@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>仪器仪表应用指南 - 永铭电子</title>
+    <meta name="description" content="永铭电子仪器仪表电容解决方案 — 覆盖精密测量仪器、工业自动化仪表、医疗检测设备、分析仪器，高精度低漏电流方案。">
+    <meta name="keywords" content="仪器仪表电容,精密测量电容,医疗设备电容,工业仪表电容,永铭电子">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: { colors: { "primary": "#1B365D" }, borderRadius: { "DEFAULT": "0px" }, fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"] } }
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5 { font-family: 'Space Grotesk', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #74777f; }
+        .group:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mega-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s; }
+        .tab-active { color: #1B365D; border-bottom: 3px solid #1B365D; font-weight: 700; }
+        .subtab-active { background: #1B365D; color: #ffffff; font-weight: 600; }
+        .topo-container { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+        .topo-svg { width: 100%; height: auto; }
+        .topo-node { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+        .topo-node:hover .topo-rect { fill: #1B365D; stroke: #1B365D; }
+        .topo-node:hover .topo-label { fill: #ffffff; }
+        .topo-node:hover .topo-series-tag { fill: #ffffff; stroke: #ffffff; }
+        .topo-node:hover .topo-series-text { fill: #1B365D; }
+        .topo-rect { transition: all 0.25s; }
+        .topo-label { transition: all 0.25s; }
+        .topo-series-tag { transition: all 0.25s; }
+        .topo-series-text { transition: all 0.25s; }
+        .topo-line { stroke: #94a3b8; stroke-width: 1.5; fill: none; }
+        .topo-line-flow { stroke: #1B365D; stroke-width: 2; fill: none; stroke-dasharray: 6,4; animation: flow 1s linear infinite; }
+        .topo-arrow { fill: #94a3b8; }
+        @keyframes flow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -10; } }
+        .topo-power { animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+        .topo-gnd-line { stroke: #64748b; stroke-width: 1.5; }
+        .product-card { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        .product-card:hover { border-color: #1B365D; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(27,54,93,0.1); }
+        .product-card:hover .product-icon { color: #1B365D; }
+        .product-icon { transition: color 0.25s; }
+        .module-card { transition: all 0.2s; }
+        .module-card:hover { border-color: #1B365D; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
+    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
+    <header id="ymin-navbar"></header>
+
+    <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <nav class="text-[11px] text-slate-500 uppercase mb-6 flex gap-2">
+                <a href="index.html" class="hover:text-primary">首页</a><span>/</span>
+                <a href="application-center.html" class="hover:text-primary">应用中心</a><span>/</span>
+                <span class="text-primary font-bold">仪器仪表</span>
+            </nav>
+
+            <div class="bg-white border border-slate-200 p-8 mb-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1">
+                        <h1 class="text-3xl font-bold text-primary mb-3">仪器仪表应用指南</h1>
+                        <p class="text-slate-600 mb-4">永铭为仪器仪表领域提供高精度、高稳定性的电容解决方案，覆盖<strong>精密测量仪器、工业自动化仪表、医疗检测设备、分析仪器</strong>等核心领域。浏览下方子应用，了解推荐产品系列与设计资源。</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">高精度</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">低漏电流</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">长寿命</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">宽温稳定</span>
+                        </div>
+                        <button class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition"><span class="material-symbols-outlined text-base align-middle">download</span> 仪器仪表应用选型指南</button>
+                    </div>
+                    <div class="md:w-72 bg-slate-100 border border-slate-200 flex items-center justify-center p-6">
+                        <span class="material-symbols-outlined text-6xl text-slate-400">precision_manufacturing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 p-4 mb-6">
+                <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择应用领域</p>
+                <div class="flex flex-wrap gap-2" id="tabContainer">
+                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="precision">精密测量</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="industrial">工业自动化</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="medical">医疗检测</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="analytical">分析仪器</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 mb-8">
+                <div class="bg-white border border-slate-200 p-4">
+                    <p class="text-[10px] text-slate-400 uppercase mb-3 tracking-wider">选择子应用</p>
+                    <div class="space-y-1" id="subtabContainer"></div>
+                    <div class="mt-8 pt-4 border-t border-slate-100">
+                        <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-lg">build</span><h3 class="text-base font-bold text-primary">设计工具与资源</h3></div>
+                        <div class="space-y-2">
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">timer</span>
+                                <div class="flex-1 min-w-0"><p class="text-xs font-bold text-slate-700 group-hover:text-primary">寿命推算工具</p><p class="text-[9px] text-slate-400">在线计算工作寿命</p></div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">query_stats</span>
+                                <div class="flex-1 min-w-0"><p class="text-xs font-bold text-slate-700 group-hover:text-primary">SPICE 模型</p><p class="text-[9px] text-slate-400">电路仿真模型</p></div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">token</span>
+                                <div class="flex-1 min-w-0"><p class="text-xs font-bold text-slate-700 group-hover:text-primary">3D-CAD 模型</p><p class="text-[9px] text-slate-400">STEP / IGES</p></div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-3 bg-white border border-slate-200 p-6" id="tabContent"></div>
+            </div>
+
+            <div class="bg-white border border-slate-200 p-6">
+                <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">newspaper</span> 相关技术文章与设计指南</h2>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">VKM系列贴片铝电解电容在精密测量仪器电源滤波中的应用</a><span class="text-slate-400 text-xs">2026-04-15 · 技术文章</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">工业自动化仪表电源设计：低漏电流电容对ADC采样精度的影响</a><span class="text-slate-400 text-xs">2026-03-10 · 应用指南</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">NPX超低ESR电容在医疗检测设备中的小型化方案</a><span class="text-slate-400 text-xs">2026-01-25 · 产品新闻</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">LK系列长寿命电容：为分析仪器提供稳定可靠的电源保障</a><span class="text-slate-400 text-xs">2025-11-20 · 设计指南</span></li>
+                    <li class="flex justify-between items-center"><a href="#" class="hover:text-primary font-medium">宽温电容在户外检测仪器中的选型要点与实测数据</a><span class="text-slate-400 text-xs">2025-09-15 · 技术文章</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 页脚（由 components/footer.js 注入） -->
+        <footer id="ymin-footer"></footer>
+    </main>
+
+    <script>
+        // renderTopologySVG 已移至 data/topology.js（共享）
+        function renderTopologySVG_deprecated(nodes, highlight, seriesMap) {
+            if (!nodes || nodes.length === 0) return '';
+            var cols = Math.min(nodes.length, 5);
+            var boxW = 90, boxH = 44, gap = 14;
+            var totalW = cols * boxW + (cols - 1) * gap;
+            var svgW = Math.max(totalW + 60, 360);
+            var svgH = 160;
+            var startX = (svgW - totalW) / 2;
+            var midY = svgH / 2;
+            var svg = '<div class="topo-container mb-4"><div class="flex items-center justify-between mb-3"><p class="text-[10px] text-slate-400 uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图</p><div class="flex gap-2 text-[9px]"><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#1B365D] inline-block"></span> 推荐产品位置</span><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#e2e8f0] border border-[#94a3b8] inline-block"></span> 功能模块</span></div></div>';
+            svg += '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" class="topo-svg">';
+            svg += '<defs><pattern id="grid_' + nodes.length + '" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e8ecf1" stroke-width="0.3"/></pattern></defs>';
+            svg += '<rect width="' + svgW + '" height="' + svgH + '" fill="url(#grid_' + nodes.length + ')"/>';
+            svg += '<g class="topo-power">';
+            svg += '<circle cx="22" cy="' + midY + '" r="12" fill="#1B365D" stroke="#1B365D" stroke-width="2"/>';
+            svg += '<text x="22" y="' + (midY + 4) + '" font-size="7" text-anchor="middle" fill="#ffffff" font-weight="bold">VCC</text>';
+            svg += '<line x1="22" y1="' + (midY - 12) + '" x2="22" y2="' + (midY - 18) + '" stroke="#1B365D" stroke-width="2"/>';
+            svg += '<line x1="16" y1="' + (midY - 18) + '" x2="28" y2="' + (midY - 18) + '" stroke="#1B365D" stroke-width="2"/>';
+            svg += '</g>';
+            svg += '<text x="22" y="' + (midY + 24) + '" font-size="6" text-anchor="middle" fill="#64748b">电源输入</text>';
+            svg += '<line x1="34" y1="' + midY + '" x2="' + startX + '" y2="' + midY + '" class="topo-line-flow"/>';
+            for (var i = 0; i < nodes.length; i++) {
+                var x = startX + i * (boxW + gap);
+                var y = midY - boxH/2;
+                var isHL = highlight && highlight.indexOf(i) >= 0;
+                var series = seriesMap && seriesMap[i] ? seriesMap[i] : null;
+                svg += '<g class="topo-node">';
+                svg += '<rect x="' + x + '" y="' + y + '" width="' + boxW + '" height="' + boxH + '" rx="4" class="topo-rect" fill="' + (isHL ? '#dbeafe' : '#e2e8f0') + '" stroke="' + (isHL ? '#1B365D' : '#94a3b8') + '" stroke-width="1.5"/>';
+                svg += '<text x="' + (x + boxW/2) + '" y="' + (y + boxH/2 + 2) + '" font-size="9" text-anchor="middle" class="topo-label" fill="' + (isHL ? '#1B365D' : '#1e293b') + '" font-weight="' + (isHL ? 'bold' : 'normal') + '">' + nodes[i] + '</text>';
+                if (series) {
+                    var tagY = y + boxH + 4, tagW = 50, tagH = 14, tagX = x + (boxW - tagW) / 2;
+                    svg += '<a href="' + series.link + '">';
+                    svg += '<rect x="' + tagX + '" y="' + tagY + '" width="' + tagW + '" height="' + tagH + '" rx="3" class="topo-series-tag" fill="' + (isHL ? '#1B365D' : '#94a3b8') + '" opacity="0.9"/>';
+                    svg += '<text x="' + (tagX + tagW/2) + '" y="' + (tagY + tagH/2 + 1) + '" font-size="7" text-anchor="middle" class="topo-series-text" fill="#ffffff" font-weight="bold">' + series.name + '</text>';
+                    svg += '</a>';
+                }
+                svg += '</g>';
+                if (i < nodes.length - 1) {
+                    var x1 = x + boxW, x2 = x + boxW + gap, cy = midY;
+                    svg += '<line x1="' + x1 + '" y1="' + cy + '" x2="' + x2 + '" y2="' + cy + '" class="topo-line"/>';
+                    svg += '<circle cx="' + x1 + '" cy="' + cy + '" r="2.5" class="topo-dot"/>';
+                    svg += '<circle cx="' + x2 + '" cy="' + cy + '" r="2.5" class="topo-dot"/>';
+                    svg += '<polygon points="' + (x2-3) + ',' + (cy-4) + ' ' + x2 + ',' + cy + ' ' + (x2-3) + ',' + (cy+4) + '" class="topo-arrow"/>';
+                }
+            }
+            var lastX = startX + (nodes.length - 1) * (boxW + gap) + boxW;
+            svg += '<line x1="' + lastX + '" y1="' + midY + '" x2="' + (lastX + 16) + '" y2="' + midY + '" class="topo-line"/>';
+            svg += '<circle cx="' + lastX + '" cy="' + midY + '" r="2.5" class="topo-dot"/>';
+            svg += '<line x1="' + (lastX + 16) + '" y1="' + midY + '" x2="' + (lastX + 16) + '" y2="' + (midY + 8) + '" class="topo-gnd-line"/>';
+            svg += '<line x1="' + (lastX + 10) + '" y1="' + (midY + 8) + '" x2="' + (lastX + 22) + '" y2="' + (midY + 8) + '" class="topo-gnd-line"/>';
+            svg += '<line x1="' + (lastX + 12) + '" y1="' + (midY + 12) + '" x2="' + (lastX + 20) + '" y2="' + (midY + 12) + '" class="topo-gnd-line"/>';
+            svg += '<line x1="' + (lastX + 14) + '" y1="' + (midY + 16) + '" x2="' + (lastX + 18) + '" y2="' + (midY + 16) + '" class="topo-gnd-line"/>';
+            svg += '<text x="' + (lastX + 16) + '" y="' + (midY + 28) + '" font-size="6" text-anchor="middle" fill="#64748b">GND</text>';
+            if (nodes.length >= 2) {
+                var midNodeX = startX + Math.floor(nodes.length/2) * (boxW + gap) + boxW/2;
+                svg += '<line x1="' + midNodeX + '" y1="' + (midY - boxH/2) + '" x2="' + midNodeX + '" y2="' + (midY - boxH/2 - 14) + '" class="topo-line" stroke-dasharray="3,3"/>';
+                svg += '<line x1="' + (midNodeX - 6) + '" y1="' + (midY - boxH/2 - 14) + '" x2="' + (midNodeX + 6) + '" y2="' + (midY - boxH/2 - 14) + '" stroke="#1B365D" stroke-width="2"/>';
+                svg += '<line x1="' + (midNodeX - 6) + '" y1="' + (midY - boxH/2 - 18) + '" x2="' + (midNodeX + 6) + '" y2="' + (midY - boxH/2 - 18) + '" stroke="#1B365D" stroke-width="2"/>';
+                svg += '<text x="' + (midNodeX + 14) + '" y="' + (midY - boxH/2 - 14) + '" font-size="5" fill="#64748b">C</text>';
+            }
+            svg += '</svg></div>';
+            return svg;
+        }
+
+        var appData = {
+            precision: {
+                name: '精密测量',
+                description: '精密测量仪器包括数字万用表、示波器、频谱分析仪、LCR电桥等，对电源的噪声和稳定性要求极高。永铭VKM和NPX系列以低漏电流和超低ESR特性，为精密测量提供纯净的电源环境，确保测量精度。',
+                subApps: [
+                    { name: '数字万用表', series: ['VKM', 'NPX'], icon: 'speed', topology: { nodes: ['电池输入', 'DC-DC升压', 'ADC采样', '显示输出'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
+                    { name: '示波器', series: ['NPX', 'VKM'], icon: 'graphic_eq', topology: { nodes: ['电源输入', '前端放大', 'ADC转换', 'FPGA处理'], highlight: [1, 2] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' }, 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
+                    { name: '频谱分析仪', series: ['NPX', 'VHT'], icon: 'frequency', topology: { nodes: ['电源', '本振', '混频器', '中频处理'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
+                    { name: 'LCR电桥', series: ['VKM', 'LK'], icon: 'circuit_board', topology: { nodes: ['电源', '信号源', '检测桥', '显示'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
+                ],
+                products: [
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化, 高分子固态', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', '固态'] },
+                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] },
+                    { series: 'LK', pkg: '引线型', feature: '极低漏电流≤20μA, 6000h, -40℃', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['漏电流≤20μA', '6000h', '-40℃'] }
+                ]
+            },
+            industrial: {
+                name: '工业自动化',
+                description: '工业自动化仪表包括PLC控制器、工业机器人、传感器变送器、DCS系统等，需要在工业现场恶劣环境下长期稳定运行。永铭VKM和VHT系列以宽温范围和长寿命特性，满足工业自动化对电容的高可靠性要求。',
+                subApps: [
+                    { name: 'PLC控制器', series: ['VKM', 'NPX'], icon: 'memory', topology: { nodes: ['电源输入', 'CPU供电', 'I/O接口', '通信'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
+                    { name: '工业机器人', series: ['VHT', 'VPG'], icon: 'precision_manufacturing', topology: { nodes: ['电源', '伺服驱动', '关节电机', '编码器'], highlight: [1] }, seriesMap: { 1: { name: 'VHT', link: 'product-center.html?series=VHT' } } },
+                    { name: '传感器变送器', series: ['VKM', 'LK'], icon: 'sensors', topology: { nodes: ['电源', '传感单元', '信号调理', '输出'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
+                    { name: 'DCS系统', series: ['VKM', 'NPX'], icon: 'dns', topology: { nodes: ['电源', '主控', 'I/O模块', '网络'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
+                ],
+                products: [
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
+                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] },
+                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] }
+                ]
+            },
+            medical: {
+                name: '医疗检测',
+                description: '医疗检测设备包括心电图机、超声诊断仪、血氧仪、监护仪等，对安全性和可靠性要求极高。永铭LK和VKM系列以极低漏电流和长寿命特性，满足医疗设备对电容的严苛要求。',
+                subApps: [
+                    { name: '心电图机', series: ['LK', 'VKM'], icon: 'monitor_heart', topology: { nodes: ['电源', '心电采集', '放大滤波', '显示'], highlight: [2] }, seriesMap: { 2: { name: 'LK', link: 'product-center.html?series=LK' } } },
+                    { name: '超声诊断仪', series: ['NPX', 'VHT'], icon: 'ultrasound', topology: { nodes: ['电源', '发射电路', '接收处理', '图像'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
+                    { name: '血氧仪', series: ['VKM', 'NPX'], icon: 'pulse', topology: { nodes: ['电池', 'LED驱动', '光电检测', '显示'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
+                    { name: '监护仪', series: ['VKM', 'LK'], icon: 'vital_signs', topology: { nodes: ['电源', '传感器', '信号处理', '报警'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
+                ],
+                products: [
+                    { series: 'LK', pkg: '引线型', feature: '极低漏电流≤20μA, 6000h, -40℃', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['漏电流≤20μA', '6000h', '-40℃'] },
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
+                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
+                ]
+            },
+            analytical: {
+                name: '分析仪器',
+                description: '分析仪器包括色谱仪、质谱仪、光谱仪、电化学分析仪等，对电源的纯净度和稳定性有极高要求。永铭LK和VKM系列以超低漏电流和卓越的噪声抑制能力，确保分析仪器获得精确可靠的测量结果。',
+                subApps: [
+                    { name: '色谱仪', series: ['LK', 'VKM'], icon: 'science', topology: { nodes: ['电源', '进样系统', '分离柱', '检测器'], highlight: [3] }, seriesMap: { 3: { name: 'LK', link: 'product-center.html?series=LK' } } },
+                    { name: '质谱仪', series: ['NPX', 'VHT'], icon: 'lab_research', topology: { nodes: ['电源', '离子源', '质量分析', '检测'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
+                    { name: '光谱仪', series: ['VKM', 'LK'], icon: 'prism', topology: { nodes: ['电源', '光源', '分光系统', '检测'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
+                    { name: '电化学分析仪', series: ['VKM', 'NPX'], icon: 'battery_unknown', topology: { nodes: ['电源', '恒电位', '电流检测', '显示'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
+                ],
+                products: [
+                    { series: 'LK', pkg: '引线型', feature: '极低漏电流≤20μA, 6000h, -40℃', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['漏电流≤20μA', '6000h', '-40℃'] },
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
+                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
+                ]
+            }
+        };
+
+        var currentTab = 'precision';
+        var currentSub = 0;
+
+        function renderSubTabs(tabKey) {
+            var container = document.getElementById('subtabContainer');
+            var data = appData[tabKey];
+            if (!data) return;
+            var html = '';
+            for (var i = 0; i < data.subApps.length; i++) {
+                var sub = data.subApps[i];
+                var active = i === currentSub ? 'subtab-active' : 'text-slate-600 hover:bg-slate-100';
+                html += '<button class="w-full text-left px-3 py-2 text-xs font-medium ' + active + ' transition-colors" data-sub="' + i + '">';
+                html += '<span class="material-symbols-outlined text-base align-middle mr-1">' + sub.icon + '</span> ' + sub.name + '</button>';
+            }
+            container.innerHTML = html;
+            var btns = container.querySelectorAll('button');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener('click', function() {
+                    currentSub = parseInt(this.dataset.sub);
+                    renderSubTabs(tabKey);
+                    renderContent(tabKey);
+                });
+            }
+        }
+
+        function renderContent(tabKey) {
+            var container = document.getElementById('tabContent');
+            var data = appData[tabKey];
+            if (!data) return;
+            var sub = data.subApps[currentSub];
+            if (!sub) return;
+            var html = '';
+            html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
+            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + data.subApps[currentSub].name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + data.subApps[currentSub].name + ' 电路拓扑（演示用，正式版替换）</p></div>';
+            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(currentTab, data.subApps[currentSub].name) : null;
+            if (sysMods) {
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
+                html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
+                sysMods.forEach(function(m) {
+                    var ph = '';
+                    data.products.forEach(function(c) {
+                        ph += '<a href="' + (c.link || '#') + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + (c.series || '') + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + (c.pkg || '') + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + (c.feature || '') + '</p></div></div></a>';
+                    });
+                    html += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + m.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + m.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + m.desc + '</p>' + ph + '</div></div></div>';
+                });
+                html += '</div>';
+            }
+            container.innerHTML = html;
+        }
+
+        function switchTab(tabKey) {
+            currentTab = tabKey;
+            currentSub = 0;
+            var btns = document.querySelectorAll('#tabContainer button');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove('tab-active');
+                btns[i].classList.add('text-slate-500');
+                if (btns[i].dataset.tab === tabKey) {
+                    btns[i].classList.add('tab-active');
+                    btns[i].classList.remove('text-slate-500');
+                }
+            }
+            renderSubTabs(tabKey);
+            renderContent(tabKey);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var btns = document.querySelectorAll('#tabContainer button');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener('click', function() {
+                    switchTab(this.dataset.tab);
+                });
+            }
+            switchTab('precision');
+        });
+    </script>
+    <!-- 共享组件 -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="data/topology.js"></script>
+    <script src="data/system-modules.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('applications');
+            YMIN.footer.inject();
+        });
+    </script>
+</body>
+</html>

@@ -4,8 +4,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>汽车电子应用指南 - 永铭电子</title>
+    <meta name="description" content="永铭电子汽车电子电容解决方案 — 覆盖主驱/电驱电控、充电系统、安全部件、ADAS、热管理、智能座舱、车灯、充电桩，AEC-Q200合规。">
+    <meta name="keywords" content="汽车电子电容,车规电容,AEC-Q200,新能源汽车电容,永铭电子">
+    <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
@@ -62,23 +66,8 @@
     </style>
 </head>
 <body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
-    <!-- 导航栏 -->
-    <header class="bg-white w-full border-b border-slate-200 z-50 flex-shrink-0">
-        <div class="flex justify-between items-center w-full px-8 h-16 max-w-[1920px] mx-auto">
-            <div class="flex items-center gap-10 h-full">
-                <div class="flex items-center gap-3"><img alt="YMIN" class="h-10 w-auto object-contain" src="logo.png"><span class="text-2xl font-bold tracking-tighter text-[#1B365D] font-['Space_Grotesk']">YMIN</span></div>
-                <nav class="hidden md:flex gap-8 h-full">
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">首页</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="product-center.html">产品中心</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-[#1B365D] border-b-2 border-[#1B365D] pb-1" href="application-center.html">应用中心 <span class="material-symbols-outlined text-xs">expand_more</span></a><div class="mega-menu absolute top-16 left-0 w-60 bg-white shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50"><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-center.html">应用总览</a><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-automotive.html">汽车电子</a><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-ai-server.html">AI服务器</a></div></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">设计工具</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">服务支持</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">关于永铭</a></div>
-                </nav>
-            </div>
-            <div class="flex items-center gap-6"><div class="relative hidden lg:block"><input class="bg-[#f3f3f7] border-b-2 px-4 py-1.5 outline-none text-xs w-64" placeholder="搜索..."><span class="material-symbols-outlined absolute right-2 top-1.5">search</span></div><button class="bg-[#1B365D] text-white px-6 py-2 text-xs font-bold uppercase">登录</button></div>
-        </div>
-    </header>
+    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
+    <header id="ymin-navbar"></header>
 
     <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
         <div class="max-w-7xl mx-auto px-6 py-8">
@@ -128,12 +117,12 @@
             </div>
 
             <!-- 主体内容区 -->
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 mb-8">
                 <div class="bg-white border border-slate-200 p-4">
                     <p class="text-[10px] text-slate-400 uppercase mb-3 tracking-wider">选择子应用</p>
                     <div class="space-y-1" id="subtabContainer"></div>
                     <!-- 设计工具入口（统一产品详情页样式） -->
-                    <div class="mt-4 pt-4 border-t border-slate-100">
+                    <div class="mt-8 pt-4 border-t border-slate-100">
                         <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-lg">build</span><h3 class="text-base font-bold text-primary">设计工具与资源</h3></div>
                         <div class="space-y-2">
                             <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
@@ -179,21 +168,14 @@
             </div>
         </div>
 
-        <!-- 页脚 -->
-        <footer class="w-full bg-white border-t border-slate-200 py-16 px-6 mt-8">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">网站导航</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">首页</a></li><li><a href="#" class="hover:text-[#1B365D]">产品中心</a></li><li><a href="#" class="hover:text-[#1B365D]">应用中心</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">产品中心</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">液态铝电解电容器</a></li><li><a href="#" class="hover:text-[#1B365D]">高分子固态电容</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">关于我们</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">公司介绍</a></li><li><a href="#" class="hover:text-[#1B365D]">加入我们</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">联系支持</h4><div class="text-xs text-slate-700"><p>400 900 1922</p><p>上海市奉贤区南桥镇杨王经济园区光村路258号</p></div></div>
-            </div>
-            <div class="max-w-7xl mx-auto mt-12 pt-8 border-t text-center text-[10px] text-slate-400">© 2024 永铭电子有限公司. 版权所有.</div>
-        </footer>
+        <!-- 页脚（由 components/footer.js 注入） -->
+        <footer id="ymin-footer"></footer>
     </main>
 
     <script>
         // ===== 电路拓扑图渲染函数（电路图风格） =====
-        function renderTopologySVG(nodes, highlight, seriesMap) {
+        // renderTopologySVG 已移至 data/topology.js（共享）
+        function renderTopologySVG_deprecated(nodes, highlight, seriesMap) {
             if (!nodes || nodes.length === 0) return '';
             
             const cols = Math.min(nodes.length, 5);
@@ -301,9 +283,15 @@
                 description: '电驱电控系统是新能源汽车的核心动力单元，包含DC-DC转换器、DC-AC逆变器、EPS转向控制等。永铭液态抗震座板贴片型铝电解电容器广泛应用于热管理系统/水泵/油泵/助力转向控制系统，兼具高抗震需求与成本效益。',
                 subApps: [
                     { 
-                        name: 'DC-DC转换器', series: ['VHT/VHU', 'VPG'], icon: 'power', 
+                        name: 'DC-DC转换器', series: ['VHT/VHU', 'VPG'], icon: 'power',
                         topology: { nodes: ['高压输入', '开关变换', '整流滤波', '低压输出'], highlight: [0, 2] },
-                        seriesMap: { 0: { name: 'VHT/VHU', link: 'product-center.html?series=VHT' }, 2: { name: 'VPG', link: 'product-center.html?series=VPG' } }
+                        seriesMap: { 0: { name: 'VHT/VHU', link: 'product-center.html?series=VHT' }, 2: { name: 'VPG', link: 'product-center.html?series=VPG' } },
+                        systemModules: [
+                            { name: '高压输入滤波', icon: 'power', desc: '车载高压电池（400V/800V平台）输入端的电容滤波，需承受高压与大纹波电流。要求高耐压、低ESR，推荐VHT系列固液混合电容。' },
+                            { name: '开关变换电路', icon: 'transform', desc: 'DC-DC功率变换核心，MOSFET/IGBT开关产生高频噪声。需在开关节点就近放置低ESR电容吸收尖峰，推荐VPG系列。' },
+                            { name: '整流滤波输出', icon: 'filter_alt', desc: '整流后的低压侧输出滤波，为12V/48V低压系统提供稳定直流。需大容量、低ESR，推荐NPX系列高分子固态电容。' },
+                            { name: '低压负载端旁路', icon: 'electrical_services', desc: '为ECU、传感器等低压负载提供就地旁路，抑制电源总线瞬态波动。推荐VKM系列SMD电容。' }
+                        ]
                     },
                     { 
                         name: 'DC-AC逆变器', series: ['薄膜电容'], icon: 'conversion_path', 
@@ -570,37 +558,23 @@
             // 子应用标题
             html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
 
-            // 电路拓扑图 - 安全气囊使用图片替换
-            if (sub.name === '安全气囊') {
-                html += '<div class="topo-container mb-4"><div class="flex items-center justify-between mb-3"><p class="text-[10px] text-slate-400 uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图</p></div><img src="anquanqinang.png" alt="安全气囊电路拓扑图" style="width:100%;height:auto;border-radius:4px;"></div>';
-            } else if (sub.topology) {
-                html += renderTopologySVG(sub.topology.nodes, sub.topology.highlight, sub.seriesMap);
-            }
+            // 电路拓扑图（演示用统一图片，后续替换各子应用实际拓扑图）
+            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换为实际拓扑图）</p></div>';
 
-            // 系统模块详解 + 推荐产品系列合并展示（仅安全气囊有）
-            if (sub.systemModules) {
-                html += '<h4 class="text-sm font-bold text-primary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
+            // 系统模块详解 — 优先用共享数据，fallback 到内联 data
+            var sysMods = sub.systemModules || (YMIN && YMIN.sysMod ? YMIN.sysMod.getModules(tabKey, sub.name) : null);
+            if (sysMods) {
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
                 html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
-                sub.systemModules.forEach(mod => {
-                    // 查找该模块对应的推荐产品
-                    let productHtml = '';
+                sysMods.forEach(function(mod) {
+                    var ph = '';
                     if (data.products) {
-                        data.products.forEach(card => {
-                            productHtml += '<a href="' + card.link + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg flex-shrink-0">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + card.series + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + card.pkg + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + card.feature + '</p><div class="flex gap-1 mt-1">' + card.highlights.map(h => '<span class="text-[8px] bg-primary/5 text-primary px-1 py-0.5 border border-primary/10">' + h + '</span>').join('') + '</div></div></div></a>';
+                        data.products.forEach(function(card) {
+                            ph += '<a href="' + card.link + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg flex-shrink-0">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + card.series + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + card.pkg + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + card.feature + '</p><div class="flex gap-1 mt-1">' + card.highlights.map(function(h) {return '<span class="text-[8px] bg-primary/5 text-primary px-1 py-0.5 border border-primary/10">' + h + '</span>';}).join('') + '</div></div></div></a>';
                         });
                     }
-                    html += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + mod.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p>' + productHtml + '</div></div></div>';
+                    html += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + mod.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p>' + ph + '</div></div></div>';
                 });
-                html += '</div>';
-            } else {
-                // 非安全气囊子应用：只展示推荐产品系列
-                html += '<h4 class="text-sm font-bold text-primary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-base">inventory_2</span> 推荐产品系列</h4>';
-                html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">';
-                if (data.products) {
-                    data.products.forEach(card => {
-                        html += '<a href="' + card.link + '" class="product-card border border-slate-200 p-3 block"><div class="flex items-start gap-3"><span class="material-symbols-outlined product-icon text-slate-400 text-2xl flex-shrink-0">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-sm font-bold text-primary">' + card.series + '</h5><span class="text-[10px] text-slate-400 bg-slate-100 px-2 py-0.5">' + card.pkg + '</span></div><p class="text-[11px] text-slate-600 mt-1">' + card.feature + '</p><div class="flex gap-1.5 mt-1.5">' + card.highlights.map(h => '<span class="text-[9px] bg-primary/5 text-primary px-1.5 py-0.5 border border-primary/10">' + h + '</span>').join('') + '</div><p class="text-[9px] text-slate-400 mt-1">样品型号: ' + card.samplePn + '</p></div></div></a>';
-                    });
-                }
                 html += '</div>';
             }
 
@@ -636,6 +610,18 @@
             } else {
                 switchTab('mainDrive');
             }
+        });
+    </script>
+    <!-- 共享组件 -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="data/topology.js"></script>
+    <script src="data/system-modules.js"></script>
+    <script src="data/automotive-apps.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('applications');
+            YMIN.footer.inject();
         });
     </script>
 </body>

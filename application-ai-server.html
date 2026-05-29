@@ -4,8 +4,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>AI服务器与数据中心 - 永铭电子</title>
+    <meta name="description" content="永铭电子AI服务器电容解决方案 — GPU加速卡、CPU供电、PDN总线架构的大电流、超低ESR电容方案，支持400V/800V DC-Link。">
+    <meta name="keywords" content="AI服务器电容,数据中心电容,GPU供电电容,PDN电容,超低ESR电容,永铭电子">
+    <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
@@ -31,23 +35,8 @@
     </style>
 </head>
 <body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
-    <!-- 导航栏 -->
-    <header class="bg-white w-full border-b border-slate-200 z-50 flex-shrink-0">
-        <div class="flex justify-between items-center w-full px-8 h-16 max-w-[1920px] mx-auto">
-            <div class="flex items-center gap-10 h-full">
-                <div class="flex items-center gap-3"><img alt="YMIN" class="h-10 w-auto object-contain" src="logo.png"><span class="text-2xl font-bold tracking-tighter text-[#1B365D] font-['Space_Grotesk']">YMIN</span></div>
-                <nav class="hidden md:flex gap-8 h-full">
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">首页</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="product-center.html">产品中心</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-[#1B365D] border-b-2 border-[#1B365D] pb-1" href="application-center.html">应用中心 <span class="material-symbols-outlined text-xs">expand_more</span></a><div class="mega-menu absolute top-16 left-0 w-60 bg-white shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50"><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-center.html">应用总览</a><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-automotive.html">汽车电子</a><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-ai-server.html">AI服务器</a></div></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">设计工具</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">服务支持</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">关于永铭</a></div>
-                </nav>
-            </div>
-            <div class="flex items-center gap-6"><div class="relative hidden lg:block"><input class="bg-[#f3f3f7] border-b-2 px-4 py-1.5 outline-none text-xs w-64" placeholder="搜索..."><span class="material-symbols-outlined absolute right-2 top-1.5">search</span></div><button class="bg-[#1B365D] text-white px-6 py-2 text-xs font-bold uppercase">登录</button></div>
-        </div>
-    </header>
+    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
+    <header id="ymin-navbar"></header>
 
     <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
         <div class="max-w-7xl mx-auto px-6 py-8">
@@ -90,7 +79,7 @@
             </div>
 
             <!-- 主体内容区：左侧二级目录 + 右侧详情 -->
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 mb-8">
                 <!-- 左侧：二级目录（子模块） -->
                 <div class="bg-white border border-slate-200 p-4">
                     <p class="text-[10px] text-slate-400 uppercase mb-3 tracking-wider">选择子模块</p>
@@ -143,16 +132,8 @@
             </div>
         </div>
 
-        <!-- 页脚 -->
-        <footer class="w-full bg-white border-t border-slate-200 py-16 px-6 mt-8">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">网站导航</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">首页</a></li><li><a href="#" class="hover:text-[#1B365D]">产品中心</a></li><li><a href="#" class="hover:text-[#1B365D]">应用中心</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">产品中心</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">液态铝电解电容器</a></li><li><a href="#" class="hover:text-[#1B365D]">高分子固态电容</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">关于我们</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">公司介绍</a></li><li><a href="#" class="hover:text-[#1B365D]">加入我们</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">联系支持</h4><div class="text-xs text-slate-700"><p>400 900 1922</p><p>上海市奉贤区南桥镇杨王经济园区光村路258号</p></div></div>
-            </div>
-            <div class="max-w-7xl mx-auto mt-12 pt-8 border-t text-center text-[10px] text-slate-400">© 2024 永铭电子有限公司. 版权所有.</div>
-        </footer>
+        <!-- 页脚（由 components/footer.js 注入） -->
+        <footer id="ymin-footer"></footer>
     </main>
 
     <script>
@@ -267,7 +248,21 @@
             });
             const displayProducts = seriesProducts.length > 0 ? seriesProducts : data.products.slice(0, 2);
 
-            contentDiv.innerHTML = `
+            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(tabId, sub.name) : null;
+            var modsHtml = '';
+            if (sysMods) {
+                modsHtml = '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
+                sysMods.forEach(function(m) {
+                    var ph = '';
+                    (data.products || appData[tabId].products || []).forEach(function(c) {
+                        ph += '<a href="' + (c.link || '#') + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + (c.series || '') + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + (c.pkg || '') + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + (c.feature || '') + '</p></div></div></a>';
+                    });
+                    modsHtml += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + m.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + m.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + m.desc + '</p>' + ph + '</div></div></div>';
+                });
+                modsHtml += '</div>';
+            }
+            var topoImg = '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
+            contentDiv.innerHTML = topoImg + `
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">${sub.icon || 'label'}</span>${sub.name}</h3>
                     <p class="text-xs text-slate-500 mt-1">所属系统模块：${data.name}</p>
@@ -295,6 +290,7 @@
                     </table>
                 </div>
                 <p class="text-[10px] text-slate-400 mt-4">* 如需完整规格参数表，请点击料号进入产品详情页查看。</p>
+                ${modsHtml}
             `;
         }
 
@@ -310,6 +306,16 @@
 
         // 默认渲染CPU/GPU核心供电
         switchTab('cpu');
+    </script>
+    <!-- 共享组件 -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="data/system-modules.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('applications');
+            YMIN.footer.inject();
+        });
     </script>
 </body>
 </html>

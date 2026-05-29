@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>消费类电子应用指南 - 永铭电子</title>
+    <meta name="description" content="永铭电子消费类电子电容解决方案 — 覆盖智能手机/平板、可穿戴设备、家用电器、LED照明，提供小型化、薄型化、低ESR电容方案。">
+    <meta name="keywords" content="消费电子电容,智能手机电容,可穿戴设备电容,LED照明电容,小型化电容,永铭电子">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: { colors: { "primary": "#1B365D" }, borderRadius: { "DEFAULT": "0px" }, fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"] } }
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
+    <header id="ymin-navbar"></header>
+
+    <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <nav class="text-[11px] text-slate-500 uppercase mb-6 flex gap-2">
+                <a href="index.html" class="hover:text-primary">首页</a><span>/</span>
+                <a href="application-center.html" class="hover:text-primary">应用中心</a><span>/</span>
+                <span class="text-primary font-bold">消费类电子</span>
+            </nav>
+
+            <!-- 概述区 -->
+            <div class="bg-white border border-slate-200 p-8 mb-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1">
+                        <h1 class="text-3xl font-bold text-primary mb-3">消费类电子应用指南</h1>
+                        <p class="text-slate-600 mb-4">永铭为消费类电子领域提供小型化、高性能电容解决方案，覆盖<strong>智能手机/平板、可穿戴设备、家用电器、LED照明</strong>等核心领域。浏览下方子应用，了解推荐产品系列与设计资源。</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">小型化</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">薄型化</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">低ESR</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">高可靠性</span>
+                        </div>
+                        <button class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition"><span class="material-symbols-outlined text-base align-middle">download</span> 消费类电子应用选型指南</button>
+                    </div>
+                    <div class="md:w-72 bg-slate-100 border border-slate-200 flex items-center justify-center p-6">
+                        <span class="material-symbols-outlined text-6xl text-slate-400">laptop</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一级目录：应用领域类别标签 -->
+            <div class="bg-white border border-slate-200 p-4 mb-6">
+                <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择应用领域</p>
+                <div class="flex flex-wrap gap-2" id="tabContainer">
+                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="smartphone">智能手机 / 平板</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="wearable">可穿戴设备</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="appliance">家用电器</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="led">LED照明</button>
+                </div>
+            </div>
+
+            <!-- 主体内容区 -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 mb-8">
+                <div class="bg-white border border-slate-200 p-4">
+                    <p class="text-[10px] text-slate-400 uppercase mb-3 tracking-wider">选择子应用</p>
+                    <div class="space-y-1" id="subtabContainer"></div>
+                    <div class="mt-8 pt-4 border-t border-slate-100">
+                        <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-lg">build</span><h3 class="text-base font-bold text-primary">设计工具与资源</h3></div>
+                        <div class="space-y-2">
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">timer</span>
+                                <div class="flex-1 min-w-0"><p class="text-xs font-bold text-slate-700 group-hover:text-primary">寿命推算工具</p><p class="text-[9px] text-slate-400">在线计算工作寿命</p></div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">query_stats</span>
+                                <div class="flex-1 min-w-0"><p class="text-xs font-bold text-slate-700 group-hover:text-primary">SPICE 模型</p><p class="text-[9px] text-slate-400">电路仿真模型</p></div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">token</span>
+                                <div class="flex-1 min-w-0"><p class="text-xs font-bold text-slate-700 group-hover:text-primary">3D-CAD 模型</p><p class="text-[9px] text-slate-400">STEP / IGES</p></div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-3 bg-white border border-slate-200 p-6" id="tabContent"></div>
+            </div>
+
+            <!-- 产品映射总览表 -->
+            <div class="bg-white border border-slate-200 p-6 mb-8">
+                <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">grid_on</span> 消费类电子电容产品映射</h2>
+                <p class="text-xs text-slate-500 mb-4">点击系列名称跳转至产品中心筛选页。以下系列覆盖消费类电子从电源管理到LED驱动的全场景需求。</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs border-collapse">
+                        <thead><tr class="bg-slate-100"><th class="border border-slate-300 px-3 py-2 text-left">应用场景</th><th class="border border-slate-300 px-3 py-2 text-left">封装</th><th class="border border-slate-300 px-3 py-2 text-left">系列</th><th class="border border-slate-300 px-3 py-2">电压范围</th><th class="border border-slate-300 px-3 py-2">ESR典型值</th><th class="border border-slate-300 px-3 py-2">主要特性</th></tr></thead>
+                        <tbody class="text-center">
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">智能手机电源管理</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=NPX" class="hover:underline">NPX</a></td><td class="border px-3 py-2">2.5V - 25V</td><td class="border px-3 py-2">≤10mΩ</td><td class="border px-3 py-2 text-left text-[10px]">超低ESR, 小型化, 高分子固态</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">平板DC-DC转换</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VHT" class="hover:underline">VHT/VHU</a></td><td class="border px-3 py-2">16V - 63V</td><td class="border px-3 py-2">≤8mΩ</td><td class="border px-3 py-2 text-left text-[10px]">固液混合, 125℃, 4000h</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">可穿戴设备PMIC</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VKM" class="hover:underline">VKM</a></td><td class="border px-3 py-2">6.3V - 100V</td><td class="border px-3 py-2">低ESR</td><td class="border px-3 py-2 text-left text-[10px]">105℃, 9000h, SMD, AEC-Q200</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">家电主控板滤波</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPG" class="hover:underline">VPG</a></td><td class="border px-3 py-2">25V - 100V</td><td class="border px-3 py-2">≤30mΩ</td><td class="border px-3 py-2 text-left text-[10px]">高纹波, 大容量, 2000h</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">LED驱动电源</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=LK" class="hover:underline">LK</a></td><td class="border px-3 py-2">16V - 400V</td><td class="border px-3 py-2">低漏电流</td><td class="border px-3 py-2 text-left text-[10px]">AEC-Q200, 6000h, 低漏电流</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">PD快充适配器</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPT" class="hover:underline">VPT</a></td><td class="border px-3 py-2">16V - 100V</td><td class="border px-3 py-2">≤50mΩ</td><td class="border px-3 py-2 text-left text-[10px]">125℃, 2000h, 贴片</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">智能家居控制</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VKO" class="hover:underline">VKO</a></td><td class="border px-3 py-2">6.3V - 50V</td><td class="border px-3 py-2">低ESR</td><td class="border px-3 py-2 text-left text-[10px]">大容量3300μF, 8000h, SMD</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 相关技术文章 -->
+            <div class="bg-white border border-slate-200 p-6">
+                <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">newspaper</span> 相关技术文章与设计指南</h2>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">NPX系列超低ESR电容在智能手机电源管理中的应用</a><span class="text-slate-400 text-xs">2026-04-20 · 技术文章</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">VKM贴片电容：穿戴设备小型化设计的理想选择</a><span class="text-slate-400 text-xs">2026-03-15 · 设计指南</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">LED驱动电源电容选型：长寿命与小型化的平衡</a><span class="text-slate-400 text-xs">2026-02-10 · 应用指南</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">PD快充适配器中的电容选型要点与纹波抑制策略</a><span class="text-slate-400 text-xs">2025-12-20 · 技术文章</span></li>
+                    <li class="flex justify-between items-center"><a href="#" class="hover:text-primary font-medium">智能家居设备电源设计：电容小型化与可靠性实践</a><span class="text-slate-400 text-xs">2025-10-15 · 设计指南</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <footer id="ymin-footer"></footer>
+    </main>
+
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="data/topology.js"></script>
+    <script src="data/system-modules.js"></script>
+    <script>
+        // ===== 消费类电子应用数据结构 =====
+        var appData = {
+            smartphone: {
+                name: '智能手机 / 平板',
+                description: '智能手机和平板电脑对电容的小型化、薄型化要求极高。永铭NPX和VHT系列以超低ESR和小尺寸特性，为PMIC、DC-DC转换器、音频功放等关键电路提供高性能滤波与储能方案。',
+                subApps: [
+                    { name: 'PMIC电源管理', series: ['NPX', 'VHT'], icon: 'power', topology: { nodes: ['电池', 'PMIC', 'DC-DC', '负载'], highlight: [2] }, seriesMap: { 2: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
+                    { name: 'DC-DC转换器', series: ['VHT/VHU', 'NPX'], icon: 'transform', topology: { nodes: ['输入', 'DC-DC', '滤波', '输出'], highlight: [2] }, seriesMap: { 2: { name: 'VHT', link: 'product-center.html?series=VHT' } } },
+                    { name: '音频功放', series: ['NPX', 'VKM'], icon: 'speaker', topology: { nodes: ['电源', '功放', '滤波', '扬声器'], highlight: [2] }, seriesMap: { 2: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
+                    { name: '快充电路', series: ['VPT', 'VHT'], icon: 'battery_charging_full', topology: { nodes: ['适配器', '充电IC', '滤波', '电池'], highlight: [2] }, seriesMap: { 2: { name: 'VPT', link: 'product-center.html?series=VPT' } } }
+                ],
+                products: [
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化, 2.5-25V', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['超低ESR', '小型化', '高分子固态'] },
+                    { series: 'VHT/VHU', pkg: '贴片型', feature: '固液混合, ESR≤8mΩ, 125℃, 4000h', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] },
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, SMD, 低漏电流', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'SMD', '高可靠'] },
+                    { series: 'VPT', pkg: '贴片型', feature: '125℃, 2000h, 低ESR, SMD', samplePn: 'VPTC0581C151MVTM', link: 'product-center.html?series=VPT', highlights: ['125℃', 'SMD', '低ESR'] }
+                ]
+            },
+            wearable: {
+                name: '可穿戴设备',
+                description: '智能手表、手环、TWS耳机等可穿戴设备对电容的尺寸和功耗要求极为苛刻。永铭NPX和VKM系列以微型封装和低漏电流特性，满足可穿戴设备PMIC、传感器供电和电池管理需求。',
+                subApps: [
+                    { name: '智能手表PMIC', series: ['NPX', 'VKM'], icon: 'watch', topology: { nodes: ['电池', 'PMIC', 'MCU', '显示'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
+                    { name: 'TWS耳机充电仓', series: ['VKM', 'NPX'], icon: 'headphones', topology: { nodes: ['充电', 'DC-DC', '电池', '输出'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
+                    { name: '传感器供电', series: ['NPX', 'VKM'], icon: 'sensors', topology: { nodes: ['电源', 'LDO', '传感器', 'MCU'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
+                    { name: '电池管理BMS', series: ['VPT', 'NPX'], icon: 'battery_horiz_075', topology: { nodes: ['充电器', 'BMS IC', '电池', '系统'], highlight: [1] }, seriesMap: { 1: { name: 'VPT', link: 'product-center.html?series=VPT' } } }
+                ],
+                products: [
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR, 超小封装, 2.5-25V', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['超小封装', '超低ESR', '高分子固态'] },
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, SMD, 低漏电流', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
+                    { series: 'VPT', pkg: '贴片型', feature: '125℃, 2000h, 贴片, 低ESR', samplePn: 'VPTC0581C151MVTM', link: 'product-center.html?series=VPT', highlights: ['125℃', '低ESR', 'SMD'] }
+                ]
+            },
+            appliance: {
+                name: '家用电器',
+                description: '洗衣机、空调、冰箱、微波炉等家用电器主控板需要高可靠性、长寿命电容。永铭VPG和LK系列以大容量、高纹波电流能力，满足家电主控板电源滤波和电机驱动需求。',
+                subApps: [
+                    { name: '主控板电源滤波', series: ['VPG', 'LK'], icon: 'developer_board', topology: { nodes: ['AC输入', '整流', 'DC滤波', 'MCU'], highlight: [2] }, seriesMap: { 2: { name: 'VPG', link: 'product-center.html?series=VPG' } } },
+                    { name: '变频电机驱动', series: ['VPG', 'CW3H'], icon: 'motor', topology: { nodes: ['整流', 'DC-Link', '逆变', '电机'], highlight: [1] }, seriesMap: { 1: { name: 'VPG', link: 'product-center.html?series=VPG' } } },
+                    { name: '显示面板供电', series: ['VKM', 'VKO'], icon: 'display_settings', topology: { nodes: ['电源', 'DC-DC', '面板', '触控'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
+                    { name: '智能控制模块', series: ['NPX', 'VKM'], icon: 'smart_toy', topology: { nodes: ['电源', 'WiFi模块', 'MCU', '传感器'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } }
+                ],
+                products: [
+                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 16-100V, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '经济型'] },
+                    { series: 'LK', pkg: '引线型', feature: 'AEC-Q200, 6000h, 低漏电流', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['6000h', '低漏电流', '高可靠'] },
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, SMD, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'SMD', 'AEC-Q200'] },
+                    { series: 'CW3H', pkg: '牛角型', feature: '400-500V, DC-Link, 大功率', samplePn: 'CW3H 800V平台', link: 'product-center.html?series=CW3H', highlights: ['高压', 'DC-Link', '大功率'] }
+                ]
+            },
+            led: {
+                name: 'LED照明',
+                description: 'LED照明驱动电源对电容的长寿命和耐高温要求突出。永铭LK系列和VPG系列以6000h以上长寿命、宽温范围，满足LED球泡灯、灯管、路灯等各类照明产品的驱动电源需求。',
+                subApps: [
+                    { name: 'LED球泡灯驱动', series: ['LK', 'VPG'], icon: 'light', topology: { nodes: ['AC输入', '整流', '滤波', 'LED'], highlight: [2] }, seriesMap: { 2: { name: 'LK', link: 'product-center.html?series=LK' } } },
+                    { name: 'LED灯管/面板灯', series: ['VPG', 'LK'], icon: 'light_group', topology: { nodes: ['AC输入', 'PFC', '滤波', '恒流'], highlight: [2] }, seriesMap: { 2: { name: 'VPG', link: 'product-center.html?series=VPG' } } },
+                    { name: 'LED路灯/户外', series: ['LK', 'CW3H'], icon: 'outdoor_lamp', topology: { nodes: ['AC输入', '浪涌保护', '滤波', 'LED阵列'], highlight: [2] }, seriesMap: { 2: { name: 'LK', link: 'product-center.html?series=LK' } } },
+                    { name: '智能照明控制', series: ['VKM', 'NPX'], icon: 'settings_remote', topology: { nodes: ['电源', '无线模块', 'MCU', 'LED驱动'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
+                ],
+                products: [
+                    { series: 'LK', pkg: '引线型', feature: 'AEC-Q200, 6000h, 16-400V', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['6000h', '宽电压', '低漏电流'] },
+                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 16-100V', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '经济型'] },
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, SMD', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'SMD', '高可靠'] },
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR, 小型化', samplePn: 'NPXC0801H560MJTM', link: 'product-center.html?series=NPX', highlights: ['超低ESR', '小型化', '高分子固态'] }
+                ]
+            }
+        };
+
+        var currentTab = 'smartphone';
+        var currentSub = 0;
+        var tabs = document.querySelectorAll('#tabContainer button[data-tab]');
+        var subtabContainer = document.getElementById('subtabContainer');
+        var contentDiv = document.getElementById('tabContent');
+
+        function renderSubTabs(tabId) {
+            var data = appData[tabId];
+            if (!data) return;
+            var html = '';
+            data.subApps.forEach(function(sub, idx) {
+                var activeClass = idx === 0 ? 'subtab-active' : 'text-slate-600 hover:bg-slate-100';
+                html += '<button class="w-full text-left px-4 py-3 text-sm font-medium transition-colors ' + activeClass + ' flex items-center gap-2" data-subtab="' + idx + '"><span class="material-symbols-outlined text-sm">' + (sub.icon || 'label') + '</span>' + sub.name + '<span class="material-symbols-outlined text-xs ml-auto">chevron_right</span></button>';
+            });
+            subtabContainer.innerHTML = html;
+            subtabContainer.querySelectorAll('button[data-subtab]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var idx = parseInt(btn.dataset.subtab);
+                    renderContent(tabId, idx);
+                    subtabContainer.querySelectorAll('button').forEach(function(b) { b.classList.remove('subtab-active', 'bg-primary', 'text-white'); b.classList.add('text-slate-600'); });
+                    btn.classList.add('subtab-active');
+                    btn.classList.remove('text-slate-600');
+                });
+            });
+        }
+
+        function renderContent(tabId, subtabIdx) {
+            subtabIdx = subtabIdx || 0;
+            var data = appData[tabId];
+            if (!data) return;
+            var sub = data.subApps[subtabIdx];
+            var topoHtml = '';
+            var products = data.products;
+
+            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
+            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(tabId, sub.name) : null;
+            if (sysMods) {
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
+                html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
+                sysMods.forEach(function(m) {
+                    var ph = '';
+                    data.products.forEach(function(c) {
+                        ph += '<a href="' + (c.link || '#') + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + (c.series || '') + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + (c.pkg || '') + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + (c.feature || '') + '</p></div></div></a>';
+                    });
+                    html += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + m.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + m.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + m.desc + '</p>' + ph + '</div></div></div>';
+                });
+                html += '</div>';
+            }
+            contentDiv.innerHTML = '<div class="mb-4"><h3 class="text-xl font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">' + (sub.icon || 'label') + '</span>' + sub.name + '</h3><p class="text-xs text-slate-500 mt-1">所属领域：' + data.name + '</p></div>' +
+                '<div class="bg-slate-50 border border-slate-100 p-4 mb-5 rounded"><p class="text-sm text-slate-600 leading-relaxed">' + data.description + '</p></div>' +
+                topoHtml + html +
+                '</div>';
+        }
+
+        function switchTab(tabKey) {
+            currentTab = tabKey;
+            currentSub = 0;
+            tabs.forEach(function(t) {
+                t.classList.remove('tab-active');
+                t.classList.add('text-slate-500');
+                if (t.dataset.tab === tabKey) { t.classList.add('tab-active'); t.classList.remove('text-slate-500'); }
+            });
+            renderSubTabs(tabKey);
+            renderContent(tabKey, 0);
+        }
+
+        tabs.forEach(function(t) {
+            t.addEventListener('click', function() { switchTab(t.dataset.tab); });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('applications');
+            YMIN.footer.inject();
+            switchTab('smartphone');
+        });
+    </script>
+</body>
+</html>
