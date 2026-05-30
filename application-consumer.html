@@ -91,26 +91,6 @@
                 <div class="lg:col-span-3 bg-white border border-slate-200 p-6" id="tabContent"></div>
             </div>
 
-            <!-- 产品映射总览表 -->
-            <div class="bg-white border border-slate-200 p-6 mb-8">
-                <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">grid_on</span> 消费类电子电容产品映射</h2>
-                <p class="text-xs text-slate-500 mb-4">点击系列名称跳转至产品中心筛选页。以下系列覆盖消费类电子从电源管理到LED驱动的全场景需求。</p>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-xs border-collapse">
-                        <thead><tr class="bg-slate-100"><th class="border border-slate-300 px-3 py-2 text-left">应用场景</th><th class="border border-slate-300 px-3 py-2 text-left">封装</th><th class="border border-slate-300 px-3 py-2 text-left">系列</th><th class="border border-slate-300 px-3 py-2">电压范围</th><th class="border border-slate-300 px-3 py-2">ESR典型值</th><th class="border border-slate-300 px-3 py-2">主要特性</th></tr></thead>
-                        <tbody class="text-center">
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">智能手机电源管理</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=NPX" class="hover:underline">NPX</a></td><td class="border px-3 py-2">2.5V - 25V</td><td class="border px-3 py-2">≤10mΩ</td><td class="border px-3 py-2 text-left text-[10px]">超低ESR, 小型化, 高分子固态</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">平板DC-DC转换</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VHT" class="hover:underline">VHT/VHU</a></td><td class="border px-3 py-2">16V - 63V</td><td class="border px-3 py-2">≤8mΩ</td><td class="border px-3 py-2 text-left text-[10px]">固液混合, 125℃, 4000h</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">可穿戴设备PMIC</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VKM" class="hover:underline">VKM</a></td><td class="border px-3 py-2">6.3V - 100V</td><td class="border px-3 py-2">低ESR</td><td class="border px-3 py-2 text-left text-[10px]">105℃, 9000h, SMD, AEC-Q200</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">家电主控板滤波</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPG" class="hover:underline">VPG</a></td><td class="border px-3 py-2">25V - 100V</td><td class="border px-3 py-2">≤30mΩ</td><td class="border px-3 py-2 text-left text-[10px]">高纹波, 大容量, 2000h</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">LED驱动电源</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=LK" class="hover:underline">LK</a></td><td class="border px-3 py-2">16V - 400V</td><td class="border px-3 py-2">低漏电流</td><td class="border px-3 py-2 text-left text-[10px]">AEC-Q200, 6000h, 低漏电流</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">PD快充适配器</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPT" class="hover:underline">VPT</a></td><td class="border px-3 py-2">16V - 100V</td><td class="border px-3 py-2">≤50mΩ</td><td class="border px-3 py-2 text-left text-[10px]">125℃, 2000h, 贴片</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">智能家居控制</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VKO" class="hover:underline">VKO</a></td><td class="border px-3 py-2">6.3V - 50V</td><td class="border px-3 py-2">低ESR</td><td class="border px-3 py-2 text-left text-[10px]">大容量3300μF, 8000h, SMD</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
             <!-- 相关技术文章 -->
             <div class="bg-white border border-slate-200 p-6">
                 <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">newspaper</span> 相关技术文章与设计指南</h2>
@@ -230,10 +210,12 @@
             var data = appData[tabId];
             if (!data) return;
             var sub = data.subApps[subtabIdx];
-            var topoHtml = '';
-            var products = data.products;
+            var html = '';
 
+            html += '<div class="mb-4"><h3 class="text-xl font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">' + (sub.icon || 'label') + '</span>' + sub.name + '</h3><p class="text-xs text-slate-500 mt-1">所属领域：' + data.name + '</p></div>';
+            html += '<div class="bg-slate-50 border border-slate-100 p-4 mb-5 rounded"><p class="text-sm text-slate-600 leading-relaxed">' + data.description + '</p></div>';
             html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
+
             var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(tabId, sub.name) : null;
             if (sysMods) {
                 html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
@@ -247,10 +229,7 @@
                 });
                 html += '</div>';
             }
-            contentDiv.innerHTML = '<div class="mb-4"><h3 class="text-xl font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">' + (sub.icon || 'label') + '</span>' + sub.name + '</h3><p class="text-xs text-slate-500 mt-1">所属领域：' + data.name + '</p></div>' +
-                '<div class="bg-slate-50 border border-slate-100 p-4 mb-5 rounded"><p class="text-sm text-slate-600 leading-relaxed">' + data.description + '</p></div>' +
-                topoHtml + html +
-                '</div>';
+            contentDiv.innerHTML = html;
         }
 
         function switchTab(tabKey) {

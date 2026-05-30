@@ -89,35 +89,6 @@
                 <div class="lg:col-span-3 bg-white border border-slate-200 p-6" id="tabContent"></div>
             </div>
 
-            <!-- 数据中心产品映射总览（与汽车电子风格一致） -->
-            <div class="bg-white border border-slate-200 p-6 mb-8">
-                <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">grid_on</span> 数据中心电容产品映射（电容值 × 额定电压）</h2>
-                <p class="text-xs text-slate-500 mb-4">点击系列名称跳转至产品中心筛选页。以下系列覆盖数据中心从核心供电到辅助电源的全场景需求。</p>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-xs border-collapse">
-                        <thead><tr class="bg-slate-100"><th class="border border-slate-300 px-3 py-2 text-left">系统模块</th><th class="border border-slate-300 px-3 py-2 text-left">封装</th><th class="border border-slate-300 px-3 py-2 text-left">系列</th><th class="border border-slate-300 px-3 py-2">电压范围</th><th class="border border-slate-300 px-3 py-2">ESR典型值</th><th class="border border-slate-300 px-3 py-2">主要特性</th></tr></thead>
-                        <tbody class="text-center">
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">CPU/GPU核心供电</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VHT" class="hover:underline">VHT/VHU</a></td><td class="border px-3 py-2">16V - 63V</td><td class="border px-3 py-2">≤8mΩ</td><td class="border px-3 py-2 text-left text-[10px]">固液混合, 125℃, 4000h</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">GPU/FPGA旁路</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=NPX" class="hover:underline">NPX</a></td><td class="border px-3 py-2">2.5V - 16V</td><td class="border px-3 py-2">≤10mΩ</td><td class="border px-3 py-2 text-left text-[10px]">超低ESR, 小型化, 高分子固态</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">12V输入滤波</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPG" class="hover:underline">VPG</a></td><td class="border px-3 py-2">25V - 100V</td><td class="border px-3 py-2">≤30mΩ</td><td class="border px-3 py-2 text-left text-[10px]">高纹波, 大容量, 2000h</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">内存/存储</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPT" class="hover:underline">VPT</a></td><td class="border px-3 py-2">16V - 100V</td><td class="border px-3 py-2">≤50mΩ</td><td class="border px-3 py-2 text-left text-[10px]">125℃, 2000h, 贴片</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">辅助电源</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPX" class="hover:underline">VPX</a></td><td class="border px-3 py-2">25V - 100V</td><td class="border px-3 py-2">≤50mΩ</td><td class="border px-3 py-2 text-left text-[10px]">经济型, 耐大纹波</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">400V/800V母线</td><td class="border px-3 py-2">牛角型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=CW3H" class="hover:underline">CW3H</a></td><td class="border px-3 py-2">400V - 500V</td><td class="border px-3 py-2">低ESR</td><td class="border px-3 py-2 text-left text-[10px]">高压DC-Link, 长寿命</td></tr>
-                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">待机/管理电源</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VP1" class="hover:underline">VP1</a></td><td class="border px-3 py-2">25V - 50V</td><td class="border px-3 py-2">低ESR</td><td class="border px-3 py-2 text-left text-[10px]">-55~105℃, 通用型</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 白皮书入口 -->
-            <div class="bg-primary text-white p-8 flex flex-col md:flex-row justify-between items-center mb-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-1">《AI服务器电源分配网络(PDN)优化指南》</h3>
-                    <p class="text-blue-100 text-sm">深入探讨400V/800V总线架构下电容选型与布局策略，包含实测数据与仿真模型。适用于数据中心电源工程师。</p>
-                </div>
-                <button class="mt-4 md:mt-0 bg-white text-primary px-8 py-3 text-sm font-bold uppercase hover:bg-blue-50 flex items-center gap-2"><span class="material-symbols-outlined">download</span> 下载白皮书</button>
-            </div>
-
             <!-- 相关技术文章 -->
             <div class="bg-white border border-slate-200 p-6">
                 <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">newspaper</span> 相关技术文章与设计指南</h2>
@@ -277,19 +248,6 @@
                         ${sub.series.map(s => `<span class="px-3 py-1 bg-primary/10 text-primary text-sm font-bold">${s}</span>`).join('')}
                     </div>
                 </div>
-                <!-- 推荐料号 -->
-                <h4 class="font-bold text-primary mb-3 flex items-center gap-2"><span class="material-symbols-outlined">inventory</span>推荐产品料号</h4>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm border-collapse">
-                        <thead class="bg-slate-100">
-                            <tr><th class="border border-slate-300 px-4 py-2 text-left">系列</th><th class="border border-slate-300 px-4 py-2 text-left">产品料号</th><th class="border border-slate-300 px-4 py-2">关键参数</th><th class="border border-slate-300 px-4 py-2">应用节点</th></tr>
-                        </thead>
-                        <tbody>
-                            ${displayProducts.map(p => `<tr class="hover:bg-slate-50"><td class="border px-4 py-2 font-bold text-primary">${p.series}</td><td class="border px-4 py-2"><a href="product-detail.html?pn=${encodeURIComponent(p.pn)}" class="text-primary hover:underline text-xs">${p.pn}</a></td><td class="border px-4 py-2 text-center text-xs">${p.specs}</td><td class="border px-4 py-2 text-center"><span class="bg-primary/10 text-primary text-[10px] px-2 py-1">${p.tag}</span></td></tr>`).join('')}
-                        </tbody>
-                    </table>
-                </div>
-                <p class="text-[10px] text-slate-400 mt-4">* 如需完整规格参数表，请点击料号进入产品详情页查看。</p>
                 ${modsHtml}
             `;
         }
@@ -303,9 +261,6 @@
         }
 
         tabs.forEach(t => t.addEventListener('click', (e) => switchTab(e.currentTarget.dataset.tab)));
-
-        // 默认渲染CPU/GPU核心供电
-        switchTab('cpu');
     </script>
     <!-- 共享组件 -->
     <script src="components/navbar.js"></script>
@@ -315,6 +270,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             YMIN.navbar.inject('applications');
             YMIN.footer.inject();
+            // 默认渲染CPU/GPU核心供电（等 system-modules 加载后）
+            switchTab('cpu');
         });
     </script>
 </body>
