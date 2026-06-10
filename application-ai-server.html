@@ -204,9 +204,24 @@ function renderContent(tabId) {
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            YMIN.navbar.inject('applications');
-            YMIN.footer.inject();
-            switchTab('t0');
+            try {
+                var diag = [];
+                diag.push('YMIN: ' + (typeof YMIN !== 'undefined' ? 'OK' : 'MISSING'));
+                diag.push('sysMod: ' + (typeof YMIN !== 'undefined' && YMIN.sysMod ? 'OK' : 'MISSING'));
+                diag.push('tabs: ' + tabs.length);
+                diag.push('subtabContainer: ' + (subtabContainer ? 'OK' : 'NULL'));
+                diag.push('contentDiv: ' + (contentDiv ? 'OK' : 'NULL'));
+                diag.push('appData keys: ' + Object.keys(appData).join(','));
+                console.log('DIAG:', diag.join(' | '));
+                YMIN.navbar.inject('applications');
+                YMIN.footer.inject();
+                switchTab('t0');
+                if (!contentDiv || !contentDiv.innerHTML) {
+                    contentDiv.innerHTML = '<div class=\"p-4 bg-red-50 border border-red-200 text-red-700 text-xs\"><b>诊断:</b> ' + diag.join('<br>') + '</div>';
+                }
+            } catch(e) {
+                document.getElementById('tabContent').innerHTML = '<div class=\"p-4 bg-red-50 border border-red-200 text-red-700 text-xs\"><b>JS错误:</b> ' + e.message + '<br><pre>' + (e.stack||'') + '</pre></div>';
+            }
         });
     </script>
 </body>
