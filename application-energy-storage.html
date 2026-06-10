@@ -89,10 +89,9 @@
             <div class="bg-white border border-slate-200 p-4 mb-6">
                 <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择应用领域</p>
                 <div class="flex flex-wrap gap-2" id="tabContainer">
-                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="pv">光伏逆变器</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="pcs">储能变流器</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="ups">UPS电源</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="bms">BMS系统</button>
+                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="t0">逆变器</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t1">变流器</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t2">BMS</button>
                 </div>
             </div>
 
@@ -206,64 +205,7 @@
             return svg;
         }
 
-        var appData = {
-            pv: {
-                name: '光伏逆变器',
-                description: '光伏逆变器将太阳能电池板产生的直流电转换为交流电并网。永铭CW3H和VPG系列以高电压和大容量特性，为光伏逆变器DC-Link提供可靠的电容方案。',
-                subApps: [
-                    { name: '组串式逆变器', series: ['CW3H', 'VPG'], icon: 'solar_power', topology: { nodes: ['光伏板', 'DC-DC', 'DC-Link', '逆变'], highlight: [2] }, seriesMap: { 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } } },
-                    { name: '集中式逆变器', series: ['CW3H', 'VPG'], icon: 'power', topology: { nodes: ['光伏阵列', '汇流箱', 'DC-Link', '逆变'], highlight: [2] }, seriesMap: { 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } } },
-                    { name: '微型逆变器', series: ['VPX', 'VPG'], icon: 'home', topology: { nodes: ['光伏板', 'DC-DC', '逆变', '电网'], highlight: [1] }, seriesMap: { 1: { name: 'VPX', link: 'product-center.html?series=VPX' } } },
-                    { name: '储能混合逆变器', series: ['CW3H', 'VPG'], icon: 'battery_charging_full', topology: { nodes: ['光伏', 'MPPT', 'DC-Link', '逆变'], highlight: [2] }, seriesMap: { 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } } }
-                ],
-                products: [
-                    { series: 'CW3H', pkg: '牛角型', feature: '400-500V, 高纹波, 长寿命', samplePn: 'CW3H 400V/470μF', link: 'product-center.html?series=CW3H', highlights: ['400-500V', '高纹波', '长寿命'] },
-                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] },
-                    { series: 'VPX', pkg: '贴片型', feature: '小型化, 低ESR, 5000h', samplePn: 'VPX系列', link: 'product-center.html?series=VPX', highlights: ['小型化', '低ESR', '5000h'] }
-                ]
-            },
-            pcs: {
-                name: '储能变流器',
-                description: '储能变流器(PCS)是储能系统的核心，实现电池与电网之间的双向能量转换。永铭CW3H和VPG系列以高纹波电流和长寿命特性，满足PCS对电容的严苛要求。',
-                subApps: [
-                    { name: '双向DC-DC', series: ['CW3H', 'VPG'], icon: 'swap_horiz', topology: { nodes: ['电池', 'DC-DC', 'DC-Link', '逆变'], highlight: [2] }, seriesMap: { 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } } },
-                    { name: '并网PCS', series: ['CW3H', 'VPG'], icon: 'grid_on', topology: { nodes: ['电池', 'DC-Link', '逆变', '电网'], highlight: [1] }, seriesMap: { 1: { name: 'CW3H', link: 'product-center.html?series=CW3H' } } },
-                    { name: '离网PCS', series: ['CW3H', 'VPG'], icon: 'offline_bolt', topology: { nodes: ['电池', 'DC-Link', '逆变', '负载'], highlight: [1] }, seriesMap: { 1: { name: 'CW3H', link: 'product-center.html?series=CW3H' } } }
-                ],
-                products: [
-                    { series: 'CW3H', pkg: '牛角型', feature: '400-500V, 高纹波, 长寿命', samplePn: 'CW3H 400V/470μF', link: 'product-center.html?series=CW3H', highlights: ['400-500V', '高纹波', '长寿命'] },
-                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] }
-                ]
-            },
-            ups: {
-                name: 'UPS电源',
-                description: 'UPS不间断电源为关键负载提供稳定可靠的电力保障。永铭CW3H和VPG系列以高可靠性和长寿命特性，为UPS电源提供可靠的电容方案。',
-                subApps: [
-                    { name: '在线式UPS', series: ['CW3H', 'VPG'], icon: 'power', topology: { nodes: ['电网', '整流', 'DC-Link', '逆变'], highlight: [2] }, seriesMap: { 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } } },
-                    { name: '后备式UPS', series: ['VPG', 'CW3H'], icon: 'battery_standby', topology: { nodes: ['电网', '充电器', '电池', '逆变'], highlight: [2] }, seriesMap: { 2: { name: 'VPG', link: 'product-center.html?series=VPG' } } },
-                    { name: '模块化UPS', series: ['CW3H', 'VPG'], icon: 'dns', topology: { nodes: ['电网', '整流', 'DC-Link', '逆变'], highlight: [2] }, seriesMap: { 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } } }
-                ],
-                products: [
-                    { series: 'CW3H', pkg: '牛角型', feature: '400-500V, 高纹波, 长寿命', samplePn: 'CW3H 400V/470μF', link: 'product-center.html?series=CW3H', highlights: ['400-500V', '高纹波', '长寿命'] },
-                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] }
-                ]
-            },
-            bms: {
-                name: 'BMS系统',
-                description: '电池管理系统(BMS)负责监控和管理电池组的充放电过程，确保电池安全可靠运行。永铭VKM和LK系列以低漏电流和高精度特性，满足BMS对电容的严苛要求。',
-                subApps: [
-                    { name: '电池电压检测', series: ['VKM', 'LK'], icon: 'monitoring', topology: { nodes: ['电池', '采样电路', 'ADC', 'MCU'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: '电流检测', series: ['VKM', 'NPX'], icon: 'electric_meter', topology: { nodes: ['电池', '电流传感器', '信号调理', 'ADC'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: '均衡电路', series: ['VKM', 'LK'], icon: 'balance', topology: { nodes: ['电池', '均衡开关', '均衡电阻', '控制'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: '通信隔离', series: ['NPX', 'VKM'], icon: 'lan', topology: { nodes: ['BMS', '隔离', 'CAN', '整车'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } }
-                ],
-                products: [
-                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
-                    { series: 'LK', pkg: '引线型', feature: '极低漏电流≤20μA, 6000h, -40℃', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['漏电流≤20μA', '6000h', '-40℃'] },
-                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] }
-                ]
-            }
-        };
+        
 
         var currentTab = 'pv';
         var currentSub = 0;
@@ -290,7 +232,9 @@
             }
         }
 
-        function renderContent(tabKey) {
+        var TAB_MAP = {'t0':'pv','t1':'pcs','t2':'bms'};
+var appData = {'t0':{name:'逆变器',description:'',subApps:[{name:'逆变器',series:[],icon:'solar_power'},{name:'定日镜',series:[],icon:'solar_power'},],products:[]},'t1':{name:'变流器',description:'',subApps:[{name:'变流器',series:[],icon:'transform'},],products:[]},'t2':{name:'BMS',description:'',subApps:[{name:'电池管理系统-BMS',series:[],icon:'battery_horiz_075'},],products:[]},};
+function renderContent(tabKey) {
             var container = document.getElementById('tabContent');
             var data = appData[tabKey];
             if (!data) return;
@@ -298,20 +242,39 @@
             if (!sub) return;
             var html = '';
             html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
-            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + data.subApps[currentSub].name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + data.subApps[currentSub].name + ' 电路拓扑（演示用，正式版替换）</p></div>';
-            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(currentTab, data.subApps[currentSub].name) : null;
+            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
+                        // 先查 SPECS（样式2用，样式1也从中提取系列名）
+            var specs = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getSpecs('energy', TAB_MAP[currentTab]||currentTab, sub.name) : null;
+
+            // === 样式1: 系统模块详解与推荐系列（2列卡片，推荐系列每行一个） ===
+            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(TAB_MAP[tabKey]||tabKey, sub.name) : null;
             if (sysMods) {
-                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐系列</h4>';
                 html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
-                sysMods.forEach(function(m) {
-                    var ph = '';
-                    data.products.forEach(function(c) {
-                        ph += '<a href="' + (c.link || '#') + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + (c.series || '') + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + (c.pkg || '') + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + (c.feature || '') + '</p></div></div></a>';
-                    });
-                    html += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + m.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + m.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + m.desc + '</p>' + ph + '</div></div></div>';
+                sysMods.forEach(function(mod) {
+                    var recSeries = [];
+                    if (specs) { var seen = {}; specs.forEach(function(sp){ if(!seen[sp.series] && recSeries.length < 3){ recSeries.push(sp.series); seen[sp.series]=1; }}); }
+                    if (!recSeries.length && sub.series) recSeries = sub.series;
+                    var rows = recSeries.length ? recSeries.map(function(s){return '<div class="flex items-center gap-2 text-[10px] py-0.5"><span class="material-symbols-outlined text-primary text-xs">check_circle</span><span class="font-medium text-primary">' + s + '</span><span class="text-slate-400">系列</span></div>';}).join('') : '';
+                    html += '<div class="border border-slate-200 p-3 hover:border-primary transition-colors"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div class="flex-1"><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed mb-2">' + mod.desc + '</p>' + rows + '</div></div></div>';
                 });
                 html += '</div>';
             }
+
+            // === 样式2: 系统模块详解与推荐规格（每个模块占一整行：介绍 + 规格表） ===
+            if (specs && sysMods) {
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-base">inventory</span>系统模块详解与推荐规格 <span class="text-[10px] font-normal text-slate-400 ml-1">（数据来源：PDF应用手册）</span></h4>';
+                sysMods.forEach(function(mod) {
+                    html += '<div class="border border-slate-200 p-4 mb-3">';
+                    html += '<div class="flex items-start gap-2 mb-3"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div><h5 class="text-sm font-bold text-primary mb-0.5">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p></div></div>';
+                    html += '<div class="overflow-x-auto"><table class="w-full text-xs border-collapse"><thead class="bg-slate-100"><tr><th class="border border-slate-300 px-2 py-1.5 text-left">系列</th><th class="border border-slate-300 px-2 py-1.5 text-left">料号</th><th class="border border-slate-300 px-2 py-1.5">电压</th><th class="border border-slate-300 px-2 py-1.5">容量</th><th class="border border-slate-300 px-2 py-1.5">尺寸</th><th class="border border-slate-300 px-2 py-1.5">ESR</th><th class="border border-slate-300 px-2 py-1.5">纹波</th><th class="border border-slate-300 px-2 py-1.5">寿命</th><th class="border border-slate-300 px-2 py-1.5 text-left">备注</th></tr></thead><tbody>';
+                    specs.forEach(function(s) {
+                        html += '<tr class="hover:bg-slate-50"><td class="border px-2 py-1.5 font-bold text-primary">' + (s.series||'') + '</td><td class="border px-2 py-1.5"><a href="product-detail.html?pn=' + encodeURIComponent(s.pn||'') + '" class="text-primary hover:underline">' + (s.pn||'') + '</a></td><td class="border px-2 py-1.5 text-center">' + (s.voltage||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.cap||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.size||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.esr||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.ripple||'') + '</td><td class="border px-2 py-1.5 text-center text-[10px]">' + (s.life||'') + '</td><td class="border px-2 py-1.5 text-[10px] text-slate-500">' + (s.note||'') + '</td></tr>';
+                    });
+                    html += '</tbody></table></div></div>';
+                });
+            }
+
             container.innerHTML = html;
         }
 
@@ -338,7 +301,6 @@
                     switchTab(this.dataset.tab);
                 });
             }
-            switchTab('pv');
         });
     </script>
     <!-- 共享组件 -->
@@ -350,6 +312,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             YMIN.navbar.inject('applications');
             YMIN.footer.inject();
+            switchTab('t0');
         });
     </script>
 </body>

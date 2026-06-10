@@ -105,14 +105,15 @@
             <div class="bg-white border border-slate-200 p-4 mb-6">
                 <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择应用领域</p>
                 <div class="flex flex-wrap gap-2" id="tabContainer">
-                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="mainDrive">主驱 / 电驱电控</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="charge">充电系统</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="safety">安全部件</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="adas">ADAS / 自动驾驶</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="thermal">热管理</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="cockpit">智能座舱</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="lamp">车灯</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="charger">充电桩</button>
+                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="t0">电机驱动</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t1">安全部件</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t2">热管理部件</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t3">新能源车车灯</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t4">智能驾驶</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t5">多媒体系统</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t6">辅助</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t7">车载OBC</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t8">充电桩</button>
                 </div>
             </div>
 
@@ -276,253 +277,116 @@
             return svg;
         }
 
-        // ===== 应用数据结构 =====
+        // ===== 应用数据结构（对齐固液混合手册6大领域） =====
         const appData = {
-            mainDrive: {
-                name: '主驱 / 电驱电控',
-                description: '电驱电控系统是新能源汽车的核心动力单元，包含DC-DC转换器、DC-AC逆变器、EPS转向控制等。永铭液态抗震座板贴片型铝电解电容器广泛应用于热管理系统/水泵/油泵/助力转向控制系统，兼具高抗震需求与成本效益。',
+            't0': {
+                name: '电机驱动',
+                description: '',
                 subApps: [
-                    { 
-                        name: 'DC-DC转换器', series: ['VHT/VHU', 'VPG'], icon: 'power',
-                        topology: { nodes: ['高压输入', '开关变换', '整流滤波', '低压输出'], highlight: [0, 2] },
-                        seriesMap: { 0: { name: 'VHT/VHU', link: 'product-center.html?series=VHT' }, 2: { name: 'VPG', link: 'product-center.html?series=VPG' } },
-                        systemModules: [
-                            { name: '高压输入滤波', icon: 'power', desc: '车载高压电池（400V/800V平台）输入端的电容滤波，需承受高压与大纹波电流。要求高耐压、低ESR，推荐VHT系列固液混合电容。' },
-                            { name: '开关变换电路', icon: 'transform', desc: 'DC-DC功率变换核心，MOSFET/IGBT开关产生高频噪声。需在开关节点就近放置低ESR电容吸收尖峰，推荐VPG系列。' },
-                            { name: '整流滤波输出', icon: 'filter_alt', desc: '整流后的低压侧输出滤波，为12V/48V低压系统提供稳定直流。需大容量、低ESR，推荐NPX系列高分子固态电容。' },
-                            { name: '低压负载端旁路', icon: 'electrical_services', desc: '为ECU、传感器等低压负载提供就地旁路，抑制电源总线瞬态波动。推荐VKM系列SMD电容。' }
-                        ]
-                    },
-                    { 
-                        name: 'DC-AC逆变器', series: ['薄膜电容'], icon: 'conversion_path', 
-                        topology: { nodes: ['直流母线', '逆变桥', '滤波输出', '电机'], highlight: [1] },
-                        seriesMap: { 1: { name: '薄膜电容', link: 'product-center.html' } }
-                    },
-                    { 
-                        name: 'EPS转向控制', series: ['LKL(R)', 'VKM'], icon: 'settings_suggest', 
-                        topology: { nodes: ['扭矩输入', 'ECU控制', '电机驱动', '输出轴'], highlight: [1, 2] },
-                        seriesMap: { 1: { name: 'LKL(R)', link: 'product-center.html?series=LKL(R)' }, 2: { name: 'VKM', link: 'product-center.html?series=VKM' } }
-                    },
-                    { 
-                        name: '电机驱动', series: ['VHT', 'VPG'], icon: 'precision_manufacturing', 
-                        topology: { nodes: ['电源输入', '驱动电路', '功率输出', '电机'], highlight: [2] },
-                        seriesMap: { 2: { name: 'VHT', link: 'product-center.html?series=VHT' } }
-                    }
+                    { name: '电机控制器-MCU', series: [], icon: 'precision_manufacturing' },
+                    { name: '直流转直流-DCDC', series: [], icon: 'precision_manufacturing' },
+                    { name: '高压分线盒-PDU', series: [], icon: 'precision_manufacturing' },
+                    { name: '整车控制-VCU', series: [], icon: 'precision_manufacturing' },
+                    { name: '电池管理系统-BMS', series: [], icon: 'precision_manufacturing' },
                 ],
-                products: [
-                    { series: 'VHT/VHU', pkg: '贴片型', feature: '固液混合，ESR≤8mΩ，125℃，4000h', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['ESR≤8mΩ', '125℃', '固液混合'] },
-                    { series: 'LKL(R)', pkg: '引线型', feature: '135℃超高温，DC-Link专用，低ESR', samplePn: 'LKL(R) 25V/4700μF', link: 'product-center.html?series=LKL(R)', highlights: ['135℃', 'DC-Link', '低ESR'] },
-                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'AEC-Q200', 'SMD'] },
-                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] }
-                ]
+                products: []
             },
-            charge: {
-                name: '充电系统',
-                description: '充电系统包含OBC车载充电机和DC-DC转换器。永铭针对性推出高性能电容产品矩阵，应对高压系统下对电容器耐高压、小尺寸、长寿命、耐大纹波电流的严苛要求。',
-                subApps: [
-                    { 
-                        name: 'OBC车载充电机', series: ['VHT/VHU', 'CW3H', 'LKD'], icon: 'ev_station', 
-                        topology: { nodes: ['AC输入', 'PFC', 'DC-Link', '输出'], highlight: [2] },
-                        seriesMap: { 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } }
-                    },
-                    { 
-                        name: 'DC-DC转换器', series: ['VHT/VHU', '薄膜电容'], icon: 'transform', 
-                        topology: { nodes: ['高压输入', '开关变换', '整流滤波', '低压输出'], highlight: [0, 2] },
-                        seriesMap: { 0: { name: 'VHT/VHU', link: 'product-center.html?series=VHT' }, 2: { name: '薄膜电容', link: 'product-center.html' } }
-                    },
-                    { 
-                        name: 'BMS电池管理', series: ['VHT', 'VPT'], icon: 'battery_horiz_075', 
-                        topology: { nodes: ['电池组', '采样电路', '均衡控制', '通信'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VHT', link: 'product-center.html?series=VHT' } }
-                    }
-                ],
-                products: [
-                    { series: 'VHT/VHU', pkg: '贴片型', feature: '固液混合，ESR≤8mΩ，125℃', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['ESR≤8mΩ', '125℃', '固液混合'] },
-                    { series: 'CW3H', pkg: '牛角型', feature: '400-500V, 800V平台DC-Link', samplePn: 'CW3H 800V平台', link: 'product-center.html?series=CW3H', highlights: ['400-500V', '800V平台', 'DC-Link'] },
-                    { series: 'LKD', pkg: '引线型', feature: '400-500V高压OBC', samplePn: 'LKD高压系列', link: 'product-center.html?series=LKD', highlights: ['400-500V', '高压', 'OBC'] }
-                ]
-            },
-            safety: {
+            't1': {
                 name: '安全部件',
-                description: '安全部件包括安全气囊ECU、ABS防抱死系统、EPS、one-box/ESC/EBS等。安全气囊ECU是汽车被动安全系统的核心，负责碰撞检测与气囊点火控制。永铭LK系列通过AEC-Q200认证，专为安全气囊ECU设计，具备极低漏电流和卓越的低温启动性能，确保在-40℃极端条件下仍能即时激活系统。',
+                description: '',
                 subApps: [
-                    {
-                        name: '安全气囊', series: ['LK(引线型)', 'VKO(贴片型)'], icon: 'shield',
-                        topology: { nodes: ['备用电源', 'MCU监控', '点火驱动', '通信'], highlight: [0, 2] },
-                        seriesMap: { 0: { name: 'LK', link: 'product-center.html?series=LK' }, 2: { name: 'VKO', link: 'product-center.html?series=VKO' } },
-                        systemModules: [
-                            { name: '备用电源', icon: 'battery_charging_full', desc: '在碰撞断电瞬间提供备用能量，确保ECU持续工作。需大容量、低漏电流电容，防止长期搁置后容量衰减影响系统激活。' },
-                            { name: 'MCU监控回路', icon: 'monitor_heart', desc: '负责传感器信号采集与碰撞算法判定，对电源纹波敏感，需要低ESR电容保证供电稳定性。' },
-                            { name: '点火驱动回路', icon: 'local_fire_department', desc: '在ECU发出点火指令后，瞬时释放大电流引爆气囊。电容需具备高纹波电流能力和极低内阻。' },
-                            { name: '通信回路', icon: 'cell_tower', desc: '与其他ECU（如ABS、ESC）交换车辆状态信息，需要滤波电容抑制总线噪声，确保通信可靠性。' }
-                        ]
-                    },
-                    { 
-                        name: 'ABS防抱死系统', series: ['VKO', 'VKM'], icon: 'warning', 
-                        topology: { nodes: ['轮速传感', 'ECU运算', '液压调节', '执行器'], highlight: [1, 2] },
-                        seriesMap: { 1: { name: 'VKO', link: 'product-center.html?series=VKO' }, 2: { name: 'VKM', link: 'product-center.html?series=VKM' } }
-                    },
-                    { 
-                        name: 'EPS', series: ['LKL(R)', '液态抗震SMD'], icon: 'settings_suggest', 
-                        topology: { nodes: ['扭矩输入', 'ECU控制', '电机驱动', '输出轴'], highlight: [1, 2] },
-                        seriesMap: { 1: { name: 'LKL(R)', link: 'product-center.html?series=LKL(R)' }, 2: { name: 'VKM', link: 'product-center.html?series=VKM' } }
-                    },
-                    { 
-                        name: 'one-box / ESC / EBS', series: ['VKO', 'LKL(R)'], icon: 'warning', 
-                        topology: { nodes: ['传感器', 'ECU', '液压单元', '制动器'], highlight: [1, 2] },
-                        seriesMap: { 1: { name: 'VKO', link: 'product-center.html?series=VKO' }, 2: { name: 'LKL(R)', link: 'product-center.html?series=LKL(R)' } }
-                    }
+                    { name: '刹车制动-BS', series: [], icon: 'shield' },
+                    { name: '电子助力转向-EPS', series: [], icon: 'shield' },
+                    { name: '安全气囊', series: [], icon: 'shield' },
+                    { name: '车窗控制器', series: [], icon: 'shield' },
+                    { name: '座椅通风', series: [], icon: 'shield' },
+                    { name: '车身稳定系统-ESC', series: [], icon: 'shield' },
                 ],
-                products: [
-                    { series: 'LK', pkg: '引线型', feature: 'AEC-Q200, 极低漏电流≤20μA, 6000h, -40℃低温启动', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['AEC-Q200', '漏电流≤20μA', '-40℃'] },
-                    { series: 'VKO', pkg: '贴片型', feature: 'AEC-Q200, SMD封装, 大容量3300μF, 8000h', samplePn: 'VKOI2101C332MVTM', link: 'product-center.html?series=VKO', highlights: ['SMD', '3300μF', '8000h'] },
-                    { series: 'LKL(R)', pkg: '引线型', feature: '135℃, DC-Link, 低ESR', samplePn: 'LKL(R) 25V/4700μF', link: 'product-center.html?series=LKL(R)', highlights: ['135℃', 'DC-Link', '低ESR'] }
-                ]
+                products: []
             },
-            adas: {
-                name: 'ADAS / 自动驾驶辅助系统',
-                description: 'ADAS系统包含域控制器、毫米波雷达、激光雷达、摄像头等传感器模组。需要高性能处理器和传感器供电，对电源稳定性、纹波抑制和瞬态响应要求极高。',
+            't2': {
+                name: '热管理部件',
+                description: '',
                 subApps: [
-                    { 
-                        name: '域控制器', series: ['NPX', 'VHT'], icon: 'memory', 
-                        topology: { nodes: ['电源输入', 'SoC供电', '存储', '通信'], highlight: [1] },
-                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
-                    },
-                    { 
-                        name: '毫米波雷达', series: ['VHT', 'VKM'], icon: 'radar', 
-                        topology: { nodes: ['天线', '射频前端', '信号处理', '输出'], highlight: [2] },
-                        seriesMap: { 2: { name: 'VHT', link: 'product-center.html?series=VHT' } }
-                    },
-                    { 
-                        name: '摄像头模组', series: ['NPX', 'VKM'], icon: 'camera', 
-                        topology: { nodes: ['镜头', '图像传感器', 'ISP', '输出'], highlight: [2] },
-                        seriesMap: { 2: { name: 'NPX', link: 'product-center.html?series=NPX' } }
-                    }
+                    { name: '电子水泵/油泵', series: [], icon: 'ac_unit' },
+                    { name: '空调压缩机控制器', series: [], icon: 'ac_unit' },
+                    { name: 'BMS电池管理', series: [], icon: 'ac_unit' },
+                    { name: '冷却风扇控制器', series: [], icon: 'ac_unit' },
+                    { name: '电子水阀', series: [], icon: 'ac_unit' },
+                    { name: 'PTC加热器', series: [], icon: 'ac_unit' },
+                    { name: '电子水泵', series: [], icon: 'ac_unit' },
                 ],
-                products: [
-                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
-                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
-                ]
+                products: []
             },
-            thermal: {
-                name: '热管理',
-                description: '热管理系统包括电子水泵、空调压缩机、水阀、PTC加热、电子油泵、冷却风扇、鼓风机等。VHE系列高分子混合电容专为热管理系统设计，135℃环境下稳定运行4000小时。',
+            't3': {
+                name: '新能源车车灯',
+                description: '',
                 subApps: [
-                    { 
-                        name: '电子水泵/油泵', series: ['VHE', '液态贴片SMD'], icon: 'water_pump', 
-                        topology: { nodes: ['电源', '驱动电路', '电机', '泵体'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VHE', link: 'product-center.html?series=VHE' } }
-                    },
-                    { 
-                        name: '空调压缩机', series: ['VHE', 'VHT'], icon: 'ac_unit', 
-                        topology: { nodes: ['电源', '变频驱动', '压缩机', '制冷回路'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VHE', link: 'product-center.html?series=VHE' } }
-                    },
-                    { 
-                        name: 'PTC加热器', series: ['VHE', 'VPG'], icon: 'heat', 
-                        topology: { nodes: ['电源', 'PTC控制', '加热元件', '温度反馈'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VHE', link: 'product-center.html?series=VHE' } }
-                    },
-                    { 
-                        name: '冷却风扇/鼓风机', series: ['VHE', 'VKM'], icon: 'air', 
-                        topology: { nodes: ['电源', '电机驱动', '风扇', '风道'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VHE', link: 'product-center.html?series=VHE' } }
-                    }
+                    { name: '新能源车车灯', series: [], icon: 'light' },
                 ],
-                products: [
-                    { series: 'VHE', pkg: '引线型', feature: '135℃耐高温, 高分子混合, 4000h', samplePn: 'VHE系列', link: 'product-center.html?series=VHE', highlights: ['135℃', '高分子混合', '4000h'] },
-                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
-                ]
+                products: []
             },
-            cockpit: {
-                name: '智能座舱',
-                description: '智能座舱包括域控制器、仪表盘、中控娱乐系统、HUD抬头显示、T-BOX车联网等。需要小型化、低ESR电容满足高密度PCB布局需求。',
+            't4': {
+                name: '智能驾驶',
+                description: '',
                 subApps: [
-                    { 
-                        name: '域控制器', series: ['NPX', 'VHT'], icon: 'memory', 
-                        topology: { nodes: ['电源输入', 'SoC供电', '存储', '通信'], highlight: [1] },
-                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
-                    },
-                    { 
-                        name: '仪表盘/中控', series: ['NPX', 'VKM'], icon: 'dashboard', 
-                        topology: { nodes: ['电源', '主控', '显示驱动', '屏幕'], highlight: [1] },
-                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
-                    },
-                    { 
-                        name: 'HUD抬头显示', series: ['NPX', 'VHT'], icon: 'visibility', 
-                        topology: { nodes: ['电源', '图像处理', '投影', '挡风玻璃'], highlight: [1] },
-                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
-                    },
-                    { 
-                        name: 'T-BOX车联网', series: ['NPX', 'VKM'], icon: 'cell_tower', 
-                        topology: { nodes: ['电源', '通信模块', '天线', 'CAN总线'], highlight: [1] },
-                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
-                    }
+                    { name: '底盘域控制器', series: [], icon: 'radar' },
+                    { name: '雷达', series: [], icon: 'radar' },
+                    { name: '域控制器-DCU', series: [], icon: 'radar' },
+                    { name: '雷达摄像头', series: [], icon: 'radar' },
+                    { name: '智能座舱', series: [], icon: 'radar' },
+                    { name: '车门窗控制器', series: [], icon: 'radar' },
+                    { name: '自动换挡器', series: [], icon: 'radar' },
+                    { name: '远程通信模块/T-BOX', series: [], icon: 'radar' },
                 ],
-                products: [
-                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
-                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] },
-                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'AEC-Q200', 'SMD'] }
-                ]
+                products: []
             },
-            lamp: {
-                name: '车灯',
-                description: '车灯包括前大灯、尾灯、日间行车灯、车内照明等。VKM系列贴片铝电解电容专为车灯应用设计，解决低温启动与长寿命难题。',
+            't5': {
+                name: '多媒体系统',
+                description: '',
                 subApps: [
-                    { 
-                        name: '前大灯', series: ['VKM', 'NPX'], icon: 'light', 
-                        topology: { nodes: ['电源', 'LED驱动', '散热', '光学'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } }
-                    },
-                    { 
-                        name: '尾灯/日行灯', series: ['VKM', 'NPX'], icon: 'light_mode', 
-                        topology: { nodes: ['电源', 'LED驱动', '控制', '灯组'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } }
-                    },
-                    { 
-                        name: '车内照明', series: ['VKM', 'NPX'], icon: 'living', 
-                        topology: { nodes: ['电源', '调光', 'LED', '灯珠'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } }
-                    }
+                    { name: '组合仪表、车载屏、导航', series: [], icon: 'tv' },
+                    { name: '抬头显示HUD', series: [], icon: 'tv' },
+                    { name: '远程通讯模块-T-BOX', series: [], icon: 'tv' },
+                    { name: '音响', series: [], icon: 'tv' },
                 ],
-                products: [
-                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, AEC-Q200, 低温启动', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'AEC-Q200', '低温启动'] },
-                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR, 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['超低ESR', '小型化', 'SMD'] }
-                ]
+                products: []
             },
-            charger: {
+            't6': {
+                name: '辅助',
+                description: '',
+                subApps: [
+                    { name: '冰箱控制器', series: [], icon: 'kitchen' },
+                    { name: 'USB/WPT', series: [], icon: 'kitchen' },
+                ],
+                products: []
+            },
+            't7': {
+                name: '车载OBC',
+                description: '',
+                subApps: [
+                    { name: 'OBC-DCDC', series: [], icon: 'ev_station' },
+                ],
+                products: []
+            },
+            't8': {
                 name: '充电桩',
-                description: '充电桩包括直流快充桩、交流慢充桩、V2G双向充电等。需要高纹波电流、大容量电容满足大功率充电需求。',
+                description: '',
                 subApps: [
-                    { 
-                        name: '直流快充桩', series: ['VPG', 'CW3H'], icon: 'bolt', 
-                        topology: { nodes: ['电网输入', '整流', 'DC-DC', '电池'], highlight: [1, 2] },
-                        seriesMap: { 1: { name: 'VPG', link: 'product-center.html?series=VPG' }, 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } }
-                    },
-                    { 
-                        name: '交流慢充桩', series: ['VPG', 'VHT'], icon: 'ev_station', 
-                        topology: { nodes: ['AC输入', 'PFC', 'DC输出', '通信'], highlight: [1] },
-                        seriesMap: { 1: { name: 'VPG', link: 'product-center.html?series=VPG' } }
-                    },
-                    { 
-                        name: 'V2G双向充电', series: ['CW3H', 'VPG'], icon: 'swap_horiz', 
-                        topology: { nodes: ['电池', '双向变换', '电网', '通信'], highlight: [1] },
-                        seriesMap: { 1: { name: 'CW3H', link: 'product-center.html?series=CW3H' } }
-                    }
+                    { name: '交流转直流-AC/DC', series: [], icon: 'bolt' },
+                    { name: '直流转直流-DC-DC', series: [], icon: 'bolt' },
                 ],
-                products: [
-                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] },
-                    { series: 'CW3H', pkg: '牛角型', feature: '400-500V, 800V平台DC-Link', samplePn: 'CW3H 800V平台', link: 'product-center.html?series=CW3H', highlights: ['400-500V', '800V平台', 'DC-Link'] },
-                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
-                ]
-            }
+                products: []
+            },
         };
 
         // ===== 渲染函数 =====
-        let currentTab = 'mainDrive';
+
+        let currentTab = '电机驱动';
         let currentSub = 0;
 
-        function getUrlParam(name) {
+        var TAB_MAP = {'t0':'电机驱动','t1':'安全部件','t2':'热管理部件','t3':'lamp','t4':'adas','t5':'cockpit','t6':'aux2','t7':'obc','t8':'charger'};
+function getUrlParam(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
@@ -547,35 +411,54 @@
         }
 
         function renderContent(tabKey) {
+            console.log('renderContent called with:', tabKey);
             const container = document.getElementById('tabContent');
+            if(!container){console.error('tabContent not found!');return;}
             const data = appData[tabKey];
-            if (!data) return;
+            console.log('appData['+tabKey+']:', data ? 'found' : 'NOT FOUND');
+            if (!data) {container.innerHTML='<p>Tab未找到: '+tabKey+'</p>';return;}
             const sub = data.subApps[currentSub];
-            if (!sub) return;
+            console.log('subApps['+currentSub+']:', sub ? sub.name : 'NOT FOUND');
+            if (!sub) {container.innerHTML='<p>子应用未找到 index:'+currentSub+'</p>';return;}
 
             let html = '';
 
             // 子应用标题
             html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
 
-            // 电路拓扑图（演示用统一图片，后续替换各子应用实际拓扑图）
-            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换为实际拓扑图）</p></div>';
+            // 电路拓扑图
+            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用）</p></div>';
 
-            // 系统模块详解 — 优先用共享数据，fallback 到内联 data
-            var sysMods = sub.systemModules || (YMIN && YMIN.sysMod ? YMIN.sysMod.getModules(tabKey, sub.name) : null);
+            // 先查 SPECS
+            var specs = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getSpecs('automotive', TAB_MAP[tabKey]||tabKey, sub.name) : null;
+
+            // === 样式1: 系统模块详解与推荐系列（2列卡片，推荐系列每行一个） ===
+            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(TAB_MAP[tabKey]||tabKey, sub.name) : null;
             if (sysMods) {
-                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐系列</h4>';
                 html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
                 sysMods.forEach(function(mod) {
-                    var ph = '';
-                    if (data.products) {
-                        data.products.forEach(function(card) {
-                            ph += '<a href="' + card.link + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg flex-shrink-0">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + card.series + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + card.pkg + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + card.feature + '</p><div class="flex gap-1 mt-1">' + card.highlights.map(function(h) {return '<span class="text-[8px] bg-primary/5 text-primary px-1 py-0.5 border border-primary/10">' + h + '</span>';}).join('') + '</div></div></div></a>';
-                        });
-                    }
-                    html += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + mod.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p>' + ph + '</div></div></div>';
+                    var recSeries = [];
+                    if (specs) { var seen = {}; specs.forEach(function(sp){ if(!seen[sp.series] && recSeries.length < 3){ recSeries.push(sp.series); seen[sp.series]=1; }}); }
+                    if (!recSeries.length && sub.series) recSeries = sub.series;
+                    var rows = recSeries.length ? recSeries.map(function(s){return '<div class="flex items-center gap-2 text-[10px] py-0.5"><span class="material-symbols-outlined text-primary text-xs">check_circle</span><span class="font-medium text-primary">' + s + '</span><span class="text-slate-400">系列</span></div>';}).join('') : '';
+                    html += '<div class="border border-slate-200 p-3 hover:border-primary transition-colors"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div class="flex-1"><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed mb-2">' + mod.desc + '</p>' + rows + '</div></div></div>';
                 });
                 html += '</div>';
+            }
+
+            // === 样式2: 系统模块详解与推荐规格（每个模块占一整行：介绍 + 规格表） ===
+            if (specs && sysMods) {
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-base">inventory</span>系统模块详解与推荐规格 <span class="text-[10px] font-normal text-slate-400 ml-1">（数据来源：PDF应用手册）</span></h4>';
+                sysMods.forEach(function(mod) {
+                    html += '<div class="border border-slate-200 p-4 mb-3">';
+                    html += '<div class="flex items-start gap-2 mb-3"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div><h5 class="text-sm font-bold text-primary mb-0.5">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p></div></div>';
+                    html += '<div class="overflow-x-auto"><table class="w-full text-xs border-collapse"><thead class="bg-slate-100"><tr><th class="border border-slate-300 px-2 py-1.5 text-left">系列</th><th class="border border-slate-300 px-2 py-1.5 text-left">料号</th><th class="border border-slate-300 px-2 py-1.5">电压</th><th class="border border-slate-300 px-2 py-1.5">容量</th><th class="border border-slate-300 px-2 py-1.5">尺寸</th><th class="border border-slate-300 px-2 py-1.5">ESR</th><th class="border border-slate-300 px-2 py-1.5">纹波</th><th class="border border-slate-300 px-2 py-1.5">寿命</th><th class="border border-slate-300 px-2 py-1.5 text-left">备注</th></tr></thead><tbody>';
+                    specs.forEach(function(s) {
+                        html += '<tr class="hover:bg-slate-50"><td class="border px-2 py-1.5 font-bold text-primary">' + (s.series||'') + '</td><td class="border px-2 py-1.5"><a href="product-detail.html?pn=' + encodeURIComponent(s.pn||'') + '" class="text-primary hover:underline">' + (s.pn||'') + '</a></td><td class="border px-2 py-1.5 text-center">' + (s.voltage||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.cap||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.size||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.esr||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.ripple||'') + '</td><td class="border px-2 py-1.5 text-center text-[10px]">' + (s.life||'') + '</td><td class="border px-2 py-1.5 text-[10px] text-slate-500">' + (s.note||'') + '</td></tr>';
+                    });
+                    html += '</tbody></table></div></div>';
+                });
             }
 
             container.innerHTML = html;
@@ -596,20 +479,13 @@
             renderContent(tabKey);
         }
 
-        // 初始化
+        // 绑定事件（不在这里初始化）
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('#tabContainer button').forEach(btn => {
                 btn.addEventListener('click', function() {
                     switchTab(this.dataset.tab);
                 });
             });
-
-            const tabParam = getUrlParam('tab');
-            if (tabParam && appData[tabParam]) {
-                switchTab(tabParam);
-            } else {
-                switchTab('mainDrive');
-            }
         });
     </script>
     <!-- 共享组件 -->
@@ -617,11 +493,18 @@
     <script src="components/footer.js"></script>
     <script src="data/topology.js"></script>
     <script src="data/system-modules.js"></script>
-    <script src="data/automotive-apps.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             YMIN.navbar.inject('applications');
             YMIN.footer.inject();
+            console.log('Init: YMIN.sysMod =', typeof YMIN !== 'undefined' && YMIN.sysMod ? 'OK' : 'MISSING');
+            console.log('Init: appData keys =', Object.keys(appData));
+            const tabParam = getUrlParam('tab');
+            if (tabParam && appData[tabParam]) {
+                switchTab(tabParam);
+            } else {
+                switchTab('t0');
+            }
         });
     </script>
 </body>

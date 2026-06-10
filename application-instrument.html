@@ -89,10 +89,9 @@
             <div class="bg-white border border-slate-200 p-4 mb-6">
                 <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择应用领域</p>
                 <div class="flex flex-wrap gap-2" id="tabContainer">
-                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="precision">精密测量</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="industrial">工业自动化</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="medical">医疗检测</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="analytical">分析仪器</button>
+                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="t0">智能电表</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t1">智能燃气表</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t2">智能水表</button>
                 </div>
             </div>
 
@@ -206,72 +205,7 @@
             return svg;
         }
 
-        var appData = {
-            precision: {
-                name: '精密测量',
-                description: '精密测量仪器包括数字万用表、示波器、频谱分析仪、LCR电桥等，对电源的噪声和稳定性要求极高。永铭VKM和NPX系列以低漏电流和超低ESR特性，为精密测量提供纯净的电源环境，确保测量精度。',
-                subApps: [
-                    { name: '数字万用表', series: ['VKM', 'NPX'], icon: 'speed', topology: { nodes: ['电池输入', 'DC-DC升压', 'ADC采样', '显示输出'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: '示波器', series: ['NPX', 'VKM'], icon: 'graphic_eq', topology: { nodes: ['电源输入', '前端放大', 'ADC转换', 'FPGA处理'], highlight: [1, 2] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' }, 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: '频谱分析仪', series: ['NPX', 'VHT'], icon: 'frequency', topology: { nodes: ['电源', '本振', '混频器', '中频处理'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
-                    { name: 'LCR电桥', series: ['VKM', 'LK'], icon: 'circuit_board', topology: { nodes: ['电源', '信号源', '检测桥', '显示'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
-                ],
-                products: [
-                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
-                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化, 高分子固态', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', '固态'] },
-                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] },
-                    { series: 'LK', pkg: '引线型', feature: '极低漏电流≤20μA, 6000h, -40℃', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['漏电流≤20μA', '6000h', '-40℃'] }
-                ]
-            },
-            industrial: {
-                name: '工业自动化',
-                description: '工业自动化仪表包括PLC控制器、工业机器人、传感器变送器、DCS系统等，需要在工业现场恶劣环境下长期稳定运行。永铭VKM和VHT系列以宽温范围和长寿命特性，满足工业自动化对电容的高可靠性要求。',
-                subApps: [
-                    { name: 'PLC控制器', series: ['VKM', 'NPX'], icon: 'memory', topology: { nodes: ['电源输入', 'CPU供电', 'I/O接口', '通信'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: '工业机器人', series: ['VHT', 'VPG'], icon: 'precision_manufacturing', topology: { nodes: ['电源', '伺服驱动', '关节电机', '编码器'], highlight: [1] }, seriesMap: { 1: { name: 'VHT', link: 'product-center.html?series=VHT' } } },
-                    { name: '传感器变送器', series: ['VKM', 'LK'], icon: 'sensors', topology: { nodes: ['电源', '传感单元', '信号调理', '输出'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: 'DCS系统', series: ['VKM', 'NPX'], icon: 'dns', topology: { nodes: ['电源', '主控', 'I/O模块', '网络'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
-                ],
-                products: [
-                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
-                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
-                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] },
-                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] }
-                ]
-            },
-            medical: {
-                name: '医疗检测',
-                description: '医疗检测设备包括心电图机、超声诊断仪、血氧仪、监护仪等，对安全性和可靠性要求极高。永铭LK和VKM系列以极低漏电流和长寿命特性，满足医疗设备对电容的严苛要求。',
-                subApps: [
-                    { name: '心电图机', series: ['LK', 'VKM'], icon: 'monitor_heart', topology: { nodes: ['电源', '心电采集', '放大滤波', '显示'], highlight: [2] }, seriesMap: { 2: { name: 'LK', link: 'product-center.html?series=LK' } } },
-                    { name: '超声诊断仪', series: ['NPX', 'VHT'], icon: 'ultrasound', topology: { nodes: ['电源', '发射电路', '接收处理', '图像'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
-                    { name: '血氧仪', series: ['VKM', 'NPX'], icon: 'pulse', topology: { nodes: ['电池', 'LED驱动', '光电检测', '显示'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: '监护仪', series: ['VKM', 'LK'], icon: 'vital_signs', topology: { nodes: ['电源', '传感器', '信号处理', '报警'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
-                ],
-                products: [
-                    { series: 'LK', pkg: '引线型', feature: '极低漏电流≤20μA, 6000h, -40℃', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['漏电流≤20μA', '6000h', '-40℃'] },
-                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
-                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
-                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
-                ]
-            },
-            analytical: {
-                name: '分析仪器',
-                description: '分析仪器包括色谱仪、质谱仪、光谱仪、电化学分析仪等，对电源的纯净度和稳定性有极高要求。永铭LK和VKM系列以超低漏电流和卓越的噪声抑制能力，确保分析仪器获得精确可靠的测量结果。',
-                subApps: [
-                    { name: '色谱仪', series: ['LK', 'VKM'], icon: 'science', topology: { nodes: ['电源', '进样系统', '分离柱', '检测器'], highlight: [3] }, seriesMap: { 3: { name: 'LK', link: 'product-center.html?series=LK' } } },
-                    { name: '质谱仪', series: ['NPX', 'VHT'], icon: 'lab_research', topology: { nodes: ['电源', '离子源', '质量分析', '检测'], highlight: [1] }, seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } } },
-                    { name: '光谱仪', series: ['VKM', 'LK'], icon: 'prism', topology: { nodes: ['电源', '光源', '分光系统', '检测'], highlight: [2] }, seriesMap: { 2: { name: 'VKM', link: 'product-center.html?series=VKM' } } },
-                    { name: '电化学分析仪', series: ['VKM', 'NPX'], icon: 'battery_unknown', topology: { nodes: ['电源', '恒电位', '电流检测', '显示'], highlight: [1] }, seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } } }
-                ],
-                products: [
-                    { series: 'LK', pkg: '引线型', feature: '极低漏电流≤20μA, 6000h, -40℃', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['漏电流≤20μA', '6000h', '-40℃'] },
-                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, 低漏电流, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', '低漏电流', 'SMD'] },
-                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
-                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
-                ]
-            }
-        };
+        
 
         var currentTab = 'precision';
         var currentSub = 0;
@@ -298,7 +232,9 @@
             }
         }
 
-        function renderContent(tabKey) {
+        var TAB_MAP = {'t0':'precision','t1':'industrial','t2':'medical'};
+var appData = {'t0':{name:'智能电表',description:'',subApps:[{name:'智能电表',series:[],icon:'bolt'},{name:'载波模块',series:[],icon:'bolt'},{name:'集中器',series:[],icon:'bolt'},{name:'新融合终端',series:[],icon:'bolt'},{name:'DTU (配电自动化终端)',series:[],icon:'bolt'},{name:'开关电源',series:[],icon:'bolt'},{name:'断路器',series:[],icon:'bolt'},],products:[]},'t1':{name:'智能燃气表',description:'',subApps:[{name:'智能燃气表',series:[],icon:'local_fire_department'},],products:[]},'t2':{name:'智能水表',description:'',subApps:[{name:'智能水表、热量表',series:[],icon:'water_drop'},],products:[]},};
+function renderContent(tabKey) {
             var container = document.getElementById('tabContent');
             var data = appData[tabKey];
             if (!data) return;
@@ -306,20 +242,39 @@
             if (!sub) return;
             var html = '';
             html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
-            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + data.subApps[currentSub].name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + data.subApps[currentSub].name + ' 电路拓扑（演示用，正式版替换）</p></div>';
-            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(currentTab, data.subApps[currentSub].name) : null;
+            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
+                        // 先查 SPECS（样式2用，样式1也从中提取系列名）
+            var specs = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getSpecs('instrument', TAB_MAP[currentTab]||currentTab, sub.name) : null;
+
+            // === 样式1: 系统模块详解与推荐系列（2列卡片，推荐系列每行一个） ===
+            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(TAB_MAP[tabKey]||tabKey, sub.name) : null;
             if (sysMods) {
-                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐系列</h4>';
                 html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
-                sysMods.forEach(function(m) {
-                    var ph = '';
-                    data.products.forEach(function(c) {
-                        ph += '<a href="' + (c.link || '#') + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + (c.series || '') + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + (c.pkg || '') + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + (c.feature || '') + '</p></div></div></a>';
-                    });
-                    html += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + m.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + m.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + m.desc + '</p>' + ph + '</div></div></div>';
+                sysMods.forEach(function(mod) {
+                    var recSeries = [];
+                    if (specs) { var seen = {}; specs.forEach(function(sp){ if(!seen[sp.series] && recSeries.length < 3){ recSeries.push(sp.series); seen[sp.series]=1; }}); }
+                    if (!recSeries.length && sub.series) recSeries = sub.series;
+                    var rows = recSeries.length ? recSeries.map(function(s){return '<div class="flex items-center gap-2 text-[10px] py-0.5"><span class="material-symbols-outlined text-primary text-xs">check_circle</span><span class="font-medium text-primary">' + s + '</span><span class="text-slate-400">系列</span></div>';}).join('') : '';
+                    html += '<div class="border border-slate-200 p-3 hover:border-primary transition-colors"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div class="flex-1"><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed mb-2">' + mod.desc + '</p>' + rows + '</div></div></div>';
                 });
                 html += '</div>';
             }
+
+            // === 样式2: 系统模块详解与推荐规格（每个模块占一整行：介绍 + 规格表） ===
+            if (specs && sysMods) {
+                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-base">inventory</span>系统模块详解与推荐规格 <span class="text-[10px] font-normal text-slate-400 ml-1">（数据来源：PDF应用手册）</span></h4>';
+                sysMods.forEach(function(mod) {
+                    html += '<div class="border border-slate-200 p-4 mb-3">';
+                    html += '<div class="flex items-start gap-2 mb-3"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div><h5 class="text-sm font-bold text-primary mb-0.5">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p></div></div>';
+                    html += '<div class="overflow-x-auto"><table class="w-full text-xs border-collapse"><thead class="bg-slate-100"><tr><th class="border border-slate-300 px-2 py-1.5 text-left">系列</th><th class="border border-slate-300 px-2 py-1.5 text-left">料号</th><th class="border border-slate-300 px-2 py-1.5">电压</th><th class="border border-slate-300 px-2 py-1.5">容量</th><th class="border border-slate-300 px-2 py-1.5">尺寸</th><th class="border border-slate-300 px-2 py-1.5">ESR</th><th class="border border-slate-300 px-2 py-1.5">纹波</th><th class="border border-slate-300 px-2 py-1.5">寿命</th><th class="border border-slate-300 px-2 py-1.5 text-left">备注</th></tr></thead><tbody>';
+                    specs.forEach(function(s) {
+                        html += '<tr class="hover:bg-slate-50"><td class="border px-2 py-1.5 font-bold text-primary">' + (s.series||'') + '</td><td class="border px-2 py-1.5"><a href="product-detail.html?pn=' + encodeURIComponent(s.pn||'') + '" class="text-primary hover:underline">' + (s.pn||'') + '</a></td><td class="border px-2 py-1.5 text-center">' + (s.voltage||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.cap||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.size||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.esr||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.ripple||'') + '</td><td class="border px-2 py-1.5 text-center text-[10px]">' + (s.life||'') + '</td><td class="border px-2 py-1.5 text-[10px] text-slate-500">' + (s.note||'') + '</td></tr>';
+                    });
+                    html += '</tbody></table></div></div>';
+                });
+            }
+
             container.innerHTML = html;
         }
 
@@ -346,7 +301,6 @@
                     switchTab(this.dataset.tab);
                 });
             }
-            switchTab('precision');
         });
     </script>
     <!-- 共享组件 -->
@@ -358,6 +312,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             YMIN.navbar.inject('applications');
             YMIN.footer.inject();
+            switchTab('t0');
         });
     </script>
 </body>
