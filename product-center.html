@@ -3,9 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>产品中心 - 电子元器件目录</title>
+    <title>产品中心 - 永铭电子</title>
+    <meta name="description" content="永铭电子电容器产品目录 - 液态铝电解、超级电容、高分子固态、MLCC、薄膜电容等全系列产品，支持按参数筛选与在线选型。">
+    <meta name="keywords" content="铝电解电容,超级电容,高分子固态电容,MLCC,薄膜电容,钽电容,永铭电子">
+    <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
@@ -53,87 +57,8 @@
     </style>
 </head>
 <body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
-    <!-- 顶部导航栏（固定） -->
-    <header class="bg-white dark:bg-slate-950 w-full border-b border-slate-200 z-50 flex-shrink-0">
-        <div class="flex justify-between items-center w-full px-8 h-16 max-w-[1920px] mx-auto">
-            <div class="flex items-center gap-10 h-full">
-                <div class="flex items-center gap-3">
-                    <img alt="YMIN" class="h-10 w-auto object-contain" src="logo.png">
-                    <span class="text-2xl font-bold tracking-tighter text-[#1B365D] dark:text-white font-['Space_Grotesk']">YMIN</span>
-                </div>
-                <nav class="hidden md:flex gap-8 h-full">
-                    <div class="group h-full flex items-center relative">
-                        <a class="flex items-center gap-1 font-['Space_Grotesk'] tracking-tight text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1B365D] transition-colors duration-150" href="#">首页 <span class="material-symbols-outlined text-xs">expand_more</span></a>
-                        <div class="mega-menu absolute top-16 left-0 w-48 bg-white dark:bg-slate-900 shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50">
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">动态轮播</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">搜索功能</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">产品矩阵</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">设计工具</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">应用指南</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">新闻中心</a>
-                        </div>
-                    </div>
-                    <div class="group h-full flex items-center relative">
-                        <a class="flex items-center gap-1 font-['Space_Grotesk'] tracking-tight text-sm font-semibold text-[#1B365D] dark:text-white border-b-2 border-[#1B365D] dark:border-[#d6e3ff] pb-1" href="product-center.html">产品中心 <span class="material-symbols-outlined text-xs">expand_more</span></a>
-                        <div class="mega-menu absolute top-16 left-0 w-56 bg-white dark:bg-slate-900 shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50">
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="product-center.html">系列总览</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="product-detail.html">产品详情页</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">产品搜索</a>
-                        </div>
-                    </div>
-                    <div class="group h-full flex items-center relative">
-                        <a class="flex items-center gap-1 font-['Space_Grotesk'] tracking-tight text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1B365D] transition-colors duration-150" href="application-center.html">应用中心 <span class="material-symbols-outlined text-xs">expand_more</span></a>
-                        <div class="mega-menu absolute top-16 left-0 w-60 bg-white dark:bg-slate-900 shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50">
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="application-center.html">应用总览</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="application-automotive.html">汽车电子</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="application-ai-server.html">AI服务器与数据中心</a>
-                        </div>
-                    </div>
-                    <div class="group h-full flex items-center relative">
-                        <a class="flex items-center gap-1 font-['Space_Grotesk'] tracking-tight text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1B365D] transition-colors duration-150" href="#">设计工具 <span class="material-symbols-outlined text-xs">expand_more</span></a>
-                        <div class="mega-menu absolute top-16 left-0 w-48 bg-white dark:bg-slate-900 shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50">
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">3D-CAD</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">寿命计算工具</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">可靠性实验数据</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">SPICE模型</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">S参数</a>
-                        </div>
-                    </div>
-                    <div class="group h-full flex items-center relative">
-                        <a class="flex items-center gap-1 font-['Space_Grotesk'] tracking-tight text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1B365D] transition-colors duration-150" href="#">服务支持 <span class="material-symbols-outlined text-xs">expand_more</span></a>
-                        <div class="mega-menu absolute top-16 left-0 w-48 bg-white dark:bg-slate-900 shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50">
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">知识库 (FAQ)</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">下载中心</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">合规证书</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">新闻资讯</a>
-                        </div>
-                    </div>
-                    <div class="group h-full flex items-center relative">
-                        <a class="flex items-center gap-1 font-['Space_Grotesk'] tracking-tight text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1B365D] transition-colors duration-150" href="#">关于永铭 <span class="material-symbols-outlined text-xs">expand_more</span></a>
-                        <div class="mega-menu absolute top-16 right-0 md:left-0 w-48 bg-white dark:bg-slate-900 shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50">
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">公司简介</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">企业荣誉</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">代理商网络</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">联系我们</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">加入我们</a>
-                            <a class="block px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors" href="#">原材料采购</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div class="flex items-center gap-6">
-                <div class="relative hidden lg:block">
-                    <input class="bg-[#f3f3f7] dark:bg-slate-900 border-b-2 border-outline-variant px-4 py-1.5 focus:border-primary outline-none text-xs w-64 no-radius font-['Inter']" placeholder="搜索型号或参数..." type="text">
-                    <span class="material-symbols-outlined absolute right-2 top-1.5 text-on-surface-variant text-lg">search</span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined p-2 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors cursor-pointer text-slate-600 dark:text-slate-400" title="Language">language</span>
-                    <span class="material-symbols-outlined p-2 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors cursor-pointer text-slate-600 dark:text-slate-400" title="Account">person</span>
-                    <button class="bg-[#1B365D] text-white px-6 py-2 text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all scale-95 active:scale-90 no-radius">登录</button>
-                </div>
-            </div>
-        </div>
-    </header>
+    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
+    <header id="ymin-navbar"></header>
 
     <!-- 主体区域：flex 布局，左侧筛选栏独立滚动，右侧内容区域整体滚动（包含表格、横幅、页脚） -->
     <main class="flex flex-1 overflow-hidden">
@@ -144,8 +69,23 @@
                 <p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">按参数过滤</p>
             </div>
             <div class="space-y-8 px-6 pb-10 flex-1">
-                <!-- 电容器类别 -->
-                <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-4 tracking-tighter">电容器类别</label><div class="space-y-3"><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">液态铝电解电容器</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">双电层超级电容</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">高分子固态铝电解电容器</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">混合型超级电容(锂离子电容)</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">高分子混合动力铝电解电容器</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">多层陶瓷片式电容器</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">叠层高分子固态铝电解电容器</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">薄膜电容器</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">导电高分子钽电解电容器</span></label></div></section>
+                <!-- 电容器类别（分组互斥多选） -->
+                <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-4 tracking-tighter">电容器类别</label>
+                    <div class="space-y-2" id="categoryFilters">
+                        <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-2 mb-1">— 铝电解组（可多选）—</div>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="al" data-name="液态铝电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">液态铝电解电容器</span></label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="al" data-name="高分子固态铝电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">高分子固态铝电解电容器</span></label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="al" data-name="高分子混合动力铝电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">高分子混合动力铝电解电容器</span></label>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-3 mb-1">— 超级电容组（可多选）—</div>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="sc" data-name="双电层超级电容" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">双电层超级电容</span></label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="sc" data-name="混合型超级电容(锂离子电容)" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">混合型超级电容（锂离子电容）</span></label>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-3 mb-1">— 叠层与钽组（可多选）—</div>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="st" data-name="叠层高分子固态铝电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">叠层高分子固态铝电解电容器</span></label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="st" data-name="导电高分子钽电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">导电高分子钽电解电容器</span></label>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-3 mb-1">— 独立组 —</div>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="fl" data-name="薄膜电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">薄膜电容器</span></label>
+                    </div>
+                </section>
                 <!-- 形状/封装 -->
                 <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-3 tracking-tighter">形状 / 封装</label><div class="relative"><select class="w-full bg-slate-50 border border-slate-200 py-2 px-3 text-sm focus:border-primary outline-none no-radius font-['Inter'] appearance-none"><option>全部封装</option><option>引线型 (Radial)</option><option>贴片型 (SMD)</option></select><span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 pointer-events-none">expand_more</span></div></section>
                 <!-- 额定电压 -->
@@ -165,9 +105,13 @@
         <!-- 右侧内容区域：独立滚动（包含表格、分页、横幅、底部footer），页脚已替换 -->
         <section class="flex-1 bg-slate-50 h-full overflow-y-auto custom-scrollbar flex flex-col">
             <div class="flex-1">
-                <div class="p-10 pb-6 flex justify-between items-end">
-                    <div><nav class="text-[10px] text-slate-500 uppercase flex gap-2 mb-2 font-['Inter']"><span>产品中心</span><span>/</span><span>铝电解电容器</span><span>/</span><span class="text-[#1B365D] font-bold">引线型产品</span></nav><h1 class="text-4xl font-bold text-[#1B365D] tracking-tighter">引线型铝电解电容器</h1></div>
-                    <div class="flex items-center gap-4"><span class="text-sm text-slate-500">共找到 <span class="font-bold text-[#1B365D]">1,248</span> 个结果</span><div class="flex gap-2"><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-lg">download</span></button><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-lg">print</span></button></div></div>
+                <div class="p-10 pb-2 flex justify-between items-end">
+                    <div>
+                        <nav class="text-[10px] text-slate-500 uppercase flex gap-2 mb-2 font-['Inter']" id="breadcrumbNav"><span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">铝电解电容器</span></nav>
+                        <h1 class="text-4xl font-bold text-[#1B365D] tracking-tighter" id="resultTitle">引线型铝电解电容器</h1>
+                        <div class="flex flex-wrap gap-2 mt-3" id="filterChips"></div>
+                    </div>
+                    <div class="flex items-center gap-4"><span class="text-sm text-slate-500">共找到 <span class="font-bold text-[#1B365D]" id="resultCount">1,248</span> 个结果</span><div class="flex gap-2"><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-lg">download</span></button><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-lg">print</span></button></div></div>
                 </div>
                 <div class="px-10 pb-20">
                     <div class="bg-white border border-slate-200 shadow-sm data-table-wrapper">
@@ -191,92 +135,111 @@
                 <div class="px-10 mb-20"><div class="relative overflow-hidden p-10 bg-[#1B365D] text-white"><div class="absolute right-0 top-0 w-1/2 h-full opacity-5 pointer-events-none"><span class="material-symbols-outlined text-[300px] absolute -right-20 -top-20">memory</span></div><div class="relative z-10 max-w-2xl"><h3 class="text-3xl font-bold tracking-tighter mb-4">定制化电容方案咨询</h3><p class="text-blue-100 text-base leading-relaxed mb-8">针对高温环境、超长寿命或特殊物理尺寸需求，我们的工程团队提供端到端的规格定义与样片支持服务。</p><button class="bg-[#f1bd81] text-[#2b1700] px-10 py-4 font-bold uppercase text-sm tracking-widest hover:brightness-110 transition-all no-radius">联系技术工程师</button></div></div></div>
             </div>
             
-            <!-- 新页脚（与详情页一致，全宽） -->
-            <footer class="w-full bg-white border-t border-slate-200 py-16 px-10">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                    <div>
-                        <h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6 tracking-widest">网站导航</h4>
-                        <ul class="space-y-3 text-xs uppercase tracking-wider text-slate-500">
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">首页</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">产品中心</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">应用中心</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">设计工具</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">服务支持</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">关于永铭</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">新闻中心</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6 tracking-widest">产品中心</h4>
-                        <ul class="space-y-3 text-xs uppercase tracking-wider text-slate-500">
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">液态铝电解电容器</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">双电层超级电容</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">高分子固态铝电解电容器</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">混合型超级电容(锂离子电容)</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">高分子固态动力铝电解电容器</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">多层陶瓷片式电容器</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">叠层高分子固态铝电解电容器</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">薄膜电容器</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">导电高分子铝电解电容器</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6 tracking-widest">关于我们</h4>
-                        <ul class="space-y-3 text-xs uppercase tracking-wider text-slate-500">
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">公司介绍</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">加入我们</a></li>
-                            <li><a href="#" class="hover:text-[#1B365D] transition-colors">联系方式</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6 tracking-widest">联系支持</h4>
-                        <div class="space-y-2 text-xs text-slate-700">
-                            <p class="flex items-start gap-2">
-                                <span class="material-symbols-outlined text-[#1B365D] text-base">call</span>
-                                <span><span class="font-bold">400 900 1922</span> (产品服务热线)</span>
-                            </p>
-                            <p class="flex items-start gap-2">
-                                <span class="material-symbols-outlined text-[#1B365D] text-base">mail</span>
-                                <span>web@ymin.com (国内业务)</span>
-                            </p>
-                            <p class="flex items-start gap-2">
-                                <span class="material-symbols-outlined text-[#1B365D] text-base">mail</span>
-                                <span>ymin-sale@ymin.com (国外业务)</span>
-                            </p>
-                            <p class="flex items-start gap-2">
-                                <span class="material-symbols-outlined text-[#1B365D] text-base">phone_in_talk</span>
-                                <span>公司总机：021-33617848</span>
-                            </p>
-                            <p class="flex items-start gap-2">
-                                <span class="material-symbols-outlined text-[#1B365D] text-base">location_on</span>
-                                <span>上海市奉贤区南桥镇杨王经济园区光村路258号</span>
-                            </p>
-                        </div>
-                        <div class="mt-8 flex gap-8">
-                            <div class="text-center">
-                                <div class="w-20 h-20 bg-slate-200 border border-slate-300 flex items-center justify-center mx-auto">
-                                    <span class="material-symbols-outlined text-4xl text-slate-500">qr_code_scanner</span>
-                                </div>
-                                <p class="text-[10px] text-slate-500 uppercase tracking-wider mt-2">扫码关注服务号</p>
-                            </div>
-                            <div class="text-center">
-                                <div class="w-20 h-20 bg-slate-200 border border-slate-300 flex items-center justify-center mx-auto">
-                                    <span class="material-symbols-outlined text-4xl text-slate-500">qr_code_scanner</span>
-                                </div>
-                                <p class="text-[10px] text-slate-500 uppercase tracking-wider mt-2">扫码关注抖音号</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-12 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p class="text-[10px] uppercase tracking-wider text-slate-400">© 2024 永铭电子有限公司. 版权所有.</p>
-                    <div class="flex gap-8">
-                        <a href="#" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D] transition-colors">隐私政策</a>
-                        <a href="#" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D] transition-colors">使用条款</a>
-                    </div>
-                </div>
-            </footer>
+            <!-- 页脚（由 components/footer.js 注入） -->
+            <footer id="ymin-footer"></footer>
         </section>
     </main>
+
+    <!-- 共享组件 -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        // ===== 电容器类别分组多选逻辑 =====
+        var allCbs = document.querySelectorAll('.cat-cb');
+        
+        function onCatChange(el) {
+            if (!el.checked) {
+                // 取消选中：检查是否还有同组被选中，没有则解锁所有组
+                enableAll();
+                updateUI();
+                return;
+            }
+            // 选中：锁定到当前组，禁用其他组的复选框
+            var activeGroup = el.getAttribute('data-group');
+            allCbs.forEach(function(cb) {
+                if (cb.getAttribute('data-group') !== activeGroup) {
+                    cb.disabled = true;
+                    cb.parentElement.classList.add('opacity-40', 'cursor-not-allowed');
+                    cb.parentElement.classList.remove('cursor-pointer');
+                }
+            });
+            updateUI();
+        }
+
+        function enableAll() {
+            var anyChecked = false;
+            allCbs.forEach(function(cb) { if (cb.checked) anyChecked = true; });
+            if (!anyChecked) {
+                allCbs.forEach(function(cb) {
+                    cb.disabled = false;
+                    cb.parentElement.classList.remove('opacity-40', 'cursor-not-allowed');
+                    cb.parentElement.classList.add('cursor-pointer');
+                });
+            }
+        }
+
+        function getSelectedCategories() {
+            var sel = [];
+            allCbs.forEach(function(cb) { if (cb.checked) sel.push(cb.getAttribute('data-name')); });
+            return sel;
+        }
+
+        function updateUI() {
+            var sel = getSelectedCategories();
+            var breadcrumb = document.getElementById('breadcrumbNav');
+            var title = document.getElementById('resultTitle');
+            var chips = document.getElementById('filterChips');
+            var count = document.getElementById('resultCount');
+
+            if (sel.length === 0) {
+                breadcrumb.innerHTML = '<span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">全部产品</span>';
+                title.textContent = '全部电容器产品';
+            } else if (sel.length === 1) {
+                breadcrumb.innerHTML = '<span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">' + sel[0] + '</span>';
+                title.textContent = sel[0];
+            } else {
+                breadcrumb.innerHTML = '<span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">筛选结果</span>';
+                title.textContent = '电容器筛选结果';
+            }
+
+            // 筛选标签 chips（仅多选时显示）
+            var chipHtml = '';
+            if (sel.length > 1) {
+                sel.forEach(function(name, i) {
+                    chipHtml += '<span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-[11px] font-bold px-3 py-1">' + name + ' <span class="material-symbols-outlined text-sm cursor-pointer hover:text-red-600" onclick="removeChip(\'' + name.replace(/'/g, "\\'") + '\')">close</span></span>';
+                });
+            }
+            chips.innerHTML = chipHtml;
+
+            // 模拟结果计数变化
+            count.textContent = sel.length === 0 ? '1,248' : (200 + sel.length * 180);
+        }
+
+        function removeChip(name) {
+            allCbs.forEach(function(cb) {
+                if (cb.getAttribute('data-name') === name) {
+                    cb.checked = false;
+                }
+            });
+            enableAll();
+            updateUI();
+        }
+
+        // "应用筛选重置" 按钮
+        document.querySelector('aside button').addEventListener('click', function() {
+            allCbs.forEach(function(cb) { cb.checked = false; });
+            enableAll();
+            updateUI();
+        });
+
+        // 初始状态
+        updateUI();
+
+        // ===== 导航和页脚 =====
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('products');
+            YMIN.footer.inject();
+        });
+    </script>
 </body>
 </html>

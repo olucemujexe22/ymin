@@ -74,9 +74,9 @@ YMIN.navbar = (function () {
         html += '<div class="group h-full flex items-center relative">';
         html += navLink('product-center.html', '产品中心', activePage === 'products', true);
         html += dropdownMenu([
-            { href: 'product-center.html', label: '系列总览' },
-            { href: 'product-detail.html', label: '产品详情页' },
-            { href: '#', label: '产品搜索' }
+            { href: 'product-series.html', label: '产品体系图' },
+            { href: 'product-center.html', label: '系列总览 / 产品搜索' },
+            { href: 'product-detail.html', label: '产品详情页' }
         ], 'w-56');
         html += '</div>';
 
@@ -94,19 +94,40 @@ YMIN.navbar = (function () {
         ], 'w-60');
         html += '</div>';
 
-        // 设计工具（暂未开放）
-        html += '<div class="h-full flex items-center">';
-        html += '<span class="text-sm font-semibold text-slate-400 cursor-not-allowed">设计工具</span>';
+        // 设计工具
+        html += '<div class="group h-full flex items-center relative">';
+        html += navLink('design-tools.html', '设计工具', activePage === 'tools', true);
+        html += dropdownMenu([
+            { href: 'design-life-calc.html', label: '寿命推算工具' },
+            { href: 'design-spice.html', label: 'SPICE 模型' },
+            { href: 'design-3d-cad.html', label: '3D-CAD 模型' },
+            { href: 'design-sparams.html', label: 'S参数' },
+            { href: 'design-reliability.html', label: '可靠性实验数据' }
+        ], 'w-52');
         html += '</div>';
 
-        // 服务支持（暂未开放）
-        html += '<div class="h-full flex items-center">';
-        html += '<span class="text-sm font-semibold text-slate-400 cursor-not-allowed">服务支持</span>';
+        // 服务支持
+        html += '<div class="group h-full flex items-center relative">';
+        html += navLink('support.html', '服务支持', activePage === 'support', true);
+        html += dropdownMenu([
+            { href: 'support-faq.html', label: '知识库 (FAQ)' },
+            { href: 'support-download.html', label: '下载中心' },
+            { href: 'support-certification.html', label: '合规证书' },
+            { href: 'support-news.html', label: '新闻资讯' }
+        ], 'w-48');
         html += '</div>';
 
-        // 关于永铭（暂未开放）
-        html += '<div class="h-full flex items-center">';
-        html += '<span class="text-sm font-semibold text-slate-400 cursor-not-allowed">关于永铭</span>';
+        // 关于永铭
+        html += '<div class="group h-full flex items-center relative">';
+        html += navLink('about.html', '关于永铭', activePage === 'about', true);
+        html += dropdownMenuRight([
+            { href: 'about-company.html', label: '公司简介' },
+            { href: 'about-honors.html', label: '企业荣誉' },
+            { href: 'about-distributors.html', label: '代理商网络' },
+            { href: 'about-contact.html', label: '联系我们' },
+            { href: 'about-careers.html', label: '加入我们' },
+            { href: 'about-procurement.html', label: '原材料采购' }
+        ], 'w-48');
         html += '</div>';
 
         html += '</nav>';

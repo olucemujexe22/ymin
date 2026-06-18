@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>产品体系图 - 永铭电子</title>
+    <meta name="description" content="永铭电子电容器产品体系图 - 8大产品线，50+产品系列，液态铝电解、超级电容、高分子固态、薄膜电容、钽电容等全系列。可按产品线筛选系列列表，查看系统图并下载PDF规格书。">
+    <meta name="keywords" content="产品体系图,电容器系列,永铭电子,铝电解电容,超级电容,固态电容,薄膜电容,钽电容">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { "primary": "#1B365D", "surface": "#f9f9fd", "on-surface": "#191c1e" },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                    fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"] }
+                }
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24'; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #74777f; }
+        .group:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mega-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s ease-in-out; }
+        .no-radius { border-radius: 0 !important; }
+        .tab-btn { transition: all 0.2s ease; }
+        .tab-btn.active { color: #1B365D; border-bottom: 3px solid #1B365D; font-weight: 700; }
+        .tab-btn:not(.active) { color: #94a3b8; border-bottom: 3px solid transparent; }
+        .tab-btn:not(.active):hover { color: #475569; }
+        .series-chip { transition: all 0.2s ease; cursor: pointer; }
+        .series-chip:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .series-chip.has-pdf:hover { box-shadow: 0 4px 16px rgba(27,54,93,0.2); }
+        .data-table-wrapper { overflow-x: auto; }
+        .color-bar { width: 4px; height: 100%; position: absolute; left: 0; top: 0; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
+    <header id="ymin-navbar"></header>
+
+    <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <!-- 面包屑 -->
+            <nav class="text-[11px] text-slate-500 uppercase tracking-wider mb-6 flex gap-2">
+                <a href="index.html" class="hover:text-primary">首页</a><span>/</span>
+                <a href="product-center.html" class="hover:text-primary">产品中心</a><span>/</span>
+                <span class="text-primary font-bold">产品体系图</span>
+            </nav>
+
+            <!-- 标题区 -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-primary mb-3">产品体系图</h1>
+                <p class="text-slate-600 max-w-3xl">覆盖8大产品线、50+产品系列。点击系列节点可直接下载对应PDF规格书。支持按产品线筛选系列列表，也可在系统图中直观浏览产品体系结构。</p>
+            </div>
+
+            <!-- Tab 切换 -->
+            <div class="flex gap-8 border-b border-slate-200 mb-8">
+                <button class="tab-btn active pb-3 text-sm font-bold uppercase tracking-wider" onclick="switchTab('list')" id="tab-list-btn">
+                    <span class="material-symbols-outlined text-sm align-middle mr-1">format_list_bulleted</span> 系列列表
+                </button>
+                <button class="tab-btn pb-3 text-sm font-bold uppercase tracking-wider" onclick="switchTab('diagram')" id="tab-diagram-btn">
+                    <span class="material-symbols-outlined text-sm align-middle mr-1">account_tree</span> 系统图
+                </button>
+            </div>
+
+            <!-- ========== Tab 1: 系列列表 ========== -->
+            <div id="tab-list" class="mb-12">
+                <!-- 筛选栏 -->
+                <div class="flex flex-wrap items-center gap-4 mb-6">
+                    <div class="relative">
+                        <select id="lineFilter" class="bg-white border border-slate-200 py-2 pl-3 pr-8 text-sm focus:border-primary outline-none no-radius appearance-none" onchange="filterTable()">
+                            <option value="全部">全部产品线</option>
+                        </select>
+                        <span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 text-sm pointer-events-none">expand_more</span>
+                    </div>
+                    <div class="relative flex-1 max-w-xs">
+                        <input id="seriesSearch" class="bg-white border border-slate-200 py-2 pl-3 pr-8 text-sm w-full focus:border-primary outline-none no-radius" placeholder="搜索系列名称..." type="text" oninput="filterTable()">
+                        <span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 text-lg">search</span>
+                    </div>
+                    <span class="text-xs text-slate-400 ml-auto" id="resultCount"></span>
+                </div>
+
+                <!-- 系列表格 -->
+                <div class="bg-white border border-slate-200 shadow-sm data-table-wrapper">
+                    <table class="w-full text-left border-collapse min-w-[1200px]">
+                        <thead>
+                            <tr class="bg-[#1B365D] text-white text-[11px] uppercase tracking-wider font-semibold">
+                                <th class="p-4">系列</th>
+                                <th class="p-4">产品线</th>
+                                <th class="p-4">封装</th>
+                                <th class="p-4">额定电压</th>
+                                <th class="p-4">容量范围</th>
+                                <th class="p-4">温度范围</th>
+                                <th class="p-4">寿命</th>
+                                <th class="p-4">特征</th>
+                                <th class="p-4 text-center">认证</th>
+                                <th class="p-4 text-center">PDF</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="text-[13px] text-slate-700 divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========== Tab 2: 系统图 ========== -->
+            <div id="tab-diagram" class="mb-12 hidden">
+                <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">info</span> 点击系列节点可直接打开PDF规格书 | 有PDF的系列用实色显示
+                </p>
+                <!-- 筛选指示条（当筛选到特定产品线时显示） -->
+                <div id="diagramFilterBar" class="hidden mb-4 bg-blue-50 border border-blue-200 p-3 flex items-center justify-between">
+                    <span class="text-sm text-primary font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">filter_alt</span>
+                        <span>当前筛选：</span><span id="diagramFilterName" class="text-[#1B365D]"></span>
+                    </span>
+                    <button onclick="clearFilter()" class="text-xs text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-white transition-colors font-bold">
+                        清除筛选 显示全部
+                    </button>
+                </div>
+                <div id="diagramContainer"></div>
+            </div>
+
+            <!-- CTA 横幅 -->
+            <div class="bg-primary text-white p-10 flex flex-col md:flex-row justify-between items-center gap-6 mt-8">
+                <div class="max-w-2xl">
+                    <h3 class="text-2xl font-bold mb-2">未找到合适的系列？</h3>
+                    <p class="text-blue-100 text-sm leading-relaxed">我们的工程团队提供定制化电容方案。从规格定义到样品交付，全程技术支持。</p>
+                </div>
+                <a href="product-center.html" class="bg-[#f1bd81] text-[#2b1700] px-10 py-4 font-bold uppercase text-sm tracking-widest hover:brightness-110 transition-all no-radius flex items-center gap-2 flex-shrink-0">
+                    <span class="material-symbols-outlined">search</span> 进入产品搜索
+                </a>
+            </div>
+        </div>
+
+        <footer id="ymin-footer"></footer>
+    </main>
+
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="data/series-diagram.js"></script>
+    <script src="data/series-table.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('products');
+            YMIN.footer.inject();
+            initPage();
+        });
+
+        // 读取 URL 参数
+        function getUrlParam(name) {
+            var m = (location.search || '').match(new RegExp('[?&]' + name + '=([^&]*)'));
+            return m ? decodeURIComponent(m[1]) : null;
+        }
+
+        var currentLineFilter = null; // 当前产品线筛选
+
+        function initPage() {
+            // 填充产品线筛选下拉
+            var lineFilter = document.getElementById('lineFilter');
+            var lines = YMIN.seriesTable.getProductLines();
+            lines.forEach(function(line) {
+                var opt = document.createElement('option');
+                opt.value = line;
+                opt.textContent = line;
+                lineFilter.appendChild(opt);
+            });
+
+            // 检查 URL 参数 ?line=xxx
+            var lineParam = getUrlParam('line');
+            if (lineParam) {
+                // 尝试匹配产品线
+                var matched = null;
+                for (var i = 0; i < lines.length; i++) {
+                    if (lines[i] === lineParam) { matched = lineParam; break; }
+                }
+                if (matched) {
+                    currentLineFilter = matched;
+                    lineFilter.value = matched;
+                    renderTable(YMIN.seriesTable.filterByLine(matched));
+                    renderDiagram(matched);
+                    return;
+                }
+            }
+
+            // 无参数或未匹配：显示全部
+            currentLineFilter = null;
+            renderTable(YMIN.seriesTable.getAll());
+            renderDiagram(null);
+        }
+
+        // ---- Tab 切换 ----
+        function switchTab(tab) {
+            var listTab = document.getElementById('tab-list');
+            var diagramTab = document.getElementById('tab-diagram');
+            var listBtn = document.getElementById('tab-list-btn');
+            var diagramBtn = document.getElementById('tab-diagram-btn');
+
+            if (tab === 'list') {
+                listTab.classList.remove('hidden');
+                diagramTab.classList.add('hidden');
+                listBtn.classList.add('active');
+                diagramBtn.classList.remove('active');
+            } else {
+                listTab.classList.add('hidden');
+                diagramTab.classList.remove('hidden');
+                listBtn.classList.remove('active');
+                diagramBtn.classList.add('active');
+                // 切到系统图时，按当前筛选重渲染
+                renderDiagram(currentLineFilter);
+            }
+        }
+
+        // ---- 表格渲染 ----
+        function filterTable() {
+            var line = document.getElementById('lineFilter').value;
+            currentLineFilter = (line === '全部') ? null : line;
+            var search = document.getElementById('seriesSearch').value.toUpperCase();
+            var data = YMIN.seriesTable.filterByLine(line);
+            if (search) {
+                data = data.filter(function(row) {
+                    return row.series.toUpperCase().indexOf(search) >= 0 ||
+                           row.feature.toUpperCase().indexOf(search) >= 0;
+                });
+            }
+            renderTable(data);
+            // 同步更新系统图
+            renderDiagram(currentLineFilter);
+        }
+
+        function renderTable(data) {
+            var tbody = document.getElementById('tableBody');
+            document.getElementById('resultCount').textContent = '共 ' + data.length + ' 个系列';
+            var html = '';
+            data.forEach(function(row) {
+                var aecBadge = row.aec ? '<span class="text-[10px] bg-green-50 text-green-700 px-1.5 py-0.5 font-medium">AEC-Q200</span>' : '<span class="text-[10px] text-slate-300">-</span>';
+                var rohsBadge = row.rohs ? '<span class="text-[10px] bg-blue-50 text-blue-700 px-1.5 py-0.5 font-medium">RoHS</span>' : '';
+                var pdfHtml = row.pdf
+                    ? '<a href="' + row.pdf + '" target="_blank" class="inline-flex items-center gap-1 text-red-600 hover:text-red-800 font-medium"><span class="material-symbols-outlined text-lg">picture_as_pdf</span></a>'
+                    : '<span class="text-slate-300 text-xs">-</span>';
+
+                html += '<tr class="hover:bg-slate-50 transition-colors">';
+                html += '<td class="p-4 font-bold text-primary">' + row.series + '</td>';
+                html += '<td class="p-4 text-xs">' + row.productLine + '</td>';
+                html += '<td class="p-4">' + row.pkg + '</td>';
+                html += '<td class="p-4">' + row.voltage + '</td>';
+                html += '<td class="p-4">' + row.cap + '</td>';
+                html += '<td class="p-4">' + row.temp + '</td>';
+                html += '<td class="p-4">' + row.life + '</td>';
+                html += '<td class="p-4 text-xs max-w-[200px]">' + row.feature + '</td>';
+                html += '<td class="p-4 text-center"><div class="flex gap-1 justify-center">' + aecBadge + rohsBadge + '</div></td>';
+                html += '<td class="p-4 text-center">' + pdfHtml + '</td>';
+                html += '</tr>';
+            });
+            tbody.innerHTML = html;
+        }
+
+        // ---- 系统图渲染 ----
+        function renderDiagram(lineFilter) {
+            var container = document.getElementById('diagramContainer');
+            var allLines = YMIN.seriesDiagram.getAll();
+            // 如果指定了产品线筛选，只显示该产品线
+            var lines = lineFilter
+                ? allLines.filter(function(l) { return l.name === lineFilter; })
+                : allLines;
+            var html = '';
+
+            // 显示/隐藏筛选指示条
+            var filterBar = document.getElementById('diagramFilterBar');
+            var filterName = document.getElementById('diagramFilterName');
+            if (lineFilter) {
+                filterBar.classList.remove('hidden');
+                filterName.textContent = lineFilter;
+            } else {
+                filterBar.classList.add('hidden');
+            }
+
+            if (lines.length === 0) {
+                html += '<div class="text-center py-12 text-slate-400"><span class="material-symbols-outlined text-4xl mb-2 block">search_off</span><p>未找到匹配的产品线</p></div>';
+                container.innerHTML = html;
+                return;
+            }
+
+            lines.forEach(function(line, li) {
+                // 交替左右布局
+                var isLeft = li % 2 === 0;
+                html += '<div class="mb-10">';
+
+                // 产品线标题栏
+                html += '<div class="flex items-center gap-3 mb-5">';
+                html += '<div style="width:8px;height:32px;background:' + line.color + '"></div>';
+                html += '<div>';
+                html += '<h3 class="text-xl font-bold text-primary">' + line.name + '</h3>';
+                html += '<p class="text-[10px] text-slate-400 uppercase">' + line.nameEn + '</p>';
+                html += '</div>';
+                html += '<span class="material-symbols-outlined text-2xl text-slate-400 ml-2">' + line.icon + '</span>';
+                html += '</div>';
+
+                // 封装分组
+                html += '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-2">';
+                line.packages.forEach(function(pkg) {
+                    html += '<div class="bg-white border border-slate-200 p-5 relative overflow-hidden">';
+                    html += '<div class="color-bar" style="background:' + line.color + '"></div>';
+                    html += '<div class="ml-4">';
+                    html += '<h4 class="text-sm font-bold text-slate-700 mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-sm text-slate-400">package_2</span> ' + pkg.name + '</h4>';
+                    html += '<div class="flex flex-wrap gap-2">';
+                    pkg.series.forEach(function(s) {
+                        var hasPdf = s.pdf ? ' has-pdf' : '';
+                        var style = s.pdf ? 'style="background:' + line.color + ';border-color:' + line.color + '"' : '';
+
+                        if (s.pdf) {
+                            html += '<a href="' + s.pdf + '" target="_blank" title="' + s.name + ': ' + s.desc + '&#10;' + s.temp + ' | ' + s.life + ' | ' + s.voltage + '" class="series-chip inline-flex flex-col items-center px-3 py-2 border min-w-[60px] transition-all" ' + style + '>';
+                            html += '<span class="text-xs font-bold">' + s.name + '</span>';
+                            html += '<span class="text-[8px] opacity-70 mt-0.5">' + s.temp + '</span>';
+                            html += '</a>';
+                        } else {
+                            html += '<span class="series-chip inline-flex flex-col items-center px-3 py-2 border border-slate-200 bg-slate-50 text-slate-500 min-w-[60px]" title="' + s.name + ': ' + s.desc + '&#10;' + s.temp + ' | ' + s.life + ' | ' + s.voltage + '">';
+                            html += '<span class="text-xs">' + s.name + '</span>';
+                            html += '<span class="text-[8px] opacity-50 mt-0.5">' + s.temp + '</span>';
+                            html += '</span>';
+                        }
+                    });
+                    html += '</div></div></div>';
+                });
+                html += '</div></div>';
+            });
+
+            // 图例
+            html += '<div class="mt-8 p-4 bg-white border border-slate-200 flex flex-wrap items-center gap-6 text-xs text-slate-500">';
+            html += '<span class="font-bold text-slate-700">图例：</span>';
+            html += '<span class="flex items-center gap-2"><span class="inline-block w-6 h-4 bg-[#1B365D]"></span> 有PDF规格书（可点击）</span>';
+            html += '<span class="flex items-center gap-2"><span class="inline-block w-6 h-4 bg-slate-50 border border-slate-200"></span> PDF待补充</span>';
+            html += '</div>';
+
+            container.innerHTML = html;
+        }
+
+        // ---- 清除筛选 ----
+        function clearFilter() {
+            document.getElementById('lineFilter').value = '全部';
+            document.getElementById('seriesSearch').value = '';
+            currentLineFilter = null;
+            renderTable(YMIN.seriesTable.getAll());
+            renderDiagram(null);
+        }
+    </script>
+</body>
+</html>
