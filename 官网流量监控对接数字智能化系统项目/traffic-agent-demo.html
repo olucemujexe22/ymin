@@ -234,7 +234,7 @@
                     <div class="lg:col-span-1 space-y-4">
                         <!-- 智能体身份卡 -->
                         <div class="bg-white border border-slate-200 rounded-xl p-5 text-center">
-                            <img src="小铭同学.png" alt="小铭同学" class="agent-avatar-lg mx-auto mb-3" onerror="this.style.display='none'">
+                            <img src="agent.png" alt="小铭同学" class="agent-avatar-lg mx-auto mb-3" onerror="this.style.display='none'">
                             <h3 class="font-bold text-[#1B365D] text-base font-['Space_Grotesk']">官网小铭同学</h3>
                             <p class="text-xs text-slate-400 mt-0.5 flex items-center justify-center gap-1"><span class="inline-block w-2 h-2 bg-green-500 rounded-full"></span>在线</p>
                             <p class="text-[11px] text-slate-500 mt-2 leading-relaxed">永铭电子官网流量与页面价值分析智能体 · 对接CRM实时数据</p>
@@ -278,7 +278,7 @@
                         <!-- 对话顶部 -->
                         <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between flex-shrink-0">
                             <div class="flex items-center gap-2">
-                                <img src="小铭同学.png" alt="小铭同学" class="agent-avatar-sm" onerror="this.style.display='none'">
+                                <img src="agent.png" alt="小铭同学" class="agent-avatar-sm" onerror="this.style.display='none'">
                                 <span class="text-sm font-semibold text-[#1B365D]">官网小铭同学</span>
                             </div>
                             <span class="text-[10px] text-slate-400">数据源: CRM实时</span>
@@ -367,14 +367,14 @@
 
     <!-- ===== 悬浮智能体按钮 ===== -->
     <button class="fab-chat" id="fabChat" title="唤醒官网小铭同学">
-        <img src="小铭同学.png" alt="小铭同学" class="fab-avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;material-symbols-outlined&quot; style=&quot;font-size:28px;color:white;&quot;>smart_toy</span>'">
+        <img src="agent.png" alt="小铭同学" class="fab-avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;material-symbols-outlined&quot; style=&quot;font-size:28px;color:white;&quot;>smart_toy</span>'">
         <span class="fab-badge"></span>
     </button>
 
     <!-- ===== 悬浮对话弹窗（WorkBuddy 风格） ===== -->
     <div class="chat-popup" id="chatPopup">
         <div class="chat-popup-header">
-            <img src="小铭同学.png" alt="小铭同学" class="agent-avatar" onerror="this.style.display='none'">
+            <img src="agent.png" alt="小铭同学" class="agent-avatar" onerror="this.style.display='none'">
             <div style="flex:1;">
                 <p style="font-weight:700; font-size:14px; margin:0;">官网小铭同学</p>
                 <p style="font-size:11px; opacity:0.8; margin:0; display:flex; align-items:center; gap:4px;"><span style="display:inline-block;width:6px;height:6px;background:#4ade80;border-radius:50%;"></span>在线 · 6项技能就绪</p>
@@ -395,6 +395,38 @@
     </div>
 
     <script>
+        // ===== API 配置 =====
+        const API_BASE = '/api';
+        const USE_REAL_API = true;
+
+        async function apiGet(path) {
+            if (!USE_REAL_API) return null;
+            try {
+                const res = await fetch(API_BASE + path);
+                if (!res.ok) throw new Error('API error: ' + res.status);
+                return await res.json();
+            } catch (e) {
+                console.warn('API 请求失败，使用Demo数据:', path, e.message);
+                return null;
+            }
+        }
+
+        async function apiPost(path, body) {
+            if (!USE_REAL_API) return null;
+            try {
+                const res = await fetch(API_BASE + path, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                if (!res.ok) throw new Error('API error: ' + res.status);
+                return await res.json();
+            } catch (e) {
+                console.warn('API 请求失败:', path, e.message);
+                return null;
+            }
+        }
+
         // ===== 模块切换 =====
         const chatBtn = document.querySelector('#moduleNav button[data-module="chat"]');
         document.querySelectorAll('#moduleNav button[data-module]').forEach(btn => {
@@ -669,6 +701,27 @@
         if (dashMod) dashMod.style.display = '';
         if (chatMod) chatMod.style.display = '';
 
+        // ===== 尝试加载真实仪表盘数据 =====
+        (async function loadDashboard() {
+            const data = await apiGet('/dashboard');
+            if (!data) return;
+            const kpiCards = document.querySelectorAll('#mod-dashboard .kpi-card');
+            if (kpiCards.length >= 6 && data.today) {
+                const t = data.today;
+                const pvEl = kpiCards[0].querySelector('p:nth-child(2)');
+                const uvEl = kpiCards[1].querySelector('p:nth-child(2)');
+                if (pvEl) pvEl.textContent = (t.pv || 0).toLocaleString();
+                if (uvEl) uvEl.textContent = (t.uv || 0).toLocaleString();
+                const pvChg = kpiCards[0].querySelector('p:nth-child(3)');
+                const uvChg = kpiCards[1].querySelector('p:nth-child(3)');
+                const sign = (t.pv_change || 0) >= 0 ? '↑' : '↓';
+                if (pvChg) pvChg.textContent = `${sign} ${Math.abs(t.pv_change || 0)}% vs 昨日`;
+                if (uvChg) uvChg.textContent = `${sign} ${Math.abs(t.uv_change || 0)}% vs 昨日`;
+            }
+            const alertEl = document.querySelector('#mod-dashboard .kpi-card:last-child p:nth-child(2)');
+            if (alertEl && data.alert_count !== undefined) alertEl.textContent = data.alert_count;
+        })();
+
         // ===== 导航按钮默认状态适配 =====
         document.querySelectorAll('#moduleNav button[data-module]').forEach(b => {
             if (b.dataset.module === 'dashboard' || b.dataset.module === 'chat') {
@@ -687,7 +740,7 @@
             if (!container) return;
             container.innerHTML = `
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                    <img src="小铭同学.png" alt="小铭同学" class="agent-avatar" style="margin-top:2px;" onerror="this.style.display='none'">
+                    <img src="agent.png" alt="小铭同学" class="agent-avatar" style="margin-top:2px;" onerror="this.style.display='none'">
                     <div class="user-msg-wrap" style="align-items:flex-start;">
                         <span class="user-name" style="text-align:left;">官网小铭同学</span>
                         <div class="chat-bubble-ai" style="max-width:100%;">
@@ -761,7 +814,7 @@
             div.style.alignItems = 'flex-start';
             div.style.gap = '8px';
             div.innerHTML = `
-                <img src="小铭同学.png" alt="小铭同学" class="agent-avatar" style="margin-top:2px;" onerror="this.style.display='none'">
+                <img src="agent.png" alt="小铭同学" class="agent-avatar" style="margin-top:2px;" onerror="this.style.display='none'">
                 <div class="user-msg-wrap" style="align-items:flex-start;">
                     <span class="user-name" style="text-align:left;">官网小铭同学</span>
                     <div class="chat-bubble-ai" style="min-width:200px;">
@@ -816,7 +869,6 @@
             const q = inputEl.value.trim();
             if (!q) return;
 
-            // user bubble with avatar + name
             const userDiv = document.createElement('div');
             userDiv.style.display = 'flex';
             userDiv.style.justifyContent = 'flex-end';
@@ -833,27 +885,34 @@
             container.scrollTop = container.scrollHeight;
             inputEl.value = '';
 
-            // thinking steps
             const thinkDiv = addThinkingSteps(container);
-            animateSteps(thinkDiv, () => {
-                setTimeout(() => {
+            animateSteps(thinkDiv, async () => {
+                try {
+                    const apiResult = await apiPost('/chat', { message: q });
                     thinkDiv.remove();
-                    const aiDiv = document.createElement('div');
-                    aiDiv.style.display = 'flex';
-                    aiDiv.style.alignItems = 'flex-start';
-                    aiDiv.style.gap = '8px';
-                    const reply = findReply(q);
-                    aiDiv.innerHTML = `
-                        <img src="小铭同学.png" alt="小铭同学" class="agent-avatar" style="margin-top:2px;" onerror="this.style.display='none'">
-                        <div class="user-msg-wrap" style="align-items:flex-start;">
-                            <span class="user-name" style="text-align:left;">官网小铭同学</span>
-                            <div class="chat-bubble-ai">${reply}</div>
-                        </div>
-                    `;
-                    container.appendChild(aiDiv);
-                    container.scrollTop = container.scrollHeight;
-                }, 400);
+                    const reply = apiResult ? apiResult.reply : findReply(q);
+                    showAiBubble(container, reply);
+                } catch (e) {
+                    thinkDiv.remove();
+                    setTimeout(() => showAiBubble(container, findReply(q)), 400);
+                }
             });
+        }
+
+        function showAiBubble(container, reply) {
+            const aiDiv = document.createElement('div');
+            aiDiv.style.display = 'flex';
+            aiDiv.style.alignItems = 'flex-start';
+            aiDiv.style.gap = '8px';
+            aiDiv.innerHTML = `
+                <img src="agent.png" alt="小铭同学" class="agent-avatar" style="margin-top:2px;" onerror="this.style.display='none'">
+                <div class="user-msg-wrap" style="align-items:flex-start;">
+                    <span class="user-name" style="text-align:left;">官网小铭同学</span>
+                    <div class="chat-bubble-ai">${reply}</div>
+                </div>
+            `;
+            container.appendChild(aiDiv);
+            container.scrollTop = container.scrollHeight;
         }
 
         // 主页面发送

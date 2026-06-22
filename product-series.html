@@ -289,10 +289,7 @@
             }
 
             lines.forEach(function(line, li) {
-                // 交替左右布局
-                var isLeft = li % 2 === 0;
-                html += '<div class="mb-10">';
-
+                html += '<div class="mb-12">';
                 // 产品线标题栏
                 html += '<div class="flex items-center gap-3 mb-5">';
                 html += '<div style="width:8px;height:32px;background:' + line.color + '"></div>';
@@ -300,44 +297,36 @@
                 html += '<h3 class="text-xl font-bold text-primary">' + line.name + '</h3>';
                 html += '<p class="text-[10px] text-slate-400 uppercase">' + line.nameEn + '</p>';
                 html += '</div>';
-                html += '<span class="material-symbols-outlined text-2xl text-slate-400 ml-2">' + line.icon + '</span>';
                 html += '</div>';
 
-                // 封装分组
-                html += '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-2">';
-                line.packages.forEach(function(pkg) {
-                    html += '<div class="bg-white border border-slate-200 p-5 relative overflow-hidden">';
-                    html += '<div class="color-bar" style="background:' + line.color + '"></div>';
-                    html += '<div class="ml-4">';
-                    html += '<h4 class="text-sm font-bold text-slate-700 mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-sm text-slate-400">package_2</span> ' + pkg.name + '</h4>';
-                    html += '<div class="flex flex-wrap gap-2">';
-                    pkg.series.forEach(function(s) {
-                        var hasPdf = s.pdf ? ' has-pdf' : '';
-                        var style = s.pdf ? 'style="background:' + line.color + ';border-color:' + line.color + '"' : '';
+                // 展示体系图图片
+                var images = line.diagramImages;
+                if (images && images.length > 0) {
+                    if (images.length === 1) {
+                        html += '<img src="' + images[0] + '" alt="' + line.name + '体系图" class="w-full border border-slate-200 shadow-sm" style="max-width:900px;">';
+                    } else {
+                        html += '<div class="grid grid-cols-1 lg:grid-cols-' + Math.min(images.length, 3) + ' gap-4">';
+                        images.forEach(function(img) {
+                            html += '<img src="' + img + '" alt="' + line.name + '体系图" class="w-full border border-slate-200 shadow-sm">';
+                        });
+                        html += '</div>';
+                    }
+                }
 
+                // 下方保留系列芯片列表（小字，辅助定位）
+                html += '<div class="mt-4 flex flex-wrap gap-1.5">';
+                line.packages.forEach(function(pkg) {
+                    pkg.series.forEach(function(s) {
                         if (s.pdf) {
-                            html += '<a href="' + s.pdf + '" target="_blank" title="' + s.name + ': ' + s.desc + '&#10;' + s.temp + ' | ' + s.life + ' | ' + s.voltage + '" class="series-chip inline-flex flex-col items-center px-3 py-2 border min-w-[60px] transition-all" ' + style + '>';
-                            html += '<span class="text-xs font-bold">' + s.name + '</span>';
-                            html += '<span class="text-[8px] opacity-70 mt-0.5">' + s.temp + '</span>';
-                            html += '</a>';
+                            html += '<a href="' + s.pdf + '" target="_blank" class="inline-flex items-center px-2 py-1 border text-[11px] font-bold text-white hover:opacity-80 transition-opacity" style="background:' + line.color + ';border-color:' + line.color + '">' + s.name + ' PDF</a>';
                         } else {
-                            html += '<span class="series-chip inline-flex flex-col items-center px-3 py-2 border border-slate-200 bg-slate-50 text-slate-500 min-w-[60px]" title="' + s.name + ': ' + s.desc + '&#10;' + s.temp + ' | ' + s.life + ' | ' + s.voltage + '">';
-                            html += '<span class="text-xs">' + s.name + '</span>';
-                            html += '<span class="text-[8px] opacity-50 mt-0.5">' + s.temp + '</span>';
-                            html += '</span>';
+                            html += '<span class="inline-flex items-center px-2 py-1 border border-slate-200 bg-slate-50 text-[11px] text-slate-400">' + s.name + '</span>';
                         }
                     });
-                    html += '</div></div></div>';
                 });
-                html += '</div></div>';
+                html += '</div>';
+                html += '</div>';
             });
-
-            // 图例
-            html += '<div class="mt-8 p-4 bg-white border border-slate-200 flex flex-wrap items-center gap-6 text-xs text-slate-500">';
-            html += '<span class="font-bold text-slate-700">图例：</span>';
-            html += '<span class="flex items-center gap-2"><span class="inline-block w-6 h-4 bg-[#1B365D]"></span> 有PDF规格书（可点击）</span>';
-            html += '<span class="flex items-center gap-2"><span class="inline-block w-6 h-4 bg-slate-50 border border-slate-200"></span> PDF待补充</span>';
-            html += '</div>';
 
             container.innerHTML = html;
         }

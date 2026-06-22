@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>汽车电子应用指南 - 永铭电子</title>
+    <meta name="description" content="永铭电子汽车电子电容解决方案 — 覆盖主驱/电驱电控、充电系统、安全部件、ADAS、热管理、智能座舱、车灯、充电桩，AEC-Q200合规。">
+    <meta name="keywords" content="汽车电子电容,车规电容,AEC-Q200,新能源汽车电容,永铭电子">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: { colors: { "primary": "#1B365D" }, borderRadius: { "DEFAULT": "0px" }, fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"] } }
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5 { font-family: 'Space Grotesk', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #74777f; }
+        .group:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mega-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s; }
+        .tab-active { color: #1B365D; border-bottom: 3px solid #1B365D; font-weight: 700; }
+        .subtab-active { background: #1B365D; color: #ffffff; font-weight: 600; }
+        
+        /* 电路拓扑方块图 */
+        .topo-container { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+        .topo-svg { width: 100%; height: auto; }
+        .topo-node { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+        .topo-node:hover .topo-rect { fill: #1B365D; stroke: #1B365D; }
+        .topo-node:hover .topo-label { fill: #ffffff; }
+        .topo-node:hover .topo-series-tag { fill: #ffffff; stroke: #ffffff; }
+        .topo-node:hover .topo-series-text { fill: #1B365D; }
+        .topo-rect { transition: all 0.25s; }
+        .topo-label { transition: all 0.25s; }
+        .topo-series-tag { transition: all 0.25s; }
+        .topo-series-text { transition: all 0.25s; }
+        .topo-line { stroke: #94a3b8; stroke-width: 1.5; fill: none; }
+        .topo-line-flow { stroke: #1B365D; stroke-width: 2; fill: none; stroke-dasharray: 6,4; animation: flow 1s linear infinite; }
+        .topo-arrow { fill: #94a3b8; }
+        @keyframes flow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -10; } }
+        .topo-power { animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+        .topo-gnd-line { stroke: #64748b; stroke-width: 1.5; }
+        
+        /* 产品卡片 */
+        .product-card { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        .product-card:hover { border-color: #1B365D; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(27,54,93,0.1); }
+        .product-card:hover .product-icon { color: #1B365D; }
+        .product-icon { transition: color 0.25s; }
+        
+        /* 模块卡片 */
+        .module-card { transition: all 0.2s; }
+        .module-card:hover { border-color: #1B365D; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        
+        /* 优势条目 */
+        .advantage-item { transition: all 0.2s; }
+        .advantage-item:hover { background: #f0f4ff; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
+    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
+    <header id="ymin-navbar"></header>
+
+    <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <!-- 面包屑 -->
+            <nav class="text-[11px] text-slate-500 uppercase mb-6 flex gap-2">
+                <a href="index.html" class="hover:text-primary">首页</a><span>/</span>
+                <a href="application-center.html" class="hover:text-primary">应用中心</a><span>/</span>
+                <span class="text-primary font-bold">汽车电子</span>
+            </nav>
+
+            <!-- 概述区 -->
+            <div class="bg-white border border-slate-200 p-8 mb-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1">
+                        <h1 class="text-3xl font-bold text-primary mb-3">汽车电子应用指南</h1>
+                        <p class="text-slate-600 mb-4">永铭为汽车电子全场景提供高可靠性电容解决方案，覆盖<strong>主驱/电驱电控、充电系统、安全部件、ADAS、热管理、智能座舱、车灯、充电桩</strong>等核心领域。浏览下方子应用，了解推荐产品系列与设计资源。</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">AEC-Q200合规</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">135℃耐高温</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">低ESR/低漏电流</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">抗振动</span>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <button class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition"><span class="material-symbols-outlined text-base align-middle">download</span> 固液混合电容汽车应用选型指南</button>
+                            <button class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition"><span class="material-symbols-outlined text-base align-middle">download</span> 液态电容汽车应用选型指南</button>
+                        </div>
+                    </div>
+                    <div class="md:w-72 bg-slate-100 border border-slate-200 flex items-center justify-center p-6">
+                        <span class="material-symbols-outlined text-6xl text-slate-400">directions_car</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一级目录：应用领域类别标签 -->
+            <div class="bg-white border border-slate-200 p-4 mb-6">
+                <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择应用领域</p>
+                <div class="flex flex-wrap gap-2" id="tabContainer">
+                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="mainDrive">主驱 / 电驱电控</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="charge">充电系统</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="safety">安全部件</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="adas">ADAS / 自动驾驶</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="thermal">热管理</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="cockpit">智能座舱</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="lamp">车灯</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="charger">充电桩</button>
+                </div>
+            </div>
+
+            <!-- 主体内容区 -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white border border-slate-200 p-4">
+                    <p class="text-[10px] text-slate-400 uppercase mb-3 tracking-wider">选择子应用</p>
+                    <div class="space-y-1" id="subtabContainer"></div>
+                    <!-- 设计工具入口（统一产品详情页样式） -->
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-lg">build</span><h3 class="text-base font-bold text-primary">设计工具与资源</h3></div>
+                        <div class="space-y-2">
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">timer</span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs font-bold text-slate-700 group-hover:text-primary">寿命推算工具</p>
+                                    <p class="text-[9px] text-slate-400">在线计算工作寿命</p>
+                                </div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">query_stats</span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs font-bold text-slate-700 group-hover:text-primary">SPICE 模型</p>
+                                    <p class="text-[9px] text-slate-400">电路仿真模型</p>
+                                </div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 hover:border-primary transition-colors group">
+                                <span class="material-symbols-outlined text-primary text-lg">token</span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs font-bold text-slate-700 group-hover:text-primary">3D-CAD 模型</p>
+                                    <p class="text-[9px] text-slate-400">STEP / IGES</p>
+                                </div>
+                                <span class="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-3 bg-white border border-slate-200 p-6" id="tabContent"></div>
+            </div>
+
+            <!-- 相关技术文章 -->
+            <div class="bg-white border border-slate-200 p-6">
+                <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">newspaper</span> 相关技术文章与设计指南</h2>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex justify-between items-center border-b pb-3"><a href="https://www.ymin.com/index/newsDetails?id=1396" target="_blank" class="hover:text-primary font-medium">永铭LK系列AEC-Q200车规电容：汽车安全气囊ECU高可靠性解决方案</a><span class="text-slate-400 text-xs">2026-03-17</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">永铭VHU系列固液混合铝电解电容：面向车载DCDC系统的低漏电流技术方案</a><span class="text-slate-400 text-xs">2026-04-03</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">永铭CW3H液态牛角电容：为800V平台OBC/DCDC打造高可靠DC-Link方案</a><span class="text-slate-400 text-xs">2025-10-24</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">VHE系列高分子混合铝电解电容：四大核心优势破解热管理系统车规电容挑战</a><span class="text-slate-400 text-xs">2025-08-18</span></li>
+                    <li class="flex justify-between items-center"><a href="#" class="hover:text-primary font-medium">永铭VKM系列贴片铝电解电容：破解智能照明低温启动与长寿命难题</a><span class="text-slate-400 text-xs">2025-10-24</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 页脚（由 components/footer.js 注入） -->
+        <footer id="ymin-footer"></footer>
+    </main>
+
+    <script>
+        // ===== 电路拓扑图渲染函数（电路图风格） =====
+        // renderTopologySVG 已移至 data/topology.js（共享）
+        function renderTopologySVG_deprecated(nodes, highlight, seriesMap) {
+            if (!nodes || nodes.length === 0) return '';
+            
+            const cols = Math.min(nodes.length, 5);
+            const boxW = 90;
+            const boxH = 44;
+            const gap = 14;
+            const totalW = cols * boxW + (cols - 1) * gap;
+            const svgW = Math.max(totalW + 60, 360);
+            const svgH = 160;
+            const startX = (svgW - totalW) / 2;
+            const midY = svgH / 2;
+            
+            let svg = '<div class="topo-container mb-4"><div class="flex items-center justify-between mb-3"><p class="text-[10px] text-slate-400 uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图</p><div class="flex gap-2 text-[9px]"><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#1B365D] inline-block"></span> 推荐产品位置</span><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#e2e8f0] border border-[#94a3b8] inline-block"></span> 功能模块</span></div></div>';
+            svg += '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" class="topo-svg">';
+            
+            // 背景网格（电路板风格）
+            svg += '<defs><pattern id="grid_' + nodes.length + '" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e8ecf1" stroke-width="0.3"/></pattern></defs>';
+            svg += '<rect width="' + svgW + '" height="' + svgH + '" fill="url(#grid_' + nodes.length + ')"/>';
+            
+            // ===== 电源输入（左侧）- 标准电路符号 =====
+            svg += '<g class="topo-power">';
+            // 电源圆
+            svg += '<circle cx="22" cy="' + midY + '" r="12" fill="#1B365D" stroke="#1B365D" stroke-width="2"/>';
+            svg += '<text x="22" y="' + (midY + 4) + '" font-size="7" text-anchor="middle" fill="#ffffff" font-weight="bold">VCC</text>';
+            // 电源正极短线
+            svg += '<line x1="22" y1="' + (midY - 12) + '" x2="22" y2="' + (midY - 18) + '" stroke="#1B365D" stroke-width="2"/>';
+            svg += '<line x1="16" y1="' + (midY - 18) + '" x2="28" y2="' + (midY - 18) + '" stroke="#1B365D" stroke-width="2"/>';
+            svg += '</g>';
+            svg += '<text x="22" y="' + (midY + 24) + '" font-size="6" text-anchor="middle" fill="#64748b">电源输入</text>';
+            
+            // 主电源母线（带电流流动动画）
+            svg += '<line x1="34" y1="' + midY + '" x2="' + startX + '" y2="' + midY + '" class="topo-line-flow"/>';
+            
+            // ===== 节点 =====
+            nodes.forEach((node, i) => {
+                const x = startX + i * (boxW + gap);
+                const y = midY - boxH/2;
+                const isHL = highlight && highlight.includes(i);
+                const series = seriesMap && seriesMap[i] ? seriesMap[i] : null;
+                
+                // 节点方块
+                svg += '<g class="topo-node">';
+                svg += '<rect x="' + x + '" y="' + y + '" width="' + boxW + '" height="' + boxH + '" rx="4" class="topo-rect" fill="' + (isHL ? '#dbeafe' : '#e2e8f0') + '" stroke="' + (isHL ? '#1B365D' : '#94a3b8') + '" stroke-width="1.5"/>';
+                svg += '<text x="' + (x + boxW/2) + '" y="' + (y + boxH/2 + 2) + '" font-size="9" text-anchor="middle" class="topo-label" fill="' + (isHL ? '#1B365D' : '#1e293b') + '" font-weight="' + (isHL ? 'bold' : 'normal') + '">' + node + '</text>';
+                
+                // 推荐系列标签（在方块下方）
+                if (series) {
+                    const tagY = y + boxH + 4;
+                    const tagW = 50;
+                    const tagH = 14;
+                    const tagX = x + (boxW - tagW) / 2;
+                    svg += '<a href="' + series.link + '">';
+                    svg += '<rect x="' + tagX + '" y="' + tagY + '" width="' + tagW + '" height="' + tagH + '" rx="3" class="topo-series-tag" fill="' + (isHL ? '#1B365D' : '#94a3b8') + '" opacity="0.9"/>';
+                    svg += '<text x="' + (tagX + tagW/2) + '" y="' + (tagY + tagH/2 + 1) + '" font-size="7" text-anchor="middle" class="topo-series-text" fill="#ffffff" font-weight="bold">' + series.name + '</text>';
+                    svg += '</a>';
+                }
+                svg += '</g>';
+                
+                // 节点间连线（电路线风格）
+                if (i < nodes.length - 1) {
+                    const x1 = x + boxW;
+                    const x2 = x + boxW + gap;
+                    const cy = midY;
+                    // 主连线
+                    svg += '<line x1="' + x1 + '" y1="' + cy + '" x2="' + x2 + '" y2="' + cy + '" class="topo-line"/>';
+                    // 连接点（圆点）
+                    svg += '<circle cx="' + x1 + '" cy="' + cy + '" r="2.5" class="topo-dot"/>';
+                    svg += '<circle cx="' + x2 + '" cy="' + cy + '" r="2.5" class="topo-dot"/>';
+                    // 箭头
+                    svg += '<polygon points="' + (x2-3) + ',' + (cy-4) + ' ' + x2 + ',' + cy + ' ' + (x2-3) + ',' + (cy+4) + '" class="topo-arrow"/>';
+                }
+            });
+            
+            // ===== 接地符号（右侧）- 标准电路符号 =====
+            const lastX = startX + (nodes.length - 1) * (boxW + gap) + boxW;
+            // 水平连线到接地
+            svg += '<line x1="' + (lastX) + '" y1="' + midY + '" x2="' + (lastX + 16) + '" y2="' + midY + '" class="topo-line"/>';
+            svg += '<circle cx="' + (lastX) + '" cy="' + midY + '" r="2.5" class="topo-dot"/>';
+            // 接地符号（标准三横线）
+            svg += '<line x1="' + (lastX + 16) + '" y1="' + midY + '" x2="' + (lastX + 16) + '" y2="' + (midY + 8) + '" class="topo-gnd-line"/>';
+            svg += '<line x1="' + (lastX + 10) + '" y1="' + (midY + 8) + '" x2="' + (lastX + 22) + '" y2="' + (midY + 8) + '" class="topo-gnd-line"/>';
+            svg += '<line x1="' + (lastX + 12) + '" y1="' + (midY + 12) + '" x2="' + (lastX + 20) + '" y2="' + (midY + 12) + '" class="topo-gnd-line"/>';
+            svg += '<line x1="' + (lastX + 14) + '" y1="' + (midY + 16) + '" x2="' + (lastX + 18) + '" y2="' + (midY + 16) + '" class="topo-gnd-line"/>';
+            svg += '<text x="' + (lastX + 16) + '" y="' + (midY + 28) + '" font-size="6" text-anchor="middle" fill="#64748b">GND</text>';
+            
+            // ===== 分支电路（上下两侧的旁路电容/电阻符号） =====
+            // 在上方添加旁路电容符号（装饰性）
+            if (nodes.length >= 2) {
+                const midNodeX = startX + Math.floor(nodes.length/2) * (boxW + gap) + boxW/2;
+                svg += '<line x1="' + midNodeX + '" y1="' + (midY - boxH/2) + '" x2="' + midNodeX + '" y2="' + (midY - boxH/2 - 14) + '" class="topo-line" stroke-dasharray="3,3"/>';
+                // 电容符号（两条平行线）
+                svg += '<line x1="' + (midNodeX - 6) + '" y1="' + (midY - boxH/2 - 14) + '" x2="' + (midNodeX + 6) + '" y2="' + (midY - boxH/2 - 14) + '" stroke="#1B365D" stroke-width="2"/>';
+                svg += '<line x1="' + (midNodeX - 6) + '" y1="' + (midY - boxH/2 - 18) + '" x2="' + (midNodeX + 6) + '" y2="' + (midY - boxH/2 - 18) + '" stroke="#1B365D" stroke-width="2"/>';
+                svg += '<text x="' + (midNodeX + 14) + '" y="' + (midY - boxH/2 - 14) + '" font-size="5" fill="#64748b">C</text>';
+            }
+            
+            svg += '</svg></div>';
+            return svg;
+        }
+
+        // ===== 应用数据结构 =====
+        const appData = {
+            mainDrive: {
+                name: '主驱 / 电驱电控',
+                description: '电驱电控系统是新能源汽车的核心动力单元，包含DC-DC转换器、DC-AC逆变器、EPS转向控制等。永铭液态抗震座板贴片型铝电解电容器广泛应用于热管理系统/水泵/油泵/助力转向控制系统，兼具高抗震需求与成本效益。',
+                subApps: [
+                    { 
+                        name: 'DC-DC转换器', series: ['VHT/VHU', 'VPG'], icon: 'power', 
+                        topology: { nodes: ['高压输入', '开关变换', '整流滤波', '低压输出'], highlight: [0, 2] },
+                        seriesMap: { 0: { name: 'VHT/VHU', link: 'product-center.html?series=VHT' }, 2: { name: 'VPG', link: 'product-center.html?series=VPG' } }
+                    },
+                    { 
+                        name: 'DC-AC逆变器', series: ['薄膜电容'], icon: 'conversion_path', 
+                        topology: { nodes: ['直流母线', '逆变桥', '滤波输出', '电机'], highlight: [1] },
+                        seriesMap: { 1: { name: '薄膜电容', link: 'product-center.html' } }
+                    },
+                    { 
+                        name: 'EPS转向控制', series: ['LKL(R)', 'VKM'], icon: 'settings_suggest', 
+                        topology: { nodes: ['扭矩输入', 'ECU控制', '电机驱动', '输出轴'], highlight: [1, 2] },
+                        seriesMap: { 1: { name: 'LKL(R)', link: 'product-center.html?series=LKL(R)' }, 2: { name: 'VKM', link: 'product-center.html?series=VKM' } }
+                    },
+                    { 
+                        name: '电机驱动', series: ['VHT', 'VPG'], icon: 'precision_manufacturing', 
+                        topology: { nodes: ['电源输入', '驱动电路', '功率输出', '电机'], highlight: [2] },
+                        seriesMap: { 2: { name: 'VHT', link: 'product-center.html?series=VHT' } }
+                    }
+                ],
+                products: [
+                    { series: 'VHT/VHU', pkg: '贴片型', feature: '固液混合，ESR≤8mΩ，125℃，4000h', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['ESR≤8mΩ', '125℃', '固液混合'] },
+                    { series: 'LKL(R)', pkg: '引线型', feature: '135℃超高温，DC-Link专用，低ESR', samplePn: 'LKL(R) 25V/4700μF', link: 'product-center.html?series=LKL(R)', highlights: ['135℃', 'DC-Link', '低ESR'] },
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'AEC-Q200', 'SMD'] },
+                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] }
+                ]
+            },
+            charge: {
+                name: '充电系统',
+                description: '充电系统包含OBC车载充电机和DC-DC转换器。永铭针对性推出高性能电容产品矩阵，应对高压系统下对电容器耐高压、小尺寸、长寿命、耐大纹波电流的严苛要求。',
+                subApps: [
+                    { 
+                        name: 'OBC车载充电机', series: ['VHT/VHU', 'CW3H', 'LKD'], icon: 'ev_station', 
+                        topology: { nodes: ['AC输入', 'PFC', 'DC-Link', '输出'], highlight: [2] },
+                        seriesMap: { 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } }
+                    },
+                    { 
+                        name: 'DC-DC转换器', series: ['VHT/VHU', '薄膜电容'], icon: 'transform', 
+                        topology: { nodes: ['高压输入', '开关变换', '整流滤波', '低压输出'], highlight: [0, 2] },
+                        seriesMap: { 0: { name: 'VHT/VHU', link: 'product-center.html?series=VHT' }, 2: { name: '薄膜电容', link: 'product-center.html' } }
+                    },
+                    { 
+                        name: 'BMS电池管理', series: ['VHT', 'VPT'], icon: 'battery_horiz_075', 
+                        topology: { nodes: ['电池组', '采样电路', '均衡控制', '通信'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VHT', link: 'product-center.html?series=VHT' } }
+                    }
+                ],
+                products: [
+                    { series: 'VHT/VHU', pkg: '贴片型', feature: '固液混合，ESR≤8mΩ，125℃', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['ESR≤8mΩ', '125℃', '固液混合'] },
+                    { series: 'CW3H', pkg: '牛角型', feature: '400-500V, 800V平台DC-Link', samplePn: 'CW3H 800V平台', link: 'product-center.html?series=CW3H', highlights: ['400-500V', '800V平台', 'DC-Link'] },
+                    { series: 'LKD', pkg: '引线型', feature: '400-500V高压OBC', samplePn: 'LKD高压系列', link: 'product-center.html?series=LKD', highlights: ['400-500V', '高压', 'OBC'] }
+                ]
+            },
+            safety: {
+                name: '安全部件',
+                description: '安全部件包括安全气囊ECU、ABS防抱死系统、EPS、one-box/ESC/EBS等。安全气囊ECU是汽车被动安全系统的核心，负责碰撞检测与气囊点火控制。永铭LK系列通过AEC-Q200认证，专为安全气囊ECU设计，具备极低漏电流和卓越的低温启动性能，确保在-40℃极端条件下仍能即时激活系统。',
+                subApps: [
+                    {
+                        name: '安全气囊', series: ['LK(引线型)', 'VKO(贴片型)'], icon: 'shield',
+                        topology: { nodes: ['备用电源', 'MCU监控', '点火驱动', '通信'], highlight: [0, 2] },
+                        seriesMap: { 0: { name: 'LK', link: 'product-center.html?series=LK' }, 2: { name: 'VKO', link: 'product-center.html?series=VKO' } },
+                        systemModules: [
+                            { name: '备用电源', icon: 'battery_charging_full', desc: '在碰撞断电瞬间提供备用能量，确保ECU持续工作。需大容量、低漏电流电容，防止长期搁置后容量衰减影响系统激活。' },
+                            { name: 'MCU监控回路', icon: 'monitor_heart', desc: '负责传感器信号采集与碰撞算法判定，对电源纹波敏感，需要低ESR电容保证供电稳定性。' },
+                            { name: '点火驱动回路', icon: 'local_fire_department', desc: '在ECU发出点火指令后，瞬时释放大电流引爆气囊。电容需具备高纹波电流能力和极低内阻。' },
+                            { name: '通信回路', icon: 'cell_tower', desc: '与其他ECU（如ABS、ESC）交换车辆状态信息，需要滤波电容抑制总线噪声，确保通信可靠性。' }
+                        ]
+                    },
+                    { 
+                        name: 'ABS防抱死系统', series: ['VKO', 'VKM'], icon: 'warning', 
+                        topology: { nodes: ['轮速传感', 'ECU运算', '液压调节', '执行器'], highlight: [1, 2] },
+                        seriesMap: { 1: { name: 'VKO', link: 'product-center.html?series=VKO' }, 2: { name: 'VKM', link: 'product-center.html?series=VKM' } }
+                    },
+                    { 
+                        name: 'EPS', series: ['LKL(R)', '液态抗震SMD'], icon: 'settings_suggest', 
+                        topology: { nodes: ['扭矩输入', 'ECU控制', '电机驱动', '输出轴'], highlight: [1, 2] },
+                        seriesMap: { 1: { name: 'LKL(R)', link: 'product-center.html?series=LKL(R)' }, 2: { name: 'VKM', link: 'product-center.html?series=VKM' } }
+                    },
+                    { 
+                        name: 'one-box / ESC / EBS', series: ['VKO', 'LKL(R)'], icon: 'warning', 
+                        topology: { nodes: ['传感器', 'ECU', '液压单元', '制动器'], highlight: [1, 2] },
+                        seriesMap: { 1: { name: 'VKO', link: 'product-center.html?series=VKO' }, 2: { name: 'LKL(R)', link: 'product-center.html?series=LKL(R)' } }
+                    }
+                ],
+                products: [
+                    { series: 'LK', pkg: '引线型', feature: 'AEC-Q200, 极低漏电流≤20μA, 6000h, -40℃低温启动', samplePn: 'OLKC1101C271MF', link: 'product-center.html?series=LK', highlights: ['AEC-Q200', '漏电流≤20μA', '-40℃'] },
+                    { series: 'VKO', pkg: '贴片型', feature: 'AEC-Q200, SMD封装, 大容量3300μF, 8000h', samplePn: 'VKOI2101C332MVTM', link: 'product-center.html?series=VKO', highlights: ['SMD', '3300μF', '8000h'] },
+                    { series: 'LKL(R)', pkg: '引线型', feature: '135℃, DC-Link, 低ESR', samplePn: 'LKL(R) 25V/4700μF', link: 'product-center.html?series=LKL(R)', highlights: ['135℃', 'DC-Link', '低ESR'] }
+                ]
+            },
+            adas: {
+                name: 'ADAS / 自动驾驶辅助系统',
+                description: 'ADAS系统包含域控制器、毫米波雷达、激光雷达、摄像头等传感器模组。需要高性能处理器和传感器供电，对电源稳定性、纹波抑制和瞬态响应要求极高。',
+                subApps: [
+                    { 
+                        name: '域控制器', series: ['NPX', 'VHT'], icon: 'memory', 
+                        topology: { nodes: ['电源输入', 'SoC供电', '存储', '通信'], highlight: [1] },
+                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
+                    },
+                    { 
+                        name: '毫米波雷达', series: ['VHT', 'VKM'], icon: 'radar', 
+                        topology: { nodes: ['天线', '射频前端', '信号处理', '输出'], highlight: [2] },
+                        seriesMap: { 2: { name: 'VHT', link: 'product-center.html?series=VHT' } }
+                    },
+                    { 
+                        name: '摄像头模组', series: ['NPX', 'VKM'], icon: 'camera', 
+                        topology: { nodes: ['镜头', '图像传感器', 'ISP', '输出'], highlight: [2] },
+                        seriesMap: { 2: { name: 'NPX', link: 'product-center.html?series=NPX' } }
+                    }
+                ],
+                products: [
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
+                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
+                ]
+            },
+            thermal: {
+                name: '热管理',
+                description: '热管理系统包括电子水泵、空调压缩机、水阀、PTC加热、电子油泵、冷却风扇、鼓风机等。VHE系列高分子混合电容专为热管理系统设计，135℃环境下稳定运行4000小时。',
+                subApps: [
+                    { 
+                        name: '电子水泵/油泵', series: ['VHE', '液态贴片SMD'], icon: 'water_pump', 
+                        topology: { nodes: ['电源', '驱动电路', '电机', '泵体'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VHE', link: 'product-center.html?series=VHE' } }
+                    },
+                    { 
+                        name: '空调压缩机', series: ['VHE', 'VHT'], icon: 'ac_unit', 
+                        topology: { nodes: ['电源', '变频驱动', '压缩机', '制冷回路'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VHE', link: 'product-center.html?series=VHE' } }
+                    },
+                    { 
+                        name: 'PTC加热器', series: ['VHE', 'VPG'], icon: 'heat', 
+                        topology: { nodes: ['电源', 'PTC控制', '加热元件', '温度反馈'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VHE', link: 'product-center.html?series=VHE' } }
+                    },
+                    { 
+                        name: '冷却风扇/鼓风机', series: ['VHE', 'VKM'], icon: 'air', 
+                        topology: { nodes: ['电源', '电机驱动', '风扇', '风道'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VHE', link: 'product-center.html?series=VHE' } }
+                    }
+                ],
+                products: [
+                    { series: 'VHE', pkg: '引线型', feature: '135℃耐高温, 高分子混合, 4000h', samplePn: 'VHE系列', link: 'product-center.html?series=VHE', highlights: ['135℃', '高分子混合', '4000h'] },
+                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
+                ]
+            },
+            cockpit: {
+                name: '智能座舱',
+                description: '智能座舱包括域控制器、仪表盘、中控娱乐系统、HUD抬头显示、T-BOX车联网等。需要小型化、低ESR电容满足高密度PCB布局需求。',
+                subApps: [
+                    { 
+                        name: '域控制器', series: ['NPX', 'VHT'], icon: 'memory', 
+                        topology: { nodes: ['电源输入', 'SoC供电', '存储', '通信'], highlight: [1] },
+                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
+                    },
+                    { 
+                        name: '仪表盘/中控', series: ['NPX', 'VKM'], icon: 'dashboard', 
+                        topology: { nodes: ['电源', '主控', '显示驱动', '屏幕'], highlight: [1] },
+                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
+                    },
+                    { 
+                        name: 'HUD抬头显示', series: ['NPX', 'VHT'], icon: 'visibility', 
+                        topology: { nodes: ['电源', '图像处理', '投影', '挡风玻璃'], highlight: [1] },
+                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
+                    },
+                    { 
+                        name: 'T-BOX车联网', series: ['NPX', 'VKM'], icon: 'cell_tower', 
+                        topology: { nodes: ['电源', '通信模块', '天线', 'CAN总线'], highlight: [1] },
+                        seriesMap: { 1: { name: 'NPX', link: 'product-center.html?series=NPX' } }
+                    }
+                ],
+                products: [
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR(≤10mΩ), 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['ESR≤10mΩ', '小型化', 'SMD'] },
+                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] },
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, AEC-Q200', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'AEC-Q200', 'SMD'] }
+                ]
+            },
+            lamp: {
+                name: '车灯',
+                description: '车灯包括前大灯、尾灯、日间行车灯、车内照明等。VKM系列贴片铝电解电容专为车灯应用设计，解决低温启动与长寿命难题。',
+                subApps: [
+                    { 
+                        name: '前大灯', series: ['VKM', 'NPX'], icon: 'light', 
+                        topology: { nodes: ['电源', 'LED驱动', '散热', '光学'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } }
+                    },
+                    { 
+                        name: '尾灯/日行灯', series: ['VKM', 'NPX'], icon: 'light_mode', 
+                        topology: { nodes: ['电源', 'LED驱动', '控制', '灯组'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } }
+                    },
+                    { 
+                        name: '车内照明', series: ['VKM', 'NPX'], icon: 'living', 
+                        topology: { nodes: ['电源', '调光', 'LED', '灯珠'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VKM', link: 'product-center.html?series=VKM' } }
+                    }
+                ],
+                products: [
+                    { series: 'VKM', pkg: '贴片型', feature: '105℃, 9000h, AEC-Q200, 低温启动', samplePn: 'VKMC1001H680MVTM', link: 'product-center.html?series=VKM', highlights: ['9000h', 'AEC-Q200', '低温启动'] },
+                    { series: 'NPX', pkg: '贴片型', feature: '超低ESR, 小型化', samplePn: 'NPXC0700J561MJTM', link: 'product-center.html?series=NPX', highlights: ['超低ESR', '小型化', 'SMD'] }
+                ]
+            },
+            charger: {
+                name: '充电桩',
+                description: '充电桩包括直流快充桩、交流慢充桩、V2G双向充电等。需要高纹波电流、大容量电容满足大功率充电需求。',
+                subApps: [
+                    { 
+                        name: '直流快充桩', series: ['VPG', 'CW3H'], icon: 'bolt', 
+                        topology: { nodes: ['电网输入', '整流', 'DC-DC', '电池'], highlight: [1, 2] },
+                        seriesMap: { 1: { name: 'VPG', link: 'product-center.html?series=VPG' }, 2: { name: 'CW3H', link: 'product-center.html?series=CW3H' } }
+                    },
+                    { 
+                        name: '交流慢充桩', series: ['VPG', 'VHT'], icon: 'ev_station', 
+                        topology: { nodes: ['AC输入', 'PFC', 'DC输出', '通信'], highlight: [1] },
+                        seriesMap: { 1: { name: 'VPG', link: 'product-center.html?series=VPG' } }
+                    },
+                    { 
+                        name: 'V2G双向充电', series: ['CW3H', 'VPG'], icon: 'swap_horiz', 
+                        topology: { nodes: ['电池', '双向变换', '电网', '通信'], highlight: [1] },
+                        seriesMap: { 1: { name: 'CW3H', link: 'product-center.html?series=CW3H' } }
+                    }
+                ],
+                products: [
+                    { series: 'VPG', pkg: '引线型', feature: '高纹波, 大容量, 2000h', samplePn: 'VPGJ1951H122MVTM', link: 'product-center.html?series=VPG', highlights: ['高纹波', '大容量', '2000h'] },
+                    { series: 'CW3H', pkg: '牛角型', feature: '400-500V, 800V平台DC-Link', samplePn: 'CW3H 800V平台', link: 'product-center.html?series=CW3H', highlights: ['400-500V', '800V平台', 'DC-Link'] },
+                    { series: 'VHT', pkg: '贴片型', feature: '125℃, 4000h, 固液混合', samplePn: 'VHTC0771H470MV', link: 'product-center.html?series=VHT', highlights: ['125℃', '4000h', '固液混合'] }
+                ]
+            }
+        };
+
+        // ===== 渲染函数 =====
+        let currentTab = 'mainDrive';
+        let currentSub = 0;
+
+        function getUrlParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function renderSubTabs(tabKey) {
+            const container = document.getElementById('subtabContainer');
+            const data = appData[tabKey];
+            if (!data) return;
+            container.innerHTML = data.subApps.map((sub, i) => {
+                const active = i === currentSub ? 'subtab-active' : 'text-slate-600 hover:bg-slate-100';
+                return '<button class="w-full text-left px-3 py-2 text-xs font-medium ' + active + ' transition-colors" data-sub="' + i + '">' +
+                    '<span class="material-symbols-outlined text-base align-middle mr-1">' + sub.icon + '</span> ' + sub.name +
+                    '</button>';
+            }).join('');
+            container.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentSub = parseInt(this.dataset.sub);
+                    renderSubTabs(tabKey);
+                    renderContent(tabKey);
+                });
+            });
+        }
+
+        function renderContent(tabKey) {
+            const container = document.getElementById('tabContent');
+            const data = appData[tabKey];
+            if (!data) return;
+            const sub = data.subApps[currentSub];
+            if (!sub) return;
+
+            let html = '';
+
+            // 子应用标题
+            html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
+
+            // 电路拓扑图 - 安全气囊使用图片替换
+            if (sub.name === '安全气囊') {
+                html += '<div class="topo-container mb-4"><div class="flex items-center justify-between mb-3"><p class="text-[10px] text-slate-400 uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图</p></div><img src="anquanqinang.png" alt="安全气囊电路拓扑图" style="width:100%;height:auto;border-radius:4px;"></div>';
+            } else if (sub.topology) {
+                html += renderTopologySVG(sub.topology.nodes, sub.topology.highlight, sub.seriesMap);
+            }
+
+            // 系统模块详解 + 推荐产品系列合并展示（仅安全气囊有）
+            if (sub.systemModules) {
+                html += '<h4 class="text-sm font-bold text-primary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐产品</h4>';
+                html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
+                sub.systemModules.forEach(mod => {
+                    // 查找该模块对应的推荐产品
+                    let productHtml = '';
+                    if (data.products) {
+                        data.products.forEach(card => {
+                            productHtml += '<a href="' + card.link + '" class="product-card border border-slate-200 p-2.5 block mt-2"><div class="flex items-start gap-2"><span class="material-symbols-outlined product-icon text-slate-400 text-lg flex-shrink-0">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-xs font-bold text-primary">' + card.series + '</h5><span class="text-[9px] text-slate-400 bg-slate-100 px-1.5 py-0.5">' + card.pkg + '</span></div><p class="text-[10px] text-slate-600 mt-0.5">' + card.feature + '</p><div class="flex gap-1 mt-1">' + card.highlights.map(h => '<span class="text-[8px] bg-primary/5 text-primary px-1 py-0.5 border border-primary/10">' + h + '</span>').join('') + '</div></div></div></a>';
+                        });
+                    }
+                    html += '<div class="module-card border border-slate-200 p-3"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + mod.icon + '</span><div><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p>' + productHtml + '</div></div></div>';
+                });
+                html += '</div>';
+            } else {
+                // 非安全气囊子应用：只展示推荐产品系列
+                html += '<h4 class="text-sm font-bold text-primary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-base">inventory_2</span> 推荐产品系列</h4>';
+                html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">';
+                if (data.products) {
+                    data.products.forEach(card => {
+                        html += '<a href="' + card.link + '" class="product-card border border-slate-200 p-3 block"><div class="flex items-start gap-3"><span class="material-symbols-outlined product-icon text-slate-400 text-2xl flex-shrink-0">memory</span><div class="flex-1"><div class="flex items-center justify-between"><h5 class="text-sm font-bold text-primary">' + card.series + '</h5><span class="text-[10px] text-slate-400 bg-slate-100 px-2 py-0.5">' + card.pkg + '</span></div><p class="text-[11px] text-slate-600 mt-1">' + card.feature + '</p><div class="flex gap-1.5 mt-1.5">' + card.highlights.map(h => '<span class="text-[9px] bg-primary/5 text-primary px-1.5 py-0.5 border border-primary/10">' + h + '</span>').join('') + '</div><p class="text-[9px] text-slate-400 mt-1">样品型号: ' + card.samplePn + '</p></div></div></a>';
+                    });
+                }
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        function switchTab(tabKey) {
+            currentTab = tabKey;
+            currentSub = 0;
+            document.querySelectorAll('#tabContainer button').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('text-slate-500');
+                if (btn.dataset.tab === tabKey) {
+                    btn.classList.add('tab-active');
+                    btn.classList.remove('text-slate-500');
+                }
+            });
+            renderSubTabs(tabKey);
+            renderContent(tabKey);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('#tabContainer button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchTab(this.dataset.tab);
+                });
+            });
+
+            const tabParam = getUrlParam('tab');
+            if (tabParam && appData[tabParam]) {
+                switchTab(tabParam);
+            } else {
+                switchTab('mainDrive');
+            }
+        });
+    </script>
+    <!-- 共享组件 -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="data/topology.js"></script>
+    <script src="data/automotive-apps.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('applications');
+            YMIN.footer.inject();
+        });
+    </script>
+</body>
+</html>

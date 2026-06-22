@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>AI服务器与数据中心 - 永铭电子</title>
+    <meta name="description" content="永铭电子AI服务器电容解决方案 — GPU加速卡、CPU供电、PDN总线架构的大电流、超低ESR电容方案，支持400V/800V DC-Link。">
+    <meta name="keywords" content="AI服务器电容,数据中心电容,GPU供电电容,PDN电容,超低ESR电容,永铭电子">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: { colors: { "primary": "#1B365D" }, borderRadius: { "DEFAULT": "0px" }, fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"] } }
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #74777f; }
+        .group:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mega-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s; }
+        .no-radius { border-radius: 0 !important; }
+        .tab-active { color: #1B365D; border-bottom: 3px solid #1B365D; font-weight: 700; }
+        .subtab-active { background: #1B365D; color: #ffffff; font-weight: 600; }
+        .topology-node { transition: all 0.2s; cursor: pointer; }
+        .topology-node:hover { fill: #1B365D; stroke: #1B365D; stroke-width: 2.5; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
+    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
+    <header id="ymin-navbar"></header>
+
+    <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <nav class="text-[11px] text-slate-500 uppercase mb-6 flex gap-2">
+                <a href="index.html" class="hover:text-primary">首页</a><span>/</span>
+                <a href="application-center.html" class="hover:text-primary">应用中心</a><span>/</span>
+                <span class="text-primary font-bold">AI服务器与数据中心</span>
+            </nav>
+
+            <!-- 概述 -->
+            <div class="bg-white border border-slate-200 p-8 mb-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1">
+                        <h1 class="text-3xl font-bold text-primary mb-3">AI服务器与数据中心解决方案</h1>
+                        <p class="text-slate-600 mb-4">为新一代<strong>AI加速卡、CPU/GPU核心供电、高速网络设备及存储系统</strong>提供完整电容解决方案。永铭高分子固态电容、固液混合电容及MLCC产品具备<strong>大电流承载、极低ESR、小型化、高可靠性</strong>等特性，支持400V/800V直流总线架构下的电源分配网络(PDN)优化，助力数据中心应对AI训练与推理的极致算力需求。</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">大电流</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">低ESR ≤5mΩ</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">小型化</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">高可靠性</span>
+                        </div>
+                        <button class="border border-primary text-primary px-6 py-2 text-sm font-bold hover:bg-primary hover:text-white transition"><span class="material-symbols-outlined text-base align-middle">download</span> 下载AI服务器应用白皮书</button>
+                    </div>
+                    <div class="md:w-72 bg-slate-100 border border-slate-200 flex items-center justify-center p-6">
+                        <span class="material-symbols-outlined text-6xl text-slate-400">cloud</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一级目录：应用子领域（与汽车电子风格统一） -->
+            <div class="bg-white border border-slate-200 p-4 mb-6">
+                <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择系统模块</p>
+                <div class="flex flex-wrap gap-2" id="tabContainer">
+                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="cpu">CPU/GPU核心供电</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="mem">内存/存储</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="net">网络接口</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="aux">辅助电源</button>
+                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="pdn">PDN与总线架构</button>
+                </div>
+            </div>
+
+            <!-- 主体内容区：左侧二级目录 + 右侧详情 -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                <!-- 左侧：二级目录（子模块） -->
+                <div class="bg-white border border-slate-200 p-4">
+                    <p class="text-[10px] text-slate-400 uppercase mb-3 tracking-wider">选择子模块</p>
+                    <div class="space-y-1" id="subtabContainer"></div>
+                </div>
+                <!-- 右侧：子模块内容 -->
+                <div class="lg:col-span-3 bg-white border border-slate-200 p-6" id="tabContent"></div>
+            </div>
+
+            <!-- 数据中心产品映射总览（与汽车电子风格一致） -->
+            <div class="bg-white border border-slate-200 p-6 mb-8">
+                <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">grid_on</span> 数据中心电容产品映射（电容值 × 额定电压）</h2>
+                <p class="text-xs text-slate-500 mb-4">点击系列名称跳转至产品中心筛选页。以下系列覆盖数据中心从核心供电到辅助电源的全场景需求。</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs border-collapse">
+                        <thead><tr class="bg-slate-100"><th class="border border-slate-300 px-3 py-2 text-left">系统模块</th><th class="border border-slate-300 px-3 py-2 text-left">封装</th><th class="border border-slate-300 px-3 py-2 text-left">系列</th><th class="border border-slate-300 px-3 py-2">电压范围</th><th class="border border-slate-300 px-3 py-2">ESR典型值</th><th class="border border-slate-300 px-3 py-2">主要特性</th></tr></thead>
+                        <tbody class="text-center">
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">CPU/GPU核心供电</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VHT" class="hover:underline">VHT/VHU</a></td><td class="border px-3 py-2">16V - 63V</td><td class="border px-3 py-2">≤8mΩ</td><td class="border px-3 py-2 text-left text-[10px]">固液混合, 125℃, 4000h</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">GPU/FPGA旁路</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=NPX" class="hover:underline">NPX</a></td><td class="border px-3 py-2">2.5V - 16V</td><td class="border px-3 py-2">≤10mΩ</td><td class="border px-3 py-2 text-left text-[10px]">超低ESR, 小型化, 高分子固态</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">12V输入滤波</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPG" class="hover:underline">VPG</a></td><td class="border px-3 py-2">25V - 100V</td><td class="border px-3 py-2">≤30mΩ</td><td class="border px-3 py-2 text-left text-[10px]">高纹波, 大容量, 2000h</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">内存/存储</td><td class="border px-3 py-2">贴片型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPT" class="hover:underline">VPT</a></td><td class="border px-3 py-2">16V - 100V</td><td class="border px-3 py-2">≤50mΩ</td><td class="border px-3 py-2 text-left text-[10px]">125℃, 2000h, 贴片</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">辅助电源</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VPX" class="hover:underline">VPX</a></td><td class="border px-3 py-2">25V - 100V</td><td class="border px-3 py-2">≤50mΩ</td><td class="border px-3 py-2 text-left text-[10px]">经济型, 耐大纹波</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">400V/800V母线</td><td class="border px-3 py-2">牛角型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=CW3H" class="hover:underline">CW3H</a></td><td class="border px-3 py-2">400V - 500V</td><td class="border px-3 py-2">低ESR</td><td class="border px-3 py-2 text-left text-[10px]">高压DC-Link, 长寿命</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="border px-3 py-2 text-left font-medium">待机/管理电源</td><td class="border px-3 py-2">引线型</td><td class="border px-3 py-2 font-bold text-primary"><a href="product-center.html?series=VP1" class="hover:underline">VP1</a></td><td class="border px-3 py-2">25V - 50V</td><td class="border px-3 py-2">低ESR</td><td class="border px-3 py-2 text-left text-[10px]">-55~105℃, 通用型</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 白皮书入口 -->
+            <div class="bg-primary text-white p-8 flex flex-col md:flex-row justify-between items-center mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-1">《AI服务器电源分配网络(PDN)优化指南》</h3>
+                    <p class="text-blue-100 text-sm">深入探讨400V/800V总线架构下电容选型与布局策略，包含实测数据与仿真模型。适用于数据中心电源工程师。</p>
+                </div>
+                <button class="mt-4 md:mt-0 bg-white text-primary px-8 py-3 text-sm font-bold uppercase hover:bg-blue-50 flex items-center gap-2"><span class="material-symbols-outlined">download</span> 下载白皮书</button>
+            </div>
+
+            <!-- 相关技术文章 -->
+            <div class="bg-white border border-slate-200 p-6">
+                <h2 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">newspaper</span> 相关技术文章与设计指南</h2>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">下一代数据中心AI服务器PDN优化策略：400V/800V总线架构下的电容选型</a><span class="text-slate-400 text-xs">2026-04-20 · 技术白皮书</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">低ESR聚合物电容在GPU加速卡供电中的应用与实测验证</a><span class="text-slate-400 text-xs">2026-03-18 · 技术文章</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">VHT系列固液混合电容：为AI服务器POL转换器提供高可靠性方案</a><span class="text-slate-400 text-xs">2026-02-05 · 产品新闻</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">CW3H高压牛角电容：面向数据中心800V母线架构的DC-Link方案</a><span class="text-slate-400 text-xs">2025-10-24 · 应用指南</span></li>
+                    <li class="flex justify-between items-center border-b pb-3"><a href="#" class="hover:text-primary font-medium">NPX系列高分子固态电容：FPGA/ASIC核心供电超低ESR解决方案</a><span class="text-slate-400 text-xs">2025-08-18 · 设计指南</span></li>
+                    <li class="flex justify-between items-center"><a href="#" class="hover:text-primary font-medium">数据中心高速光模块电源滤波电容选型与布局建议</a><span class="text-slate-400 text-xs">2025-06-10 · 技术文章</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 页脚（由 components/footer.js 注入） -->
+        <footer id="ymin-footer"></footer>
+    </main>
+
+    <script>
+        // 应用数据结构：一级目录 → 二级目录（子模块）→ 三级（所属系列）→ 推荐料号
+        const appData = {
+            cpu: {
+                name: 'CPU/GPU核心供电',
+                description: 'CPU/GPU核心供电是AI服务器最关键的电源模块，需为数百瓦甚至上千瓦的处理器提供稳定电压。VRM（电压调节模块）需应对极速负载瞬态变化，要求电容具备极低ESR、高纹波电流能力及小尺寸。永铭VHT/VHU系列固液混合电容和NPX系列超低ESR电容可满足GPU/AI加速卡核心供电需求。',
+                subApps: [
+                    { name: 'GPU加速卡VRM', series: ['VHT/VHU', 'NPX'], icon: 'memory' },
+                    { name: 'CPU核心供电', series: ['VHT/VHU', 'VPG'], icon: 'developer_board' },
+                    { name: 'POL转换器', series: ['NPX', 'VHT'], icon: 'transform' },
+                    { name: '大电流输入滤波', series: ['VPG', 'CW3H'], icon: 'power' }
+                ],
+                products: [
+                    { series: 'VHT/VHU', pn: 'VHTC0771H470MV', specs: '47µF, 50V, ESR ≤8mΩ, 125℃', tag: 'GPU核心输出滤波' },
+                    { series: 'NPX', pn: 'NPXC0700J561MJTM', specs: '560µF, 6.3V, ESR 8mΩ', tag: 'GPU/FPGA旁路' },
+                    { series: 'VPG', pn: 'VPGJ1951H122MVTM', specs: '1200µF, 50V, 高纹波', tag: '12V输入滤波' },
+                    { series: 'VHT', pn: 'VHTD1201H101MVTM', specs: '100µF, 50V, 125℃', tag: 'CPU核心POL输出' }
+                ]
+            },
+            mem: {
+                name: '内存/存储',
+                description: 'DDR5内存、NVMe SSD等存储设备对电源质量要求极高，需在数据读写瞬间提供稳定供电，并抑制高频噪声。永铭NPX和VPT系列提供低ESR、贴片型电容，适配紧凑的存储模组空间。',
+                subApps: [
+                    { name: 'DDR5内存供电', series: ['VPT', 'NPX'], icon: 'database' },
+                    { name: 'NVMe SSD电源', series: ['VPL', 'VPT'], icon: 'storage' },
+                    { name: 'HBM内存供电', series: ['NPX', 'VHT'], icon: 'memory_alt' }
+                ],
+                products: [
+                    { series: 'VPT', pn: 'VPTC0581C151MVTM', specs: '150µF, 16V, 125℃, 贴片', tag: 'DDR5 VTT供电' },
+                    { series: 'VPL', pn: 'VPLB0771H180MVTM', specs: '18µF, 50V, 5000h长寿命', tag: 'SSD电源滤波' },
+                    { series: 'NPX', pn: 'NPXC0801H560MJTM', specs: '56µF, 50V, 低ESR', tag: 'HBM供电旁路' }
+                ]
+            },
+            net: {
+                name: '网络接口',
+                description: '400G/800G高速光模块和以太网交换芯片对电源纹波极为敏感，需在紧凑空间内实现高效滤波。永铭NPX和VHT系列以超低ESR特性满足高速通信信号完整性要求。',
+                subApps: [
+                    { name: '400G/800G光模块', series: ['NPX', 'VKM'], icon: 'network_intelligence' },
+                    { name: '以太网交换芯片', series: ['VHT', 'NPX'], icon: 'router' },
+                    { name: 'PCIe/CXL接口', series: ['NPX', 'VKM'], icon: 'cable' }
+                ],
+                products: [
+                    { series: 'NPX', pn: 'NPXC0801H560MJTM', specs: '56µF, 50V, 低ESR', tag: '光模块滤波' },
+                    { series: 'VHT', pn: 'VHTC0771H470MV', specs: '47µF, 50V, 125℃', tag: '交换芯片供电' },
+                    { series: 'VKM', pn: 'VKMC1001H680MVTM', specs: '50V, 68µF, 105℃, SMD', tag: 'PCIe接口滤波' }
+                ]
+            },
+            aux: {
+                name: '辅助电源',
+                description: '辅助电源模块包括待机电源、风扇控制、管理控制器等，要求低成本与高可靠性兼顾。永铭VP1和VPX系列提供经济型解决方案，同时保持车规/工业级质量标准。',
+                subApps: [
+                    { name: '待机电源', series: ['VPX', 'VP1'], icon: 'electrical_services' },
+                    { name: '风扇/散热控制', series: ['VP1', 'VPG'], icon: 'fan' },
+                    { name: 'BMC管理电源', series: ['VPT', 'VPX'], icon: 'settings' }
+                ],
+                products: [
+                    { series: 'VPX', pn: 'VPXE1051H221MVTM', specs: '220µF, 50V, 耐大纹波', tag: '待机电源滤波' },
+                    { series: 'VP1', pn: 'VP1D1701E681MVTM', specs: '680µF, 25V, -55~105℃', tag: '风扇控制' },
+                    { series: 'VPT', pn: 'VPTL1502A101MVTM', specs: '100µF, 100V, 125℃', tag: 'BMC电源' }
+                ]
+            },
+            pdn: {
+                name: 'PDN与总线架构',
+                description: 'AI服务器电源分配网络(PDN)是整体供电架构的核心，涉及400V/800V直流母线、48V中间总线及多级POL转换。永铭CW3H高压牛角电容为DC-Link提供大容量储能，薄膜电容为SiC/IGBT模块提供高频吸收。',
+                subApps: [
+                    { name: '400V/800V DC-Link', series: ['CW3H', '薄膜电容'], icon: 'electric_bolt' },
+                    { name: '48V中间总线', series: ['VPG', 'VHT'], icon: 'power_input' },
+                    { name: 'SiC/IGBT吸收', series: ['薄膜电容', 'CW3H'], icon: 'precision_manufacturing' }
+                ],
+                products: [
+                    { series: 'CW3H', pn: 'CW3H 800V平台牛角型', specs: '400-500V, 大容量, 低ESR', tag: '800V DC-Link' },
+                    { series: '薄膜电容', pn: '薄膜电容-高耐压定制', specs: '耐高压, 低ESL, 高温高湿', tag: 'SiC/IGBT吸收' },
+                    { series: 'VPG', pn: 'VPGJ1951H122MVTM', specs: '1200µF, 50V, 高纹波', tag: '48V总线滤波' }
+                ]
+            }
+        };
+
+        const tabs = document.querySelectorAll('#tabContainer button[data-tab]');
+        const subtabContainer = document.getElementById('subtabContainer');
+        const contentDiv = document.getElementById('tabContent');
+        let currentTab = 'cpu';
+        let currentSubtab = 0;
+
+        function renderSubtabs(tabId) {
+            const data = appData[tabId];
+            if (!data) return;
+            let html = '';
+            data.subApps.forEach((sub, idx) => {
+                const activeClass = idx === 0 ? 'subtab-active' : 'text-slate-600 hover:bg-slate-100';
+                html += `<button class="w-full text-left px-4 py-3 text-sm font-medium transition-colors ${activeClass} flex items-center gap-2" data-subtab="${idx}"><span class="material-symbols-outlined text-sm">${sub.icon || 'label'}</span>${sub.name}<span class="material-symbols-outlined text-xs ml-auto">chevron_right</span></button>`;
+            });
+            subtabContainer.innerHTML = html;
+            subtabContainer.querySelectorAll('button[data-subtab]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.dataset.subtab);
+                    renderContent(tabId, idx);
+                    subtabContainer.querySelectorAll('button').forEach(b => { b.classList.remove('subtab-active', 'bg-primary', 'text-white'); b.classList.add('text-slate-600'); });
+                    btn.classList.add('subtab-active');
+                    btn.classList.remove('text-slate-600');
+                });
+            });
+        }
+
+        function renderContent(tabId, subtabIdx = 0) {
+            const data = appData[tabId];
+            if (!data) return;
+            const sub = data.subApps[subtabIdx];
+            const seriesProducts = data.products.filter(p => {
+                return sub.series.some(s => p.series.includes(s.replace('(引线型)', '').replace('(贴片型)', '')));
+            });
+            const displayProducts = seriesProducts.length > 0 ? seriesProducts : data.products.slice(0, 2);
+
+            contentDiv.innerHTML = `
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">${sub.icon || 'label'}</span>${sub.name}</h3>
+                    <p class="text-xs text-slate-500 mt-1">所属系统模块：${data.name}</p>
+                </div>
+                <div class="bg-primary/5 border border-primary/20 p-4 mb-6">
+                    <p class="text-sm text-slate-700">${data.description}</p>
+                </div>
+                <!-- 所属系列标签 -->
+                <div class="mb-4">
+                    <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">所属产品系列</p>
+                    <div class="flex flex-wrap gap-2">
+                        ${sub.series.map(s => `<span class="px-3 py-1 bg-primary/10 text-primary text-sm font-bold">${s}</span>`).join('')}
+                    </div>
+                </div>
+                <!-- 推荐料号 -->
+                <h4 class="font-bold text-primary mb-3 flex items-center gap-2"><span class="material-symbols-outlined">inventory</span>推荐产品料号</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border-collapse">
+                        <thead class="bg-slate-100">
+                            <tr><th class="border border-slate-300 px-4 py-2 text-left">系列</th><th class="border border-slate-300 px-4 py-2 text-left">产品料号</th><th class="border border-slate-300 px-4 py-2">关键参数</th><th class="border border-slate-300 px-4 py-2">应用节点</th></tr>
+                        </thead>
+                        <tbody>
+                            ${displayProducts.map(p => `<tr class="hover:bg-slate-50"><td class="border px-4 py-2 font-bold text-primary">${p.series}</td><td class="border px-4 py-2"><a href="product-detail.html?pn=${encodeURIComponent(p.pn)}" class="text-primary hover:underline text-xs">${p.pn}</a></td><td class="border px-4 py-2 text-center text-xs">${p.specs}</td><td class="border px-4 py-2 text-center"><span class="bg-primary/10 text-primary text-[10px] px-2 py-1">${p.tag}</span></td></tr>`).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-4">* 如需完整规格参数表，请点击料号进入产品详情页查看。</p>
+            `;
+        }
+
+        function switchTab(tabId) {
+            tabs.forEach(t => { if (t.dataset.tab === tabId) { t.classList.add('tab-active'); t.classList.remove('text-slate-500'); } else { t.classList.remove('tab-active'); t.classList.add('text-slate-500'); } });
+            currentTab = tabId;
+            currentSubtab = 0;
+            renderSubtabs(tabId);
+            renderContent(tabId, 0);
+        }
+
+        tabs.forEach(t => t.addEventListener('click', (e) => switchTab(e.currentTarget.dataset.tab)));
+
+        // 默认渲染CPU/GPU核心供电
+        switchTab('cpu');
+    </script>
+    <!-- 共享组件 -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('applications');
+            YMIN.footer.inject();
+        });
+    </script>
+</body>
+</html>

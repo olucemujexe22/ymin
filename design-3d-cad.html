@@ -114,11 +114,10 @@ function openPreview(pn,pkg,dia,len,stepUrl){
  var topMat=new THREE.MeshPhongMaterial({color:0xc0c0c0,specular:0x666666,shininess:120});
  var topCap=new THREE.Mesh(topGeo,topMat);topCap.position.y=h2;group.add(topCap);
  if(isSMD){
-  // 贴片型：底座 + 焊盘
+  // 贴片型：底座朝下 + 侧面焊盘
   var baseGeo=new THREE.CylinderGeometry(r*0.88,r*0.88,0.5,48);
   var baseMat=new THREE.MeshPhongMaterial({color:0x334155});
   var base=new THREE.Mesh(baseGeo,baseMat);base.position.y=-h2;group.add(base);
-  // 侧面焊盘
   [-1,1].forEach(function(side){
    var padGeo=new THREE.BoxGeometry(r*0.3,0.3,r*0.5);
    var padMat=new THREE.MeshPhongMaterial({color:0xc0c0c0,shininess:100});
@@ -126,23 +125,22 @@ function openPreview(pn,pkg,dia,len,stepUrl){
    pad.position.set(side*r*1.05,-h2+0.2,0);group.add(pad);
   });
  }else{
-  // 引线型：底部朝下引脚（PCB安装方向）
+  // 引线型：引脚朝上
   var leadLen=len*0.3;
   [-1,1].forEach(function(side){
    var legGeo=new THREE.CylinderGeometry(0.25,0.25,leadLen,8);
    var legMat=new THREE.MeshPhongMaterial({color:0xc0c0c0,shininess:100});
    var leg=new THREE.Mesh(legGeo,legMat);
-   leg.position.set(side*r*0.35,-h2-leadLen/2,0);group.add(leg);
+   leg.position.set(side*r*0.35,h2+leadLen/2,0);group.add(leg);
   });
-  // 牛角型：底部加粗端子 + 定位柱
+  // 牛角型：加粗端子朝上 + 底座
   if(pkg.indexOf('牛角')>=0){
    [-1,1].forEach(function(side){
     var pinGeo=new THREE.CylinderGeometry(0.5,0.5,leadLen,8);
     var pinMat=new THREE.MeshPhongMaterial({color:0xd0d0d0,shininess:100});
     var pin=new THREE.Mesh(pinGeo,pinMat);
-    pin.position.set(side*r*0.25,-h2-leadLen/2,0);group.add(pin);
+    pin.position.set(side*r*0.25,h2+leadLen/2,0);group.add(pin);
    });
-   // 牛角型底座
    var basePlateGeo=new THREE.CylinderGeometry(r*0.9,r*0.9,0.4,48);
    var basePlateMat=new THREE.MeshPhongMaterial({color:0x2d3748});
    var basePlate=new THREE.Mesh(basePlateGeo,basePlateMat);
@@ -153,10 +151,10 @@ function openPreview(pn,pkg,dia,len,stepUrl){
  var ringGeo=new THREE.TorusGeometry(r*0.95,0.15,8,48);
  var ringMat=new THREE.MeshPhongMaterial({color:0xe8e8e8,shininess:50});
  var ring=new THREE.Mesh(ringGeo,ringMat);ring.position.y=h2-0.5;ring.rotation.x=Math.PI/2;group.add(ring);
- var maxDim=Math.max(dia,len);var sc=20/maxDim;
+ var maxDim=Math.max(dia,len);var sc=6/maxDim;
  group.scale.set(sc,sc,sc);
  pm=group;ps.add(pm);
- pc.position.set(15,10,15);pctrl.target.set(0,0,0);pctrl.update();
+ pc.position.set(12,8,18);pctrl.target.set(0,0.5,0);pctrl.update();
  l.classList.add('hidden');animateP();
 }
 function animateP(){requestAnimationFrame(animateP);if(pctrl)pctrl.update();if(pr&&ps&&pc)pr.render(ps,pc);}
