@@ -1,214 +1,203 @@
-// 百度统计 API 对接模块
+// 百度统计 API 对接模块（授权码模式）
 const axios = require('axios');
 const { query } = require('./db');
+const fs = require('fs');
 
 const API_KEY = process.env.BAIDU_API_KEY;
 const SECRET_KEY = process.env.BAIDU_SECRET_KEY;
 const SITE_ID = process.env.BAIDU_SITE_ID;
+let ACCESS_TOKEN = process.env.BAIDU_ACCESS_TOKEN;
+let REFRESH_TOKEN = process.env.BAIDU_REFRESH_TOKEN;
 
-// 获取 access_token
-async function getAccessToken() {
-  const url = 'https://api.baidu.com/oauth/2.0/token';
-  const params = {
-    grant_type: 'client_credentials',
-    client_id: API_KEY,
-    client_secret: SECRET_KEY
-  };
-  const res = await axios.get(url, { params });
-  if (res.data.access_token) {
-    return res.data.access_token;
-  }
-  throw new Error('百度统计鉴权失败: ' + JSON.stringify(res.data));
-}
-
-// 通用请求
-async function callApi(method, params) {
-  const token = await getAccessToken();
-  const url = `https://api.baidu.com/json/tongji/v1/ReportService/${method}`;
-  const body = {
-    header: {
-      username: API_KEY,
-      password: token,
-      token: token,
-      account_type: 1
+// 刷新 access_token
+async function refreshAccessToken() {
+  const res = await axios.get('http://openapi.baidu.com/oauth/2.0/token', {
+    params: {
+      grant_type: 'refresh_token',
+      refresh_token: REFRESH_TOKEN,
+      client_id: API_KEY,
+      client_secret: SECRET_KEY
     },
-    body: params
-  };
-  const res = await axios.post(url, body, { timeout: 30000 });
-  const data = res.data;
-  if (data.header && data.header.failures && data.header.failures.length > 0) {
-    throw new Error('百度统计API失败: ' + JSON.stringify(data.header.failures));
+    timeout: 10000
+  });
+  if (res.data.access_token) {
+    ACCESS_TOKEN = res.data.access_token;
+    REFRESH_TOKEN = res.data.refresh_token;
+    const envPath = __dirname + '/.env';
+    let env = fs.readFileSync(envPath, 'utf8');
+    env = env.replace(/BAIDU_ACCESS_TOKEN=.*/, 'BAIDU_ACCESS_TOKEN=' + ACCESS_TOKEN);
+    env = env.replace(/BAIDU_REFRESH_TOKEN=.*/, 'BAIDU_REFRESH_TOKEN=' + REFRESH_TOKEN);
+    fs.writeFileSync(envPath, env);
+    return ACCESS_TOKEN;
   }
-  return data.body;
+  throw new Error('刷新token失败');
 }
 
-// 拉取指定日期各页面 PV/UV/停留时长
-async function fetchPageData(dateStr) {
-  try {
-    const result = await callApi('getData', {
-      site_id: SITE_ID,
-      method: 'overview/getTimeTrendRpt',
-      start_date: dateStr,
-      end_date: dateStr,
-      metrics: 'pv_count,visitor_count,avg_visit_time,bounce_ratio',
-      source: 'all',
-      area: 'all'
+// 调用 API
+async function callApi(method, params) {
+  const doCall = async (t) => {
+    return axios.post('https://openapi.baidu.com/rest/2.0/tongji/report/getData', null, {
+      params: { access_token: t, site_id: SITE_ID, method, ...params },
+      timeout: 30000
     });
-
-    // 提取总计
-    if (result && result.data && result.data[0]) {
-      const item = result.data[0];
-      return {
-        date: dateStr,
-        total_pv: parseInt(item.result.pagesum[0]) || 0,
-        total_uv: parseInt(item.result.pagevisitor[0]) || 0,
-        avg_stay: parseInt(item.result.pagetimeavg[0]) || 0,
-        bounce_rate: parseFloat(item.result.bounceratio[0]) || 0
-      };
+  };
+  try {
+    const res = await doCall(ACCESS_TOKEN);
+    if (res.data.error_code === 110 || res.data.error_code === 111) {
+      ACCESS_TOKEN = await refreshAccessToken();
+      const retry = await doCall(ACCESS_TOKEN);
+      return retry.data;
     }
-    return null;
+    return res.data;
   } catch (e) {
-    console.error(`拉取页面数据失败 (${dateStr}):`, e.message);
-    return null;
+    throw e;
   }
 }
 
-// 拉取各页面明细 PV/UV
+// 拉取落地页数据
 async function fetchPageDetail(dateStr) {
   try {
-    const result = await callApi('getData', {
-      site_id: SITE_ID,
-      method: 'overview/getCommonTrackRpt',
-      start_date: dateStr,
-      end_date: dateStr,
+    const result = await callApi('overview/getCommonTrackRpt', {
+      start_date: dateStr, end_date: dateStr,
       metrics: 'pv_count,visitor_count,avg_visit_time,bounce_ratio',
-      order: 'pv_count,desc',
-      start_index: 0,
-      max_results: 5000
+      start_index: 0, max_results: 5000
     });
-
     const rows = [];
-    if (result && result.data && result.data[0]) {
-      const items = result.data[0].result.items || [];
-      for (const item of items) {
-        rows.push({
-          date: dateStr,
-          page_url: item[0] || '',
-          pv: parseInt(item[1]) || 0,
-          uv: parseInt(item[2]) || 0,
-          avg_stay: parseInt(item[3]) || 0,
-          bounce_rate: parseFloat(item[4]) || 0
-        });
+    if (result && result.result) {
+      // landingPage items
+      const lp = result.result.landingPage;
+      if (lp && lp.items) {
+        for (const item of lp.items) {
+          rows.push({ date: dateStr, page_url: item[0] || '', pv: parseInt(item[1]) || 0 });
+        }
+      }
+      // 补充总 UV（来自 visitType）
+      const vt = result.result.visitType;
+      if (vt) {
+        const totalUv = (vt.newVisitor?.visitor_count || 0) + (vt.oldVisitor?.visitor_count || 0);
+        if (totalUv > 0) {
+          rows.forEach(r => r.total_uv = totalUv);
+        }
       }
     }
     return rows;
-  } catch (e) {
-    console.error(`拉取页面明细失败 (${dateStr}):`, e.message);
-    return [];
-  }
+  } catch (e) { console.error('页面明细失败:', e.message); return []; }
 }
 
-// 拉取搜索词数据
+// 拉取搜索词
 async function fetchSearchTerms(dateStr) {
   try {
-    const result = await callApi('getData', {
-      site_id: SITE_ID,
-      method: 'source/searchword/track',
-      start_date: dateStr,
-      end_date: dateStr,
-      metrics: 'pv_count',
-      order: 'pv_count,desc',
-      start_index: 0,
-      max_results: 500
+    const result = await callApi('source/searchword/track', {
+      start_date: dateStr, end_date: dateStr,
+      metrics: 'pv_count', order: 'pv_count,desc',
+      start_index: 0, max_results: 500
     });
-
     const rows = [];
-    if (result && result.data && result.data[0]) {
-      const items = result.data[0].result.items || [];
+    // 格式: result.word.items 或 result.items
+    const data = result && result.result;
+    if (data) {
+      const items = (data.word && data.word.items) || data.items || [];
       for (const item of items) {
-        rows.push({
-          date: dateStr,
-          keyword: item[0] || '',
-          pv: parseInt(item[1]) || 0,
-          landing_url: item[2] || null,
-          source: 'baidu'
-        });
+        if (Array.isArray(item) && item.length >= 2) {
+          rows.push({ date: dateStr, keyword: String(item[0] || '').trim(), pv: parseInt(item[1]) || 0 });
+        }
       }
     }
     return rows;
-  } catch (e) {
-    console.error(`拉取搜索词失败 (${dateStr}):`, e.message);
-    return [];
-  }
+  } catch (e) { console.error('搜索词失败:', e.message); return []; }
 }
 
-// 拉取昨日数据并入库
+// 拉取来源数据
+async function fetchSources(dateStr) {
+  try {
+    const result = await callApi('overview/getCommonTrackRpt', {
+      start_date: dateStr, end_date: dateStr,
+      metrics: 'pv_count', start_index: 0, max_results: 50
+    });
+    const rows = [];
+    const data = result && result.result;
+    if (data && data.sourceSite && data.sourceSite.items) {
+      for (const item of data.sourceSite.items) {
+        rows.push({ date: dateStr, source: item[0] || '', pv: parseInt(item[1]) || 0 });
+      }
+    }
+    return rows;
+  } catch (e) { console.error('来源失败:', e.message); return []; }
+}
+
+// 拉取数据并入库
 async function fetchAndStore() {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   const dateStr = yesterday.toISOString().split('T')[0];
 
-  console.log(`[百度统计] 开始拉取 ${dateStr} 数据...`);
+  console.log(`[百度统计] 拉取 ${dateStr} ...`);
 
-  // 页面明细
+  // 落地页
   const pages = await fetchPageDetail(dateStr);
-  if (pages.length > 0) {
-    for (const p of pages) {
-      await query(
-        `INSERT INTO traffic_daily (date, page_url, pv, uv, avg_stay, bounce_rate)
-         VALUES (?, ?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE pv=VALUES(pv), uv=VALUES(uv), avg_stay=VALUES(avg_stay), bounce_rate=VALUES(bounce_rate)`,
-        [p.date, p.page_url, p.pv, p.uv, p.avg_stay, p.bounce_rate]
-      );
-    }
-    console.log(`[百度统计] 页面明细入库: ${pages.length} 条`);
+  let totalUv = 0;
+  for (const p of pages) {
+    await query(
+      `INSERT INTO traffic_daily (date, page_url, pv, uv)
+       VALUES (?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE pv=VALUES(pv), uv=VALUES(uv)`,
+      [p.date, p.page_url, p.pv, 0]
+    );
+    if (p.total_uv) totalUv = p.total_uv;
   }
+  // 补总 UV 到首页
+  if (totalUv > 0) {
+    await query(
+      `UPDATE traffic_daily SET uv = ? WHERE date = ? AND page_url IN ('https://www.ymin.com','https://ymin.com')`,
+      [totalUv, dateStr]
+    );
+  }
+  console.log(`[百度统计] 落地页: ${pages.length} 条, UV: ${totalUv}`);
 
   // 搜索词
   const terms = await fetchSearchTerms(dateStr);
-  if (terms.length > 0) {
-    for (const t of terms) {
-      await query(
-        `INSERT INTO traffic_search_terms (date, keyword, pv, landing_url, source)
-         VALUES (?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE pv=VALUES(pv)`,
-        [t.date, t.keyword, t.pv, t.landing_url, t.source]
-      );
-    }
-    console.log(`[百度统计] 搜索词入库: ${terms.length} 条`);
-  }
-
-  return { pages: pages.length, terms: terms.length, date: dateStr };
-}
-
-// 自动给页面打类型标签（基于URL规则）
-async function tagPageTypes() {
-  const updates = [
-    { type: '产品页', pattern: '/index/capacity_detail' },
-    { type: '应用领域页', pattern: '/index/subApply' },
-    { type: '应用中心', pattern: '/index/apply' },
-    { type: 'FAQ', pattern: '/index/faq' },
-    { type: '设计工具', pattern: '/index/shouming' },
-    { type: '设计工具', pattern: '/index/spice' },
-    { type: '设计工具', pattern: '/index/cad3d' },
-    { type: '文章', pattern: '/index/article' },
-  ];
-  for (const u of updates) {
+  for (const t of terms) {
     await query(
-      `UPDATE traffic_daily SET page_type = ? WHERE page_url LIKE ? AND page_type IS NULL`,
-      [u.type, `%${u.pattern}%`]
+      `INSERT INTO traffic_search_terms (date, keyword, pv, source)
+       VALUES (?, ?, ?, 'baidu')
+       ON DUPLICATE KEY UPDATE pv=VALUES(pv)`,
+      [t.date, t.keyword, t.pv]
     );
   }
+  console.log(`[百度统计] 搜索词: ${terms.length} 条`);
+
+  return { pages: pages.length, terms: terms.length, uv: totalUv, date: dateStr };
 }
 
-// 关联产品线（URL参数 part_number → tp_good.liaohao → column_id → tp_column）
+// 页面类型打标
+async function tagPageTypes() {
+  const updates = [
+    ['产品页', '/index/capacity_detail'],
+    ['文章', '/index/article'],
+    ['设计工具', '/index/shouming'],
+    ['设计工具', '/index/spice'],
+    ['设计工具', '/index/cad3d'],
+    ['应用领域页', '/index/subApply'],
+    ['应用中心', '/index/apply'],
+    ['关于', '/index/about'],
+    ['关于', '/index/aboutContact'],
+    ['下载', '/index/xgwj'],
+  ];
+  for (const [type, pattern] of updates) {
+    await query(
+      'UPDATE traffic_daily SET page_type = ? WHERE page_url LIKE ? AND page_type IS NULL',
+      [type, `%${pattern}%`]
+    );
+  }
+  await query(
+    "UPDATE traffic_daily SET page_type = '首页' WHERE page_url IN ('https://www.ymin.com','https://ymin.com','https://www.ymin.com/index','https://ymin.com/index') AND page_type IS NULL"
+  );
+}
+
 async function tagProductLines() {
-  await query(`
-    UPDATE traffic_daily d
-    JOIN v_product_line p ON d.page_url LIKE CONCAT('%part_number=', p.part_number, '%')
-    SET d.page_type = CONCAT('产品页|', IFNULL(p.product_line, ''))
-    WHERE d.page_type = '产品页'
-  `);
+  await query(
+    "UPDATE traffic_daily d JOIN v_product_line p ON d.page_url LIKE CONCAT('%part_number=', p.part_number, '%') SET d.page_type = CONCAT('产品页|', IFNULL(p.product_line, '')) WHERE d.page_type = '产品页'"
+  );
 }
 
-module.exports = { fetchAndStore, fetchPageData, tagPageTypes, tagProductLines };
+module.exports = { fetchAndStore, tagPageTypes, tagProductLines };

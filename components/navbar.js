@@ -61,12 +61,12 @@ YMIN.navbar = (function () {
         html += '<div class="group h-full flex items-center relative">';
         html += navLink('index.html', '首页', activePage === 'home', true);
         html += dropdownMenu([
-            { href: '#', label: '动态轮播' },
-            { href: '#', label: '搜索功能' },
-            { href: '#', label: '产品矩阵' },
-            { href: '#', label: '设计工具' },
-            { href: '#', label: '应用指南' },
-            { href: '#', label: '新闻中心' }
+            { href: 'index.html', label: '动态轮播' },
+            { href: 'product-center.html', label: '搜索功能' },
+            { href: 'product-series.html', label: '产品矩阵' },
+            { href: 'design-tools.html', label: '设计工具' },
+            { href: 'application-center.html', label: '应用指南' },
+            { href: 'support-news.html', label: '新闻中心' }
         ]);
         html += '</div>';
 
@@ -89,6 +89,9 @@ YMIN.navbar = (function () {
             { href: 'application-ai-server.html', label: 'AI服务器与数据中心' },
             { href: 'application-instrument.html', label: '仪器仪表' },
             { href: 'application-motor-drive.html', label: '新型电机驱动' },
+            { href: 'application-power.html', label: '电源' },
+            { href: 'application-robotics.html', label: '机器人' },
+            { href: 'application-drone.html', label: '无人机' },
             { href: 'application-energy-storage.html', label: '储能' },
             { href: 'application-consumer.html', label: '消费类电子' }
         ], 'w-60');

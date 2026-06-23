@@ -30,28 +30,7 @@
 </head>
 <body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
     <!-- 顶部导航栏（与应用中心其他页面一致） -->
-    <header class="bg-white w-full border-b border-slate-200 z-50 flex-shrink-0">
-        <div class="flex justify-between items-center w-full px-8 h-16 max-w-[1920px] mx-auto">
-            <div class="flex items-center gap-10 h-full">
-                <div class="flex items-center gap-3">
-                    <img alt="YMIN" class="h-10 w-auto object-contain" src="logo.png">
-                    <span class="text-2xl font-bold tracking-tighter text-[#1B365D] font-['Space_Grotesk']">YMIN</span>
-                </div>
-                <nav class="hidden md:flex gap-8 h-full">
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">首页</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="product-center.html">产品中心</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-[#1B365D] border-b-2 border-[#1B365D] pb-1" href="application-center.html">应用中心 <span class="material-symbols-outlined text-xs">expand_more</span></a><div class="mega-menu absolute top-16 left-0 w-60 bg-white shadow-xl border-t-2 border-[#1B365D] py-4 px-2 z-50"><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-center.html">应用总览</a><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-automotive.html">汽车电子</a><a class="block px-4 py-2 text-xs hover:bg-[#edeef1]" href="application-ai-server.html">AI服务器</a></div></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">设计工具</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">服务支持</a></div>
-                    <div class="group h-full flex items-center relative"><a class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-[#1B365D]" href="#">关于永铭</a></div>
-                </nav>
-            </div>
-            <div class="flex items-center gap-6">
-                <div class="relative hidden lg:block"><input class="bg-[#f3f3f7] border-b-2 px-4 py-1.5 outline-none text-xs w-64" placeholder="搜索..."><span class="material-symbols-outlined absolute right-2 top-1.5">search</span></div>
-                <button class="bg-[#1B365D] text-white px-6 py-2 text-xs font-bold uppercase">登录</button>
-            </div>
-        </div>
-    </header>
+    <header id="ymin-navbar"></header>
 
     <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
         <div class="max-w-7xl mx-auto px-6 py-8">
@@ -79,7 +58,7 @@
                             <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">极低漏电流</span>
                             <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">6000h长寿命</span>
                         </div>
-                        <a href="application-automotive.html?tab=safety" class="inline-flex items-center gap-2 text-primary text-sm font-bold hover:underline">
+                        <a href="application-automotive.html?tab=t1" class="inline-flex items-center gap-2 text-primary text-sm font-bold hover:underline">
                             <span class="material-symbols-outlined text-base">arrow_back</span> 返回汽车电子安全部件
                         </a>
                     </div>
@@ -274,12 +253,12 @@
 
             <!-- 相关产品链接 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                <a href="application-automotive.html?tab=safety&sub=0" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
+                <a href="application-automotive.html?tab=t1&sub=0" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
                     <span class="material-symbols-outlined text-3xl text-primary">memory</span>
                     <div class="flex-1"><h4 class="font-bold text-sm">LK 引线型系列</h4><p class="text-xs text-slate-500">安全气囊ECU备用电源与点火驱动专用</p></div>
                     <span class="material-symbols-outlined text-slate-300 group-hover:text-primary">arrow_forward</span>
                 </a>
-                <a href="application-automotive.html?tab=safety&sub=0" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
+                <a href="application-automotive.html?tab=t1&sub=0" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
                     <span class="material-symbols-outlined text-3xl text-primary">token</span>
                     <div class="flex-1"><h4 class="font-bold text-sm">VKO 贴片型系列</h4><p class="text-xs text-slate-500">安全气囊ECU MCU滤波与通信回路专用</p></div>
                     <span class="material-symbols-outlined text-slate-300 group-hover:text-primary">arrow_forward</span>
@@ -307,15 +286,15 @@
         </div>
 
         <!-- 页脚 -->
-        <footer class="w-full bg-white border-t border-slate-200 py-16 px-6 mt-8">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">网站导航</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">首页</a></li><li><a href="#" class="hover:text-[#1B365D]">产品中心</a></li><li><a href="#" class="hover:text-[#1B365D]">应用中心</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">产品中心</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">液态铝电解电容器</a></li><li><a href="#" class="hover:text-[#1B365D]">高分子固态电容</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">关于我们</h4><ul class="space-y-3 text-xs text-slate-500"><li><a href="#" class="hover:text-[#1B365D]">公司介绍</a></li><li><a href="#" class="hover:text-[#1B365D]">加入我们</a></li></ul></div>
-                <div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6">联系支持</h4><div class="text-xs text-slate-700"><p>400 900 1922</p><p>上海市奉贤区南桥镇杨王经济园区光村路258号</p></div></div>
-            </div>
-            <div class="max-w-7xl mx-auto mt-12 pt-8 border-t text-center text-[10px] text-slate-400">© 2024 永铭电子有限公司. 版权所有.</div>
-        </footer>
+        <footer id="ymin-footer"></footer>
     </main>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            YMIN.navbar.inject('applications');
+            YMIN.footer.inject();
+        });
+    </script>
 </body>
 </html>

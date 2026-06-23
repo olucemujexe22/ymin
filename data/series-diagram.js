@@ -10,14 +10,10 @@ YMIN.seriesDiagram = (function(){
   var DB = [
     {
       name: '液态铝电解电容器',
+      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/液态铝电解_贴片型引线型.png','产品资料库/体系图和系列列表/web_体系图/液态铝电解_牛角型基板自立型.png','产品资料库/体系图和系列列表/web_体系图/液态铝电解_螺栓型.png'],
       nameEn: 'Liquid Aluminum Electrolytic Capacitor',
       icon: 'bolt',
       color: '#1B365D',
-      diagramImages: [
-        '产品资料库/体系图和系列列表/web_体系图/液态铝电解_贴片型引线型.png',
-        '产品资料库/体系图和系列列表/web_体系图/液态铝电解_牛角型基板自立型.png',
-        '产品资料库/体系图和系列列表/web_体系图/液态铝电解_螺栓型.png'
-      ],
       packages: [
         {
           name: '贴片型 (SMD)',
@@ -56,10 +52,10 @@ YMIN.seriesDiagram = (function(){
     },
     {
       name: '双电层超级电容',
+      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/超级电容_双电层与LIC.png'],
       nameEn: 'EDLC Supercapacitor',
       icon: 'battery_charging_full',
       color: '#2a4a7f',
-      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/超级电容_双电层与LIC.png'],
       packages: [
         {
           name: '双电层单体',
@@ -82,10 +78,10 @@ YMIN.seriesDiagram = (function(){
     },
     {
       name: '高分子固态铝电解电容器',
+      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/高分子固态铝电解.png'],
       nameEn: 'Polymer Solid Aluminum Electrolytic Capacitor',
       icon: 'layers',
       color: '#1a5632',
-      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/高分子固态铝电解.png'],
       packages: [
         {
           name: '贴片型 (SMD)',
@@ -108,10 +104,10 @@ YMIN.seriesDiagram = (function(){
     },
     {
       name: '混合型超级电容（锂离子电容）',
+      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/超级电容_双电层与LIC.png'],
       nameEn: 'Hybrid Supercapacitor (LIC)',
       icon: 'electric_bolt',
       color: '#5c3d1a',
-      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/超级电容_双电层与LIC.png'],
       packages: [
         {
           name: '混合型LIC单体/模组',
@@ -125,10 +121,10 @@ YMIN.seriesDiagram = (function(){
     },
     {
       name: '高分子混合动力铝电解电容器',
+      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/高分子混合动力铝电解.png'],
       nameEn: 'Polymer Hybrid Aluminum Electrolytic Capacitor',
       icon: 'water_drop',
       color: '#4a1a5c',
-      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/高分子混合动力铝电解.png'],
       packages: [
         {
           name: '贴片型 (SMD)',
@@ -153,10 +149,10 @@ YMIN.seriesDiagram = (function(){
     },
     {
       name: '叠层高分子固态铝电解电容器',
+      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/叠层高分子固态铝电解.png'],
       nameEn: 'Stacked Polymer Solid Aluminum Electrolytic Capacitor',
       icon: 'stacked_bar_chart',
       color: '#1a3a5c',
-      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/叠层高分子固态铝电解.png'],
       packages: [
         {
           name: '贴片型 (SMD)',
@@ -169,10 +165,10 @@ YMIN.seriesDiagram = (function(){
     },
     {
       name: '薄膜电容器',
+      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/薄膜电容器.png'],
       nameEn: 'Metallized Film Capacitor',
       icon: 'filter_alt',
       color: '#3a4a1a',
-      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/薄膜电容器.png'],
       packages: [
         {
           name: '插针式 (Box-type)',
@@ -185,10 +181,10 @@ YMIN.seriesDiagram = (function(){
     },
     {
       name: '导电高分子钽电解电容器',
+      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/导电高分子钽电解电容器.png'],
       nameEn: 'Conductive Polymer Tantalum Electrolytic Capacitor',
       icon: 'memory',
       color: '#5c1a1a',
-      diagramImages: ['产品资料库/体系图和系列列表/web_体系图/导电高分子钽电解电容器.png'],
       packages: [
         {
           name: '贴片型 (SMD)',

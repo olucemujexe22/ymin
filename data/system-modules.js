@@ -714,9 +714,60 @@ consumer: {
   }
 
   // ===== 规格级推荐数据（Style 2 — 详细料号表） =====
-  var SPECS = {
+  var SPECS = {power: {
+    smps: {
+        '开关电源-AC输入': [{series:'VPG',pn:'VPGJ1951H122MVTM',voltage:'50V',cap:'1200µF',size:'18×19.5',esr:'0.03Ω',ripple:'4650mA',life:'2000H',note:'引线型 高纹波'},
+            {series:'CW3H',pn:'CW3H 500V/470µF',voltage:'500V',cap:'470µF',size:'35×50',esr:'0.15Ω',ripple:'3800mA',life:'3000H',note:'牛角型 DC-Link'}
+        ],
+        '开关电源-DC输出': [{series:'NPX',pn:'NPXC0700J561MJTM',voltage:'6.3V',cap:'560µF',size:'6.3×7',esr:'8mΩ',ripple:'4800mA',life:'2000H',note:'固态 超低ESR'},
+            {series:'VKM',pn:'VKMC1001H680MVTM',voltage:'50V',cap:'68µF',size:'10×10',esr:'0.12Ω',ripple:'420mA',life:'9000H',note:'SMD 长寿命'}
+        ]
+    },
+    ups: {
+        'UPS-逆变模块': [{series:'CW3H',pn:'CW3H 500V/1000µF',voltage:'500V',cap:'1000µF',size:'35×63',esr:'0.10Ω',ripple:'5200mA',life:'3000H',note:'牛角型 DC-Link'},
+            {series:'VPG',pn:'VPGJ1951H122MVTM',voltage:'50V',cap:'1200µF',size:'18×19.5',esr:'0.03Ω',ripple:'4650mA',life:'2000H',note:'引线型 高纹波'}
+        ]
+    },
+    pd: {
+        'PD快充-初级侧': [{series:'VPG',pn:'VPGJ1951H122MVTM',voltage:'50V',cap:'1200µF',size:'18×19.5',esr:'0.03Ω',ripple:'4650mA',life:'2000H',note:'引线型 高纹波'}],
+        'PD快充-次级侧': [{series:'NPX',pn:'NPXC0700J561MJTM',voltage:'6.3V',cap:'560µF',size:'6.3×7',esr:'8mΩ',ripple:'4800mA',life:'2000H',note:'固态 超低ESR'}]
+    }
+},
+robotics: {
+    servo: {
+        '伺服驱动器': [{series:'VHT',pn:'VHTC0771H470MV',voltage:'50V',cap:'47µF',size:'6.3×7.7',esr:'40mΩ',ripple:'1100mA',life:'125℃4000H',note:'固液混合 AEC-Q200'},
+            {series:'NPX',pn:'NPXC0700J561MJTM',voltage:'6.3V',cap:'560µF',size:'6.3×7',esr:'8mΩ',ripple:'4800mA',life:'2000H',note:'固态 超低ESR'}
+        ],
+        '编码器接口': [{series:'VKM',pn:'VKMC1001H680MVTM',voltage:'50V',cap:'68µF',size:'10×10',esr:'0.12Ω',ripple:'420mA',life:'9000H',note:'SMD 长寿命 AEC-Q200'}]
+    },
+    joint: {
+        '关节电机驱动': [{series:'VHT',pn:'VHTC0771H470MV',voltage:'50V',cap:'47µF',size:'6.3×7.7',esr:'40mΩ',ripple:'1100mA',life:'125℃4000H',note:'固液混合 小型化'}]
+    },
+    control: {
+        '机器人控制器': [{series:'NPX',pn:'NPXC0700J561MJTM',voltage:'6.3V',cap:'560µF',size:'6.3×7',esr:'8mΩ',ripple:'4800mA',life:'2000H',note:'固态 超低ESR'}],
+        '传感器模块': [{series:'VKM',pn:'VKMC1001H680MVTM',voltage:'50V',cap:'68µF',size:'10×10',esr:'0.12Ω',ripple:'420mA',life:'9000H',note:'SMD 长寿命'}]
+    }
+},
+drone: {
+    fc: {
+        '飞控主板': [{series:'NPX',pn:'NPXC0700J561MJTM',voltage:'6.3V',cap:'560µF',size:'6.3×7',esr:'8mΩ',ripple:'4800mA',life:'2000H',note:'固态 小尺寸'},
+            {series:'VKM',pn:'VKMC1001H680MVTM',voltage:'50V',cap:'68µF',size:'10×10',esr:'0.12Ω',ripple:'420mA',life:'9000H',note:'SMD 长寿命'}
+        ],
+        'IMU传感器': [{series:'VKM',pn:'VKMC1001H680MVTM',voltage:'50V',cap:'68µF',size:'10×10',esr:'0.12Ω',ripple:'420mA',life:'9000H',note:'SMD 低漏电流'}]
+    },
+    esc: {
+        '无刷电调': [{series:'VHT',pn:'VHTC0771H470MV',voltage:'50V',cap:'47µF',size:'6.3×7.7',esr:'40mΩ',ripple:'1100mA',life:'125℃4000H',note:'固液混合 高纹波'},
+            {series:'NPX',pn:'NPXC0700J561MJTM',voltage:'6.3V',cap:'560µF',size:'6.3×7',esr:'8mΩ',ripple:'4800mA',life:'2000H',note:'固态 超低ESR'}
+        ]
+    },
+    video: {
+        '图传模块': [{series:'NPX',pn:'NPXC0700J561MJTM',voltage:'6.3V',cap:'560µF',size:'6.3×7',esr:'8mΩ',ripple:'4800mA',life:'2000H',note:'固态 低ESR'}],
+        '通信模块': [{series:'VKM',pn:'VKMC1001H680MVTM',voltage:'50V',cap:'68µF',size:'10×10',esr:'0.12Ω',ripple:'420mA',life:'9000H',note:'SMD 长寿命'}]
+    }
+},
+
     automotive: {
-      '电机驱动': {
+      'mainDrive': {
         '电机控制器-MCU': [
           {series:'VHT',pn:'—',voltage:'35V',cap:'120µF',size:'6.3×7.7',esr:'35mΩ',ripple:'1400mA',life:'125℃ 4000H',note:'[固液]P05 · Nichicon ZC/ZK · Panasonic GYA/GYE'},
           {series:'VHT',pn:'—',voltage:'35V',cap:'150µF',size:'8×10.5',esr:'27mΩ',ripple:'1600mA',life:'125℃ 4000H',note:'[固液]P05 · Panasonic ZT/ZKU · Chemi-Con HXJ'},
@@ -731,7 +782,7 @@ consumer: {
           {series:'VHU',pn:'—',voltage:'35V',cap:'47µF',size:'6.3×5.8',esr:'60mΩ',ripple:'1000mA',life:'135℃ 4000H',note:'[固液]P12 · Nichicon GYC'},
         ],
       },
-      '安全部件': {
+      'safety': {
         '刹车制动-BS': [
           {series:'VHT',pn:'—',voltage:'35V',cap:'100µF',size:'6.3×7.7',esr:'35mΩ',ripple:'1400mA',life:'125℃ 4000H',note:'[固液]P08 · Nichicon ZC/ZK'},
           {series:'VHT',pn:'—',voltage:'35V',cap:'150µF',size:'8×8.5',esr:'35mΩ',ripple:'1400mA',life:'125℃ 4000H',note:'[固液]P08 · Panasonic GYA/GYE'},
@@ -761,7 +812,7 @@ consumer: {
           {series:'LKL(R)',pn:'—',voltage:'35V',cap:'1200µF',size:'12.5×20',esr:'0.57Ω',ripple:'2215mA',life:'135℃ 3000H',note:'[液态]P05引线 · Chemi-Con HGX'},
         ],
       },
-      '热管理部件': {
+      'thermal': {
         '电子水泵/油泵': [
           {series:'VHT',pn:'—',voltage:'25V',cap:'330µF',size:'10×10.5',esr:'20mΩ',ripple:'2800mA',life:'125℃ 4000H',note:'[固液]P10 · Nichicon GYA/GYE'},
           {series:'VHT',pn:'—',voltage:'25V',cap:'470µF',size:'10×10.5',esr:'20mΩ',ripple:'2800mA',life:'125℃ 4000H',note:'[固液]P10 · Nichicon GYF'},

@@ -141,7 +141,7 @@
         }
 
         var TAB_MAP = {'t0':'smartphone','t1':'led','t2':'pen','t3':'digital','t4':'security'};
-var appData = {'t0':{name:'PD快充',description:'',subApps:[{name:'快充输入端专用',series:[],icon:'battery_charging_full'},{name:'快充输出端专用',series:[],icon:'battery_charging_full'},],products:[]},'t1':{name:'智能照明',description:'',subApps:[{name:'智能照明',series:[],icon:'light'},],products:[]},'t2':{name:'电子笔',description:'',subApps:[{name:'电子笔',series:[],icon:'edit'},],products:[]},'t3':{name:'数码3C',description:'',subApps:[{name:'数码3C',series:[],icon:'devices'},],products:[]},'t4':{name:'安防',description:'',subApps:[{name:'安防',series:[],icon:'security'},],products:[]},};
+var appData = {'t0':{name:'PD快充',description:'',subApps:[{name:'PD快充-高压输入端',series:[],icon:'battery_charging_full'},{name:'PD快充-PWM供电',series:[],icon:'battery_charging_full'},],products:[]},'t1':{name:'智能照明',description:'',subApps:[{name:'智能照明',series:[],icon:'light'},],products:[]},'t2':{name:'电子笔',description:'',subApps:[{name:'电子笔',series:[],icon:'edit'},],products:[]},'t3':{name:'数码3C',description:'',subApps:[{name:'数码3C',series:[],icon:'devices'},],products:[]},'t4':{name:'安防',description:'',subApps:[{name:'安防',series:[],icon:'security'},],products:[]},};
 function renderContent(tabId) {
             var data = appData[tabId];
             if (!data) return;

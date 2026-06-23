@@ -244,7 +244,7 @@ function renderContent(tabKey) {
             html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
             html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
                         // 先查 SPECS（样式2用，样式1也从中提取系列名）
-            var specs = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getSpecs('instrument', TAB_MAP[currentTab]||currentTab, sub.name) : null;
+            var specs = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getSpecs('instrument', TAB_MAP[tabKey]||currentTab, sub.name) : null;
 
             // === 样式1: 系统模块详解与推荐系列（2列卡片，推荐系列每行一个） ===
             var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(TAB_MAP[tabKey]||tabKey, sub.name) : null;
