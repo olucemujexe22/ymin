@@ -236,6 +236,47 @@
         // 初始状态
         updateUI();
 
+        // ===== 处理 ?series= URL参数：跳转后筛选指定系列 =====
+        (function() {
+            var m = (location.search || '').match(/[?&]series=([^&]*)/);
+            if (m) {
+                var seriesName = decodeURIComponent(m[1]);
+                // 更新面包屑和标题
+                var bc = document.getElementById('breadcrumbNav');
+                var title = document.getElementById('resultTitle');
+                if (bc) bc.innerHTML = '<span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">' + seriesName + ' 系列</span>';
+                if (title) title.textContent = seriesName + ' 系列产品';
+                // 勾选对应类别复选框
+                var checked = false;
+                document.querySelectorAll('.cat-cb').forEach(function(cb) {
+                    // 根据系列名推断所属类别并勾选
+                    var liquidSmd = ['VMM','V3M','V3MC','V4M','VK7','VKO','VKL','VKM','VKG','VKL(R)','VKD'];
+                    var liquidRadial = ['LK','LKF','LKM','LKJ','LKZ','LKG','LKC','LKL','LKL(R)'];
+                    var liquidSnap = ['CW3','CW6','CW6H','CN6','CW3S','CW3H','CN3','SH15','SW3','SN3','SW6','SN6','IDC3','CKD','ES3M','EW3','ES3','EH3','EW6','ES6','EH6','EKD'];
+                    var solidSmd = ['VPX','NPX','VPC','VPW','VPH','VPT','VP1','VPL','VPG','VP4'];
+                    var solidRadial = ['NPC','NPM','NPL','NPH','NPT','NP1','NPG','PKD'];
+                    var hybridSmd = ['VHT','VHU','VHM','VHX','VHR','VGY'];
+                    var hybridRadial = ['VHE','NHX','NGY','NHT','HKD'];
+                    var edlc = ['SDN','SDB','SDL','SDH','SM','SDM','SLM','SDV','SDA','SDS'];
+                    var lic = ['SLA','SLR','SLX','SLD','SLA(H)'];
+                    var stacked = ['MPS','MPD19','MPD10','MPD15','MPX','MPD28','MPU41'];
+                    var film = ['MDP','MDR','MDP(X)','MDP(H)','MAP','MDR(X)','MDR(H)','MDA'];
+                    var tantalum = ['TPB19','TQB19','TQD15','TQD19','TQD28','TQD42','TQW19','TQW42'];
+
+                    var catName = cb.getAttribute('data-name');
+                    if (liquidSmd.concat(liquidRadial, liquidSnap).indexOf(seriesName) >= 0 && catName === '液态铝电解电容器') { cb.checked = true; checked = true; }
+                    if (solidSmd.concat(solidRadial).indexOf(seriesName) >= 0 && catName === '高分子固态铝电解电容器') { cb.checked = true; checked = true; }
+                    if (hybridSmd.concat(hybridRadial).indexOf(seriesName) >= 0 && catName === '高分子混合动力铝电解电容器') { cb.checked = true; checked = true; }
+                    if (edlc.indexOf(seriesName) >= 0 && catName === '双电层超级电容') { cb.checked = true; checked = true; }
+                    if (lic.indexOf(seriesName) >= 0 && catName === '混合型超级电容(锂离子电容)') { cb.checked = true; checked = true; }
+                    if (stacked.indexOf(seriesName) >= 0 && catName === '叠层高分子固态铝电解电容器') { cb.checked = true; checked = true; }
+                    if (film.indexOf(seriesName) >= 0 && catName === '薄膜电容器') { cb.checked = true; checked = true; }
+                    if (tantalum.indexOf(seriesName) >= 0 && catName === '导电高分子钽电解电容器') { cb.checked = true; checked = true; }
+                });
+                if (checked) updateUI();
+            }
+        })();
+
         // ===== 导航和页脚 =====
         document.addEventListener('DOMContentLoaded', function() {
             YMIN.navbar.inject('products');

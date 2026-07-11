@@ -24,7 +24,7 @@
         }
     </script>
     <style>
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24'; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
@@ -41,6 +41,253 @@
         .series-chip.has-pdf:hover { box-shadow: 0 4px 16px rgba(27,54,93,0.2); }
         .data-table-wrapper { overflow-x: auto; }
         .color-bar { width: 4px; height: 100%; position: absolute; left: 0; top: 0; }
+        .diagram-line {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
+            padding: 28px;
+            margin-bottom: 34px;
+        }
+        .diagram-line-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .diagram-line-mark {
+            width: 8px;
+            height: 36px;
+            flex: 0 0 auto;
+        }
+        .diagram-package {
+            margin-top: 24px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            overflow-x: auto;
+        }
+        .diagram-package-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            min-width: 900px;
+        }
+        .diagram-package-label {
+            border: 2px solid #334155;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #334155;
+            min-width: 148px;
+            padding: 5px 18px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .diagram-package-count {
+            font-size: 10px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+        .diagram-map {
+            position: relative;
+            width: var(--map-width);
+            min-width: var(--map-width);
+            height: var(--map-height);
+        }
+        .diagram-map-label {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #334155;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #334155;
+            font-size: 15px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .diagram-map-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .diagram-map .diagram-card-wrap {
+            position: absolute;
+            width: var(--card-width);
+            height: var(--card-height);
+            min-width: 0;
+            max-width: none;
+            z-index: 1;
+        }
+        .diagram-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            min-width: 900px;
+        }
+        .diagram-row {
+            display: flex;
+            align-items: stretch;
+        }
+        .diagram-card-wrap {
+            flex: 1 1 0;
+            min-width: 172px;
+            max-width: 230px;
+        }
+        .diagram-series-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 118px;
+            height: 100%;
+            background: #f8fafc;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            color: #0f172a;
+            overflow: hidden;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+        .diagram-series-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 28px rgba(15, 23, 42, 0.13);
+        }
+        .diagram-card-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 34px;
+            padding: 6px 12px;
+            background: #e5e7eb;
+            border-bottom: 2px solid #334155;
+        }
+        .diagram-card-no {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            flex: 0 0 auto;
+            border-radius: 999px;
+            background: #64748b;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+        }
+        .diagram-card-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: .02em;
+        }
+        .diagram-card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 7px;
+            padding: 14px 12px 16px;
+            text-align: center;
+        }
+        .diagram-card-meta {
+            font-size: 11px;
+            font-weight: 700;
+            color: #475569;
+            line-height: 1.45;
+        }
+        .diagram-card-desc {
+            font-size: 12px;
+            color: #334155;
+            line-height: 1.45;
+        }
+        .diagram-arrow {
+            position: relative;
+            flex: 0 0 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .diagram-arrow::before {
+            content: "";
+            display: block;
+            width: 100%;
+            border-top: 2px solid #64748b;
+        }
+        .diagram-arrow::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            width: 9px;
+            height: 9px;
+            border-top: 2px solid #64748b;
+            border-right: 2px solid #64748b;
+            transform: rotate(45deg);
+            background: transparent;
+        }
+        .diagram-reference {
+            margin-top: 18px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 14px;
+        }
+        .diagram-reference summary {
+            cursor: pointer;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            user-select: none;
+        }
+        .diagram-reference summary:hover {
+            color: #1B365D;
+        }
+        @media (max-width: 900px) {
+            .diagram-line { padding: 18px; }
+            .diagram-package { padding: 16px; }
+            .diagram-map {
+                min-width: var(--map-width);
+            }
+            .diagram-package-head,
+            .diagram-flow { min-width: 0; }
+            .diagram-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .diagram-card-wrap {
+                max-width: none;
+                min-width: 0;
+            }
+            .diagram-arrow {
+                width: 100%;
+                height: 34px;
+                flex: 0 0 34px;
+            }
+            .diagram-arrow::before {
+                width: 0;
+                height: 100%;
+                border-top: 0;
+                border-left: 2px solid #64748b;
+            }
+            .diagram-arrow::after {
+                right: auto;
+                bottom: 3px;
+                border-top: 0;
+                border-left: 0;
+                border-right: 2px solid #64748b;
+                border-bottom: 2px solid #64748b;
+                transform: rotate(45deg);
+            }
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
@@ -58,7 +305,7 @@
             <!-- 标题区 -->
             <div class="mb-8">
                 <h1 class="text-4xl font-bold text-primary mb-3">产品体系图</h1>
-                <p class="text-slate-600 max-w-3xl">覆盖8大产品线、50+产品系列。点击系列节点可直接下载对应PDF规格书。支持按产品线筛选系列列表，也可在系统图中直观浏览产品体系结构。</p>
+                <p class="text-slate-600 max-w-3xl">覆盖8大产品线、50+产品系列。点击系列卡片跳转产品中心查看详情。支持按产品线筛选，也可在系统图中按封装分组直观浏览产品体系结构。</p>
             </div>
 
             <!-- Tab 切换 -->
@@ -78,6 +325,12 @@
                     <div class="relative">
                         <select id="lineFilter" class="bg-white border border-slate-200 py-2 pl-3 pr-8 text-sm focus:border-primary outline-none no-radius appearance-none" onchange="filterTable()">
                             <option value="全部">全部产品线</option>
+                        </select>
+                        <span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 text-sm pointer-events-none">expand_more</span>
+                    </div>
+                    <div class="relative">
+                        <select id="packageFilter" class="bg-white border border-slate-200 py-2 pl-3 pr-8 text-sm focus:border-primary outline-none no-radius appearance-none" onchange="filterTable()">
+                            <option value="全部封装">全部封装形式</option>
                         </select>
                         <span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 text-sm pointer-events-none">expand_more</span>
                     </div>
@@ -113,7 +366,7 @@
             <!-- ========== Tab 2: 系统图 ========== -->
             <div id="tab-diagram" class="mb-12 hidden">
                 <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-1">
-                    <span class="material-symbols-outlined text-xs">info</span> 点击系列节点可直接打开PDF规格书 | 有PDF的系列用实色显示
+                    <span class="material-symbols-outlined text-xs">info</span> 点击系列卡片跳转产品中心查看该系列全部产品 | 按封装形式分组展示
                 </p>
                 <!-- 筛选指示条（当筛选到特定产品线时显示） -->
                 <div id="diagramFilterBar" class="hidden mb-4 bg-blue-50 border border-blue-200 p-3 flex items-center justify-between">
@@ -161,16 +414,24 @@
         }
 
         var currentLineFilter = null; // 当前产品线筛选
+        var currentPackageFilter = null; // 当前封装形式筛选
 
         function initPage() {
             // 填充产品线筛选下拉
             var lineFilter = document.getElementById('lineFilter');
+            var packageFilter = document.getElementById('packageFilter');
             var lines = YMIN.seriesTable.getProductLines();
             lines.forEach(function(line) {
                 var opt = document.createElement('option');
                 opt.value = line;
                 opt.textContent = line;
                 lineFilter.appendChild(opt);
+            });
+            ['贴片型', '引线型', '牛角型', '插针式'].forEach(function(pkg) {
+                var opt = document.createElement('option');
+                opt.value = pkg;
+                opt.textContent = pkg;
+                packageFilter.appendChild(opt);
             });
 
             // 检查 URL 参数 ?line=xxx
@@ -183,17 +444,19 @@
                 }
                 if (matched) {
                     currentLineFilter = matched;
+                    currentPackageFilter = null;
                     lineFilter.value = matched;
                     renderTable(YMIN.seriesTable.filterByLine(matched));
-                    renderDiagram(matched);
+                    renderDiagram(matched, null);
                     return;
                 }
             }
 
             // 无参数或未匹配：显示全部
             currentLineFilter = null;
+            currentPackageFilter = null;
             renderTable(YMIN.seriesTable.getAll());
-            renderDiagram(null);
+            renderDiagram(null, null);
         }
 
         // ---- Tab 切换 ----
@@ -214,7 +477,7 @@
                 listBtn.classList.remove('active');
                 diagramBtn.classList.add('active');
                 // 切到系统图时，按当前筛选重渲染
-                renderDiagram(currentLineFilter);
+                renderDiagram(currentLineFilter, currentPackageFilter);
             }
         }
 
@@ -222,8 +485,15 @@
         function filterTable() {
             var line = document.getElementById('lineFilter').value;
             currentLineFilter = (line === '全部') ? null : line;
+            var pkg = document.getElementById('packageFilter').value;
+            currentPackageFilter = (pkg === '全部封装') ? null : pkg;
             var search = document.getElementById('seriesSearch').value.toUpperCase();
             var data = YMIN.seriesTable.filterByLine(line);
+            if (currentPackageFilter) {
+                data = data.filter(function(row) {
+                    return row.pkg === currentPackageFilter;
+                });
+            }
             if (search) {
                 data = data.filter(function(row) {
                     return row.series.toUpperCase().indexOf(search) >= 0 ||
@@ -232,7 +502,7 @@
             }
             renderTable(data);
             // 同步更新系统图
-            renderDiagram(currentLineFilter);
+            renderDiagram(currentLineFilter, currentPackageFilter);
         }
 
         function renderTable(data) {
@@ -262,22 +532,226 @@
             tbody.innerHTML = html;
         }
 
+        function escapeHtml(value) {
+            return String(value == null ? '' : value).replace(/[&<>"']/g, function(ch) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[ch];
+            });
+        }
+
+        function padNumber(num) {
+            return String(num).padStart(2, '0');
+        }
+
+        function chunkSeries(seriesList) {
+            var size = seriesList.length > 3 ? 4 : Math.max(seriesList.length, 1);
+            var rows = [];
+            for (var i = 0; i < seriesList.length; i += size) {
+                rows.push(seriesList.slice(i, i + size));
+            }
+            return rows;
+        }
+
+        function renderSeriesCard(series, line, index) {
+            var seriesName = escapeHtml(series.name);
+            var seriesUrl = 'product-center.html?series=' + encodeURIComponent(series.name);
+            var cardNo = series.no || index;
+            var meta = [series.temp, series.life, series.voltage].filter(Boolean).map(escapeHtml).join(' · ');
+            var desc = escapeHtml(series.desc || '');
+            var color = escapeHtml(line.color);
+            var tint = color + '14';
+
+            var html = '';
+            html += '<div class="diagram-card-wrap">';
+            html += '<a href="' + seriesUrl + '" class="diagram-series-card" style="border-color:' + color + ';">';
+            html += '<div class="diagram-card-head" style="background:' + tint + '; border-bottom-color:' + color + ';">';
+            html += '<span class="diagram-card-no" style="background:' + color + ';">' + padNumber(cardNo) + '</span>';
+            html += '<span class="diagram-card-name" style="color:' + color + ';">' + seriesName + '</span>';
+            html += '</div>';
+            html += '<div class="diagram-card-body">';
+            if (meta) html += '<div class="diagram-card-meta">' + meta + '</div>';
+            if (desc) html += '<div class="diagram-card-desc">' + desc + '</div>';
+            html += '</div>';
+            html += '</a>';
+            html += '</div>';
+            return html;
+        }
+
+        function renderSeriesCardAt(series, line, index, pos, layout) {
+            var style = 'left:' + pos.x + 'px; top:' + pos.y + 'px; --card-width:' + layout.cardWidth + 'px; --card-height:' + layout.cardHeight + 'px;';
+            return renderSeriesCard(series, line, index).replace('<div class="diagram-card-wrap">', '<div class="diagram-card-wrap" style="' + style + '">');
+        }
+
+        function getArrowPoints(arrow, layout) {
+            var from = layout.nodes[arrow.from];
+            var to = layout.nodes[arrow.to];
+            var w = layout.cardWidth;
+            var h = layout.cardHeight;
+            if (!from || !to) return null;
+
+            if (arrow.dir === 'left') {
+                return {
+                    x1: from.x,
+                    y1: from.y + h / 2,
+                    x2: to.x + w,
+                    y2: to.y + h / 2
+                };
+            }
+            if (arrow.dir === 'up') {
+                return {
+                    x1: from.x + w / 2,
+                    y1: from.y,
+                    x2: to.x + w / 2,
+                    y2: to.y + h
+                };
+            }
+            if (arrow.dir === 'down') {
+                return {
+                    x1: from.x + w / 2,
+                    y1: from.y + h,
+                    x2: to.x + w / 2,
+                    y2: to.y
+                };
+            }
+            return {
+                x1: from.x + w,
+                y1: from.y + h / 2,
+                x2: to.x,
+                y2: to.y + h / 2
+            };
+        }
+
+        function getSeriesPackageMap() {
+            var map = {};
+            YMIN.seriesTable.getAll().forEach(function(row) {
+                if (!map[row.series]) map[row.series] = row.pkg;
+            });
+            return map;
+        }
+
+        function filterPackageByPackageField(pkg, packageFilter, seriesPackageMap) {
+            if (!packageFilter) return pkg;
+            var filteredSeries = pkg.series.filter(function(series) {
+                return seriesPackageMap[series.name] === packageFilter;
+            });
+            if (!filteredSeries.length) return null;
+            var clone = {};
+            for (var key in pkg) {
+                if (Object.prototype.hasOwnProperty.call(pkg, key)) clone[key] = pkg[key];
+            }
+            clone.series = filteredSeries;
+            return clone;
+        }
+
+        function renderPackageMap(pkg, line, startIndex) {
+            var layout = pkg.layout;
+            var seriesByName = {};
+            pkg.series.forEach(function(series) {
+                seriesByName[series.name] = series;
+            });
+
+            var html = '';
+            html += '<div class="diagram-package">';
+            html += '<div class="diagram-package-head" style="min-width:' + layout.width + 'px;">';
+            html += '<span class="diagram-package-label">' + escapeHtml(pkg.name) + '</span>';
+            html += '<span class="diagram-package-count">' + pkg.series.length + ' 个系列</span>';
+            html += '<span class="flex-1 h-px bg-slate-300"></span>';
+            html += '</div>';
+            html += '<div class="diagram-map" style="--map-width:' + layout.width + 'px; --map-height:' + layout.height + 'px;">';
+            if (layout.labelBox) {
+                html += '<div class="diagram-map-label" style="left:' + layout.labelBox.x + 'px; top:' + layout.labelBox.y + 'px; width:' + layout.labelBox.w + 'px; height:' + layout.labelBox.h + 'px;">' + escapeHtml(layout.label || pkg.name) + '</div>';
+            }
+            html += '<svg class="diagram-map-svg" viewBox="0 0 ' + layout.width + ' ' + layout.height + '" preserveAspectRatio="none" aria-hidden="true">';
+            html += '<defs><marker id="arrow-' + escapeHtml(layout.type) + '" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"></path></marker></defs>';
+            (layout.arrows || []).forEach(function(arrow) {
+                if (!seriesByName[arrow.from] || !seriesByName[arrow.to]) return;
+                var pts = getArrowPoints(arrow, layout);
+                if (!pts) return;
+                html += '<line x1="' + pts.x1 + '" y1="' + pts.y1 + '" x2="' + pts.x2 + '" y2="' + pts.y2 + '" stroke="#334155" stroke-width="2" marker-end="url(#arrow-' + escapeHtml(layout.type) + ')"></line>';
+            });
+            html += '</svg>';
+            pkg.series.forEach(function(series, i) {
+                var pos = layout.nodes[series.name];
+                if (pos) html += renderSeriesCardAt(series, line, startIndex + i, pos, layout);
+            });
+            html += '</div>';
+            html += '</div>';
+            return { html: html, nextIndex: startIndex + pkg.series.length };
+        }
+
+        function renderPackageFlow(pkg, line, startIndex) {
+            if (pkg.layout && pkg.layout.nodes) {
+                return renderPackageMap(pkg, line, startIndex);
+            }
+
+            var rows = chunkSeries(pkg.series);
+            var index = startIndex;
+            var html = '';
+
+            html += '<div class="diagram-package">';
+            html += '<div class="diagram-package-head">';
+            html += '<span class="diagram-package-label">' + escapeHtml(pkg.name) + '</span>';
+            html += '<span class="diagram-package-count">' + pkg.series.length + ' 个系列</span>';
+            html += '<span class="flex-1 h-px bg-slate-300"></span>';
+            html += '</div>';
+
+            html += '<div class="diagram-flow">';
+            rows.forEach(function(row) {
+                html += '<div class="diagram-row">';
+                row.forEach(function(series, ri) {
+                    html += renderSeriesCard(series, line, index++);
+                    if (ri < row.length - 1) {
+                        html += '<span class="diagram-arrow" aria-hidden="true"></span>';
+                    }
+                });
+                html += '</div>';
+            });
+            html += '</div>';
+            html += '</div>';
+
+            return { html: html, nextIndex: index };
+        }
+
+        function renderReferenceImages(line) {
+            var images = line.diagramImages || [];
+            var html = '';
+            if (!images.length) return html;
+
+            html += '<details class="diagram-reference">';
+            html += '<summary>查看原始体系图图片</summary>';
+            if (images.length === 1) {
+                html += '<img src="' + escapeHtml(images[0]) + '" alt="' + escapeHtml(line.name) + '体系图" class="w-full border border-slate-200 shadow-sm mt-4" style="max-width:900px;">';
+            } else {
+                html += '<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">';
+                images.forEach(function(img) {
+                    html += '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(line.name) + '体系图" class="w-full border border-slate-200 shadow-sm">';
+                });
+                html += '</div>';
+            }
+            html += '</details>';
+            return html;
+        }
+
         // ---- 系统图渲染 ----
-        function renderDiagram(lineFilter) {
+        function renderDiagram(lineFilter, packageFilter) {
             var container = document.getElementById('diagramContainer');
             var allLines = YMIN.seriesDiagram.getAll();
-            // 如果指定了产品线筛选，只显示该产品线
             var lines = lineFilter
                 ? allLines.filter(function(l) { return l.name === lineFilter; })
                 : allLines;
+            var seriesPackageMap = getSeriesPackageMap();
             var html = '';
 
-            // 显示/隐藏筛选指示条
             var filterBar = document.getElementById('diagramFilterBar');
             var filterName = document.getElementById('diagramFilterName');
-            if (lineFilter) {
+            if (lineFilter || packageFilter) {
                 filterBar.classList.remove('hidden');
-                filterName.textContent = lineFilter;
+                filterName.textContent = [lineFilter, packageFilter].filter(Boolean).join(' / ');
             } else {
                 filterBar.classList.add('hidden');
             }
@@ -289,44 +763,46 @@
             }
 
             lines.forEach(function(line, li) {
-                html += '<div class="mb-12">';
-                html += '<div class="flex items-center gap-3 mb-5">';
-                html += '<div style="width:8px;height:32px;background:' + line.color + '"></div>';
-                html += '<div><h3 class="text-xl font-bold text-primary">' + line.name + '</h3>';
-                html += '<p class="text-[10px] text-slate-400 uppercase">' + line.nameEn + '</p></div></div>';
-                var images = line.diagramImages;
-                if (images && images.length > 0) {
-                    if (images.length === 1) {
-                        html += '<img src="' + images[0] + '" alt="' + line.name + '体系图" class="w-full border border-slate-200 shadow-sm" style="max-width:900px;">';
-                    } else {
-                        html += '<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">';
-                        images.forEach(function(img) { html += '<img src="' + img + '" alt="' + line.name + '体系图" class="w-full border border-slate-200 shadow-sm">'; });
-                        html += '</div>';
-                    }
-                }
-                html += '<div class="mt-4 flex flex-wrap gap-1.5">';
+                var cardIndex = 1;
+                var displayPackages = [];
                 line.packages.forEach(function(pkg) {
-                    pkg.series.forEach(function(s) {
-                        if (s.pdf) {
-                            html += '<a href="' + s.pdf + '" target="_blank" class="inline-flex items-center px-2 py-1 border text-[11px] font-bold text-white" style="background:' + line.color + '">' + s.name + ' PDF</a>';
-                        } else {
-                            html += '<span class="inline-flex items-center px-2 py-1 border border-slate-200 bg-slate-50 text-[11px] text-slate-400">' + s.name + '</span>';
-                        }
-                    });
+                    var filteredPkg = filterPackageByPackageField(pkg, packageFilter, seriesPackageMap);
+                    if (filteredPkg) displayPackages.push(filteredPkg);
                 });
-                html += '</div></div>';
+                if (displayPackages.length === 0) return;
+                html += '<section class="diagram-line">';
+                html += '<div class="diagram-line-heading">';
+                html += '<div class="diagram-line-mark" style="background:' + escapeHtml(line.color) + '"></div>';
+                html += '<div><h3 class="text-xl font-bold text-primary">' + escapeHtml(line.name) + '</h3>';
+                html += '<p class="text-[10px] text-slate-400 uppercase tracking-wider">' + escapeHtml(line.nameEn) + '</p></div>';
+                html += '<span class="ml-auto text-[10px] text-slate-400 uppercase tracking-wider">' + displayPackages.length + ' 个封装分组</span>';
+                html += '</div>';
+
+                displayPackages.forEach(function(pkg) {
+                    var flow = renderPackageFlow(pkg, line, cardIndex);
+                    html += flow.html;
+                    cardIndex = flow.nextIndex;
+                });
+
+                html += renderReferenceImages(line);
+                html += '</section>';
             });
 
             container.innerHTML = html;
+            if (!html) {
+                container.innerHTML = '<div class="text-center py-12 text-slate-400"><span class="material-symbols-outlined text-4xl mb-2 block">search_off</span><p>未找到匹配的封装形式</p></div>';
+            }
         }
 
         // ---- 清除筛选 ----
         function clearFilter() {
             document.getElementById('lineFilter').value = '全部';
+            document.getElementById('packageFilter').value = '全部封装';
             document.getElementById('seriesSearch').value = '';
             currentLineFilter = null;
+            currentPackageFilter = null;
             renderTable(YMIN.seriesTable.getAll());
-            renderDiagram(null);
+            renderDiagram(null, null);
         }
     </script>
 </body>

@@ -12,10 +12,13 @@ YMIN.seriesTable = (function(){
     {series:'VMM',  productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'6.3~100V', cap:'0.1~1000µF', temp:'-55~105℃', life:'3000~8000H', esr:'低阻抗', feature:'5mm高超小型品', aec:false, rohs:true, pdf:'系列PDF/VMM.pdf'},
     {series:'V3M',  productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'6.3~100V', cap:'0.1~1000µF', temp:'-55~105℃', life:'2000~5000H', esr:'低阻抗', feature:'低阻抗薄型高容量化品', aec:false, rohs:true, pdf:'系列PDF/V3M.pdf'},
     {series:'V3MC', productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'6.3~100V', cap:'1~2200µF', temp:'-55~105℃', life:'2000H', esr:'低阻抗', feature:'超高容量 低阻抗小型化', aec:false, rohs:true, pdf:'系列PDF/V3MC.pdf'},
+    {series:'V4M',  productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'6.3~50V', cap:'—', temp:'-55~105℃', life:'1000H', esr:'标准', feature:'3.95mm LMAX 超小型品', aec:false, rohs:true, pdf:null},
     {series:'VK7',  productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'6.3~50V', cap:'10~470µF', temp:'-55~105℃', life:'2000~5000H', esr:'标准', feature:'7mm高超小型品', aec:false, rohs:true, pdf:'系列PDF/VK7.pdf'},
     {series:'VKO',  productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'6.3~50V', cap:'100~3300µF', temp:'-55~105℃', life:'7000~10000H', esr:'低', feature:'高纹波电流 AEC-Q200 大容量3300μF', aec:true, rohs:true, pdf:'系列PDF/VKO.pdf'},
     {series:'VKL',  productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'10~100V', cap:'10~470µF', temp:'-55~125℃', life:'2000~5000H', esr:'低', feature:'高纹波电流 耐高温长寿命品', aec:false, rohs:true, pdf:'系列PDF/VKL.pdf'},
     {series:'VKM',  productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'6.3~100V', cap:'10~680µF', temp:'-55~105℃', life:'6000~9000H', esr:'低', feature:'高纹波电流标准品 AEC-Q200 9000h', aec:true, rohs:true, pdf:'系列PDF/VKM.pdf'},
+    {series:'VKG',  productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'6.3~100V', cap:'—', temp:'-55~105℃', life:'8000~12000H', esr:'低', feature:'高纹波电流 长寿命品', aec:false, rohs:true, pdf:null},
+    {series:'VKL(R)',productLine:'液态铝电解电容器', pkg:'贴片型', voltage:'16~63V', cap:'—', temp:'-55~135℃', life:'2000H', esr:'低', feature:'耐高温 低阻抗品', aec:false, rohs:true, pdf:null},
     {series:'LK',   productLine:'液态铝电解电容器', pkg:'引线型', voltage:'16~400V', cap:'4.7~470µF', temp:'-40~105℃', life:'5000~10000H', esr:'低', feature:'AEC-Q200 极低漏电流 6000h长寿命', aec:true, rohs:true, pdf:'系列PDF/LK.pdf'},
     {series:'LKF',  productLine:'液态铝电解电容器', pkg:'引线型', voltage:'6.3~100V', cap:'10~2200µF', temp:'-55~105℃', life:'6000~8000H', esr:'低阻抗', feature:'高纹波电流 低阻抗小型化', aec:false, rohs:true, pdf:'系列PDF/LKF.pdf'},
     {series:'LKM',  productLine:'液态铝电解电容器', pkg:'引线型', voltage:'6.3~100V', cap:'10~2200µF', temp:'-55~105℃', life:'7000~10000H', esr:'低阻抗', feature:'高纹波电流 低阻抗标准品', aec:false, rohs:true, pdf:null},
@@ -76,6 +79,96 @@ YMIN.seriesTable = (function(){
     {series:'TQD15',productLine:'导电高分子钽电解电容器', pkg:'贴片型', voltage:'16~35V', cap:'68~220µF', temp:'-55~105℃', life:'2000H', esr:'低', feature:'7.3×4.3×1.5mm 薄型', aec:false, rohs:true, pdf:null},
     {series:'TQD19',productLine:'导电高分子钽电解电容器', pkg:'贴片型', voltage:'16~100V', cap:'1.2~33µF', temp:'-55~105℃', life:'2000H', esr:'低', feature:'3.5×2.8×1.9mm 16~100V', aec:false, rohs:true, pdf:null}
   ];
+
+  function addMissingSeriesRows() {
+    var seen = {};
+    DB.forEach(function(row) {
+      seen[row.productLine + '|' + row.series] = true;
+    });
+
+    function add(line, pkg, series, voltage, temp, life, feature) {
+      var key = line + '|' + series;
+      if (seen[key]) return;
+      seen[key] = true;
+      DB.push({
+        series: series,
+        productLine: line,
+        pkg: pkg,
+        voltage: voltage || '—',
+        cap: '—',
+        temp: temp || '—',
+        life: life || '—',
+        esr: '—',
+        feature: feature || '按产品体系图补充',
+        aec: false,
+        rohs: true,
+        pdf: null,
+        supplemental: true
+      });
+    }
+
+    var liquid = '液态铝电解电容器';
+    [
+      ['贴片型', 'VKD', '—', '—', '—', '量身定制产品'],
+      ['基板自立型', 'CW6H', '350~600V', '-40~105℃', '6000H', '新能源汽车电子'],
+      ['基板自立型', 'CN6', '350~500V', '-40~85℃', '6000H', '电源、变频器'],
+      ['基板自立型', 'CW3S', '350~500V', '-40~105℃', '3000H', '电源小型化'],
+      ['基板自立型', 'CW3H', '350~600V', '-40~105℃', '3000H', '新能源汽车电子'],
+      ['基板自立型', 'CN3', '350~500V', '-40~85℃', '3000H', '电源、变频器'],
+      ['基板自立型', 'SH15', '160~400V', '-40~105℃', '3000H', '电源薄型化'],
+      ['基板自立型', 'SW3', '16~500V', '-40~105℃', '3000H', '电源、变频器'],
+      ['基板自立型', 'SN3', '16~550V', '-40~85℃', '3000H', '电源、变频器'],
+      ['基板自立型', 'SW6', '10~500V', '-25~105℃', '6000H', '电源、变频器'],
+      ['基板自立型', 'SN6', '16~500V', '-40~85℃', '6000H', '电源、变频器'],
+      ['基板自立型', 'IDC3', '450~500V', '-40~105℃', '3000H', 'AI服务器主供电源'],
+      ['基板自立型', 'CKD', '—', '—', '—', '量身定制产品'],
+      ['螺栓型', 'ES3M', '200~500V', '-25~85℃', '3000H', '电源、变频、中频炉'],
+      ['螺栓型', 'EW3', '200~500V', '-25~105℃', '3000H', 'UPS电源、工控'],
+      ['螺栓型', 'ES3', '200~500V', '-25~85℃', '3000H', 'UPS电源、工业控制器'],
+      ['螺栓型', 'EH3', '550~630V', '-25~85℃', '3000H', '光伏、工控'],
+      ['螺栓型', 'EW6', '350~500V', '-25~105℃', '6000H', 'UPS电源、工控、工业伺服'],
+      ['螺栓型', 'ES6', '200~500V', '-25~85℃', '6000H', 'UPS、工业变频'],
+      ['螺栓型', 'EH6', '550~630V', '-25~85℃', '6000H', '光伏、工控'],
+      ['螺栓型', 'EKD', '—', '—', '—', '量身定制产品']
+    ].forEach(function(r) { add(liquid, r[0], r[1], r[2], r[3], r[4], r[5]); });
+
+    var solid = '高分子固态铝电解电容器';
+    ['VPH','VPT','VP1','VPL','VPG','VP4','NPH','NPT','NP1','NPG','PKD'].forEach(function(series) {
+      add(solid, series.charAt(0) === 'V' ? '贴片型' : (series === 'PKD' ? '量身定制产品' : '引线型'), series, '—', '—', '—', '按产品体系图补充');
+    });
+
+    var hybrid = '高分子混合动力铝电解电容器';
+    ['VGY','HKD'].forEach(function(series) {
+      add(hybrid, series === 'HKD' ? '量身定制产品' : '贴片型', series, '—', '—', '—', '按产品体系图补充');
+    });
+
+    var edlc = '双电层超级电容';
+    ['SDV','SDA','SDS'].forEach(function(series) {
+      add(edlc, '单体', series, '—', '—', '1000H', '按产品体系图补充');
+    });
+
+    var lic = '混合型超级电容(锂离子电容)';
+    ['SLX','SLD','SLA(H)'].forEach(function(series) {
+      add(lic, '单体', series, '3.8V/4.2V', '—', '1000H', '按产品体系图补充');
+    });
+
+    var stacked = '叠层高分子固态铝电解电容器';
+    ['MPD10','MPD15','MPX','MPD28','MPU41'].forEach(function(series) {
+      add(stacked, '贴片型', series, '—', '-55~105℃', '2000H', '按产品体系图补充');
+    });
+
+    var film = '薄膜电容器';
+    ['MDP(X)','MDP(H)','MAP','MDR(X)','MDR(H)','MDA'].forEach(function(series) {
+      add(film, series.indexOf('MDR') === 0 ? '矩形干式直流滤波电容' : (series === 'MDA' ? '铝壳圆形干式直流滤波电容' : '4引线方壳电容'), series, '—', '-40~105℃', '—', '按产品体系图补充');
+    });
+
+    var tantalum = '导电高分子钽电解电容器';
+    ['TQD28','TQD42','TQW19','TQW42'].forEach(function(series) {
+      add(tantalum, '贴片型', series, '16~100V', '-55~105℃', '—', '按产品体系图补充');
+    });
+  }
+
+  addMissingSeriesRows();
 
   /**
    * 获取所有系列表格数据
