@@ -1,1 +1,194 @@
-<!DOCTYPE html><html class="light" lang="zh-CN"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1.0" name="viewport"><title>寿命计算工具 - 永铭电子</title><meta name="description" content="永铭电子电容寿命计算工具 - 在线交互式计算工作寿命，输入温度/电压/纹波电流参数，实时预估实际使用寿命。"><link rel="icon" type="image/png" href="logo.png"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles/common.css"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#1B365D"},borderRadius:{"DEFAULT":"0px"},fontFamily:{"headline":["Space Grotesk"],"body":["Inter"]}}}}</script></head><body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden"><header id="ymin-navbar"></header><main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50"><div class="max-w-7xl mx-auto px-6 py-8"><nav class="text-[11px] text-slate-500 uppercase mb-6 flex gap-2"><a href="index.html" class="hover:text-primary">首页</a><span>/</span><a href="design-tools.html" class="hover:text-primary">设计工具</a><span>/</span><span class="text-primary font-bold">寿命计算工具</span></nav><div class="bg-white border border-slate-200 p-8 mb-8"><h1 class="text-3xl font-bold text-primary mb-3">电容寿命计算工具</h1><p class="text-slate-600 mb-6">基于阿伦尼乌斯(Arrhenius)寿命模型，输入实际工作条件（温度、电压、纹波电流），预估电容在特定工况下的使用寿命。适用于铝电解电容器、固液混合电容器及高分子固态电容器。</p><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div class="space-y-4"><div><label class="block text-xs font-bold text-primary uppercase mb-2">产品系列</label><select class="w-full bg-slate-50 border border-slate-200 py-2 px-3 text-sm focus:border-primary outline-none"><option>VHT - 高分子混合动力</option><option>LK - 液态引线型</option><option>NPX - 高分子固态</option><option>VPG - 液态引线型</option><option>CW3H - 牛角型</option></select></div><div><label class="block text-xs font-bold text-primary uppercase mb-2">额定电压 (V.DC)</label><input class="w-full bg-slate-50 border border-slate-200 p-2 text-sm" value="50" type="number"></div><div><label class="block text-xs font-bold text-primary uppercase mb-2">实际工作电压 (V.DC)</label><input class="w-full bg-slate-50 border border-slate-200 p-2 text-sm" value="40" type="number"></div><div><label class="block text-xs font-bold text-primary uppercase mb-2">环境温度 (°C)</label><div class="relative"><input class="w-full bg-slate-50 border border-slate-200 p-2 text-sm" value="85" type="number"><span class="absolute right-2 top-2 text-slate-400 text-sm">°C</span></div></div><div><label class="block text-xs font-bold text-primary uppercase mb-2">额定纹波电流 (mA rms)</label><input class="w-full bg-slate-50 border border-slate-200 p-2 text-sm" value="1100" type="number"></div><div><label class="block text-xs font-bold text-primary uppercase mb-2">实际纹波电流 (mA rms)</label><input class="w-full bg-slate-50 border border-slate-200 p-2 text-sm" value="800" type="number"></div><button class="w-full bg-[#1B365D] text-white py-3 text-sm font-bold mt-4">计算寿命</button></div><div class="bg-slate-50 border border-slate-200 p-6"><h3 class="text-lg font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">analytics</span>计算结果</h3><div class="space-y-4"><div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">额定寿命 @105°C</span><span class="text-lg font-bold text-primary">4,000 h</span></div><div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">预估实际寿命 @85°C</span><span class="text-2xl font-bold text-green-600">12,800 h</span></div><div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">寿命延长倍数</span><span class="text-lg font-bold text-primary">3.2x</span></div><div class="flex justify-between items-center"><span class="text-sm text-slate-600">年等效（24h/天运行）</span><span class="text-lg font-bold text-primary">约 1.5 年</span></div></div><p class="text-[10px] text-slate-400 mt-6">* 基于阿伦尼乌斯模型估算，实际寿命受纹波电流、频率、冷却条件等因素影响。建议结合实际应用进行验证。</p></div></div></div></div><footer id="ymin-footer"></footer></main><script src="components/navbar.js"></script><script src="components/footer.js"></script><script>document.addEventListener('DOMContentLoaded',function(){YMIN.navbar.inject('tools');YMIN.footer.inject();});</script></body></html>
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta content="width=device-width,initial-scale=1.0" name="viewport">
+<title>寿命计算工具 - 永铭电子</title>
+<meta name="description" content="永铭电子电容寿命计算工具 - 支持6种电容类型，基于阿伦尼乌斯模型和逆幂律，温度/电压/纹波实时联动，预估电容器工作寿命。">
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/common.css">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#1B365D"},borderRadius:{"DEFAULT":"0px"},fontFamily:{"headline":["Space Grotesk"],"body":["Inter"]}}}}</script>
+<style>
+.custom-scrollbar::-webkit-scrollbar{width:8px}.custom-scrollbar::-webkit-scrollbar-thumb{background:#74777f}
+.group:hover .mega-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.mega-menu{opacity:0;visibility:hidden;transform:translateY(10px);transition:all .2s}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;background:#e2e8f0;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;background:#1B365D;cursor:pointer}
+.peer:checked~.peer-checked\:block{display:block}
+</style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
+<header id="ymin-navbar"></header>
+<main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
+<div class="max-w-7xl mx-auto px-6 py-8">
+<nav class="text-[11px] text-slate-500 uppercase mb-6 flex gap-2"><a href="index.html" class="hover:text-primary">首页</a><span>/</span><a href="design-tools.html" class="hover:text-primary">设计工具</a><span>/</span><span class="text-primary font-bold">寿命计算工具</span></nav>
+
+<div class="bg-white border border-slate-200 p-8 mb-8">
+<h1 class="text-3xl font-bold text-primary mb-3">电容寿命计算工具</h1>
+<p class="text-slate-600 mb-6">根据电容类型自动切换寿命模型：液态/混合型使用阿伦尼乌斯10°C规则，固态/钽使用20°C规则，超级电容加电压加速，薄膜使用逆幂律。输入实际工作条件，实时预估使用寿命。</p>
+
+<!-- 电容类型选择 -->
+<div class="bg-slate-50 border border-slate-200 p-4 mb-6"><label class="block text-xs font-bold text-primary uppercase mb-3">电容类型</label>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2" id="typeSelector">
+<label class="flex items-center gap-1 bg-white border border-slate-200 p-2 cursor-pointer hover:border-primary type-opt" data-type="liquid"><input type="radio" name="capType" value="liquid" class="sr-only" checked><span class="text-xs font-bold">液态铝电解</span></label>
+<label class="flex items-center gap-1 bg-white border border-slate-200 p-2 cursor-pointer hover:border-primary type-opt" data-type="hybrid"><input type="radio" name="capType" value="hybrid" class="sr-only"><span class="text-xs font-bold">混合动力</span></label>
+<label class="flex items-center gap-1 bg-white border border-slate-200 p-2 cursor-pointer hover:border-primary type-opt" data-type="solid"><input type="radio" name="capType" value="solid" class="sr-only"><span class="text-xs font-bold">高分子固态</span></label>
+<label class="flex items-center gap-1 bg-white border border-slate-200 p-2 cursor-pointer hover:border-primary type-opt" data-type="tantalum"><input type="radio" name="capType" value="tantalum" class="sr-only"><span class="text-xs font-bold">导电钽</span></label>
+<label class="flex items-center gap-1 bg-white border border-slate-200 p-2 cursor-pointer hover:border-primary type-opt" data-type="edlc"><input type="radio" name="capType" value="edlc" class="sr-only"><span class="text-xs font-bold">超级电容</span></label>
+<label class="flex items-center gap-1 bg-white border border-slate-200 p-2 cursor-pointer hover:border-primary type-opt" data-type="film"><input type="radio" name="capType" value="film" class="sr-only"><span class="text-xs font-bold">薄膜电容</span></label>
+</div><p class="text-[10px] text-slate-400 mt-2" id="typeDesc">液态铝电解 — 10°C规则，纹波发热主导</p></div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- INPUTS -->
+<div class="space-y-5">
+<div><label class="block text-xs font-bold text-primary uppercase mb-2">产品系列</label>
+<select id="series" class="w-full bg-white border border-slate-200 py-2.5 px-3 text-sm focus:border-primary outline-none" onchange="onSeriesChange()">
+<optgroup label="液态铝电解（10°C规则）"><option value="lk" data-theta="10">LK - 引线型 (105℃/6000h)</option><option value="vpg" data-theta="10">VPG - 引线型高纹波 (105℃/2000h)</option><option value="cw3h" data-theta="10">CW3H - 牛角型 DC-Link (105℃/3000h)</option><option value="vkm" data-theta="10">VKM - 贴片型 (105℃/9000h)</option></optgroup>
+<optgroup label="混合动力（10°C规则·保守值）"><option value="vht" data-theta="10">VHT - 混合动力 (125℃/4000h)</option><option value="vhu" data-theta="10">VHU - 混合动力低漏电 (125℃/4000h)</option></optgroup>
+<optgroup label="高分子固态（20°C规则）"><option value="npx" data-theta="20">NPX - 固态 (105℃/2000h)</option><option value="vpx" data-theta="20">VPX - 固态 (105℃/2000h)</option></optgroup>
+<optgroup label="导电钽（20°C规则+电压指数）"><option value="tqd" data-theta="20">TQD - 导电钽 (105℃/2000h)</option></optgroup>
+<optgroup label="超级电容（10°C+电压加速）"><option value="sdb" data-theta="10">SDB - 双电层 (70℃/1000h)</option></optgroup>
+<optgroup label="薄膜（逆幂律·非Arrhenius）"><option value="mdp" data-theta="0">MDP - 薄膜 (105℃/100000h)</option></optgroup>
+</select></div>
+
+<div><label class="block text-xs font-bold text-primary uppercase mb-2">加速因子 θ</label><input id="theta" class="w-full bg-slate-100 border border-slate-200 p-2.5 text-sm font-bold" value="10°C（每降10℃寿命×2）" readonly></div>
+<div class="grid grid-cols-2 gap-4"><div><label class="block text-xs font-bold text-primary uppercase mb-2">额定温度 T₀ (℃)</label><input id="trated" class="w-full bg-slate-100 border border-slate-200 p-2.5 text-sm" value="125" readonly></div><div><label class="block text-xs font-bold text-primary uppercase mb-2">额定寿命 L₀ @T₀ (h)</label><input id="lrated" class="w-full bg-slate-100 border border-slate-200 p-2.5 text-sm" value="4000" readonly></div></div>
+
+<div><label class="block text-xs font-bold text-primary uppercase mb-2">实际工作温度 Ta (℃)</label>
+<div class="flex items-center gap-3"><input type="range" id="tempRange" min="30" max="135" value="85" oninput="document.getElementById('tempVal').value=this.value;calc()"><input id="tempVal" class="w-20 bg-white border border-slate-200 p-2 text-sm text-center" value="85" type="number" oninput="document.getElementById('tempRange').value=this.value;calc()"></div></div>
+
+<div id="rippleGroup"><label class="block text-xs font-bold text-primary uppercase mb-2">纹波电流比 Ir/IR</label>
+<div class="flex items-center gap-3"><input type="range" id="rippleRange" min="0" max="1" step="0.05" value="0.7" oninput="document.getElementById('rippleVal').value=Math.round(this.value*100);calc()"><input id="rippleVal" class="w-20 bg-white border border-slate-200 p-2 text-sm text-center" value="70" type="number" oninput="document.getElementById('rippleRange').value=this.value/100;calc()"><span class="text-xs text-slate-400">%</span></div></div>
+
+<div id="voltGroup"><label class="block text-xs font-bold text-primary uppercase mb-2">电压比 Va/V₀</label>
+<div class="flex items-center gap-3"><input type="range" id="voltRange" min="0.3" max="1" step="0.05" value="0.8" oninput="document.getElementById('voltVal').value=Math.round(this.value*100);calc()"><input id="voltVal" class="w-20 bg-white border border-slate-200 p-2 text-sm text-center" value="80" type="number" oninput="document.getElementById('voltRange').value=this.value/100;calc()"><span class="text-xs text-slate-400">%</span></div></div>
+</div>
+
+<!-- RESULTS -->
+<div class="bg-slate-50 border border-slate-200 p-6">
+<h3 class="text-lg font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">analytics</span>计算结果</h3>
+<div class="space-y-4" id="results"></div>
+<p class="text-[10px] text-slate-400 mt-6">* 计算结果为理论预估值，实际寿命受散热条件、频率、湿度、安装方式等影响。高温/高纹波场景建议预留2倍以上安全裕量。</p>
+</div>
+</div>
+
+<!-- FORMULA -->
+<div class="mt-6 p-4 bg-blue-50/50 border border-blue-100 text-xs text-slate-600" id="formulaBox"></div>
+</div>
+</div>
+<footer id="ymin-footer"></footer></main>
+
+<script src="components/navbar.js"></script>
+<script src="components/footer.js"></script>
+<script>
+var presets={
+ lk:{t0:105,l0:6000,theta:10,dtMax:10,type:'liquid'},
+ vpg:{t0:105,l0:2000,theta:10,dtMax:10,type:'liquid'},
+ cw3h:{t0:105,l0:3000,theta:10,dtMax:10,type:'liquid'},
+ vkm:{t0:105,l0:9000,theta:10,dtMax:10,type:'liquid'},
+ vht:{t0:125,l0:4000,theta:10,dtMax:10,type:'hybrid'},
+ vhu:{t0:125,l0:4000,theta:10,dtMax:10,type:'hybrid'},
+ npx:{t0:105,l0:2000,theta:20,dtMax:5,type:'solid'},
+ vpx:{t0:105,l0:2000,theta:20,dtMax:5,type:'solid'},
+ tqd:{t0:105,l0:2000,theta:20,dtMax:5,type:'tantalum'},
+ sdb:{t0:70,l0:1000,theta:10,dtMax:0,type:'edlc'},
+ mdp:{t0:105,l0:100000,theta:0,dtMax:0,type:'film'},
+};
+
+var currentType='liquid';
+
+// Type selector click
+document.querySelectorAll('.type-opt').forEach(function(el){
+ el.addEventListener('click',function(){
+  document.querySelectorAll('.type-opt').forEach(function(e){e.classList.remove('bg-primary/10','border-primary','font-bold');});
+  el.classList.add('bg-primary/10','border-primary');
+  currentType=el.dataset.type;
+  updateTypeUI();
+  calc();
+ });
+});
+
+function updateTypeUI(){
+ var descs={liquid:'液态铝电解 — 10°C规则，纹波发热主导',hybrid:'混合动力 — 10°C规则（保守值），固液协同退化',solid:'高分子固态 — 20°C规则，聚合物退化机制',tantalum:'导电钽 — 20°C规则 + 强烈电压降压',edlc:'超级电容 — 温度+电压双重加速',film:'薄膜电容 — 逆幂律V⁸，电压主导'};
+ document.getElementById('typeDesc').textContent=descs[currentType]||'';
+ var rG=document.getElementById('rippleGroup'),vG=document.getElementById('voltGroup');
+ if(currentType==='film'){rG.style.display='none';vG.querySelector('label').textContent='电压比 Va/V₀（主导因素）';}
+ else{rG.style.display='';vG.querySelector('label').textContent='电压比 Va/V₀';}
+}
+
+function onSeriesChange(){
+ var s=document.getElementById('series').value;
+ var p=presets[s];
+ if(!p)return;
+ document.getElementById('trated').value=p.t0;
+ document.getElementById('lrated').value=p.l0;
+ document.getElementById('theta').value=p.theta+'°C'+(p.theta>0?'（每降'+p.theta+'°C寿命×2）':'（非Arrhenius）');
+ // Update type
+ currentType=p.type;
+ document.querySelectorAll('.type-opt').forEach(function(e){e.classList.remove('bg-primary/10','border-primary');});
+ var typeEl=document.querySelector('.type-opt[data-type="'+p.type+'"]');
+ if(typeEl)typeEl.classList.add('bg-primary/10','border-primary');
+ updateTypeUI();
+ calc();
+}
+
+function calc(){
+ var s=document.getElementById('series').value;
+ var p=presets[s];if(!p)return;
+ var tr=p.t0,lr=p.l0,theta=p.theta||10,dtMax=p.dtMax||10;
+ var ta=parseFloat(document.getElementById('tempVal').value)||85;
+ var ripple=parseFloat(document.getElementById('rippleVal').value)/100||0.7;
+ var voltRatio=parseFloat(document.getElementById('voltVal').value)/100||0.8;
+ var html='';
+
+ if(currentType==='film'){
+  // Inverse power law: L = L0 * (V0/Va)^8
+  var n=8;
+  var estLife=lr*Math.pow(1/voltRatio,n);
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">额定寿命 @'+tr+'℃/'+lr.toLocaleString()+'h</span><span class="text-lg font-bold text-primary">'+lr.toLocaleString()+' h</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">电压应力指数 n</span><span class="text-lg font-bold">'+n+'</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">预估寿命</span><span class="text-2xl font-bold text-green-600">'+Math.round(estLife).toLocaleString()+' h</span></div>';
+  html+='<div class="flex justify-between items-center"><span class="text-sm text-slate-600">年等效 (24h)</span><span class="text-lg font-bold text-primary">'+(estLife/(24*365)).toFixed(1)+' 年</span></div>';
+  document.getElementById('formulaBox').innerHTML='<h4 class="font-bold text-primary mb-2">计算公式（逆幂律）</h4><p>L = L₀ × (V₀ / Va)<sup>n</sup> &nbsp; n≈7~9</p><p class="mt-1">电压每降低一半，寿命增加约 2<sup>n</sup> ≈ 256 倍</p>';
+
+ }else if(currentType==='edlc'){
+  // EDLC: temperature + voltage double acceleration
+  var deltaT=0;
+  var tempLife=lr*Math.pow(2,(tr-ta)/theta);
+  var voltFactor=Math.pow(2,(1-voltRatio)/0.1);
+  var estLife=tempLife*voltFactor;
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">额定寿命 @'+tr+'℃/'+lr.toLocaleString()+'h</span><span class="text-lg font-bold text-primary">'+lr.toLocaleString()+' h</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">温度加速因子</span><span class="text-lg font-bold">'+Math.pow(2,(tr-ta)/theta).toFixed(1)+'x</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">电压加速因子</span><span class="text-lg font-bold">'+voltFactor.toFixed(1)+'x</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">预估寿命</span><span class="text-2xl font-bold text-green-600">'+Math.round(estLife).toLocaleString()+' h</span></div>';
+  html+='<div class="flex justify-between items-center"><span class="text-sm text-slate-600">年等效 (24h)</span><span class="text-lg font-bold text-primary">'+(estLife/(24*365)).toFixed(1)+' 年</span></div>';
+  document.getElementById('formulaBox').innerHTML='<h4 class="font-bold text-primary mb-2">计算公式（温度+电压双重加速）</h4><p>L = L₀ × 2<sup>(T₀-Ta)/10</sup> × 2<sup>(V₀-Va)/0.1</sup></p><p class="mt-1">温度每降10°C寿命×2 | 电压每降0.1V寿命×2</p>';
+
+ }else{
+  // Arrhenius: L = L0 * 2^((T0-Ta-DT)/theta) * Kv
+  var deltaT=Math.pow(ripple,2)*dtMax;
+  var tempFactor=Math.pow(2,(tr-ta-deltaT)/theta);
+  var kv=(currentType==='tantalum')?Math.pow(voltRatio,-2.5):(currentType==='solid'?Math.min(1,1-(voltRatio-0.8)*2):1);
+  var estLife=lr*tempFactor*kv;
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">额定寿命 @'+tr+'℃</span><span class="text-lg font-bold text-primary">'+lr.toLocaleString()+' h</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">加速因子 θ</span><span class="text-lg font-bold">'+theta+'°C/×2</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">温度加速因子</span><span class="text-lg font-bold">'+tempFactor.toFixed(1)+'x</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">预估寿命</span><span class="text-2xl font-bold text-green-600">'+Math.round(estLife).toLocaleString()+' h</span></div>';
+  html+='<div class="flex justify-between items-center border-b pb-3"><span class="text-sm text-slate-600">年等效 (24h)</span><span class="text-lg font-bold text-primary">'+(estLife/(24*365)).toFixed(1)+' 年</span></div>';
+  html+='<div class="flex justify-between items-center"><span class="text-sm text-slate-600">纹波发热温升 ΔT</span><span class="text-lg font-bold text-amber-600">'+deltaT.toFixed(1)+' ℃</span></div>';
+  var formulaText=theta===20?'L = L₀ × 2<sup>(T₀ - Ta - ΔT)/20</sup> × Kv（固态20°C规则）':'L = L₀ × 2<sup>(T₀ - Ta - ΔT)/10</sup> × Kv（10°C规则）';
+  document.getElementById('formulaBox').innerHTML='<h4 class="font-bold text-primary mb-2">计算公式（Arrhenius）</h4><p>'+formulaText+'</p><p class="mt-1">ΔT = ΔTmax × (Ir/IR)² &nbsp;|&nbsp; L₀='+lr+'h &nbsp;|&nbsp; T₀='+tr+'℃ &nbsp;|&nbsp; θ='+theta+'℃</p>';
+ }
+
+ document.getElementById('results').innerHTML=html;
+}
+
+// Init
+document.querySelector('.type-opt[data-type="hybrid"]').click();
+onSeriesChange();
+document.addEventListener('DOMContentLoaded',function(){YMIN.navbar.inject('tools');YMIN.footer.inject();});
+</script>
+</body>
+</html>
