@@ -1,0 +1,6946 @@
+{
+  "feb16b41214ff2cd1f6488189c1b4649d62b1da51267826cdeaba664a39cedd5": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      33.9,
+      5.017
+    ],
+    "sortedEnvelope": [
+      5,
+      5.017,
+      33.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -4.996
+    ],
+    "maximum": [
+      5,
+      33.9,
+      0.021
+    ],
+    "parts": 4,
+    "vertices": 3191,
+    "triangles": 4338,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 5/引线 5x9/5x9.stp",
+    "fileHash": "feb16b41214ff2cd1f6488189c1b4649d62b1da51267826cdeaba664a39cedd5"
+  },
+  "a1cc15fcb43eb5b78d721f0c6e523bda1f46ab6e7ee1c3d6cbaaa22b10efbd61": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      35.9,
+      5.035
+    ],
+    "sortedEnvelope": [
+      5,
+      5.035,
+      35.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -5
+    ],
+    "maximum": [
+      5,
+      35.9,
+      0.035
+    ],
+    "parts": 4,
+    "vertices": 2804,
+    "triangles": 3592,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 5/引线 5x11/05001100.stp",
+    "fileHash": "a1cc15fcb43eb5b78d721f0c6e523bda1f46ab6e7ee1c3d6cbaaa22b10efbd61"
+  },
+  "acf2180f926c8d0c1b1d493635331a4a8dd36f8f6d97765da452a58535069e65": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      31.9,
+      6.348
+    ],
+    "sortedEnvelope": [
+      6.3,
+      6.348,
+      31.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.295
+    ],
+    "maximum": [
+      6.3,
+      31.9,
+      0.053
+    ],
+    "parts": 3,
+    "vertices": 3072,
+    "triangles": 4308,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 6.3/引线 6.3x7/06300700.stp",
+    "fileHash": "acf2180f926c8d0c1b1d493635331a4a8dd36f8f6d97765da452a58535069e65"
+  },
+  "8e1c6d61062f954fcee54ae663cc9f9d51198b24d8bbbee2bc19935f90f6efb1": {
+    "status": "parsed",
+    "envelope": [
+      8.8,
+      12.87,
+      6.296
+    ],
+    "sortedEnvelope": [
+      6.296,
+      8.8,
+      12.87
+    ],
+    "minimum": [
+      -2.5,
+      -1.85,
+      -6.296
+    ],
+    "maximum": [
+      6.3,
+      11.02,
+      0
+    ],
+    "parts": 7,
+    "vertices": 4634,
+    "triangles": 6754,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 6.3/引线 6.3x11 -直角折弯/LKM_80V_47μF_6.3x11_±20%_引线型_CG .stp",
+    "fileHash": "8e1c6d61062f954fcee54ae663cc9f9d51198b24d8bbbee2bc19935f90f6efb1"
+  },
+  "91cd0c031aec694d1c9f6112975d1d6a099b3e8f85aa5dcaf42dcb70080510b8": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      35.9,
+      6.341
+    ],
+    "sortedEnvelope": [
+      6.3,
+      6.341,
+      35.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      6.3,
+      35.9,
+      0.041
+    ],
+    "parts": 4,
+    "vertices": 3212,
+    "triangles": 4250,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 6.3/引线 6.3x11/LKM-50V-100uF-6.3x11.stp",
+    "fileHash": "91cd0c031aec694d1c9f6112975d1d6a099b3e8f85aa5dcaf42dcb70080510b8"
+  },
+  "8473ce777a475ae70d9c331a9faf6f47964debd5e727fa1e4d1d1d82c52d8342": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      31.94,
+      8.194
+    ],
+    "sortedEnvelope": [
+      8.194,
+      8.2,
+      31.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.194
+    ],
+    "maximum": [
+      8.2,
+      31.94,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3338,
+    "triangles": 4600,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 8/引线 8x7/lkf-8x7_asm.stp",
+    "fileHash": "8473ce777a475ae70d9c331a9faf6f47964debd5e727fa1e4d1d1d82c52d8342"
+  },
+  "1ad77acd2abcd17b6ef954c3a8336ef49684533b1a1cd5d3b88c404aa4903633": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      36.4,
+      8.023
+    ],
+    "sortedEnvelope": [
+      8,
+      8.023,
+      36.4
+    ],
+    "minimum": [
+      0,
+      0,
+      -8
+    ],
+    "maximum": [
+      8,
+      36.4,
+      0.023
+    ],
+    "parts": 4,
+    "vertices": 3348,
+    "triangles": 4504,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 8/引线 8x11.5/LKG_35V_220μF_8x11.5.stp",
+    "fileHash": "1ad77acd2abcd17b6ef954c3a8336ef49684533b1a1cd5d3b88c404aa4903633"
+  },
+  "5670eb02f016154d711a36f443e70684484e41209d5ef8c9f5a49bf756ed521a": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      36.9,
+      8.076
+    ],
+    "sortedEnvelope": [
+      8,
+      8.076,
+      36.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -8
+    ],
+    "maximum": [
+      8,
+      36.9,
+      0.076
+    ],
+    "parts": 4,
+    "vertices": 3654,
+    "triangles": 5036,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 8/引线 8x12/8x12.stp",
+    "fileHash": "5670eb02f016154d711a36f443e70684484e41209d5ef8c9f5a49bf756ed521a"
+  },
+  "35b3a239426218afedac5df1e083a333822f7a96886c0020f9d1bcd588fe3cf7": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      38.9,
+      8.042
+    ],
+    "sortedEnvelope": [
+      8,
+      8.042,
+      38.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.991
+    ],
+    "maximum": [
+      8,
+      38.9,
+      0.051
+    ],
+    "parts": 4,
+    "vertices": 3253,
+    "triangles": 4338,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 8/引线 8x14/LKMD1401K101MF.stp",
+    "fileHash": "35b3a239426218afedac5df1e083a333822f7a96886c0020f9d1bcd588fe3cf7"
+  },
+  "58f16c3013280f4e0c3c8225d099c9b826a617b21420d2371a2db098fbadd6d3": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      40.9,
+      8.034
+    ],
+    "sortedEnvelope": [
+      8,
+      8.034,
+      40.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.994
+    ],
+    "maximum": [
+      8,
+      40.9,
+      0.04
+    ],
+    "parts": 5,
+    "vertices": 3661,
+    "triangles": 4838,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 8/引线 8x16/LKM_16V_1000μF_8x16.stp",
+    "fileHash": "58f16c3013280f4e0c3c8225d099c9b826a617b21420d2371a2db098fbadd6d3"
+  },
+  "c00ca869fbcdda2ff86db8f39b2d5543fe07cbbef5a241c61974697d6687eec3": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      31.9,
+      10.028
+    ],
+    "sortedEnvelope": [
+      10,
+      10.028,
+      31.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.996
+    ],
+    "maximum": [
+      10,
+      31.9,
+      0.032
+    ],
+    "parts": 3,
+    "vertices": 3437,
+    "triangles": 4866,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x7/10000700.stp",
+    "fileHash": "c00ca869fbcdda2ff86db8f39b2d5543fe07cbbef5a241c61974697d6687eec3"
+  },
+  "8104ddfe4c4df27c71f57b7d36f4ba1a7671b99ec4ffab286665406c9977f945": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      33.9,
+      10.158
+    ],
+    "sortedEnvelope": [
+      10,
+      10.158,
+      33.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      33.9,
+      0.158
+    ],
+    "parts": 3,
+    "vertices": 3136,
+    "triangles": 4282,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x9/10x9.stp",
+    "fileHash": "8104ddfe4c4df27c71f57b7d36f4ba1a7671b99ec4ffab286665406c9977f945"
+  },
+  "02eb0d1acef57ed585a6be4e90b27d3d8f77c0416a2b972e32c9477ff7593bed": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      34.9,
+      10.024
+    ],
+    "sortedEnvelope": [
+      10,
+      10.024,
+      34.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      34.9,
+      0.024
+    ],
+    "parts": 3,
+    "vertices": 3136,
+    "triangles": 4282,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x10/10x10.stp",
+    "fileHash": "02eb0d1acef57ed585a6be4e90b27d3d8f77c0416a2b972e32c9477ff7593bed"
+  },
+  "49f1386183f279c076bc9650faaf008a743d95962e1af468f471134135a34323": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      37.4,
+      10.02
+    ],
+    "sortedEnvelope": [
+      10,
+      10.02,
+      37.4
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      37.4,
+      0.02
+    ],
+    "parts": 3,
+    "vertices": 3114,
+    "triangles": 4390,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x12.5/10001250.stp",
+    "fileHash": "49f1386183f279c076bc9650faaf008a743d95962e1af468f471134135a34323"
+  },
+  "67e2a1857bc50b88c3d48a1e31d14cb31d19ecd95e246c0fb8c046f6a8969abc": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      38.9,
+      10.081
+    ],
+    "sortedEnvelope": [
+      10,
+      10.081,
+      38.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.996
+    ],
+    "maximum": [
+      10,
+      38.9,
+      0.085
+    ],
+    "parts": 4,
+    "vertices": 3356,
+    "triangles": 4552,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x14/10001400.stp",
+    "fileHash": "67e2a1857bc50b88c3d48a1e31d14cb31d19ecd95e246c0fb8c046f6a8969abc"
+  },
+  "f5848b399e2f07a7134ad8ca74c09f0196b99c1fa52133aeb2d193ec644dd67a": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      42.9,
+      10.094
+    ],
+    "sortedEnvelope": [
+      10,
+      10.094,
+      42.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      42.9,
+      0.094
+    ],
+    "parts": 4,
+    "vertices": 3046,
+    "triangles": 3984,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x18/10x18.stp",
+    "fileHash": "f5848b399e2f07a7134ad8ca74c09f0196b99c1fa52133aeb2d193ec644dd67a"
+  },
+  "fcd05b43d34d0971a96a866783260ead7ff053e723edd3e157b240eda3d3e847": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      44.9,
+      10.03
+    ],
+    "sortedEnvelope": [
+      10,
+      10.03,
+      44.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      44.9,
+      0.03
+    ],
+    "parts": 4,
+    "vertices": 3298,
+    "triangles": 4444,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x20/10x20-TG.stp",
+    "fileHash": "fcd05b43d34d0971a96a866783260ead7ff053e723edd3e157b240eda3d3e847"
+  },
+  "8b8c05d02537944e319cbe1227c924c8c1cab27a3676bd19edb07edc982c14b0": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      44.94,
+      10
+    ],
+    "sortedEnvelope": [
+      10,
+      10,
+      44.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      44.94,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3086,
+    "triangles": 4180,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x20/10x20-TM.stp",
+    "fileHash": "8b8c05d02537944e319cbe1227c924c8c1cab27a3676bd19edb07edc982c14b0"
+  },
+  "98d9ba1e0876430869860d1d48792573b709020ee727d8dd2d3ab7d412dd743b": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      44.9,
+      10
+    ],
+    "sortedEnvelope": [
+      10,
+      10,
+      44.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      44.9,
+      0
+    ],
+    "parts": 1,
+    "vertices": 2492,
+    "triangles": 3602,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x23/10x23.stp",
+    "fileHash": "98d9ba1e0876430869860d1d48792573b709020ee727d8dd2d3ab7d412dd743b"
+  },
+  "34240d82b63d1a436949621e037831769fa3ed51fc24306daa06784126581e0e": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      49.9,
+      10.025
+    ],
+    "sortedEnvelope": [
+      10,
+      10.025,
+      49.9
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.995
+    ],
+    "maximum": [
+      10,
+      49.9,
+      0.03
+    ],
+    "parts": 4,
+    "vertices": 3156,
+    "triangles": 4248,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径10/引线 10x25/10x25.stp",
+    "fileHash": "34240d82b63d1a436949621e037831769fa3ed51fc24306daa06784126581e0e"
+  },
+  "2ed41a2453a3e93f99937aad6c03f6090b36f5b188e43556a903d043d1ac2de7": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      38.94,
+      12.589
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.589,
+      38.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.494
+    ],
+    "maximum": [
+      12.5,
+      38.94,
+      0.095
+    ],
+    "parts": 4,
+    "vertices": 3824,
+    "triangles": 5184,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 12.5/引线 12.5x14/12501400.stp",
+    "fileHash": "2ed41a2453a3e93f99937aad6c03f6090b36f5b188e43556a903d043d1ac2de7"
+  },
+  "3a622d4260a78ce8d730f9ee89abd3d6813f8b0de78f7b29cb6984ae8775d3f9": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      18.154,
+      12.5
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.5,
+      18.154
+    ],
+    "minimum": [
+      0,
+      -2.09,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      16.064,
+      0
+    ],
+    "parts": 10,
+    "vertices": 6715,
+    "triangles": 9320,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 12.5/20260414 引线12.5x16 M脚/LKE 100-220 12.5-16 涂膜铝壳 M型.stp",
+    "fileHash": "3a622d4260a78ce8d730f9ee89abd3d6813f8b0de78f7b29cb6984ae8775d3f9"
+  },
+  "64a4380667b630b43e4658183b73a72b23898aa840d0ed21538bcb3052e7d200": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      40.94,
+      12.594
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.594,
+      40.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.494
+    ],
+    "maximum": [
+      12.5,
+      40.94,
+      0.101
+    ],
+    "parts": 4,
+    "vertices": 3894,
+    "triangles": 5328,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 12.5/引线 12.5x16/12.5x16.stp",
+    "fileHash": "64a4380667b630b43e4658183b73a72b23898aa840d0ed21538bcb3052e7d200"
+  },
+  "82ec68ee30c82ecef7a49242fd0ca3dda56d29e83df87acdd844656f646dda8e": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      44.94,
+      12.536
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.536,
+      44.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      44.94,
+      0.036
+    ],
+    "parts": 4,
+    "vertices": 3614,
+    "triangles": 4810,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 12.5/引线 12.5x20/LKM-12.5x20.stp",
+    "fileHash": "82ec68ee30c82ecef7a49242fd0ca3dda56d29e83df87acdd844656f646dda8e"
+  },
+  "ccd372d52cb2e2d1497c1ddf6b5a75770d61bfa090e20129bd61051177a929c0": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      49.94,
+      12.547
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.547,
+      49.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.488
+    ],
+    "maximum": [
+      12.5,
+      49.94,
+      0.06
+    ],
+    "parts": 5,
+    "vertices": 3788,
+    "triangles": 4876,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 12.5/引线 12.5x25/LKL-35V-2200uf-12.5x25.stp",
+    "fileHash": "ccd372d52cb2e2d1497c1ddf6b5a75770d61bfa090e20129bd61051177a929c0"
+  },
+  "612b5a30cfbcae6df4ae6ecbb6a8c6bc7cef0d0c6bd319b7919ee21c764ef1be": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      54.94,
+      12.673
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.673,
+      54.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      54.94,
+      0.173
+    ],
+    "parts": 5,
+    "vertices": 3576,
+    "triangles": 4496,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 12.5/引线 12.5x30/12503000.stp",
+    "fileHash": "612b5a30cfbcae6df4ae6ecbb6a8c6bc7cef0d0c6bd319b7919ee21c764ef1be"
+  },
+  "592f7ce83f1c52802e26a76cfe1b5f7a4160a72277634d6d4323620f3ae56b47": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      74.94,
+      12.567
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.567,
+      74.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      74.94,
+      0.067
+    ],
+    "parts": 7,
+    "vertices": 4054,
+    "triangles": 4918,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 12.5/引线 12.5x50/LKX-400V-100uf-12.5x50.stp",
+    "fileHash": "592f7ce83f1c52802e26a76cfe1b5f7a4160a72277634d6d4323620f3ae56b47"
+  },
+  "fe7bc0f9d12ee231056980f2b5e12175dc6fd7bb190fdd179dfe603608c595f3": {
+    "status": "parsed",
+    "envelope": [
+      13,
+      27.154,
+      13
+    ],
+    "sortedEnvelope": [
+      13,
+      13,
+      27.154
+    ],
+    "minimum": [
+      0,
+      -2.09,
+      -13
+    ],
+    "maximum": [
+      13,
+      25.064,
+      0
+    ],
+    "parts": 10,
+    "vertices": 6322,
+    "triangles": 8622,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径13/20250605 引线13x25 M脚/LKE 100-330 13-25 涂膜铝壳 M型.stp",
+    "fileHash": "fe7bc0f9d12ee231056980f2b5e12175dc6fd7bb190fdd179dfe603608c595f3"
+  },
+  "fb25eeb7e880e56611bb73ae1ed23a95371b94abe800ff043cb24a2240400551": {
+    "status": "parsed",
+    "envelope": [
+      18,
+      56.41,
+      18.141
+    ],
+    "sortedEnvelope": [
+      18,
+      18.141,
+      56.41
+    ],
+    "minimum": [
+      0,
+      0,
+      -17.992
+    ],
+    "maximum": [
+      18,
+      56.41,
+      0.149
+    ],
+    "parts": 4,
+    "vertices": 3844,
+    "triangles": 5330,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 18/18x31.5/18003150.stp",
+    "fileHash": "fb25eeb7e880e56611bb73ae1ed23a95371b94abe800ff043cb24a2240400551"
+  },
+  "cf01cb09fcb47b61a7ced6ba9df384840affaac2b0d9b155193eeaa11fcc97ad": {
+    "status": "parsed",
+    "envelope": [
+      18,
+      69.91,
+      17.992
+    ],
+    "sortedEnvelope": [
+      17.992,
+      18,
+      69.91
+    ],
+    "minimum": [
+      -9,
+      -24.9,
+      -8.992
+    ],
+    "maximum": [
+      9,
+      45.01,
+      9
+    ],
+    "parts": 1,
+    "vertices": 2869,
+    "triangles": 4176,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/引线型/直径 18/18x45/18x45.stp",
+    "fileHash": "cf01cb09fcb47b61a7ced6ba9df384840affaac2b0d9b155193eeaa11fcc97ad"
+  },
+  "16d49569c0c9603b4f0dad66038f99fc122672f00b519531327e79d9bf08e3ba": {
+    "status": "parsed",
+    "envelope": [
+      5.44,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      5.44,
+      6.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      5.44,
+      5.3,
+      0
+    ],
+    "parts": 6,
+    "vertices": 4446,
+    "triangles": 5870,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 5/贴片-5x5.4/00500540.stp",
+    "fileHash": "16d49569c0c9603b4f0dad66038f99fc122672f00b519531327e79d9bf08e3ba"
+  },
+  "ab2d9484d81aeaa3a222588f0b2b0d44f95410c6d6cc70091daafee946ce4665": {
+    "status": "parsed",
+    "envelope": [
+      5.84,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      5.84,
+      6.6,
+      7.6
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      5.84,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4315,
+    "triangles": 5378,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 6.3/贴片-6.3x5.8/液态铝电解电容器-贴片型-50V-47μF-6.3x5.8.stp",
+    "fileHash": "ab2d9484d81aeaa3a222588f0b2b0d44f95410c6d6cc70091daafee946ce4665"
+  },
+  "c97d900791a0350c940dddde504da20211cc1d4a5c928ec6029f6a1a02a39a2a": {
+    "status": "parsed",
+    "envelope": [
+      7.7,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      7.7
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      7.7,
+      6.6,
+      0
+    ],
+    "parts": 4,
+    "vertices": 4148,
+    "triangles": 5428,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 6.3/贴片-6.3x7.7/06300770.stp",
+    "fileHash": "c97d900791a0350c940dddde504da20211cc1d4a5c928ec6029f6a1a02a39a2a"
+  },
+  "3ea32f7edc7f84a033f9b085457b2a1d0648ca792ee377bf000c50d059868222": {
+    "status": "parsed",
+    "envelope": [
+      7.9,
+      8.3,
+      9.1
+    ],
+    "sortedEnvelope": [
+      7.9,
+      8.3,
+      9.1
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.1
+    ],
+    "maximum": [
+      7.9,
+      8.3,
+      0
+    ],
+    "parts": 4,
+    "vertices": 3820,
+    "triangles": 4800,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 8/贴片-8x7.9/08000790.stp",
+    "fileHash": "3ea32f7edc7f84a033f9b085457b2a1d0648ca792ee377bf000c50d059868222"
+  },
+  "f7c84e0d45fc2304c34b9c7338308a2c17a1e06af632b19c738b533913dd8c61": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      8.3,
+      9.1
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.1,
+      10
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.1
+    ],
+    "maximum": [
+      10,
+      8.3,
+      0
+    ],
+    "parts": 5,
+    "vertices": 4200,
+    "triangles": 5280,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 8/贴片-8x10/VKM-8x10.stp",
+    "fileHash": "f7c84e0d45fc2304c34b9c7338308a2c17a1e06af632b19c738b533913dd8c61"
+  },
+  "1ebad1cabf91e6718e651546828c9aa5870330ee529867b0accc69da4ca09ed7": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      8.3,
+      9.1
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.1,
+      12.5
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.1
+    ],
+    "maximum": [
+      12.5,
+      8.3,
+      0
+    ],
+    "parts": 5,
+    "vertices": 4260,
+    "triangles": 5452,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 8/贴片-8x12.5/8x12.5.stp",
+    "fileHash": "1ebad1cabf91e6718e651546828c9aa5870330ee529867b0accc69da4ca09ed7"
+  },
+  "16f5907e011ac1b1064089baa68a14c246876f8668fd7ff78dbcddcd652493c0": {
+    "status": "parsed",
+    "envelope": [
+      14.54,
+      8.3,
+      9.7
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.7,
+      14.54
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.7
+    ],
+    "maximum": [
+      14.54,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3836,
+    "triangles": 4628,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 8/贴片-8x14.5/00801450.stp",
+    "fileHash": "16f5907e011ac1b1064089baa68a14c246876f8668fd7ff78dbcddcd652493c0"
+  },
+  "b5b143c25c48491d9653d18ed218e36f64ec0b8679d251bd8eebd3fdb48faec2": {
+    "status": "parsed",
+    "envelope": [
+      7.009,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      7.009,
+      10.3,
+      11.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      7.009,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4466,
+    "triangles": 5684,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 10/贴片-10x6.9/1000-0695.stp",
+    "fileHash": "b5b143c25c48491d9653d18ed218e36f64ec0b8679d251bd8eebd3fdb48faec2"
+  },
+  "1211efe356cac17ddb57c4ac1d2fd0c144ba4fb6c08cedaaf6c438fccb0b2a31": {
+    "status": "parsed",
+    "envelope": [
+      6.919,
+      10.3,
+      11.4
+    ],
+    "sortedEnvelope": [
+      6.919,
+      10.3,
+      11.4
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.4
+    ],
+    "maximum": [
+      6.919,
+      10.3,
+      0
+    ],
+    "parts": 8,
+    "vertices": 4304,
+    "triangles": 5632,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 10/贴片-10x6.9/液态铝电解电容器-贴片型-6.3V-560μF-10x6.9-TG.stp",
+    "fileHash": "1211efe356cac17ddb57c4ac1d2fd0c144ba4fb6c08cedaaf6c438fccb0b2a31"
+  },
+  "1319df15e003bedeb3b4f0571e9593a46d52b4f54a03bda75a99be276c9d3fd0": {
+    "status": "parsed",
+    "envelope": [
+      8.419,
+      10.3,
+      11.4
+    ],
+    "sortedEnvelope": [
+      8.419,
+      10.3,
+      11.4
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.4
+    ],
+    "maximum": [
+      8.419,
+      10.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4498,
+    "triangles": 5744,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 10/贴片-10x8.4/10x8.4.stp",
+    "fileHash": "1319df15e003bedeb3b4f0571e9593a46d52b4f54a03bda75a99be276c9d3fd0"
+  },
+  "0c102b93434a08024985d4ff028c3b759bbe55943201db2056edacad8f519163": {
+    "status": "parsed",
+    "envelope": [
+      10.019,
+      10.3,
+      11.6
+    ],
+    "sortedEnvelope": [
+      10.019,
+      10.3,
+      11.6
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.6
+    ],
+    "maximum": [
+      10.019,
+      10.3,
+      0
+    ],
+    "parts": 16,
+    "vertices": 4868,
+    "triangles": 5744,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 10/贴片-10x10/10x10-TG.stp",
+    "fileHash": "0c102b93434a08024985d4ff028c3b759bbe55943201db2056edacad8f519163"
+  },
+  "4993114621781605ae9bd159be127aab8b99ad0b39c7e6868d33a2a025d05024": {
+    "status": "parsed",
+    "envelope": [
+      10.059,
+      10.3,
+      11.6
+    ],
+    "sortedEnvelope": [
+      10.059,
+      10.3,
+      11.6
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.6
+    ],
+    "maximum": [
+      10.059,
+      10.3,
+      0
+    ],
+    "parts": 10,
+    "vertices": 4014,
+    "triangles": 4994,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 10/贴片-10x10/10x10-TM.stp",
+    "fileHash": "4993114621781605ae9bd159be127aab8b99ad0b39c7e6868d33a2a025d05024"
+  },
+  "fcca7462a9c7995a65aeead348873e39b68345e748e791596234b09f3d9e9906": {
+    "status": "parsed",
+    "envelope": [
+      13.019,
+      10.3,
+      11.6
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.6,
+      13.019
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.6
+    ],
+    "maximum": [
+      13.019,
+      10.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4532,
+    "triangles": 5800,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 10/贴片-10x13/液态铝电解电容器-贴片型-35V-470μF-10x13-TG.stp",
+    "fileHash": "fcca7462a9c7995a65aeead348873e39b68345e748e791596234b09f3d9e9906"
+  },
+  "b5e4054e4547ed49613fd5f5b2b5d01a1da567b3521cd1c7c806074c00f7a656": {
+    "status": "parsed",
+    "envelope": [
+      16.559,
+      10.3,
+      11.4
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.4,
+      16.559
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.4
+    ],
+    "maximum": [
+      16.559,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4052,
+    "triangles": 4896,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 10/贴片-10x16.5/液态铝电解电容器-贴片型-160V-47μF-10x16.5.stp",
+    "fileHash": "b5e4054e4547ed49613fd5f5b2b5d01a1da567b3521cd1c7c806074c00f7a656"
+  },
+  "c61348fd3c52696dd93cd0a726145dd34f3d1d408c1da9a1df1d7dd704b6cf0d": {
+    "status": "parsed",
+    "envelope": [
+      14.5,
+      12.8,
+      13.8
+    ],
+    "sortedEnvelope": [
+      12.8,
+      13.8,
+      14.5
+    ],
+    "minimum": [
+      0,
+      0,
+      -13.8
+    ],
+    "maximum": [
+      14.5,
+      12.8,
+      0
+    ],
+    "parts": 5,
+    "vertices": 3866,
+    "triangles": 5110,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 12.5/贴片-12.5x14.5/1250-1450-TG.stp",
+    "fileHash": "c61348fd3c52696dd93cd0a726145dd34f3d1d408c1da9a1df1d7dd704b6cf0d"
+  },
+  "f192f27de270927355077aac39ed013256da01a1c1a7758f96172f76dd65cc15": {
+    "status": "parsed",
+    "envelope": [
+      14.564,
+      12.8,
+      13.8
+    ],
+    "sortedEnvelope": [
+      12.8,
+      13.8,
+      14.564
+    ],
+    "minimum": [
+      0,
+      0,
+      -13.8
+    ],
+    "maximum": [
+      14.564,
+      12.8,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3868,
+    "triangles": 5044,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 12.5/贴片-12.5x14.5/1250-1450-TM.stp",
+    "fileHash": "f192f27de270927355077aac39ed013256da01a1c1a7758f96172f76dd65cc15"
+  },
+  "b31454b95a6ad5a867b3de08695f2407f8cfd3cef7149750232172988d790ac9": {
+    "status": "parsed",
+    "envelope": [
+      17,
+      17,
+      18.4
+    ],
+    "sortedEnvelope": [
+      17,
+      17,
+      18.4
+    ],
+    "minimum": [
+      0,
+      0,
+      -18.4
+    ],
+    "maximum": [
+      17,
+      17,
+      0
+    ],
+    "parts": 5,
+    "vertices": 4020,
+    "triangles": 5204,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 16/贴片-16x17/VKM-160V-120μF-16x17-TG.stp",
+    "fileHash": "b31454b95a6ad5a867b3de08695f2407f8cfd3cef7149750232172988d790ac9"
+  },
+  "2653a6b09279915875c281dd44dc51842a2187000dce013bc7747a32827feeae": {
+    "status": "parsed",
+    "envelope": [
+      21.064,
+      17,
+      18.4
+    ],
+    "sortedEnvelope": [
+      17,
+      18.4,
+      21.064
+    ],
+    "minimum": [
+      0,
+      0,
+      -18.4
+    ],
+    "maximum": [
+      21.064,
+      17,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3754,
+    "triangles": 4852,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 16/贴片-16x21/VKM-160V-150μF-16x21-TM.stp",
+    "fileHash": "2653a6b09279915875c281dd44dc51842a2187000dce013bc7747a32827feeae"
+  },
+  "7d0e650a5d2663a1183c744c9918d5725db6aaa61a866924a2c7c6b158a035f1": {
+    "status": "parsed",
+    "envelope": [
+      21.064,
+      19,
+      20.9
+    ],
+    "sortedEnvelope": [
+      19,
+      20.9,
+      21.064
+    ],
+    "minimum": [
+      0,
+      0,
+      -20.9
+    ],
+    "maximum": [
+      21.064,
+      19,
+      0
+    ],
+    "parts": 9,
+    "vertices": 6212,
+    "triangles": 6908,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/01 液态3dcad集合/贴片型/直径 18/抗震贴片-18x21/VKM_50V_1500μF_18x21_±20%-TM-KZ.stp",
+    "fileHash": "7d0e650a5d2663a1183c744c9918d5725db6aaa61a866924a2c7c6b158a035f1"
+  },
+  "1577275bfc7261bd22ded8fd5639340abdf2503f8d010175fe89e92554380caa": {
+    "status": "parsed",
+    "envelope": [
+      3.75,
+      36.11,
+      3.75
+    ],
+    "sortedEnvelope": [
+      3.75,
+      3.75,
+      36.11
+    ],
+    "minimum": [
+      -1.875,
+      -24.9,
+      -1.875
+    ],
+    "maximum": [
+      1.875,
+      11.21,
+      1.875
+    ],
+    "parts": 1,
+    "vertices": 2158,
+    "triangles": 3156,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/引线 3.55x11/3.75x11.2.stp",
+    "fileHash": "1577275bfc7261bd22ded8fd5639340abdf2503f8d010175fe89e92554380caa"
+  },
+  "f08a6ec651bdb9eb26d4639728fadf61815796b59dd5b845a258cd7d9d72a560": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      30.16,
+      4
+    ],
+    "sortedEnvelope": [
+      4,
+      4,
+      30.16
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -2
+    ],
+    "maximum": [
+      2,
+      5.26,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2422,
+    "triangles": 3608,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x5/4x5.25.stp",
+    "fileHash": "f08a6ec651bdb9eb26d4639728fadf61815796b59dd5b845a258cd7d9d72a560"
+  },
+  "c8dd4492b9adc03f007a70428db1f528e1f1125ee585ee5e9a203fd73d0e77b9": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      30.16,
+      4
+    ],
+    "sortedEnvelope": [
+      4,
+      4,
+      30.16
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -2
+    ],
+    "maximum": [
+      2,
+      5.26,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2422,
+    "triangles": 3608,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x5.4/4x5.4.stp",
+    "fileHash": "c8dd4492b9adc03f007a70428db1f528e1f1125ee585ee5e9a203fd73d0e77b9"
+  },
+  "cf7179f22152783b012bf887e20b3d2d5ba82e14c1bd407c06d5aa6049904dc2": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      32.86,
+      3.995
+    ],
+    "sortedEnvelope": [
+      3.995,
+      4,
+      32.86
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -1.995
+    ],
+    "maximum": [
+      2,
+      7.96,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2255,
+    "triangles": 3326,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x7/4x7.95.stp",
+    "fileHash": "cf7179f22152783b012bf887e20b3d2d5ba82e14c1bd407c06d5aa6049904dc2"
+  },
+  "544293fbbd467d7d53f75a8e8efd4a6b461f578a36394c2657343b0a164af2ff": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      33.86,
+      3.996
+    ],
+    "sortedEnvelope": [
+      3.996,
+      4,
+      33.86
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -1.996
+    ],
+    "maximum": [
+      2,
+      8.96,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2303,
+    "triangles": 3424,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x9/4x8.95.stp",
+    "fileHash": "544293fbbd467d7d53f75a8e8efd4a6b461f578a36394c2657343b0a164af2ff"
+  },
+  "50e3e1010b4766e56b3d57b56e8755218d0a36a2d9325c91e93d5f8dc0cc6fea": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      34.56,
+      3.996
+    ],
+    "sortedEnvelope": [
+      3.996,
+      4,
+      34.56
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -1.996
+    ],
+    "maximum": [
+      2,
+      9.66,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2258,
+    "triangles": 3322,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x9/4x9.65.stp",
+    "fileHash": "50e3e1010b4766e56b3d57b56e8755218d0a36a2d9325c91e93d5f8dc0cc6fea"
+  },
+  "1d9e1b2ee7d39ed2945c75ea9c60c3fdf6727228ff92a89139c100f1908f666f": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      35.06,
+      3.996
+    ],
+    "sortedEnvelope": [
+      3.996,
+      4,
+      35.06
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -1.996
+    ],
+    "maximum": [
+      2,
+      10.16,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2235,
+    "triangles": 3316,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x10/4x10.15.stp",
+    "fileHash": "1d9e1b2ee7d39ed2945c75ea9c60c3fdf6727228ff92a89139c100f1908f666f"
+  },
+  "31b085e3a7b4822f76eae1d0810aea60aaa8229bda758d23ce9bc1189fb8a787": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      36.11,
+      3.996
+    ],
+    "sortedEnvelope": [
+      3.996,
+      4,
+      36.11
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -1.996
+    ],
+    "maximum": [
+      2,
+      11.21,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2326,
+    "triangles": 3494,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x12/4x11.2.stp",
+    "fileHash": "31b085e3a7b4822f76eae1d0810aea60aaa8229bda758d23ce9bc1189fb8a787"
+  },
+  "dc088e2925196fa77b73053bc0a9f704256c2d3974c1b816de2aff0d8335c403": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      36.26,
+      3.996
+    ],
+    "sortedEnvelope": [
+      3.996,
+      4,
+      36.26
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -1.996
+    ],
+    "maximum": [
+      2,
+      11.36,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2257,
+    "triangles": 3324,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x11/4x11.35.stp",
+    "fileHash": "dc088e2925196fa77b73053bc0a9f704256c2d3974c1b816de2aff0d8335c403"
+  },
+  "c120615053fb44501c47b9f614fbda4a86fce9236be24b3e2c009e8bd9763e62": {
+    "status": "parsed",
+    "envelope": [
+      4,
+      36.31,
+      3.996
+    ],
+    "sortedEnvelope": [
+      3.996,
+      4,
+      36.31
+    ],
+    "minimum": [
+      -2,
+      -24.9,
+      -1.996
+    ],
+    "maximum": [
+      2,
+      11.41,
+      2
+    ],
+    "parts": 1,
+    "vertices": 2251,
+    "triangles": 3316,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 4/引线 4x11/4x11.4.stp",
+    "fileHash": "c120615053fb44501c47b9f614fbda4a86fce9236be24b3e2c009e8bd9763e62"
+  },
+  "21af5a780d431a0aea1c8f42cbaf9e357550c8166084660ffe78eff8739080bc": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      30.29,
+      5
+    ],
+    "sortedEnvelope": [
+      5,
+      5,
+      30.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -5
+    ],
+    "maximum": [
+      5,
+      30.29,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2917,
+    "triangles": 4080,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x5.7/5x5.35.stp",
+    "fileHash": "21af5a780d431a0aea1c8f42cbaf9e357550c8166084660ffe78eff8739080bc"
+  },
+  "9c9cacbcad323c63458b1ff5818bff36b8b77b1f07baea1b9300130dd9f98a83": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      31.89,
+      4.995
+    ],
+    "sortedEnvelope": [
+      4.995,
+      5,
+      31.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -4.995
+    ],
+    "maximum": [
+      5,
+      31.89,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2814,
+    "triangles": 3890,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x6/5x6.95.stp",
+    "fileHash": "9c9cacbcad323c63458b1ff5818bff36b8b77b1f07baea1b9300130dd9f98a83"
+  },
+  "ab31222d6cc1d12037adfafbf70d4e1dd3271a0540975c00f4d7824cb1b5eb82": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      35.69,
+      5
+    ],
+    "sortedEnvelope": [
+      5,
+      5,
+      35.69
+    ],
+    "minimum": [
+      0,
+      0,
+      -5
+    ],
+    "maximum": [
+      5,
+      35.69,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2508,
+    "triangles": 3304,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x10/5x10.75.stp",
+    "fileHash": "ab31222d6cc1d12037adfafbf70d4e1dd3271a0540975c00f4d7824cb1b5eb82"
+  },
+  "7d2f241d168be15600d05593451e26c563cb30c3d8eb0f9d8a848eda56a690ee": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      37.39,
+      5
+    ],
+    "sortedEnvelope": [
+      5,
+      5,
+      37.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -5
+    ],
+    "maximum": [
+      5,
+      37.39,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2648,
+    "triangles": 3608,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x12/5x12.45.stp",
+    "fileHash": "7d2f241d168be15600d05593451e26c563cb30c3d8eb0f9d8a848eda56a690ee"
+  },
+  "4c544dbac58faeca1ade7a19942e72668abd605f1175757474f54f18cb33ed9f": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      40.29,
+      5
+    ],
+    "sortedEnvelope": [
+      5,
+      5,
+      40.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -5
+    ],
+    "maximum": [
+      5,
+      40.29,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2728,
+    "triangles": 3782,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x15/5x15.35.stp",
+    "fileHash": "4c544dbac58faeca1ade7a19942e72668abd605f1175757474f54f18cb33ed9f"
+  },
+  "2f9077b80ade62ae552b46785928adf51f1da8f8765ba9b52c15c746b743082f": {
+    "status": "parsed",
+    "envelope": [
+      5.15,
+      31.84,
+      5.15
+    ],
+    "sortedEnvelope": [
+      5.15,
+      5.15,
+      31.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.15
+    ],
+    "maximum": [
+      5.15,
+      31.84,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2910,
+    "triangles": 4066,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x8/5.15x6.9.stp",
+    "fileHash": "2f9077b80ade62ae552b46785928adf51f1da8f8765ba9b52c15c746b743082f"
+  },
+  "94b582cf913a04ecc41d2b97d136b80d780b8ffb3c378b75af07fc7ba364a23a": {
+    "status": "parsed",
+    "envelope": [
+      5.15,
+      32.89,
+      5.145
+    ],
+    "sortedEnvelope": [
+      5.145,
+      5.15,
+      32.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.145
+    ],
+    "maximum": [
+      5.15,
+      32.89,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2806,
+    "triangles": 3882,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x7/5.15x7.95.stp",
+    "fileHash": "94b582cf913a04ecc41d2b97d136b80d780b8ffb3c378b75af07fc7ba364a23a"
+  },
+  "022d8cf92a93c3218081729369f653711a47f44f6053a482fa611993a821ef57": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      40.29,
+      5
+    ],
+    "sortedEnvelope": [
+      5,
+      5,
+      40.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -5
+    ],
+    "maximum": [
+      5,
+      40.29,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2728,
+    "triangles": 3782,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x10/5.15x9.15.stp",
+    "fileHash": "022d8cf92a93c3218081729369f653711a47f44f6053a482fa611993a821ef57"
+  },
+  "38ccc6906f6d118451d17687cd333c400460ca4446312813ebe180f948d08d15": {
+    "status": "parsed",
+    "envelope": [
+      5,
+      40.29,
+      5
+    ],
+    "sortedEnvelope": [
+      5,
+      5,
+      40.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -5
+    ],
+    "maximum": [
+      5,
+      40.29,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2728,
+    "triangles": 3782,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x9/5.15x9.15.stp",
+    "fileHash": "38ccc6906f6d118451d17687cd333c400460ca4446312813ebe180f948d08d15"
+  },
+  "f3985df0c342ebf1ef3f70b87415f544f10d385b077066dfeff5c6dbb4e72449": {
+    "status": "parsed",
+    "envelope": [
+      5.15,
+      36.49,
+      5.15
+    ],
+    "sortedEnvelope": [
+      5.15,
+      5.15,
+      36.49
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.15
+    ],
+    "maximum": [
+      5.15,
+      36.49,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2456,
+    "triangles": 3236,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x11/5.15x11.55.stp",
+    "fileHash": "f3985df0c342ebf1ef3f70b87415f544f10d385b077066dfeff5c6dbb4e72449"
+  },
+  "6c2531d8a357276814cc3b1774cb11c855f759a4a5b315c016302e68ef4ae3c3": {
+    "status": "parsed",
+    "envelope": [
+      5.15,
+      36.59,
+      5.15
+    ],
+    "sortedEnvelope": [
+      5.15,
+      5.15,
+      36.59
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.15
+    ],
+    "maximum": [
+      5.15,
+      36.59,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2456,
+    "triangles": 3236,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x11/5.15x11.65.stp",
+    "fileHash": "6c2531d8a357276814cc3b1774cb11c855f759a4a5b315c016302e68ef4ae3c3"
+  },
+  "93235a1e34531044ad29b247572825b7c8b9b7d08a9ca4d690c398391f542b5b": {
+    "status": "parsed",
+    "envelope": [
+      5.15,
+      37.39,
+      5.15
+    ],
+    "sortedEnvelope": [
+      5.15,
+      5.15,
+      37.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.15
+    ],
+    "maximum": [
+      5.15,
+      37.39,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2480,
+    "triangles": 3266,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x12/5.15x12.45.stp",
+    "fileHash": "93235a1e34531044ad29b247572825b7c8b9b7d08a9ca4d690c398391f542b5b"
+  },
+  "03a6463aaef93b81963f1778d8b44c0ff50c847b1969735dad618432c925df2e": {
+    "status": "parsed",
+    "envelope": [
+      5.15,
+      38.84,
+      5.15
+    ],
+    "sortedEnvelope": [
+      5.15,
+      5.15,
+      38.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.15
+    ],
+    "maximum": [
+      5.15,
+      38.84,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2638,
+    "triangles": 3596,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x13/5.15x13.9.stp",
+    "fileHash": "03a6463aaef93b81963f1778d8b44c0ff50c847b1969735dad618432c925df2e"
+  },
+  "6edcc47748379c39f7e754c840da915e2b8f394d240cd1404c69b66bedc79a47": {
+    "status": "parsed",
+    "envelope": [
+      5.15,
+      40.29,
+      5.15
+    ],
+    "sortedEnvelope": [
+      5.15,
+      5.15,
+      40.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.15
+    ],
+    "maximum": [
+      5.15,
+      40.29,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2727,
+    "triangles": 3780,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5/引线 5x15/5.15x15.35.stp",
+    "fileHash": "6edcc47748379c39f7e754c840da915e2b8f394d240cd1404c69b66bedc79a47"
+  },
+  "77bf7d00fe900957a68770d80f339af664086fd90a85b4f38c5797cd7b9231f9": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      31.89,
+      5.45
+    ],
+    "sortedEnvelope": [
+      5.45,
+      5.45,
+      31.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.45
+    ],
+    "maximum": [
+      5.45,
+      31.89,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2890,
+    "triangles": 4022,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x6/5.45x6.95.stp",
+    "fileHash": "77bf7d00fe900957a68770d80f339af664086fd90a85b4f38c5797cd7b9231f9"
+  },
+  "6f6d8a32da9af90ba949dd0f7df3747b4615e947a7cff9932cc971e3cd8c5ca9": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      32.86,
+      5.45
+    ],
+    "sortedEnvelope": [
+      5.45,
+      5.45,
+      32.86
+    ],
+    "minimum": [
+      -2.725,
+      -24.9,
+      -2.725
+    ],
+    "maximum": [
+      2.725,
+      7.96,
+      2.725
+    ],
+    "parts": 1,
+    "vertices": 2506,
+    "triangles": 3734,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x7/5.45x7.95.stp",
+    "fileHash": "6f6d8a32da9af90ba949dd0f7df3747b4615e947a7cff9932cc971e3cd8c5ca9"
+  },
+  "afd394ff2c1a2c9495dcfac86ebe317ae721c4dc5f0aa560d2ed37a034ef1d20": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      32.89,
+      5.45
+    ],
+    "sortedEnvelope": [
+      5.45,
+      5.45,
+      32.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.45
+    ],
+    "maximum": [
+      5.45,
+      32.89,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2926,
+    "triangles": 4098,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x8/5.45x7.95.stp",
+    "fileHash": "afd394ff2c1a2c9495dcfac86ebe317ae721c4dc5f0aa560d2ed37a034ef1d20"
+  },
+  "999896ffb2868f82b64ad30e389842e9b8b15477583529fd2b93a3b982b6558a": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      34.09,
+      5.442
+    ],
+    "sortedEnvelope": [
+      5.442,
+      5.45,
+      34.09
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.442
+    ],
+    "maximum": [
+      5.45,
+      34.09,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2715,
+    "triangles": 3688,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x9/5.45x9.15.stp",
+    "fileHash": "999896ffb2868f82b64ad30e389842e9b8b15477583529fd2b93a3b982b6558a"
+  },
+  "3b330db499499d9eaabad4b6d91f0a5816ac68ef55eaf9067561117d3ff9f87f": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      35.89,
+      5.446
+    ],
+    "sortedEnvelope": [
+      5.446,
+      5.45,
+      35.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.446
+    ],
+    "maximum": [
+      5.45,
+      35.89,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2915,
+    "triangles": 4104,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x10/5.45x10.95.stp",
+    "fileHash": "3b330db499499d9eaabad4b6d91f0a5816ac68ef55eaf9067561117d3ff9f87f"
+  },
+  "96d775e44300695a6be16ea7a040d10b6ca623d4ab8b0c0bf17a330af15f9b32": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      36.34,
+      5.446
+    ],
+    "sortedEnvelope": [
+      5.446,
+      5.45,
+      36.34
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.446
+    ],
+    "maximum": [
+      5.45,
+      36.34,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2915,
+    "triangles": 4104,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x11/5.45x11.4.stp",
+    "fileHash": "96d775e44300695a6be16ea7a040d10b6ca623d4ab8b0c0bf17a330af15f9b32"
+  },
+  "9f11f8d18ff05233f3055e08794f990f38ea8df2d275cbd1f8fac0854304b193": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      36.39,
+      5.446
+    ],
+    "sortedEnvelope": [
+      5.446,
+      5.45,
+      36.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.446
+    ],
+    "maximum": [
+      5.45,
+      36.39,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2915,
+    "triangles": 4104,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x11/5.45x11.45.stp",
+    "fileHash": "9f11f8d18ff05233f3055e08794f990f38ea8df2d275cbd1f8fac0854304b193"
+  },
+  "35daa2689ffcff888cc6e7c5166a5765d79b8469efbddeb21649f5aee7fed7b3": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      37.39,
+      5.446
+    ],
+    "sortedEnvelope": [
+      5.446,
+      5.45,
+      37.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.446
+    ],
+    "maximum": [
+      5.45,
+      37.39,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2871,
+    "triangles": 4028,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x12/5.45x12.45.stp",
+    "fileHash": "35daa2689ffcff888cc6e7c5166a5765d79b8469efbddeb21649f5aee7fed7b3"
+  },
+  "1861b91025dda8ec7307abb0da9d54125d219ee9cff6a0c1a3eb6d5932bc143d": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      38.79,
+      5.45
+    ],
+    "sortedEnvelope": [
+      5.45,
+      5.45,
+      38.79
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.45
+    ],
+    "maximum": [
+      5.45,
+      38.79,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2482,
+    "triangles": 3270,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x14/5.45x13.85.stp",
+    "fileHash": "1861b91025dda8ec7307abb0da9d54125d219ee9cff6a0c1a3eb6d5932bc143d"
+  },
+  "de1cb84da7afcae9911587304b62c361b5baaaa5997849bcca99035188b2879e": {
+    "status": "parsed",
+    "envelope": [
+      5.45,
+      40.29,
+      5.45
+    ],
+    "sortedEnvelope": [
+      5.45,
+      5.45,
+      40.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.45
+    ],
+    "maximum": [
+      5.45,
+      40.29,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2592,
+    "triangles": 3494,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x15/5.45x15.35.stp",
+    "fileHash": "de1cb84da7afcae9911587304b62c361b5baaaa5997849bcca99035188b2879e"
+  },
+  "629a6d8633d2a80784d5e1e97761b615d9d6e6f3d40c74222a15fea86fe17c3b": {
+    "status": "parsed",
+    "envelope": [
+      5.5,
+      43.29,
+      5.5
+    ],
+    "sortedEnvelope": [
+      5.5,
+      5.5,
+      43.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -5.5
+    ],
+    "maximum": [
+      5.5,
+      43.29,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2732,
+    "triangles": 3790,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 5.5/引线 5.5x18/5.5x18.35.stp",
+    "fileHash": "629a6d8633d2a80784d5e1e97761b615d9d6e6f3d40c74222a15fea86fe17c3b"
+  },
+  "1ce91e0749412580b032b60fd8a34ab03c068041aba2778f3f6c59514967e2f6": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      28.79,
+      6.3
+    ],
+    "sortedEnvelope": [
+      6.3,
+      6.3,
+      28.79
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      6.3,
+      28.79,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3267,
+    "triangles": 4484,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x4.2/6.3x3.85.stp",
+    "fileHash": "1ce91e0749412580b032b60fd8a34ab03c068041aba2778f3f6c59514967e2f6"
+  },
+  "abf7cc0a21e348ec970a1930e02738189d9d9802d3fd7fdc073ae24d3288e3d0": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      29.19,
+      6.3
+    ],
+    "sortedEnvelope": [
+      6.3,
+      6.3,
+      29.19
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      6.3,
+      29.19,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3301,
+    "triangles": 4556,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x4.2/6.3x.4.25.stp",
+    "fileHash": "abf7cc0a21e348ec970a1930e02738189d9d9802d3fd7fdc073ae24d3288e3d0"
+  },
+  "7e5f515d007af1b998505fafb2975c62ddb6801a3ed7ccf9020de00d87f86317": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      31.79,
+      6.295
+    ],
+    "sortedEnvelope": [
+      6.295,
+      6.3,
+      31.79
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.295
+    ],
+    "maximum": [
+      6.3,
+      31.79,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3254,
+    "triangles": 4488,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x7/6.3x6.85.stp",
+    "fileHash": "7e5f515d007af1b998505fafb2975c62ddb6801a3ed7ccf9020de00d87f86317"
+  },
+  "d5d0a5c80b8e882dcc3da498cef10874c8a568e1341c531af7142d6b6814ff12": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      32.44,
+      6.296
+    ],
+    "sortedEnvelope": [
+      6.296,
+      6.3,
+      32.44
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.296
+    ],
+    "maximum": [
+      6.3,
+      32.44,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3316,
+    "triangles": 4614,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x7/6.3x7.5.stp",
+    "fileHash": "d5d0a5c80b8e882dcc3da498cef10874c8a568e1341c531af7142d6b6814ff12"
+  },
+  "d8bd4e7be6eb3722b1dd1a5604dfbe6581e200c8630f9dec74405ddab2761d72": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      33.19,
+      6.296
+    ],
+    "sortedEnvelope": [
+      6.296,
+      6.3,
+      33.19
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.296
+    ],
+    "maximum": [
+      6.3,
+      33.19,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3278,
+    "triangles": 4550,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x8/6.3x8.25.stp",
+    "fileHash": "d8bd4e7be6eb3722b1dd1a5604dfbe6581e200c8630f9dec74405ddab2761d72"
+  },
+  "226930e391f0c28561582b191572852646068650060c923a70083547983cbc0a": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      35.19,
+      6.3
+    ],
+    "sortedEnvelope": [
+      6.3,
+      6.3,
+      35.19
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      6.3,
+      35.19,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2849,
+    "triangles": 3712,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x10/6.3x10.25.stp",
+    "fileHash": "226930e391f0c28561582b191572852646068650060c923a70083547983cbc0a"
+  },
+  "d48c1278e9e2e976c16208d9cc3c983589efb9e2baf569957deb276a43d4e243": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      35.69,
+      6.3
+    ],
+    "sortedEnvelope": [
+      6.3,
+      6.3,
+      35.69
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      6.3,
+      35.69,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2884,
+    "triangles": 3792,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x10/6.3x10.75.stp",
+    "fileHash": "d48c1278e9e2e976c16208d9cc3c983589efb9e2baf569957deb276a43d4e243"
+  },
+  "f166cd4a4231271cda1ffc10551316076dabfa06a4dfd6c117a405b2886927f5": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      30.54,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      30.54
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      30.54,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3291,
+    "triangles": 4544,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x5.7/6.5x5.6.stp",
+    "fileHash": "f166cd4a4231271cda1ffc10551316076dabfa06a4dfd6c117a405b2886927f5"
+  },
+  "5c6791bb0113b7cabb3fd61fa8062b561ccb3d5272d01eba9cacd335f016a019": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      30.64,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      30.64
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      30.64,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3291,
+    "triangles": 4544,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x2.7/6.5x5.7.stp",
+    "fileHash": "5c6791bb0113b7cabb3fd61fa8062b561ccb3d5272d01eba9cacd335f016a019"
+  },
+  "b66a9b84102442a4665ba762e5bed956a770b5295a5b4cac1a6bb8a923824f43": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      30.64,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      30.64
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      30.64,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3291,
+    "triangles": 4544,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x5/6.5x5.7.stp",
+    "fileHash": "b66a9b84102442a4665ba762e5bed956a770b5295a5b4cac1a6bb8a923824f43"
+  },
+  "6dd4b1abc0359d19c2ae107fe5c199554eedf41ac4dd21e89de183ca7411cbbd": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      31.79,
+      6.492
+    ],
+    "sortedEnvelope": [
+      6.492,
+      6.5,
+      31.79
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.492
+    ],
+    "maximum": [
+      6.5,
+      31.79,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3091,
+    "triangles": 4156,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x6/6.5x6.85.stp",
+    "fileHash": "6dd4b1abc0359d19c2ae107fe5c199554eedf41ac4dd21e89de183ca7411cbbd"
+  },
+  "56a24ea2bbd9b3df7d5bd7ab12ca51217b80d83d1f9364a1590bf29e6abeb708": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      32.29,
+      6.492
+    ],
+    "sortedEnvelope": [
+      6.492,
+      6.5,
+      32.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.492
+    ],
+    "maximum": [
+      6.5,
+      32.29,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3133,
+    "triangles": 4242,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x7/6.5x7.35.stp",
+    "fileHash": "56a24ea2bbd9b3df7d5bd7ab12ca51217b80d83d1f9364a1590bf29e6abeb708"
+  },
+  "5b36aff6ed43e4606cb6929e84064eccbaeac9314fceaadc3ab12d5bd7e3df45": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      32.79,
+      6.495
+    ],
+    "sortedEnvelope": [
+      6.495,
+      6.5,
+      32.79
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.495
+    ],
+    "maximum": [
+      6.5,
+      32.79,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3253,
+    "triangles": 4486,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x7/6.5x7.85.stp",
+    "fileHash": "5b36aff6ed43e4606cb6929e84064eccbaeac9314fceaadc3ab12d5bd7e3df45"
+  },
+  "705ec10278cea3207bb95f56c803f47f42da01a62735f385fa17e04826257569": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      35.19,
+      6.3
+    ],
+    "sortedEnvelope": [
+      6.3,
+      6.3,
+      35.19
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      6.3,
+      35.19,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2849,
+    "triangles": 3712,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x8/6.5x8.25.stp",
+    "fileHash": "705ec10278cea3207bb95f56c803f47f42da01a62735f385fa17e04826257569"
+  },
+  "d70f558eeedecb933ae9dd6036af4a68f564a845cc39b102d55b38a8df92364d": {
+    "status": "parsed",
+    "envelope": [
+      6.3,
+      34.19,
+      6.296
+    ],
+    "sortedEnvelope": [
+      6.296,
+      6.3,
+      34.19
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.296
+    ],
+    "maximum": [
+      6.3,
+      34.19,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3278,
+    "triangles": 4550,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x9/6.5x9.25.stp",
+    "fileHash": "d70f558eeedecb933ae9dd6036af4a68f564a845cc39b102d55b38a8df92364d"
+  },
+  "628e5d00ed57643a79b170ad634cd996e85933dc809dd1720430c1b76027cbbf": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      35.69,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      35.69
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      35.69,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2828,
+    "triangles": 3678,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x11/6.5x10.75.stp",
+    "fileHash": "628e5d00ed57643a79b170ad634cd996e85933dc809dd1720430c1b76027cbbf"
+  },
+  "290970252857ed8ed94d1b571988d58f9e0e78d789a40dd08b6fcbaea23fed21": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      36.59,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      36.59
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      36.59,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2828,
+    "triangles": 3678,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x11/6.5x11.65.stp",
+    "fileHash": "290970252857ed8ed94d1b571988d58f9e0e78d789a40dd08b6fcbaea23fed21"
+  },
+  "68d9d7bdfc79dfcea7f9a482d290fd5f7d50595758da99594528e214486cc762": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      37.49,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      37.49
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      37.49,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2987,
+    "triangles": 4002,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x12/6.5x12.55.stp",
+    "fileHash": "68d9d7bdfc79dfcea7f9a482d290fd5f7d50595758da99594528e214486cc762"
+  },
+  "bbffda40deeff148f733ffdfb0fa9530f216335924e2e372e151c66a59888342": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      38.69,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      38.69
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      38.69,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3064,
+    "triangles": 4162,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x13.5/6.5x13.75.stp",
+    "fileHash": "bbffda40deeff148f733ffdfb0fa9530f216335924e2e372e151c66a59888342"
+  },
+  "e8d2cf0fc9900dcc9545c7340f011e19d66055ca70e7396a66db7f7f829a2de8": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      39.19,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      39.19
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      39.19,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3064,
+    "triangles": 4162,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x14/6.5x14.25.stp",
+    "fileHash": "e8d2cf0fc9900dcc9545c7340f011e19d66055ca70e7396a66db7f7f829a2de8"
+  },
+  "7380da46d43c9542e259ac0c72081b27dbcf0c3aab030620ff40e55a3c48a17e": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      40.69,
+      6.492
+    ],
+    "sortedEnvelope": [
+      6.492,
+      6.5,
+      40.69
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.492
+    ],
+    "maximum": [
+      6.5,
+      40.69,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2880,
+    "triangles": 3806,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x15/6.5x15.75.stp",
+    "fileHash": "7380da46d43c9542e259ac0c72081b27dbcf0c3aab030620ff40e55a3c48a17e"
+  },
+  "aa451cc18f59c5e3cf7c0d7c4284f76e77785fb37724f058aa343944ce11ff87": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      43.24,
+      6.495
+    ],
+    "sortedEnvelope": [
+      6.495,
+      6.5,
+      43.24
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.495
+    ],
+    "maximum": [
+      6.5,
+      43.24,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3021,
+    "triangles": 4102,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x18/6.5x18.3.stp",
+    "fileHash": "aa451cc18f59c5e3cf7c0d7c4284f76e77785fb37724f058aa343944ce11ff87"
+  },
+  "c4ff49712f76316d95b5f534a6c21f86cfadb57082c1d7599bfb54e952bb10e5": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      45.69,
+      6.495
+    ],
+    "sortedEnvelope": [
+      6.495,
+      6.5,
+      45.69
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.495
+    ],
+    "maximum": [
+      6.5,
+      45.69,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3008,
+    "triangles": 4090,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x20/6.5x20.75.stp",
+    "fileHash": "c4ff49712f76316d95b5f534a6c21f86cfadb57082c1d7599bfb54e952bb10e5"
+  },
+  "21e1b98b4cf17351945ec0faff8c97868416c7696ae0c8634c169d4a51d25ec5": {
+    "status": "parsed",
+    "envelope": [
+      6.5,
+      48.69,
+      6.5
+    ],
+    "sortedEnvelope": [
+      6.5,
+      6.5,
+      48.69
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.5
+    ],
+    "maximum": [
+      6.5,
+      48.69,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2750,
+    "triangles": 3606,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 6.3/引线 6.3x23/6.5x23.75.stp",
+    "fileHash": "21e1b98b4cf17351945ec0faff8c97868416c7696ae0c8634c169d4a51d25ec5"
+  },
+  "90e8a85347b679dd02a30bf03b17d164eed7f1693d72ae6f08d1d7a7e482ce54": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      34.44,
+      8
+    ],
+    "sortedEnvelope": [
+      8,
+      8,
+      34.44
+    ],
+    "minimum": [
+      0,
+      0,
+      -8
+    ],
+    "maximum": [
+      8,
+      34.44,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2968,
+    "triangles": 3896,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x9/8x9.5.stp",
+    "fileHash": "90e8a85347b679dd02a30bf03b17d164eed7f1693d72ae6f08d1d7a7e482ce54"
+  },
+  "0a5989a64d83b5d73bfcd6b9e17438c6357a3ed3bd059c797091e30a7c351873": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      35.04,
+      8
+    ],
+    "sortedEnvelope": [
+      8,
+      8,
+      35.04
+    ],
+    "minimum": [
+      0,
+      0,
+      -8
+    ],
+    "maximum": [
+      8,
+      35.04,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2968,
+    "triangles": 3896,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x10/8x10.1.stp",
+    "fileHash": "0a5989a64d83b5d73bfcd6b9e17438c6357a3ed3bd059c797091e30a7c351873"
+  },
+  "3a621c3d4fc0a685999ac787b0973300e459e1153d44a958d19e87107dc43206": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      35.04,
+      8
+    ],
+    "sortedEnvelope": [
+      8,
+      8,
+      35.04
+    ],
+    "minimum": [
+      0,
+      0,
+      -8
+    ],
+    "maximum": [
+      8,
+      35.04,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2968,
+    "triangles": 3896,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x9/8x10.1.stp",
+    "fileHash": "3a621c3d4fc0a685999ac787b0973300e459e1153d44a958d19e87107dc43206"
+  },
+  "afc0aaf0f06067c147ae44d6c48f0c69be6753302f1ecafbfe0ce33bdd43f0be": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      45.14,
+      8
+    ],
+    "sortedEnvelope": [
+      8,
+      8,
+      45.14
+    ],
+    "minimum": [
+      0,
+      0,
+      -8
+    ],
+    "maximum": [
+      8,
+      45.14,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2792,
+    "triangles": 3624,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x20/8x20.2.stp",
+    "fileHash": "afc0aaf0f06067c147ae44d6c48f0c69be6753302f1ecafbfe0ce33bdd43f0be"
+  },
+  "dfcf00dbc40af9f23bec1d0417281cea34d6a0327ce666859b164e8adaee546a": {
+    "status": "parsed",
+    "envelope": [
+      8,
+      47.84,
+      8
+    ],
+    "sortedEnvelope": [
+      8,
+      8,
+      47.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -8
+    ],
+    "maximum": [
+      8,
+      47.84,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2996,
+    "triangles": 4044,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x22/8x22.9.stp",
+    "fileHash": "dfcf00dbc40af9f23bec1d0417281cea34d6a0327ce666859b164e8adaee546a"
+  },
+  "0093a3c634a4b163d27ad9c23b1fcd930794669ba528c05b8701ab7dd648f22b": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      30.94,
+      8.192
+    ],
+    "sortedEnvelope": [
+      8.192,
+      8.2,
+      30.94
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.192
+    ],
+    "maximum": [
+      8.2,
+      30.94,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3218,
+    "triangles": 4356,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x6.2/8.2x6.stp",
+    "fileHash": "0093a3c634a4b163d27ad9c23b1fcd930794669ba528c05b8701ab7dd648f22b"
+  },
+  "6967e57f37d020fc57ea429969c1afcc01d4b7c1250e5316e0827816f10e16dc": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      32.44,
+      8.194
+    ],
+    "sortedEnvelope": [
+      8.194,
+      8.2,
+      32.44
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.194
+    ],
+    "maximum": [
+      8.2,
+      32.44,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3338,
+    "triangles": 4600,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x6/8.2x7.5.stp",
+    "fileHash": "6967e57f37d020fc57ea429969c1afcc01d4b7c1250e5316e0827816f10e16dc"
+  },
+  "988d0fac9b3866aeaaba3e178088502dc718bc34bdddbda132c81d8778efd4ec": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      33.44,
+      8.194
+    ],
+    "sortedEnvelope": [
+      8.194,
+      8.2,
+      33.44
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.194
+    ],
+    "maximum": [
+      8.2,
+      33.44,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3352,
+    "triangles": 4644,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x8/8.2x8.5.stp",
+    "fileHash": "988d0fac9b3866aeaaba3e178088502dc718bc34bdddbda132c81d8778efd4ec"
+  },
+  "7a7d1e1614f0237dbe56ea2f5754b4041bd58d7ea43f3d7d309c3894a3c0fd7f": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      34.34,
+      8.194
+    ],
+    "sortedEnvelope": [
+      8.194,
+      8.2,
+      34.34
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.194
+    ],
+    "maximum": [
+      8.2,
+      34.34,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3352,
+    "triangles": 4644,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x9/8.2x9.4.stp",
+    "fileHash": "7a7d1e1614f0237dbe56ea2f5754b4041bd58d7ea43f3d7d309c3894a3c0fd7f"
+  },
+  "f7819c29ee9246ab50c77b4eaf19204c2a824dd982508c45eb0cdf2fad0069e7": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      34.44,
+      8.194
+    ],
+    "sortedEnvelope": [
+      8.194,
+      8.2,
+      34.44
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.194
+    ],
+    "maximum": [
+      8.2,
+      34.44,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3352,
+    "triangles": 4644,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x10/8.2x9.5.stp",
+    "fileHash": "f7819c29ee9246ab50c77b4eaf19204c2a824dd982508c45eb0cdf2fad0069e7"
+  },
+  "f063f31bf4e788215acf5c9b941b6c1f998051319ebf27e49b2841a35747e44f": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      35.04,
+      8.2
+    ],
+    "sortedEnvelope": [
+      8.2,
+      8.2,
+      35.04
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.2
+    ],
+    "maximum": [
+      8.2,
+      35.04,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2968,
+    "triangles": 3896,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x10/8.2x10.1.stp",
+    "fileHash": "f063f31bf4e788215acf5c9b941b6c1f998051319ebf27e49b2841a35747e44f"
+  },
+  "469487ed367228993205881082b64c9fb6ff61c05cbc40718172f99eaec18280": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      35.84,
+      8.2
+    ],
+    "sortedEnvelope": [
+      8.2,
+      8.2,
+      35.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.2
+    ],
+    "maximum": [
+      8.2,
+      35.84,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2968,
+    "triangles": 3896,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x10/8.2x10.9.stp",
+    "fileHash": "469487ed367228993205881082b64c9fb6ff61c05cbc40718172f99eaec18280"
+  },
+  "ad165839fbd38acbd592d3592a8d298d67ab746fe802a08ca72d92c8d09a70f5": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      36.84,
+      8.2
+    ],
+    "sortedEnvelope": [
+      8.2,
+      8.2,
+      36.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.2
+    ],
+    "maximum": [
+      8.2,
+      36.84,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3092,
+    "triangles": 4156,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x11.5/8.2x11.9.stp",
+    "fileHash": "ad165839fbd38acbd592d3592a8d298d67ab746fe802a08ca72d92c8d09a70f5"
+  },
+  "02a2aa33c62395aad4982b158ae556ddb5b4f55fe29e6317c9234bf33785ef34": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      37.84,
+      8.2
+    ],
+    "sortedEnvelope": [
+      8.2,
+      8.2,
+      37.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.2
+    ],
+    "maximum": [
+      8.2,
+      37.84,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3214,
+    "triangles": 4408,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x12.5/8.2x12.9.stp",
+    "fileHash": "02a2aa33c62395aad4982b158ae556ddb5b4f55fe29e6317c9234bf33785ef34"
+  },
+  "5403031f974a4b96cd89ca652dcc63b1848a6f1282167dbbfdbf877e2536671b": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      37.84,
+      8.2
+    ],
+    "sortedEnvelope": [
+      8.2,
+      8.2,
+      37.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.2
+    ],
+    "maximum": [
+      8.2,
+      37.84,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3214,
+    "triangles": 4408,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x12/8.2x12.9.stp",
+    "fileHash": "5403031f974a4b96cd89ca652dcc63b1848a6f1282167dbbfdbf877e2536671b"
+  },
+  "e9bc139cf55097f42647ef8118eea261bd9dbb7d3085b03fc93e8c5ffd58698c": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      39.44,
+      8.2
+    ],
+    "sortedEnvelope": [
+      8.2,
+      8.2,
+      39.44
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.2
+    ],
+    "maximum": [
+      8.2,
+      39.44,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3214,
+    "triangles": 4408,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x14/8.2x14.5.stp",
+    "fileHash": "e9bc139cf55097f42647ef8118eea261bd9dbb7d3085b03fc93e8c5ffd58698c"
+  },
+  "ef36b662b2687d5862201933ff4201554f59cb5e1e6819b02e91ae564f66e703": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      41.54,
+      8.194
+    ],
+    "sortedEnvelope": [
+      8.194,
+      8.2,
+      41.54
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.194
+    ],
+    "maximum": [
+      8.2,
+      41.54,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3161,
+    "triangles": 4318,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x16/8.2x16.6.stp",
+    "fileHash": "ef36b662b2687d5862201933ff4201554f59cb5e1e6819b02e91ae564f66e703"
+  },
+  "e24befa037dbbb689920cfa6e68f7698831427c39e5ca1ad3058f128b9ef0f7f": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      43.34,
+      8.194
+    ],
+    "sortedEnvelope": [
+      8.194,
+      8.2,
+      43.34
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.194
+    ],
+    "maximum": [
+      8.2,
+      43.34,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3185,
+    "triangles": 4390,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x18/8.2x18.4.stp",
+    "fileHash": "e24befa037dbbb689920cfa6e68f7698831427c39e5ca1ad3058f128b9ef0f7f"
+  },
+  "2679c6f697075bccf025565dde60549f7461077e31be40210d2c4aa9c9cb22a5": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      43.84,
+      8.194
+    ],
+    "sortedEnvelope": [
+      8.194,
+      8.2,
+      43.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.194
+    ],
+    "maximum": [
+      8.2,
+      43.84,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3185,
+    "triangles": 4390,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x18/8.2x18.9.stp",
+    "fileHash": "2679c6f697075bccf025565dde60549f7461077e31be40210d2c4aa9c9cb22a5"
+  },
+  "99510009e5b9e41e8edbf7d8f6ff1862e931d4e16fd35089da5cde486154e3f9": {
+    "status": "parsed",
+    "envelope": [
+      8.2,
+      45.84,
+      8.2
+    ],
+    "sortedEnvelope": [
+      8.2,
+      8.2,
+      45.84
+    ],
+    "minimum": [
+      0,
+      0,
+      -8.2
+    ],
+    "maximum": [
+      8.2,
+      45.84,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2792,
+    "triangles": 3624,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 8/引线 8x20/8.2x20.9.stp",
+    "fileHash": "99510009e5b9e41e8edbf7d8f6ff1862e931d4e16fd35089da5cde486154e3f9"
+  },
+  "bd5b2d5b98159ea8e9adf2ab604bccabd6d35986993e85f18419fd5c5cab2993": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      31.09,
+      9.996
+    ],
+    "sortedEnvelope": [
+      9.996,
+      10,
+      31.09
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.996
+    ],
+    "maximum": [
+      10,
+      31.09,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3303,
+    "triangles": 4584,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x6.5/10x6.15.stp",
+    "fileHash": "bd5b2d5b98159ea8e9adf2ab604bccabd6d35986993e85f18419fd5c5cab2993"
+  },
+  "e2a0962d2c69ca66d3f64dc232953efb8b780fa6b480c2a1b1cde1a7f56e4f72": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      32.59,
+      9.996
+    ],
+    "sortedEnvelope": [
+      9.996,
+      10,
+      32.59
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.996
+    ],
+    "maximum": [
+      10,
+      32.59,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3387,
+    "triangles": 4756,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x7/10x7.65.stp",
+    "fileHash": "e2a0962d2c69ca66d3f64dc232953efb8b780fa6b480c2a1b1cde1a7f56e4f72"
+  },
+  "c0b7d79ef12841aabb7af23e7d22aed01ec35b82d01f61ca639837b226f10720": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      32.99,
+      9.996
+    ],
+    "sortedEnvelope": [
+      9.996,
+      10,
+      32.99
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.996
+    ],
+    "maximum": [
+      10,
+      32.99,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3387,
+    "triangles": 4756,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x8/10x8.05.stp",
+    "fileHash": "c0b7d79ef12841aabb7af23e7d22aed01ec35b82d01f61ca639837b226f10720"
+  },
+  "9a2c54bf7d27fd3d330a3f663eec9fbf0be177ee43855855ade79d7f8ab9ee10": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      35.04,
+      10
+    ],
+    "sortedEnvelope": [
+      10,
+      10,
+      35.04
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      35.04,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3316,
+    "triangles": 4528,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x10/10x10.1.stp",
+    "fileHash": "9a2c54bf7d27fd3d330a3f663eec9fbf0be177ee43855855ade79d7f8ab9ee10"
+  },
+  "1574e7246e469ad825a2c17aa1cfae3b0898d5e12dd9109554160310e44d09a7": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      37.09,
+      10
+    ],
+    "sortedEnvelope": [
+      10,
+      10,
+      37.09
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      37.09,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3174,
+    "triangles": 4366,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x12/10x12.15.stp",
+    "fileHash": "1574e7246e469ad825a2c17aa1cfae3b0898d5e12dd9109554160310e44d09a7"
+  },
+  "ef57013aaa414df5c9f651b4b950d324fe0e33a549b4837c4e957486a61779ac": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      37.59,
+      9.996
+    ],
+    "sortedEnvelope": [
+      9.996,
+      10,
+      37.59
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.996
+    ],
+    "maximum": [
+      10,
+      37.59,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3120,
+    "triangles": 4264,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x12/10x12.65.stp",
+    "fileHash": "ef57013aaa414df5c9f651b4b950d324fe0e33a549b4837c4e957486a61779ac"
+  },
+  "a9854c57d25bcc78ef2d2e255676db2ba277190ca73e872c48e990650017908b": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      37.64,
+      9.996
+    ],
+    "sortedEnvelope": [
+      9.996,
+      10,
+      37.64
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.996
+    ],
+    "maximum": [
+      10,
+      37.64,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3120,
+    "triangles": 4264,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x12.5/10x12.7.stp",
+    "fileHash": "a9854c57d25bcc78ef2d2e255676db2ba277190ca73e872c48e990650017908b"
+  },
+  "36192bfc9307816fb7e2c1125aebe0f1949e19c5af6f2e7b8afabaf9fa9ae2b8": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      38.39,
+      9.996
+    ],
+    "sortedEnvelope": [
+      9.996,
+      10,
+      38.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.996
+    ],
+    "maximum": [
+      10,
+      38.39,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3120,
+    "triangles": 4264,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x13/10x13.45.stp",
+    "fileHash": "36192bfc9307816fb7e2c1125aebe0f1949e19c5af6f2e7b8afabaf9fa9ae2b8"
+  },
+  "b62f8c3c0fcd9e81a0cc0f9637701aeff00c70adaedc028d13d4b6071d2ac880": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      39.87,
+      9.995
+    ],
+    "sortedEnvelope": [
+      9.995,
+      10,
+      39.87
+    ],
+    "minimum": [
+      -5,
+      -24.9,
+      -4.995
+    ],
+    "maximum": [
+      5,
+      14.97,
+      5
+    ],
+    "parts": 1,
+    "vertices": 2548,
+    "triangles": 3822,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x14/10x14.95.stp",
+    "fileHash": "b62f8c3c0fcd9e81a0cc0f9637701aeff00c70adaedc028d13d4b6071d2ac880"
+  },
+  "6a29c2553a4a9d524623dfc61083562dbcabe540d5b40bf55335f5e16e57d8c6": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      39.89,
+      9.995
+    ],
+    "sortedEnvelope": [
+      9.995,
+      10,
+      39.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.995
+    ],
+    "maximum": [
+      10,
+      39.89,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3108,
+    "triangles": 4258,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x15/10x14.95.stp",
+    "fileHash": "6a29c2553a4a9d524623dfc61083562dbcabe540d5b40bf55335f5e16e57d8c6"
+  },
+  "88c8ff1e5491fc4e13e6ec657a829aa0f759fbb211dea53dcd37d0bb1c0f7735": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      41.37,
+      9.995
+    ],
+    "sortedEnvelope": [
+      9.995,
+      10,
+      41.37
+    ],
+    "minimum": [
+      -5,
+      -24.9,
+      -4.995
+    ],
+    "maximum": [
+      5,
+      16.47,
+      5
+    ],
+    "parts": 1,
+    "vertices": 2602,
+    "triangles": 3942,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x16/10x16.45.stp",
+    "fileHash": "88c8ff1e5491fc4e13e6ec657a829aa0f759fbb211dea53dcd37d0bb1c0f7735"
+  },
+  "8d876b1bb3691fd7061ac4a944493e7ea79dbee01d9625c667cdc04e9bd1f85a": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      41.39,
+      9.995
+    ],
+    "sortedEnvelope": [
+      9.995,
+      10,
+      41.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.995
+    ],
+    "maximum": [
+      10,
+      41.39,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3162,
+    "triangles": 4378,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x17/10x16.45.stp",
+    "fileHash": "8d876b1bb3691fd7061ac4a944493e7ea79dbee01d9625c667cdc04e9bd1f85a"
+  },
+  "f1339719474946b92872057f89fafe938c1c0edde187d6c67aabb037757fd734": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      42.39,
+      9.995
+    ],
+    "sortedEnvelope": [
+      9.995,
+      10,
+      42.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.995
+    ],
+    "maximum": [
+      10,
+      42.39,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3162,
+    "triangles": 4378,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x18/10x17.45.stp",
+    "fileHash": "f1339719474946b92872057f89fafe938c1c0edde187d6c67aabb037757fd734"
+  },
+  "e09fd70468eafc2be4e358be9a29e2b5f64788101920de77a8c7ece63d4fb46e": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      43.39,
+      10
+    ],
+    "sortedEnvelope": [
+      10,
+      10,
+      43.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      43.39,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2912,
+    "triangles": 3894,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x18/10x18.45.stp",
+    "fileHash": "e09fd70468eafc2be4e358be9a29e2b5f64788101920de77a8c7ece63d4fb46e"
+  },
+  "3e2d3670d6a7de03c7a17b08c2a3cdff31944e6a6c5c55c68b9847fb28d88a69": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      45.09,
+      10
+    ],
+    "sortedEnvelope": [
+      10,
+      10,
+      45.09
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      45.09,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2912,
+    "triangles": 3894,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x20/10x20.15.stp",
+    "fileHash": "3e2d3670d6a7de03c7a17b08c2a3cdff31944e6a6c5c55c68b9847fb28d88a69"
+  },
+  "d4cccc08cb5a38207909bf51e255a2c757cc883c566a0f38041af100aa396018": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      46.39,
+      10
+    ],
+    "sortedEnvelope": [
+      10,
+      10,
+      46.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      46.39,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2896,
+    "triangles": 3872,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x21/10x21.45.stp",
+    "fileHash": "d4cccc08cb5a38207909bf51e255a2c757cc883c566a0f38041af100aa396018"
+  },
+  "9b9687a7a0080a823f9f33ef2957e48a6e1753118b6dbc6bde36f49124e46f8c": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      48.99,
+      9.995
+    ],
+    "sortedEnvelope": [
+      9.995,
+      10,
+      48.99
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.995
+    ],
+    "maximum": [
+      10,
+      48.99,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2944,
+    "triangles": 3984,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x23/10x24.05.stp",
+    "fileHash": "9b9687a7a0080a823f9f33ef2957e48a6e1753118b6dbc6bde36f49124e46f8c"
+  },
+  "af0583cede1fadebed7bbf751ddf2edd5af19097409d395cc79cd77a13464a00": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      50.39,
+      9.995
+    ],
+    "sortedEnvelope": [
+      9.995,
+      10,
+      50.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.995
+    ],
+    "maximum": [
+      10,
+      50.39,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2849,
+    "triangles": 3796,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x25/10x25.45.stp",
+    "fileHash": "af0583cede1fadebed7bbf751ddf2edd5af19097409d395cc79cd77a13464a00"
+  },
+  "6f861cf4afa9cdaab48cca8b2a8e8e903f7d0b54d4a38f16b673f99b70a47c3a": {
+    "status": "parsed",
+    "envelope": [
+      10,
+      55.89,
+      10
+    ],
+    "sortedEnvelope": [
+      10,
+      10,
+      55.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -10
+    ],
+    "maximum": [
+      10,
+      55.89,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2734,
+    "triangles": 3610,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径10/引线 10x30/10x30.95.stp",
+    "fileHash": "6f861cf4afa9cdaab48cca8b2a8e8e903f7d0b54d4a38f16b673f99b70a47c3a"
+  },
+  "4a41af66b186f83b1c04384cf215f1eca6b9b92c21780432fff3707da5ab7cba": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      35.364,
+      12.5
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.5,
+      35.364
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      35.364,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3342,
+    "triangles": 4630,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x10.5/12.5x10.4.stp",
+    "fileHash": "4a41af66b186f83b1c04384cf215f1eca6b9b92c21780432fff3707da5ab7cba"
+  },
+  "889b60fd83cffab1422b52b6262daa7842fa1b2d7881f7b0896404fdd50cd1f3": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      37.464,
+      12.489
+    ],
+    "sortedEnvelope": [
+      12.489,
+      12.5,
+      37.464
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.489
+    ],
+    "maximum": [
+      12.5,
+      37.464,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3419,
+    "triangles": 4664,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x12.5/12.5x12.5.stp",
+    "fileHash": "889b60fd83cffab1422b52b6262daa7842fa1b2d7881f7b0896404fdd50cd1f3"
+  },
+  "f3d1a0738813923c9d5a97b9d17653e64c2262fc705f67b64c13cedc0e91beaf": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      38.164,
+      12.491
+    ],
+    "sortedEnvelope": [
+      12.491,
+      12.5,
+      38.164
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.491
+    ],
+    "maximum": [
+      12.5,
+      38.164,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3563,
+    "triangles": 4956,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x12.5/12.5x13.2.stp",
+    "fileHash": "f3d1a0738813923c9d5a97b9d17653e64c2262fc705f67b64c13cedc0e91beaf"
+  },
+  "f5dc5b61e3d3626fca6ab22928472c70c56bf96000727b735b0628f73b644e7d": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      38.464,
+      12.489
+    ],
+    "sortedEnvelope": [
+      12.489,
+      12.5,
+      38.464
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.489
+    ],
+    "maximum": [
+      12.5,
+      38.464,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3374,
+    "triangles": 4586,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x14/12.5x13.5.stp",
+    "fileHash": "f5dc5b61e3d3626fca6ab22928472c70c56bf96000727b735b0628f73b644e7d"
+  },
+  "0bf9a5cf9934ca7162a7eb5de6a41aeff6a3ffa04ef397622d8be3f3a9af18dc": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      41.164,
+      12.494
+    ],
+    "sortedEnvelope": [
+      12.494,
+      12.5,
+      41.164
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.494
+    ],
+    "maximum": [
+      12.5,
+      41.164,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3557,
+    "triangles": 4960,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x16/12.5x16.2.stp",
+    "fileHash": "0bf9a5cf9934ca7162a7eb5de6a41aeff6a3ffa04ef397622d8be3f3a9af18dc"
+  },
+  "c547b3c85279cc27006730d2419b364dd0d0ec34160a0b44abe1d181d7e3ddd2": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      43.464,
+      12.5
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.5,
+      43.464
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      43.464,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3146,
+    "triangles": 4166,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x18/12.5x18.5.stp",
+    "fileHash": "c547b3c85279cc27006730d2419b364dd0d0ec34160a0b44abe1d181d7e3ddd2"
+  },
+  "2a7e2c793e8f91b32bd6518770545273aec18f2feeb296547dadcbbb044a58c0": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      45.464,
+      12.5
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.5,
+      45.464
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      45.464,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3549,
+    "triangles": 4898,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x20/12.5x20.5.stp",
+    "fileHash": "2a7e2c793e8f91b32bd6518770545273aec18f2feeb296547dadcbbb044a58c0"
+  },
+  "f3d338e431b1cbd7ee16ab081629191d5543e70a712ef3c376cfd290e7312651": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      47.564,
+      12.488
+    ],
+    "sortedEnvelope": [
+      12.488,
+      12.5,
+      47.564
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.488
+    ],
+    "maximum": [
+      12.5,
+      47.564,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3240,
+    "triangles": 4378,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x22.6/12.5x22.6.stp",
+    "fileHash": "f3d338e431b1cbd7ee16ab081629191d5543e70a712ef3c376cfd290e7312651"
+  },
+  "1d5c469e10f13d73132cf07a49c25c0d9b33e8886ca0939b150bb2c2358447fe": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      50.664,
+      12.494
+    ],
+    "sortedEnvelope": [
+      12.494,
+      12.5,
+      50.664
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.494
+    ],
+    "maximum": [
+      12.5,
+      50.664,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3252,
+    "triangles": 4426,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x25/12.5x25.7.stp",
+    "fileHash": "1d5c469e10f13d73132cf07a49c25c0d9b33e8886ca0939b150bb2c2358447fe"
+  },
+  "e0fa997d88f65ae18275fc8358c4aaf5fbc4c6fb6c83c316b1cb1c41dcba4e6e": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      56.264,
+      12.5
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.5,
+      56.264
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      56.264,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2934,
+    "triangles": 3928,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x35/12.5x31.3.stp",
+    "fileHash": "e0fa997d88f65ae18275fc8358c4aaf5fbc4c6fb6c83c316b1cb1c41dcba4e6e"
+  },
+  "3e37b2d4cb266231209e70d579635b417fccb51e4042ab8a49cbaa273fc5e48e": {
+    "status": "parsed",
+    "envelope": [
+      12.5,
+      76.164,
+      12.5
+    ],
+    "sortedEnvelope": [
+      12.5,
+      12.5,
+      76.164
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.5
+    ],
+    "maximum": [
+      12.5,
+      76.164,
+      0
+    ],
+    "parts": 8,
+    "vertices": 2891,
+    "triangles": 3918,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 12.5/引线 12.5x50/12.5x51.2.stp",
+    "fileHash": "3e37b2d4cb266231209e70d579635b417fccb51e4042ab8a49cbaa273fc5e48e"
+  },
+  "20dcd22327e13dc56adef2b796a5611907a32ed716444b8b55422fe20a91e968": {
+    "status": "parsed",
+    "envelope": [
+      13,
+      50.664,
+      12.991
+    ],
+    "sortedEnvelope": [
+      12.991,
+      13,
+      50.664
+    ],
+    "minimum": [
+      0,
+      0,
+      -12.991
+    ],
+    "maximum": [
+      13,
+      50.664,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3112,
+    "triangles": 4256,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/引线 13x25/13x25.7.stp",
+    "fileHash": "20dcd22327e13dc56adef2b796a5611907a32ed716444b8b55422fe20a91e968"
+  },
+  "bad1b5cf00274cef8ef99bd1606dd4efbafdeab818d67fbccd78ada6f10872de": {
+    "status": "parsed",
+    "envelope": [
+      16,
+      41.564,
+      16
+    ],
+    "sortedEnvelope": [
+      16,
+      16,
+      41.564
+    ],
+    "minimum": [
+      0,
+      0,
+      -16
+    ],
+    "maximum": [
+      16,
+      41.564,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3389,
+    "triangles": 4694,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 16/引线 16x16/16x16.6.stp",
+    "fileHash": "bad1b5cf00274cef8ef99bd1606dd4efbafdeab818d67fbccd78ada6f10872de"
+  },
+  "088db8ef0e88edbb021fc368f93fd1a3251d24920631aaa18618b6b6ff477639": {
+    "status": "parsed",
+    "envelope": [
+      16,
+      44.964,
+      16
+    ],
+    "sortedEnvelope": [
+      16,
+      16,
+      44.964
+    ],
+    "minimum": [
+      0,
+      0,
+      -16
+    ],
+    "maximum": [
+      16,
+      44.964,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3491,
+    "triangles": 4908,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 16/引线 16x20/16x20.stp",
+    "fileHash": "088db8ef0e88edbb021fc368f93fd1a3251d24920631aaa18618b6b6ff477639"
+  },
+  "1f5120f3b3a17fc941a3a6f32973ef7219ff84733155e7d0690d62aa8c29c138": {
+    "status": "parsed",
+    "envelope": [
+      16,
+      50.564,
+      15.987
+    ],
+    "sortedEnvelope": [
+      15.987,
+      16,
+      50.564
+    ],
+    "minimum": [
+      0,
+      0,
+      -15.987
+    ],
+    "maximum": [
+      16,
+      50.564,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3709,
+    "triangles": 5258,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 16/引线 16x25/16x25.6.stp",
+    "fileHash": "1f5120f3b3a17fc941a3a6f32973ef7219ff84733155e7d0690d62aa8c29c138"
+  },
+  "5ef3eed018fd9cde6f1c10d9185a95afe4d3c12d3ad799d3f6037376845330e8": {
+    "status": "parsed",
+    "envelope": [
+      16,
+      56.664,
+      16
+    ],
+    "sortedEnvelope": [
+      16,
+      16,
+      56.664
+    ],
+    "minimum": [
+      0,
+      0,
+      -16
+    ],
+    "maximum": [
+      16,
+      56.664,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3502,
+    "triangles": 4884,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 16/引线 16x31.5/16x31.7.stp",
+    "fileHash": "5ef3eed018fd9cde6f1c10d9185a95afe4d3c12d3ad799d3f6037376845330e8"
+  },
+  "32b3ff75a9dd14a2492e709b9a1801eb0f2f385bdbb063000bf52a02059550a7": {
+    "status": "parsed",
+    "envelope": [
+      18,
+      45.364,
+      17.993
+    ],
+    "sortedEnvelope": [
+      17.993,
+      18,
+      45.364
+    ],
+    "minimum": [
+      0,
+      0,
+      -17.993
+    ],
+    "maximum": [
+      18,
+      45.364,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3669,
+    "triangles": 5254,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 18/18x20/18x20.4.stp",
+    "fileHash": "32b3ff75a9dd14a2492e709b9a1801eb0f2f385bdbb063000bf52a02059550a7"
+  },
+  "3265955c12c7a6f9afa4e2494bcf789320e6f2aee3104a948788339d8bea7b83": {
+    "status": "parsed",
+    "envelope": [
+      18,
+      50.364,
+      18
+    ],
+    "sortedEnvelope": [
+      18,
+      18,
+      50.364
+    ],
+    "minimum": [
+      0,
+      0,
+      -18
+    ],
+    "maximum": [
+      18,
+      50.364,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3386,
+    "triangles": 4720,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 18/18x25/18x25.4.stp",
+    "fileHash": "3265955c12c7a6f9afa4e2494bcf789320e6f2aee3104a948788339d8bea7b83"
+  },
+  "28106e9041238896ac6fee5cf030a8fb1aecefc9457f575ce7af7be99c61cabc": {
+    "status": "parsed",
+    "envelope": [
+      18,
+      56.364,
+      17.992
+    ],
+    "sortedEnvelope": [
+      17.992,
+      18,
+      56.364
+    ],
+    "minimum": [
+      0,
+      0,
+      -17.992
+    ],
+    "maximum": [
+      18,
+      56.364,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3419,
+    "triangles": 4814,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 18/18x30/18x31.4.stp",
+    "fileHash": "28106e9041238896ac6fee5cf030a8fb1aecefc9457f575ce7af7be99c61cabc"
+  },
+  "cd5afdfc0dbc15320907934ec25da39362852a2d1be85661025047ef3f3158c2": {
+    "status": "parsed",
+    "envelope": [
+      18,
+      60.864,
+      18
+    ],
+    "sortedEnvelope": [
+      18,
+      18,
+      60.864
+    ],
+    "minimum": [
+      0,
+      0,
+      -18
+    ],
+    "maximum": [
+      18,
+      60.864,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3124,
+    "triangles": 4250,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/直径 18/18x35.5/18x35.9.stp",
+    "fileHash": "cd5afdfc0dbc15320907934ec25da39362852a2d1be85661025047ef3f3158c2"
+  },
+  "a3ba84e4f04455eb95956469387ef111a25c2cddfe0b340c7e5052b3f1620da5": {
+    "status": "parsed",
+    "envelope": [
+      22,
+      76.064,
+      22
+    ],
+    "sortedEnvelope": [
+      22,
+      22,
+      76.064
+    ],
+    "minimum": [
+      0,
+      0,
+      -22
+    ],
+    "maximum": [
+      22,
+      76.064,
+      0
+    ],
+    "parts": 8,
+    "vertices": 3224,
+    "triangles": 4420,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/引线型/引线 22x50/22.00x51.10.stp",
+    "fileHash": "a3ba84e4f04455eb95956469387ef111a25c2cddfe0b340c7e5052b3f1620da5"
+  },
+  "9a177e6a7032bc6165ea5ef5da4014f1e61adb37de31c17f4a10e23abe5ffb08": {
+    "status": "parsed",
+    "envelope": [
+      5.99,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      5.99,
+      6.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -6
+    ],
+    "maximum": [
+      5.99,
+      5.3,
+      0.3
+    ],
+    "parts": 6,
+    "vertices": 4487,
+    "triangles": 5962,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x5.8/5x5.95.stp",
+    "fileHash": "9a177e6a7032bc6165ea5ef5da4014f1e61adb37de31c17f4a10e23abe5ffb08"
+  },
+  "6dd761609007da47ad6990423f78bc051b6a5a61f6802bcae41a464b78e2a971": {
+    "status": "parsed",
+    "envelope": [
+      7.59,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      6.3,
+      7.59
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      7.59,
+      5.3,
+      0
+    ],
+    "parts": 6,
+    "vertices": 4090,
+    "triangles": 5250,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x7/5x7.55.stp",
+    "fileHash": "6dd761609007da47ad6990423f78bc051b6a5a61f6802bcae41a464b78e2a971"
+  },
+  "f0e22f7c559e4eae03af265c14c47416c608b605dad749f3d2470896975c12e9": {
+    "status": "parsed",
+    "envelope": [
+      7.79,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      6.3,
+      7.79
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      7.79,
+      5.3,
+      0
+    ],
+    "parts": 6,
+    "vertices": 4175,
+    "triangles": 5422,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x7.7/5x7.75.stp",
+    "fileHash": "f0e22f7c559e4eae03af265c14c47416c608b605dad749f3d2470896975c12e9"
+  },
+  "8b3e44b6b0d6a111c31306b5fd04afeda61cc5dc405527d95b8fed0c07371d3a": {
+    "status": "parsed",
+    "envelope": [
+      11.39,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      6.3,
+      11.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      11.39,
+      5.3,
+      0
+    ],
+    "parts": 6,
+    "vertices": 3983,
+    "triangles": 5118,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x11/5x11.35.stp",
+    "fileHash": "8b3e44b6b0d6a111c31306b5fd04afeda61cc5dc405527d95b8fed0c07371d3a"
+  },
+  "8dc5a16ca5007ea2ae154f8f6e7ce81b73b9363c57d1f4fa61659188648cf928": {
+    "status": "parsed",
+    "envelope": [
+      8.59,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      6.3,
+      8.59
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      8.59,
+      5.3,
+      0
+    ],
+    "parts": 6,
+    "vertices": 4127,
+    "triangles": 5334,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x7.7/5.15x8.55.stp",
+    "fileHash": "8dc5a16ca5007ea2ae154f8f6e7ce81b73b9363c57d1f4fa61659188648cf928"
+  },
+  "d536b250333c008ea291aafe436fb92c9293496dee41cc36c9dd851d57b66a8a": {
+    "status": "parsed",
+    "envelope": [
+      9.79,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      6.3,
+      9.79
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      9.79,
+      5.3,
+      0
+    ],
+    "parts": 6,
+    "vertices": 4064,
+    "triangles": 5236,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x9.5/5.15x9.75.stp",
+    "fileHash": "d536b250333c008ea291aafe436fb92c9293496dee41cc36c9dd851d57b66a8a"
+  },
+  "1b1288b1808785b63d167bc4cf368f7166cc46dc937fdb3bdc10563965d6bfb7": {
+    "status": "parsed",
+    "envelope": [
+      12.19,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      6.3,
+      12.19
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      12.19,
+      5.3,
+      0
+    ],
+    "parts": 6,
+    "vertices": 3754,
+    "triangles": 4692,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x12/5.15x12.15.stp",
+    "fileHash": "1b1288b1808785b63d167bc4cf368f7166cc46dc937fdb3bdc10563965d6bfb7"
+  },
+  "24f327b8fef6409094dc1e0c59fcbf231452e15e9b8d6c2b8bf94c4bf5187eeb": {
+    "status": "parsed",
+    "envelope": [
+      13.09,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      6.3,
+      13.09
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      13.09,
+      5.3,
+      0
+    ],
+    "parts": 10,
+    "vertices": 4326,
+    "triangles": 5368,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x13/5.15x13.05.stp",
+    "fileHash": "24f327b8fef6409094dc1e0c59fcbf231452e15e9b8d6c2b8bf94c4bf5187eeb"
+  },
+  "35780739407bbc7c611c52ac5d0ae8a7f67eb749f2b71bf63cc4622f61d5cbe1": {
+    "status": "parsed",
+    "envelope": [
+      15.99,
+      5.3,
+      6.3
+    ],
+    "sortedEnvelope": [
+      5.3,
+      6.3,
+      15.99
+    ],
+    "minimum": [
+      0,
+      0,
+      -6.3
+    ],
+    "maximum": [
+      15.99,
+      5.3,
+      0
+    ],
+    "parts": 6,
+    "vertices": 3586,
+    "triangles": 4424,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5/贴片-5x15.5/5.15x15.95.stp",
+    "fileHash": "35780739407bbc7c611c52ac5d0ae8a7f67eb749f2b71bf63cc4622f61d5cbe1"
+  },
+  "e4ff0aaf86daaed5239efca5b3259a34ccb783c6f182f11083beba1904e0b5d4": {
+    "status": "parsed",
+    "envelope": [
+      8.59,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      8.59
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      8.59,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4374,
+    "triangles": 5576,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5.5/贴片-5.5x8.5/5.45x8.55.stp",
+    "fileHash": "e4ff0aaf86daaed5239efca5b3259a34ccb783c6f182f11083beba1904e0b5d4"
+  },
+  "2b80e184c191b271b539842f8a0f42d8f860673d4c7bca348b9d45ea6767fde2": {
+    "status": "parsed",
+    "envelope": [
+      9.79,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      9.79
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      9.79,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4088,
+    "triangles": 5044,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5.5/贴片-5.5x9.5/5.45x9.75.stp",
+    "fileHash": "2b80e184c191b271b539842f8a0f42d8f860673d4c7bca348b9d45ea6767fde2"
+  },
+  "124672834072b98c1a9381563d4a7450b70a534d36955ab93fa8f6a23f1b3b6a": {
+    "status": "parsed",
+    "envelope": [
+      13.09,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      13.09
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      13.09,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3920,
+    "triangles": 4780,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5.5/贴片-5.5x12.5/5.45x13.05.stp",
+    "fileHash": "124672834072b98c1a9381563d4a7450b70a534d36955ab93fa8f6a23f1b3b6a"
+  },
+  "5c9e028ac877b05ba53d9f9d2c53599eff9794d5d19b2f1b004ca602760151ec": {
+    "status": "parsed",
+    "envelope": [
+      15.99,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      15.99
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      15.99,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4012,
+    "triangles": 5004,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 5.5/贴片-5.5x15.5/5.45x15.95.stp",
+    "fileHash": "5c9e028ac877b05ba53d9f9d2c53599eff9794d5d19b2f1b004ca602760151ec"
+  },
+  "0aba613e515bed0400f412e955d8f2c9f6db222a04631b2bb62ddb0aebb6e7ea": {
+    "status": "parsed",
+    "envelope": [
+      4.22,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      4.22,
+      6.6,
+      7.6
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      4.22,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4899,
+    "triangles": 6470,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x3.95/6.3x4.18.stp",
+    "fileHash": "0aba613e515bed0400f412e955d8f2c9f6db222a04631b2bb62ddb0aebb6e7ea"
+  },
+  "d58142dcafbe14af55d086342cc6a2abadf92a63d1cac203bbac00c2f1e94676": {
+    "status": "parsed",
+    "envelope": [
+      4.72,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      4.72,
+      6.6,
+      7.6
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      4.72,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4853,
+    "triangles": 6418,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x4.5/6.3x4.68.stp",
+    "fileHash": "d58142dcafbe14af55d086342cc6a2abadf92a63d1cac203bbac00c2f1e94676"
+  },
+  "3f59c7f98d831075eb0ae7f60829a91cd7a327cc7023e917199db0d650726dac": {
+    "status": "parsed",
+    "envelope": [
+      8.14,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      8.14
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      8.14,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4172,
+    "triangles": 5168,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x7.7/6.3x8.1.stp",
+    "fileHash": "3f59c7f98d831075eb0ae7f60829a91cd7a327cc7023e917199db0d650726dac"
+  },
+  "8fec602abf94edc796a41db6681919617504f8f79a97a3a42c4e1bca5fc73cc8": {
+    "status": "parsed",
+    "envelope": [
+      11.64,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      11.64
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      11.64,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4016,
+    "triangles": 4924,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x10.5/6.3x11.6.stp",
+    "fileHash": "8fec602abf94edc796a41db6681919617504f8f79a97a3a42c4e1bca5fc73cc8"
+  },
+  "8b6b301d0525cf3aa29cbb5694aba085496577ea26538869251edecbae06c0bd": {
+    "status": "parsed",
+    "envelope": [
+      6.09,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.09,
+      6.6,
+      7.6
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      6.09,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4533,
+    "triangles": 5826,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x5.8/6.5x6.05.stp",
+    "fileHash": "8b6b301d0525cf3aa29cbb5694aba085496577ea26538869251edecbae06c0bd"
+  },
+  "d9a2d2f035a224e4c5b022fc491a31ca9d0f0cca9460920b67a8d49652656e5c": {
+    "status": "parsed",
+    "envelope": [
+      6.21,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.21,
+      6.6,
+      7.6
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      6.21,
+      6.6,
+      0
+    ],
+    "parts": 2,
+    "vertices": 3973,
+    "triangles": 5390,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x5.8/6.5x6.2.stp",
+    "fileHash": "d9a2d2f035a224e4c5b022fc491a31ca9d0f0cca9460920b67a8d49652656e5c"
+  },
+  "7f91acee8aeeddeba2642b12cdb6759a253cf0065cd6bb9b7898d54024bcb5d2": {
+    "status": "parsed",
+    "envelope": [
+      6.34,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.34,
+      6.6,
+      7.6
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      6.34,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4533,
+    "triangles": 5826,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x5.8/6.5x6.3.stp",
+    "fileHash": "7f91acee8aeeddeba2642b12cdb6759a253cf0065cd6bb9b7898d54024bcb5d2"
+  },
+  "291b84d36512c63d9a1d0d8636688ba41daf84e3782d8b4ad964a1f982289053": {
+    "status": "parsed",
+    "envelope": [
+      7.99,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      7.99
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      7.99,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4172,
+    "triangles": 5168,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x7.7/6.5x7.95.stp",
+    "fileHash": "291b84d36512c63d9a1d0d8636688ba41daf84e3782d8b4ad964a1f982289053"
+  },
+  "7eb93c5186c043de382526b6cd7b4cae0eefe3f9164549c5fa16e93ad9ecbe7c": {
+    "status": "parsed",
+    "envelope": [
+      8.49,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      8.49
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      8.49,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4374,
+    "triangles": 5576,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x7.7/6.5x8.45.stp",
+    "fileHash": "7eb93c5186c043de382526b6cd7b4cae0eefe3f9164549c5fa16e93ad9ecbe7c"
+  },
+  "e0dcd024b23b3444f6008be6e6723dd3550ba9e05af1a5f1b9a8d1d0a08b2614": {
+    "status": "parsed",
+    "envelope": [
+      8.89,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      8.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      8.89,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4374,
+    "triangles": 5576,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x12/6.5x8.85.stp",
+    "fileHash": "e0dcd024b23b3444f6008be6e6723dd3550ba9e05af1a5f1b9a8d1d0a08b2614"
+  },
+  "f77100a0db0c38aa54ac5efb00cd4b016b9925b4c290272c288fbbedc7c6748a": {
+    "status": "parsed",
+    "envelope": [
+      9.89,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      9.89
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      9.89,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4088,
+    "triangles": 5044,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x10/6.5x9.85.stp",
+    "fileHash": "f77100a0db0c38aa54ac5efb00cd4b016b9925b4c290272c288fbbedc7c6748a"
+  },
+  "c3b68f86cf73f5447b63c52e2293208e9710905cd0c0c6e622a2a2169ea66b29": {
+    "status": "parsed",
+    "envelope": [
+      12.29,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      12.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      12.29,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4174,
+    "triangles": 5248,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x11/6.5x12.25.stp",
+    "fileHash": "c3b68f86cf73f5447b63c52e2293208e9710905cd0c0c6e622a2a2169ea66b29"
+  },
+  "08f2f42df6a8ba04518ad31a980e84c1bdb744f7e6577009aa4632d43af0f81b": {
+    "status": "parsed",
+    "envelope": [
+      12.29,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      12.29
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      12.29,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4174,
+    "triangles": 5248,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x12/6.5x12.25.stp",
+    "fileHash": "08f2f42df6a8ba04518ad31a980e84c1bdb744f7e6577009aa4632d43af0f81b"
+  },
+  "30d4e2dea0c5869f3a8c81275ea0f43866cc2406465ed793f48b037cb12a7077": {
+    "status": "parsed",
+    "envelope": [
+      13.19,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      13.19
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      13.19,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3920,
+    "triangles": 4780,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x12/6.5x13.15.stp",
+    "fileHash": "30d4e2dea0c5869f3a8c81275ea0f43866cc2406465ed793f48b037cb12a7077"
+  },
+  "3040854ff6e9d55f564c4fa4c18c7c65b4783673b9fc1da0e98c9c068b68e9a7": {
+    "status": "parsed",
+    "envelope": [
+      16.39,
+      6.6,
+      7.6
+    ],
+    "sortedEnvelope": [
+      6.6,
+      7.6,
+      16.39
+    ],
+    "minimum": [
+      0,
+      0,
+      -7.6
+    ],
+    "maximum": [
+      16.39,
+      6.6,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4012,
+    "triangles": 5004,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 6.3/贴片-6.3x16/6.5x16.35.stp",
+    "fileHash": "3040854ff6e9d55f564c4fa4c18c7c65b4783673b9fc1da0e98c9c068b68e9a7"
+  },
+  "7fae14b3bcf10182735a27b5e68059b05f42d8614d08f20db3d371b968b1e699": {
+    "status": "parsed",
+    "envelope": [
+      10.14,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      10.14
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      10.14,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4197,
+    "triangles": 5280,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x10.5/8x10.1.stp",
+    "fileHash": "7fae14b3bcf10182735a27b5e68059b05f42d8614d08f20db3d371b968b1e699"
+  },
+  "9fc28906f57a8684cf5ea1496b750ca89a9633b424030428d48bad7fc40472ce": {
+    "status": "parsed",
+    "envelope": [
+      10.74,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      10.74
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      10.74,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4240,
+    "triangles": 5384,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x10.5/8x10.7.stp",
+    "fileHash": "9fc28906f57a8684cf5ea1496b750ca89a9633b424030428d48bad7fc40472ce"
+  },
+  "f9ccf9d3d016b755942f58a607ec8494fe30f99481e768805c327519571c68d8": {
+    "status": "parsed",
+    "envelope": [
+      13.24,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      13.24
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      13.24,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3849,
+    "triangles": 4646,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x12.5/8x13.2.stp",
+    "fileHash": "f9ccf9d3d016b755942f58a607ec8494fe30f99481e768805c327519571c68d8"
+  },
+  "05a3d0cd2d59a3f901db53e6caefcd1126887673f28f1b2f92b8fbae28bc6270": {
+    "status": "parsed",
+    "envelope": [
+      6.64,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      6.64,
+      8.3,
+      9.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      6.64,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4282,
+    "triangles": 5394,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x6.5/8.2x6.6.stp",
+    "fileHash": "05a3d0cd2d59a3f901db53e6caefcd1126887673f28f1b2f92b8fbae28bc6270"
+  },
+  "6d77be2522ad13ec68aa3f2113abd6250113229f7ded276de717bd2a5628d31d": {
+    "status": "parsed",
+    "envelope": [
+      8.14,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.14,
+      8.3,
+      9.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      8.14,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4216,
+    "triangles": 5284,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x7.7/8.2x8.1.stp",
+    "fileHash": "6d77be2522ad13ec68aa3f2113abd6250113229f7ded276de717bd2a5628d31d"
+  },
+  "014c6c256724c1f4409e7d4f2b7b15467190fcba45bb31120f5df6e52a7f7105": {
+    "status": "parsed",
+    "envelope": [
+      8.14,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.14,
+      8.3,
+      9.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      8.14,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4216,
+    "triangles": 5284,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x8/8.2x8.1.stp",
+    "fileHash": "014c6c256724c1f4409e7d4f2b7b15467190fcba45bb31120f5df6e52a7f7105"
+  },
+  "64d910910f394e1e7b07e0fe42e7e52c7e936e6508887d88d902a9e8bb71e553": {
+    "status": "parsed",
+    "envelope": [
+      9.14,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.14,
+      9.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      9.14,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4359,
+    "triangles": 5578,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x8.5/8.2x9.1.stp",
+    "fileHash": "64d910910f394e1e7b07e0fe42e7e52c7e936e6508887d88d902a9e8bb71e553"
+  },
+  "23104b8b16d624a334abc3a52265c7264640d6b72e2c9922faeaa9f51052e27e": {
+    "status": "parsed",
+    "envelope": [
+      9.14,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.14,
+      9.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      9.14,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4359,
+    "triangles": 5578,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x9/8.2x9.1.stp",
+    "fileHash": "23104b8b16d624a334abc3a52265c7264640d6b72e2c9922faeaa9f51052e27e"
+  },
+  "b149e0423fa6efb5697b050c0690ee16466bbdcb1c8a879bfb54f61f083f9070": {
+    "status": "parsed",
+    "envelope": [
+      10.04,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      10.04
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      10.04,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4136,
+    "triangles": 5156,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x10/8.2x10.stp",
+    "fileHash": "b149e0423fa6efb5697b050c0690ee16466bbdcb1c8a879bfb54f61f083f9070"
+  },
+  "6bf1e8e77556c021e9e5f939d96b4b30a1e02496f95fd1b8ee31664d975d1e8d": {
+    "status": "parsed",
+    "envelope": [
+      12.54,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      12.54
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      12.54,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4177,
+    "triangles": 5290,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x12.5/8.2x12.5.stp",
+    "fileHash": "6bf1e8e77556c021e9e5f939d96b4b30a1e02496f95fd1b8ee31664d975d1e8d"
+  },
+  "857bd5567c293749673a565014aed0fab150326fa1f8dcbb0479cde253d02b5d": {
+    "status": "parsed",
+    "envelope": [
+      13.54,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      13.54
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      13.54,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4014,
+    "triangles": 4988,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x13.5/8.2x13.5.stp",
+    "fileHash": "857bd5567c293749673a565014aed0fab150326fa1f8dcbb0479cde253d02b5d"
+  },
+  "fb74c863515010e3546896fbc5b6d73eb4596088c33f3a48e410d81fd67412a1": {
+    "status": "parsed",
+    "envelope": [
+      15.14,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      15.14
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      15.14,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3820,
+    "triangles": 4612,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x15/8.2x15.1.stp",
+    "fileHash": "fb74c863515010e3546896fbc5b6d73eb4596088c33f3a48e410d81fd67412a1"
+  },
+  "988518481d407c3e71d9cfffebdad2b9fb9497d75d084b0c3a63cdd9ed3476f8": {
+    "status": "parsed",
+    "envelope": [
+      16.54,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      16.54
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      16.54,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 4011,
+    "triangles": 5008,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x16.5/8.2x16.5.stp",
+    "fileHash": "988518481d407c3e71d9cfffebdad2b9fb9497d75d084b0c3a63cdd9ed3476f8"
+  },
+  "85fd3ba19f3c576d7f1ccf69f71c4604a2fcae43dbee8fe5445fa69817bf131c": {
+    "status": "parsed",
+    "envelope": [
+      17.24,
+      8.3,
+      9.3
+    ],
+    "sortedEnvelope": [
+      8.3,
+      9.3,
+      17.24
+    ],
+    "minimum": [
+      0,
+      0,
+      -9.3
+    ],
+    "maximum": [
+      17.24,
+      8.3,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3744,
+    "triangles": 4506,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 8/贴片-8x16.5/8.2x17.2.stp",
+    "fileHash": "85fd3ba19f3c576d7f1ccf69f71c4604a2fcae43dbee8fe5445fa69817bf131c"
+  },
+  "00aa7d86686385a6d1083e1057e02c37a45ab1c3a03c58783449894e129fb86e": {
+    "status": "parsed",
+    "envelope": [
+      8.709,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      8.709,
+      10.3,
+      11.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      8.709,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4391,
+    "triangles": 5582,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x7.7/10x8.65.stp",
+    "fileHash": "00aa7d86686385a6d1083e1057e02c37a45ab1c3a03c58783449894e129fb86e"
+  },
+  "085d66765887f0e8981dfc749b87f7391b7d0aee72320e8fcfc03b8033556e68": {
+    "status": "parsed",
+    "envelope": [
+      9.709,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      9.709,
+      10.3,
+      11.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      9.709,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4456,
+    "triangles": 5706,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x9.5/10x9.65.stp",
+    "fileHash": "085d66765887f0e8981dfc749b87f7391b7d0aee72320e8fcfc03b8033556e68"
+  },
+  "9b2bf7fc9e6b92390f59d115ecd64dfefb90b8c7bb4511572ac57f07eff8726f": {
+    "status": "parsed",
+    "envelope": [
+      10.509,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      10.509,
+      11.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      10.509,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4212,
+    "triangles": 5244,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x10/10x10.45.stp",
+    "fileHash": "9b2bf7fc9e6b92390f59d115ecd64dfefb90b8c7bb4511572ac57f07eff8726f"
+  },
+  "b83b13152abe59d7dcd0bcfe331f32d67e41d125b9a58235f465d1366707a759": {
+    "status": "parsed",
+    "envelope": [
+      10.759,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      10.759,
+      11.3
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      10.759,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4350,
+    "triangles": 5464,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x10.5/10x10.7.stp",
+    "fileHash": "b83b13152abe59d7dcd0bcfe331f32d67e41d125b9a58235f465d1366707a759"
+  },
+  "eb701928484101e98b747cefd194abe5b4ca3da500b57ccf35f808a0f9dd5828": {
+    "status": "parsed",
+    "envelope": [
+      12.809,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.3,
+      12.809
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      12.809,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4152,
+    "triangles": 5156,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x12.5/10-12.75.stp",
+    "fileHash": "eb701928484101e98b747cefd194abe5b4ca3da500b57ccf35f808a0f9dd5828"
+  },
+  "689560c109db7ef80cb5cbca10a9a02c1665a3292a5ab789c81888097f755500": {
+    "status": "parsed",
+    "envelope": [
+      13.359,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.3,
+      13.359
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      13.359,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4198,
+    "triangles": 5250,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x12/10x13.3.stp",
+    "fileHash": "689560c109db7ef80cb5cbca10a9a02c1665a3292a5ab789c81888097f755500"
+  },
+  "c8153b7846783f8aac0e9918b997826b7ecb94a565eda3eeb1a94049e251bae7": {
+    "status": "parsed",
+    "envelope": [
+      14.109,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.3,
+      14.109
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      14.109,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 3912,
+    "triangles": 4712,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x14.5/10x14.05.stp",
+    "fileHash": "c8153b7846783f8aac0e9918b997826b7ecb94a565eda3eeb1a94049e251bae7"
+  },
+  "dd2f2dded2872bb59bb488c520d66130c1a676c3bfe5082700b9931cb6256a84": {
+    "status": "parsed",
+    "envelope": [
+      15.609,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.3,
+      15.609
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      15.609,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4131,
+    "triangles": 5164,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x15.5/10x15.55.stp",
+    "fileHash": "dd2f2dded2872bb59bb488c520d66130c1a676c3bfe5082700b9931cb6256a84"
+  },
+  "6923f639509fa33e4dbd6f71deee0e3c68c03ecc71ae5713cff7f847ab01a76f": {
+    "status": "parsed",
+    "envelope": [
+      17.109,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.3,
+      17.109
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      17.109,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 3856,
+    "triangles": 4636,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x16.5/10x17.05.stp",
+    "fileHash": "6923f639509fa33e4dbd6f71deee0e3c68c03ecc71ae5713cff7f847ab01a76f"
+  },
+  "0159e728aa3c295a9d9fe821ccf0b6ae741e549ad7ec3e5cef3664c2c3047002": {
+    "status": "parsed",
+    "envelope": [
+      18.109,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.3,
+      18.109
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      18.109,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 4072,
+    "triangles": 5066,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x19.5/10x18.05.stp",
+    "fileHash": "0159e728aa3c295a9d9fe821ccf0b6ae741e549ad7ec3e5cef3664c2c3047002"
+  },
+  "037158f2f3e7e8f5aca9c560509bd968fcf5113b86e8c088d3b3973ffca8395f": {
+    "status": "parsed",
+    "envelope": [
+      22.109,
+      10.3,
+      11.3
+    ],
+    "sortedEnvelope": [
+      10.3,
+      11.3,
+      22.109
+    ],
+    "minimum": [
+      0,
+      0,
+      -11.3
+    ],
+    "maximum": [
+      22.109,
+      10.3,
+      0
+    ],
+    "parts": 13,
+    "vertices": 3736,
+    "triangles": 4470,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 10/贴片-10x22/10x22.05.stp",
+    "fileHash": "037158f2f3e7e8f5aca9c560509bd968fcf5113b86e8c088d3b3973ffca8395f"
+  },
+  "5262b98e84e9a094654a8153f224c07126ba7a0acadd0e98824d816512091c70": {
+    "status": "parsed",
+    "envelope": [
+      12.864,
+      12.8,
+      13.8
+    ],
+    "sortedEnvelope": [
+      12.8,
+      12.864,
+      13.8
+    ],
+    "minimum": [
+      0,
+      0,
+      -13.8
+    ],
+    "maximum": [
+      12.864,
+      12.8,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3606,
+    "triangles": 4504,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 12.5/贴片-12.5x12.5/12.5x12.8.stp",
+    "fileHash": "5262b98e84e9a094654a8153f224c07126ba7a0acadd0e98824d816512091c70"
+  },
+  "4b293c8e641944afa8bd72b905ad319a57a11f353726fb5f4d7ff694dbab82a2": {
+    "status": "parsed",
+    "envelope": [
+      13.164,
+      12.8,
+      13.8
+    ],
+    "sortedEnvelope": [
+      12.8,
+      13.164,
+      13.8
+    ],
+    "minimum": [
+      0,
+      0,
+      -13.8
+    ],
+    "maximum": [
+      13.164,
+      12.8,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3606,
+    "triangles": 4504,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 12.5/贴片-12.5x13.5/12.5x13.1.stp",
+    "fileHash": "4b293c8e641944afa8bd72b905ad319a57a11f353726fb5f4d7ff694dbab82a2"
+  },
+  "30c31505abda57531083163d8fe2650eadc20682b2b2ee348f4ab0663b631057": {
+    "status": "parsed",
+    "envelope": [
+      14.164,
+      12.8,
+      13.8
+    ],
+    "sortedEnvelope": [
+      12.8,
+      13.8,
+      14.164
+    ],
+    "minimum": [
+      0,
+      0,
+      -13.8
+    ],
+    "maximum": [
+      14.164,
+      12.8,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3774,
+    "triangles": 4852,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 12.5/贴片-12.5x15/12.5x14.1.stp",
+    "fileHash": "30c31505abda57531083163d8fe2650eadc20682b2b2ee348f4ab0663b631057"
+  },
+  "27966136f5227303c034a57f5d2ed4d5aa216a93d7c49e585400e8b19ccddd3e": {
+    "status": "parsed",
+    "envelope": [
+      16.864,
+      12.8,
+      13.8
+    ],
+    "sortedEnvelope": [
+      12.8,
+      13.8,
+      16.864
+    ],
+    "minimum": [
+      0,
+      0,
+      -13.8
+    ],
+    "maximum": [
+      16.864,
+      12.8,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3692,
+    "triangles": 4728,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 12.5/贴片-12.5x16.5/12.5x16.8.stp",
+    "fileHash": "27966136f5227303c034a57f5d2ed4d5aa216a93d7c49e585400e8b19ccddd3e"
+  },
+  "174812d4987d00882dc043e4a0da19ae78298dc711d165aa868e9837f5aee6db": {
+    "status": "parsed",
+    "envelope": [
+      19.164,
+      12.8,
+      13.8
+    ],
+    "sortedEnvelope": [
+      12.8,
+      13.8,
+      19.164
+    ],
+    "minimum": [
+      0,
+      0,
+      -13.8
+    ],
+    "maximum": [
+      19.164,
+      12.8,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3464,
+    "triangles": 4300,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 12.5/贴片-12.5x18.5/12.5x19.1.stp",
+    "fileHash": "174812d4987d00882dc043e4a0da19ae78298dc711d165aa868e9837f5aee6db"
+  },
+  "b2be6054b76b5e9e2f9ebb9682add0b4521bb1088718f50f8329a76c20b5e806": {
+    "status": "parsed",
+    "envelope": [
+      21.164,
+      12.8,
+      13.8
+    ],
+    "sortedEnvelope": [
+      12.8,
+      13.8,
+      21.164
+    ],
+    "minimum": [
+      0,
+      0,
+      -13.8
+    ],
+    "maximum": [
+      21.164,
+      12.8,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3416,
+    "triangles": 4236,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 12.5/贴片-12.5x21/12.50x21.10.stp",
+    "fileHash": "b2be6054b76b5e9e2f9ebb9682add0b4521bb1088718f50f8329a76c20b5e806"
+  },
+  "40e494488e054dfe63551b633e1cdd2300384fa43f8101c448577dbfc69ce8f8": {
+    "status": "parsed",
+    "envelope": [
+      17.264,
+      17,
+      18
+    ],
+    "sortedEnvelope": [
+      17,
+      17.264,
+      18
+    ],
+    "minimum": [
+      0,
+      0,
+      -18
+    ],
+    "maximum": [
+      17.264,
+      17,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3836,
+    "triangles": 4968,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 16/贴片-16x16.5/16.00x17.20.stp",
+    "fileHash": "40e494488e054dfe63551b633e1cdd2300384fa43f8101c448577dbfc69ce8f8"
+  },
+  "e81baa3627a64c99e158471df333f69a9e8b4b120d0f2356ede7327a8056c36c": {
+    "status": "parsed",
+    "envelope": [
+      19.864,
+      17,
+      18
+    ],
+    "sortedEnvelope": [
+      17,
+      18,
+      19.864
+    ],
+    "minimum": [
+      0,
+      0,
+      -18
+    ],
+    "maximum": [
+      19.864,
+      17,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3770,
+    "triangles": 4868,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 16/贴片-16x19.5/16.00x19.80.stp",
+    "fileHash": "e81baa3627a64c99e158471df333f69a9e8b4b120d0f2356ede7327a8056c36c"
+  },
+  "8d014817bbdf9c722091b1cd72f9d9e8534a5ff4e414d074af04a4fe78a2483f": {
+    "status": "parsed",
+    "envelope": [
+      21.264,
+      17,
+      18
+    ],
+    "sortedEnvelope": [
+      17,
+      18,
+      21.264
+    ],
+    "minimum": [
+      0,
+      0,
+      -18
+    ],
+    "maximum": [
+      21.264,
+      17,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3754,
+    "triangles": 4852,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 16/贴片-16x21.5/16.00x21.20.stp",
+    "fileHash": "8d014817bbdf9c722091b1cd72f9d9e8534a5ff4e414d074af04a4fe78a2483f"
+  },
+  "2fd1657d2758952fae2aabecbe85c35ab5fb64fbb308e52d6bd5207dc543ebcf": {
+    "status": "parsed",
+    "envelope": [
+      26.264,
+      17,
+      18
+    ],
+    "sortedEnvelope": [
+      17,
+      18,
+      26.264
+    ],
+    "minimum": [
+      0,
+      0,
+      -18
+    ],
+    "maximum": [
+      26.264,
+      17,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3671,
+    "triangles": 4744,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 16/贴片-16x26.5/16.00x26.20.stp",
+    "fileHash": "2fd1657d2758952fae2aabecbe85c35ab5fb64fbb308e52d6bd5207dc543ebcf"
+  },
+  "27248db31989830083f41ee3fb9b39c738a75ea8f002e68ab20fda2534d67159": {
+    "status": "parsed",
+    "envelope": [
+      21.064,
+      19,
+      20
+    ],
+    "sortedEnvelope": [
+      19,
+      20,
+      21.064
+    ],
+    "minimum": [
+      0,
+      0,
+      -20
+    ],
+    "maximum": [
+      21.064,
+      19,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3940,
+    "triangles": 5186,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 18/贴片-18x19.5/18.00x21.00.stp",
+    "fileHash": "27248db31989830083f41ee3fb9b39c738a75ea8f002e68ab20fda2534d67159"
+  },
+  "75814a75fde2391d0e87d64206ac4792aceab048dd839bfd118ccec582eda2f6": {
+    "status": "parsed",
+    "envelope": [
+      26.064,
+      19,
+      20
+    ],
+    "sortedEnvelope": [
+      19,
+      20,
+      26.064
+    ],
+    "minimum": [
+      0,
+      0,
+      -20
+    ],
+    "maximum": [
+      26.064,
+      19,
+      0
+    ],
+    "parts": 9,
+    "vertices": 3681,
+    "triangles": 4724,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/02 固态3dcad集合/贴片型-普通座板/直径 18/贴片-18x26.5/18.00x26.00.stp",
+    "fileHash": "75814a75fde2391d0e87d64206ac4792aceab048dd839bfd118ccec582eda2f6"
+  },
+  "c3153bbead2458cf778a222a73e153c87aa4d094914cc2ab831f120c8c98bdc0": {
+    "status": "parsed",
+    "envelope": [
+      3.55,
+      31.92,
+      3.546
+    ],
+    "sortedEnvelope": [
+      3.546,
+      3.55,
+      31.92
+    ],
+    "minimum": [
+      0,
+      0,
+      -3.546
+    ],
+    "maximum": [
+      3.55,
+      31.92,
+      0
+    ],
+    "parts": 5,
+    "vertices": 2698,
+    "triangles": 3758,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/03 超电3dcad集合/引线型/引线 3.55x7/Hybrid Supercapacitor-3.8V-1.5F-3.55x7mm.stp",
+    "fileHash": "c3153bbead2458cf778a222a73e153c87aa4d094914cc2ab831f120c8c98bdc0"
+  },
+  "b64907fc4987f9c5c6fccf0f68958a685473b482fcd17fdc21315485fab4e22c": {
+    "status": "parsed",
+    "envelope": [
+      24.972,
+      30,
+      25
+    ],
+    "sortedEnvelope": [
+      24.972,
+      25,
+      30
+    ],
+    "minimum": [
+      -12.486,
+      -2.5,
+      -12.5
+    ],
+    "maximum": [
+      12.486,
+      27.5,
+      12.5
+    ],
+    "parts": 2,
+    "vertices": 1916,
+    "triangles": 2464,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/牛角型/25x30/二脚/02500300.stp",
+    "fileHash": "b64907fc4987f9c5c6fccf0f68958a685473b482fcd17fdc21315485fab4e22c"
+  },
+  "73cc17c028a159a6432d06c8b2160e9f8f587483252065a907e8acc604a9095d": {
+    "status": "parsed",
+    "envelope": [
+      29.961,
+      50,
+      30
+    ],
+    "sortedEnvelope": [
+      29.961,
+      30,
+      50
+    ],
+    "minimum": [
+      0.019,
+      3.15,
+      -30
+    ],
+    "maximum": [
+      29.981,
+      53.15,
+      0
+    ],
+    "parts": 7,
+    "vertices": 4916,
+    "triangles": 6338,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/牛角型/30x50/30x50.stp",
+    "fileHash": "73cc17c028a159a6432d06c8b2160e9f8f587483252065a907e8acc604a9095d"
+  },
+  "cc3418a9539938e27c46d599815840fd899798f6444f683819e921d7bdcf36b9": {
+    "status": "parsed",
+    "envelope": [
+      34.987,
+      51.6,
+      34.978
+    ],
+    "sortedEnvelope": [
+      34.978,
+      34.987,
+      51.6
+    ],
+    "minimum": [
+      -17.5,
+      -22.5,
+      -17.489
+    ],
+    "maximum": [
+      17.487,
+      29.1,
+      17.489
+    ],
+    "parts": 5,
+    "vertices": 8351,
+    "triangles": 12063,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/牛角型/35x45 S2/二脚/SW3 450V 680uF 35x45 S2-2.stp",
+    "fileHash": "cc3418a9539938e27c46d599815840fd899798f6444f683819e921d7bdcf36b9"
+  },
+  "2926f798bd6fea3e20477fbca571e23cc90af33a002a535036fd08d18aad137c": {
+    "status": "parsed",
+    "envelope": [
+      35,
+      56.6,
+      34.996
+    ],
+    "sortedEnvelope": [
+      34.996,
+      35,
+      56.6
+    ],
+    "minimum": [
+      -17.5,
+      -25,
+      -17.498
+    ],
+    "maximum": [
+      17.5,
+      31.6,
+      17.498
+    ],
+    "parts": 5,
+    "vertices": 5944,
+    "triangles": 8236,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/牛角型/35x50/二脚/cw6_390uf_550v_35x50.stp",
+    "fileHash": "2926f798bd6fea3e20477fbca571e23cc90af33a002a535036fd08d18aad137c"
+  },
+  "2b45578e0dc8574114b2feefa48c032c7fc31aa21c67dae3c5aa240447e22f75": {
+    "status": "parsed",
+    "envelope": [
+      34.976,
+      91.9,
+      35
+    ],
+    "sortedEnvelope": [
+      34.976,
+      35,
+      91.9
+    ],
+    "minimum": [
+      -17.476,
+      -40,
+      -17.5
+    ],
+    "maximum": [
+      17.5,
+      51.9,
+      17.5
+    ],
+    "parts": 8,
+    "vertices": 7137,
+    "triangles": 9040,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/螺栓型/35x80/eh3_100uf_600v_35x80_asm.stp",
+    "fileHash": "2b45578e0dc8574114b2feefa48c032c7fc31aa21c67dae3c5aa240447e22f75"
+  },
+  "38282a1bbf87e83a24c7dcc3a17c5bcfe3c48c34bac1833a46ae69c0ab35844c": {
+    "status": "parsed",
+    "envelope": [
+      64,
+      116.9,
+      63.973
+    ],
+    "sortedEnvelope": [
+      63.973,
+      64,
+      116.9
+    ],
+    "minimum": [
+      -32,
+      -52.5,
+      -31.986
+    ],
+    "maximum": [
+      32,
+      64.4,
+      31.986
+    ],
+    "parts": 8,
+    "vertices": 6540,
+    "triangles": 8388,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/螺栓型/64x105/ew6_1000uf_600v_64x105_asm.stp",
+    "fileHash": "38282a1bbf87e83a24c7dcc3a17c5bcfe3c48c34bac1833a46ae69c0ab35844c"
+  },
+  "6e0358522fb6e29dca1c3ec308f2ff6a89860618c36f4bc507fa80c6f4decd74": {
+    "status": "parsed",
+    "envelope": [
+      100.931,
+      216.4,
+      100.954
+    ],
+    "sortedEnvelope": [
+      100.931,
+      100.954,
+      216.4
+    ],
+    "minimum": [
+      -50.431,
+      -102.5,
+      -50.477
+    ],
+    "maximum": [
+      50.5,
+      113.9,
+      50.477
+    ],
+    "parts": 6,
+    "vertices": 7450,
+    "triangles": 10681,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/螺栓型/100x205/ES3_22000uf_400v_100x205-2.stp",
+    "fileHash": "6e0358522fb6e29dca1c3ec308f2ff6a89860618c36f4bc507fa80c6f4decd74"
+  },
+  "79cbc4be122b0d009443c15e37103ad83d83fe2dadee307d9debe850cbe0ec02": {
+    "status": "parsed",
+    "envelope": [
+      29.979,
+      74.5,
+      29.996
+    ],
+    "sortedEnvelope": [
+      29.979,
+      29.996,
+      74.5
+    ],
+    "minimum": [
+      -14.979,
+      -35,
+      -14.998
+    ],
+    "maximum": [
+      15,
+      39.5,
+      14.998
+    ],
+    "parts": 6,
+    "vertices": 4934,
+    "triangles": 6709,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/T型/CW3 450V1200uF 30-70 T型.stp",
+    "fileHash": "79cbc4be122b0d009443c15e37103ad83d83fe2dadee307d9debe850cbe0ec02"
+  },
+  "7c8afa7cea825a8db438dbab9e20c706e42cbd6715adf61daf965491a31450ba": {
+    "status": "parsed",
+    "envelope": [
+      34.976,
+      74.5,
+      34.984
+    ],
+    "sortedEnvelope": [
+      34.976,
+      34.984,
+      74.5
+    ],
+    "minimum": [
+      -17.476,
+      -35,
+      -17.492
+    ],
+    "maximum": [
+      17.5,
+      39.5,
+      17.492
+    ],
+    "parts": 5,
+    "vertices": 4837,
+    "triangles": 6592,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/04 液态大型3dcad集合/T型/CW3 450V1500uF 35-70 T型.stp",
+    "fileHash": "7c8afa7cea825a8db438dbab9e20c706e42cbd6715adf61daf965491a31450ba"
+  },
+  "ac52e53d7662637cfc8bcaabdabe7ec40882dec29a8d40ee9e8deaa88870f80e": {
+    "status": "parsed",
+    "envelope": [
+      6.1,
+      4.32,
+      7.44
+    ],
+    "sortedEnvelope": [
+      4.32,
+      6.1,
+      7.44
+    ],
+    "minimum": [
+      -3.05,
+      -0.12,
+      -3.72
+    ],
+    "maximum": [
+      3.05,
+      4.2,
+      3.72
+    ],
+    "parts": 1,
+    "vertices": 96,
+    "triangles": 60,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/05 叠层3dcad集合/7.2x6.1x4.2.stp",
+    "fileHash": "ac52e53d7662637cfc8bcaabdabe7ec40882dec29a8d40ee9e8deaa88870f80e"
+  },
+  "19d07087461b13826bf51564b81041861e4bec4d14d15f6202443309175046b6": {
+    "status": "parsed",
+    "envelope": [
+      4.3,
+      1.12,
+      7.54
+    ],
+    "sortedEnvelope": [
+      1.12,
+      4.3,
+      7.54
+    ],
+    "minimum": [
+      -2.15,
+      -0.12,
+      -3.77
+    ],
+    "maximum": [
+      2.15,
+      1,
+      3.77
+    ],
+    "parts": 1,
+    "vertices": 96,
+    "triangles": 60,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/05 叠层3dcad集合/7.3x4.3x1.0.stp",
+    "fileHash": "19d07087461b13826bf51564b81041861e4bec4d14d15f6202443309175046b6"
+  },
+  "b9d895117c347c1c0b39644387dfc055728419028d42389bab9c51c3ff49e748": {
+    "status": "parsed",
+    "envelope": [
+      4.3,
+      1.62,
+      7.54
+    ],
+    "sortedEnvelope": [
+      1.62,
+      4.3,
+      7.54
+    ],
+    "minimum": [
+      -2.15,
+      -0.12,
+      -3.77
+    ],
+    "maximum": [
+      2.15,
+      1.5,
+      3.77
+    ],
+    "parts": 1,
+    "vertices": 96,
+    "triangles": 60,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/05 叠层3dcad集合/7.3x4.3x1.5.stp",
+    "fileHash": "b9d895117c347c1c0b39644387dfc055728419028d42389bab9c51c3ff49e748"
+  },
+  "ddf83caf0c3056c9385fe36650fa531b506f86defee3d770017e6452683fbfef": {
+    "status": "parsed",
+    "envelope": [
+      4.3,
+      2.02,
+      7.54
+    ],
+    "sortedEnvelope": [
+      2.02,
+      4.3,
+      7.54
+    ],
+    "minimum": [
+      -2.15,
+      -0.12,
+      -3.77
+    ],
+    "maximum": [
+      2.15,
+      1.9,
+      3.77
+    ],
+    "parts": 1,
+    "vertices": 96,
+    "triangles": 60,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/05 叠层3dcad集合/7.3x4.3x1.9.stp",
+    "fileHash": "ddf83caf0c3056c9385fe36650fa531b506f86defee3d770017e6452683fbfef"
+  },
+  "e2e6c6099807a940896d91307861ceb0556ef57ea376a791da12c3b39da178db": {
+    "status": "parsed",
+    "envelope": [
+      4.3,
+      2.92,
+      7.54
+    ],
+    "sortedEnvelope": [
+      2.92,
+      4.3,
+      7.54
+    ],
+    "minimum": [
+      -2.15,
+      -0.12,
+      -3.77
+    ],
+    "maximum": [
+      2.15,
+      2.8,
+      3.77
+    ],
+    "parts": 1,
+    "vertices": 96,
+    "triangles": 60,
+    "source": "3dcad文件/20260730-3dcad/20260730-3dcad/05 叠层3dcad集合/7.3x4.3x2.8.stp",
+    "fileHash": "e2e6c6099807a940896d91307861ceb0556ef57ea376a791da12c3b39da178db"
+  }
+}

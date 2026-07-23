@@ -1,175 +1,342 @@
-<!DOCTYPE html><html class="light" lang="zh-CN"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1.0" name="viewport"><title>3D-CAD模型 - 永铭电子</title><meta name="description" content="永铭电子电容器3D-CAD模型下载 - STEP/IGES格式，支持料号搜索、尺寸筛选、3D在线预览，兼容主流PCB设计软件。"><link rel="icon" type="image/png" href="logo.png"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles/common.css"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#1B365D"},borderRadius:{"DEFAULT":"0px"},fontFamily:{"headline":["Space Grotesk"],"body":["Inter"]}}}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script></head><body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden"><header id="ymin-navbar"></header><main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50"><div class="max-w-7xl mx-auto px-6 py-8"><nav class="text-[11px] text-slate-500 uppercase mb-6 flex gap-2"><a href="index.html" class="hover:text-primary">首页</a><span>/</span><a href="design-tools.html" class="hover:text-primary">设计工具</a><span>/</span><span class="text-primary font-bold">3D-CAD模型</span></nav><div class="bg-white border border-slate-200 p-8 mb-8"><div class="flex flex-col md:flex-row justify-between items-start mb-6"><div><h1 class="text-3xl font-bold text-primary mb-3">3D-CAD 模型下载</h1><p class="text-slate-600 max-w-2xl">提供 STEP/IGES 格式电容3D封装模型，支持料号搜索、尺寸筛选与<strong>在线3D预览</strong>，数据来源于永铭官方CAD库，可直接导入 Altium Designer / KiCad / Cadence Allegro。</p></div><div class="flex items-center gap-2 mt-4 md:mt-0"><button class="bg-[#1B365D] text-white px-5 py-2 text-xs font-bold flex items-center gap-1" id="btnBatchDownload"><span class="material-symbols-outlined text-sm">download</span>批量下载</button></div></div><div class="bg-slate-50 border border-slate-200 p-5 mb-6"><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"><div><label class="text-[10px] text-slate-400 uppercase block mb-1">料号搜索</label><input id="filterPn" class="w-full bg-white border border-slate-200 p-2 text-xs focus:border-primary outline-none" placeholder="输入料号如 VHTC0771..."></div><div><label class="text-[10px] text-slate-400 uppercase block mb-1">系列</label><select id="filterSeries" class="w-full bg-white border border-slate-200 py-2 px-2 text-xs focus:border-primary outline-none"><option value="">全部系列</option><option>VHT</option><option>NPX</option><option>VKM</option><option>VKO</option><option>VPT</option><option>VPG</option><option>LK</option><option>LKL</option><option>CW3H</option></select></div><div><label class="text-[10px] text-slate-400 uppercase block mb-1">封装</label><select id="filterPkg" class="w-full bg-white border border-slate-200 py-2 px-2 text-xs focus:border-primary outline-none"><option value="">全部</option><option>贴片型 (SMD)</option><option>引线型 (Radial)</option><option>牛角型 (Snap-in)</option></select></div><div><label class="text-[10px] text-slate-400 uppercase block mb-1">直径 (mm)</label><div class="flex gap-1"><input id="filterDmin" class="w-full bg-white border border-slate-200 p-2 text-xs" placeholder="Min"><span class="text-slate-400 text-xs self-center">-</span><input id="filterDmax" class="w-full bg-white border border-slate-200 p-2 text-xs" placeholder="Max"></div></div><div><label class="text-[10px] text-slate-400 uppercase block mb-1">长度 (mm)</label><div class="flex gap-1"><input id="filterLmin" class="w-full bg-white border border-slate-200 p-2 text-xs" placeholder="Min"><span class="text-slate-400 text-xs self-center">-</span><input id="filterLmax" class="w-full bg-white border border-slate-200 p-2 text-xs" placeholder="Max"></div></div><div><label class="text-[10px] text-slate-400 uppercase block mb-1">格式</label><div class="flex gap-3 pt-1"><label class="flex items-center gap-1 text-xs"><input type="checkbox" class="filterFmt w-3 h-3" value="STEP" checked>STEP</label><label class="flex items-center gap-1 text-xs"><input type="checkbox" class="filterFmt w-3 h-3" value="IGES" checked>IGES</label></div></div></div><div class="flex justify-end mt-4"><button id="btnFilter" class="bg-[#1B365D] text-white px-6 py-1.5 text-xs font-bold">应用筛选</button><button id="btnReset" class="ml-2 border border-slate-300 text-slate-600 px-6 py-1.5 text-xs font-bold hover:bg-slate-50">重置</button></div></div><div class="overflow-x-auto"><table class="w-full text-sm border-collapse"><thead class="bg-slate-100"><tr><th class="border border-slate-300 px-2 py-2 w-8"><input type="checkbox" id="selectAll" class="w-3 h-3"></th><th class="border border-slate-300 px-3 py-2 text-left">料号</th><th class="border border-slate-300 px-3 py-2 text-left">系列</th><th class="border border-slate-300 px-3 py-2 text-left">封装</th><th class="border border-slate-300 px-3 py-2 text-left">尺寸 øD×L (mm)</th><th class="border border-slate-300 px-3 py-2 text-center">引脚间距 (mm)</th><th class="border border-slate-300 px-3 py-2 text-center">格式</th><th class="border border-slate-300 px-3 py-2 text-center">3D预览</th><th class="border border-slate-300 px-3 py-2 text-center">下载</th></tr></thead><tbody id="tableBody"></tbody></table></div><div class="flex justify-between items-center mt-4 text-xs text-slate-500"><span id="resultCount">共 25 条</span><span>点击「3D预览」查看真实 STEP 模型（需加载 WASM 约 2-3 秒）</span></div></div></div><footer id="ymin-footer"></footer></main><!-- 3D预览 Modal --><div id="previewModal" class="fixed inset-0 bg-black/70 z-[100] hidden flex items-center justify-center" onclick="closePreview(event)"><div class="bg-white w-[90vw] max-w-4xl h-[80vh] flex flex-col shadow-2xl" onclick="event.stopPropagation()"><div class="flex items-center justify-between px-5 py-3 border-b border-slate-200"><div><span class="font-bold text-primary" id="previewTitle">3D 预览</span><span class="text-xs text-slate-500 ml-3" id="previewSubtitle"></span></div><div class="flex items-center gap-3"><button id="btnWireframe" class="text-xs border border-slate-300 px-2 py-1 hover:bg-slate-50">线框模式</button><button id="btnAutoRotate" class="text-xs border border-slate-300 px-2 py-1 hover:bg-slate-50 bg-primary/10">自动旋转</button><button onclick="document.getElementById('previewModal').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 ml-2"><span class="material-symbols-outlined">close</span></button></div></div><div class="flex-1 relative bg-slate-100" id="preview3DContainer"><canvas id="previewCanvas" class="w-full h-full"></canvas><div id="previewLoading" class="absolute inset-0 flex items-center justify-center bg-slate-100/80 hidden"><div class="text-center"><div class="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-2"></div><p class="text-xs text-slate-500" id="previewLoadingText">加载 STEP 模型中...</p></div></div></div><div class="px-4 py-2 border-t border-slate-200 text-[10px] text-slate-400 flex justify-between"><span>拖拽旋转 | 滚轮缩放 | 右键平移</span><span id="previewDim"></span></div></div></div><script src="components/navbar.js"></script><script src="components/footer.js"></script><script>document.addEventListener('DOMContentLoaded',function(){YMIN.navbar.inject('tools');YMIN.footer.inject();});
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品 3D-CAD 数据库 - 永铭电子</title>
+  <meta name="description" content="按永铭电子产品料号、系列、类别与目录尺寸查找 STEP 3D-CAD，在线预览并下载真实工程模型。">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/cad-viewer.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: { primary: "#0f2f56" },
+          borderRadius: { DEFAULT: "0px" },
+          fontFamily: { headline: ["Space Grotesk"], body: ["Inter"] }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="cad-body flex h-screen flex-col overflow-hidden">
+  <header id="ymin-navbar"></header>
 
-// ===== CAD 数据 =====
-var cadData=[
-{pn:"VHTC0771H470MV",series:"VHT",pkg:"贴片型",dia:6.3,len:7.7,pitch:1.8,step:"cad-models/smd-6.3x7.7.stp"},
-{pn:"VHTD1201H101MV",series:"VHT",pkg:"贴片型",dia:8,len:10.5,pitch:2.2,step:"cad-models/smd-10x10.5.stp"},
-{pn:"VHTC1001H221MV",series:"VHT",pkg:"贴片型",dia:10,len:10.5,pitch:2.5,step:"cad-models/smd-10x10.5.stp"},
-{pn:"NPXC0700J561MJTM",series:"NPX",pkg:"贴片型",dia:6.3,len:5.8,pitch:1.8,step:"cad-models/smd-6.3x7.7.stp"},
-{pn:"NPXC0801H560MJTM",series:"NPX",pkg:"贴片型",dia:8,len:10.5,pitch:2.2,step:"cad-models/smd-10x10.5.stp"},
-{pn:"VKMC1001H680MVTM",series:"VKM",pkg:"贴片型",dia:10,len:10.5,pitch:2.5,step:"cad-models/smd-10x10.5.stp"},
-{pn:"VKMD0801C470MV",series:"VKM",pkg:"贴片型",dia:8,len:10.5,pitch:2.2,step:"cad-models/smd-10x10.5.stp"},
-{pn:"VKOI2101C332MVTM",series:"VKO",pkg:"贴片型",dia:10,len:12.5,pitch:2.5,step:"cad-models/smd-10x10.5.stp"},
-{pn:"VKOD1001C271MV",series:"VKO",pkg:"贴片型",dia:8,len:10.5,pitch:2.2,step:"cad-models/smd-10x10.5.stp"},
-{pn:"VPTC0581C151MVTM",series:"VPT",pkg:"贴片型",dia:6.3,len:5.8,pitch:1.8,step:"cad-models/smd-6.3x7.7.stp"},
-{pn:"VPTL1502A101MVTM",series:"VPT",pkg:"贴片型",dia:8,len:12.5,pitch:2.2,step:"cad-models/smd-10x10.5.stp"},
-{pn:"VPGJ1951H122MVTM",series:"VPG",pkg:"引线型",dia:10,len:20,pitch:5.0,step:"cad-models/radial-8x12.stp"},
-{pn:"VPGJ1651H102MVTM",series:"VPG",pkg:"引线型",dia:12.5,len:25,pitch:5.0,step:"cad-models/radial-8x12.stp"},
-{pn:"OLKC1101C271MF",series:"LK",pkg:"引线型",dia:6.3,len:11,pitch:2.5,step:"cad-models/radial-8x12.stp"},
-{pn:"OLKC1202G4R7MF",series:"LK",pkg:"引线型",dia:8,len:12,pitch:3.5,step:"cad-models/radial-8x12.stp"},
-{pn:"OLKC1001C471MF",series:"LK",pkg:"引线型",dia:10,len:16,pitch:5.0,step:"cad-models/radial-8x12.stp"},
-{pn:"LKL1601C102MF",series:"LKL",pkg:"引线型",dia:10,len:20,pitch:5.0,step:"cad-models/radial-8x12.stp"},
-{pn:"LKL1801C222MF",series:"LKL",pkg:"引线型",dia:12.5,len:25,pitch:5.0,step:"cad-models/radial-8x12.stp"},
-{pn:"CW3H400V470UF",series:"CW3H",pkg:"牛角型",dia:22,len:30,pitch:10.0,step:"cad-models/radial-8x12.stp"},
-{pn:"CW3H400V680UF",series:"CW3H",pkg:"牛角型",dia:25,len:35,pitch:10.0,step:"cad-models/radial-8x12.stp"},
-{pn:"CW3H500V330UF",series:"CW3H",pkg:"牛角型",dia:30,len:40,pitch:10.0,step:"cad-models/radial-8x12.stp"},
-{pn:"VHTC0771H330MV",series:"VHT",pkg:"贴片型",dia:6.3,len:5.8,pitch:1.8,step:"cad-models/smd-6.3x7.7.stp"},
-{pn:"VHTD1001H221MV",series:"VHT",pkg:"贴片型",dia:10,len:12.5,pitch:2.5,step:"cad-models/smd-10x10.5.stp"},
-{pn:"NPXC0501H270MJTM",series:"NPX",pkg:"贴片型",dia:5,len:5.8,pitch:1.5,step:"cad-models/smd-6.3x7.7.stp"},
-{pn:"VKMJ0801H101MV",series:"VKM",pkg:"贴片型",dia:6.3,len:7.7,pitch:1.8,step:"cad-models/smd-6.3x7.7.stp"}
-];
-function renderTable(d){
- var h='';
- d.forEach(function(r){
-  h+='<tr class="hover:bg-slate-50">';
-  h+='<td class="border px-2 py-2 text-center"><input type="checkbox" class="rowCheck w-3 h-3" data-pn="'+r.pn+'"></td>';
-  h+='<td class="border px-3 py-2 font-bold text-primary text-xs">'+r.pn+'</td>';
-  h+='<td class="border px-3 py-2">'+r.series+'</td><td class="border px-3 py-2">'+r.pkg+'</td>';
-  h+='<td class="border px-3 py-2">ø'+r.dia+' × '+r.len+'</td>';
-  h+='<td class="border px-3 py-2 text-center">'+r.pitch+'</td>';
-  h+='<td class="border px-3 py-2 text-center"><span class="text-[10px] bg-blue-50 text-blue-700 px-1.5 py-0.5">STEP</span><span class="text-[10px] bg-green-50 text-green-700 px-1.5 py-0.5 ml-0.5">IGES</span></td>';
-  h+='<td class="border px-3 py-2 text-center"><button class="text-primary text-xs font-bold hover:underline" onclick="openPreview(\''+r.pn+'\',\''+r.pkg+'\','+r.dia+','+r.len+',\''+r.step+'\')"><span class="material-symbols-outlined text-sm">view_in_ar</span>预览</button></td>';
-  h+='<td class="border px-3 py-2 text-center"><button class="text-primary text-xs font-bold hover:underline flex items-center gap-1 mx-auto"><span class="material-symbols-outlined text-sm">download</span></button></td></tr>';
- });
- document.getElementById('tableBody').innerHTML=h;
- document.getElementById('resultCount').textContent='共 '+d.length+' 条';
-}
-function applyFilter(){
- var pn=document.getElementById('filterPn').value.toUpperCase();
- var s=document.getElementById('filterSeries').value;
- var pk=document.getElementById('filterPkg').value;
- var dmin=parseFloat(document.getElementById('filterDmin').value)||0;
- var dmax=parseFloat(document.getElementById('filterDmax').value)||999;
- var lmin=parseFloat(document.getElementById('filterLmin').value)||0;
- var lmax=parseFloat(document.getElementById('filterLmax').value)||999;
- var f=cadData.filter(function(r){
-  if(pn&&r.pn.toUpperCase().indexOf(pn)===-1)return false;
-  if(s&&r.series!==s)return false;
-  if(pk&&r.pkg.indexOf(pk.replace(' (SMD)','').replace(' (Radial)','').replace(' (Snap-in)',''))===-1)return false;
-  if(r.dia<dmin||r.dia>dmax)return false;
-  if(r.len<lmin||r.len>lmax)return false;
-  return true;
- });
- renderTable(f);
-}
-document.getElementById('btnFilter').addEventListener('click',applyFilter);
-document.getElementById('btnReset').addEventListener('click',function(){
- document.getElementById('filterPn').value='';document.getElementById('filterSeries').value='';
- document.getElementById('filterPkg').value='';document.getElementById('filterDmin').value='';
- document.getElementById('filterDmax').value='';document.getElementById('filterLmin').value='';
- document.getElementById('filterLmax').value='';renderTable(cadData);
-});
-document.getElementById('filterPn').addEventListener('keyup',function(e){if(e.key==='Enter')applyFilter();});
-document.getElementById('selectAll').addEventListener('change',function(){
- var v=this.checked;document.querySelectorAll('.rowCheck').forEach(function(c){c.checked=v;});
-});
-document.getElementById('btnBatchDownload').addEventListener('click',function(){
- var c=document.querySelectorAll('.rowCheck:checked');
- if(c.length===0){alert('请先勾选要下载的模型');return;}
- alert('已选择 '+c.length+' 个，开始批量下载（模拟）');
-});
+  <main class="cad-page custom-scrollbar flex-1 overflow-y-auto">
+    <div class="cad-shell">
+      <nav class="cad-breadcrumb" aria-label="面包屑">
+        <a href="index.html">首页</a>
+        <span aria-hidden="true">/</span>
+        <a href="design-tools.html">设计工具</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">3D-CAD 模型</span>
+      </nav>
 
-// ===== Three.js 3D预览（程序化模型，基于真实尺寸） =====
-var ps,pc,pr,pctrl,pm,autoRot=true;
-function openPreview(pn,pkg,dia,len,stepUrl){
- var m=document.getElementById('previewModal'),l=document.getElementById('previewLoading');
- var cv=document.getElementById('previewCanvas');
- document.getElementById('previewTitle').textContent=pn;
- document.getElementById('previewSubtitle').textContent=pkg+' | ø'+dia+'×'+len+'mm';
- document.getElementById('previewDim').textContent='尺寸: ø'+dia+' × '+len+' mm | 点击下载获取真实STEP模型';
- m.classList.remove('hidden');l.classList.remove('hidden');
- document.getElementById('previewLoadingText').textContent='渲染 3D 模型中...';
- if(pm){ps.remove(pm);pm=null;}
- if(pr){pr.dispose();}
- var ct=document.getElementById('preview3DContainer'),w=ct.clientWidth,h=ct.clientHeight;
- if(!ps){
-  ps=new THREE.Scene();ps.background=new THREE.Color(0xf1f5f9);
-  ps.add(new THREE.AmbientLight(0xffffff,0.6));
-  var d1=new THREE.DirectionalLight(0xffffff,0.8);d1.position.set(10,20,10);ps.add(d1);
-  var d2=new THREE.DirectionalLight(0xffffff,0.3);d2.position.set(-5,0,-5);ps.add(d2);
-  ps.add(new THREE.GridHelper(40,40,0xcccccc,0xe5e7eb));
- }
- pc=new THREE.PerspectiveCamera(45,w/h,0.1,1000);pc.position.set(25,15,25);pc.lookAt(0,0,0);
- pr=new THREE.WebGLRenderer({canvas:cv,antialias:true,preserveDrawingBuffer:true});pr.setSize(w,h);pr.setPixelRatio(window.devicePixelRatio);
- pctrl=new THREE.OrbitControls(pc,cv);pctrl.enableDamping=true;pctrl.dampingFactor=0.1;pctrl.autoRotate=autoRot;pctrl.autoRotateSpeed=2;
- var group=new THREE.Group();
- var r=dia/2, h2=len/2;
- var isSMD=pkg.indexOf('贴片')>=0;
- // 主体圆柱
- var cylGeo=new THREE.CylinderGeometry(r,r,len,48);
- var cylMat=new THREE.MeshPhongMaterial({color:0x1B365D,specular:0x333333,shininess:80,transparent:true,opacity:0.85});
- group.add(new THREE.Mesh(cylGeo,cylMat));
- // 顶部铝壳
- var topGeo=new THREE.CylinderGeometry(r*0.92,r*0.92,0.3,48);
- var topMat=new THREE.MeshPhongMaterial({color:0xc0c0c0,specular:0x666666,shininess:120});
- var topCap=new THREE.Mesh(topGeo,topMat);topCap.position.y=h2;group.add(topCap);
- if(isSMD){
-  // 贴片型：底座朝下 + 侧面焊盘
-  var baseGeo=new THREE.CylinderGeometry(r*0.88,r*0.88,0.5,48);
-  var baseMat=new THREE.MeshPhongMaterial({color:0x334155});
-  var base=new THREE.Mesh(baseGeo,baseMat);base.position.y=-h2;group.add(base);
-  [-1,1].forEach(function(side){
-   var padGeo=new THREE.BoxGeometry(r*0.3,0.3,r*0.5);
-   var padMat=new THREE.MeshPhongMaterial({color:0xc0c0c0,shininess:100});
-   var pad=new THREE.Mesh(padGeo,padMat);
-   pad.position.set(side*r*1.05,-h2+0.2,0);group.add(pad);
-  });
- }else{
-  // 引线型：引脚朝上
-  var leadLen=len*0.3;
-  [-1,1].forEach(function(side){
-   var legGeo=new THREE.CylinderGeometry(0.25,0.25,leadLen,8);
-   var legMat=new THREE.MeshPhongMaterial({color:0xc0c0c0,shininess:100});
-   var leg=new THREE.Mesh(legGeo,legMat);
-   leg.position.set(side*r*0.35,h2+leadLen/2,0);group.add(leg);
-  });
-  // 牛角型：加粗端子朝上 + 底座
-  if(pkg.indexOf('牛角')>=0){
-   [-1,1].forEach(function(side){
-    var pinGeo=new THREE.CylinderGeometry(0.5,0.5,leadLen,8);
-    var pinMat=new THREE.MeshPhongMaterial({color:0xd0d0d0,shininess:100});
-    var pin=new THREE.Mesh(pinGeo,pinMat);
-    pin.position.set(side*r*0.25,h2+leadLen/2,0);group.add(pin);
-   });
-   var basePlateGeo=new THREE.CylinderGeometry(r*0.9,r*0.9,0.4,48);
-   var basePlateMat=new THREE.MeshPhongMaterial({color:0x2d3748});
-   var basePlate=new THREE.Mesh(basePlateGeo,basePlateMat);
-   basePlate.position.y=-h2-0.2;group.add(basePlate);
-  }
- }
- // 极性标记环
- var ringGeo=new THREE.TorusGeometry(r*0.95,0.15,8,48);
- var ringMat=new THREE.MeshPhongMaterial({color:0xe8e8e8,shininess:50});
- var ring=new THREE.Mesh(ringGeo,ringMat);ring.position.y=h2-0.5;ring.rotation.x=Math.PI/2;group.add(ring);
- var maxDim=Math.max(dia,len);var sc=6/maxDim;
- group.scale.set(sc,sc,sc);
- pm=group;ps.add(pm);
- pc.position.set(12,8,18);pctrl.target.set(0,0.5,0);pctrl.update();
- l.classList.add('hidden');animateP();
-}
-function animateP(){requestAnimationFrame(animateP);if(pctrl)pctrl.update();if(pr&&ps&&pc)pr.render(ps,pc);}
-function closePreview(e){if(e.target===document.getElementById('previewModal'))document.getElementById('previewModal').classList.add('hidden');}
-document.getElementById('btnWireframe').addEventListener('click',function(){
- if(pm){
-  var wf=this.textContent.trim()==='线框模式';
-  pm.traverse(function(c){if(c.isMesh&&c.material)c.material.wireframe=!wf;});
-  this.textContent=wf?'实体模式':'线框模式';
- }
-});
-document.getElementById('btnAutoRotate').addEventListener('click',function(){
- autoRot=!autoRot;if(pctrl)pctrl.autoRotate=autoRot;
- this.textContent=autoRot?'自动旋转':'手动旋转';
- if(autoRot)this.classList.add('bg-primary/10');else this.classList.remove('bg-primary/10');
-});
-renderTable(cadData);
-</script></body></html>
+      <section class="cad-hero" aria-labelledby="cadPageTitle">
+        <div>
+          <div class="cad-kicker">PRODUCT DESIGN RESOURCE / 3D CAD</div>
+          <h1 id="cadPageTitle">产品 3D-CAD 数据库</h1>
+          <p class="cad-hero-copy">
+            按料号、系列、产品类别和目录尺寸查找最新电容模型。一个 STEP 模型可供多个相同封装与尺寸的产品共享，
+            在线预览与下载使用同一份工程文件；最终安装尺寸请以正式规格书和尺寸图为准。
+          </p>
+          <div class="cad-hero-proof">
+            <span class="material-symbols-outlined" aria-hidden="true">account_tree</span>
+            产品与 CAD 按类别、封装和目录尺寸关联 · 可直接预览与下载
+          </div>
+        </div>
+        <div class="cad-hero-stats" aria-label="模型库概览">
+          <div class="cad-stat">
+            <span class="cad-stat-kicker">已关联料号</span>
+            <strong id="cadMappedProductCount">—</strong>
+            <span class="cad-stat-note">可直接查询 CAD</span>
+          </div>
+          <div class="cad-stat">
+            <span class="cad-stat-kicker">STEP 工程文件</span>
+            <strong id="cadTotalCount">—</strong>
+            <span class="cad-stat-note">在线预览与下载</span>
+          </div>
+          <div class="cad-stat">
+            <span class="cad-stat-kicker">产品类别覆盖</span>
+            <strong id="cadCategoryCount">—</strong>
+            <span class="cad-stat-note">支持组合筛选</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="cad-panel cad-filter-panel" aria-labelledby="cadFilterTitle">
+        <div class="cad-filter-head">
+          <h2 class="cad-section-title" id="cadFilterTitle">
+            <span class="material-symbols-outlined" aria-hidden="true">tune</span>查找产品 CAD
+          </h2>
+          <button class="cad-link-button" id="cadClearFilters" type="button">清除全部</button>
+        </div>
+        <div class="cad-view-tabs" role="group" aria-label="浏览方式">
+          <button class="cad-view-tab is-active" type="button" data-cad-mode="product" aria-pressed="true">
+            <span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>
+            <span><strong>按产品查 CAD</strong><small>客户入口 · 料号与产品参数优先</small></span>
+          </button>
+          <button class="cad-view-tab" type="button" data-cad-mode="model" aria-pressed="false">
+            <span class="material-symbols-outlined" aria-hidden="true">deployed_code</span>
+            <span><strong>按 CAD 模型浏览</strong><small>共享模型 · 封装与尺寸优先</small></span>
+          </button>
+        </div>
+        <div class="cad-term-guide" id="cadTermGuide" aria-label="尺寸筛选说明">
+          <div class="cad-term-guide-title">
+            <span class="material-symbols-outlined" aria-hidden="true">help</span>
+            <strong>尺寸筛选说明</strong>
+          </div>
+          <div class="cad-term-guide-items">
+            <p><strong>最小 / 最大外形尺寸</strong>：用于统一筛选不同形状。D10×L20 的最小值为 10、最大值为 20；L7.3×W4.3×H2.8 的最小值为 2.8、最大值为 7.3。</p>
+          </div>
+        </div>
+        <div class="cad-filters">
+          <div class="cad-field">
+            <label for="cadSearch">产品料号 / 系列 / 尺寸 / CAD 文件</label>
+            <div class="cad-input-wrap">
+              <span class="material-symbols-outlined" aria-hidden="true">search</span>
+              <input class="cad-search-input" id="cadSearch" type="search" placeholder="例如 VHMC0771V470MVCG、VHM、6.3×7.7" autocomplete="off">
+            </div>
+          </div>
+          <div class="cad-field">
+            <label for="cadCategoryFilter">产品类别</label>
+            <select id="cadCategoryFilter">
+              <option value="">全部类别</option>
+            </select>
+          </div>
+          <div class="cad-field">
+            <label for="cadPackageFilter">封装 / 结构</label>
+            <select id="cadPackageFilter">
+              <option value="">全部封装</option>
+            </select>
+          </div>
+          <div class="cad-field">
+            <label for="cadSeriesFilter">产品系列</label>
+            <select id="cadSeriesFilter">
+              <option value="">全部系列</option>
+            </select>
+          </div>
+          <div class="cad-field">
+            <label for="cadDiameterFilter">最小外形尺寸</label>
+            <select id="cadDiameterFilter" aria-describedby="cadTermGuide">
+              <option value="">全部尺寸</option>
+              <option value="0-6.5">小于 6.5 mm</option>
+              <option value="6.5-10">6.5–10 mm</option>
+              <option value="10-16">10–16 mm</option>
+              <option value="16-999">16 mm 及以上</option>
+            </select>
+          </div>
+          <div class="cad-field">
+            <label for="cadLengthFilter">最大外形尺寸</label>
+            <select id="cadLengthFilter" aria-describedby="cadTermGuide">
+              <option value="">全部尺寸</option>
+              <option value="0-8">小于 8 mm</option>
+              <option value="8-12">8–12 mm</option>
+              <option value="12-20">12–20 mm</option>
+              <option value="20-999">20 mm 及以上</option>
+            </select>
+          </div>
+        </div>
+        <div class="cad-active-filter" id="cadActiveFilters" aria-live="polite">
+          <span class="cad-filter-hint">默认按产品展示；输入完整料号可直接定位其共享 STEP 模型</span>
+        </div>
+      </section>
+
+      <section class="cad-panel cad-table-panel" aria-labelledby="cadResultTitle">
+        <div class="cad-table-head">
+          <div>
+            <h2 class="cad-section-title" id="cadResultTitle">
+              <span class="material-symbols-outlined" aria-hidden="true">inventory_2</span><span id="cadResultLabel">产品 CAD 结果</span>
+            </h2>
+            <div class="cad-table-head-meta" id="cadResultCount">正在载入模型索引…</div>
+          </div>
+          <div class="cad-table-actions">
+            <button class="cad-button cad-button-primary" id="cadBatchDownload" type="button" disabled>
+              <span class="material-symbols-outlined" aria-hidden="true">download</span>下载所选 STEP
+            </button>
+          </div>
+        </div>
+
+        <div class="cad-table-scroll custom-scrollbar">
+          <table class="cad-table">
+            <thead><tr id="cadTableHeadRow"></tr></thead>
+            <tbody id="cadTableBody">
+              <tr><td class="cad-table-message" colspan="8">正在载入模型索引…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cad-table-footer">
+          <div class="cad-selection-status" id="cadSelectedCount">已选择 0 个</div>
+          <div class="cad-page-controls">
+            <div class="cad-page-size">
+              <span>每页</span>
+              <select id="cadPageSize" aria-label="每页显示数量">
+                <option value="20" selected>20</option>
+                <option value="40">40</option>
+                <option value="80">80</option>
+              </select>
+            </div>
+            <button id="cadPagePrev" type="button" aria-label="上一页"><span class="material-symbols-outlined">chevron_left</span></button>
+            <span class="cad-page-indicator" id="cadPageIndicator">1 / 1 页</span>
+            <button id="cadPageNext" type="button" aria-label="下一页"><span class="material-symbols-outlined">chevron_right</span></button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer id="ymin-footer"></footer>
+  </main>
+
+  <div class="cad-modal" id="cadPreviewModal" role="dialog" aria-modal="true" aria-labelledby="cadModalTitle" hidden>
+    <div class="cad-modal-panel">
+      <header class="cad-modal-header">
+        <div>
+          <div class="cad-modal-title-row">
+            <h2 class="cad-modal-title" id="cadModalTitle">STEP 模型</h2>
+            <span class="cad-viewer-status" id="cadViewerStatus">正在解析</span>
+          </div>
+          <div class="cad-modal-subtitle" id="cadModalSubtitle">—</div>
+        </div>
+        <button class="cad-close-button" id="cadModalClose" type="button" aria-label="关闭预览">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </header>
+
+      <div class="cad-modal-body">
+        <div class="cad-stage" id="cadStage">
+          <canvas id="cadCanvas" tabindex="0" aria-label="可旋转缩放的三维 CAD 模型"></canvas>
+
+          <div class="cad-stage-toolbar" aria-label="预览工具栏">
+            <button class="cad-tool-button" id="cadFitView" type="button" title="适配窗口">
+              <span class="material-symbols-outlined">fit_screen</span><span class="cad-tool-label">适配</span>
+            </button>
+            <button class="cad-tool-button" id="cadAutoRotate" type="button" title="自动旋转">
+              <span class="material-symbols-outlined">360</span><span class="cad-tool-label">旋转</span>
+            </button>
+            <button class="cad-tool-button is-active" id="cadEdges" type="button" title="显示或隐藏工程轮廓线">
+              <span class="material-symbols-outlined">polyline</span><span class="cad-tool-label">轮廓</span>
+            </button>
+            <button class="cad-tool-button" id="cadBounds" type="button" title="显示模型包络盒">
+              <span class="material-symbols-outlined">select_all</span><span class="cad-tool-label">包络</span>
+            </button>
+            <button class="cad-tool-button" id="cadDisplayMode" type="button" title="切换实体、X 光和线框显示">
+              <span class="material-symbols-outlined">view_in_ar</span><span class="cad-tool-label" id="cadDisplayModeLabel">X 光</span>
+            </button>
+          </div>
+
+          <div class="cad-stage-badge" id="cadViewerSourceBadge">
+            <span class="material-symbols-outlined">deployed_code</span> STEP GEOMETRY
+          </div>
+
+          <div class="cad-view-presets" aria-label="标准视图">
+            <button type="button" data-cad-view="iso">等轴</button>
+            <button type="button" data-cad-view="front">前视</button>
+            <button type="button" data-cad-view="right">右视</button>
+            <button type="button" data-cad-view="top">顶视</button>
+            <button type="button" data-cad-view="bottom">底视</button>
+          </div>
+          <div class="cad-stage-help">左键旋转 · 滚轮缩放 · 右键平移</div>
+
+          <div class="cad-loading" id="cadViewerLoading">
+            <div class="cad-loading-card">
+              <div class="cad-loader-mark" aria-hidden="true"></div>
+              <strong id="cadLoadingTitle">准备工程预览</strong>
+              <p id="cadLoadingDetail">正在初始化 STEP 解析器…</p>
+              <div class="cad-loading-progress" aria-hidden="true"><span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="cad-inspector custom-scrollbar" aria-label="产品与 CAD 模型信息">
+          <section class="cad-inspector-section cad-product-summary">
+            <h3 class="cad-inspector-label">产品资料 / Product data</h3>
+            <dl class="cad-property-list">
+              <div class="cad-property"><dt>产品料号</dt><dd id="cadMetaItems">—</dd></div>
+              <div class="cad-property"><dt>产品系列</dt><dd id="cadMetaSeries">—</dd></div>
+              <div class="cad-property"><dt>产品类别</dt><dd id="cadMetaCategory">—</dd></div>
+              <div class="cad-property"><dt>封装类型</dt><dd id="cadMetaPackage">—</dd></div>
+              <div class="cad-property"><dt>目录尺寸</dt><dd id="cadMetaNominal">—</dd></div>
+              <div class="cad-property"><dt>电气参数</dt><dd id="cadMetaElectrical">—</dd></div>
+              <div class="cad-property"><dt>引脚间距</dt><dd id="cadMetaPitch">—</dd></div>
+              <div class="cad-property"><dt>关联情况</dt><dd id="cadMetaMapping">—</dd></div>
+            </dl>
+            <p class="cad-view-note">当前关联依据产品类别、封装和目录尺寸；使用前请核对座板、端子和脚距。</p>
+          </section>
+
+          <section class="cad-inspector-section">
+            <h3 class="cad-inspector-label">CAD 文件 / Model file</h3>
+            <dl class="cad-property-list">
+              <div class="cad-property"><dt>模型规格</dt><dd id="cadMetaPublished">—</dd></div>
+              <div class="cad-property"><dt>结构 / 座板</dt><dd id="cadMetaSubtype">—</dd></div>
+              <div class="cad-property"><dt>文件大小</dt><dd id="cadMetaFile">—</dd></div>
+              <div class="cad-property"><dt>更新日期</dt><dd id="cadMetaUpdated">—</dd></div>
+              <div class="cad-property"><dt>文件格式</dt><dd>STEP (.stp)</dd></div>
+              <div class="cad-property"><dt>数据源</dt><dd class="cad-path" id="cadMetaSource">—</dd></div>
+            </dl>
+            <p class="cad-view-note cad-terminal-note" id="cadTerminalNote" hidden></p>
+          </section>
+
+          <section class="cad-inspector-section cad-model-choice" id="cadModelChoiceWrap" hidden>
+            <label class="cad-inspector-label" for="cadModelChoice">该料号有多份可选 CAD</label>
+            <select id="cadModelChoice" aria-label="切换可选 CAD 模型"></select>
+            <p class="cad-view-note">请根据座板、端子和脚距选择适用文件。</p>
+          </section>
+
+          <details class="cad-advanced-section">
+            <summary>
+              <span><strong>高级模型信息</strong><small>自动测量包络与网格数据</small></span>
+              <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="cad-advanced-content">
+              <h3 class="cad-inspector-label">模型几何包络 / Auto-measured</h3>
+              <div class="cad-envelope-grid">
+                <div class="cad-envelope-item"><span>X</span><strong id="cadEnvelopeX">—</strong></div>
+                <div class="cad-envelope-item"><span>Y</span><strong id="cadEnvelopeY">—</strong></div>
+                <div class="cad-envelope-item"><span>Z</span><strong id="cadEnvelopeZ">—</strong></div>
+              </div>
+              <dl class="cad-property-list cad-geometry-list">
+                <div class="cad-property"><dt>部件数量</dt><dd id="cadMetaParts">—</dd></div>
+                <div class="cad-property"><dt>网格规模</dt><dd id="cadMetaTriangles">—</dd></div>
+              </dl>
+              <p class="cad-view-note cad-envelope-warning">X/Y/Z 是模型按安装方向校正后自动测得的预览包络，可能包含引脚、端子或座板，仅用于空间检查，不作为产品目录尺寸。</p>
+            </div>
+          </details>
+
+          <section class="cad-inspector-section">
+            <div class="cad-inspector-actions">
+              <a class="cad-button cad-button-primary" id="cadModalDownload" href="#" download>
+                <span class="material-symbols-outlined">download</span>下载当前 STEP
+              </a>
+              <a class="cad-button" id="cadModalProductLink" href="product-center.html" hidden>
+                <span class="material-symbols-outlined">open_in_new</span>查看产品详情
+              </a>
+            </div>
+            <p class="cad-view-note">STEP 在浏览器本地解析，不会上传到第三方服务。首次打开需加载一次解析组件。</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="cad-toast" id="cadToast" role="status" aria-live="polite" hidden>
+    <span class="material-symbols-outlined" id="cadToastIcon">info</span>
+    <span id="cadToastText"></span>
+  </div>
+
+  <script src="components/navbar.js"></script>
+  <script src="components/footer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script>
+  <script src="data/cad-products.js"></script>
+  <script src="data/cad-models.js"></script>
+  <script src="components/cad-viewer.js"></script>
+</body>
+</html>
