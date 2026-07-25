@@ -116,6 +116,15 @@ body.cad-body {
   font-size: 17px;
 }
 
+.cad-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 16px;
+  color: #6b788a;
+  font-size: 12px;
+}
+
 .cad-hero-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -784,6 +793,35 @@ body.cad-body {
   font-size: 32px;
 }
 
+.cad-table-message strong,
+.cad-table-message small {
+  display: block;
+}
+
+.cad-table-message strong {
+  color: var(--cad-navy);
+  font-size: 14px;
+}
+
+.cad-table-message small {
+  margin-top: 6px;
+  color: #7d899a;
+  font-size: 11px;
+}
+
+.cad-empty-action {
+  width: fit-content;
+  margin: 18px auto 0;
+  color: #fff !important;
+}
+
+.cad-empty-action .material-symbols-outlined {
+  display: inline-block;
+  margin: 0;
+  color: currentColor;
+  font-size: 17px;
+}
+
 .cad-table-footer {
   padding: 14px 24px;
   background: #fafbfd;
@@ -1405,6 +1443,11 @@ body.cad-body {
   .cad-hero {
     gap: 24px;
     padding: 26px 24px;
+  }
+
+  .cad-hero-actions {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .cad-filter-panel,

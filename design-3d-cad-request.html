@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D-CAD 申请 - 永铭电子</title>
+  <meta name="description" content="提交永铭电子产品 3D-CAD 模型需求，自动带入产品料号和规格信息。">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/cad-request.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: { primary: "#0f2f56" },
+          borderRadius: { DEFAULT: "0px" },
+          fontFamily: { headline: ["Space Grotesk"], body: ["Inter"] }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="cad-request-body flex h-screen flex-col overflow-hidden">
+  <header id="ymin-navbar"></header>
+
+  <main class="cad-request-page custom-scrollbar flex-1 overflow-y-auto">
+    <div class="cad-request-shell">
+      <nav class="cad-request-breadcrumb" aria-label="面包屑">
+        <a href="index.html">首页</a><span>/</span>
+        <a href="design-tools.html">设计工具</a><span>/</span>
+        <a href="design-3d-cad.html">3D-CAD 模型</a><span>/</span>
+        <span aria-current="page">申请 3D-CAD</span>
+      </nav>
+
+      <section class="cad-request-hero" aria-labelledby="cadRequestTitle">
+        <div>
+          <div class="cad-request-kicker">3D CAD REQUEST</div>
+          <h1 id="cadRequestTitle">申请产品 3D-CAD</h1>
+          <p>当前料号没有可下载模型时，请补充项目和联系方式。若从产品详情页进入，料号及已有规格会自动带入，无需重复填写。</p>
+        </div>
+        <a class="cad-request-secondary" href="design-3d-cad.html">
+          <span class="material-symbols-outlined" aria-hidden="true">view_in_ar</span>返回模型库
+        </a>
+      </section>
+
+      <div class="cad-request-layout">
+        <section class="cad-request-card" aria-labelledby="cadRequestFormTitle">
+          <div class="cad-request-card-head">
+            <div>
+              <span class="cad-request-step">REQUEST FORM</span>
+              <h2 id="cadRequestFormTitle">申请信息</h2>
+            </div>
+            <span class="cad-request-required"><b>*</b> 为必填项</span>
+          </div>
+
+          <form id="cadRequestForm">
+            <fieldset>
+              <legend><span>01</span>产品信息</legend>
+              <p class="cad-fieldset-note" id="cadProductPrefillNote">可直接填写料号；若从产品详情页进入，以下信息将自动带入。</p>
+              <div class="cad-form-grid">
+                <label class="cad-field cad-field-wide">
+                  <span>产品料号 <b>*</b></span>
+                  <input id="cadRequestItem" name="item" type="text" autocomplete="off" required placeholder="请输入产品料号">
+                  <small id="cadItemMatchStatus">用于确认所需模型对应的产品</small>
+                </label>
+                <label class="cad-field">
+                  <span>产品类别</span>
+                  <input id="cadRequestCategory" name="category" type="text" placeholder="例如：液态铝电解电容器">
+                </label>
+                <label class="cad-field">
+                  <span>系列</span>
+                  <input id="cadRequestSeries" name="series" type="text" placeholder="产品系列">
+                </label>
+                <label class="cad-field">
+                  <span>封装形式</span>
+                  <input id="cadRequestPackage" name="package" type="text" placeholder="例如：引线型 / 贴片型">
+                </label>
+                <label class="cad-field">
+                  <span>产品尺寸</span>
+                  <input id="cadRequestSize" name="size" type="text" placeholder="例如：10 × 12.5 mm">
+                </label>
+                <label class="cad-field">
+                  <span>额定电压</span>
+                  <input id="cadRequestVoltage" name="voltage" type="text" placeholder="例如：50 V">
+                </label>
+                <label class="cad-field">
+                  <span>标称容量</span>
+                  <input id="cadRequestCapacitance" name="capacitance" type="text" placeholder="例如：330 µF">
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>02</span>联系信息</legend>
+              <div class="cad-form-grid">
+                <label class="cad-field">
+                  <span>姓名 <b>*</b></span>
+                  <input id="cadRequestName" name="name" type="text" autocomplete="name" required>
+                </label>
+                <label class="cad-field">
+                  <span>公司 <b>*</b></span>
+                  <input id="cadRequestCompany" name="company" type="text" autocomplete="organization" required>
+                </label>
+                <label class="cad-field">
+                  <span>部门</span>
+                  <input id="cadRequestDepartment" name="department" type="text" autocomplete="organization-title">
+                </label>
+                <label class="cad-field">
+                  <span>所在省份</span>
+                  <input id="cadRequestProvince" name="province" type="text" autocomplete="address-level1">
+                </label>
+                <label class="cad-field">
+                  <span>电话</span>
+                  <input id="cadRequestPhone" name="phone" type="tel" autocomplete="tel" placeholder="电话或邮箱至少填写一项">
+                </label>
+                <label class="cad-field">
+                  <span>邮箱</span>
+                  <input id="cadRequestEmail" name="email" type="email" autocomplete="email" placeholder="电话或邮箱至少填写一项">
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>03</span>应用需求</legend>
+              <div class="cad-form-grid">
+                <label class="cad-field">
+                  <span>所属行业 <b>*</b></span>
+                  <select id="cadRequestIndustry" name="industry" required>
+                    <option value="">请选择所属行业</option>
+                    <option>汽车电子</option>
+                    <option>新能源与储能</option>
+                    <option>工业控制</option>
+                    <option>通信与数据中心</option>
+                    <option>消费电子</option>
+                    <option>医疗电子</option>
+                    <option>照明与电源</option>
+                    <option>其他</option>
+                  </select>
+                </label>
+                <label class="cad-field">
+                  <span>应用整机 / 项目 <b>*</b></span>
+                  <input id="cadRequestApplication" name="application" type="text" required placeholder="例如：车载充电机 OBC">
+                </label>
+                <label class="cad-field cad-field-wide">
+                  <span>补充需求</span>
+                  <textarea id="cadRequestNote" name="note" rows="4" placeholder="请说明安装空间、装配方向、期望格式或其他特殊要求"></textarea>
+                </label>
+              </div>
+            </fieldset>
+
+            <label class="cad-request-agreement">
+              <input id="cadRequestAgreement" name="agreement" type="checkbox" required>
+              <span>我已阅读并同意 3D-CAD 数据使用注意事项，并同意将以上信息用于本次需求沟通。<b>*</b></span>
+            </label>
+
+            <div class="cad-request-submit-row">
+              <p>提交后由相关人员确认需求；模型交付以实际可提供情况为准。</p>
+              <button class="cad-request-primary" type="submit">
+                <span class="material-symbols-outlined" aria-hidden="true">send</span>提交申请
+              </button>
+            </div>
+            <p class="cad-request-form-error" id="cadRequestFormError" role="alert" hidden></p>
+          </form>
+
+          <section class="cad-request-success" id="cadRequestSuccess" tabindex="-1" hidden>
+            <span class="material-symbols-outlined" aria-hidden="true">task_alt</span>
+            <div>
+              <h2>申请信息已确认（页面演示）</h2>
+              <p id="cadRequestSuccessText"></p>
+              <p class="cad-request-demo-note">当前页面已完成填写、校验和确认流程；正式上线时需由数字智能部接入工单或客户服务接口。</p>
+              <div class="cad-request-success-actions">
+                <a href="design-3d-cad.html">返回 3D-CAD 模型库</a>
+                <button id="cadRequestEdit" type="button">返回修改</button>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <aside class="cad-request-side">
+          <section>
+            <h2><span class="material-symbols-outlined">info</span>申请说明</h2>
+            <ol>
+              <li><b>确认产品</b><span>料号和规格将随申请一并提交。</span></li>
+              <li><b>补充用途</b><span>填写所属行业、应用整机及必要的装配需求。</span></li>
+              <li><b>需求确认</b><span>相关人员评估可提供性并与申请人联系。</span></li>
+            </ol>
+          </section>
+          <section class="cad-request-notice">
+            <h2><span class="material-symbols-outlined">gavel</span>数据使用注意事项</h2>
+            <ul>
+              <li>3D-CAD 为设计参考数据，产品尺寸请以正式规格书和尺寸图为准。</li>
+              <li>不同生产批次可能存在合理尺寸偏差，使用前请核对安装空间。</li>
+              <li>文件仅供项目设计评估使用，不得分发、转载或用于未经授权的用途。</li>
+              <li>提交申请不代表一定能够提供模型，最终以需求评估结果为准。</li>
+            </ul>
+          </section>
+          <section class="cad-request-prototype">
+            <span class="material-symbols-outlined">developer_board</span>
+            <div><b>功能原型说明</b><p>本页用于确认网站流程和字段。后台工单流转、通知及权限由正式开发阶段接入。</p></div>
+          </section>
+        </aside>
+      </div>
+    </div>
+    <footer id="ymin-footer"></footer>
+  </main>
+
+  <script src="components/navbar.js"></script>
+  <script src="components/footer.js"></script>
+  <script src="components/cad-request.js"></script>
+</body>
+</html>

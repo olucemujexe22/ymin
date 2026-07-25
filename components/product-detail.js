@@ -133,7 +133,22 @@
         var alternatives = relatedProducts(merged);
         var applications = applicationReferences(merged.category);
         var cad = merged.cad;
-        var cadUrl = 'design-3d-cad.html?item=' + encodeURIComponent(merged.itemNo);
+        var cadAvailable = !!(cad && cad.candidateCount);
+        var cadRequestParams = new URLSearchParams();
+        [
+            ['item', merged.itemNo],
+            ['category', merged.category],
+            ['series', merged.series],
+            ['package', merged.package],
+            ['voltage', merged.voltage],
+            ['capacitance', merged.capacitance],
+            ['size', merged.size]
+        ].forEach(function (entry) {
+            if (entry[1] !== '' && entry[1] != null) cadRequestParams.set(entry[0], entry[1]);
+        });
+        var cadUrl = cadAvailable
+            ? 'design-3d-cad.html?item=' + encodeURIComponent(merged.itemNo)
+            : 'design-3d-cad-request.html?' + cadRequestParams.toString();
         var datasheet = externalAsset(merged.datasheet);
         var sourceUrl = externalAsset(merged.sourceUrl);
         var imageUrl = externalAsset(merged.image);
@@ -171,7 +186,9 @@
         ].filter(function (item) { return item[1] !== '' && item[1] != null; });
         var dimensionTable = dimensionRows.length ? '<table class="w-full text-xs border-collapse"><thead><tr class="bg-slate-100"><th class="border px-3 py-2">尺寸代号</th><th class="border px-3 py-2">数值 (mm)</th></tr></thead><tbody>' + dimensionRows.map(function (item) { return '<tr><td class="border px-3 py-2 font-bold text-center">' + esc(item[0]) + '</td><td class="border px-3 py-2 text-center">' + display(item[1]) + '</td></tr>'; }).join('') + '</tbody></table>' : '<div class="bg-slate-50 border p-6 text-xs text-slate-400 text-center">尺寸字段待补充</div>';
 
-        var cadSubtitle = cad && cad.candidateCount ? cad.candidateCount + ' 个候选，待确认' : '暂无尺寸匹配候选';
+        var cadTitle = cadAvailable ? '3D-CAD 模型' : '申请 3D-CAD';
+        var cadSubtitle = cadAvailable ? '已有 STEP 模型，可预览与下载' : '当前暂无模型，可提交需求';
+        var cadIcon = cadAvailable ? 'token' : 'add_box';
         var alternativesHtml = alternatives.length ? alternatives.map(function (candidate) {
             return '<li><a class="flex items-center gap-3 p-3 bg-slate-50 border hover:border-primary" href="product-detail.html?pn=' + encodeURIComponent(candidate.itemNo) + '"><span class="material-symbols-outlined text-primary">memory</span><div class="min-w-0"><span class="font-mono text-sm font-bold break-all">' + esc(candidate.itemNo) + '</span><p class="text-[10px] text-slate-500">' + display(candidate.voltage) + ' · ' + display(candidate.capacitance) + ' · ' + display(candidate.size) + '</p></div></a></li>';
         }).join('') : '<li class="p-4 bg-slate-50 border text-xs text-slate-400">暂无可推荐的相近料号</li>';
@@ -185,7 +202,7 @@
         html += '<div class="mt-10 pt-6 border-t"><h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">show_chart</span>额定纹波电流与频率条件</h3><div class="overflow-x-auto"><table class="w-full text-xs border-collapse"><thead><tr class="bg-slate-100"><th class="border px-4 py-2">额定纹波电流</th><th class="border px-4 py-2">测试条件</th><th class="border px-4 py-2">ESR / 阻抗</th></tr></thead><tbody><tr class="text-center"><td class="border px-4 py-3 font-medium">' + display(merged.ripple) + '</td><td class="border px-4 py-3">' + display(merged.rippleLabel) + '</td><td class="border px-4 py-3">' + display(merged.esr) + '</td></tr></tbody></table></div><p class="text-[10px] text-slate-400 mt-3">* 分频修正因子尚未结构化入库，请以官方规格书为准。</p></div>';
         html += '<div class="mt-10 pt-6 border-t"><h3 class="text-xl font-bold text-primary mb-4">特性曲线与图表</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div class="border p-4"><h4 class="font-bold text-sm mb-3">纹波电流频率修正系数</h4><div class="h-40 bg-slate-100 flex items-center justify-center text-slate-400 text-xs">[图表数据待关联]</div></div><div class="border p-4"><h4 class="font-bold text-sm mb-3">温度与寿命关系曲线</h4><div class="h-40 bg-slate-100 flex flex-col items-center justify-center text-slate-400 text-xs"><span>' + display(merged.temperature) + '</span><span class="mt-2">额定寿命 ' + display(merged.life ? merged.life + ' h' : '') + '</span></div></div></div></div></div>';
 
-        html += '<aside class="lg:w-80 flex flex-col gap-6"><div class="bg-white border border-slate-200 p-6"><div class="flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-primary text-xl">build</span><h3 class="text-xl font-bold text-primary">设计工具与资源</h3></div><div class="space-y-3">' + resourceItem('timer', '寿命推算工具', '在线计算工作寿命', 'design-life-calc.html', true) + resourceItem('query_stats', 'SPICE 模型', '电路仿真模型', 'design-spice.html', true) + resourceItem('token', '3D-CAD 模型', cadSubtitle, cadUrl, !!(cad && cad.candidateCount)) + resourceItem('picture_as_pdf', '产品规格书', datasheet ? '已提供 PDF' : '暂无 PDF', datasheet, !!datasheet) + resourceItem('fact_check', 'RoHS / REACH', display(merged.rohs), 'support-download.html', true) + resourceItem('monitoring', '可靠性数据', '试验报告', 'design-reliability.html', true) + (sourceUrl ? resourceItem('database', '原始数据页', '查看现官网来源', sourceUrl, true) : '') + '</div></div>';
+        html += '<aside class="lg:w-80 flex flex-col gap-6"><div class="bg-white border border-slate-200 p-6"><div class="flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-primary text-xl">build</span><h3 class="text-xl font-bold text-primary">设计工具与资源</h3></div><div class="space-y-3">' + resourceItem('timer', '寿命推算工具', '在线计算工作寿命', 'design-life-calc.html', true) + resourceItem('query_stats', 'SPICE 模型', '电路仿真模型', 'design-spice.html', true) + resourceItem(cadIcon, cadTitle, cadSubtitle, cadUrl, true) + resourceItem('picture_as_pdf', '产品规格书', datasheet ? '已提供 PDF' : '暂无 PDF', datasheet, !!datasheet) + resourceItem('fact_check', 'RoHS / REACH', display(merged.rohs), 'support-download.html', true) + resourceItem('monitoring', '可靠性数据', '试验报告', 'design-reliability.html', true) + (sourceUrl ? resourceItem('database', '原始数据页', '查看现官网来源', sourceUrl, true) : '') + '</div></div>';
         html += '<div class="bg-white border border-slate-200 p-6"><h3 class="text-lg font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">compare_arrows</span>交叉参考</h3><p class="text-xs text-slate-500 mb-4">同类别、同系列/封装的相近规格：</p><ul class="space-y-3">' + alternativesHtml + '</ul><div class="mt-4 p-3 bg-amber-50/50 border border-amber-200"><p class="text-xs flex items-start gap-2"><span class="material-symbols-outlined text-amber-600 text-sm">info</span>替换前请核对完整电气与机械规格。</p></div></div></aside></div>';
 
         html += '<div class="bg-white border border-slate-200 p-8 mb-8"><h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3"><span class="material-symbols-outlined text-2xl">devices</span>推荐应用场景</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-4">' + applications.map(function (application) { return '<a class="bg-slate-50 border p-5 text-center hover:border-primary" href="application-center.html"><span class="material-symbols-outlined text-3xl text-primary mb-2">' + esc(application[0]) + '</span><h4 class="font-bold text-sm mb-1">' + esc(application[1]) + '</h4><p class="text-[10px] text-slate-500 uppercase">典型应用</p></a>'; }).join('') + '</div><div class="mt-6 p-5 bg-primary/5 border-l-4 border-primary"><p class="text-sm text-slate-700"><span class="font-bold">产品类别：</span>' + display(merged.category) + '。应用场景为类别级参考，实际选型请结合额定电压、容量、温度、纹波电流及寿命要求。</p></div></div>';

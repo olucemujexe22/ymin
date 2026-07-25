@@ -1,0 +1,531 @@
+:root {
+  --request-navy: #0f2f56;
+  --request-blue: #1f5d9a;
+  --request-cyan: #1999a6;
+  --request-orange: #e47c33;
+  --request-border: #d9e1ea;
+  --request-muted: #68788c;
+}
+
+.cad-request-body {
+  margin: 0;
+  background: #f4f7fa;
+  color: #172538;
+  font-family: Inter, "Microsoft YaHei", sans-serif;
+}
+
+.cad-request-page {
+  background:
+    linear-gradient(rgba(15, 47, 86, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 47, 86, 0.028) 1px, transparent 1px),
+    #f4f7fa;
+  background-size: 32px 32px;
+}
+
+.cad-request-shell {
+  width: min(100% - 48px, 1240px);
+  margin: 0 auto;
+  padding: 26px 0 0;
+}
+
+.cad-request-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #7a8797;
+  font-size: 12px;
+}
+
+.cad-request-breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cad-request-breadcrumb a:hover,
+.cad-request-breadcrumb [aria-current="page"] {
+  color: var(--request-navy);
+}
+
+.cad-request-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 32px 36px;
+  border: 1px solid var(--request-border);
+  border-left: 4px solid var(--request-cyan);
+  background: #fff;
+}
+
+.cad-request-kicker,
+.cad-request-step {
+  color: var(--request-blue);
+  font: 700 11px/1 "Space Grotesk", sans-serif;
+  letter-spacing: 0.15em;
+}
+
+.cad-request-hero h1 {
+  margin: 10px 0 9px;
+  color: var(--request-navy);
+  font: 700 clamp(30px, 4vw, 44px)/1.08 "Space Grotesk", "Microsoft YaHei", sans-serif;
+}
+
+.cad-request-hero p {
+  max-width: 770px;
+  margin: 0;
+  color: #5b697b;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.cad-request-secondary,
+.cad-request-primary {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 17px;
+  border: 1px solid var(--request-navy);
+  background: #fff;
+  color: var(--request-navy);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cad-request-secondary:hover {
+  background: #f2f6fa;
+}
+
+.cad-request-secondary .material-symbols-outlined,
+.cad-request-primary .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.cad-request-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.cad-request-card,
+.cad-request-side section {
+  border: 1px solid var(--request-border);
+  background: #fff;
+}
+
+.cad-request-card {
+  padding: 30px 34px;
+}
+
+.cad-request-card-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #e7ecf1;
+}
+
+.cad-request-card-head h2 {
+  margin: 8px 0 0;
+  color: var(--request-navy);
+  font: 700 24px/1.2 "Space Grotesk", "Microsoft YaHei", sans-serif;
+}
+
+.cad-request-required {
+  color: #7d8998;
+  font-size: 11px;
+}
+
+.cad-request-required b,
+.cad-field > span b,
+.cad-request-agreement b {
+  color: #c94e3a;
+}
+
+.cad-request-card fieldset {
+  margin: 0;
+  padding: 28px 0;
+  border: 0;
+  border-bottom: 1px solid #e7ecf1;
+}
+
+.cad-request-card legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  color: var(--request-navy);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cad-request-card legend span {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  background: var(--request-navy);
+  color: #fff;
+  font: 700 10px/1 "Space Grotesk", sans-serif;
+}
+
+.cad-fieldset-note {
+  margin: 10px 0 18px 38px;
+  color: #748195;
+  font-size: 11px;
+}
+
+.cad-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+  margin-top: 18px;
+}
+
+.cad-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cad-field-wide {
+  grid-column: 1 / -1;
+}
+
+.cad-field > span {
+  color: #405168;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cad-field input,
+.cad-field select,
+.cad-field textarea {
+  width: 100%;
+  min-height: 43px;
+  box-sizing: border-box;
+  border: 1px solid #cbd5df;
+  border-radius: 0;
+  background: #fff;
+  color: #172538;
+  font: 13px/1.5 Inter, "Microsoft YaHei", sans-serif;
+  box-shadow: none;
+}
+
+.cad-field textarea {
+  min-height: 104px;
+  resize: vertical;
+}
+
+.cad-field input:focus,
+.cad-field select:focus,
+.cad-field textarea:focus {
+  border-color: var(--request-blue);
+  outline: 2px solid rgba(31, 93, 154, 0.12);
+}
+
+.cad-field input.is-prefilled {
+  border-color: #b9d7d9;
+  background: #f2f9f8;
+}
+
+.cad-field small {
+  color: #8793a2;
+  font-size: 10px;
+}
+
+.cad-field small.is-match {
+  color: #247174;
+}
+
+.cad-request-agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 15px 16px;
+  border: 1px solid #d9e4ee;
+  background: #f7fafc;
+  color: #536276;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.cad-request-agreement input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin-top: 2px;
+  border-radius: 0;
+  color: var(--request-navy);
+}
+
+.cad-request-submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 22px;
+}
+
+.cad-request-submit-row p {
+  margin: 0;
+  color: #7b8796;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.cad-request-primary {
+  border-color: var(--request-navy);
+  background: var(--request-navy);
+  color: #fff;
+  cursor: pointer;
+}
+
+.cad-request-primary:hover {
+  background: #194675;
+}
+
+.cad-request-form-error {
+  margin: 12px 0 0;
+  color: #b23b2f;
+  font-size: 12px;
+  text-align: right;
+}
+
+.cad-request-side {
+  display: grid;
+  gap: 18px;
+}
+
+.cad-request-side section {
+  padding: 23px 22px;
+}
+
+.cad-request-side h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  color: var(--request-navy);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cad-request-side h2 .material-symbols-outlined {
+  color: var(--request-blue);
+  font-size: 19px;
+}
+
+.cad-request-side ol,
+.cad-request-side ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cad-request-side ol {
+  display: grid;
+  gap: 17px;
+  counter-reset: steps;
+}
+
+.cad-request-side ol li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 10px;
+  counter-increment: steps;
+}
+
+.cad-request-side ol li::before {
+  content: counter(steps);
+  display: flex;
+  width: 23px;
+  height: 23px;
+  grid-row: 1 / span 2;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c7d5e2;
+  color: var(--request-blue);
+  font: 700 10px/1 "Space Grotesk", sans-serif;
+}
+
+.cad-request-side ol b {
+  color: #33465e;
+  font-size: 12px;
+}
+
+.cad-request-side ol span,
+.cad-request-notice li {
+  margin-top: 3px;
+  color: #758296;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.cad-request-notice {
+  border-top: 3px solid var(--request-orange) !important;
+}
+
+.cad-request-notice ul {
+  display: grid;
+  gap: 10px;
+}
+
+.cad-request-notice li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.cad-request-notice li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  top: 7px;
+  left: 0;
+  background: var(--request-orange);
+}
+
+.cad-request-prototype {
+  display: flex;
+  gap: 11px;
+  border-color: #cfe1e3 !important;
+  background: #f0f9f8 !important;
+  color: #2c696c;
+}
+
+.cad-request-prototype > .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.cad-request-prototype b {
+  font-size: 12px;
+}
+
+.cad-request-prototype p {
+  margin: 4px 0 0;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.cad-request-success {
+  display: flex;
+  gap: 18px;
+  margin-top: 26px;
+  padding: 25px;
+  border: 1px solid #bad9d8;
+  background: #f0f9f8;
+}
+
+.cad-request-success[hidden] {
+  display: none;
+}
+
+.cad-request-success > .material-symbols-outlined {
+  color: #238286;
+  font-size: 34px;
+}
+
+.cad-request-success h2 {
+  margin: 0 0 8px;
+  color: var(--request-navy);
+  font-size: 18px;
+}
+
+.cad-request-success p {
+  margin: 0;
+  color: #4f6670;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.cad-request-success .cad-request-demo-note {
+  margin-top: 10px;
+  color: #728087;
+  font-size: 10px;
+}
+
+.cad-request-success-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.cad-request-success-actions a,
+.cad-request-success-actions button {
+  padding: 8px 12px;
+  border: 1px solid var(--request-navy);
+  background: var(--request-navy);
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cad-request-success-actions button {
+  background: #fff;
+  color: var(--request-navy);
+}
+
+@media (max-width: 980px) {
+  .cad-request-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cad-request-side {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cad-request-prototype {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .cad-request-shell {
+    width: min(100% - 28px, 1240px);
+    padding-top: 18px;
+  }
+
+  .cad-request-hero {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 25px 23px;
+  }
+
+  .cad-request-card {
+    padding: 24px 20px;
+  }
+
+  .cad-request-card-head,
+  .cad-request-submit-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cad-form-grid,
+  .cad-request-side {
+    grid-template-columns: 1fr;
+  }
+
+  .cad-field-wide,
+  .cad-request-prototype {
+    grid-column: auto;
+  }
+
+  .cad-request-primary {
+    width: 100%;
+  }
+}

@@ -160,6 +160,44 @@
     setSelectOptions("cadSeriesFilter", "全部系列", series);
   }
 
+  function requestProduct() {
+    var query = byId("cadSearch").value.trim().toLowerCase();
+    if (!query) return null;
+    return state.products.find(function (product) {
+      return String(product.itemNo || "").trim().toLowerCase() === query;
+    }) || null;
+  }
+
+  function buildRequestUrl() {
+    var params = new URLSearchParams();
+    var query = byId("cadSearch").value.trim();
+    var product = requestProduct();
+    var likelyItemNo = /^[A-Za-z0-9_.-]{5,}$/.test(query) ? query : "";
+    var values = product ? {
+      item: product.itemNo,
+      category: product.category,
+      series: product.series,
+      package: product.package,
+      voltage: product.voltage,
+      capacitance: product.capacitance,
+      size: product.size
+    } : {
+      item: likelyItemNo,
+      category: byId("cadCategoryFilter").value,
+      series: byId("cadSeriesFilter").value,
+      package: byId("cadPackageFilter").value
+    };
+    Object.keys(values).forEach(function (key) {
+      if (values[key]) params.set(key, values[key]);
+    });
+    return "design-3d-cad-request.html" + (params.toString() ? "?" + params.toString() : "");
+  }
+
+  function updateRequestLinks() {
+    var entry = byId("cadRequestEntry");
+    if (entry) entry.href = buildRequestUrl();
+  }
+
   function setSelectOptions(id, emptyLabel, values) {
     var select = byId(id);
     select.innerHTML = '<option value="">' + escapeHtml(emptyLabel) + '</option>';
@@ -329,6 +367,7 @@
       });
     }
     renderActiveFilters();
+    updateRequestLinks();
     renderTable();
   }
 
@@ -378,7 +417,7 @@
       : "共 " + state.filtered.length + " 个 STEP 文件 · " + unique(state.filtered.map(function (row) { return row.model.fileHash || row.model.id; })).length + " 个唯一几何";
 
     if (!rows.length) {
-      renderMessage("search_off", "没有符合当前筛选条件的模型", "empty");
+      renderMessage("search_off", "没有符合当前条件的 3D-CAD 模型", "empty");
     } else {
       body.innerHTML = rows.map(function (row) {
         return row.type === "product" ? renderProductRow(row) : renderModelRow(row);
@@ -391,9 +430,15 @@
     updateSelectionUI();
   }
 
-  function renderMessage(icon, message) {
+  function renderMessage(icon, message, variant) {
+    var action = variant === "empty"
+      ? '<a class="cad-button cad-button-primary cad-empty-action" href="' + escapeHtml(buildRequestUrl()) + '">' +
+        '<span class="material-symbols-outlined">add_box</span>申请 3D-CAD</a>'
+      : "";
     byId("cadTableBody").innerHTML = '<tr><td class="cad-table-message" colspan="8">' +
-      '<span class="material-symbols-outlined">' + escapeHtml(icon) + '</span>' + escapeHtml(message) + '</td></tr>';
+      '<span class="material-symbols-outlined">' + escapeHtml(icon) + '</span><strong>' +
+      escapeHtml(message) + '</strong>' + (variant === "empty"
+        ? '<small>若当前料号没有模型，可提交需求信息。</small>' : "") + action + '</td></tr>';
   }
 
   function renderBadges(values, className, empty) {
