@@ -10,14 +10,14 @@
   const EPSILON = 1e-12;
 
   const PRODUCT_LINES = {
-    liquid: { name: "液态铝电解电容器", model: "aluminum", review: "待工程确认系列/封装系数" },
-    edlc: { name: "双电层超级电容", model: "edlc", review: "必须填写系列退化试验系数" },
-    polymer: { name: "高分子固态铝电解电容器", model: "polymer", review: "公开公式，待工程确认适用系列" },
-    lic: { name: "混合型超级电容（锂离子电容）", model: "lic", review: "工程拟合模型，必须填写日历/循环数据" },
-    hybrid: { name: "高分子混合动力铝电解电容器", model: "aluminum", review: "公开公式，待工程确认系列系数" },
-    stacked: { name: "叠层高分子固态铝电解电容器", model: "polymer", review: "公开公式，待工程确认封装适用性" },
-    film: { name: "薄膜电容器", model: "film", review: "公开公式，A、n必须按系列确认" },
-    tantalum: { name: "导电高分子钽电解电容器", model: "tantalum", review: "可靠性模型，非磨损寿命模型" }
+    liquid: { name: "液态铝电解电容器", model: "aluminum", review: "温度、纹波与工作电压" },
+    edlc: { name: "双电层超级电容", model: "edlc", review: "容量退化寿命" },
+    polymer: { name: "高分子固态铝电解电容器", model: "polymer", review: "温度与纹波自热" },
+    lic: { name: "混合型超级电容（锂离子电容）", model: "lic", review: "日历寿命与循环寿命" },
+    hybrid: { name: "高分子混合动力铝电解电容器", model: "aluminum", review: "温度、纹波与工作电压" },
+    stacked: { name: "叠层高分子固态铝电解电容器", model: "stacked", review: "本体温度寿命推算" },
+    film: { name: "薄膜电容器", model: "film", review: "热点温度与工作电压" },
+    tantalum: { name: "导电高分子钽电解电容器", model: "tantalum", review: "FIT与MTBF可靠性" }
   };
 
   function finite(value) {
@@ -131,6 +131,55 @@
     };
   }
 
+  /**
+   * 高分子叠层铝电容寿命计算卡：
+   * ΔT = (I / I0)² × ΔT0
+   * Tx = T + ΔT
+   * Lx = L0 × 10^((T0 - Tx) / 20)
+   */
+  function calculateStacked(input) {
+    const errors = [];
+    const warnings = [];
+    const ratedLife = requireNumber(input, "ratedLifeHours", "最高额定温度下的保证寿命 L0", { positive: true }, errors);
+    const ratedTemp = requireNumber(input, "ratedTemperatureC", "允许的最高使用温度 T0", {}, errors);
+    const ambient = requireNumber(input, "ambientTemperatureC", "环境温度 T", {}, errors);
+    const ratedRipple = requireNumber(input, "ratedRippleA", "额定最大纹波电流 I0", { positive: true }, errors);
+    const actualRipple = requireNumber(input, "actualRippleA", "实际等效纹波电流 I", { nonNegative: true }, errors);
+    const ratedRise = requireNumber(input, "ratedTempRiseC", "额定纹波电流下温升 ΔT0", { nonNegative: true }, errors);
+
+    if (ambient > ratedTemp) errors.push("环境温度 T 不能超过允许的最高使用温度 T0。");
+    if (actualRipple > ratedRipple) errors.push("实际等效纹波电流 I 不能超过额定最大纹波电流 I0。");
+    if (errors.length) return { ok: false, errors, warnings };
+
+    const rippleRatio = actualRipple / ratedRipple;
+    const actualRise = rippleRatio * rippleRatio * ratedRise;
+    const bodyTemperature = ambient + actualRise;
+    if (bodyTemperature > ratedTemp) {
+      errors.push("计算得到的实际本体温度 Tx 超过允许的最高使用温度 T0。");
+      return { ok: false, errors, warnings };
+    }
+
+    const temperatureFactor = Math.pow(10, (ratedTemp - bodyTemperature) / 20);
+    const rawHours = ratedLife * temperatureFactor;
+    const life = cappedLife(rawHours, Number(input.maxLifeHours));
+    if (life.capped) warnings.push("原始推算值超过15年，按计算卡规则显示为15年（131,400小时）。");
+
+    return {
+      ok: true,
+      type: "life",
+      ...life,
+      errors,
+      warnings,
+      details: {
+        rippleRatio,
+        actualRise,
+        bodyTemperature,
+        temperatureDifference: ratedTemp - bodyTemperature,
+        temperatureFactor
+      }
+    };
+  }
+
   function calculateEdlc(input) {
     const errors = [];
     const warnings = ["k与a必须来自该系列在目标温度、电压下的退化试验，不能跨系列套用。"];
@@ -234,9 +283,10 @@
     if (!product) return { ok: false, errors: ["未知产品线。"], warnings: [] };
     switch (product.model) {
       case "aluminum": return calculateAluminum(input);
-      case "polymer": return calculatePolymer(input);
       case "edlc": return calculateEdlc(input);
+      case "polymer": return calculatePolymer(input);
       case "lic": return calculateLic(input);
+      case "stacked": return calculateStacked(input);
       case "film": return calculateFilm(input);
       case "tantalum": return calculateTantalum(input);
       default: return { ok: false, errors: ["该产品线尚未配置计算模型。"], warnings: [] };
@@ -253,6 +303,7 @@
     DEFAULT_MAX_HOURS,
     PRODUCT_LINES,
     calculateProduct,
+    calculateStacked,
     calculateAluminum,
     calculatePolymer,
     calculateEdlc,

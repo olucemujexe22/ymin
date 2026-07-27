@@ -113,6 +113,7 @@ input, select {
 }
 input:focus, select:focus { border-color: var(--blue-2); box-shadow: 0 0 0 3px rgba(19, 133, 197, .12); }
 select:disabled { color: #9ba8b1; background: #f2f5f7; }
+input[readonly] { color: #536779; background: #f1f4f7; cursor: not-allowed; }
 .input-unit { position: relative; }
 .input-unit input { padding-right: 64px; }
 .input-unit em { position: absolute; top: 50%; right: 12px; color: #71818d; font-size: 12px; font-style: normal; transform: translateY(-50%); }
@@ -120,12 +121,11 @@ select:disabled { color: #9ba8b1; background: #f2f5f7; }
 .formula-preview { margin-top: 20px; padding: 18px 20px; color: #144d70; background: var(--pale); border-left: 3px solid var(--blue-2); }
 .formula-preview strong { color: var(--navy); }
 .formula-preview code { display: block; margin-top: 6px; color: #155f8c; font-family: Cambria, "Times New Roman", serif; font-size: 17px; white-space: normal; }
+.formula-preview code span { display: block; margin-top: 4px; }
 .formula-preview p { margin: 7px 0 0; color: #5a6d79; font-size: 12px; }
 .formula-preview .source-note { margin-top: 12px; padding-top: 10px; border-top: 1px solid #d7e2ec; }
-.line-selector { display: grid; grid-template-columns: minmax(280px, 1fr) 1.4fr; gap: 18px; align-items: end; }
-.review-state { min-height: 44px; padding: 9px 14px; display: flex; align-items: center; justify-content: space-between; gap: 18px; background: #f3f6fa; border: 1px solid #cbd7e3; }
-.review-state span { color: var(--muted); font-size: 12px; }
-.review-state strong { color: #9a5b0c; font-size: 13px; text-align: right; }
+.model-intro .model-description { margin-top: 8px; color: #415b70; font-size: 14px; line-height: 1.7; }
+.line-selector { display: grid; grid-template-columns: minmax(280px, 520px); gap: 18px; align-items: end; }
 .preset-row { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin-top: 20px; color: var(--muted); font-size: 13px; }
 .chip-button { padding: 7px 13px; color: var(--blue); background: #fff; border: 1px solid #9fb1c5; border-radius: 0; }
 .chip-button:hover { color: #fff; background: var(--blue); border-color: var(--blue); }
@@ -134,6 +134,7 @@ select:disabled { color: #9ba8b1; background: #f2f5f7; }
 .advanced-settings summary { padding: 13px 16px; color: var(--blue); background: #f7fafc; font-size: 14px; font-weight: 700; cursor: pointer; }
 .advanced-settings[open] summary { border-bottom: 1px solid var(--line); }
 .advanced-settings .field-grid { padding: 20px; }
+.parameter-group > h3 { margin: 0 0 16px; color: var(--navy); font-size: 15px; }
 
 .bank-card { display: flex; align-items: end; gap: 22px; margin-bottom: 20px; padding: 18px 20px; background: var(--pale); border: 1px solid #cfe0ea; }
 .bank-card > div { flex: 1; }
@@ -160,16 +161,27 @@ select:disabled { color: #9ba8b1; background: #f2f5f7; }
 .secondary-button { margin-top: 16px; padding: 10px 16px; color: var(--blue); background: #fff; border: 1px solid #9abfd5; font-weight: 700; }
 .secondary-button:hover { background: var(--pale); }
 .action-row { display: flex; gap: 14px; margin-bottom: 22px; }
+.action-spacer { flex: 1; }
 .primary-button { min-width: 180px; padding: 12px 24px; color: #fff; background: var(--navy); border: 1px solid var(--navy); font-weight: 800; box-shadow: none; }
 .primary-button:hover { filter: brightness(1.05); }
+.primary-button:disabled { color: #82909d; background: #dce2e8; border-color: #d0d8df; cursor: not-allowed; filter: none; }
 .text-button { padding: 10px 16px; color: var(--muted); background: transparent; border: 0; }
 .text-button:hover { color: var(--blue); }
+.secondary-action { padding: 10px 14px; color: var(--navy); background: #fff; border: 1px solid #aebdcb; font-size: 13px; font-weight: 700; }
+.secondary-action:hover { border-color: var(--navy); }
+.secondary-action:disabled { color: #9aa7b3; background: #f2f5f7; border-color: #d8e0e7; cursor: not-allowed; }
 
 .output { min-height: 190px; border: 1px solid #ccdae3; background: #f7fafc; }
 .output-empty { display: grid; place-items: center; align-content: center; min-height: 190px; text-align: center; }
 .output-empty span { display: grid; place-items: center; width: 48px; height: 48px; color: var(--blue); background: #e2f0f8; border-radius: 50%; font-family: Georgia, serif; font-size: 24px; }
 .output-empty h3 { margin: 10px 0 2px; color: var(--navy); }
 .output-empty p { margin: 0; color: var(--muted); font-size: 13px; }
+.output-empty.ready span { color: var(--green); background: #e2f3ec; font-family: inherit; font-weight: 900; }
+.output-empty.pending span { color: #9a5b0c; background: #fff1d9; font-family: inherit; font-weight: 900; }
+.pending-parameter-card { grid-column: 1 / -1; min-height: 150px; padding: 28px; display: flex; align-items: center; justify-content: center; gap: 18px; color: var(--muted); background: #f7f9fb; border: 1px dashed #bac7d3; text-align: left; }
+.pending-parameter-card .pending-icon { flex: 0 0 44px; display: grid; place-items: center; width: 44px; height: 44px; color: #9a5b0c; background: #fff1d9; border-radius: 50%; font-weight: 900; }
+.pending-parameter-card strong { display: block; margin-bottom: 4px; color: var(--navy); }
+.pending-parameter-card p { margin: 0; font-size: 13px; }
 .error-box, .warning-box { margin: 18px; padding: 15px 18px; }
 .error-box { color: #812d2d; background: #fff0f0; border-left: 4px solid var(--red); }
 .warning-box { color: #6e4b07; background: #fff8e7; border-left: 4px solid var(--orange); }
@@ -184,6 +196,11 @@ select:disabled { color: #9ba8b1; background: #f2f5f7; }
 .result-details { padding: 20px; }
 .result-details p { margin: 0; color: var(--muted); font-size: 13px; }
 .result-details h3 { margin: 0 0 10px; color: var(--navy); font-size: 16px; }
+.calculation-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.calculation-steps > div { padding: 13px 14px; background: #fff; border: 1px solid var(--line); }
+.calculation-steps span, .calculation-steps strong { display: block; }
+.calculation-steps span { color: var(--muted); font-size: 11px; }
+.calculation-steps strong { margin-top: 4px; color: var(--navy); font-size: 14px; }
 .result-table { width: 100%; border-collapse: collapse; font-size: 12px; }
 .result-table th, .result-table td { padding: 10px; text-align: right; border-bottom: 1px solid var(--line); }
 .result-table th:first-child, .result-table td:first-child { text-align: left; }
@@ -230,6 +247,7 @@ select:disabled { color: #9ba8b1; background: #f2f5f7; }
   .method-grid article:nth-child(2) { border-right: 0; }
   .method-grid article:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .result-summary { grid-template-columns: 1fr; }
+  .calculation-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .result-summary > div { border-right: 0; border-bottom: 1px solid var(--line); }
   .result-summary > div:last-child { border-bottom: 0; }
   .footer-grid { gap: 32px; }
@@ -247,8 +265,6 @@ select:disabled { color: #9ba8b1; background: #f2f5f7; }
   .section-heading { gap: 11px; }
   .step { flex-basis: 38px; height: 38px; }
   .three-cols, .four-cols, .condition-main { grid-template-columns: 1fr; }
-  .review-state { align-items: flex-start; flex-direction: column; gap: 2px; }
-  .review-state strong { text-align: left; }
   .bank-card { align-items: stretch; flex-direction: column; }
   .compact-field { width: 100%; }
   .ripple-row { grid-template-columns: 1fr; padding: 12px; background: #f0f5f8; }
@@ -257,8 +273,23 @@ select:disabled { color: #9ba8b1; background: #f2f5f7; }
   .method-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
   .method-grid article:last-child { border-bottom: 0; }
   .action-row { flex-direction: column; }
+  .action-spacer { display: none; }
   .primary-button { width: 100%; }
+  .secondary-action { width: 100%; }
   .result-table { display: block; overflow-x: auto; }
+  .calculation-steps { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
   .footer-bottom { padding: 16px 14px; align-items: flex-start; flex-direction: column; }
+}
+
+@media print {
+  body { display: block !important; height: auto !important; overflow: visible !important; background: #fff !important; }
+  body > header, .hero, .notice, .panel:not(.result-panel), .method-panel, footer, .action-row { display: none !important; }
+  main { display: block !important; overflow: visible !important; }
+  .shell { width: 100% !important; }
+  .page-content { padding: 0 !important; }
+  .result-panel { margin: 0 !important; padding: 0 !important; border: 0 !important; }
+  .result-panel .section-heading { display: block !important; }
+  .result-panel .step { display: none !important; }
+  .output { border: 1px solid #bcc7d2 !important; }
 }

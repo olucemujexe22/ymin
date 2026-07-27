@@ -3,41 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="永铭电容器八条产品线寿命与可靠性计算公式工程评估版">
-  <title>电容寿命计算工具｜工程评估版</title>
+  <meta name="description" content="永铭电容器寿命计算工具，覆盖八条产品线，支持按规格参数与实际工况进行寿命或可靠性计算。">
+  <title>电容寿命计算工具 - 永铭电子</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/common.css">
   <link rel="stylesheet" href="life-calc.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#1B365D"},borderRadius:{"DEFAULT":"0px"},fontFamily:{"headline":["Space Grotesk"],"body":["Inter"]}}}}
+  </script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-left">
-        <a class="brand" href="https://geo.ymin.com/" aria-label="永铭电子首页">
-          <img src="ymin-logo.jpg" alt=""><span>YMIN</span>
-        </a>
-        <nav class="main-nav" id="main-nav" aria-label="主导航">
-          <div class="nav-item"><a href="https://geo.ymin.com/">首页<span class="nav-chevron">⌄</span></a><div class="nav-submenu"><a href="#">动态轮播</a><a href="#">搜索功能</a><a href="#">产品矩阵</a><a href="#">设计工具</a></div></div>
-          <div class="nav-item"><a href="https://geo.ymin.com/">产品中心<span class="nav-chevron">⌄</span></a><div class="nav-submenu"><a href="#">系列总览</a><a href="#">产品搜索</a><a href="#">产品详情页</a></div></div>
-          <div class="nav-item"><a href="#">应用中心<span class="nav-chevron">⌄</span></a><div class="nav-submenu"><a href="#">应用总览</a><a href="#">汽车电子</a><a href="#">AI服务器与数据中心</a></div></div>
-          <div class="nav-item"><a class="active" href="#">设计工具<span class="nav-chevron">⌄</span></a><div class="nav-submenu"><a href="#">3D-CAD</a><a class="current" href="#">寿命计算工具</a><a href="#">可靠性实验数据</a><a href="#">SPICE模型</a></div></div>
-          <div class="nav-item"><a href="#">服务支持<span class="nav-chevron">⌄</span></a><div class="nav-submenu"><a href="#">知识库 (FAQ)</a><a href="#">下载中心</a><a href="#">合规证书</a></div></div>
-          <div class="nav-item"><a href="#">关于永铭<span class="nav-chevron">⌄</span></a><div class="nav-submenu"><a href="#">公司简介</a><a href="#">企业荣誉</a><a href="#">联系我们</a></div></div>
-        </nav>
-      </div>
-      <div class="header-actions">
-        <form class="header-search" action="https://geo.ymin.com/" method="get"><label class="sr-only" for="site-search">搜索型号或参数</label><input id="site-search" name="q" type="search" placeholder="搜索型号或参数..."><button type="submit" aria-label="搜索"><span class="search-symbol"></span></button></form>
-        <button class="language-button" type="button" aria-label="切换语言">◉</button>
-        <button class="mobile-menu-button" id="mobile-menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false">菜单</button>
-      </div>
-    </div>
-  </header>
+<body class="bg-surface text-on-surface flex h-screen flex-col overflow-hidden">
+  <header id="ymin-navbar"></header>
 
-  <main>
+  <main class="custom-scrollbar flex-1 overflow-y-auto">
     <section class="hero">
       <div class="shell">
-        <nav class="breadcrumb" aria-label="面包屑"><a href="https://geo.ymin.com/">首页</a><span>/</span><a href="#">设计工具</a><span>/</span><strong>寿命计算工具</strong></nav>
+        <nav class="breadcrumb" aria-label="面包屑"><a href="index.html">首页</a><span>/</span><a href="design-tools.html">设计工具</a><span>/</span><strong>寿命计算工具</strong></nav>
         <div class="hero-row">
-          <div><span class="eyebrow">DESIGN TOOLS / ENGINEERING REVIEW</span><h1>电容寿命计算工具</h1><p>八条产品线分模型验证；先由工程确认公式和系列系数，再接入产品料号。</p></div>
-          <div class="version-card"><strong>工程评估版 V3</strong><span>8条产品线 · 参数计算优先</span></div>
+          <div><span class="eyebrow">DESIGN TOOLS / LIFE CALCULATION</span><h1>电容寿命计算工具</h1><p>根据产品规格参数与实际工况，快速获得寿命或可靠性参考结果。</p></div>
+          <div class="version-card"><strong>8条产品线</strong><span>独立参数 · 独立计算 · 统一结果</span></div>
         </div>
       </div>
     </section>
@@ -45,11 +32,11 @@
     <div class="shell page-content">
       <div class="notice" role="note">
         <span class="notice-mark">!</span>
-        <div><strong>页面中的“公开公式”不等于永铭产品已批准公式</strong><p>空白系数必须由对应事业部依据规格书和老化试验填写。工程确认前，结果仅用于核对计算逻辑，不构成产品寿命保证。</p></div>
+        <div><strong>使用前请准备产品规格与实际工况参数</strong><p>额定寿命、温度、电压和纹波电流等数据请以对应产品规格书为准；不同产品线的参数和计算方式相互独立。</p></div>
       </div>
 
       <section class="panel" aria-labelledby="line-heading">
-        <div class="section-heading"><span class="step">01</span><div><h2 id="line-heading">选择产品线</h2><p>产品线决定计算模型；封装、系列和料号后续只负责带入对应参数与适用规则。</p></div></div>
+        <div class="section-heading"><span class="step">01</span><div><h2 id="line-heading">选择产品线</h2><p>产品线决定需要填写的规格参数、工况参数和结果类型。</p></div></div>
         <div class="line-selector">
           <label class="field">
             <span>产品线</span>
@@ -59,56 +46,57 @@
               <option value="polymer">高分子固态铝电解电容器</option>
               <option value="lic">混合型超级电容（锂离子电容）</option>
               <option value="hybrid">高分子混合动力铝电解电容器</option>
-              <option value="stacked">叠层高分子固态铝电解电容器</option>
+              <option value="stacked" selected>叠层高分子固态铝电解电容器</option>
               <option value="film">薄膜电容器</option>
               <option value="tantalum">导电高分子钽电解电容器</option>
             </select>
           </label>
-          <div class="review-state"><span>当前工程状态</span><strong id="product-review"></strong></div>
         </div>
-        <div class="formula-preview">
+        <div class="formula-preview model-intro">
           <strong id="model-title"></strong>
-          <code id="formula-text"></code>
-          <p id="model-status"></p>
-          <p class="source-note">依据说明：<span id="model-source"></span></p>
+          <p id="model-description" class="model-description"></p>
+          <p class="source-note">输入提示：<span id="model-note"></span></p>
         </div>
       </section>
 
       <section class="panel" aria-labelledby="parameter-heading">
-        <div class="section-heading"><span class="step">02</span><div><h2 id="parameter-heading">填写计算参数</h2><p>有公开通用值的已给出示例；会改变产品结论的系列系数保持空白，交由工程填写。</p></div></div>
-        <div class="field-grid four-cols" id="parameter-fields"></div>
+        <div class="section-heading"><span class="step">02</span><div><h2 id="parameter-heading">填写计算参数</h2><p>先填写规格书中的额定参数，再填写实际使用条件；专业参数可按需展开。</p></div></div>
+        <div id="parameter-fields"></div>
       </section>
 
       <section class="panel result-panel" aria-labelledby="result-heading">
-        <div class="section-heading"><span class="step">03</span><div><h2 id="result-heading">计算与工程核对</h2><p>计算器会拦截缺项、负数、超额定电压/温度/纹波等明显错误。</p></div></div>
-        <div class="action-row"><button id="calculate" type="button" class="primary-button">开始计算</button><button id="reset" type="button" class="text-button">恢复本产品线示例</button></div>
+        <div class="section-heading"><span class="step">03</span><div><h2 id="result-heading">计算结果</h2><p>查看寿命或可靠性结果、年等效、边界提示及关键计算过程。</p></div></div>
+        <div class="action-row">
+          <button id="calculate" type="button" class="primary-button">开始计算</button>
+          <button id="reset" type="button" class="text-button">恢复示例参数</button>
+          <span class="action-spacer"></span>
+          <button id="copy-result" type="button" class="secondary-action" disabled>复制结果</button>
+          <button id="print-result" type="button" class="secondary-action" disabled>打印 / 保存PDF</button>
+        </div>
         <div id="calculation-output" class="output" aria-live="polite"></div>
       </section>
 
       <section class="method-panel" aria-labelledby="method-heading">
-        <span class="eyebrow">ENGINEERING ACCEPTANCE</span>
-        <h2 id="method-heading">工程评估时只需要确认这四类内容</h2>
+        <span class="eyebrow">HOW TO USE</span>
+        <h2 id="method-heading">四步完成计算</h2>
         <div class="method-grid">
-          <article><strong>01</strong><h3>公式适用范围</h3><p>确认产品线、封装、系列是否使用当前公式，是否存在分段温度规则。</p></article>
-          <article><strong>02</strong><h3>系列专用系数</h3><p>填写温升、加速因子、退化斜率、FIT修正因子等试验参数。</p></article>
-          <article><strong>03</strong><h3>输入边界</h3><p>确认最低计算温度、最大纹波、降额电压、寿命封顶值和禁止工况。</p></article>
-          <article><strong>04</strong><h3>对照算例</h3><p>每条产品线至少提供额定边界、常用工况和异常拦截三个已知答案。</p></article>
+          <article><strong>01</strong><h3>选择产品类型</h3><p>八条产品线使用各自的参数页面和结果形式。</p></article>
+          <article><strong>02</strong><h3>填写规格与工况</h3><p>额定参数来自规格书，实际参数来自设备使用条件。</p></article>
+          <article><strong>03</strong><h3>检查边界提示</h3><p>页面自动拦截缺项、负数、超温、超压和超纹波等情况。</p></article>
+          <article><strong>04</strong><h3>保存计算结果</h3><p>结果可复制，也可通过打印功能保存为PDF文件。</p></article>
         </div>
-        <div class="disclaimer"><strong>说明：</strong>料号关联应放在公式验收之后。届时产品详情页只需把额定寿命、温度、电压、纹波及系列系数自动带入，不改变已经验收的计算核心。</div>
+        <div class="disclaimer"><strong>结果说明：</strong>计算结果用于设计选型和工况评估参考，不构成产品寿命承诺。实际应用还需结合散热、安装、环境应力及产品规格书要求综合判断。</div>
       </section>
     </div>
+    <footer id="ymin-footer"></footer>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <section><h3>快速链接</h3><a href="https://geo.ymin.com/">首页</a><a href="#">产品中心</a><a href="#">应用中心</a><a href="#">设计工具</a></section>
-      <section><h3>产品中心</h3><a href="#">液态铝电解电容器</a><a href="#">高分子固态铝电解电容器</a><a href="#">超级电容器</a><a href="#">薄膜电容器</a></section>
-      <section><h3>联系我们</h3><p>400 900 1922 产品服务热线</p><p>web@ymin.com</p><p>上海市奉贤区南桥镇杨王经济园区光村路258号</p></section>
-    </div>
-    <div class="footer-bottom"><span>© 2024 永铭电子有限公司. 版权所有</span><span><a href="#">隐私政策</a><a href="#">使用条款</a></span></div>
-  </footer>
-
+  <script src="components/navbar.js"></script>
+  <script src="components/footer.js"></script>
   <script src="life-calc-engine.js"></script>
   <script src="life-calc-ui.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded",function(){YMIN.navbar.inject("tools");YMIN.footer.inject();});
+  </script>
 </body>
 </html>

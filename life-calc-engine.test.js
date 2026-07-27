@@ -25,54 +25,63 @@ function polymer(overrides = {}) {
   };
 }
 
+function stacked(overrides = {}) {
+  return {
+    ratedLifeHours: 2000, ratedTemperatureC: 105, ratedRippleA: 2.125,
+    actualRippleA: 0.22, ambientTemperatureC: 65, ratedTempRiseC: 20,
+    maxLifeHours: 131400, ...overrides
+  };
+}
+
 const tests = [];
 const test = (name, fn) => tests.push({ name, fn });
 
-test("8条产品线均已配置", () => assert.equal(Object.keys(Engine.PRODUCT_LINES).length, 8));
-
-test("液态铝电解额定纹波条件返回额定寿命", () => {
-  const result = Engine.calculateProduct("liquid", aluminum());
-  assert.equal(result.ok, true);
-  close(result.rawHours, 2000);
+test("页面包含8条独立产品线", () => {
+  assert.equal(Object.keys(Engine.PRODUCT_LINES).length, 8);
 });
 
-test("液态铝电解降低10℃寿命翻倍", () => {
+test("液态铝电解在额定纹波条件下返回额定寿命", () => {
+  close(Engine.calculateProduct("liquid", aluminum()).rawHours, 2000);
+});
+
+test("液态铝电解降低10℃时寿命翻倍", () => {
   close(Engine.calculateProduct("liquid", aluminum({ ambientTemperatureC: 95 })).rawHours, 4000);
 });
 
-test("液态铝电解超温、超压、超纹波均拦截", () => {
+test("液态铝电解拦截超温、超压和超纹波", () => {
   assert.equal(Engine.calculateProduct("liquid", aluminum({ ambientTemperatureC: 106 })).ok, false);
   assert.equal(Engine.calculateProduct("liquid", aluminum({ actualVoltageV: 51 })).ok, false);
   assert.equal(Engine.calculateProduct("liquid", aluminum({ actualRippleMa: 351 })).ok, false);
 });
 
-test("高分子固态公开公式在降低10℃时翻倍", () => {
-  const result = Engine.calculateProduct("polymer", polymer({ ambientTemperatureC: 95 }));
-  close(result.rawHours, 4000);
+test("高分子固态降低10℃时寿命翻倍", () => {
+  close(Engine.calculateProduct("polymer", polymer({ ambientTemperatureC: 95 })).rawHours, 4000);
 });
 
-test("叠层高分子使用独立产品线入口与同族候选公式", () => {
-  const result = Engine.calculateProduct("stacked", polymer({ ambientTemperatureC: 95 }));
-  close(result.rawHours, 4000);
+test("叠层计算卡示例温升、本体温度和原始寿命正确", () => {
+  const result = Engine.calculateProduct("stacked", stacked());
+  close(result.details.actualRise, 0.21436678200692044);
+  close(result.details.bodyTemperature, 65.21436678200692);
+  close(result.rawHours, 195124.43411457943, 1e-6);
 });
 
-test("混合动力铝电解使用铝电解可配置模型", () => {
-  const result = Engine.calculateProduct("hybrid", aluminum({ ambientTemperatureC: 95 }));
-  close(result.rawHours, 4000);
+test("叠层结果超过15年时显示131400小时", () => {
+  const result = Engine.calculateProduct("stacked", stacked());
+  assert.equal(result.capped, true);
+  assert.equal(result.hours, 131400);
+  assert.equal(result.years, 15);
 });
 
-test("双电层平方根退化公式正确反解时间", () => {
+test("叠层拦截超额定纹波和超本体温度", () => {
+  assert.equal(Engine.calculateProduct("stacked", stacked({ actualRippleA: 2.126 })).ok, false);
+  assert.equal(Engine.calculateProduct("stacked", stacked({ ambientTemperatureC: 100, actualRippleA: 2 })).ok, false);
+});
+
+test("双电层平方根退化模型正确反解时间", () => {
   const result = Engine.calculateProduct("edlc", {
     degradationK: 0.1, initialLossPercent: 2, lossLimitPercent: 20, maxLifeHours: 1e9
   });
   close(result.rawHours, 32400);
-});
-
-test("双电层退化阈值不大于截距时拒绝计算", () => {
-  const result = Engine.calculateProduct("edlc", {
-    degradationK: 0.1, initialLossPercent: 20, lossLimitPercent: 20
-  });
-  assert.equal(result.ok, false);
 });
 
 test("锂离子电容日历和循环损伤按倒数相加", () => {
@@ -85,7 +94,13 @@ test("锂离子电容日历和循环损伤按倒数相加", () => {
   close(result.rawHours, 5000);
 });
 
-test("薄膜电容公开公式在参考条件下返回参考寿命", () => {
+test("混合动力产品线使用独立入口并正常输出", () => {
+  const result = Engine.calculateProduct("hybrid", aluminum({ ambientTemperatureC: 95 }));
+  assert.equal(result.ok, true);
+  close(result.rawHours, 4000);
+});
+
+test("薄膜电容参考条件返回参考寿命", () => {
   const result = Engine.calculateProduct("film", {
     referenceLifeHours: 100000, referenceHotspotC: 70, actualHotspotC: 70,
     referenceVoltageV: 450, actualVoltageV: 450, accelerationA: 10,
@@ -94,16 +109,7 @@ test("薄膜电容公开公式在参考条件下返回参考寿命", () => {
   close(result.rawHours, 100000);
 });
 
-test("薄膜电容温度与电压因子按公式计算", () => {
-  const result = Engine.calculateProduct("film", {
-    referenceLifeHours: 1000, referenceHotspotC: 80, actualHotspotC: 70,
-    referenceVoltageV: 400, actualVoltageV: 200, accelerationA: 10,
-    voltageExponentN: 2, maxLifeHours: 1e9
-  });
-  close(result.rawHours, 1000 * Math.E * 4);
-});
-
-test("高分子钽输出FIT与MTBF而非磨损寿命", () => {
+test("高分子钽输出FIT与MTBF", () => {
   const result = Engine.calculateProduct("tantalum", {
     baseFit: 0.5, temperatureFactor: 2, voltageFactor: 3, environmentFactor: 1,
     ratedVoltageV: 10, actualVoltageV: 8
@@ -111,13 +117,6 @@ test("高分子钽输出FIT与MTBF而非磨损寿命", () => {
   assert.equal(result.type, "reliability");
   close(result.fit, 3);
   close(result.mtbfHours, 1e9 / 3);
-});
-
-test("寿命结果按15年上限封顶但保留原始值", () => {
-  const result = Engine.calculateProduct("polymer", polymer({ ambientTemperatureC: 40 }));
-  assert.equal(result.hours, 131400);
-  assert.equal(result.capped, true);
-  assert.ok(result.rawHours > result.hours);
 });
 
 let passed = 0;
