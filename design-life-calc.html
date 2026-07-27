@@ -65,15 +65,16 @@
       </section>
 
       <section class="panel result-panel" aria-labelledby="result-heading">
-        <div class="section-heading"><span class="step">03</span><div><h2 id="result-heading">计算结果</h2><p>查看寿命或可靠性结果、年等效、边界提示及关键计算过程。</p></div></div>
+        <div class="section-heading"><span class="step">03</span><div><h2 id="result-heading">计算结果</h2><p>查看寿命或可靠性结果、边界提示及关键计算过程；打印报告将自动附带本次输入参数与工况。</p></div></div>
         <div class="action-row">
           <button id="calculate" type="button" class="primary-button">开始计算</button>
           <button id="reset" type="button" class="text-button">恢复示例参数</button>
           <span class="action-spacer"></span>
           <button id="copy-result" type="button" class="secondary-action" disabled>复制结果</button>
-          <button id="print-result" type="button" class="secondary-action" disabled>打印 / 保存PDF</button>
+          <button id="print-result" type="button" class="secondary-action" disabled>打印完整报告 / 保存PDF</button>
         </div>
         <div id="calculation-output" class="output" aria-live="polite"></div>
+        <div id="print-report" class="print-report" aria-hidden="true"></div>
       </section>
 
       <section class="method-panel" aria-labelledby="method-heading">

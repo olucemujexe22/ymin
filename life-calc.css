@@ -170,6 +170,7 @@ input[readonly] { color: #536779; background: #f1f4f7; cursor: not-allowed; }
 .secondary-action { padding: 10px 14px; color: var(--navy); background: #fff; border: 1px solid #aebdcb; font-size: 13px; font-weight: 700; }
 .secondary-action:hover { border-color: var(--navy); }
 .secondary-action:disabled { color: #9aa7b3; background: #f2f5f7; border-color: #d8e0e7; cursor: not-allowed; }
+.print-report { display: none; }
 
 .output { min-height: 190px; border: 1px solid #ccdae3; background: #f7fafc; }
 .output-empty { display: grid; place-items: center; align-content: center; min-height: 190px; text-align: center; }
@@ -283,13 +284,39 @@ input[readonly] { color: #536779; background: #f1f4f7; cursor: not-allowed; }
 }
 
 @media print {
+  @page { size: A4; margin: 14mm 15mm 13mm; }
   body { display: block !important; height: auto !important; overflow: visible !important; background: #fff !important; }
   body > header, .hero, .notice, .panel:not(.result-panel), .method-panel, footer, .action-row { display: none !important; }
   main { display: block !important; overflow: visible !important; }
   .shell { width: 100% !important; }
   .page-content { padding: 0 !important; }
   .result-panel { margin: 0 !important; padding: 0 !important; border: 0 !important; }
-  .result-panel .section-heading { display: block !important; }
-  .result-panel .step { display: none !important; }
-  .output { border: 1px solid #bcc7d2 !important; }
+  .result-panel .section-heading, .result-panel .output { display: none !important; }
+  .print-report { display: block !important; color: #1f2d38; font-family: Arial, "Microsoft YaHei", sans-serif; }
+  .print-report-header { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 14px; border-bottom: 3px solid #16385f; }
+  .print-report-header span { color: #47708f; font-size: 9pt; font-weight: 700; letter-spacing: .12em; }
+  .print-report-header h1 { margin: 4px 0 0; color: #16385f; font-size: 22pt; line-height: 1.2; }
+  .print-report-time { color: #63727e; font-size: 9pt; line-height: 1.55; text-align: right; }
+  .print-report-time strong { color: #263d50; font-size: 10pt; font-weight: 700; }
+  .print-report-meta { display: grid; grid-template-columns: 1fr 1fr; margin: 14px 0 4px; border: 1px solid #b9c8d4; }
+  .print-report-meta > div { padding: 9px 11px; border-right: 1px solid #b9c8d4; }
+  .print-report-meta > div:last-child { border-right: 0; }
+  .print-report-meta span { display: block; margin-bottom: 3px; color: #657681; font-size: 8.5pt; }
+  .print-report-meta strong { color: #16385f; font-size: 10.5pt; }
+  .print-report-section { margin-top: 13px; break-inside: avoid; page-break-inside: avoid; }
+  .print-report-section h2 { margin: 0 0 6px; padding-left: 7px; color: #16385f; border-left: 3px solid #1d8467; font-size: 11.5pt; line-height: 1.25; }
+  .print-report-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 9pt; }
+  .print-report-table th, .print-report-table td { padding: 6px 9px; border: 1px solid #c7d2da; text-align: left; vertical-align: middle; }
+  .print-report-table th { width: 46%; color: #465b6a; background: #f1f5f7; font-weight: 500; }
+  .print-report-table td { color: #172f43; font-weight: 700; }
+  .print-result-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #aebfcb; }
+  .print-result-grid > div { padding: 11px 10px; border-right: 1px solid #aebfcb; }
+  .print-result-grid > div:last-child { border-right: 0; }
+  .print-result-grid span { display: block; color: #667983; font-size: 8.5pt; }
+  .print-result-grid strong { display: block; margin-top: 3px; color: #16385f; font-size: 13pt; }
+  .print-result-grid > div:first-child strong { color: #14725a; font-size: 15pt; }
+  .print-report-warnings { margin: 0; padding: 7px 10px 7px 28px; color: #704c08; background: #fff8e7; border: 1px solid #e5d3a6; font-size: 9pt; }
+  .print-report-ok { margin: 0; padding: 8px 10px; color: #2c6656; background: #edf7f3; border: 1px solid #bed9cf; font-size: 9pt; }
+  .print-report-disclaimer { margin-top: 14px; padding: 9px 11px; color: #5f6d76; background: #f4f6f8; border: 1px solid #d1d9df; font-size: 8.5pt; line-height: 1.55; break-inside: avoid; }
+  .print-report-footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 7px; color: #7a8993; border-top: 1px solid #cbd5dc; font-size: 8pt; }
 }

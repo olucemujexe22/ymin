@@ -262,7 +262,8 @@
   function calculate() {
     const productLine = byId("product-line").value;
     const schema = schemas[productLine];
-    const result = Engine.calculateProduct(productLine, readInput());
+    const input = readInput();
+    const result = Engine.calculateProduct(productLine, input);
     if (!result.ok) {
       byId("calculation-output").innerHTML = `<div class="error-box"><strong>请检查以下输入：</strong><ul>${
         result.errors.map(item => `<li>${item}</li>`).join("")
@@ -280,7 +281,7 @@
         </div>
         ${warningsHtml(result.warnings)}
         ${detailsHtml(schema, result.details)}`;
-      lastResultText = `${schema.title}\n工作条件失效率：${format(result.fit, 4)} FIT\n统计MTBF：${format(result.mtbfHours, 0)} h\n年等效：${format(result.mtbfYears, 2)} 年`;
+      updateReport(schema, input, result);
       setResultActions(true);
       return;
     }
@@ -294,7 +295,7 @@
       </div>
       ${warningsHtml(result.warnings)}
       ${detailsHtml(schema, result.details)}`;
-    lastResultText = `${schema.title}\n预计寿命：${prefix}${format(result.hours, 0)} h\n原始推算值：${format(result.rawHours, 0)} h\n年等效：${prefix}${format(result.years, 2)} 年`;
+    updateReport(schema, input, result);
     setResultActions(true);
   }
 
@@ -322,10 +323,163 @@
     }</ul></div>`;
   }
 
+  function updateReport(schema, input, result) {
+    const productLineName = byId("product-line").selectedOptions[0].textContent.trim();
+    const calculatedAt = new Date().toLocaleString("zh-CN", { hour12: false });
+    const basicFields = schema.fields.filter(item => !item.advanced && !item.readonly);
+    const advancedFields = schema.fields.filter(item => item.advanced && !item.readonly);
+    const resultRows = reportResultRows(result);
+    const detailRows = reportDetailRows(schema, result.details);
+    const warnings = result.warnings || [];
+
+    byId("print-report").innerHTML = `
+      <div class="print-report-header">
+        <div>
+          <span>YMIN DESIGN TOOLS</span>
+          <h1>电容寿命计算报告</h1>
+        </div>
+        <div class="print-report-time">计算时间<br><strong>${escapeHtml(calculatedAt)}</strong></div>
+      </div>
+      <div class="print-report-meta">
+        <div><span>产品线</span><strong>${escapeHtml(productLineName)}</strong></div>
+        <div><span>计算项目</span><strong>${escapeHtml(schema.title)}</strong></div>
+      </div>
+      ${reportParameterSection("产品参数与实际工况", basicFields, input)}
+      ${advancedFields.length ? reportParameterSection("专业计算参数", advancedFields, input) : ""}
+      <section class="print-report-section">
+        <h2>计算结果</h2>
+        <div class="print-result-grid">${resultRows.map(reportResultCard).join("")}</div>
+      </section>
+      ${detailRows.length ? `<section class="print-report-section">
+        <h2>主要计算过程</h2>
+        <table class="print-report-table"><tbody>${detailRows.map(reportTableRow).join("")}</tbody></table>
+      </section>` : ""}
+      <section class="print-report-section">
+        <h2>校验信息</h2>
+        ${warnings.length
+          ? `<ul class="print-report-warnings">${warnings.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+          : `<p class="print-report-ok">本次输入未触发超温、过压、纹波超限等校验警告。</p>`}
+      </section>
+      <div class="print-report-disclaimer">
+        <strong>结果说明：</strong>本报告根据页面中填写的产品参数与实际工况生成，计算结果仅供设计选型和工况分析参考，不构成产品寿命承诺。实际应用请结合产品规格书、散热、安装及环境应力综合判断。
+      </div>
+      <div class="print-report-footer"><span>永铭电子 · 电容寿命计算工具</span><span>报告由系统自动生成</span></div>`;
+
+    lastResultText = buildReportText(
+      productLineName,
+      schema,
+      calculatedAt,
+      basicFields,
+      advancedFields,
+      input,
+      resultRows,
+      detailRows,
+      warnings
+    );
+  }
+
+  function reportParameterSection(title, fields, input) {
+    return `<section class="print-report-section">
+      <h2>${escapeHtml(title)}</h2>
+      <table class="print-report-table"><tbody>${
+        fields.map(item => reportTableRow([item.label, reportFieldValue(item, input[item.key])])).join("")
+      }</tbody></table>
+    </section>`;
+  }
+
+  function reportResultRows(result) {
+    if (result.type === "reliability") {
+      return [
+        ["工作条件失效率", `${format(result.fit, 4)} FIT`],
+        ["统计MTBF", `${format(result.mtbfHours, 0)} h`],
+        ["年等效", `${format(result.mtbfYears, 2)} 年`]
+      ];
+    }
+    const prefix = result.capped ? "≥ " : "";
+    return [
+      ["预计寿命", `${prefix}${format(result.hours, 0)} h`],
+      ["原始推算值", `${format(result.rawHours, 0)} h`],
+      ["年等效（8760h/年）", `${prefix}${format(result.years, 2)} 年`]
+    ];
+  }
+
+  function reportDetailRows(schema, values) {
+    return Object.keys(schema.details || {})
+      .filter(key => Number.isFinite(values[key]))
+      .map(key => {
+        const meta = schema.details[key];
+        return [meta.label, `${format(values[key], meta.digits)}${meta.unit ? " " + meta.unit : ""}`];
+      });
+  }
+
+  function reportResultCard(row) {
+    return `<div><span>${escapeHtml(row[0])}</span><strong>${escapeHtml(row[1])}</strong></div>`;
+  }
+
+  function reportTableRow(row) {
+    return `<tr><th>${escapeHtml(row[0])}</th><td>${escapeHtml(row[1])}</td></tr>`;
+  }
+
+  function reportFieldValue(item, value) {
+    let display = value;
+    if (item.type === "select") {
+      const selected = item.options.find(option => option[0] === value);
+      display = selected ? selected[1] : value;
+    } else if (Number.isFinite(value)) {
+      display = format(value, 8);
+    }
+    return `${display}${item.unit ? " " + item.unit : ""}`;
+  }
+
+  function buildReportText(productLineName, schema, calculatedAt, basicFields, advancedFields, input, resultRows, detailRows, warnings) {
+    const lines = [
+      "永铭电子｜电容寿命计算报告",
+      `产品线：${productLineName}`,
+      `计算项目：${schema.title}`,
+      `计算时间：${calculatedAt}`,
+      "",
+      "一、产品参数与实际工况",
+      ...basicFields.map(item => `${item.label}：${reportFieldValue(item, input[item.key])}`)
+    ];
+
+    if (advancedFields.length) {
+      lines.push("", "二、专业计算参数", ...advancedFields.map(item => `${item.label}：${reportFieldValue(item, input[item.key])}`));
+    }
+    lines.push(
+      "",
+      "三、计算结果",
+      ...resultRows.map(row => `${row[0]}：${row[1]}`)
+    );
+    if (detailRows.length) {
+      lines.push("", "四、主要计算过程", ...detailRows.map(row => `${row[0]}：${row[1]}`));
+    }
+    lines.push(
+      "",
+      "五、校验信息",
+      ...(warnings.length ? warnings : ["本次输入未触发超温、过压、纹波超限等校验警告。"]),
+      "",
+      "结果说明：本报告根据页面中填写的产品参数与实际工况生成，计算结果仅供设计选型和工况分析参考，不构成产品寿命承诺。"
+    );
+    return lines.join("\n");
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, character => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#39;"
+    })[character]);
+  }
+
   function setResultActions(enabled) {
     byId("copy-result").disabled = !enabled;
     byId("print-result").disabled = !enabled;
-    if (!enabled) lastResultText = "";
+    if (!enabled) {
+      lastResultText = "";
+      byId("print-report").innerHTML = "";
+    }
   }
 
   async function copyResult() {
@@ -359,7 +513,9 @@
   byId("calculate").addEventListener("click", calculate);
   byId("reset").addEventListener("click", renderModel);
   byId("copy-result").addEventListener("click", copyResult);
-  byId("print-result").addEventListener("click", () => window.print());
+  byId("print-result").addEventListener("click", () => {
+    if (lastResultText) window.print();
+  });
 
   renderModel();
 })();
