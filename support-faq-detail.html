@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
+    <title>FAQ详情 - 永铭电子</title>
+    <meta name="description" content="永铭电子技术FAQ详细解答、相关应用文章与设计工具。">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/support-content.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#1B365D"},borderRadius:{"DEFAULT":"0px"},fontFamily:{"headline":["Space Grotesk"],"body":["Inter"]}}}}
+    </script>
+</head>
+<body data-support-page="faq-detail" class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
+    <header id="ymin-navbar"></header>
+    <main class="support-page flex-1 overflow-y-auto custom-scrollbar">
+        <div class="support-container">
+            <nav class="support-breadcrumb" aria-label="面包屑">
+                <a href="index.html">首页</a><span>/</span>
+                <a href="support.html">服务支持</a><span>/</span>
+                <a href="support-faq.html">FAQ知识库</a><span>/</span>
+                <span>解答详情</span>
+            </nav>
+            <div class="support-detail-layout">
+                <article class="support-detail-main" id="faq-detail-content">
+                    <div class="support-loading">
+                        <span class="material-symbols-outlined">progress_activity</span>
+                        正在加载解答
+                    </div>
+                </article>
+                <aside class="support-detail-aside" id="faq-detail-aside">
+                    <div class="support-loading">
+                        <span class="material-symbols-outlined">progress_activity</span>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <footer id="ymin-footer"></footer>
+    </main>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/support-content.js"></script>
+</body>
+</html>
