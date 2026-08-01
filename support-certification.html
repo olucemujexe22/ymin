@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width,initial-scale=1.0" name="viewport">
     <title>合规证书 - 永铭电子</title>
-    <meta name="description" content="永铭电子合规证书与产品检测报告查询，提供体系认证、SGS、RoHS、REACH、无卤和 UL 等公开文件的检索与下载。">
+    <meta name="description" content="永铭电子合规证书与产品线合规资料查询，提供体系认证和 8 个产品线综合合规文件的检索与下载。">
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
                     <div>
                         <div class="support-kicker">COMPLIANCE CENTER</div>
                         <h1 id="certification-title">合规文件，查询有据</h1>
-                        <p>集中查看质量体系认证与产品检测报告。可按产品类别、合规标准或报告编号检索公开资料；料号级适用性以最终发布的规格书、检测报告及质量确认结果为准。</p>
+                        <p>集中查看质量体系认证与产品线合规资料。</p>
                     </div>
                     <div class="certification-hero-note">
                         <span class="material-symbols-outlined">verified</span>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="certification-stat-row" aria-label="合规资料概况">
-                    <div class="certification-stat"><strong id="cert-product-report-count">—</strong><span>产品检测报告</span></div>
+                    <div class="certification-stat"><strong id="cert-product-report-count">—</strong><span>产品线合规资料</span></div>
                     <div class="certification-stat"><strong id="cert-system-cert-count">—</strong><span>体系认证文件</span></div>
                     <div class="certification-stat"><strong id="cert-file-count">—</strong><span>已关联 PDF</span></div>
                     <div class="certification-stat"><strong id="cert-pending-count">—</strong><span>待补附件</span></div>
@@ -48,7 +48,7 @@
 
             <form class="support-search certification-search" id="cert-search-form" role="search">
                 <span class="material-symbols-outlined">search</span>
-                <input id="cert-search-input" type="search" autocomplete="off" placeholder="输入报告编号、认证标准、产品类别或关键词，例如 SHAEC、RoHS、叠层">
+                <input id="cert-search-input" type="search" autocomplete="off" placeholder="输入报告编号、产品线、系列或关键词，例如 SHAEC、叠层、MPD">
                 <button type="submit">查询资料</button>
             </form>
 
@@ -56,8 +56,8 @@
                 <div class="certification-lookup-heading">
                     <span class="material-symbols-outlined">fact_check</span>
                     <div>
-                        <h2 id="certification-lookup-title">料号 / 系列合规资料查询</h2>
-                        <p>当前公开资料按产品类别与报告维护。输入料号或系列并选择产品类别，可快速定位已公开的相关报告。</p>
+                        <h2 id="certification-lookup-title">产品线 / 系列合规资料查询</h2>
+                        <p>按产品线或系列定位相关合规资料。</p>
                     </div>
                 </div>
                 <div class="certification-lookup-form">
@@ -66,35 +66,31 @@
                         <input id="cert-lookup-keyword" type="text" autocomplete="off" placeholder="例如：VKM、MPD、完整料号">
                     </label>
                     <label>
-                        <span>产品类别</span>
-                        <select id="cert-lookup-category"></select>
+                        <span>产品线</span>
+                        <select id="cert-lookup-product-line"></select>
                     </label>
                     <button id="cert-lookup-button" type="button"><span class="material-symbols-outlined">manage_search</span>查询相关资料</button>
                 </div>
                 <div class="certification-lookup-result" id="cert-lookup-result" aria-live="polite">
                     <span class="material-symbols-outlined">info</span>
-                    <p>输入查询条件后，可查看当前公开资料中已匹配的报告。料号级适用范围和材料豁免条款将由后续后台规则与质量数据维护。</p>
+                    <p>输入查询条件后，可查看当前已维护的相关资料。</p>
                 </div>
             </section>
 
             <section class="support-section certification-section" id="product-reports" aria-labelledby="product-reports-title">
                 <div class="support-section-heading">
                     <div>
-                        <h2 id="product-reports-title">产品检测报告</h2>
-                        <p>来自现官网“产品认证”栏目；点击报告编号可展开网页摘要，已关联的文件可直接下载。</p>
+                        <h2 id="product-reports-title">产品线合规资料</h2>
+                        <p>每个产品线维护一份综合合规资料。</p>
                     </div>
                     <a class="support-text-link" href="https://www.ymin.com/index/aboutCertify?column_id=34" target="_blank" rel="noopener">查看现官网来源 <span class="material-symbols-outlined">north_east</span></a>
                 </div>
                 <div class="certification-content-grid">
                     <aside class="support-filter-panel certification-filter-panel">
-                        <h3>筛选报告 <span class="material-symbols-outlined">tune</span></h3>
+                        <h3>筛选资料 <span class="material-symbols-outlined">tune</span></h3>
                         <div class="support-filter-group">
-                            <label class="support-filter-label">资料类型</label>
-                            <div class="support-chip-list" id="cert-type-filter"></div>
-                        </div>
-                        <div class="support-filter-group">
-                            <label class="support-filter-label" for="cert-category-filter">产品类别</label>
-                            <select class="support-select" id="cert-category-filter"></select>
+                            <label class="support-filter-label" for="cert-product-line-filter">产品线</label>
+                            <select class="support-select" id="cert-product-line-filter"></select>
                         </div>
                         <div class="support-filter-group">
                             <label class="support-filter-label" for="cert-file-filter">文件状态</label>
@@ -108,7 +104,7 @@
                     </aside>
                     <div class="support-results certification-results">
                         <div class="support-toolbar certification-toolbar">
-                            <div class="support-result-count" id="cert-result-count">正在读取报告资料…</div>
+                            <div class="support-result-count" id="cert-result-count">正在读取产品线资料…</div>
                             <div class="support-active-filters" id="cert-active-filters"></div>
                         </div>
                         <div class="certification-report-list" id="cert-report-results"></div>
