@@ -17,7 +17,7 @@
         { value: 'all', label: '全部' },
         { value: 'comprehensive-catalog', label: '综合目录册' },
         { value: 'product-catalog', label: '产品目录册' },
-        { value: 'application-catalog', label: '应用手册' },
+        { value: 'application-catalog', label: '应用选型手册' },
         { value: 'coding-rule', label: '编码规则' },
         { value: 'usage-guide', label: '使用资料' }
     ];
@@ -243,7 +243,7 @@
         if (state.group !== 'all') {
             var groupLabels = {
                 'product-catalog': '产品目录册',
-                'application-catalog': '应用手册',
+                'application-catalog': '应用选型手册',
                 'comprehensive-catalog': '综合目录册',
                 guidance: '编码与使用资料'
             };
