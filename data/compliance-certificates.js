@@ -58,23 +58,80 @@ YMIN.complianceCertificates = (function () {
         }
     ];
 
-    // 产品合规资料按 8 个产品线维护；每个产品线当前只保留一条综合资料。
-    // coverage 表示同一份资料覆盖的项目，不作为独立报告拆分。
-    var productLineDocuments = [
-        { id: 'liquid-aluminum', productLine: '液态铝电解电容器', name: '液态铝电解电容器合规检测资料', reportNo: 'SHAEC24021610602', reportDate: '2025-06-03', issuer: '通标标准技术服务有限公司', coverage: ['无卤', 'REACH', 'RoHS'], fileUrl: baseUrl + '/uploads/files/20250603/11b8d87e2fda412213994ba56a468561.pdf' },
-        { id: 'polymer-solid', productLine: '高分子固态铝电解电容器', name: '高分子固态铝电解电容器合规检测资料', reportNo: 'SHAEC25003101102', reportDate: '2025-06-03', issuer: '通标标准技术服务有限公司', coverage: ['无卤', 'REACH', 'RoHS'], fileUrl: baseUrl + '/uploads/files/20250603/fa0da0cad6cf464f09d0c1e01c13f672.pdf' },
-        { id: 'polymer-hybrid', productLine: '高分子混合动力铝电解电容器', name: '高分子混合动力铝电解电容器合规资料', reportNo: '待维护', reportDate: '', issuer: '待维护', coverage: ['无卤', 'REACH', 'RoHS'], fileUrl: '' },
-        { id: 'double-layer-supercap', productLine: '双电层超级电容', name: '双电层超级电容合规检测资料', reportNo: 'SHAEC25008403604', reportDate: '2025-06-03', issuer: '通标标准技术服务有限公司', coverage: ['无卤', 'REACH', 'RoHS'], fileUrl: '' },
-        { id: 'hybrid-supercap', productLine: '混合型超级电容（锂离子电容）', name: '混合型超级电容（锂离子电容）合规资料', reportNo: '待维护', reportDate: '', issuer: '待维护', coverage: ['无卤', 'REACH', 'RoHS'], fileUrl: '' },
-        { id: 'stacked-polymer', productLine: '叠层高分子固态铝电解电容器', name: '叠层高分子固态铝电解电容器合规检测资料', reportNo: 'SHAEC24014516708', reportDate: '2025-06-03', issuer: '通标标准技术服务有限公司', coverage: ['无卤', 'REACH', 'RoHS'], fileUrl: baseUrl + '/uploads/files/20250603/82be983c6654ceb3e5da6301f0f4222e.pdf' },
-        { id: 'polymer-tantalum', productLine: '导电高分子钽电解电容器', name: '导电高分子钽电解电容器合规检测资料', reportNo: 'SHAEC25028621202', reportDate: '2026-07-21', issuer: '通标标准技术服务（上海）有限公司', coverage: ['无卤', 'REACH', 'RoHS'], fileUrl: baseUrl + '/uploads/files/20260721/9fe2c771625de061c5e08050dbed5809.pdf' },
-        { id: 'film', productLine: '薄膜电容器', name: '薄膜电容器合规资料', reportNo: '待维护', reportDate: '', issuer: '待维护', coverage: ['无卤', 'REACH', 'RoHS'], fileUrl: '' }
+    var productLines = [
+        { id: 'liquid-aluminum', name: '液态铝电解电容器' },
+        { id: 'polymer-solid', name: '高分子固态铝电解电容器' },
+        { id: 'polymer-hybrid', name: '高分子混合动力铝电解电容器' },
+        { id: 'double-layer-supercap', name: '双电层超级电容' },
+        { id: 'hybrid-supercap', name: '混合型超级电容（锂离子电容）' },
+        { id: 'stacked-polymer', name: '叠层高分子固态铝电解电容器' },
+        { id: 'polymer-tantalum', name: '导电高分子钽电解电容器' },
+        { id: 'film', name: '薄膜电容器' }
     ];
+    var documentTypes = ['REACH', 'RoHS', 'SGS'];
+
+    // 当前已掌握的公开文件信息。其余条目由后台资料维护时补全，不影响 24 条资料的维护结构。
+    var knownDocuments = {
+        'liquid-aluminum-SGS': {
+            reportNo: 'SHAEC24021610602',
+            reportDate: '2025-06-03',
+            issuer: '通标标准技术服务有限公司',
+            fileUrl: baseUrl + '/uploads/files/20250603/11b8d87e2fda412213994ba56a468561.pdf'
+        },
+        'polymer-solid-SGS': {
+            reportNo: 'SHAEC25003101102',
+            reportDate: '2025-06-03',
+            issuer: '通标标准技术服务有限公司',
+            fileUrl: baseUrl + '/uploads/files/20250603/fa0da0cad6cf464f09d0c1e01c13f672.pdf'
+        },
+        'double-layer-supercap-SGS': {
+            reportNo: 'SHAEC25008403604',
+            reportDate: '2025-06-03',
+            issuer: '通标标准技术服务有限公司',
+            fileUrl: ''
+        },
+        'stacked-polymer-SGS': {
+            reportNo: 'SHAEC24014516708',
+            reportDate: '2025-06-03',
+            issuer: '通标标准技术服务有限公司',
+            fileUrl: baseUrl + '/uploads/files/20250603/82be983c6654ceb3e5da6301f0f4222e.pdf'
+        },
+        'polymer-tantalum-REACH': {
+            reportNo: 'SHAEC25028621206',
+            reportDate: '2026-07-21',
+            issuer: '通标标准技术服务有限公司',
+            fileUrl: baseUrl + '/uploads/files/20260721/5fff0f49952d8724440c21cecaa141f6.pdf'
+        },
+        'polymer-tantalum-RoHS': {
+            reportNo: 'SHAEC25028621202',
+            reportDate: '2026-07-21',
+            issuer: '通标标准技术服务（上海）有限公司',
+            fileUrl: baseUrl + '/uploads/files/20260721/9fe2c771625de061c5e08050dbed5809.pdf'
+        }
+    };
+
+    var productCertificationDocuments = productLines.reduce(function (rows, productLine) {
+        return rows.concat(documentTypes.map(function (documentType) {
+            var known = knownDocuments[productLine.id + '-' + documentType] || {};
+            return {
+                id: productLine.id + '-' + documentType.toLowerCase(),
+                productLine: productLine.name,
+                documentType: documentType,
+                name: productLine.name + ' ' + documentType + ' 文件',
+                reportNo: known.reportNo || '待维护',
+                reportDate: known.reportDate || '',
+                issuer: known.issuer || '待维护',
+                fileUrl: known.fileUrl || ''
+            };
+        }));
+    }, []);
 
     return {
         updatedAt: '2026-08-01',
         sourceUrl: baseUrl + '/index/aboutCertify?column_id=34',
         systemCertifications: systemCertifications,
-        productLineDocuments: productLineDocuments
+        productLines: productLines,
+        documentTypes: documentTypes,
+        productCertificationDocuments: productCertificationDocuments
     };
 })();

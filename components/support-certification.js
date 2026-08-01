@@ -5,14 +5,17 @@ YMIN.supportCertification = (function () {
 
     var data = YMIN.complianceCertificates || {
         systemCertifications: [],
-        productLineDocuments: [],
+        productLines: [],
+        documentTypes: [],
+        productCertificationDocuments: [],
         updatedAt: ''
     };
-    var documents = data.productLineDocuments || [];
+    var documents = data.productCertificationDocuments || [];
     var pageSize = 8;
     var state = {
         search: '',
         productLine: 'all',
+        documentType: 'all',
         page: 1,
         openId: ''
     };
@@ -38,13 +41,15 @@ YMIN.supportCertification = (function () {
     }
 
     function productLines() {
-        return documents.map(function (item) {
-            return item.productLine;
-        });
+        return (data.productLines || []).map(function (item) { return item.name; });
     }
 
-    function coverageLabel(document) {
-        return (document.coverage || []).join(' · ') || '—';
+    function documentTypes() {
+        return data.documentTypes || [];
+    }
+
+    function iconForDocumentType(documentType) {
+        return documentType === 'SGS' ? 'fact_check' : 'eco';
     }
 
     function showToast(message) {
@@ -61,7 +66,7 @@ YMIN.supportCertification = (function () {
     function includesText(document, keyword) {
         if (!keyword) return true;
         var needle = keyword.toLocaleLowerCase();
-        var textMatch = [document.productLine, document.name, document.reportNo, document.reportDate, document.issuer, coverageLabel(document)]
+        var textMatch = [document.productLine, document.documentType, document.name, document.reportNo, document.reportDate, document.issuer]
             .join(' ')
             .toLocaleLowerCase()
             .indexOf(needle) !== -1;
@@ -71,6 +76,7 @@ YMIN.supportCertification = (function () {
     function filteredDocuments() {
         return documents.filter(function (document) {
             if (state.productLine !== 'all' && document.productLine !== state.productLine) return false;
+            if (state.documentType !== 'all' && document.documentType !== state.documentType) return false;
             return includesText(document, state.search);
         }).sort(function (a, b) {
             return String(b.reportDate || '').localeCompare(String(a.reportDate || ''));
@@ -87,6 +93,7 @@ YMIN.supportCertification = (function () {
         var items = [];
         if (state.search) items.push(activeFilter('关键词', state.search));
         if (state.productLine !== 'all') items.push(activeFilter('产品线', state.productLine));
+        if (state.documentType !== 'all') items.push(activeFilter('资料类型', state.documentType));
         node.innerHTML = items.join('');
     }
 
@@ -94,7 +101,7 @@ YMIN.supportCertification = (function () {
         var deepLink = window.location.href.split('#')[0] + '#cert-report-' + document.id;
         return '<div class="certification-report-detail">' +
             '<div class="certification-report-detail-inner">' +
-            '<p><strong>资料范围：</strong>' + escapeHtml(coverageLabel(document)) + '；<strong>检测机构：</strong>' +
+            '<p><strong>资料类型：</strong>' + escapeHtml(document.documentType) + '；<strong>检测机构：</strong>' +
             escapeHtml(document.issuer) + '。</p>' +
             '<button class="certification-permalink" type="button" data-copy-link="' + escapeHtml(deepLink) + '">' +
             '<span class="material-symbols-outlined">link</span>复制页面链接</button>' +
@@ -110,10 +117,10 @@ YMIN.supportCertification = (function () {
         var openClass = state.openId === document.id ? ' is-open' : '';
         return '<article class="certification-report' + openClass + '" id="cert-report-' + escapeHtml(document.id) + '">' +
             '<div class="certification-report-main">' +
-            '<div class="certification-report-icon"><span class="material-symbols-outlined">fact_check</span></div>' +
+            '<div class="certification-report-icon"><span class="material-symbols-outlined">' + iconForDocumentType(document.documentType) + '</span></div>' +
             '<div class="certification-report-title"><h3>' + escapeHtml(document.name) + '</h3>' +
             '<div class="certification-report-meta"><span class="certification-badge">' + escapeHtml(document.productLine) + '</span>' +
-            '<span class="certification-badge is-type">' + escapeHtml(coverageLabel(document)) + '</span></div></div>' +
+            '<span class="certification-badge is-type">' + escapeHtml(document.documentType) + '</span></div></div>' +
             '<div class="certification-report-field"><small>报告编号</small><strong>' + escapeHtml(document.reportNo || '—') + '</strong></div>' +
             '<div class="certification-report-field"><small>检测日期</small><strong>' + escapeHtml(formatDate(document.reportDate)) + '</strong></div>' +
             '<div class="certification-report-actions">' +
@@ -146,12 +153,12 @@ YMIN.supportCertification = (function () {
         var list = byId('cert-report-results');
         var pagination = byId('cert-report-pagination');
         if (count) {
-            count.innerHTML = '共 <strong>' + filtered.length + '</strong> 条产品线合规资料' + (filtered.length ? '，按检测日期排序' : '');
+            count.innerHTML = '共 <strong>' + filtered.length + '</strong> 条产品认证文件' + (filtered.length ? '，按检测日期排序' : '');
         }
         if (list) {
             list.innerHTML = visible.length
                 ? visible.map(documentMarkup).join('')
-                : '<div class="support-empty"><span class="material-symbols-outlined">search_off</span><h3>未找到匹配资料</h3><p>请调整产品线、文件状态或关键词后再次查询。</p></div>';
+                : '<div class="support-empty"><span class="material-symbols-outlined">search_off</span><h3>未找到匹配资料</h3><p>请调整产品线、资料类型或关键词后再次查询。</p></div>';
         }
         if (pagination) pagination.innerHTML = paginationMarkup(filtered.length, state.page);
         updateActiveFilters();
@@ -180,6 +187,16 @@ YMIN.supportCertification = (function () {
         }).join('');
     }
 
+    function renderDocumentTypeFilter() {
+        var node = byId('cert-document-type-filter');
+        if (!node) return;
+        var values = ['all'].concat(documentTypes());
+        node.innerHTML = values.map(function (documentType) {
+            var label = documentType === 'all' ? '全部' : documentType;
+            return '<button class="support-chip' + (state.documentType === documentType ? ' is-active' : '') + '" type="button" data-cert-document-type="' + escapeHtml(documentType) + '">' + escapeHtml(label) + '</button>';
+        }).join('');
+    }
+
     function renderStatistics() {
         byId('cert-product-report-count').textContent = documents.length;
         byId('cert-system-cert-count').textContent = data.systemCertifications.length;
@@ -199,9 +216,11 @@ YMIN.supportCertification = (function () {
         if (state.openId) {
             state.search = '';
             state.productLine = 'all';
+            state.documentType = 'all';
             state.page = documentPage(document);
         }
         syncControls();
+        renderDocumentTypeFilter();
         renderDocuments();
         if (state.openId) {
             window.history.replaceState(null, '', '#cert-report-' + id);
@@ -243,8 +262,8 @@ YMIN.supportCertification = (function () {
             '@context': 'https://schema.org',
             '@type': 'Dataset',
             '@id': pageUrl + '#compliance-index',
-            name: '永铭电子合规证书与产品线合规资料索引',
-            description: '永铭电子公开的体系认证与产品线合规资料索引，包含产品线、资料范围、报告编号、检测日期、检测机构及文件链接状态。',
+            name: '永铭电子合规证书与产品认证文件索引',
+            description: '永铭电子公开的体系认证与产品认证文件索引，包含产品线、资料类型、报告编号、检测日期、检测机构及文件链接。',
             dateModified: data.updatedAt,
             creator: { '@type': 'Organization', name: '上海永铭电子股份有限公司' },
             hasPart: documents.map(function (document) {
@@ -255,7 +274,7 @@ YMIN.supportCertification = (function () {
                     identifier: document.reportNo,
                     datePublished: document.reportDate,
                     publisher: { '@type': 'Organization', name: document.issuer },
-                    keywords: [document.productLine].concat(document.coverage || []),
+                    keywords: [document.productLine, document.documentType],
                     url: document.fileUrl || pageUrl + '#cert-report-' + document.id
                 };
             })
@@ -298,9 +317,20 @@ YMIN.supportCertification = (function () {
             renderDocuments();
         });
 
+        byId('cert-document-type-filter').addEventListener('click', function (event) {
+            var button = event.target.closest('[data-cert-document-type]');
+            if (!button) return;
+            state.documentType = button.dataset.certDocumentType;
+            state.page = 1;
+            state.openId = '';
+            renderDocumentTypeFilter();
+            renderDocuments();
+        });
+
         byId('cert-filter-reset').addEventListener('click', function () {
-            state = { search: '', productLine: 'all', page: 1, openId: '' };
+            state = { search: '', productLine: 'all', documentType: 'all', page: 1, openId: '' };
             syncControls();
+            renderDocumentTypeFilter();
             renderDocuments();
         });
 
@@ -335,6 +365,7 @@ YMIN.supportCertification = (function () {
         fillProductLineSelect(byId('cert-product-line-filter'), '全部产品线');
         renderStatistics();
         renderSystemCertifications();
+        renderDocumentTypeFilter();
         handleHash();
         syncControls();
         renderDocuments();
