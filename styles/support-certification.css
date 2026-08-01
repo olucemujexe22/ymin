@@ -1,5 +1,5 @@
 .certification-hero {
-    padding-bottom: 0;
+    padding-bottom: 48px;
 }
 
 .certification-hero-grid {
@@ -7,74 +7,35 @@
 }
 
 .certification-hero-note {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    max-width: 286px;
-    padding: 17px 19px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(330px, 100%);
     border: 1px solid rgba(255, 255, 255, 0.16);
     background: rgba(255, 255, 255, 0.08);
 }
 
-.certification-hero-note > .material-symbols-outlined {
-    display: grid;
-    width: 42px;
-    height: 42px;
-    place-items: center;
-    flex: 0 0 auto;
-    color: white;
-    background: rgba(228, 111, 54, 0.92);
-    font-size: 23px;
+.certification-hero-stat {
+    min-height: 78px;
+    padding: 17px 19px;
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.certification-hero-note strong,
-.certification-hero-note small {
-    display: block;
-}
-
-.certification-hero-note strong {
-    font-size: 13px;
-}
-
-.certification-hero-note small {
-    margin-top: 5px;
-    color: #dce7f1;
-    font-size: 10px;
-    line-height: 1.6;
-}
-
-.certification-stat-row {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 540px;
-    margin-top: 40px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.certification-stat {
-    min-height: 88px;
-    padding: 19px 20px;
-    border-left: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.certification-stat:first-child {
+.certification-hero-stat:first-child {
     border-left: 0;
 }
 
-.certification-stat strong,
-.certification-stat span {
+.certification-hero-stat strong,
+.certification-hero-stat span {
     display: block;
 }
 
-.certification-stat strong {
+.certification-hero-stat strong {
     font: 700 26px/1 "Space Grotesk", sans-serif;
 }
 
-.certification-stat span {
+.certification-hero-stat span {
     margin-top: 7px;
-    color: #d8e4ee;
+    color: #dce7f1;
     font-size: 11px;
 }
 
@@ -488,24 +449,16 @@ button.certification-report-action {
 }
 
 @media (max-width: 760px) {
-    .certification-stat-row,
+    .certification-hero {
+        padding-bottom: 44px;
+    }
+
     .certification-content-grid {
         grid-template-columns: 1fr;
     }
 
-    .certification-stat-row {
-        margin-top: 30px;
-    }
-
-    .certification-stat {
-        min-height: 0;
-        padding: 15px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-        border-left: 0;
-    }
-
-    .certification-stat:first-child {
-        border-top: 0;
+    .certification-hero-note {
+        width: 100%;
     }
 
     .certification-search {

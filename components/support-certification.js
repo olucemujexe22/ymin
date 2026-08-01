@@ -49,7 +49,7 @@ YMIN.supportCertification = (function () {
     }
 
     function iconForDocumentType(documentType) {
-        return documentType === 'SGS' ? 'fact_check' : 'eco';
+        return 'eco';
     }
 
     function showToast(message) {
@@ -102,7 +102,7 @@ YMIN.supportCertification = (function () {
         return '<div class="certification-report-detail">' +
             '<div class="certification-report-detail-inner">' +
             '<p><strong>资料类型：</strong>' + escapeHtml(document.documentType) + '；<strong>检测机构：</strong>' +
-            escapeHtml(document.issuer) + '。</p>' +
+            escapeHtml(document.issuer || '—') + '。</p>' +
             '<button class="certification-permalink" type="button" data-copy-link="' + escapeHtml(deepLink) + '">' +
             '<span class="material-symbols-outlined">link</span>复制页面链接</button>' +
             '</div></div>';

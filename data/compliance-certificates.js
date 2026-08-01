@@ -68,34 +68,10 @@ YMIN.complianceCertificates = (function () {
         { id: 'polymer-tantalum', name: '导电高分子钽电解电容器' },
         { id: 'film', name: '薄膜电容器' }
     ];
-    var documentTypes = ['REACH', 'RoHS', 'SGS'];
+    var documentTypes = ['REACH', 'RoHS', '无卤'];
 
     // 当前已掌握的公开文件信息。其余条目由后台资料维护时补全，不影响 24 条资料的维护结构。
     var knownDocuments = {
-        'liquid-aluminum-SGS': {
-            reportNo: 'SHAEC24021610602',
-            reportDate: '2025-06-03',
-            issuer: '通标标准技术服务有限公司',
-            fileUrl: baseUrl + '/uploads/files/20250603/11b8d87e2fda412213994ba56a468561.pdf'
-        },
-        'polymer-solid-SGS': {
-            reportNo: 'SHAEC25003101102',
-            reportDate: '2025-06-03',
-            issuer: '通标标准技术服务有限公司',
-            fileUrl: baseUrl + '/uploads/files/20250603/fa0da0cad6cf464f09d0c1e01c13f672.pdf'
-        },
-        'double-layer-supercap-SGS': {
-            reportNo: 'SHAEC25008403604',
-            reportDate: '2025-06-03',
-            issuer: '通标标准技术服务有限公司',
-            fileUrl: ''
-        },
-        'stacked-polymer-SGS': {
-            reportNo: 'SHAEC24014516708',
-            reportDate: '2025-06-03',
-            issuer: '通标标准技术服务有限公司',
-            fileUrl: baseUrl + '/uploads/files/20250603/82be983c6654ceb3e5da6301f0f4222e.pdf'
-        },
         'polymer-tantalum-REACH': {
             reportNo: 'SHAEC25028621206',
             reportDate: '2026-07-21',
@@ -107,6 +83,12 @@ YMIN.complianceCertificates = (function () {
             reportDate: '2026-07-21',
             issuer: '通标标准技术服务（上海）有限公司',
             fileUrl: baseUrl + '/uploads/files/20260721/9fe2c771625de061c5e08050dbed5809.pdf'
+        },
+        'polymer-tantalum-无卤': {
+            reportNo: 'SHAEC25028621204',
+            reportDate: '2026-07-21',
+            issuer: '通标标准技术服务（上海）有限公司',
+            fileUrl: baseUrl + '/uploads/files/20260721/fd136286ec94466aac51212bc94fd63a.pdf'
         }
     };
 
@@ -118,9 +100,9 @@ YMIN.complianceCertificates = (function () {
                 productLine: productLine.name,
                 documentType: documentType,
                 name: productLine.name + ' ' + documentType + ' 文件',
-                reportNo: known.reportNo || '待维护',
+                reportNo: known.reportNo || '',
                 reportDate: known.reportDate || '',
-                issuer: known.issuer || '待维护',
+                issuer: known.issuer || '',
                 fileUrl: known.fileUrl || ''
             };
         }));
