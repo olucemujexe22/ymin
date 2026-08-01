@@ -26,6 +26,44 @@ YMIN.supportContent = (function () {
         '光储充（光伏储能充电）': 'solar_power',
         '消费类电子': 'devices'
     };
+    var faqProductLineOrder = [
+        '液态铝电解电容器',
+        '高分子固态铝电解电容器',
+        '高分子混合动力铝电解电容器',
+        '双电层超级电容',
+        '混合型超级电容（锂离子电容）',
+        '叠层高分子固态铝电解电容器',
+        '导电高分子钽电解电容器',
+        '薄膜电容器'
+    ];
+    var faqSeriesProductLineMap = {
+        'CW3H': '液态铝电解电容器',
+        'CW6': '液态铝电解电容器',
+        'CW6H': '液态铝电解电容器',
+        'IDC3': '液态铝电解电容器',
+        'KCG': '液态铝电解电容器',
+        'KCM': '液态铝电解电容器',
+        'KCX': '液态铝电解电容器',
+        'LK': '液态铝电解电容器',
+        'LKF': '液态铝电解电容器',
+        'LKG': '液态铝电解电容器',
+        'LKL(R)': '液态铝电解电容器',
+        'LKM': '液态铝电解电容器',
+        'LKZ': '液态铝电解电容器',
+        'LMM': '液态铝电解电容器',
+        'NPX': '高分子固态铝电解电容器',
+        'NGY': '高分子混合动力铝电解电容器',
+        'NHX': '高分子混合动力铝电解电容器',
+        'VHT': '高分子混合动力铝电解电容器',
+        'VHU': '高分子混合动力铝电解电容器',
+        'SDF': '双电层超级电容',
+        'SDM': '双电层超级电容',
+        'SDN': '双电层超级电容',
+        'SLF': '混合型超级电容（锂离子电容）',
+        'MPS': '叠层高分子固态铝电解电容器',
+        'TQD': '导电高分子钽电解电容器',
+        'TQW': '导电高分子钽电解电容器'
+    };
     var searchAliases = {
         '固液混合': '混合',
         '混合型': '混合',
@@ -81,6 +119,16 @@ YMIN.supportContent = (function () {
         return needle.split(/\s+/).every(function (term) {
             return haystack.indexOf(term) !== -1;
         });
+    }
+
+    function faqProductLines(faq) {
+        var directLines = faq.productLines || faq.productLine || [];
+        if (!Array.isArray(directLines)) directLines = [directLines];
+        directLines = unique(directLines);
+        if (directLines.length) return directLines;
+        return unique((faq.series || []).map(function (series) {
+            return faqSeriesProductLineMap[series] || '';
+        }));
     }
 
     function queryValue(name) {
@@ -188,7 +236,7 @@ YMIN.supportContent = (function () {
         var searchInput = document.getElementById('support-global-search');
         var searchButton = document.getElementById('faq-search-button');
         var appSelect = document.getElementById('faq-app-select');
-        var seriesSelect = document.getElementById('faq-series-select');
+        var productLineSelect = document.getElementById('faq-product-line-select');
         var typeNode = document.getElementById('faq-type-chips');
         var appButtons = document.getElementById('faq-app-buttons');
         var resetButton = document.getElementById('faq-reset');
@@ -196,7 +244,7 @@ YMIN.supportContent = (function () {
         var state = {
             search: queryValue('q'),
             app: queryValue('app'),
-            series: queryValue('series'),
+            productLine: queryValue('line'),
             type: queryValue('type'),
             page: Math.max(1, Number(queryValue('page')) || 1)
         };
@@ -210,15 +258,12 @@ YMIN.supportContent = (function () {
             articles.forEach(function (article) { articleMap[article.id] = article; });
 
             var applications = applicationOrder.slice();
-            var series = unique([].concat.apply([], faqs.map(function (item) {
-                return item.series || [];
-            }))).sort();
             var types = unique(faqs.map(function (item) { return item.type; }));
 
             appSelect.innerHTML = '<option value="">全部应用</option>' + applications.map(function (app) {
                 return '<option value="' + escapeHtml(app) + '">' + escapeHtml(app) + '</option>';
             }).join('');
-            seriesSelect.innerHTML = '<option value="">全部系列</option>' + series.map(function (name) {
+            productLineSelect.innerHTML = '<option value="">全部产品线</option>' + faqProductLineOrder.map(function (name) {
                 return '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>';
             }).join('');
             typeNode.innerHTML =
@@ -236,11 +281,11 @@ YMIN.supportContent = (function () {
 
             searchInput.value = state.search;
             appSelect.value = state.app;
-            seriesSelect.value = state.series;
+            productLineSelect.value = state.productLine;
 
             function updateControls() {
                 appSelect.value = state.app;
-                seriesSelect.value = state.series;
+                productLineSelect.value = state.productLine;
                 typeNode.querySelectorAll('[data-type]').forEach(function (button) {
                     button.classList.toggle('is-active', button.dataset.type === state.type);
                 });
@@ -253,12 +298,13 @@ YMIN.supportContent = (function () {
                 var needle = normalizeSearch(state.search);
                 var filtered = faqs.filter(function (faq) {
                     return (!state.app || (faq.applications || []).indexOf(state.app) !== -1) &&
-                        (!state.series || (faq.series || []).indexOf(state.series) !== -1) &&
+                        (!state.productLine || faqProductLines(faq).indexOf(state.productLine) !== -1) &&
                         (!state.type || faq.type === state.type) &&
                         matchesSearch(needle, [
                             faq.question,
                             faq.answer,
                             faq.type,
+                            faqProductLines(faq),
                             faq.series,
                             faq.applications,
                             faq.secondaryApplications
@@ -271,7 +317,7 @@ YMIN.supportContent = (function () {
                 activeNode.innerHTML = [
                     state.search ? '关键词：' + state.search : '',
                     state.app,
-                    state.series ? '系列：' + state.series : '',
+                    state.productLine ? '产品线：' + state.productLine : '',
                     state.type
                 ].filter(Boolean).map(function (value) {
                     return '<span class="support-active-filter">' + escapeHtml(value) + '</span>';
@@ -320,7 +366,8 @@ YMIN.supportContent = (function () {
                 setQuery({
                     q: state.search,
                     app: state.app,
-                    series: state.series,
+                    line: state.productLine,
+                    series: '',
                     type: state.type,
                     page: state.page > 1 ? state.page : ''
                 }, replace);
@@ -343,8 +390,8 @@ YMIN.supportContent = (function () {
                 sync(false);
                 render();
             };
-            seriesSelect.onchange = function () {
-                state.series = this.value;
+            productLineSelect.onchange = function () {
+                state.productLine = this.value;
                 state.page = 1;
                 sync(false);
                 render();
@@ -366,7 +413,7 @@ YMIN.supportContent = (function () {
                 render();
             };
             resetButton.onclick = function () {
-                state = { search: '', app: '', series: '', type: '', page: 1 };
+                state = { search: '', app: '', productLine: '', type: '', page: 1 };
                 searchInput.value = '';
                 sync(false);
                 render();
