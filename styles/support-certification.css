@@ -220,48 +220,8 @@
     font-weight: 700;
 }
 
-.certification-summary-section {
-    padding-top: 42px;
-}
-
-.certification-summary-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-}
-
-.certification-summary-card {
-    min-height: 188px;
-    padding: 23px;
-    border: 1px solid var(--support-line);
-    background: white;
-}
-
-.certification-summary-card > .material-symbols-outlined {
-    display: grid;
-    width: 37px;
-    height: 37px;
-    place-items: center;
-    color: var(--support-navy);
-    background: var(--support-mist);
-    font-size: 20px;
-}
-
-.certification-summary-card h3 {
-    margin: 18px 0 8px;
-    color: var(--support-navy);
-    font-size: 15px;
-}
-
-.certification-summary-card p {
-    margin: 0;
-    color: var(--support-muted);
-    font-size: 12px;
-    line-height: 1.75;
-}
-
 .certification-section {
-    padding-top: 50px;
+    padding-top: 42px;
 }
 
 .certification-content-grid {
@@ -641,7 +601,6 @@ button.certification-report-action {
 
 @media (max-width: 760px) {
     .certification-stat-row,
-    .certification-summary-grid,
     .certification-lookup-form,
     .certification-content-grid {
         grid-template-columns: 1fr;
