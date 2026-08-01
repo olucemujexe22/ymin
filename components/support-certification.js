@@ -13,22 +13,10 @@ YMIN.supportCertification = (function () {
     var state = {
         search: '',
         productLine: 'all',
-        file: 'all',
         page: 1,
         openId: ''
     };
     var toastTimer = 0;
-    var productLineKeywords = {
-        '液态铝电解电容器': ['CN', 'CW', 'EH', 'ES', 'EW', 'IDC', 'KCG', 'KCM', 'KCX', 'LK', 'LLK', 'LMM', 'NHT', 'SN', 'SW'],
-        '高分子固态铝电解电容器': ['NP', 'V3', 'VP', 'VG', 'VH', 'VK'],
-        '高分子混合动力铝电解电容器': ['NGY', 'NHM', 'NHT', 'NHX', 'VGY', 'VHM', 'VHR', 'VHT', 'VHU', 'VHX'],
-        '双电层超级电容': ['SDA', 'SDB', 'SDH', 'SDL', 'SDM', 'SDN', 'SDS', 'SDV', 'SM'],
-        '混合型超级电容（锂离子电容）': ['SLA', 'SLD', 'SLR', 'SLX'],
-        '叠层高分子固态铝电解电容器': ['MPD', 'MPS', 'MPU', 'MPX'],
-        '导电高分子钽电解电容器': ['TPA', 'TPB', 'TPD'],
-        '薄膜电容器': ['MAP', 'MDP']
-    };
-
     function byId(id) {
         return document.getElementById(id);
     }
@@ -73,23 +61,16 @@ YMIN.supportCertification = (function () {
     function includesText(document, keyword) {
         if (!keyword) return true;
         var needle = keyword.toLocaleLowerCase();
-        var normalizedNeedle = needle.replace(/[\s\-_]/g, '');
         var textMatch = [document.productLine, document.name, document.reportNo, document.reportDate, document.issuer, coverageLabel(document)]
             .join(' ')
             .toLocaleLowerCase()
             .indexOf(needle) !== -1;
-        if (textMatch) return true;
-        return (productLineKeywords[document.productLine] || []).some(function (prefix) {
-            var normalizedPrefix = prefix.toLocaleLowerCase().replace(/[\s\-_]/g, '');
-            return normalizedNeedle.indexOf(normalizedPrefix) === 0 || normalizedPrefix.indexOf(normalizedNeedle) === 0;
-        });
+        return textMatch;
     }
 
     function filteredDocuments() {
         return documents.filter(function (document) {
             if (state.productLine !== 'all' && document.productLine !== state.productLine) return false;
-            if (state.file === 'available' && !document.fileUrl) return false;
-            if (state.file === 'pending' && document.fileUrl) return false;
             return includesText(document, state.search);
         }).sort(function (a, b) {
             return String(b.reportDate || '').localeCompare(String(a.reportDate || ''));
@@ -106,19 +87,15 @@ YMIN.supportCertification = (function () {
         var items = [];
         if (state.search) items.push(activeFilter('关键词', state.search));
         if (state.productLine !== 'all') items.push(activeFilter('产品线', state.productLine));
-        if (state.file === 'available') items.push(activeFilter('文件', '已关联 PDF'));
-        if (state.file === 'pending') items.push(activeFilter('文件', '待补附件'));
         node.innerHTML = items.join('');
     }
 
     function documentDetail(document) {
-        var hasFile = Boolean(document.fileUrl);
         var deepLink = window.location.href.split('#')[0] + '#cert-report-' + document.id;
-        var sourceText = hasFile ? '已关联 PDF 原始文件，可直接下载。' : '该产品线资料待补附件。';
         return '<div class="certification-report-detail">' +
             '<div class="certification-report-detail-inner">' +
             '<p><strong>资料范围：</strong>' + escapeHtml(coverageLabel(document)) + '；<strong>检测机构：</strong>' +
-            escapeHtml(document.issuer) + '。' + sourceText + '</p>' +
+            escapeHtml(document.issuer) + '。</p>' +
             '<button class="certification-permalink" type="button" data-copy-link="' + escapeHtml(deepLink) + '">' +
             '<span class="material-symbols-outlined">link</span>复制页面链接</button>' +
             '</div></div>';
@@ -129,7 +106,7 @@ YMIN.supportCertification = (function () {
         var fileAction = available
             ? '<a class="certification-report-action" href="' + escapeHtml(document.fileUrl) + '" target="_blank" rel="noopener">' +
                 '<span class="material-symbols-outlined">download</span>下载 PDF</a>'
-            : '<span class="certification-report-action is-disabled"><span class="material-symbols-outlined">schedule</span>待补附件</span>';
+            : '';
         var openClass = state.openId === document.id ? ' is-open' : '';
         return '<article class="certification-report' + openClass + '" id="cert-report-' + escapeHtml(document.id) + '">' +
             '<div class="certification-report-main">' +
@@ -204,12 +181,8 @@ YMIN.supportCertification = (function () {
     }
 
     function renderStatistics() {
-        var linkedProductFiles = documents.filter(function (item) { return item.fileUrl; }).length;
-        var systemFiles = data.systemCertifications.filter(function (item) { return item.fileUrl; }).length;
         byId('cert-product-report-count').textContent = documents.length;
         byId('cert-system-cert-count').textContent = data.systemCertifications.length;
-        byId('cert-file-count').textContent = linkedProductFiles + systemFiles;
-        byId('cert-pending-count').textContent = documents.length - linkedProductFiles;
     }
 
     function documentPage(document) {
@@ -226,7 +199,6 @@ YMIN.supportCertification = (function () {
         if (state.openId) {
             state.search = '';
             state.productLine = 'all';
-            state.file = 'all';
             state.page = documentPage(document);
         }
         syncControls();
@@ -247,10 +219,8 @@ YMIN.supportCertification = (function () {
     function syncControls() {
         var search = byId('cert-search-input');
         var productLine = byId('cert-product-line-filter');
-        var file = byId('cert-file-filter');
         if (search) search.value = state.search;
         if (productLine) productLine.value = state.productLine;
-        if (file) file.value = state.file;
     }
 
     function copyLink(link) {
@@ -262,37 +232,6 @@ YMIN.supportCertification = (function () {
             });
         } else {
             showToast('请从浏览器地址栏复制该链接。');
-        }
-    }
-
-    function lookupDocuments() {
-        var keywordInput = byId('cert-lookup-keyword');
-        var productLineSelect = byId('cert-lookup-product-line');
-        var keyword = keywordInput ? keywordInput.value.trim() : '';
-        var productLine = productLineSelect ? productLineSelect.value : 'all';
-        var candidates = documents.filter(function (document) {
-            return (productLine === 'all' || document.productLine === productLine) && includesText(document, keyword);
-        });
-        var result = byId('cert-lookup-result');
-        if (!keyword && productLine === 'all') {
-            result.classList.remove('is-found');
-            result.innerHTML = '<span class="material-symbols-outlined">info</span><p>请至少输入料号/系列，或选择一个产品线后再查询。</p>';
-            return;
-        }
-        state.search = keyword;
-        state.productLine = productLine;
-        state.file = 'all';
-        state.page = 1;
-        state.openId = '';
-        syncControls();
-        renderDocuments();
-        if (candidates.length) {
-            result.classList.add('is-found');
-            result.innerHTML = '<span class="material-symbols-outlined">task_alt</span><p>找到 <strong>' + candidates.length + '</strong> 条相关产品线资料，已同步筛选至下方列表。</p>';
-            byId('product-reports').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-            result.classList.remove('is-found');
-            result.innerHTML = '<span class="material-symbols-outlined">info</span><p>未找到匹配资料，请调整查询条件后重试。</p>';
         }
     }
 
@@ -359,15 +298,8 @@ YMIN.supportCertification = (function () {
             renderDocuments();
         });
 
-        byId('cert-file-filter').addEventListener('change', function (event) {
-            state.file = event.target.value;
-            state.page = 1;
-            state.openId = '';
-            renderDocuments();
-        });
-
         byId('cert-filter-reset').addEventListener('click', function () {
-            state = { search: '', productLine: 'all', file: 'all', page: 1, openId: '' };
+            state = { search: '', productLine: 'all', page: 1, openId: '' };
             syncControls();
             renderDocuments();
         });
@@ -391,14 +323,6 @@ YMIN.supportCertification = (function () {
             byId('product-reports').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        byId('cert-lookup-button').addEventListener('click', lookupDocuments);
-        byId('cert-lookup-keyword').addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                lookupDocuments();
-            }
-        });
-
         window.addEventListener('hashchange', function () {
             handleHash();
             renderDocuments();
@@ -409,7 +333,6 @@ YMIN.supportCertification = (function () {
         if (YMIN.navbar && YMIN.navbar.inject) YMIN.navbar.inject('support');
         if (YMIN.footer && YMIN.footer.inject) YMIN.footer.inject();
         fillProductLineSelect(byId('cert-product-line-filter'), '全部产品线');
-        fillProductLineSelect(byId('cert-lookup-product-line'), '请选择产品线');
         renderStatistics();
         renderSystemCertifications();
         handleHash();

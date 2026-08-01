@@ -41,41 +41,14 @@
                 <div class="certification-stat-row" aria-label="合规资料概况">
                     <div class="certification-stat"><strong id="cert-product-report-count">—</strong><span>产品线合规资料</span></div>
                     <div class="certification-stat"><strong id="cert-system-cert-count">—</strong><span>体系认证文件</span></div>
-                    <div class="certification-stat"><strong id="cert-file-count">—</strong><span>已关联 PDF</span></div>
-                    <div class="certification-stat"><strong id="cert-pending-count">—</strong><span>待补附件</span></div>
                 </div>
             </section>
 
             <form class="support-search certification-search" id="cert-search-form" role="search">
                 <span class="material-symbols-outlined">search</span>
-                <input id="cert-search-input" type="search" autocomplete="off" placeholder="输入报告编号、产品线、系列或关键词，例如 SHAEC、叠层、MPD">
+                <input id="cert-search-input" type="search" autocomplete="off" placeholder="输入报告编号、产品线或关键词，例如 SHAEC、叠层">
                 <button type="submit">查询资料</button>
             </form>
-
-            <section class="certification-lookup" aria-labelledby="certification-lookup-title">
-                <div class="certification-lookup-heading">
-                    <span class="material-symbols-outlined">fact_check</span>
-                    <div>
-                        <h2 id="certification-lookup-title">产品线 / 系列合规资料查询</h2>
-                        <p>按产品线或系列定位相关合规资料。</p>
-                    </div>
-                </div>
-                <div class="certification-lookup-form">
-                    <label>
-                        <span>料号或系列</span>
-                        <input id="cert-lookup-keyword" type="text" autocomplete="off" placeholder="例如：VKM、MPD、完整料号">
-                    </label>
-                    <label>
-                        <span>产品线</span>
-                        <select id="cert-lookup-product-line"></select>
-                    </label>
-                    <button id="cert-lookup-button" type="button"><span class="material-symbols-outlined">manage_search</span>查询相关资料</button>
-                </div>
-                <div class="certification-lookup-result" id="cert-lookup-result" aria-live="polite">
-                    <span class="material-symbols-outlined">info</span>
-                    <p>输入查询条件后，可查看当前已维护的相关资料。</p>
-                </div>
-            </section>
 
             <section class="support-section certification-section" id="product-reports" aria-labelledby="product-reports-title">
                 <div class="support-section-heading">
@@ -91,14 +64,6 @@
                         <div class="support-filter-group">
                             <label class="support-filter-label" for="cert-product-line-filter">产品线</label>
                             <select class="support-select" id="cert-product-line-filter"></select>
-                        </div>
-                        <div class="support-filter-group">
-                            <label class="support-filter-label" for="cert-file-filter">文件状态</label>
-                            <select class="support-select" id="cert-file-filter">
-                                <option value="all">全部状态</option>
-                                <option value="available">已关联 PDF</option>
-                                <option value="pending">待补附件</option>
-                            </select>
                         </div>
                         <button class="support-reset" id="cert-filter-reset" type="button">清除全部筛选</button>
                     </aside>
