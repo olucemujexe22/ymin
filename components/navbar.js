@@ -113,10 +113,10 @@ YMIN.navbar = (function () {
         html += '<div class="group h-full flex items-center relative">';
         html += navLink('support.html', '服务支持', activePage === 'support', true);
         html += dropdownMenu([
-            { href: 'support-faq.html', label: '知识库 (FAQ)' },
+            { href: 'support-news.html', label: '新闻资讯' },
+            { href: 'support-faq.html', label: '知识库' },
             { href: 'support-download.html', label: '下载中心' },
-            { href: 'support-certification.html', label: '合规证书' },
-            { href: 'support-news.html', label: '新闻资讯' }
+            { href: 'support-certification.html', label: '合规证书' }
         ], 'w-48');
         html += '</div>';
 
