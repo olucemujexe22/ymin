@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>公司简介 - 上海永铭电子股份有限公司</title>
-    <meta name="description" content="上海永铭电子股份有限公司始于2001年，专业从事电容器研发、制造与应用服务。了解公司概况、发展历程和八大产品线。">
+    <meta name="description" content="上海永铭电子股份有限公司是一家从事各类电容器的新产品开发、高精度制造、应用端推广的高新技术企业。">
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap">
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/about.css">
+    <link rel="stylesheet" href="styles/about.css?v=20260803c">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1B365D'},borderRadius:{DEFAULT:'0px'},fontFamily:{headline:['Space Grotesk'],body:['Inter']}}}}</script>
     <script type="application/ld+json">
@@ -20,46 +20,36 @@
 <body class="bg-slate-50 text-slate-900 flex flex-col h-screen overflow-hidden" data-about-page="company">
     <header id="ymin-navbar"></header>
     <main class="about-main flex-1 overflow-y-auto custom-scrollbar">
-        <section class="about-hero" style="--hero-image: url('assets/about/company-factory.webp')">
+        <section class="about-hero">
             <div class="about-hero-content">
-                <span class="about-kicker">Company Profile</span>
                 <h1>公司简介</h1>
-                <p>始于2001年，专注各类电容器的新产品开发、高精度制造与应用端推广。</p>
+                <p class="about-company-hero-lead">上海永铭电子股份有限公司是一家从事各类电容器的新产品开发、高精度制造、应用端推广的高新技术企业。</p>
             </div>
         </section>
         <div class="about-stats" data-about-stats aria-label="企业概览数据"></div>
 
-        <section class="about-section is-white">
-            <div class="about-container about-split">
-                <div class="about-prose">
-                    <span class="about-eyebrow">Shanghai Yongming Electronic</span>
-                    <h2>上海永铭电子股份有限公司</h2>
-                    <p>上海永铭电子股份有限公司成立于2001年，始终坚持“电容应用，有困难—找永铭”的服务理念，专业从事各类电容器的新产品开发、高精度制造与应用端推广。</p>
-                    <p>公司围绕客户应用需求持续推进产品创新，产品面向汽车电子、AI服务器与数据中心、工业电源、新能源及消费电子等领域。</p>
-                    <ul>
-                        <li>注册资本：3,000万元</li>
-                        <li>公司地址：上海市奉贤区南桥镇杨王经济园区光村路258号</li>
-                        <li>产品范围：八大电容器产品线</li>
-                    </ul>
-                </div>
-                <div class="about-capability-panel" aria-label="研发制造应用协同能力">
-                    <div class="about-capability-row"><span class="material-symbols-outlined">science</span><span><strong>研发</strong><span>从材料、结构与工艺出发开发产品</span></span></div>
-                    <div class="about-capability-row"><span class="material-symbols-outlined">factory</span><span><strong>制造</strong><span>以过程控制支撑一致性与规模交付</span></span></div>
-                    <div class="about-capability-row"><span class="material-symbols-outlined">developer_board</span><span><strong>应用</strong><span>围绕整机工况协同选型与验证</span></span></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="about-section">
+        <section class="about-section about-positioning-section">
             <div class="about-container">
                 <div class="about-section-head">
-                    <div><span class="about-eyebrow">Capabilities</span><h2>围绕应用构建产品与服务能力</h2><p>以研发、制造、质量和应用协同为基础，面向不同行业提供产品与技术支持。</p></div>
+                    <div><h2>企业定位与愿景</h2><p>以清晰的企业文化、市场定位、产品定位与长期愿景指导企业发展。</p></div>
                 </div>
-                <div class="about-grid cols-4">
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">experiment</span><h3>产品研发</h3><p>围绕材料体系、产品结构、工艺与可靠性开展产品开发。</p></article>
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">factory</span><h3>精密制造</h3><p>通过制造过程控制和设备能力支撑产品一致性与规模交付。</p></article>
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">settings_suggest</span><h3>应用协同</h3><p>根据整机工况、寿命、尺寸和电气参数等需求协同选型。</p></article>
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">shield_with_heart</span><h3>质量管理</h3><p>按质量、环境、职业健康安全和汽车行业体系要求持续管理。</p><a class="about-card-link" href="support-certification.html">查看合规证书 <span class="material-symbols-outlined text-base">arrow_forward</span></a></article>
+                <div class="about-positioning-grid">
+                    <article class="about-positioning-item">
+                        <span class="about-positioning-number">01</span>
+                        <h3>企业文化</h3>
+                        <p class="about-positioning-main">每天进步一点点</p>
+                    </article>
+                    <article class="about-positioning-item">
+                        <span class="about-positioning-number">02</span>
+                        <h3>市场与产品定位</h3>
+                        <p><strong>市场定位：</strong>电容应用，有困难找永铭</p>
+                        <p><strong>产品定位：</strong>永铭和国际头部同行竞争，成为国际头部品牌</p>
+                    </article>
+                    <article class="about-positioning-item">
+                        <span class="about-positioning-number">03</span>
+                        <h3>企业愿景</h3>
+                        <p class="about-positioning-main">做客户尊重的产品<br>做社会尊敬的团队</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -67,17 +57,17 @@
         <section class="about-section is-white">
             <div class="about-container">
                 <div class="about-section-head">
-                    <div><span class="about-eyebrow">Product Portfolio</span><h2>八大产品线</h2><p>产品数据按产品线、系列和料号分层组织，便于检索、比较与技术资料关联。</p></div>
+                    <div><h2>八大产品线</h2><p>围绕不同材料体系、结构形式与应用需求，形成覆盖八大类别的电容器产品布局。</p></div>
                     <a class="about-btn is-outline" href="product-center.html">查看产品</a>
                 </div>
-                <div class="about-grid cols-4 about-lines" data-product-lines></div>
+                <p class="about-product-lines-copy">产品包括液态铝电解电容器、双电层超级电容器、混合型超级电容（锂离子电容）、高分子固态铝电解电容器、高分子混合动力铝电解电容器、叠层高分子固态铝电解电容器、薄膜电容器和导电高分子钽电解电容器。产品资料按产品线、系列和料号组织，便于客户检索、比较与获取相关技术资料。</p>
             </div>
         </section>
 
         <section class="about-section" style="background-image:linear-gradient(rgba(247,249,252,.94),rgba(247,249,252,.94)),url('assets/about/history-background.webp');background-size:cover;background-position:center">
             <div class="about-container">
                 <div class="about-section-head">
-                    <div><span class="about-eyebrow">Milestones</span><h2>发展历程</h2><p>从铝电解电容器起步，持续推进小型化、固态化和多材料体系产品布局。</p></div>
+                    <div><h2>发展历程</h2><p>从铝电解电容器起步，持续推进小型化、固态化和多材料体系产品布局。</p></div>
                 </div>
                 <div class="about-timeline" data-company-history></div>
             </div>

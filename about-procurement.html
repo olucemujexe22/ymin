@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap">
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/about.css">
+    <link rel="stylesheet" href="styles/about.css?v=20260803g">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1B365D'},borderRadius:{DEFAULT:'0px'},fontFamily:{headline:['Space Grotesk'],body:['Inter']}}}}</script>
 </head>
@@ -19,28 +19,30 @@
     <main class="about-main flex-1 overflow-y-auto custom-scrollbar">
         <section class="about-hero">
             <div class="about-hero-content">
-                <span class="about-kicker">Procurement & Supplier Partnership</span>
                 <h1>原材料采购</h1>
                 <p>以质量、交付、技术、成本和合规为共同基础，与供应商建立稳定、透明、可持续的合作关系。</p>
-                <div class="about-hero-actions"><a class="about-btn is-light" href="#supplier-intent">提交合作意向</a><a class="about-btn is-outline" href="#supplier-process">查看准入流程</a></div>
             </div>
         </section>
 
         <section class="about-section is-white">
             <div class="about-container">
-                <div class="about-section-head"><div><span class="about-eyebrow">Procurement Principles</span><h2>采购原则</h2><p>采购与供应商管理以产品质量和客户需求为起点，并兼顾合规经营、环境责任与长期协作。</p></div></div>
+                <div class="about-section-head"><div><h2>采购原则</h2><p>供应商应具备与供货范围相匹配的质量、制造、交付、技术和合规能力。</p></div></div>
                 <div class="about-grid cols-4">
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">verified</span><h3>质量优先</h3><p>以材料稳定性、过程能力、可追溯性和持续改进支撑产品质量。</p></article>
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">balance</span><h3>公平透明</h3><p>基于明确要求、规范评估和商业诚信开展供应商选择与合作。</p></article>
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">eco</span><h3>绿色与责任采购</h3><p>关注环境管理、物质合规、劳动与商业道德及负责任矿产要求。</p></article>
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">handshake</span><h3>共同发展</h3><p>鼓励供应商在材料、工艺、交付与成本方面持续创新和改善。</p></article>
+                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">sell</span><h3>价格优</h3><p>在满足质量与技术要求的基础上，具备合理且有竞争力的供货价格。</p></article>
+                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">verified</span><h3>质量与追溯</h3><p>建立适用的质量管理体系，具备批次追溯、变更管理和异常闭环能力。</p></article>
+                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">speed</span><h3>交期快</h3><p>快速响应采购需求，具备及时的生产排期与交付能力。</p></article>
+                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">inventory</span><h3>供应稳定</h3><p>具备稳定产能、备货管理和风险应对能力，保障供应连续性。</p></article>
+                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">engineering</span><h3>技术与改善</h3><p>能够配合样品、验证、工艺优化、成本改善及问题分析。</p></article>
+                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">eco</span><h3>环境与物质合规</h3><p>满足适用的环境管理和限制物质要求，并提供真实、可追溯的资料。</p></article>
+                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">balance</span><h3>商业道德</h3><p>遵守适用法律法规，坚持诚信经营，保护商业信息和知识产权。</p></article>
+                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">diversity_3</span><h3>社会责任</h3><p>关注劳动权益、职业健康安全、环境影响及负责任供应链要求。</p></article>
                 </div>
             </div>
         </section>
 
         <section class="about-section">
             <div class="about-container">
-                <div class="about-section-head"><div><span class="about-eyebrow">Cooperation Fields</span><h2>主要合作方向</h2><p>具体采购项目、技术规格、验证要求和采购计划以正式询价或项目文件为准。</p></div></div>
+                <div class="about-section-head"><div><h2>主要合作方向</h2><p>具体采购项目、技术规格、验证要求和采购计划以正式询价或项目文件为准。</p></div></div>
                 <div class="about-grid cols-3">
                     <article class="about-card"><span class="about-card-icon material-symbols-outlined">layers</span><h3>金属与电极材料</h3><p>电容器相关铝箔、金属材料、电极材料及配套材料。</p></article>
                     <article class="about-card"><span class="about-card-icon material-symbols-outlined">water_drop</span><h3>化学与功能材料</h3><p>电解液、导电高分子材料及其他功能化学材料。</p></article>
@@ -52,30 +54,21 @@
             </div>
         </section>
 
-        <section class="about-section is-white">
-            <div class="about-container">
-                <div class="about-section-head"><div><span class="about-eyebrow">Supplier Expectations</span><h2>供应商基本要求</h2><p>供应商应具备与供货范围相匹配的管理、制造、质量和合规能力。</p></div></div>
-                <div class="about-grid cols-3">
-                    <article class="about-card"><h3>质量与追溯</h3><p>建立适用的质量管理体系，具备批次追溯、变更管理和异常闭环能力。</p></article>
-                    <article class="about-card"><h3>交付与保障</h3><p>具备稳定产能、交付计划、风险识别和供应连续性保障能力。</p></article>
-                    <article class="about-card"><h3>技术与改善</h3><p>能够配合样品、验证、工艺优化、成本改善及问题分析。</p></article>
-                    <article class="about-card"><h3>环境与物质合规</h3><p>满足适用的环境管理和限制物质要求，并提供真实、可追溯的声明或检测资料。</p></article>
-                    <article class="about-card"><h3>商业道德</h3><p>遵守适用法律法规，坚持诚信经营，保护商业信息和知识产权。</p></article>
-                    <article class="about-card"><h3>社会责任</h3><p>关注劳动权益、职业健康安全、环境影响及负责任供应链要求。</p></article>
-                </div>
-            </div>
-        </section>
-
         <section class="about-section" id="supplier-process">
             <div class="about-container">
-                <div class="about-section-head"><div><span class="about-eyebrow">Supplier Onboarding</span><h2>供应商准入流程</h2><p>不同材料和项目的评估环节可能有所差异，以采购与质量团队正式要求为准。</p></div></div>
-                <div class="about-process">
-                    <article class="about-process-step"><strong>01</strong><h3>合作登记</h3><p>提交企业、产品、产能、体系和联系信息。</p></article>
-                    <article class="about-process-step"><strong>02</strong><h3>资料评估</h3><p>采购与相关部门核对资质和供货匹配度。</p></article>
-                    <article class="about-process-step"><strong>03</strong><h3>技术与样品确认</h3><p>确认技术要求并开展样品或材料验证。</p></article>
-                    <article class="about-process-step"><strong>04</strong><h3>现场审核</h3><p>按材料和风险等级开展必要的现场审核。</p></article>
-                    <article class="about-process-step"><strong>05</strong><h3>小批验证</h3><p>验证过程稳定性、质量表现与交付能力。</p></article>
-                    <article class="about-process-step"><strong>06</strong><h3>合格供应商</h3><p>完成审批后进入合格供应商管理与持续评价。</p></article>
+                <div class="about-section-head"><div><h2>供应商准入流程</h2><p>供应商通过送样、试验验证、现场评定和小批量试用后进入合格供方名录，并接受持续评价。</p></div></div>
+                <div class="supplier-process-flow" aria-label="供应商准入及持续评价流程">
+                    <article class="supplier-process-step"><strong>01</strong><h3>供应商初步遴选及送样</h3><p>结合供货范围和基础能力开展初步遴选并安排送样。</p></article>
+                    <article class="supplier-process-step"><strong>02</strong><h3>送样确认</h3><p>核对样品、规格、批次及配套资料。</p></article>
+                    <article class="supplier-process-step"><strong>03</strong><h3>相关试验验证</h3><p>按照材料和技术要求完成相关试验。</p></article>
+                    <article class="supplier-process-step"><strong>04</strong><h3>供应商调查及现场评定</h3><p>评估制造、质量、产能和现场管理能力。</p></article>
+                    <article class="supplier-process-step"><strong>05</strong><h3>签订相关协议</h3><p>确认质量、技术、商务及保密等合作要求。</p></article>
+                    <article class="supplier-process-step"><strong>06</strong><h3>确认为合格供方</h3><p>完成审核并纳入合格供方管理。</p></article>
+                    <article class="supplier-process-step"><strong>07</strong><h3>小批量供货试用</h3><p>通过小批量供货检验材料和供货表现。</p></article>
+                    <article class="supplier-process-step"><strong>08</strong><h3>实施验证</h3><p>结合实际生产验证质量和过程稳定性。</p></article>
+                    <article class="supplier-process-step"><strong>09</strong><h3>批量供货</h3><p>验证通过后按采购计划开展批量供货。</p></article>
+                    <article class="supplier-process-step"><strong>10</strong><h3>月度评审</h3><p>按月评价质量、交付、响应和改善表现。</p></article>
+                    <article class="supplier-process-step"><strong>11</strong><h3>年度评审</h3><p>综合年度表现进行持续合作评定。</p></article>
                 </div>
             </div>
         </section>
@@ -83,21 +76,22 @@
         <section class="about-section is-white" id="supplier-intent">
             <div class="about-container about-contact-grid">
                 <div class="about-prose">
-                    <span class="about-eyebrow">Supplier Registration</span>
                     <h2>提交合作意向</h2>
                     <p>请简要说明企业能力、拟供应类别、主要产品、体系资质和合作优势。正式合作以永铭采购团队后续评估与书面文件为准。</p>
                     <ul><li>企业基本信息与生产地点</li><li>拟供应材料或服务类别</li><li>质量、环境及行业体系情况</li><li>产能、主要客户与技术优势</li></ul>
                 </div>
-                <form class="about-form" data-mail-form data-mail-to="web@ymin.com" data-mail-subject="供应商合作意向">
+                <form class="about-form" data-crm-form data-crm-endpoint="/api/crm/supplier-intents" enctype="multipart/form-data">
+                    <input type="hidden" name="来源" value="官网原材料采购">
                     <div class="about-form-grid">
                         <label class="about-form-group"><span class="about-label">公司名称 *</span><input class="about-input" type="text" name="公司" required></label>
                         <label class="about-form-group"><span class="about-label">联系人 *</span><input class="about-input" type="text" name="联系人" required></label>
                         <label class="about-form-group"><span class="about-label">电话或邮箱 *</span><input class="about-input" type="text" name="联系方式" required></label>
                         <label class="about-form-group"><span class="about-label">合作类别 *</span><select class="about-select" name="合作类别" required><option value="">请选择</option><option>金属与电极材料</option><option>化学与功能材料</option><option>介质与隔离材料</option><option>结构件与辅料</option><option>包装材料</option><option>设备与技术服务</option><option>其他</option></select></label>
                         <label class="about-form-group is-wide"><span class="about-label">企业与供货能力简介 *</span><textarea class="about-textarea" name="企业与供货能力简介" required placeholder="请说明主要产品、生产地点、体系资质、产能及技术优势"></textarea></label>
+                        <label class="about-form-group is-wide"><span class="about-label">企业资料附件 *</span><input class="about-file-input" type="file" name="附件" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip,.rar" multiple required data-crm-files><small>支持 PDF、Word、Excel、图片及压缩包，最多 5 个文件，单个文件不超过 20MB。</small></label>
                         <label class="about-checkbox about-form-group is-wide"><input type="checkbox" name="consent" value="同意" required><span>我确认以上信息真实，并同意永铭为供应商合作评估使用这些信息。</span></label>
                     </div>
-                    <button class="about-btn" type="submit" style="margin-top:22px">生成合作邮件 <span class="material-symbols-outlined text-base">outgoing_mail</span></button>
+                    <button class="about-btn" type="submit" style="margin-top:22px">提交合作意向 <span class="material-symbols-outlined text-base">send</span></button>
                     <div class="about-form-message" data-form-message role="status"></div>
                 </form>
             </div>
@@ -107,7 +101,7 @@
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
     <script src="data/about-content.js"></script>
-    <script src="components/about-pages.js"></script>
+    <script src="components/about-pages.js?v=20260803a"></script>
     <script>document.addEventListener('DOMContentLoaded',function(){YMIN.navbar.inject('about');YMIN.footer.inject();});</script>
 </body>
 </html>

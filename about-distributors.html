@@ -10,35 +10,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap">
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/about.css">
+    <link rel="stylesheet" href="styles/about.css?v=20260803d">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1B365D'},borderRadius:{DEFAULT:'0px'},fontFamily:{headline:['Space Grotesk'],body:['Inter']}}}}</script>
 </head>
 <body class="bg-slate-50 text-slate-900 flex flex-col h-screen overflow-hidden" data-about-page="distributors">
     <header id="ymin-navbar"></header>
     <main class="about-main flex-1 overflow-y-auto custom-scrollbar">
-        <section class="about-hero">
-            <div class="about-hero-content">
-                <span class="about-kicker">Authorized Distributors</span>
-                <h1>代理商网络</h1>
-                <p>查询永铭公开授权代理商名录。采购前建议核验代理资格、授权有效期与证书信息。</p>
-            </div>
-        </section>
-
-        <section class="about-section is-white">
-            <div class="about-container about-split">
-                <div class="about-prose">
-                    <span class="about-eyebrow">Authorization Verification</span>
-                    <h2>认准官方授权，谨防采购风险</h2>
-                    <p>授权代理商应持有永铭出具的有效代理资格证或代理证。公开名录提供公司名称和授权日期，便于采购、供应链与质量人员快速检索。</p>
-                    <ul>
-                        <li>使用代理商完整公司名称查询</li>
-                        <li>结合授权日期与盖章证书核验</li>
-                        <li>对授权真实性有疑问时，通过永铭官方联系方式确认</li>
-                    </ul>
+        <section class="about-hero about-distributor-hero">
+            <div class="about-hero-content about-distributor-hero-layout">
+                <div class="about-distributor-hero-copy">
+                    <h1>代理商网络</h1>
+                    <p>查询永铭公开授权代理商名录。采购前建议核验代理资格、授权有效期与证书信息。</p>
                 </div>
-                <div class="about-visual" style="min-height:300px">
-                    <img src="assets/about/distributor-banner.webp" alt="永铭代理商资格证样式和防伪提示" loading="eager">
+                <div class="about-distributor-hero-image">
+                    <img src="assets/about/distributor-banner.webp" alt="永铭代理商资格证样式" loading="eager">
                 </div>
             </div>
         </section>
@@ -46,7 +32,7 @@
         <section class="about-section">
             <div class="about-container">
                 <div class="about-section-head">
-                    <div><span class="about-eyebrow">Distributor Directory</span><h2>授权代理商查询</h2><p>输入公司名称或按授权年份筛选。列表按授权日期由近到远排列。</p></div>
+                    <div><h2>授权代理商查询</h2><p>输入公司名称或按授权年份筛选。列表按授权日期由近到远排列。</p></div>
                 </div>
                 <div class="about-toolbar">
                     <label class="about-field">
@@ -70,11 +56,6 @@
             </div>
         </section>
 
-        <section class="about-section is-compact is-white">
-            <div class="about-container">
-                <div class="about-cta"><div><h2>需要核验代理商资格？</h2><p>请提供代理商完整公司名称及相关证书信息。</p></div><a class="about-btn is-light" href="about-contact.html?type=代理商资格核验">联系永铭核验</a></div>
-            </div>
-        </section>
         <footer id="ymin-footer"></footer>
     </main>
     <script src="components/navbar.js"></script>

@@ -241,6 +241,47 @@
         });
     }
 
+    function initCrmForms() {
+        document.querySelectorAll('[data-crm-form]').forEach(function (form) {
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                if (!form.reportValidity()) return;
+
+                var files = form.querySelector('[data-crm-files]');
+                var selectedFiles = files ? Array.from(files.files || []) : [];
+                var message = form.querySelector('[data-form-message]');
+                var submit = form.querySelector('[type="submit"]');
+                var maxFileSize = 20 * 1024 * 1024;
+                if (message) message.classList.add('is-visible');
+
+                if (selectedFiles.length > 5) {
+                    if (message) message.textContent = '最多可上传 5 个附件。';
+                    return;
+                }
+                if (selectedFiles.some(function (file) { return file.size > maxFileSize; })) {
+                    if (message) message.textContent = '单个附件不能超过 20MB。';
+                    return;
+                }
+
+                var endpoint = form.getAttribute('data-crm-endpoint');
+                if (!endpoint) return;
+                if (submit) submit.disabled = true;
+                if (message) message.textContent = '正在提交，请稍候…';
+
+                try {
+                    var response = await fetch(endpoint, { method: 'POST', body: new FormData(form) });
+                    if (!response.ok) throw new Error('CRM request failed');
+                    form.reset();
+                    if (message) message.textContent = '合作意向已提交，我们将尽快与您联系。';
+                } catch (error) {
+                    if (message) message.textContent = '提交失败，请稍后重试或联系永铭采购人员。';
+                } finally {
+                    if (submit) submit.disabled = false;
+                }
+            });
+        });
+    }
+
     function initQueryDefaults() {
         var params = new URLSearchParams(window.location.search);
         var type = params.get('type');
@@ -259,6 +300,7 @@
         initDistributors();
         initCareerSearch();
         initMailForms();
+        initCrmForms();
         initQueryDefaults();
     }
 

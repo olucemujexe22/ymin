@@ -75,43 +75,117 @@
             background: #1B365D;
         }
         .home-tool-card {
-            min-height: 176px;
-            border: 1px solid rgba(255,255,255,.18);
-            background: rgba(255,255,255,.06);
-            transition: background .2s ease, transform .2s ease, border-color .2s ease;
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 14px 16px;
+            color: #17375f;
+            border: 1px solid #cbd9e6;
+            background: rgba(255,255,255,.88);
+            box-shadow: 0 8px 20px rgba(15, 35, 58, .04);
+            transition: background .2s ease, transform .2s ease, border-color .2s ease, box-shadow .2s ease;
         }
         .home-tool-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(241,189,129,.75);
-            background: rgba(255,255,255,.11);
+            transform: translateY(-3px);
+            border-color: #6f8dac;
+            background: #ffffff;
+            box-shadow: 0 14px 28px rgba(15, 35, 58, .10);
         }
-        .home-news-card {
+        .home-tool-card > .material-symbols-outlined {
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1B365D;
+            background: #e3edf5;
+        }
+        .home-product-hub {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e8f0f6 0%, #f3f7fa 54%, #dfeaf3 100%);
+            border-top: 1px solid #d6e1eb;
+            border-bottom: 1px solid #d2deea;
+        }
+        .home-product-hub::after {
+            content: '';
+            position: absolute;
+            right: -180px;
+            top: -220px;
+            width: 520px;
+            height: 520px;
+            border: 1px solid rgba(27, 54, 93, .08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .home-news-list {
+            border-top: 1px solid #d9e1e8;
+        }
+        .home-news-row {
+            display: grid;
+            grid-template-columns: 112px minmax(0, 1fr) 28px;
+            align-items: center;
+            gap: 20px;
+            min-height: 104px;
+            padding: 15px 8px 15px 4px;
+            border-bottom: 1px solid #d9e1e8;
+            transition: background .18s ease, padding-left .18s ease;
+        }
+        .home-news-row:hover {
+            padding-left: 10px;
+            background: #f4f7fa;
+        }
+        .home-news-thumb {
+            width: 112px;
+            height: 72px;
+            overflow: hidden;
+            background: #e8eef4;
+        }
+        .home-news-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .home-news-placeholder {
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            min-height: 220px;
-            background: #fff;
-            border: 1px solid #dbe3ec;
-            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            color: #ffffff;
+            text-align: center;
+            background: linear-gradient(135deg, #23466f 0%, #6f8daa 100%);
         }
-        .home-news-card:hover {
-            transform: translateY(-4px);
-            border-color: #1B365D;
-            box-shadow: 0 16px 34px rgba(15, 35, 58, .10);
+        .home-news-type {
+            display: inline-flex;
+            align-items: center;
+            min-height: 24px;
+            padding: 2px 9px;
+            color: #1B365D;
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 1;
+            background: #e6eef5;
+            border: 1px solid #c9d8e5;
         }
         .home-news-title {
             display: -webkit-box;
             overflow: hidden;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 2;
         }
         .home-product-card {
             display: flex;
             flex-direction: column;
-            min-height: 146px;
-            background: #eaf1f5;
-            border: 0;
+            min-height: 138px;
+            background: #ffffff;
+            border: 1px solid #d5e0e9;
             overflow: hidden;
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+            box-shadow: 0 10px 24px rgba(15, 35, 58, .06);
             transition: transform .2s ease, box-shadow .2s ease;
         }
         .home-product-card:hover {
@@ -120,16 +194,16 @@
         }
         .home-product-main {
             flex: 1;
-            min-height: 110px;
+            min-height: 102px;
             display: grid;
-            grid-template-columns: 46% 54%;
+            grid-template-columns: 44% 56%;
             align-items: center;
             gap: 10px;
-            padding: 12px 16px;
+            padding: 10px 14px;
         }
         .home-product-image {
             width: 100%;
-            max-height: 86px;
+            max-height: 78px;
             object-fit: contain;
         }
         .home-product-empty {
@@ -181,6 +255,16 @@
             .home-product-title {
                 font-size: 13px;
             }
+            .home-news-row {
+                grid-template-columns: 88px minmax(0, 1fr) 20px;
+                gap: 12px;
+                min-height: 96px;
+                padding: 12px 0;
+            }
+            .home-news-thumb {
+                width: 88px;
+                height: 64px;
+            }
         }
     </style>
 </head>
@@ -194,10 +278,6 @@
             <div class="home-hero-overlay" aria-hidden="true"></div>
             <div class="home-hero-layout relative z-10 max-w-7xl mx-auto px-6 py-14 md:py-20 min-h-[590px]">
                 <div class="w-full max-w-2xl">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="w-9 h-px bg-[#f1bd81]"></span>
-                        <p class="text-[11px] uppercase tracking-[0.22em] text-blue-100">YMIN Enterprise Spirit</p>
-                    </div>
                     <h1 id="homeHeroTitle" class="text-4xl md:text-6xl font-bold leading-[1.12] tracking-tight">电容应用，<br><span class="text-[#f1bd81]">有困难找永铭</span></h1>
                     <p class="mt-6 text-base md:text-lg text-blue-100 leading-8 max-w-xl">20+年行业经验，覆盖8大产品线与9大应用领域，支持从参数选型、方案匹配到设计验证。</p>
 
@@ -241,16 +321,17 @@
             </div>
         </section>
 
-        <!-- 产品线（Rubycon风格：8产品线卡片 + 搜索卡片） -->
-        <section class="max-w-7xl mx-auto px-6 py-16">
-            <div class="flex items-center justify-between mb-8">
+        <!-- 产品中心与设计工具：同屏工程入口 -->
+        <section class="home-product-hub" aria-labelledby="productHubHeading">
+          <div class="relative z-10 max-w-7xl mx-auto px-6 py-12">
+            <div class="flex items-center justify-between mb-6">
                 <div>
                     <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1">产品中心</p>
-                    <h2 class="text-2xl font-bold text-primary">全系列电容器产品</h2>
+                    <h2 id="productHubHeading" class="text-2xl font-bold text-primary">全系列电容器产品</h2>
                 </div>
                 <a href="product-series.html" class="text-sm text-primary font-bold hover:underline flex items-center gap-1">产品体系图 <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
             </div>
-            <div id="homeProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+            <div id="homeProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="bg-white border-2 border-slate-200 p-6 hover-card group relative">
                     <span class="material-symbols-outlined text-3xl text-primary mb-4 block">bolt</span>
                     <h3 class="text-base font-bold text-primary mb-2">液态铝电解电容器</h3>
@@ -324,13 +405,29 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-8 pt-6 border-t border-[#c7d6e4]">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                        <h2 id="toolsHeading" class="text-lg font-bold text-primary">设计工具与数据资源</h2>
+                        <p class="text-xs text-slate-500">选型、结构设计、寿命评估与仿真验证</p>
+                    </div>
+                    <a href="design-tools.html" class="text-sm text-primary font-bold hover:underline inline-flex items-center gap-1">全部工具 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+                    <a href="design-3d-cad.html" class="home-tool-card"><span class="material-symbols-outlined">view_in_ar</span><span><strong class="block text-sm">3D-CAD</strong><small class="block text-[11px] text-slate-500 mt-1">产品结构模型</small></span></a>
+                    <a href="design-life-calc.html" class="home-tool-card"><span class="material-symbols-outlined">calculate</span><span><strong class="block text-sm">寿命计算器</strong><small class="block text-[11px] text-slate-500 mt-1">工作寿命推算</small></span></a>
+                    <a href="design-spice.html" class="home-tool-card"><span class="material-symbols-outlined">deployed_code</span><span><strong class="block text-sm">SPICE 模型</strong><small class="block text-[11px] text-slate-500 mt-1">电路仿真资源</small></span></a>
+                    <a href="design-sparams.html" class="home-tool-card"><span class="material-symbols-outlined">ssid_chart</span><span><strong class="block text-sm">S参数</strong><small class="block text-[11px] text-slate-500 mt-1">高频网络参数</small></span></a>
+                    <a href="design-reliability.html" class="home-tool-card"><span class="material-symbols-outlined">verified</span><span><strong class="block text-sm">可靠性数据</strong><small class="block text-[11px] text-slate-500 mt-1">试验与验证数据</small></span></a>
+                </div>
+            </div>
+          </div>
         </section>
 
         <!-- 应用领域 -->
         <section class="max-w-7xl mx-auto px-6 pb-20" aria-labelledby="applicationHeading">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                 <div>
-                    <p class="text-[10px] text-slate-400 uppercase tracking-[0.18em] mb-2">Application Fields</p>
                     <h2 id="applicationHeading" class="text-3xl font-bold text-primary">按应用领域快速进入</h2>
                     <p class="text-sm text-slate-500 mt-3">从应用整机与关键电路出发，查看对应的电容器解决方案。</p>
                 </div>
@@ -349,39 +446,17 @@
             </div>
         </section>
 
-        <!-- 设计工具与资源 -->
-        <section class="bg-[#102a4b] text-white border-y border-[#24476e]" aria-labelledby="toolsHeading">
-            <div class="max-w-7xl mx-auto px-6 py-16">
-                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-                    <div>
-                        <p class="text-[10px] text-blue-200 uppercase tracking-[0.18em] mb-2">Engineering Resources</p>
-                        <h2 id="toolsHeading" class="text-3xl font-bold">设计工具与数据资源</h2>
-                        <p class="text-sm text-blue-100 mt-3">连接选型、结构设计、寿命评估与仿真验证的工程入口。</p>
-                    </div>
-                    <a href="design-tools.html" class="text-sm text-[#f1bd81] font-bold hover:underline inline-flex items-center gap-1">查看设计工具 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-                    <a href="design-3d-cad.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">view_in_ar</span><h3 class="font-bold text-lg mt-5">3D-CAD</h3><p class="text-xs text-blue-100 mt-2 leading-5">查询与下载产品结构模型</p></a>
-                    <a href="design-life-calc.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">calculate</span><h3 class="font-bold text-lg mt-5">寿命计算器</h3><p class="text-xs text-blue-100 mt-2 leading-5">按产品线与工作条件进行寿命推算</p></a>
-                    <a href="design-spice.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">deployed_code</span><h3 class="font-bold text-lg mt-5">SPICE 模型</h3><p class="text-xs text-blue-100 mt-2 leading-5">查找产品仿真模型与资源</p></a>
-                    <a href="design-sparams.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">ssid_chart</span><h3 class="font-bold text-lg mt-5">S参数</h3><p class="text-xs text-blue-100 mt-2 leading-5">查询高频特性与网络参数数据</p></a>
-                    <a href="design-reliability.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">verified</span><h3 class="font-bold text-lg mt-5">可靠性数据</h3><p class="text-xs text-blue-100 mt-2 leading-5">查看产品试验项目与可靠性数据</p></a>
-                </div>
-            </div>
-        </section>
-
         <!-- 最新动态：从新闻数据中自动取最新内容 -->
         <section class="max-w-7xl mx-auto px-6 py-20" aria-labelledby="newsHeading">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                 <div>
-                    <p class="text-[10px] text-slate-400 uppercase tracking-[0.18em] mb-2">News & Insights</p>
                     <h2 id="newsHeading" class="text-3xl font-bold text-primary">最新动态与技术文章</h2>
                     <p class="text-sm text-slate-500 mt-3">了解新产品、应用方案与技术观点。</p>
                 </div>
                 <a href="support-news.html" class="text-sm text-primary font-bold hover:underline inline-flex items-center gap-1">进入新闻资讯 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
             </div>
-            <div id="homeNewsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4" aria-live="polite">
-                <div class="home-news-card p-6 text-sm text-slate-400">正在加载最新内容…</div>
+            <div id="homeNewsGrid" class="home-news-list" aria-live="polite">
+                <div class="py-8 text-sm text-slate-400">正在加载最新内容…</div>
             </div>
         </section>
 
@@ -436,9 +511,40 @@
                 .replace(/'/g, '&#039;');
         }
 
+        function renderHomeNewsItems(grid, items) {
+            grid.innerHTML = items.map(function(item) {
+                var date = String(item.date || '').replace(/-/g, '/');
+                var series = (item.series || []).slice(0, 2).join(' · ') || 'YMIN';
+                var media = item.coverImage
+                    ? '<img src="' + escapeHomeHtml(item.coverImage) + '" alt="' + escapeHomeHtml(item.title || '') + '" loading="lazy">'
+                    : '<div class="home-news-placeholder"><strong class="text-xs tracking-[0.16em]">YMIN</strong><small class="mt-1 text-[9px] leading-3 opacity-80">' + escapeHomeHtml(series) + '</small></div>';
+                return '<a class="home-news-row group" href="support-news-detail.html?id=' + encodeURIComponent(item.id || '') + '">' +
+                    '<div class="home-news-thumb">' + media + '</div>' +
+                    '<div class="min-w-0">' +
+                        '<div class="flex flex-wrap items-center gap-3 mb-2">' +
+                            '<time class="text-xs font-semibold text-slate-500" datetime="' + escapeHomeHtml(item.date || '') + '">' + escapeHomeHtml(date) + '</time>' +
+                            '<span class="home-news-type">' + escapeHomeHtml(item.type || '新闻资讯') + '</span>' +
+                        '</div>' +
+                        '<h3 class="home-news-title text-[15px] md:text-base leading-6 font-bold text-slate-800 group-hover:text-primary group-hover:underline">' + escapeHomeHtml(item.title || '查看最新内容') + '</h3>' +
+                    '</div>' +
+                    '<span class="material-symbols-outlined text-xl text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition">arrow_forward</span>' +
+                '</a>';
+            }).join('');
+        }
+
         function renderHomeNews() {
             var grid = document.getElementById('homeNewsGrid');
             if (!grid) return;
+
+            var fallbackNews = [
+                { id: '1439', date: '2026-06-18', type: '技术文章', title: 'PCB空间极度受限？永铭φ7/φ12/φ13/φ14.5mm非常规直径铝电解电容——无需改板，兼顾高纹波、长寿命与低成本', series: ['LKM', 'LKG'] },
+                { id: '1436', date: '2026-06-06', type: '技术文章', title: '永铭牛角铝电解电容：让充电桩滤波方案从“能用”变成“全生命周期降本”', series: ['CW3H', 'CW6H'] },
+                { id: '1435', date: '2026-06-06', type: '技术文章', title: '超小直径破局者：永铭SLX系列混合型超级电容，为欧美狭长设备提供“快充+长寿命+免电池法规”低TCO方案', series: ['SLX'], coverImage: 'https://www.ymin.com/ueditor/php/upload/image/20260606/1780732519385598.png' },
+                { id: '1434', date: '2026-06-06', type: '技术文章', title: '从电气参数到物理承载：永铭LKE系列液态铝电解电容，系统性解决无人机电调输入端过热熔断与震动断针问题', series: ['LKE'] },
+                { id: '1433', date: '2026-06-05', type: '技术文章', title: '从功耗达标到TCO领先：永铭VHU系列助力车载DCDC降低待机功耗风险', series: ['VHU'], coverImage: 'https://www.ymin.com/ueditor/php/upload/image/20260605/1780644479208938.png' }
+            ];
+
+            renderHomeNewsItems(grid, fallbackNews);
 
             fetch('data/support-articles.json', { cache: 'no-store' })
                 .then(function(response) {
@@ -449,23 +555,11 @@
                     var items = Array.isArray(payload) ? payload : (payload.items || []);
                     var latest = items.slice().sort(function(left, right) {
                         return String(right.date || '').localeCompare(String(left.date || ''));
-                    }).slice(0, 4);
+                    }).slice(0, 5);
 
-                    grid.innerHTML = latest.map(function(item) {
-                        var date = String(item.date || '').replace(/-/g, '.');
-                        return '<a class="home-news-card p-6" href="support-news-detail.html?id=' + encodeURIComponent(item.id || '') + '">' +
-                            '<div class="flex items-center justify-between gap-3 text-[10px] uppercase tracking-wider">' +
-                                '<span class="text-primary font-bold">' + escapeHomeHtml(item.type || '新闻资讯') + '</span>' +
-                                '<time class="text-slate-400" datetime="' + escapeHomeHtml(item.date || '') + '">' + escapeHomeHtml(date) + '</time>' +
-                            '</div>' +
-                            '<h3 class="home-news-title mt-5 text-base leading-7 font-bold text-slate-800">' + escapeHomeHtml(item.title || '查看最新内容') + '</h3>' +
-                            '<span class="mt-auto pt-6 text-xs text-primary font-bold inline-flex items-center gap-1">阅读详情 <span class="material-symbols-outlined text-sm">arrow_forward</span></span>' +
-                        '</a>';
-                    }).join('');
+                    if (latest.length) renderHomeNewsItems(grid, latest);
                 })
-                .catch(function() {
-                    grid.innerHTML = '<div class="home-news-card p-6"><h3 class="font-bold text-primary">最新动态</h3><p class="text-sm text-slate-500 mt-3">新闻数据暂未加载，可前往新闻资讯页查看。</p><a href="support-news.html" class="mt-auto pt-6 text-xs text-primary font-bold">进入新闻资讯 →</a></div>';
-                });
+                .catch(function() {});
         }
 
         document.addEventListener('DOMContentLoaded', function() {

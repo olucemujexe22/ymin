@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>加入我们 - 上海永铭电子股份有限公司</title>
-    <meta name="description" content="查看上海永铭电子股份有限公司最新工作机会，按职位类别、工作地点、工作性质和专业方向查找适合的职位。">
+    <meta name="description" content="查看上海永铭电子股份有限公司当前招聘岗位、应聘方式及人事联系方式。">
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap">
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/about.css">
+    <link rel="stylesheet" href="styles/about.css?v=20260803e">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1B365D'},borderRadius:{DEFAULT:'0px'},fontFamily:{headline:['Space Grotesk'],body:['Inter']}}}}</script>
 </head>
@@ -25,55 +25,27 @@
             </div>
         </section>
 
-        <div class="career-opportunities" aria-label="工作机会概览">
-            <div><strong data-career-count>0</strong><span>工作机会</span></div>
-            <div><span>主要工作地点</span><strong style="font-size:20px;margin-top:7px">上海市奉贤区</strong></div>
-        </div>
-
         <section class="about-section">
             <div class="about-container">
                 <div class="about-section-head">
-                    <div><span class="about-eyebrow">Find Your Role</span><h2>找到适合您的职位</h2><p>输入职位名称或关键词，也可按职位类别、地点、工作性质和专业方向进行筛选。</p></div>
+                    <div><h2>在招岗位</h2><p>以下为永铭当前公开招聘职位。</p></div>
                 </div>
-                <div class="career-search-panel">
-                    <div class="career-filter-grid">
-                        <label class="about-field">
-                            <span class="material-symbols-outlined">search</span>
-                            <input class="about-input" type="search" placeholder="输入职位名称或关键字" data-career-keyword aria-label="输入职位名称或关键字">
-                        </label>
-                        <select class="about-select" data-career-category aria-label="职位类别"><option value="">全部职位类别</option></select>
-                        <select class="about-select" data-career-location aria-label="工作地点"><option value="">全部工作地点</option></select>
-                        <select class="about-select" data-career-type aria-label="工作性质"><option value="">全部工作性质</option></select>
-                        <select class="about-select" data-career-major aria-label="专业方向"><option value="">全部专业方向</option></select>
-                        <button class="about-btn is-outline" type="button" data-career-reset>重置</button>
-                    </div>
-                    <div class="career-job-list" data-career-list></div>
-                </div>
+                <div class="career-job-list is-direct" data-career-list></div>
             </div>
         </section>
 
         <section class="about-section is-white">
             <div class="about-container">
-                <div class="about-section-head">
-                    <div><span class="about-eyebrow">Work at YMIN</span><h2>在永铭，连接技术与应用</h2><p>永铭围绕电容器研发、制造与应用持续建设专业团队。</p></div>
-                </div>
-                <div class="about-grid cols-3">
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">biotech</span><h3>技术创新</h3><p>参与材料、结构、工艺、测试与产品开发，把技术指标转化为稳定产品。</p></article>
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">manufacturing</span><h3>精密制造</h3><p>在设备、生产、质量和供应链协同中持续改善效率与一致性。</p></article>
-                    <article class="about-card"><span class="about-card-icon material-symbols-outlined">conversion_path</span><h3>应用协作</h3><p>理解客户整机和电路需求，推动选型、验证与量产落地。</p></article>
-                </div>
-            </div>
-        </section>
-
-        <section class="about-section">
-            <div class="about-container">
-                <div class="about-section-head"><div><span class="about-eyebrow">Recruitment Process</span><h2>招聘流程</h2><p>公开职位上线后，按照统一流程推进沟通与评估。</p></div></div>
-                <div class="about-process">
-                    <article class="about-process-step"><strong>01</strong><h3>查看职位</h3><p>确认岗位职责、要求与工作地点。</p></article>
-                    <article class="about-process-step"><strong>02</strong><h3>提交申请</h3><p>按岗位说明提交个人简历与必要材料。</p></article>
-                    <article class="about-process-step"><strong>03</strong><h3>简历评估</h3><p>招聘团队结合岗位要求进行初步评估。</p></article>
-                    <article class="about-process-step"><strong>04</strong><h3>面试沟通</h3><p>围绕专业能力、经验与岗位匹配度沟通。</p></article>
-                    <article class="about-process-step"><strong>05</strong><h3>录用入职</h3><p>完成录用沟通与入职安排。</p></article>
+                <div class="about-cta career-application">
+                    <div>
+                        <h2>申请职位</h2>
+                        <p>请准备个人简历，并联系公司人事沟通岗位要求与应聘安排。</p>
+                    </div>
+                    <div class="career-application-contact">
+                        <span><span class="material-symbols-outlined">person</span>人事联系人：顾经理</span>
+                        <a href="tel:13816055904"><span class="material-symbols-outlined">call</span>138 1605 5904</a>
+                        <span><span class="material-symbols-outlined">location_on</span>上海市奉贤区南桥镇杨王经济园区光村路258号</span>
+                    </div>
                 </div>
             </div>
         </section>
