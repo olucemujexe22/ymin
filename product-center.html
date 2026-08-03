@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>产品中心 - 永铭电子</title>
-    <meta name="description" content="永铭电子电容器产品目录 - 液态铝电解、超级电容、高分子固态、MLCC、薄膜电容等全系列产品，支持按参数筛选与在线选型。">
-    <meta name="keywords" content="铝电解电容,超级电容,高分子固态电容,MLCC,薄膜电容,钽电容,永铭电子">
+    <meta name="description" content="永铭电子产品中心，支持按产品线、封装、系列和关键参数筛选、对比产品。">
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -13,272 +12,335 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
-                    colors: {
-                        "primary-container": "#1b365d", "surface-bright": "#f9f9fd", "on-error": "#ffffff",
-                        "on-error-container": "#93000a", "on-primary-fixed": "#001b3d", "on-secondary": "#ffffff",
-                        "secondary-container": "#d7e0f5", "surface-container-highest": "#e2e2e6", "secondary": "#565f70",
-                        "error": "#ba1a1a", "inverse-primary": "#aec7f7", "primary-fixed-dim": "#aec7f7",
-                        "outline-variant": "#c4c6cf", "on-primary": "#ffffff", "tertiary-fixed-dim": "#f1bd81",
-                        "secondary-fixed-dim": "#bec7db", "surface-container-low": "#f3f3f7", "inverse-on-surface": "#f0f0f4",
-                        "on-primary-container": "#87a0cd", "outline": "#74777f", "tertiary-fixed": "#ffddb9",
-                        "surface-dim": "#d9dadd", "on-tertiary-container": "#c6965e", "primary": "#1B365D",
-                        "surface-container": "#edeef1", "surface-tint": "#465f88", "on-tertiary": "#ffffff",
-                        "secondary-fixed": "#dae3f8", "on-secondary-fixed-variant": "#3e4758", "surface-container-lowest": "#ffffff",
-                        "background": "#f9f9fd", "tertiary": "#321c00", "inverse-surface": "#2e3133", "on-secondary-fixed": "#131c2b",
-                        "tertiary-container": "#4f2f00", "on-primary-fixed-variant": "#2e476f", "surface-variant": "#e2e2e6",
-                        "on-tertiary-fixed": "#2b1700", "on-tertiary-fixed-variant": "#623f0f", "surface": "#f9f9fd",
-                        "on-secondary-container": "#5a6375", "on-surface-variant": "#44474e", "surface-container-high": "#e7e8eb",
-                        "on-surface": "#191c1e", "error-container": "#ffdad6", "primary-fixed": "#d6e3ff", "on-background": "#191c1e"
-                    },
-                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
-                    fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"], "label": ["Inter"] }
+                    colors: { primary: '#1B365D', surface: '#f7f8fa' },
+                    borderRadius: { DEFAULT: '0px', lg: '0px', xl: '0px', full: '9999px' },
+                    fontFamily: { headline: ['Space Grotesk'], body: ['Inter'] }
                 }
-            },
-        }
+            }
+        };
     </script>
     <style>
+        body { font-family: Inter, "Microsoft YaHei", sans-serif; }
+        h1, h2, h3 { font-family: "Space Grotesk", "Microsoft YaHei", sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
-        .custom-scrollbar::-webkit-scrollbar { width: 10px; height: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #edeef1; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #74777f; border-radius: 0px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #edf0f4; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #9aa6b5; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #1B365D; }
-        .custom-scrollbar { scrollbar-width: auto; scrollbar-color: #74777f #edeef1; }
-        .no-radius { border-radius: 0 !important; }
-        input[type="range"] { -webkit-appearance: none; width: 100%; height: 4px; background: #e2e2e6; outline: none; }
-        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; background: #1B365D; border-radius: 50%; cursor: pointer; }
-        .group:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-        .mega-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s ease-in-out; }
-        .data-table-wrapper { overflow-x: auto; }
+        .filter-input { width: 100%; border: 1px solid #d9e0e8; background: #fff; padding: .55rem .65rem; font-size: .75rem; color: #1e293b; }
+        .filter-input:focus { border-color: #1B365D; outline: none; box-shadow: 0 0 0 1px #1B365D; }
+        .filter-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: .55rem; color: #1B365D; font-size: .75rem; font-weight: 700; }
+        .category-option.is-disabled { opacity: .32; cursor: not-allowed; }
+        .category-option.is-disabled input { cursor: not-allowed; }
+        .category-count { margin-left: auto; color: #94a3b8; font-size: 10px; font-variant-numeric: tabular-nums; }
+        .filter-group-title { margin: .8rem 0 .4rem; font-size: 9px; color: #94a3b8; letter-spacing: .08em; }
+        .option-chip { border: 1px solid #dbe2ea; background: #fff; padding: .4rem .55rem; color: #475569; font-size: 11px; transition: all .15s ease; }
+        .option-chip:hover { border-color: #1B365D; color: #1B365D; }
+        .option-chip.is-active { border-color: #1B365D; background: #1B365D; color: #fff; }
+        .dual-range { position: relative; height: 28px; margin: .15rem 0 .3rem; }
+        .dual-range::before { content: ""; position: absolute; left: 0; right: 0; top: 13px; height: 4px; background: #dbe2ea; }
+        .dual-range input[type="range"] { -webkit-appearance: none; appearance: none; position: absolute; left: 0; top: 0; width: 100%; height: 28px; margin: 0; background: transparent; pointer-events: none; }
+        .dual-range input[type="range"]::-webkit-slider-runnable-track { height: 4px; background: transparent; }
+        .dual-range input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 15px; height: 15px; margin-top: -5px; border: 2px solid #fff; border-radius: 50%; background: #1B365D; box-shadow: 0 0 0 1px #1B365D; pointer-events: auto; cursor: pointer; }
+        .dual-range input[type="range"]::-moz-range-track { height: 4px; background: transparent; }
+        .dual-range input[type="range"]::-moz-range-thumb { width: 15px; height: 15px; border: 2px solid #fff; border-radius: 50%; background: #1B365D; box-shadow: 0 0 0 1px #1B365D; pointer-events: auto; cursor: pointer; }
+        .range-values { display: grid; grid-template-columns: minmax(0,1fr) 18px minmax(0,1fr) 38px; align-items: center; gap: .3rem; margin-top: .45rem; }
+        .dimension-card { border: 1px solid #e2e8f0; background: #f8fafc; padding: .65rem; }
+        .product-thumb { display: flex; width: 58px; height: 58px; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #dbe2ea; background: linear-gradient(145deg,#fff,#edf2f7); color: #64748b; }
+        .product-thumb img { width: 100%; height: 100%; object-fit: contain; }
+        .status-badge { display: inline-flex; align-items: center; white-space: nowrap; border: 1px solid; padding: .22rem .42rem; font-size: 10px; font-weight: 700; }
+        .status-production { border-color: #bbf7d0; background: #f0fdf4; color: #15803d; }
+        .status-new { border-color: #bfdbfe; background: #eff6ff; color: #1d4ed8; }
+        .status-discouraged { border-color: #fed7aa; background: #fff7ed; color: #c2410c; }
+        .data-table-wrapper { max-height: calc(100vh - 255px); overflow: auto; }
+        .data-table-wrapper thead { position: sticky; top: 0; z-index: 5; }
+        .data-table-wrapper th { white-space: nowrap; }
+        .data-table-wrapper td { vertical-align: middle; }
+        .product-certification-column { width: 96px; max-width: 96px; overflow-wrap: anywhere; }
+        .compare-highlight { background: #fff9e8; }
+        .compare-diff { background: #fff1f2; color: #9f1239; font-weight: 700; }
+        .grid-product-card { border: 1px solid #dfe5ec; background: #fff; padding: 1rem; transition: border-color .15s ease, box-shadow .15s ease; }
+        .grid-product-card:hover { border-color: #1B365D; box-shadow: 0 8px 24px rgba(27,54,93,.08); }
+        @media (max-width: 1024px) {
+            .filter-aside { width: 300px; }
+        }
     </style>
 </head>
-<body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
-    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
+<body class="bg-surface text-slate-900 flex flex-col h-screen overflow-hidden">
     <header id="ymin-navbar"></header>
 
-    <!-- 主体区域：flex 布局，左侧筛选栏独立滚动，右侧内容区域整体滚动（包含表格、横幅、页脚） -->
-    <main class="flex flex-1 overflow-hidden">
-        <!-- 左侧筛选栏：独立滚动，修复滚动不到底的问题 -->
-        <aside class="w-[320px] bg-white dark:bg-slate-900 h-full border-r border-slate-200 flex flex-col overflow-y-auto custom-scrollbar flex-shrink-0">
-            <div class="px-6 py-4 border-b border-slate-100 mb-6 flex-shrink-0">
-                <h2 class="text-[#1B365D] dark:text-blue-200 font-['Space_Grotesk'] text-lg font-bold tracking-tight">产品搜索</h2>
-                <p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">按参数过滤</p>
+    <main class="flex flex-1 min-h-0 overflow-hidden">
+        <aside class="filter-aside w-[340px] bg-white h-full border-r border-slate-200 flex flex-col flex-shrink-0">
+            <div class="px-6 py-4 border-b border-slate-100">
+                <h2 class="text-primary text-lg font-bold tracking-tight">产品搜索</h2>
+                <p class="text-slate-500 text-[10px] mt-1">按参数过滤</p>
             </div>
-            <div class="space-y-8 px-6 pb-10 flex-1">
-                <!-- 电容器类别（分组互斥多选） -->
-                <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-4 tracking-tighter">电容器类别</label>
-                    <div class="space-y-2" id="categoryFilters">
-                        <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-2 mb-1">— 铝电解组（可多选）—</div>
-                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="al" data-name="液态铝电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">液态铝电解电容器</span></label>
-                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="al" data-name="高分子固态铝电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">高分子固态铝电解电容器</span></label>
-                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="al" data-name="高分子混合动力铝电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">高分子混合动力铝电解电容器</span></label>
-                        <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-3 mb-1">— 超级电容组（可多选）—</div>
-                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="sc" data-name="双电层超级电容" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">双电层超级电容</span></label>
-                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="sc" data-name="混合型超级电容(锂离子电容)" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">混合型超级电容（锂离子电容）</span></label>
-                        <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-3 mb-1">— 叠层与钽组（可多选）—</div>
-                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="st" data-name="叠层高分子固态铝电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">叠层高分子固态铝电解电容器</span></label>
-                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="st" data-name="导电高分子钽电解电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">导电高分子钽电解电容器</span></label>
-                        <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-3 mb-1">— 独立组 —</div>
-                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-primary focus:ring-0 w-4 h-4 cat-cb" type="checkbox" data-group="fl" data-name="薄膜电容器" onchange="onCatChange(this)"><span class="group-hover:text-primary transition-colors">薄膜电容器</span></label>
+
+            <form id="filterForm" class="flex flex-1 flex-col gap-7 overflow-y-auto custom-scrollbar px-6 py-5" onsubmit="return false">
+                <section style="order:1">
+                    <div class="filter-title"><label for="keywordFilter">料号搜索</label></div>
+                    <div class="relative">
+                        <input id="keywordFilter" class="filter-input pr-9" placeholder="输入完整/部分料号" autocomplete="off">
+                        <span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 text-lg">search</span>
                     </div>
                 </section>
-                <!-- 形状/封装 -->
-                <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-3 tracking-tighter">形状 / 封装</label><div class="relative"><select class="w-full bg-slate-50 border border-slate-200 py-2 px-3 text-sm focus:border-primary outline-none no-radius font-['Inter'] appearance-none"><option>全部封装</option><option>引线型 (Radial)</option><option>贴片型 (SMD)</option></select><span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 pointer-events-none">expand_more</span></div></section>
-                <!-- 额定电压 -->
-                <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-3 tracking-tighter">额定电压 (V.DC)</label><div class="grid grid-cols-3 gap-1 mb-3"><button class="bg-slate-100 text-[10px] py-1.5 hover:bg-[#1B365D] hover:text-white transition-colors">16V</button><button class="bg-slate-100 text-[10px] py-1.5 hover:bg-[#1B365D] hover:text-white transition-colors">25V</button><button class="bg-slate-100 text-[10px] py-1.5 hover:bg-[#1B365D] hover:text-white transition-colors">35V</button><button class="bg-slate-100 text-[10px] py-1.5 hover:bg-[#1B365D] hover:text-white transition-colors">50V</button><button class="bg-slate-100 text-[10px] py-1.5 hover:bg-[#1B365D] hover:text-white transition-colors">100V</button><button class="bg-slate-100 text-[10px] py-1.5 hover:bg-[#1B365D] hover:text-white transition-colors">400V</button></div><div class="flex items-center gap-2"><input class="w-full bg-slate-50 border border-slate-200 p-2 text-xs no-radius" placeholder="Min" type="text"><span class="text-slate-400">-</span><input class="w-full bg-slate-50 border border-slate-200 p-2 text-xs no-radius" placeholder="Max" type="text"></div></section>
-                <!-- 静电容量（带滑动条） -->
-                <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-3 tracking-tighter">静电容量 (µF)</label><div class="px-1 mt-4"><input class="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#1B365D]" max="10000" min="0.1" step="0.1" type="range"><div class="flex justify-between mt-2"><span class="text-[10px] text-slate-500">0.1µF</span><span class="text-[10px] text-slate-500">10000µF</span></div></div></section>
-                <!-- 温度 & 寿命 -->
-                <section class="grid grid-cols-2 gap-4"><div><label class="block text-xs font-bold text-[#1B365D] uppercase mb-2 tracking-tighter">温度上限</label><div class="relative"><select class="w-full bg-slate-50 border border-slate-200 py-2 px-3 text-xs focus:border-primary outline-none no-radius appearance-none"><option>125°C</option><option>105°C</option><option>85°C</option></select><span class="material-symbols-outlined absolute right-1 top-2 text-slate-400 text-sm pointer-events-none">expand_more</span></div></div><div><label class="block text-xs font-bold text-[#1B365D] uppercase mb-2 tracking-tighter">寿命 (HRS)</label><div class="relative"><select class="w-full bg-slate-50 border border-slate-200 py-2 px-3 text-xs focus:border-primary outline-none no-radius appearance-none"><option>2000</option><option>5000</option><option>10000</option></select><span class="material-symbols-outlined absolute right-1 top-2 text-slate-400 text-sm pointer-events-none">expand_more</span></div></div></section>
-                <!-- ESR -->
-                <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-3 tracking-tighter">ESR (最大值)</label><div class="relative"><input class="w-full bg-slate-50 border border-slate-200 p-2 pr-10 text-xs no-radius" placeholder="单位: mΩ" type="text"></div></section>
-                <!-- 认证与状态 -->
-                <section><label class="block text-xs font-bold text-[#1B365D] uppercase mb-4 tracking-tighter">认证与状态</label><div class="space-y-3"><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input checked class="rounded-none border-outline text-[#1B365D] focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">AEC-Q200 合规</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input class="rounded-none border-outline text-[#1B365D] focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors">RoHS 符合</span></label><label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer group"><input checked class="rounded-none border-outline text-[#1B365D] focus:ring-0 w-4 h-4" type="checkbox"><span class="group-hover:text-primary transition-colors font-medium text-[#1B365D]">仅显示在产型号</span></label></div></section>
-                <button class="w-full bg-[#1B365D] text-white py-3 text-sm font-bold tracking-widest hover:brightness-110 transition-all no-radius mt-4">应用筛选重置</button>
+
+                <section style="order:3">
+                    <div class="filter-title">
+                        <span>电容器类别</span>
+                        <span id="categoryMode" class="text-[9px] text-slate-400 font-normal">组内可多选</span>
+                    </div>
+                    <div id="categoryFilters">
+                        <div class="filter-group-title">铝电解电容器</div>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="al" type="checkbox" value="液态铝电解电容器"><span>液态铝电解电容器</span><span class="category-count" data-category-count="液态铝电解电容器"></span></label>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="al" type="checkbox" value="高分子固态铝电解电容器"><span>高分子固态铝电解电容器</span><span class="category-count" data-category-count="高分子固态铝电解电容器"></span></label>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="al" type="checkbox" value="高分子混合动力铝电解电容器"><span>高分子混合动力铝电解电容器</span><span class="category-count" data-category-count="高分子混合动力铝电解电容器"></span></label>
+
+                        <div class="filter-group-title">超级电容器</div>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="sc" type="checkbox" value="双电层超级电容"><span>双电层超级电容</span><span class="category-count" data-category-count="双电层超级电容"></span></label>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="sc" type="checkbox" value="混合型超级电容（锂离子电容）"><span>混合型超级电容（锂离子电容）</span><span class="category-count" data-category-count="混合型超级电容（锂离子电容）"></span></label>
+
+                        <div class="filter-group-title">叠层与钽电容器</div>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="st" type="checkbox" value="叠层高分子固态铝电解电容器"><span>叠层高分子固态铝电解电容器</span><span class="category-count" data-category-count="叠层高分子固态铝电解电容器"></span></label>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="st" type="checkbox" value="导电高分子钽电解电容器"><span>导电高分子钽电解电容器</span><span class="category-count" data-category-count="导电高分子钽电解电容器"></span></label>
+
+                        <div class="filter-group-title">薄膜电容器</div>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="fl" type="checkbox" value="薄膜电容器"><span>薄膜电容器</span><span class="category-count" data-category-count="薄膜电容器"></span></label>
+                    </div>
+                    <p class="mt-2 text-[10px] leading-4 text-slate-400">选中一个产品组后，其他产品组暂时锁定；取消本组全部选项即可重新选择。</p>
+                </section>
+
+                <section style="order:4">
+                    <div class="filter-title"><span>形状 / 封装</span><span id="packageSelectedText" class="text-[9px] text-slate-400 font-normal">全部</span></div>
+                    <div id="packageOptions" class="flex flex-wrap gap-2">
+                        <span class="text-[11px] text-slate-400">请先选择产品线</span>
+                    </div>
+                </section>
+
+                <section style="order:8">
+                    <div class="filter-title"><label for="seriesSearch">产品系列</label><span id="seriesSelectedText" class="text-[9px] text-slate-400 font-normal">全部</span></div>
+                    <input id="seriesSearch" class="filter-input" placeholder="搜索系列" autocomplete="off">
+                    <div id="seriesOptions" class="mt-2 max-h-36 overflow-y-auto custom-scrollbar border border-slate-200 bg-white p-2 space-y-1">
+                        <p class="text-[11px] text-slate-400">按产品线和封装自动加载系列</p>
+                    </div>
+                </section>
+
+                <section style="order:2">
+                    <div class="filter-title"><span>产品状态</span></div>
+                    <div class="grid grid-cols-1 gap-2">
+                        <label class="flex items-center gap-2 text-xs cursor-pointer"><input class="status-cb" type="checkbox" value="量产品"><span>量产品</span></label>
+                        <label class="flex items-center gap-2 text-xs cursor-pointer"><input class="status-cb" type="checkbox" value="新品"><span>新品</span></label>
+                        <label class="flex items-center gap-2 text-xs cursor-pointer"><input class="status-cb" type="checkbox" value="新项目不推荐"><span>新项目不推荐</span></label>
+                    </div>
+                </section>
+
+                <section class="range-control" data-range-section="voltage" style="order:5">
+                    <div class="filter-title"><span>额定电压 (V.DC)</span><span class="font-normal"><span id="voltageUnit">V</span></span></div>
+                    <div class="dual-range">
+                        <input id="voltageRangeMin" type="range" min="0" max="1000" step="1" value="0" aria-label="额定电压最小值">
+                        <input id="voltageRangeMax" type="range" min="0" max="1000" step="1" value="1000" aria-label="额定电压最大值">
+                    </div>
+                    <div class="range-values">
+                        <input id="voltageMin" class="filter-input" type="number" min="0" step="any" placeholder="最小">
+                        <span class="text-center text-slate-400">–</span>
+                        <input id="voltageMax" class="filter-input" type="number" min="0" step="any" placeholder="最大">
+                        <span class="text-[10px] text-slate-500">V</span>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2"><input id="voltageExact" class="filter-input" type="number" min="0" step="any" placeholder="指定数值搜索"><button class="option-chip flex-shrink-0" type="button" data-exact-button="voltage">匹配</button></div>
+                </section>
+
+                <section class="range-control" data-range-section="capacity" style="order:6">
+                    <div class="filter-title"><span>静电容量</span><span id="capacityUnit" class="font-normal">µF</span></div>
+                    <div class="dual-range">
+                        <input id="capacityRangeMin" type="range" min="0" max="50000" step="1" value="0" aria-label="静电容量最小值">
+                        <input id="capacityRangeMax" type="range" min="0" max="50000" step="1" value="50000" aria-label="静电容量最大值">
+                    </div>
+                    <div class="range-values">
+                        <input id="capacityMin" class="filter-input" type="number" min="0" step="any" placeholder="最小">
+                        <span class="text-center text-slate-400">–</span>
+                        <input id="capacityMax" class="filter-input" type="number" min="0" step="any" placeholder="最大">
+                        <span id="capacityUnitInput" class="text-[10px] text-slate-500">µF</span>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2"><input id="capacityExact" class="filter-input" type="number" min="0" step="any" placeholder="指定数值搜索"><button class="option-chip flex-shrink-0" type="button" data-exact-button="capacity">匹配</button></div>
+                </section>
+
+                <section style="order:9">
+                    <div class="filter-title"><span>工作温度范围</span></div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <select id="temperatureMinFilter" class="filter-input" aria-label="工作温度下限">
+                            <option value="">下限不限</option><option value="-55">达到 -55℃</option><option value="-40">达到 -40℃</option><option value="-25">达到 -25℃</option>
+                        </select>
+                        <select id="temperatureMaxFilter" class="filter-input" aria-label="工作温度上限">
+                            <option value="">上限不限</option><option value="85">达到 85℃</option><option value="105">达到 105℃</option><option value="125">达到 125℃</option><option value="135">达到 135℃</option><option value="150">达到 150℃</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="range-control" data-range-section="life" style="order:10">
+                    <div class="filter-title"><span>寿命 (HRS)</span><span class="font-normal">hrs</span></div>
+                    <div class="dual-range">
+                        <input id="lifeRangeMin" type="range" min="0" max="20000" step="100" value="0" aria-label="寿命最小值">
+                        <input id="lifeRangeMax" type="range" min="0" max="20000" step="100" value="20000" aria-label="寿命最大值">
+                    </div>
+                    <div class="range-values">
+                        <input id="lifeMin" class="filter-input" type="number" min="0" step="100" placeholder="最小">
+                        <span class="text-center text-slate-400">–</span>
+                        <input id="lifeMax" class="filter-input" type="number" min="0" step="100" placeholder="最大">
+                        <span class="text-[10px] text-slate-500">hrs</span>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2"><input id="lifeExact" class="filter-input" type="number" min="0" step="100" placeholder="指定数值搜索"><button class="option-chip flex-shrink-0" type="button" data-exact-button="life">匹配</button></div>
+                </section>
+
+                <section class="range-control" data-range-section="ripple" style="order:11">
+                    <div class="filter-title"><span>额定纹波电流</span><span id="rippleUnit" class="font-normal">mArms</span></div>
+                    <div class="dual-range">
+                        <input id="rippleRangeMin" type="range" min="0" max="10000" step="1" value="0" aria-label="额定纹波电流最小值">
+                        <input id="rippleRangeMax" type="range" min="0" max="10000" step="1" value="10000" aria-label="额定纹波电流最大值">
+                    </div>
+                    <div class="range-values">
+                        <input id="rippleMin" class="filter-input" type="number" min="0" step="any" placeholder="最小">
+                        <span class="text-center text-slate-400">–</span>
+                        <input id="rippleMax" class="filter-input" type="number" min="0" step="any" placeholder="最大">
+                        <span id="rippleUnitInput" class="text-[10px] text-slate-500">mArms</span>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2"><input id="rippleExact" class="filter-input" type="number" min="0" step="any" placeholder="指定数值搜索"><button class="option-chip flex-shrink-0" type="button" data-exact-button="ripple">匹配</button></div>
+                </section>
+
+                <section class="range-control" data-range-section="esr" style="order:12">
+                    <div class="filter-title"><span>ESR / 阻抗</span><span id="esrUnit" class="font-normal">mΩ</span></div>
+                    <div class="dual-range">
+                        <input id="esrRangeMin" type="range" min="0" max="5000" step="1" value="0" aria-label="ESR最小值">
+                        <input id="esrRangeMax" type="range" min="0" max="5000" step="1" value="5000" aria-label="ESR最大值">
+                    </div>
+                    <div class="range-values">
+                        <input id="esrMin" class="filter-input" type="number" min="0" step="any" placeholder="最小">
+                        <span class="text-center text-slate-400">–</span>
+                        <input id="esrMax" class="filter-input" type="number" min="0" step="any" placeholder="最大">
+                        <span id="esrUnitInput" class="text-[10px] text-slate-500">mΩ</span>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2"><input id="esrExact" class="filter-input" type="number" min="0" step="any" placeholder="指定数值搜索"><button class="option-chip flex-shrink-0" type="button" data-exact-button="esr">匹配</button></div>
+                </section>
+
+                <section id="dimensionFilters" style="order:7">
+                    <div class="filter-title"><span>外形尺寸 (mm)</span><span class="text-[9px] font-normal text-slate-400">按产品线显示</span></div>
+                    <p id="dimensionHint" class="mb-2 text-[10px] leading-4 text-slate-400">选择产品线后显示相应尺寸字段。</p>
+                    <div id="dimensionRows" class="space-y-2"></div>
+                </section>
+
+                <section class="space-y-2.5" style="order:13">
+                    <div class="filter-title"><span>认证与资源</span></div>
+                    <label class="flex items-center gap-2 text-xs cursor-pointer"><input id="aecFilter" type="checkbox"><span>仅显示 AEC-Q200 产品</span></label>
+                    <label class="flex items-center gap-2 text-xs cursor-pointer"><input id="rohsFilter" type="checkbox"><span>仅显示 RoHS 产品</span></label>
+                    <label class="flex items-center gap-2 text-xs cursor-pointer"><input id="cadFilter" type="checkbox"><span>仅显示有 3D-CAD 的产品</span></label>
+                </section>
+            </form>
+
+            <div class="border-t border-slate-200 bg-white px-6 py-4 shadow-[0_-8px_20px_rgba(15,23,42,.05)]">
+                <p id="filterError" class="hidden mb-2 text-[11px] text-red-600"></p>
+                <div class="grid grid-cols-[1fr_92px] gap-2">
+                    <button id="applyFilters" class="bg-primary text-white py-3 text-xs font-bold tracking-wider hover:brightness-110" type="button">应用筛选<span id="draftCount" class="hidden"></span></button>
+                    <button id="resetFilters" class="border border-slate-300 bg-white py-3 text-xs font-bold text-slate-600 hover:border-primary hover:text-primary" type="button">重置</button>
+                </div>
             </div>
         </aside>
 
-        <!-- 右侧内容区域：独立滚动（包含表格、分页、横幅、底部footer），页脚已替换 -->
-        <section class="flex-1 bg-slate-50 h-full overflow-y-auto custom-scrollbar flex flex-col">
+        <section class="flex-1 bg-slate-50 h-full overflow-y-auto custom-scrollbar flex flex-col min-w-0">
             <div class="flex-1">
-                <div class="p-10 pb-2 flex justify-between items-end">
+                <div class="p-8 pb-4 flex flex-wrap justify-between items-end gap-5">
                     <div>
-                        <nav class="text-[10px] text-slate-500 uppercase flex gap-2 mb-2 font-['Inter']" id="breadcrumbNav"><span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">铝电解电容器</span></nav>
-                        <h1 class="text-4xl font-bold text-[#1B365D] tracking-tighter" id="resultTitle">引线型铝电解电容器</h1>
-                        <div class="flex flex-wrap gap-2 mt-3" id="filterChips"></div>
+                        <nav class="text-[10px] text-slate-500 uppercase flex gap-2 mb-2"><span>产品中心</span><span>/</span><span class="text-primary font-bold">产品选型</span></nav>
+                        <h1 id="resultTitle" class="text-4xl font-bold text-primary tracking-tighter">全部电容器产品</h1>
+                        <div id="filterChips" class="flex flex-wrap gap-2 mt-3"></div>
+                        <button id="clearAllTop" class="mt-3 text-[11px] font-bold text-primary hover:underline" type="button">清空全部筛选</button>
                     </div>
-                    <div class="flex items-center gap-4"><span class="text-sm text-slate-500">共找到 <span class="font-bold text-[#1B365D]" id="resultCount">1,248</span> 个结果</span><div class="flex gap-2"><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-lg">download</span></button><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-lg">print</span></button></div></div>
+                    <div class="flex flex-wrap items-center justify-end gap-3">
+                        <span class="text-sm text-slate-500">共找到 <span class="font-bold text-primary" id="resultCount">0</span> 个结果</span>
+                        <select id="sortProducts" class="border border-slate-200 bg-white px-3 py-2 text-xs text-slate-600">
+                            <option value="default">默认排序</option>
+                            <option value="voltageAsc">电压从低到高</option>
+                            <option value="capacityAsc">容量从低到高</option>
+                            <option value="lifeDesc">寿命从高到低</option>
+                        </select>
+                        <div class="flex border border-slate-200 bg-white">
+                            <button id="listView" class="bg-primary p-2 text-white" type="button" title="列表视图"><span class="material-symbols-outlined text-lg">view_list</span></button>
+                            <button id="gridView" class="p-2 text-slate-500 hover:text-primary" type="button" title="卡片视图"><span class="material-symbols-outlined text-lg">grid_view</span></button>
+                        </div>
+                        <button id="refreshProducts" class="bg-white p-2 border border-slate-200 hover:bg-slate-100" type="button" title="刷新筛选结果"><span class="material-symbols-outlined text-lg">refresh</span></button>
+                        <button id="exportProducts" class="bg-white p-2 border border-slate-200 hover:bg-slate-100" type="button" title="导出当前筛选结果"><span class="material-symbols-outlined text-lg">download</span></button>
+                        <button id="printProducts" class="bg-white p-2 border border-slate-200 hover:bg-slate-100" type="button" title="打印"><span class="material-symbols-outlined text-lg">print</span></button>
+                    </div>
                 </div>
-                <div class="px-10 pb-20">
-                    <div class="bg-white border border-slate-200 shadow-sm data-table-wrapper">
-                        <table class="w-full text-left border-collapse min-w-[1600px]">
-                            <thead><tr class="bg-[#1B365D] text-white text-[11px] uppercase tracking-wider font-semibold font-['Inter']"><th class="p-5 text-center w-12 border-r border-white/10">点击对比</th><th class="p-5">产品</th><th class="p-5">状态</th><th class="p-5">产品料号</th><th class="p-5">工作温度 (℃)</th><th class="p-5">额定电压 (Vdc)</th><th class="p-5">静电容量 (µF)</th><th class="p-5">直径D (mm)</th><th class="p-5">高度L (mm)</th><th class="p-5">漏电流 (µA)</th><th class="p-5">额定纹波电流 [mA/r.m.s]</th><th class="p-5">ESR/Impedance [Ωmax]</th><th class="p-5">寿命 (hrs)</th><th class="p-5">产品认证</th><th class="p-5 text-center">PDF</th> </tr></thead>
-                            <tbody class="text-[13px] text-slate-700 divide-y divide-slate-100 font-['Inter']">
-                                <tr class="hover:bg-slate-50 transition-colors"><td class="p-5 text-center border-r border-slate-100"><input class="w-4 h-4 border-slate-300 rounded-none text-[#1B365D] focus:ring-0" type="checkbox"></td><td class="p-5 font-medium">VP1</td><td class="p-5"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-600">settings_suggest</span> <span class="text-xs">量产</span></div></td><td class="p-5"><a class="text-[#1B365D] font-semibold underline decoration-slate-300 hover:decoration-[#1B365D]" href="product-detail.html?pn=VP1D1701E681MVTM">VP1D1701E681MVTM</a></td><td class="p-5">-55~105</td><td class="p-5">25</td><td class="p-5">680</td><td class="p-5">8</td><td class="p-5">17</td><td class="p-5">3400</td><td class="p-5">5050</td><td class="p-5">0.016</td><td class="p-5">2000</td><td class="p-5 text-center">-</td><td class="p-5 text-center"><span class="material-symbols-outlined text-red-600 cursor-pointer">picture_as_pdf</span></td></tr>
-                                <tr class="hover:bg-slate-50 transition-colors bg-slate-50/30"><td class="p-5 text-center border-r border-slate-100"><input class="w-4 h-4 border-slate-300 rounded-none text-[#1B365D] focus:ring-0" type="checkbox"></td><td class="p-5 font-medium">VPX</td><td class="p-5"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-600">settings_suggest</span> <span class="text-xs">量产</span></div></td><td class="p-5"><a class="text-[#1B365D] font-semibold underline decoration-slate-300 hover:decoration-[#1B365D]" href="product-detail.html?pn=VPXE1051H221MVTM">VPXE1051H221MVTM</a></td><td class="p-5">-55~105</td><td class="p-5">50</td><td class="p-5">220</td><td class="p-5">10</td><td class="p-5">10.5</td><td class="p-5">2200</td><td class="p-5">2450</td><td class="p-5">0.05</td><td class="p-5">2000</td><td class="p-5 text-center">-</td><td class="p-5 text-center"><span class="material-symbols-outlined text-red-600 cursor-pointer">picture_as_pdf</span></td></tr>
-                                <tr class="hover:bg-slate-50 transition-colors"><td class="p-5 text-center border-r border-slate-100"><input class="w-4 h-4 border-slate-300 rounded-none text-[#1B365D] focus:ring-0" type="checkbox"></td><td class="p-5 font-medium">VPT</td><td class="p-5"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-600">settings_suggest</span> <span class="text-xs">量产</span></div></td><td class="p-5"><a class="text-[#1B365D] font-semibold underline decoration-slate-300 hover:decoration-[#1B365D]" href="product-detail.html?pn=VPTC0581C151MVTM">VPTC0581C151MVTM</a></td><td class="p-5">-55~125</td><td class="p-5">16</td><td class="p-5">150</td><td class="p-5">6.3</td><td class="p-5">5.8</td><td class="p-5">480</td><td class="p-5">1000</td><td class="p-5">0.03</td><td class="p-5">2000</td><td class="p-5 text-center">-</td><td class="p-5 text-center"><span class="material-symbols-outlined text-red-600 cursor-pointer">picture_as_pdf</span></td></tr>
-                                <tr class="hover:bg-slate-50 transition-colors bg-slate-50/30"><td class="p-5 text-center border-r border-slate-100"><input class="w-4 h-4 border-slate-300 rounded-none text-[#1B365D] focus:ring-0" type="checkbox"></td><td class="p-5 font-medium">VPT</td><td class="p-5"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-600">settings_suggest</span> <span class="text-xs">量产</span></div></td><td class="p-5"><a class="text-[#1B365D] font-semibold underline decoration-slate-300 hover:decoration-[#1B365D]" href="product-detail.html?pn=VPTL1502A101MVTM">VPTL1502A101MVTM</a></td><td class="p-5">-55~125</td><td class="p-5">100</td><td class="p-5">100</td><td class="p-5">12.5</td><td class="p-5">15</td><td class="p-5">2000</td><td class="p-5">1450</td><td class="p-5">0.05</td><td class="p-5">2000</td><td class="p-5 text-center">-</td><td class="p-5 text-center"><span class="material-symbols-outlined text-red-600 cursor-pointer">picture_as_pdf</span></td></tr>
-                                <tr class="hover:bg-slate-50 transition-colors"><td class="p-5 text-center border-r border-slate-100"><input class="w-4 h-4 border-slate-300 rounded-none text-[#1B365D] focus:ring-0" type="checkbox"></td><td class="p-5 font-medium">VPL</td><td class="p-5"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-600">settings_suggest</span> <span class="text-xs">量产</span></div></td><td class="p-5"><a class="text-[#1B365D] font-semibold underline decoration-slate-300 hover:decoration-[#1B365D]" href="product-detail.html?pn=VPLB0771H180MVTM">VPLB0771H180MVTM</a></td><td class="p-5">-55~105</td><td class="p-5">50</td><td class="p-5">18</td><td class="p-5">5</td><td class="p-5">7.7</td><td class="p-5">300</td><td class="p-5">1450</td><td class="p-5">0.06</td><td class="p-5">5000</td><td class="p-5 text-center">-</td><td class="p-5 text-center"><span class="material-symbols-outlined text-red-600 cursor-pointer">picture_as_pdf</span></td></tr>
-                                <tr class="hover:bg-slate-50 transition-colors bg-slate-50/30"><td class="p-5 text-center border-r border-slate-100"><input class="w-4 h-4 border-slate-300 rounded-none text-[#1B365D] focus:ring-0" type="checkbox"></td><td class="p-5 font-medium">VPG</td><td class="p-5"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-600">settings_suggest</span> <span class="text-xs">量产</span></div></td><td class="p-5"><a class="text-[#1B365D] font-semibold underline decoration-slate-300 hover:decoration-[#1B365D]" href="product-detail.html?pn=VPGJ1951H122MVTM">VPGJ1951H122MVTM</a></td><td class="p-5">-55~105</td><td class="p-5">50</td><td class="p-5">1200</td><td class="p-5">18</td><td class="p-5">19.5</td><td class="p-5">7500</td><td class="p-5">4650</td><td class="p-5">0.03</td><td class="p-5">2000</td><td class="p-5 text-center">-</td><td class="p-5 text-center"><span class="material-symbols-outlined text-red-600 cursor-pointer">picture_as_pdf</span></td></tr>
-                                <tr class="hover:bg-slate-50 transition-colors"><td class="p-5 text-center border-r border-slate-100"><input class="w-4 h-4 border-slate-300 rounded-none text-[#1B365D] focus:ring-0" type="checkbox"></td><td class="p-5 font-medium">NPX</td><td class="p-5"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-600">settings_suggest</span> <span class="text-xs">量产</span></div></td><td class="p-5"><a class="text-[#1B365D] font-semibold underline decoration-slate-300 hover:decoration-[#1B365D]" href="product-detail.html?pn=NPXC0700J561MJTM">NPXC0700J561MJTM</a></td><td class="p-5">-55~105</td><td class="p-5">6.3</td><td class="p-5">560</td><td class="p-5">6.3</td><td class="p-5">7</td><td class="p-5">706</td><td class="p-5">4800</td><td class="p-5">0.008</td><td class="p-5">2000</td><td class="p-5 text-center">-</td><td class="p-5 text-center"><span class="material-symbols-outlined text-red-600 cursor-pointer">picture_as_pdf</span></td></tr>
-                                <tr class="hover:bg-slate-50 transition-colors bg-slate-50/30"><td class="p-5 text-center border-r border-slate-100"><input class="w-4 h-4 border-slate-300 rounded-none text-[#1B365D] focus:ring-0" type="checkbox"></td><td class="p-5 font-medium">NPX</td><td class="p-5"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-600">settings_suggest</span> <span class="text-xs">量产</span></div></td><td class="p-5"><a class="text-[#1B365D] font-semibold underline decoration-slate-300 hover:decoration-[#1B365D]" href="product-detail.html?pn=NPXC0801H560MJTM">NPXC0801H560MJTM</a></td><td class="p-5">-55~105</td><td class="p-5">50</td><td class="p-5">56</td><td class="p-5">6.3</td><td class="p-5">8</td><td class="p-5">560</td><td class="p-5">1900</td><td class="p-5">0.05</td><td class="p-5">2000</td><td class="p-5 text-center">-</td><td class="p-5 text-center"><span class="material-symbols-outlined text-red-600 cursor-pointer">picture_as_pdf</span></td></tr>
+
+                <div class="px-8 pb-24">
+                    <div id="listResults" class="bg-white border border-slate-200 shadow-sm data-table-wrapper custom-scrollbar">
+                        <table id="productTable" class="w-full text-left border-collapse" style="min-width: 1760px;">
+                            <thead>
+                                <tr class="bg-primary text-white text-[11px] uppercase tracking-wider font-semibold">
+                                    <th class="px-2.5 py-2.5 text-center">对比</th>
+                                    <th class="px-2.5 py-2.5">产品图</th>
+                                    <th class="px-2.5 py-2.5">产品线</th>
+                                    <th class="px-2.5 py-2.5">系列</th>
+                                    <th class="px-2.5 py-2.5">状态</th>
+                                    <th class="px-2.5 py-2.5">产品料号</th>
+                                    <th class="px-2.5 py-2.5">封装形式</th>
+                                    <th class="px-2.5 py-2.5">工作温度 (℃)</th>
+                                    <th class="px-2.5 py-2.5">额定电压</th>
+                                    <th id="capacityColumn" class="px-2.5 py-2.5">标称容量</th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="diameter"><span class="block">直径 D</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="length"><span class="block">长度 L</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="width"><span class="block">宽度 W</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="height"><span class="block">高度 H</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="thickness"><span class="block">厚度 T</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-2.5">漏电流</th>
+                                    <th id="rippleColumn" class="px-2.5 py-1.5 leading-tight"><span class="block">额定纹波电流</span><span class="block text-[9px] font-medium">(mArms)</span></th>
+                                    <th id="esrColumn" class="px-2.5 py-2.5">ESR / 阻抗</th>
+                                    <th class="px-2.5 py-2.5">寿命 (hrs)</th>
+                                    <th class="product-certification-column px-2 py-2.5">产品认证</th>
+                                    <th class="px-2.5 py-2.5 text-center">PDF</th>
+                                    <th class="px-2.5 py-2.5 text-center">3D-CAD</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productRows" class="text-[12px] text-slate-700 divide-y divide-slate-100">
+                                <tr><td class="p-8 text-center text-slate-400" colspan="22">正在加载产品数据…</td></tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="mt-10 flex justify-center items-center gap-4"><button class="w-10 h-10 flex items-center justify-center border border-slate-200 bg-white hover:bg-slate-50 transition-colors disabled:opacity-30" disabled><span class="material-symbols-outlined text-lg">chevron_left</span></button><div class="flex gap-2 font-semibold"><button class="w-10 h-10 flex items-center justify-center bg-[#1B365D] text-white">1</button><button class="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 hover:bg-slate-50">2</button><button class="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 hover:bg-slate-50">3</button><span class="w-10 h-10 flex items-center justify-center text-slate-400">...</span><button class="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 hover:bg-slate-50">42</button></div><button class="w-10 h-10 flex items-center justify-center border border-slate-200 bg-white hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined text-lg">chevron_right</span></button></div>
+                    <div id="gridResults" class="hidden grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4"></div>
+                    <div id="pagination" class="mt-8 flex flex-wrap justify-center items-center gap-2"></div>
                 </div>
-                <!-- 定制化横幅 -->
-                <div class="px-10 mb-20"><div class="relative overflow-hidden p-10 bg-[#1B365D] text-white"><div class="absolute right-0 top-0 w-1/2 h-full opacity-5 pointer-events-none"><span class="material-symbols-outlined text-[300px] absolute -right-20 -top-20">memory</span></div><div class="relative z-10 max-w-2xl"><h3 class="text-3xl font-bold tracking-tighter mb-4">定制化电容方案咨询</h3><p class="text-blue-100 text-base leading-relaxed mb-8">针对高温环境、超长寿命或特殊物理尺寸需求，我们的工程团队提供端到端的规格定义与样片支持服务。</p><button class="bg-[#f1bd81] text-[#2b1700] px-10 py-4 font-bold uppercase text-sm tracking-widest hover:brightness-110 transition-all no-radius">联系技术工程师</button></div></div></div>
             </div>
-            
-            <!-- 页脚（由 components/footer.js 注入） -->
             <footer id="ymin-footer"></footer>
         </section>
     </main>
 
-    <!-- 共享组件 -->
-    <script src="components/navbar.js"></script>
+    <div id="compareBar" class="hidden fixed bottom-0 left-[340px] right-0 z-30 border-t border-primary/20 bg-white/95 backdrop-blur shadow-[0_-10px_30px_rgba(15,23,42,.12)]">
+        <div class="mx-auto flex max-w-[1500px] items-center gap-4 px-8 py-3">
+            <div class="flex-shrink-0"><p class="text-xs font-bold text-primary">产品对比</p><p class="text-[10px] text-slate-400">最多选择 4 项</p></div>
+            <div id="compareItems" class="flex flex-1 gap-2 overflow-x-auto custom-scrollbar"></div>
+            <button id="clearCompare" class="border border-slate-300 px-4 py-2 text-xs text-slate-600" type="button">清空</button>
+            <button id="openCompare" class="bg-primary px-5 py-2 text-xs font-bold text-white" type="button">开始对比</button>
+        </div>
+    </div>
+
+    <div id="compareModal" class="hidden fixed inset-0 z-50 bg-slate-950/55 p-4 md:p-8">
+        <div class="mx-auto flex h-full max-w-[1500px] flex-col bg-white shadow-2xl">
+            <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+                <div><h2 class="text-xl font-bold text-primary">产品参数对比</h2><p class="mt-1 text-[11px] text-slate-500">差异参数以浅红色标识</p></div>
+                <button id="closeCompare" class="p-2 text-slate-500 hover:text-primary" type="button" aria-label="关闭对比"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div id="compareContent" class="flex-1 overflow-auto custom-scrollbar p-6"></div>
+        </div>
+    </div>
+
+    <script src="components/navbar.js?v=20260803"></script>
     <script src="components/footer.js"></script>
-    <script src="data/series-table.js"></script>
+    <script src="data/series-images.js?v=20260730"></script>
+    <script src="data/products.js"></script>
+    <script src="components/product-center.js?v=20260803h"></script>
     <script>
-        // ===== 电容器类别分组多选逻辑 =====
-        var allCbs = document.querySelectorAll('.cat-cb');
-        
-        function onCatChange(el) {
-            if (!el.checked) {
-                // 取消选中：检查是否还有同组被选中，没有则解锁所有组
-                enableAll();
-                updateUI();
-                return;
-            }
-            // 选中：锁定到当前组，禁用其他组的复选框
-            var activeGroup = el.getAttribute('data-group');
-            allCbs.forEach(function(cb) {
-                if (cb.getAttribute('data-group') !== activeGroup) {
-                    cb.disabled = true;
-                    cb.parentElement.classList.add('opacity-40', 'cursor-not-allowed');
-                    cb.parentElement.classList.remove('cursor-pointer');
-                }
-            });
-            updateUI();
-        }
-
-        function enableAll() {
-            var anyChecked = false;
-            allCbs.forEach(function(cb) { if (cb.checked) anyChecked = true; });
-            if (!anyChecked) {
-                allCbs.forEach(function(cb) {
-                    cb.disabled = false;
-                    cb.parentElement.classList.remove('opacity-40', 'cursor-not-allowed');
-                    cb.parentElement.classList.add('cursor-pointer');
-                });
-            }
-        }
-
-        function getSelectedCategories() {
-            var sel = [];
-            allCbs.forEach(function(cb) { if (cb.checked) sel.push(cb.getAttribute('data-name')); });
-            return sel;
-        }
-
-        function updateUI() {
-            var sel = getSelectedCategories();
-            var breadcrumb = document.getElementById('breadcrumbNav');
-            var title = document.getElementById('resultTitle');
-            var chips = document.getElementById('filterChips');
-            var count = document.getElementById('resultCount');
-
-            if (sel.length === 0) {
-                breadcrumb.innerHTML = '<span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">全部产品</span>';
-                title.textContent = '全部电容器产品';
-            } else if (sel.length === 1) {
-                breadcrumb.innerHTML = '<span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">' + sel[0] + '</span>';
-                title.textContent = sel[0];
-            } else {
-                breadcrumb.innerHTML = '<span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">筛选结果</span>';
-                title.textContent = '电容器筛选结果';
-            }
-
-            // 筛选标签 chips（仅多选时显示）
-            var chipHtml = '';
-            if (sel.length > 1) {
-                sel.forEach(function(name, i) {
-                    chipHtml += '<span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-[11px] font-bold px-3 py-1">' + name + ' <span class="material-symbols-outlined text-sm cursor-pointer hover:text-red-600" onclick="removeChip(\'' + name.replace(/'/g, "\\'") + '\')">close</span></span>';
-                });
-            }
-            chips.innerHTML = chipHtml;
-
-            // 模拟结果计数变化
-            count.textContent = sel.length === 0 ? '1,248' : (200 + sel.length * 180);
-        }
-
-        function removeChip(name) {
-            allCbs.forEach(function(cb) {
-                if (cb.getAttribute('data-name') === name) {
-                    cb.checked = false;
-                }
-            });
-            enableAll();
-            updateUI();
-        }
-
-        // "应用筛选重置" 按钮
-        document.querySelector('aside button').addEventListener('click', function() {
-            allCbs.forEach(function(cb) { cb.checked = false; });
-            enableAll();
-            updateUI();
-        });
-
-        // 初始状态
-        updateUI();
-
-        // ===== 处理 ?series= URL参数：跳转后筛选指定系列 =====
-        (function() {
-            var m = (location.search || '').match(/[?&]series=([^&]*)/);
-            if (m) {
-                var seriesName = decodeURIComponent(m[1]);
-                // 更新面包屑和标题
-                var bc = document.getElementById('breadcrumbNav');
-                var title = document.getElementById('resultTitle');
-                if (bc) bc.innerHTML = '<span>产品中心</span><span>/</span><span class="text-[#1B365D] font-bold">' + seriesName + ' 系列</span>';
-                if (title) title.textContent = seriesName + ' 系列产品';
-                // 勾选对应类别复选框
-                var checked = false;
-                document.querySelectorAll('.cat-cb').forEach(function(cb) {
-                    // 根据系列名推断所属类别并勾选
-                    var liquidSmd = ['VMM','V3M','V3MC','V4M','VK7','VKO','VKL','VKM','VKG','VKL(R)','VKD'];
-                    var liquidRadial = ['LK','LKF','LKM','LKJ','LKZ','LKG','LKC','LKL','LKL(R)'];
-                    var liquidSnap = ['CW3','CW6','CW6H','CN6','CW3S','CW3H','CN3','SH15','SW3','SN3','SW6','SN6','IDC3','CKD','ES3M','EW3','ES3','EH3','EW6','ES6','EH6','EKD'];
-                    var solidSmd = ['VPX','NPX','VPC','VPW','VPH','VPT','VP1','VPL','VPG','VP4'];
-                    var solidRadial = ['NPC','NPM','NPL','NPH','NPT','NP1','NPG','PKD'];
-                    var hybridSmd = ['VHT','VHU','VHM','VHX','VHR','VGY'];
-                    var hybridRadial = ['VHE','NHX','NGY','NHT','HKD'];
-                    var edlc = ['SDN','SDB','SDL','SDH','SM','SDM','SLM','SDV','SDA','SDS'];
-                    var lic = ['SLA','SLR','SLX','SLD','SLA(H)'];
-                    var stacked = ['MPS','MPD19','MPD10','MPD15','MPX','MPD28','MPU41'];
-                    var film = ['MDP','MDR','MDP(X)','MDP(H)','MAP','MDR(X)','MDR(H)','MDA'];
-                    var tantalum = ['TPB19','TQB19','TQD15','TQD19','TQD28','TQD42','TQW19','TQW42'];
-
-                    var catName = cb.getAttribute('data-name');
-                    if (liquidSmd.concat(liquidRadial, liquidSnap).indexOf(seriesName) >= 0 && catName === '液态铝电解电容器') { cb.checked = true; checked = true; }
-                    if (solidSmd.concat(solidRadial).indexOf(seriesName) >= 0 && catName === '高分子固态铝电解电容器') { cb.checked = true; checked = true; }
-                    if (hybridSmd.concat(hybridRadial).indexOf(seriesName) >= 0 && catName === '高分子混合动力铝电解电容器') { cb.checked = true; checked = true; }
-                    if (edlc.indexOf(seriesName) >= 0 && catName === '双电层超级电容') { cb.checked = true; checked = true; }
-                    if (lic.indexOf(seriesName) >= 0 && catName === '混合型超级电容(锂离子电容)') { cb.checked = true; checked = true; }
-                    if (stacked.indexOf(seriesName) >= 0 && catName === '叠层高分子固态铝电解电容器') { cb.checked = true; checked = true; }
-                    if (film.indexOf(seriesName) >= 0 && catName === '薄膜电容器') { cb.checked = true; checked = true; }
-                    if (tantalum.indexOf(seriesName) >= 0 && catName === '导电高分子钽电解电容器') { cb.checked = true; checked = true; }
-                });
-                if (checked) updateUI();
-            }
-        })();
-
-        // ===== 导航和页脚 =====
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             YMIN.navbar.inject('products');
             YMIN.footer.inject();
         });

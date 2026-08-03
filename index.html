@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>永铭电子 — 电容器解决方案专家</title>
-    <meta name="description" content="永铭电子 — 液态铝电解电容、超级电容、高分子固态电容、MLCC、薄膜电容等全系列电容器产品。覆盖汽车电子、AI服务器、储能、电机驱动、仪器仪表、消费类电子等领域。">
-    <meta name="keywords" content="永铭电子,铝电解电容,超级电容,固态电容,MLCC,薄膜电容,电容器厂家">
+    <meta name="description" content="永铭电子提供液态铝电解、超级电容、高分子固态、固液混合、叠层、薄膜与钽电容器产品，服务汽车电子、AI服务器、储能、电机驱动等领域。">
+    <meta name="keywords" content="永铭电子,铝电解电容,超级电容,固态电容,固液混合电容,叠层电容,薄膜电容,钽电容">
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -32,7 +32,78 @@
         .hover-card:hover .card-arrow { transform: translateX(4px); }
         .card-arrow { transition: transform 0.3s ease; }
         .stat-number { font-family: 'Space Grotesk', sans-serif; }
-        .hero-gradient { background: linear-gradient(135deg, #1B365D 0%, #2a4a7f 50%, #1B365D 100%); }
+        .home-hero {
+            position: relative;
+            min-height: 590px;
+            overflow: hidden;
+            background: #061526;
+        }
+        .home-hero-media {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+        .home-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(5, 20, 37, .62) 0%, rgba(5, 20, 37, .34) 38%, rgba(5, 20, 37, .04) 61%, rgba(5, 20, 37, 0) 100%);
+        }
+        .home-hero-layout {
+            display: flex;
+            align-items: center;
+        }
+        .home-search-panel {
+            box-shadow: 0 18px 50px rgba(0, 0, 0, .22);
+            backdrop-filter: blur(8px);
+        }
+        .home-stat {
+            position: relative;
+            background: #fff;
+            border: 1px solid #dbe3ec;
+            padding: 22px 24px;
+        }
+        .home-stat::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 42px;
+            height: 3px;
+            background: #1B365D;
+        }
+        .home-tool-card {
+            min-height: 176px;
+            border: 1px solid rgba(255,255,255,.18);
+            background: rgba(255,255,255,.06);
+            transition: background .2s ease, transform .2s ease, border-color .2s ease;
+        }
+        .home-tool-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(241,189,129,.75);
+            background: rgba(255,255,255,.11);
+        }
+        .home-news-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 220px;
+            background: #fff;
+            border: 1px solid #dbe3ec;
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+        .home-news-card:hover {
+            transform: translateY(-4px);
+            border-color: #1B365D;
+            box-shadow: 0 16px 34px rgba(15, 35, 58, .10);
+        }
+        .home-news-title {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+        }
         .home-product-card {
             display: flex;
             flex-direction: column;
@@ -64,6 +135,10 @@
         .home-product-empty {
             width: 100%;
             height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7890aa;
         }
         .home-product-title {
             color: #0f2236;
@@ -95,6 +170,9 @@
             background: #123153;
         }
         @media (max-width: 640px) {
+            .home-hero { min-height: auto; }
+            .home-hero-media { object-position: 70% center; opacity: .52; }
+            .home-hero-overlay { background: linear-gradient(90deg, rgba(5,20,37,.95) 0%, rgba(5,20,37,.76) 100%); }
             .home-product-main {
                 grid-template-columns: 42% 58%;
                 min-height: 104px;
@@ -110,39 +188,57 @@
     <header id="ymin-navbar"></header>
 
     <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
-        <!-- Hero 区 -->
-        <section class="hero-gradient text-white">
-            <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
-                <div class="max-w-3xl">
-                    <p class="text-sm uppercase tracking-[0.2em] text-blue-200 mb-4">Shanghai Yongming Electronic Co., Ltd.</p>
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">电容器解决方案专家<br>为全球电子产业赋能</h1>
-                    <p class="text-lg text-blue-100 mb-10 leading-relaxed max-w-2xl">20+年电容器研发与制造经验，产品覆盖液态铝电解、超级电容、高分子固态、MLCC、薄膜电容等全系列。服务汽车电子、AI数据中心、新能源储能、工业驱动等关键领域。</p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="product-center.html" class="bg-white text-primary px-8 py-3 text-sm font-bold hover:bg-blue-50 transition inline-flex items-center gap-2"><span class="material-symbols-outlined text-lg">inventory_2</span> 浏览产品</a>
-                        <a href="application-center.html" class="border-2 border-white/40 text-white px-8 py-3 text-sm font-bold hover:bg-white/10 transition inline-flex items-center gap-2"><span class="material-symbols-outlined text-lg">apps</span> 按应用选型</a>
+        <!-- 首屏 Banner：按永铭8大产品线典型外观设计的产品家族主视觉 -->
+        <section class="home-hero text-white" aria-labelledby="homeHeroTitle">
+            <img class="home-hero-media" src="assets/home/banner-hero-ymin-products-v2.png" alt="永铭液态、超级电容、固态、混合、叠层、薄膜与钽电容器产品家族主视觉">
+            <div class="home-hero-overlay" aria-hidden="true"></div>
+            <div class="home-hero-layout relative z-10 max-w-7xl mx-auto px-6 py-14 md:py-20 min-h-[590px]">
+                <div class="w-full max-w-2xl">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-9 h-px bg-[#f1bd81]"></span>
+                        <p class="text-[11px] uppercase tracking-[0.22em] text-blue-100">YMIN Enterprise Spirit</p>
+                    </div>
+                    <h1 id="homeHeroTitle" class="text-4xl md:text-6xl font-bold leading-[1.12] tracking-tight">电容应用，<br><span class="text-[#f1bd81]">有困难找永铭</span></h1>
+                    <p class="mt-6 text-base md:text-lg text-blue-100 leading-8 max-w-xl">20+年行业经验，覆盖8大产品线与9大应用领域，支持从参数选型、方案匹配到设计验证。</p>
+
+                    <form class="home-search-panel mt-8 flex flex-col sm:flex-row bg-white/95 p-2 max-w-xl" role="search" onsubmit="var v=document.getElementById('homePnSearch').value.trim();if(v){window.location='product-center.html?search='+encodeURIComponent(v);}else{window.location='product-center.html';}return false;">
+                        <label class="sr-only" for="homePnSearch">产品料号搜索</label>
+                        <div class="relative flex-1">
+                            <span class="material-symbols-outlined absolute left-3 top-3 text-slate-400">search</span>
+                            <input class="w-full border-0 bg-transparent pl-11 pr-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:ring-0" placeholder="输入完整或部分产品料号" type="search" name="q" id="homePnSearch" autocomplete="off">
+                        </div>
+                        <button type="submit" class="bg-primary text-white px-6 py-3 text-sm font-bold hover:bg-[#102a4b] transition inline-flex items-center justify-center gap-2">查询产品 <span class="material-symbols-outlined text-base">arrow_forward</span></button>
+                    </form>
+
+                    <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+                        <a href="product-center.html" class="text-white font-bold hover:text-[#f1bd81] transition inline-flex items-center gap-2"><span class="material-symbols-outlined text-lg">tune</span>按参数选型</a>
+                        <a href="product-series.html" class="text-white font-bold hover:text-[#f1bd81] transition inline-flex items-center gap-2"><span class="material-symbols-outlined text-lg">account_tree</span>查看产品体系图</a>
+                        <a href="application-center.html" class="text-white font-bold hover:text-[#f1bd81] transition inline-flex items-center gap-2"><span class="material-symbols-outlined text-lg">apps</span>按应用选型</a>
                     </div>
                 </div>
+            </div>
         </section>
 
-        <!-- 核心数据 -->
-        <section class="max-w-7xl mx-auto px-6 -mt-10 relative z-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-white border border-slate-200 p-6 text-center">
-                    <p class="stat-number text-3xl font-bold text-primary">20+</p>
-                    <p class="text-xs text-slate-500 mt-1">年行业经验</p>
+        <!-- 可核对的首页数据 -->
+        <section class="max-w-7xl mx-auto px-6 -mt-8 relative z-20" aria-label="永铭业务概览">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="home-stat">
+                    <p class="stat-number text-3xl md:text-4xl font-bold text-primary">20+</p>
+                    <p class="text-xs text-slate-500 mt-2">年行业经验</p>
                 </div>
-                <div class="bg-white border border-slate-200 p-6 text-center">
-                    <p class="stat-number text-3xl font-bold text-primary">8</p>
-                    <p class="text-xs text-slate-500 mt-1">大产品线</p>
+                <div class="home-stat">
+                    <p class="stat-number text-3xl md:text-4xl font-bold text-primary">8</p>
+                    <p class="text-xs text-slate-500 mt-2">大电容器产品线</p>
                 </div>
-                <div class="bg-white border border-slate-200 p-6 text-center">
-                    <p class="stat-number text-3xl font-bold text-primary">200+</p>
-                    <p class="text-xs text-slate-500 mt-1">产品系列</p>
+                <div class="home-stat">
+                    <p class="stat-number text-3xl md:text-4xl font-bold text-primary">9</p>
+                    <p class="text-xs text-slate-500 mt-2">大应用领域入口</p>
                 </div>
-                <div class="bg-white border border-slate-200 p-6 text-center">
-                    <p class="stat-number text-3xl font-bold text-primary">6</p>
-                    <p class="text-xs text-slate-500 mt-1">核心应用领域</p>
+                <div class="home-stat">
+                    <p class="stat-number text-3xl md:text-4xl font-bold text-primary">5</p>
+                    <p class="text-xs text-slate-500 mt-2">项设计工具与数据资源</p>
                 </div>
+            </div>
         </section>
 
         <!-- 产品线（Rubycon风格：8产品线卡片 + 搜索卡片） -->
@@ -228,137 +324,71 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-5 bg-primary text-white p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-4">
-                    <span class="material-symbols-outlined text-4xl">search</span>
-                    <div>
-                        <h3 class="text-xl font-bold">按项目编号搜索</h3>
-                        <p class="text-blue-200 text-sm">输入产品料号快速查找规格参数与库存</p>
-                    </div>
-                </div>
-                <form class="flex gap-3 w-full md:w-auto" onsubmit="var v=document.getElementById('homePnSearch').value.trim();if(v){window.location='product-center.html?search='+encodeURIComponent(v);}return false;">
-                    <input class="flex-1 md:w-72 bg-white/10 border border-white/30 text-white placeholder-blue-200 px-4 py-3 text-sm outline-none no-radius" placeholder="例: VHTC0771H470MV" type="text" id="homePnSearch">
-                    <button type="submit" class="bg-[#f1bd81] text-[#2b1700] px-6 py-3 text-sm font-bold uppercase tracking-wider hover:brightness-110 transition-all no-radius flex items-center gap-2 flex-shrink-0 cursor-pointer">跳转产品搜索 <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
-                </form>
-            </div>
         </section>
 
         <!-- 应用领域 -->
-        <section class="max-w-7xl mx-auto px-6 pb-16">
-            <div class="flex items-center justify-between mb-8">
+        <section class="max-w-7xl mx-auto px-6 pb-20" aria-labelledby="applicationHeading">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                 <div>
-                    <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1">应用中心</p>
-                    <h2 class="text-2xl font-bold text-primary">按应用领域选型</h2>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-[0.18em] mb-2">Application Fields</p>
+                    <h2 id="applicationHeading" class="text-3xl font-bold text-primary">按应用领域快速进入</h2>
+                    <p class="text-sm text-slate-500 mt-3">从应用整机与关键电路出发，查看对应的电容器解决方案。</p>
                 </div>
-                <a href="application-center.html" class="text-sm text-primary font-bold hover:underline flex items-center gap-1">查看全部 <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                <a href="application-center.html" class="text-sm text-primary font-bold hover:underline inline-flex items-center gap-1">查看应用中心 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <a href="application-automotive.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">directions_car</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">汽车电子</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">主驱/电驱电控 · 充电系统 · 安全部件 · ADAS · 热管理 · 智能座舱 · 车灯 · 充电桩</p>
-                    <span class="text-[10px] bg-primary/10 text-primary px-2 py-1 font-medium">AEC-Q200 · 135℃ · 低ESR</span>
-                </a>
-                <a href="application-ai-server.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">cloud</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">AI服务器与数据中心</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">GPU加速卡 · CPU核心供电 · PDN总线 · 400V/800V DC-Link · 大电流超低ESR</p>
-                    <span class="text-[10px] bg-primary/10 text-primary px-2 py-1 font-medium">超低ESR · 大电流 · 小型化</span>
-                </a>
-                <a href="application-energy-storage.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">solar_power</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">光储充</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">光伏逆变器 · 储能变流器(PCS) · UPS · 电池管理系统(BMS) · 高压大容量DC-Link</p>
-                    <span class="text-[10px] bg-primary/10 text-primary px-2 py-1 font-medium">DC-Link · 高压 · 长寿命</span>
-                </a>
-                <a href="application-motor-drive.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">precision_manufacturing</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">新型电机驱动</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">智慧出行 · 机器人 · 无人机 · 电动工具 · 汽车热管理 · 智能家电</p>
-                    <span class="text-[10px] bg-primary/10 text-primary px-2 py-1 font-medium">DC-Link · 高纹波 · 大容量</span>
-                </a>
-                <a href="application-instrument.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">bolt</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">仪器仪表</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">智能电表 · 燃气表 · 水表 · 载波模块 · 集中器 · 断路器 · 工业自动化</p>
-                    <span class="text-[10px] bg-primary/10 text-primary px-2 py-1 font-medium">低漏电流 · 高精度 · 长寿命</span>
-                </a>
-                <a href="application-consumer.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">devices</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">消费类电子</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">PD快充 · 智能照明 · 电子笔 · 数码3C · 安防 · 小型化薄型化方案</p>
-                    
-                <a href="application-power.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">power</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">电源</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">开关电源 · UPS · PD快充 · 工业电源 · 高效率低ESR方案</p>
-                    <span class="text-[10px] bg-primary/10 text-primary px-2 py-1 font-medium">高效率 · 低ESR · 高纹波</span>
-                </a>
-                <a href="application-robotics.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">smart_toy</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">机器人</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">伺服驱动 · 关节电机 · 控制器 · 传感器 · 小型化高可靠</p>
-                    <span class="text-[10px] bg-primary/10 text-primary px-2 py-1 font-medium">小型化 · 高可靠 · 低ESR</span>
-                </a>
-                <a href="application-drone.html" class="bg-white border-2 border-slate-200 p-7 hover-card group cursor-pointer">
-                    <div class="flex items-start justify-between mb-3">
-                        <span class="material-symbols-outlined text-3xl text-primary">flight</span>
-                        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow">arrow_forward</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-2">无人机</h3>
-                    <p class="text-xs text-slate-500 mb-3 leading-relaxed">飞控 · 电调ESC · 图传 · BMS · 轻量化高能量密度</p>
-                    <span class="text-[10px] bg-primary/10 text-primary px-2 py-1 font-medium">轻量化 · 高能量密度 · 宽温</span>
-                </a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="application-automotive.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">directions_car</span><h3 class="text-lg font-bold text-primary mt-4">汽车电子</h3><p class="text-xs text-slate-500 mt-2">电驱电控 · 热管理 · 智能座舱 · 充电系统</p></a>
+                <a href="application-ai-server.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">dns</span><h3 class="text-lg font-bold text-primary mt-4">AI服务器与数据中心</h3><p class="text-xs text-slate-500 mt-2">CPU/GPU供电 · VRM · 备份电源 · DC-Link</p></a>
+                <a href="application-power.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">power</span><h3 class="text-lg font-bold text-primary mt-4">电源</h3><p class="text-xs text-slate-500 mt-2">开关电源 · UPS · PD快充 · 工业电源</p></a>
+                <a href="application-motor-drive.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">precision_manufacturing</span><h3 class="text-lg font-bold text-primary mt-4">新型电机驱动</h3><p class="text-xs text-slate-500 mt-2">伺服驱动 · 电调 · 变频器 · 热管理</p></a>
+                <a href="application-robotics.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">smart_toy</span><h3 class="text-lg font-bold text-primary mt-4">机器人</h3><p class="text-xs text-slate-500 mt-2">关节电机 · 控制器 · 伺服驱动 · 传感器</p></a>
+                <a href="application-drone.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">flight</span><h3 class="text-lg font-bold text-primary mt-4">无人机</h3><p class="text-xs text-slate-500 mt-2">飞控 · 电调ESC · 图传 · BMS</p></a>
+                <a href="application-energy-storage.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">solar_power</span><h3 class="text-lg font-bold text-primary mt-4">储能</h3><p class="text-xs text-slate-500 mt-2">光伏逆变器 · PCS · BMS · 高压DC-Link</p></a>
+                <a href="application-instrument.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">speed</span><h3 class="text-lg font-bold text-primary mt-4">仪器仪表</h3><p class="text-xs text-slate-500 mt-2">智能电表 · 气表 · 水表 · 工业自动化</p></a>
+                <a href="application-consumer.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">devices</span><h3 class="text-lg font-bold text-primary mt-4">消费类电子</h3><p class="text-xs text-slate-500 mt-2">快充 · 智能照明 · 电子笔 · 安防设备</p></a>
             </div>
         </section>
 
-        <!-- 设计工具入口 -->
-        <section class="bg-white border-y border-slate-200">
-            <div class="max-w-7xl mx-auto px-6 py-12">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="flex items-center gap-4">
-                        <span class="material-symbols-outlined text-4xl text-primary">build</span>
-                        <div>
-                            <h2 class="text-xl font-bold text-primary">设计工具与资源</h2>
-                            <p class="text-sm text-slate-500">寿命推算 · SPICE模型 · 3D-CAD · S参数 — 在线工具助力快速设计验证</p>
-                        </div>
+        <!-- 设计工具与资源 -->
+        <section class="bg-[#102a4b] text-white border-y border-[#24476e]" aria-labelledby="toolsHeading">
+            <div class="max-w-7xl mx-auto px-6 py-16">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                    <div>
+                        <p class="text-[10px] text-blue-200 uppercase tracking-[0.18em] mb-2">Engineering Resources</p>
+                        <h2 id="toolsHeading" class="text-3xl font-bold">设计工具与数据资源</h2>
+                        <p class="text-sm text-blue-100 mt-3">连接选型、结构设计、寿命评估与仿真验证的工程入口。</p>
                     </div>
-                    <div class="flex gap-3">
-                        <a href="design-life-calc.html" class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition">寿命推算</a>
-                        <a href="design-spice.html" class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition">SPICE 模型</a>
-                        <a href="design-3d-cad.html" class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition">3D-CAD</a>
-                    </div>
+                    <a href="design-tools.html" class="text-sm text-[#f1bd81] font-bold hover:underline inline-flex items-center gap-1">查看设计工具 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
                 </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                    <a href="design-3d-cad.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">view_in_ar</span><h3 class="font-bold text-lg mt-5">3D-CAD</h3><p class="text-xs text-blue-100 mt-2 leading-5">查询与下载产品结构模型</p></a>
+                    <a href="design-life-calc.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">calculate</span><h3 class="font-bold text-lg mt-5">寿命计算器</h3><p class="text-xs text-blue-100 mt-2 leading-5">按产品线与工作条件进行寿命推算</p></a>
+                    <a href="design-spice.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">deployed_code</span><h3 class="font-bold text-lg mt-5">SPICE 模型</h3><p class="text-xs text-blue-100 mt-2 leading-5">查找产品仿真模型与资源</p></a>
+                    <a href="design-sparams.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">ssid_chart</span><h3 class="font-bold text-lg mt-5">S参数</h3><p class="text-xs text-blue-100 mt-2 leading-5">查询高频特性与网络参数数据</p></a>
+                    <a href="design-reliability.html" class="home-tool-card p-6"><span class="material-symbols-outlined text-3xl text-[#f1bd81]">verified</span><h3 class="font-bold text-lg mt-5">可靠性数据</h3><p class="text-xs text-blue-100 mt-2 leading-5">查看产品试验项目与可靠性数据</p></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最新动态：从新闻数据中自动取最新内容 -->
+        <section class="max-w-7xl mx-auto px-6 py-20" aria-labelledby="newsHeading">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-[0.18em] mb-2">News & Insights</p>
+                    <h2 id="newsHeading" class="text-3xl font-bold text-primary">最新动态与技术文章</h2>
+                    <p class="text-sm text-slate-500 mt-3">了解新产品、应用方案与技术观点。</p>
+                </div>
+                <a href="support-news.html" class="text-sm text-primary font-bold hover:underline inline-flex items-center gap-1">进入新闻资讯 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+            </div>
+            <div id="homeNewsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4" aria-live="polite">
+                <div class="home-news-card p-6 text-sm text-slate-400">正在加载最新内容…</div>
+            </div>
         </section>
 
         <footer id="ymin-footer"></footer>
     </main>
 
-    <script src="components/navbar.js"></script>
+    <script src="components/navbar.js?v=20260803"></script>
     <script src="components/footer.js"></script>
     <script>
         function renderHomeProductCards() {
@@ -366,22 +396,22 @@
             if (!grid) return;
 
             var cards = [
-                { title: '液态铝电解电容器', line: '液态铝电解电容器', image: '首页产品图片/4.png' },
-                { title: '双电层超级电容器', line: '双电层超级电容', image: '首页产品图片/5.png' },
-                { title: '高分子固态铝电解电容器', line: '高分子固态铝电解电容器', image: '首页产品图片/1.png' },
-                { title: '混合型超级电容（锂离子电容）', line: '混合型超级电容(锂离子电容)', image: '' },
-                { title: '高分子混合动力铝电解电容器', line: '高分子混合动力铝电解电容器', image: '' },
-                { title: '叠层高分子固态铝电解电容器', line: '叠层高分子固态铝电解电容器', image: '首页产品图片/3.png' },
-                { title: '薄膜电容器', line: '薄膜电容器', image: '首页产品图片/6.png' },
-                { title: '导电高分子钽电解电容器', line: '导电高分子钽电解电容器', image: '首页产品图片/2.png' }
+                { title: '液态铝电解电容器', line: '液态铝电解电容器', category: '液态铝电解电容器', image: '首页产品图片/4.png' },
+                { title: '双电层超级电容器', line: '双电层超级电容', category: '双电层超级电容', image: '首页产品图片/5.png' },
+                { title: '高分子固态铝电解电容器', line: '高分子固态铝电解电容器', category: '高分子固态铝电解电容器', image: '首页产品图片/1.png' },
+                { title: '混合型超级电容（锂离子电容）', line: '混合型超级电容(锂离子电容)', category: '混合型超级电容（锂离子电容）', image: '' },
+                { title: '高分子混合动力铝电解电容器', line: '高分子混合动力铝电解电容器', category: '高分子混合动力铝电解电容器', image: '' },
+                { title: '叠层高分子固态铝电解电容器', line: '叠层高分子固态铝电解电容器', category: '叠层高分子固态铝电解电容器', image: '首页产品图片/3.png' },
+                { title: '薄膜电容器', line: '薄膜电容器', category: '薄膜电容器', image: '首页产品图片/6.png' },
+                { title: '导电高分子钽电解电容器', line: '导电高分子钽电解电容器', category: '导电高分子钽电解电容器', image: '首页产品图片/2.png' }
             ];
 
             grid.innerHTML = cards.map(function(card) {
                 var seriesUrl = 'product-series.html?line=' + encodeURIComponent(card.line);
-                var productUrl = 'product-center.html?line=' + encodeURIComponent(card.line);
+                var productUrl = 'product-center.html?category=' + encodeURIComponent(card.category);
                 var imageHtml = card.image
                     ? '<img class="home-product-image" src="' + card.image + '" alt="' + card.title + '">'
-                    : '<div class="home-product-empty" aria-hidden="true"></div>';
+                    : '<div class="home-product-empty" aria-hidden="true"><span class="material-symbols-outlined text-5xl">battery_charging_full</span></div>';
 
                 return '' +
                     '<article class="home-product-card">' +
@@ -397,8 +427,50 @@
             }).join('');
         }
 
+        function escapeHomeHtml(value) {
+            return String(value == null ? '' : value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function renderHomeNews() {
+            var grid = document.getElementById('homeNewsGrid');
+            if (!grid) return;
+
+            fetch('data/support-articles.json', { cache: 'no-store' })
+                .then(function(response) {
+                    if (!response.ok) throw new Error('新闻数据加载失败');
+                    return response.json();
+                })
+                .then(function(payload) {
+                    var items = Array.isArray(payload) ? payload : (payload.items || []);
+                    var latest = items.slice().sort(function(left, right) {
+                        return String(right.date || '').localeCompare(String(left.date || ''));
+                    }).slice(0, 4);
+
+                    grid.innerHTML = latest.map(function(item) {
+                        var date = String(item.date || '').replace(/-/g, '.');
+                        return '<a class="home-news-card p-6" href="support-news-detail.html?id=' + encodeURIComponent(item.id || '') + '">' +
+                            '<div class="flex items-center justify-between gap-3 text-[10px] uppercase tracking-wider">' +
+                                '<span class="text-primary font-bold">' + escapeHomeHtml(item.type || '新闻资讯') + '</span>' +
+                                '<time class="text-slate-400" datetime="' + escapeHomeHtml(item.date || '') + '">' + escapeHomeHtml(date) + '</time>' +
+                            '</div>' +
+                            '<h3 class="home-news-title mt-5 text-base leading-7 font-bold text-slate-800">' + escapeHomeHtml(item.title || '查看最新内容') + '</h3>' +
+                            '<span class="mt-auto pt-6 text-xs text-primary font-bold inline-flex items-center gap-1">阅读详情 <span class="material-symbols-outlined text-sm">arrow_forward</span></span>' +
+                        '</a>';
+                    }).join('');
+                })
+                .catch(function() {
+                    grid.innerHTML = '<div class="home-news-card p-6"><h3 class="font-bold text-primary">最新动态</h3><p class="text-sm text-slate-500 mt-3">新闻数据暂未加载，可前往新闻资讯页查看。</p><a href="support-news.html" class="mt-auto pt-6 text-xs text-primary font-bold">进入新闻资讯 →</a></div>';
+                });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             renderHomeProductCards();
+            renderHomeNews();
             YMIN.navbar.inject('home');
             YMIN.footer.inject();
         });

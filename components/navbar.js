@@ -57,17 +57,9 @@ YMIN.navbar = (function () {
         // 导航菜单
         html += '<nav class="hidden md:flex gap-8 h-full">';
 
-        // 首页
+        // 首页：直接返回首页，不设重复的页内模块下拉菜单
         html += '<div class="group h-full flex items-center relative">';
-        html += navLink('index.html', '首页', activePage === 'home', true);
-        html += dropdownMenu([
-            { href: 'index.html', label: '动态轮播' },
-            { href: 'product-center.html', label: '搜索功能' },
-            { href: 'product-series.html', label: '产品矩阵' },
-            { href: 'design-tools.html', label: '设计工具' },
-            { href: 'application-center.html', label: '应用指南' },
-            { href: 'support-news.html', label: '新闻中心' }
-        ]);
+        html += navLink('index.html', '首页', activePage === 'home', false);
         html += '</div>';
 
         // 产品中心

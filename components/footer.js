@@ -19,10 +19,10 @@ YMIN.footer = (function () {
         html += '<li><a href="index.html" class="hover:text-[#1B365D]">首页</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">产品中心</a></li>';
         html += '<li><a href="application-center.html" class="hover:text-[#1B365D]">应用中心</a></li>';
-        html += '<li><a href="#" class="hover:text-[#1B365D]">设计工具</a></li>';
-        html += '<li><a href="#" class="hover:text-[#1B365D]">服务支持</a></li>';
-        html += '<li><a href="#" class="hover:text-[#1B365D]">关于永铭</a></li>';
-        html += '<li><a href="#" class="hover:text-[#1B365D]">新闻中心</a></li>';
+        html += '<li><a href="design-tools.html" class="hover:text-[#1B365D]">设计工具</a></li>';
+        html += '<li><a href="support.html" class="hover:text-[#1B365D]">服务支持</a></li>';
+        html += '<li><a href="about.html" class="hover:text-[#1B365D]">关于永铭</a></li>';
+        html += '<li><a href="support-news.html" class="hover:text-[#1B365D]">新闻中心</a></li>';
         html += '</ul></div>';
 
         // 产品中心
@@ -33,7 +33,6 @@ YMIN.footer = (function () {
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">高分子固态铝电解电容器</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">混合型超级电容(锂离子电容)</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">高分子混合动力铝电解电容器</a></li>';
-        html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">多层陶瓷片式电容器</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">叠层高分子固态铝电解电容器</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">薄膜电容器</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">导电高分子钽电解电容器</a></li>';
@@ -42,9 +41,12 @@ YMIN.footer = (function () {
         // 关于我们
         html += '<div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6 tracking-widest">关于我们</h4>';
         html += '<ul class="space-y-3 text-xs uppercase tracking-wider text-slate-500">';
-        html += '<li><a href="#" class="hover:text-[#1B365D]">公司介绍</a></li>';
-        html += '<li><a href="#" class="hover:text-[#1B365D]">加入我们</a></li>';
-        html += '<li><a href="#" class="hover:text-[#1B365D]">联系方式</a></li>';
+        html += '<li><a href="about-company.html" class="hover:text-[#1B365D]">公司简介</a></li>';
+        html += '<li><a href="about-honors.html" class="hover:text-[#1B365D]">企业荣誉</a></li>';
+        html += '<li><a href="about-distributors.html" class="hover:text-[#1B365D]">代理商网络</a></li>';
+        html += '<li><a href="about-contact.html" class="hover:text-[#1B365D]">联系我们</a></li>';
+        html += '<li><a href="about-careers.html" class="hover:text-[#1B365D]">加入我们</a></li>';
+        html += '<li><a href="about-procurement.html" class="hover:text-[#1B365D]">原材料采购</a></li>';
         html += '</ul></div>';
 
         // 联系支持
