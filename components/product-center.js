@@ -2,6 +2,7 @@
     'use strict';
 
     var catalog = window.YMIN_PRODUCT_CATALOG || { meta: {}, products: [] };
+    var fieldApi = window.YMIN && YMIN.productFields ? YMIN.productFields : null;
     var supportedCategories = [
         '液态铝电解电容器',
         '高分子固态铝电解电容器',
@@ -15,6 +16,7 @@
     var products = (Array.isArray(catalog.products) ? catalog.products : [])
         .filter(function (product) { return product && supportedCategories.indexOf(product.category) >= 0; })
         .map(function (product, index) {
+            if (fieldApi && fieldApi.packageValue) product.package = fieldApi.packageValue(product);
             product.__compareKey = String(product.itemNo || 'product') + '::' + index;
             return product;
         });
@@ -43,13 +45,11 @@
     var initialStatus = initialParams.get('status') || '';
     var initialKeyword = initialParams.get('search') || initialParams.get('q') || '';
     var initialSeriesConsumed = false;
-    var groupNames = { al: '铝电解电容器', sc: '超级电容器', st: '叠层与钽电容器', fl: '薄膜电容器' };
     var dimensionDefinitions = [
         { key: 'diameter', label: '直径 D' },
-        { key: 'length', label: '长度 L' },
-        { key: 'width', label: '宽度 W' },
-        { key: 'height', label: '高度 H' },
-        { key: 'thickness', label: '厚度 T' }
+        { key: 'length', label: '高度 L' },
+        { key: 'width', label: '宽 W' },
+        { key: 'height', label: '高 H' }
     ];
     var categoryDimensions = {
         '液态铝电解电容器': ['diameter', 'length'],
@@ -180,12 +180,31 @@
             return true;
         });
     }
+    function dimensionValue(product, key) {
+        if (fieldApi && fieldApi.dimensionValue) return fieldApi.dimensionValue(product, key);
+        return product[key];
+    }
+    function dimensionLabel(key) {
+        if (fieldApi && fieldApi.listDimensionLabel) return fieldApi.listDimensionLabel(selectedCategories(), draftPackage, key);
+        var definition = dimensionDefinitions.find(function (item) { return item.key === key; });
+        return definition ? definition.label : key;
+    }
+    function temperatureBounds(product) {
+        if (fieldApi && fieldApi.temperatureRange) return fieldApi.temperatureRange(product, {});
+        return { min: numberFrom(product.temperatureMin), max: numberFrom(product.temperatureMax) };
+    }
     function scopeUnits() {
         var categories = selectedCategories();
+        var esrUnits = unique(productScope(true).map(function (product) {
+            return fieldApi && fieldApi.esrUnit ? fieldApi.esrUnit(product) : (isLiquidCategory(product.category) ? 'Ω' : 'mΩ');
+        }));
+        var esrMixed = esrUnits.length > 1;
+        var esrUnit = esrMixed ? 'mΩ' : (esrUnits[0] || 'mΩ');
         return {
             capacity: categories.length && categories.every(isSuperCategory) ? 'F' : 'µF',
             ripple: categories.length && categories.every(isFilmCategory) ? 'Arms' : 'mArms',
-            esr: categories.length && categories.every(isLiquidCategory) ? 'Ω' : 'mΩ'
+            esr: esrUnit,
+            esrMixed: esrMixed
         };
     }
 
@@ -196,7 +215,6 @@
             checkbox.disabled = disabled;
             checkbox.closest('.category-option').classList.toggle('is-disabled', disabled);
         });
-        byId('categoryMode').textContent = group ? groupNames[group] + '内可多选' : '组内可多选';
     }
 
     function updateCategoryCounts() {
@@ -366,14 +384,13 @@
         var keys = activeDimensionKeys();
         var holder = byId('dimensionRows');
         byId('dimensionHint').textContent = selectedCategories().length
-            ? '当前显示：' + keys.map(function (key) { return dimensionDefinitions.find(function (item) { return item.key === key; }).label; }).join('、')
+            ? '当前显示：' + keys.map(dimensionLabel).join('、')
             : '请先选择电容器类别，尺寸字段将按事业部确认规则显示。';
         holder.innerHTML = keys.map(function (key) {
-            var definition = dimensionDefinitions.find(function (item) { return item.key === key; });
             var minimum = values[key + 'Min'] == null ? '' : values[key + 'Min'];
             var maximum = values[key + 'Max'] == null ? '' : values[key + 'Max'];
             return '<div class="dimension-card" data-dimension="' + key + '">' +
-                '<div class="mb-2 flex items-center justify-between"><span class="text-[11px] font-bold text-slate-600">' + definition.label + '</span><span class="text-[10px] text-slate-400">mm</span></div>' +
+                '<div class="mb-2 flex items-center justify-between"><span class="text-[11px] font-bold text-slate-600">' + esc(dimensionLabel(key)) + '</span><span class="text-[10px] text-slate-400">mm</span></div>' +
                 '<div class="range-values"><input id="' + key + 'Min" class="filter-input" type="number" min="0" step="any" value="' + esc(minimum) + '" placeholder="最小"><span class="text-center text-slate-400">–</span><input id="' + key + 'Max" class="filter-input" type="number" min="0" step="any" value="' + esc(maximum) + '" placeholder="最大"><span class="text-[10px] text-slate-500">mm</span></div>' +
             '</div>';
         }).join('');
@@ -478,8 +495,7 @@
             ['esrMin', 'esrMax', 'ESR / 阻抗']
         ];
         activeDimensionKeys().forEach(function (key) {
-            var definition = dimensionDefinitions.find(function (item) { return item.key === key; });
-            pairs.push([key + 'Min', key + 'Max', definition.label]);
+            pairs.push([key + 'Min', key + 'Max', dimensionLabel(key)]);
         });
         pairs.some(function (pair) {
             var min = numberValue(pair[0]);
@@ -573,18 +589,19 @@
             if (applied.statuses.length && applied.statuses.indexOf(normalizeStatus(product.status)) < 0) return false;
             if (!matchesNumber(product.voltageNumber, applied.voltageMin, applied.voltageMax)) return false;
             if (!matchesNumber(product.capacitanceUf, applied.capacityMin, applied.capacityMax)) return false;
-            if (applied.temperatureMin != null && (numberFrom(product.temperatureMin) == null || numberFrom(product.temperatureMin) > applied.temperatureMin)) return false;
-            if (applied.temperatureMax != null && (numberFrom(product.temperatureMax) == null || numberFrom(product.temperatureMax) < applied.temperatureMax)) return false;
+            var temperature = temperatureBounds(product);
+            if (applied.temperatureMin != null && (temperature.min == null || temperature.min > applied.temperatureMin)) return false;
+            if (applied.temperatureMax != null && (temperature.max == null || temperature.max < applied.temperatureMax)) return false;
             if (!matchesNumber(product.lifeNumber, applied.lifeMin, applied.lifeMax)) return false;
             if (!matchesNumber(product.rippleMilliAmp, applied.rippleMin, applied.rippleMax)) return false;
             if (!matchesNumber(product.esrMilliOhm, applied.esrMin, applied.esrMax)) return false;
             var dimensionMismatch = Object.keys(applied.dimensions).some(function (key) {
                 var range = applied.dimensions[key];
-                return !matchesNumber(product[key], range.min, range.max);
+                return !matchesNumber(dimensionValue(product, key), range.min, range.max);
             });
             if (dimensionMismatch) return false;
-            if (applied.aec && String(product.certification || '').toUpperCase().indexOf('AEC') < 0) return false;
-            if (applied.rohs && String(product.rohs || '').toUpperCase().indexOf('ROHS') < 0) return false;
+            if (applied.aec && !productAec(product)) return false;
+            if (applied.rohs && !String(product.rohs || '').trim()) return false;
             if (applied.cad && !(numberFrom(product.cadCandidateCount) > 0)) return false;
             return true;
         });
@@ -629,6 +646,9 @@
         document.querySelectorAll('[data-result-dimension]').forEach(function (cell) {
             cell.classList.toggle('hidden', visible.indexOf(cell.dataset.resultDimension) < 0);
         });
+        document.querySelectorAll('[data-dimension-label]').forEach(function (label) {
+            label.textContent = dimensionLabel(label.dataset.dimensionLabel);
+        });
     }
 
     function productCapacity(product) {
@@ -645,7 +665,9 @@
     }
     function productEsr(product) {
         var value = numberFrom(product.esrMilliOhm);
-        if (isLiquidCategory(product.category) && value != null) return formatNumber(value / 1000) + ' Ω';
+        var units = applied && applied.units ? applied.units : scopeUnits();
+        var unit = units.esrMixed && fieldApi && fieldApi.esrUnit ? fieldApi.esrUnit(product) : units.esr;
+        if (unit === 'Ω' && value != null) return formatNumber(value / 1000) + ' Ω';
         if (value != null) return formatNumber(value) + ' mΩ';
         return empty(product.esr);
     }
@@ -653,12 +675,16 @@
         var value = numberFrom(product.voltageNumber);
         return value != null ? formatNumber(value) + ' V' : empty(product.voltage);
     }
+    function productAec(product) {
+        return fieldApi && fieldApi.aecValue ? fieldApi.aecValue(product, {}) : product.certification;
+    }
     function productLife(product) {
         var value = numberFrom(product.lifeNumber);
         return value != null ? formatNumber(value, 0) : empty(product.life);
     }
     function productTemperature(product) {
-        if (numberFrom(product.temperatureMin) != null && numberFrom(product.temperatureMax) != null) return esc(product.temperatureMin) + '～' + esc(product.temperatureMax);
+        var range = temperatureBounds(product);
+        if (range.min != null && range.max != null) return esc(formatNumber(range.min)) + '～' + esc(formatNumber(range.max));
         return empty(product.temperature);
     }
     function productImage(product, large) {
@@ -686,14 +712,14 @@
             var emptyText = replacementMode
                 ? '已找到替代关系，但对应永铭料号的产品详情资料尚未同步。'
                 : '没有找到符合当前条件的产品，请调整筛选条件。';
-            holder.innerHTML = '<tr><td class="p-12 text-center text-slate-400" colspan="22"><span class="material-symbols-outlined mb-2 block text-4xl">search_off</span>' + emptyText + '</td></tr>';
+            holder.innerHTML = '<tr><td class="p-12 text-center text-slate-400" colspan="21"><span class="material-symbols-outlined mb-2 block text-4xl">search_off</span>' + emptyText + '</td></tr>';
             return;
         }
         holder.innerHTML = pageProducts.map(function (product, index) {
             var checked = selectedCompare.indexOf(product.__compareKey) >= 0;
             var pdfUrl = externalAsset(product.datasheet);
             var pdf = pdfUrl ? '<a class="text-red-600 hover:text-red-700" href="' + esc(pdfUrl) + '" target="_blank" rel="noopener" title="查看系列规格书"><span class="material-symbols-outlined text-xl">picture_as_pdf</span></a>' : '—';
-            var certification = [product.certification, product.rohs].filter(Boolean).join(' / ');
+            var certification = productAec(product);
             var status = normalizeStatus(product.status);
             var rowClass = checked ? 'compare-highlight' : (index % 2 ? 'bg-slate-50/35' : '');
             return '<tr class="' + rowClass + ' hover:bg-slate-50" data-product-row="' + esc(product.__compareKey) + '">' +
@@ -707,11 +733,10 @@
                 '<td class="px-2.5 py-3">' + productTemperature(product) + '</td>' +
                 '<td class="px-2.5 py-3 font-semibold">' + productVoltage(product) + '</td>' +
                 '<td class="px-2.5 py-3 font-semibold">' + productCapacity(product) + '</td>' +
-                '<td class="px-2.5 py-3" data-result-dimension="diameter">' + empty(product.diameter) + '</td>' +
-                '<td class="px-2.5 py-3" data-result-dimension="length">' + empty(product.length) + '</td>' +
-                '<td class="px-2.5 py-3" data-result-dimension="width">' + empty(product.width) + '</td>' +
-                '<td class="px-2.5 py-3" data-result-dimension="height">' + empty(product.height) + '</td>' +
-                '<td class="px-2.5 py-3" data-result-dimension="thickness">' + empty(product.thickness) + '</td>' +
+                '<td class="px-2.5 py-3" data-result-dimension="diameter">' + empty(dimensionValue(product, 'diameter')) + '</td>' +
+                '<td class="px-2.5 py-3" data-result-dimension="length">' + empty(dimensionValue(product, 'length')) + '</td>' +
+                '<td class="px-2.5 py-3" data-result-dimension="width">' + empty(dimensionValue(product, 'width')) + '</td>' +
+                '<td class="px-2.5 py-3" data-result-dimension="height">' + empty(dimensionValue(product, 'height')) + '</td>' +
                 '<td class="px-2.5 py-3">' + empty(product.leakage) + '</td>' +
                 '<td class="min-w-28 px-2.5 py-3">' + productRipple(product) + '</td>' +
                 '<td class="min-w-28 px-2.5 py-3">' + productEsr(product) + '</td>' +
@@ -836,7 +861,7 @@
         byId('resultCount').textContent = (replacementMode ? unique(replacementMode.mappings.map(function (mapping) { return mapping.yminPartKey || partKey(mapping.yminPart); })).length : filtered.length).toLocaleString('zh-CN');
         byId('capacityColumn').textContent = applied && applied.units.capacity === 'F' ? '标称容量 (F)' : '标称容量';
         byId('rippleColumn').innerHTML = '<span class="block">额定纹波电流</span><span class="block text-[9px] font-medium">(' + esc(applied ? applied.units.ripple : 'mArms') + ')</span>';
-        byId('esrColumn').textContent = applied ? 'ESR / 阻抗 (' + applied.units.esr + ')' : 'ESR / 阻抗';
+        byId('esrColumn').textContent = applied && applied.units.esrMixed ? 'ESR / 阻抗（单位按封装）' : (applied ? 'ESR / 阻抗 (' + applied.units.esr + ')' : 'ESR / 阻抗');
         renderRows(pageProducts);
         renderGrid(pageProducts);
         renderReplacementSummary();
@@ -878,10 +903,10 @@
     }
 
     function compareRows() {
-        return [
+        var rows = [
             ['产品线', function (product) { return product.category; }],
             ['系列', function (product) { return product.series; }],
-            ['生命周期状态', function (product) { return normalizeStatus(product.status); }],
+            ['全生命周期状态', function (product) { return normalizeStatus(product.status); }],
             ['封装形式', function (product) { return product.package; }],
             ['额定电压', productVoltage],
             ['标称容量', productCapacity],
@@ -889,16 +914,20 @@
             ['寿命', function (product) { return productLife(product) + ' hrs'; }],
             ['ESR / 阻抗', productEsr],
             ['额定纹波电流', productRipple],
-            ['漏电流', function (product) { return product.leakage; }],
-            ['直径 D', function (product) { return blank(product.diameter) ? '' : product.diameter + ' mm'; }],
-            ['长度 L', function (product) { return blank(product.length) ? '' : product.length + ' mm'; }],
-            ['宽度 W', function (product) { return blank(product.width) ? '' : product.width + ' mm'; }],
-            ['高度 H', function (product) { return blank(product.height) ? '' : product.height + ' mm'; }],
-            ['厚度 T', function (product) { return blank(product.thickness) ? '' : product.thickness + ' mm'; }],
-            ['产品认证', function (product) { return [product.certification, product.rohs].filter(Boolean).join(' / '); }],
+            ['漏电流', function (product) { return product.leakage; }]
+        ];
+        activeDimensionKeys().forEach(function (key) {
+            rows.push([dimensionLabel(key), function (product) {
+                var value = dimensionValue(product, key);
+                return blank(value) ? '' : value + ' mm';
+            }]);
+        });
+        return rows.concat([
+            ['AEC-Q200', productAec],
+            ['RoHS指令', function (product) { return product.rohs; }],
             ['系列规格书', function (product) { return product.datasheet ? '有' : '—'; }],
             ['3D-CAD', function (product) { return numberFrom(product.cadCandidateCount) > 0 ? '有' : '可申请'; }]
-        ];
+        ]);
     }
 
     function openCompareModal() {
@@ -967,9 +996,9 @@
             downloadCsv([replacementHeaders].concat(replacementRows), '永铭替代料查询结果.csv');
             return;
         }
-        var headers = ['产品线', '系列', '生命周期状态', '产品料号', '封装形式', '工作温度', '额定电压', '标称容量', '直径D', '长度L', '宽度W', '高度H', '厚度T', '漏电流', '额定纹波电流', 'ESR/阻抗', '寿命', '产品认证', 'RoHS', '系列规格书', '3D-CAD'];
+        var headers = ['产品线', '系列', '全生命周期状态', '产品料号', '形状/封装', '工作温度', '额定电压', '标称容量', '直径/尺寸D', '高度/长/尺寸L', '宽W', '高/尺寸H', '漏电流', '额定纹波电流', 'ESR/阻抗', '额定寿命', 'AEC-Q200', 'RoHS指令', '系列规格书', '3D-CAD'];
         var rows = filtered.map(function (product) {
-            return [product.category, product.series, normalizeStatus(product.status), product.itemNo, product.package, productTemperature(product), productVoltage(product), productCapacity(product), product.diameter, product.length, product.width, product.height, product.thickness, product.leakage, productRipple(product), productEsr(product), productLife(product), product.certification, product.rohs, product.datasheet ? '有' : '', numberFrom(product.cadCandidateCount) > 0 ? '有' : '可申请'];
+            return [product.category, product.series, normalizeStatus(product.status), product.itemNo, product.package, productTemperature(product), productVoltage(product), productCapacity(product), dimensionValue(product, 'diameter'), dimensionValue(product, 'length'), dimensionValue(product, 'width'), dimensionValue(product, 'height'), product.leakage, productRipple(product), productEsr(product), productLife(product), productAec(product), product.rohs, product.datasheet ? '有' : '', numberFrom(product.cadCandidateCount) > 0 ? '有' : '可申请'];
         });
         downloadCsv([headers].concat(rows), '永铭产品筛选结果.csv');
     }

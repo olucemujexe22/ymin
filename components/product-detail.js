@@ -3,6 +3,7 @@
 
     var catalog = window.YMIN_PRODUCT_CATALOG || { meta: {}, products: [] };
     var products = Array.isArray(catalog.products) ? catalog.products : [];
+    var fieldApi = window.YMIN && YMIN.productFields ? YMIN.productFields : null;
     var replacementCatalog = window.YMIN_REPLACEMENT_CROSS_REFERENCE || { meta: {}, mappings: [] };
     var replacementMappings = Array.isArray(replacementCatalog.mappings) ? replacementCatalog.mappings : [];
     var replacementByYmin = {};
@@ -91,6 +92,11 @@
         return field && field.value ? field.value : '';
     }
 
+    function measurementConditions(value) {
+        var parts = String(value || '').split('/').map(function (part) { return part.trim(); }).filter(Boolean);
+        return parts.length > 1 ? parts.slice(1).join(' / ') : '';
+    }
+
     function crossReferencesFor(itemNo) {
         return replacementByYmin[partKey(itemNo)] || [];
     }
@@ -123,6 +129,7 @@
 
     function renderProduct(product, detail) {
         var merged = Object.assign({}, product, detail);
+        if (fieldApi && fieldApi.packageValue) merged.package = fieldApi.packageValue(merged);
         var specFields = Array.isArray(merged.specFields) ? merged.specFields : [];
         var features = descriptionLines(merged.description);
         var crossReferences = crossReferencesFor(merged.itemNo);
@@ -152,20 +159,28 @@
         var lcsc = externalAsset(merged.lcsc);
         var ickey = externalAsset(merged.ickey);
         var updated = dateText(merged.updatedAt);
-        var packageQuantity = findSpec(specFields, ['包装数量', '最小包装']);
+        var confirmedFields = fieldApi && fieldApi.detailFields ? fieldApi.detailFields(merged, merged) : specFields.map(function (field) {
+            return { key: '', label: field.label, value: field.value };
+        });
+        function confirmedValue(key, fallback) {
+            var value = fieldApi && fieldApi.fieldValue ? fieldApi.fieldValue(confirmedFields, key) : '';
+            return value === '' || value == null ? (fallback || '') : value;
+        }
+        var packageQuantity = confirmedValue('minimumPack', findSpec(specFields, ['包装数量', '最小包装']));
+        var esrField = confirmedFields.find(function (field) { return field.key === 'esr'; }) || { label: 'ESR / 阻抗', value: merged.esr };
+        var esrFrequency = confirmedValue('esrFrequency');
+        var rippleField = confirmedFields.find(function (field) { return field.key === 'ripple' || field.key === 'rippleFilm'; }) || { label: '额定纹波电流', value: merged.ripple };
 
         var quickSpecs = [
-            ['额定电压', merged.voltage], ['标称容量', merged.capacitance], ['工作温度', merged.temperature],
-            ['ESR / 阻抗', merged.esr], ['额定寿命', merged.life ? merged.life + ' h' : ''], ['封装尺寸', merged.size]
+            ['额定电压', confirmedValue('voltage', merged.voltage)], ['标称容量', confirmedValue('capacity', merged.capacitance)], ['工作温度', merged.temperature],
+            [esrField.label, esrField.value], ['额定寿命', confirmedValue('life', merged.life)], ['封装尺寸', merged.size]
         ];
-        var lifecycleStatus = /不推荐|新项目/.test(String(merged.status || '')) ? '新项目不推荐' : /新品/.test(String(merged.status || '')) ? '新品' : '量产品';
-        var generalSpecs = [
-            ['电容类别', merged.category], ['形状 / 封装', merged.package], ['产品料号', merged.itemNo], ['系列', merged.series], ['全生命周期状态', lifecycleStatus]
-        ];
-        var allSpecs = generalSpecs.concat(specFields.map(function (field) { return [field.label, field.value]; }));
+        var lifecycleStatus = fieldApi && fieldApi.lifecycleStatus ? fieldApi.lifecycleStatus(merged.status) : (/不推荐|新项目/.test(String(merged.status || '')) ? '新项目不推荐' : /新品/.test(String(merged.status || '')) ? '新品' : '量产品');
+        // 特性标签已在料号下方由 description 字段拆分展示，不在规格参数区重复出现。
+        var allSpecs = confirmedFields.filter(function (field) { return field.key !== 'featureTags'; }).map(function (field) { return [field.label, field.value]; });
         var certifications = [];
-        if (merged.certification) certifications.push(merged.certification);
-        if (merged.rohs) certifications.push('RoHS ' + merged.rohs);
+        if (confirmedValue('aec', merged.certification)) certifications.push('AEC-Q200：' + confirmedValue('aec', merged.certification));
+        if (confirmedValue('rohs', merged.rohs)) certifications.push('RoHS：' + confirmedValue('rohs', merged.rohs));
 
         document.title = merged.itemNo + ' - 产品详情 | 永铭电子';
         byId('detailBreadcrumb').innerHTML = '<a href="index.html" class="hover:text-primary">首页</a><span>/</span><a href="product-center.html" class="hover:text-primary">产品中心</a><span>/</span><a href="product-center.html?category=' + encodeURIComponent(merged.category || '') + '" class="hover:text-primary">' + display(merged.category) + '</a><span>/</span><span class="text-primary font-bold">' + esc(merged.itemNo) + '</span>';
@@ -181,11 +196,13 @@
         if (ickey) shopButtons += '<a class="block w-full border border-primary text-primary text-center text-xs py-2 font-bold hover:bg-primary hover:text-white" href="' + esc(ickey) + '" target="_blank" rel="noopener">云汉芯城</a>';
         if (!shopButtons) shopButtons = '<div class="text-xs text-slate-400 border bg-slate-50 p-3 text-center">当前料号暂无商城链接</div>';
 
-        var dimensionRows = [
-            ['D', merged.diameter], ['L', merged.length], ['W', merged.width], ['H', merged.height], ['B/T', merged.thickness]
-        ].filter(function (item) { return item[1] !== '' && item[1] != null; });
-        var dimensionTable = dimensionRows.length ? '<table class="w-full text-xs border-collapse"><thead><tr class="bg-slate-100"><th class="border px-3 py-2">尺寸代号</th><th class="border px-3 py-2">数值 (mm)</th></tr></thead><tbody>' + dimensionRows.map(function (item) { return '<tr><td class="border px-3 py-2 font-bold text-center">' + esc(item[0]) + '</td><td class="border px-3 py-2 text-center">' + display(item[1]) + '</td></tr>'; }).join('') + '</tbody></table>' : '<div class="bg-slate-50 border p-6 text-xs text-slate-400 text-center">尺寸字段待补充</div>';
-        var rippleTable = '<table class="w-full text-xs border-collapse"><thead><tr class="bg-slate-100"><th class="border px-3 py-2">额定纹波电流</th><th class="border px-3 py-2">测试条件</th><th class="border px-3 py-2">ESR / 阻抗</th></tr></thead><tbody><tr class="text-center"><td class="border px-3 py-3 font-medium">' + display(merged.ripple) + '</td><td class="border px-3 py-3">' + display(merged.rippleLabel) + '</td><td class="border px-3 py-3">' + display(merged.esr) + '</td></tr></tbody></table>';
+        var dimensionRows = fieldApi && fieldApi.dimensionFields ? fieldApi.dimensionFields(merged) : [
+            { symbol: 'D', label: '直径 D', value: merged.diameter }, { symbol: 'L', label: '高度 L', value: merged.length },
+            { symbol: 'W', label: '宽 W', value: merged.width }, { symbol: 'H', label: '高 H', value: merged.height }
+        ];
+        dimensionRows = dimensionRows.filter(function (item) { return item.value !== '' && item.value != null; });
+        var dimensionTable = dimensionRows.length ? '<table class="w-full text-xs border-collapse"><thead><tr class="bg-slate-100"><th class="border px-3 py-2">尺寸项目</th><th class="border px-3 py-2">代号</th><th class="border px-3 py-2">数值 (mm)</th></tr></thead><tbody>' + dimensionRows.map(function (item) { return '<tr><td class="border px-3 py-2 text-center">' + esc(item.label) + '</td><td class="border px-3 py-2 font-bold text-center">' + esc(item.symbol) + '</td><td class="border px-3 py-2 text-center">' + display(item.value) + '</td></tr>'; }).join('') + '</tbody></table>' : '<div class="bg-slate-50 border p-6 text-xs text-slate-400 text-center">尺寸字段待补充</div>';
+        var rippleTable = '<table class="w-full text-xs border-collapse"><thead><tr class="bg-slate-100"><th class="border px-3 py-2">' + esc(rippleField.label) + '</th><th class="border px-3 py-2">纹波测试条件</th><th class="border px-3 py-2">' + esc(esrField.label) + '</th><th class="border px-3 py-2">ESR频率</th></tr></thead><tbody><tr class="text-center"><td class="border px-3 py-3 font-medium">' + display(rippleField.value) + '</td><td class="border px-3 py-3">' + display(measurementConditions(merged.ripple)) + '</td><td class="border px-3 py-3">' + display(esrField.value) + '</td><td class="border px-3 py-3">' + display(esrFrequency) + '</td></tr></tbody></table>';
         var technicalFigure = technicalImageUrl
             ? '<figure class="mt-6 border border-slate-200 bg-white p-3 md:p-5"><img class="series-technical-image block w-full h-auto" src="' + esc(technicalImageUrl) + '" alt="' + esc(merged.series || merged.itemNo) + ' 系列产品尺寸与额定纹波电流条件" loading="lazy"><figcaption class="mt-3 text-[11px] leading-5 text-slate-500">' + display(merged.series) + ' 系列技术图，同系列料号共用；具体尺寸、电气条件及修正系数以正式规格书为准。</figcaption></figure>'
             : '<div class="mt-6 border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-xs text-slate-500"><span class="material-symbols-outlined block mb-2 text-3xl text-slate-300">image_not_supported</span>当前系列技术图待资料库补充</div>';
@@ -208,7 +225,7 @@
         html += '<div class="bg-white border border-slate-200 p-6 lg:p-8 mb-6"><div class="flex flex-col lg:flex-row gap-6 lg:gap-8"><div class="flex-1 min-w-0"><div class="flex flex-col md:flex-row md:items-start gap-6"><div class="flex-1 min-w-0"><div class="text-3xl font-bold text-primary mb-1 leading-tight">' + display(merged.category) + '</div><h1 class="text-4xl font-bold text-primary mb-2 break-all">' + esc(merged.itemNo) + '</h1><div class="flex flex-wrap items-center gap-3 mb-2"><span class="bg-primary text-white text-[11px] px-3 py-1 font-bold uppercase tracking-wider">' + lifecycleStatus + '</span><span class="text-xs text-slate-500">' + display(merged.series) + ' 系列 · ' + display(merged.package) + '</span>' + (updated ? '<span class="text-[10px] text-slate-400">数据更新：' + esc(updated) + '</span>' : '') + '</div>' + featureHtml + certHtml + '</div><div class="md:w-52 lg:w-56 shrink-0">' + productImage + '</div></div><div class="grid grid-cols-2 md:grid-cols-3 gap-4 bg-slate-50 p-5 border border-slate-100 mt-5">' + quickSpecs.map(function (spec) { return '<div><div class="text-[10px] uppercase tracking-wider text-slate-500">' + esc(spec[0]) + '</div><div class="text-base font-semibold text-primary">' + display(spec[1]) + '</div></div>'; }).join('') + '</div></div>';
         html += '<div class="lg:w-80 shrink-0"><div class="bg-slate-50 border border-slate-200 p-5"><h4 class="text-sm font-bold text-primary mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-base">storefront</span>网销商城</h4><div class="text-xs space-y-2"><div class="flex justify-between gap-4"><span class="text-slate-500">最小包装量 (MOQ):</span><span class="font-semibold text-right">' + display(packageQuantity) + '</span></div><div class="flex justify-between gap-4"><span class="text-slate-500">封装形式:</span><span class="font-semibold text-right">' + display(merged.package) + '</span></div><div class="space-y-2 mt-4">' + shopButtons + '</div></div></div></div></div></div>';
 
-        html += '<div class="flex flex-col lg:flex-row gap-8 mb-8"><div class="flex-1 bg-white border border-slate-200 p-8"><div class="flex items-center justify-between mb-6"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">description</span><h2 class="text-2xl font-bold text-primary">详细规格参数</h2></div><div class="flex gap-2"><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100" id="downloadTableBtn" title="下载规格表"><span class="material-symbols-outlined text-lg">download</span></button><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100" id="printTableBtn" title="打印"><span class="material-symbols-outlined text-lg">print</span></button></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">' + allSpecs.map(function (field) { return '<div class="flex justify-between items-start gap-5 py-3 border-b border-slate-100"><span class="text-slate-600 text-sm">' + esc(field[0]) + '</span><span class="font-medium text-sm text-primary text-right">' + display(field[1]) + '</span></div>'; }).join('') + '</div><p class="text-[10px] text-slate-400 mt-6">* 参数来自现官网生产数据库，空字段以“—”显示。</p>';
+        html += '<div class="flex flex-col lg:flex-row gap-8 mb-8"><div class="flex-1 bg-white border border-slate-200 p-8"><div class="flex items-center justify-between mb-6"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">description</span><h2 class="text-2xl font-bold text-primary">详细规格参数</h2></div><div class="flex gap-2"><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100" id="downloadTableBtn" title="下载规格表"><span class="material-symbols-outlined text-lg">download</span></button><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100" id="printTableBtn" title="打印"><span class="material-symbols-outlined text-lg">print</span></button></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">' + allSpecs.map(function (field) { return '<div class="flex justify-between items-start gap-5 py-3 border-b border-slate-100"><span class="text-slate-600 text-sm">' + esc(field[0]) + '</span><span class="font-medium text-sm text-primary text-right">' + display(field[1]) + '</span></div>'; }).join('') + '</div><p class="text-[10px] text-slate-400 mt-6">* 具体参数及测试条件以正式规格书为准。</p>';
         html += '<div class="mt-10 pt-6 border-t"><h3 class="text-xl font-bold text-primary mb-2 flex items-center gap-2"><span class="material-symbols-outlined">straighten</span>产品尺寸图与额定纹波电流、频率条件</h3><p class="text-xs text-slate-500 mb-5">本料号结构化参数与系列技术图对应展示。</p><div class="grid grid-cols-1 xl:grid-cols-2 gap-5"><div><h4 class="font-bold text-sm text-primary mb-3">本料号尺寸（单位：mm）</h4><div class="overflow-x-auto">' + dimensionTable + '</div></div><div><h4 class="font-bold text-sm text-primary mb-3">本料号纹波参数</h4><div class="overflow-x-auto">' + rippleTable + '</div></div></div>' + technicalFigure + '</div></div>';
 
         html += '<aside class="lg:w-80 flex flex-col gap-6"><div class="bg-white border border-slate-200 p-6"><div class="flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-primary text-xl">build</span><h3 class="text-xl font-bold text-primary">设计工具与资源</h3></div><div class="space-y-3">' + resourceItem('timer', '寿命推算工具', '在线计算工作寿命', 'design-life-calc.html', true) + resourceItem('query_stats', 'SPICE 模型', '电路仿真模型', 'design-spice.html', true) + resourceItem(cadIcon, cadTitle, cadSubtitle, cadUrl, true) + resourceItem('picture_as_pdf', '产品规格书', datasheet ? '已提供 PDF' : '暂无 PDF', datasheet, !!datasheet) + resourceItem('fact_check', 'RoHS / REACH', display(merged.rohs), 'support-download.html', true) + resourceItem('monitoring', '可靠性数据', '试验报告', 'design-reliability.html', true) + (sourceUrl ? resourceItem('database', '原始数据页', '查看现官网来源', sourceUrl, true) : '') + '</div></div>';

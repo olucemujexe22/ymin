@@ -94,7 +94,6 @@
                 <section style="order:3">
                     <div class="filter-title">
                         <span>电容器类别</span>
-                        <span id="categoryMode" class="text-[9px] text-slate-400 font-normal">组内可多选</span>
                     </div>
                     <div id="categoryFilters">
                         <div class="filter-group-title">铝电解电容器</div>
@@ -102,13 +101,12 @@
                         <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="al" type="checkbox" value="高分子固态铝电解电容器"><span>高分子固态铝电解电容器</span><span class="category-count" data-category-count="高分子固态铝电解电容器"></span></label>
                         <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="al" type="checkbox" value="高分子混合动力铝电解电容器"><span>高分子混合动力铝电解电容器</span><span class="category-count" data-category-count="高分子混合动力铝电解电容器"></span></label>
 
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="st" type="checkbox" value="叠层高分子固态铝电解电容器"><span>叠层高分子固态铝电解电容器</span><span class="category-count" data-category-count="叠层高分子固态铝电解电容器"></span></label>
+                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="st" type="checkbox" value="导电高分子钽电解电容器"><span>导电高分子钽电解电容器</span><span class="category-count" data-category-count="导电高分子钽电解电容器"></span></label>
+
                         <div class="filter-group-title">超级电容器</div>
                         <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="sc" type="checkbox" value="双电层超级电容"><span>双电层超级电容</span><span class="category-count" data-category-count="双电层超级电容"></span></label>
                         <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="sc" type="checkbox" value="混合型超级电容（锂离子电容）"><span>混合型超级电容（锂离子电容）</span><span class="category-count" data-category-count="混合型超级电容（锂离子电容）"></span></label>
-
-                        <div class="filter-group-title">叠层与钽电容器</div>
-                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="st" type="checkbox" value="叠层高分子固态铝电解电容器"><span>叠层高分子固态铝电解电容器</span><span class="category-count" data-category-count="叠层高分子固态铝电解电容器"></span></label>
-                        <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="st" type="checkbox" value="导电高分子钽电解电容器"><span>导电高分子钽电解电容器</span><span class="category-count" data-category-count="导电高分子钽电解电容器"></span></label>
 
                         <div class="filter-group-title">薄膜电容器</div>
                         <label class="category-option flex items-start gap-2 py-1 text-xs cursor-pointer"><input class="cat-cb mt-0.5" data-group="fl" type="checkbox" value="薄膜电容器"><span>薄膜电容器</span><span class="category-count" data-category-count="薄膜电容器"></span></label>
@@ -132,7 +130,7 @@
                 </section>
 
                 <section style="order:2">
-                    <div class="filter-title"><span>产品状态</span></div>
+                    <div class="filter-title"><span>全生命周期状态</span></div>
                     <div class="grid grid-cols-1 gap-2">
                         <label class="flex items-center gap-2 text-xs cursor-pointer"><input class="status-cb" type="checkbox" value="量产品"><span>量产品</span></label>
                         <label class="flex items-center gap-2 text-xs cursor-pointer"><input class="status-cb" type="checkbox" value="新品"><span>新品</span></label>
@@ -286,28 +284,27 @@
                                     <th class="px-2.5 py-2.5">产品图</th>
                                     <th class="px-2.5 py-2.5">产品线</th>
                                     <th class="px-2.5 py-2.5">系列</th>
-                                    <th class="px-2.5 py-2.5">状态</th>
+                                    <th class="px-2.5 py-2.5">全生命周期状态</th>
                                     <th class="px-2.5 py-2.5">产品料号</th>
                                     <th class="px-2.5 py-2.5">封装形式</th>
                                     <th class="px-2.5 py-2.5">工作温度 (℃)</th>
                                     <th class="px-2.5 py-2.5">额定电压</th>
                                     <th id="capacityColumn" class="px-2.5 py-2.5">标称容量</th>
-                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="diameter"><span class="block">直径 D</span><span class="block text-[9px] font-medium">(mm)</span></th>
-                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="length"><span class="block">长度 L</span><span class="block text-[9px] font-medium">(mm)</span></th>
-                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="width"><span class="block">宽度 W</span><span class="block text-[9px] font-medium">(mm)</span></th>
-                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="height"><span class="block">高度 H</span><span class="block text-[9px] font-medium">(mm)</span></th>
-                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="thickness"><span class="block">厚度 T</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="diameter"><span class="block" data-dimension-label="diameter">直径 D</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="length"><span class="block" data-dimension-label="length">高度 L</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="width"><span class="block" data-dimension-label="width">宽 W</span><span class="block text-[9px] font-medium">(mm)</span></th>
+                                    <th class="px-2.5 py-1.5 leading-tight" data-dimension-column="height"><span class="block" data-dimension-label="height">高 H</span><span class="block text-[9px] font-medium">(mm)</span></th>
                                     <th class="px-2.5 py-2.5">漏电流</th>
                                     <th id="rippleColumn" class="px-2.5 py-1.5 leading-tight"><span class="block">额定纹波电流</span><span class="block text-[9px] font-medium">(mArms)</span></th>
                                     <th id="esrColumn" class="px-2.5 py-2.5">ESR / 阻抗</th>
                                     <th class="px-2.5 py-2.5">寿命 (hrs)</th>
-                                    <th class="product-certification-column px-2 py-2.5">产品认证</th>
+                                    <th class="product-certification-column px-2 py-2.5">AEC-Q200</th>
                                     <th class="px-2.5 py-2.5 text-center">PDF</th>
                                     <th class="px-2.5 py-2.5 text-center">3D-CAD</th>
                                 </tr>
                             </thead>
                             <tbody id="productRows" class="text-[12px] text-slate-700 divide-y divide-slate-100">
-                                <tr><td class="p-8 text-center text-slate-400" colspan="22">正在加载产品数据…</td></tr>
+                                <tr><td class="p-8 text-center text-slate-400" colspan="21">正在加载产品数据…</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -342,8 +339,9 @@
     <script src="components/footer.js"></script>
     <script src="data/series-images.js?v=20260730"></script>
     <script src="data/products.js"></script>
+    <script src="components/product-fields.js?v=20260804c"></script>
     <script src="data/replacement-cross-reference.js?v=20260804"></script>
-    <script src="components/product-center.js?v=20260804b"></script>
+    <script src="components/product-center.js?v=20260804c"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             YMIN.navbar.inject('products');
