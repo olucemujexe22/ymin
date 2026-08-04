@@ -75,15 +75,20 @@
         <aside class="filter-aside w-[340px] bg-white h-full border-r border-slate-200 flex flex-col flex-shrink-0">
             <div class="px-6 py-4 border-b border-slate-100">
                 <h2 class="text-primary text-lg font-bold tracking-tight">产品筛选</h2>
+                <a class="mt-3 flex items-center justify-between gap-3 bg-primary px-4 py-3 text-white hover:brightness-110" href="product-replacement.html">
+                    <span class="flex min-w-0 items-center gap-3"><span class="material-symbols-outlined text-xl">compare_arrows</span><span><strong class="block text-xs">寻找替代料</strong><small class="mt-0.5 block text-[9px] text-white/70">同行料号 → 永铭料号</small></span></span>
+                    <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </a>
             </div>
 
             <form id="filterForm" class="flex flex-1 flex-col gap-7 overflow-y-auto custom-scrollbar px-6 py-5" onsubmit="return false">
                 <section style="order:1">
                     <div class="filter-title"><label for="keywordFilter">料号搜索</label></div>
                     <div class="relative">
-                        <input id="keywordFilter" class="filter-input pr-9" placeholder="输入完整/部分料号" autocomplete="off">
-                        <span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 text-lg">search</span>
+                        <input id="keywordFilter" class="filter-input pr-10" placeholder="输入永铭或同行完整料号" autocomplete="off">
+                        <button id="keywordSearchButton" class="absolute right-1 top-1 flex h-8 w-8 items-center justify-center text-slate-400 hover:text-primary" type="button" aria-label="搜索料号"><span class="material-symbols-outlined text-lg">search</span></button>
                     </div>
+                    <p class="mt-2 text-[10px] leading-4 text-slate-400">支持永铭料号搜索；粘贴同行完整料号可查询对应的永铭替代料。</p>
                 </section>
 
                 <section style="order:3">
@@ -250,7 +255,6 @@
                 <div class="p-8 pb-4 flex flex-wrap justify-between items-end gap-5">
                     <div>
                         <nav class="text-[10px] text-slate-500 uppercase flex gap-2 mb-2"><span>产品中心</span><span>/</span><span class="text-primary font-bold">产品选型</span></nav>
-                        <h1 id="resultTitle" class="text-4xl font-bold text-primary tracking-tighter">全部电容器产品</h1>
                         <div id="filterChips" class="flex flex-wrap gap-2 mt-3"></div>
                         <button id="clearAllTop" class="mt-3 text-[11px] font-bold text-primary hover:underline" type="button">清空全部筛选</button>
                     </div>
@@ -273,6 +277,7 @@
                 </div>
 
                 <div class="px-8 pb-24">
+                    <section id="replacementSummary" class="hidden mb-5"></section>
                     <div id="listResults" class="bg-white border border-slate-200 shadow-sm data-table-wrapper custom-scrollbar">
                         <table id="productTable" class="w-full text-left border-collapse" style="min-width: 1760px;">
                             <thead>
@@ -337,7 +342,8 @@
     <script src="components/footer.js"></script>
     <script src="data/series-images.js?v=20260730"></script>
     <script src="data/products.js"></script>
-    <script src="components/product-center.js?v=20260803h"></script>
+    <script src="data/replacement-cross-reference.js?v=20260804"></script>
+    <script src="components/product-center.js?v=20260804b"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             YMIN.navbar.inject('products');

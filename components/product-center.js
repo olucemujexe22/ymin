@@ -18,6 +18,18 @@
             product.__compareKey = String(product.itemNo || 'product') + '::' + index;
             return product;
         });
+    var replacementCatalog = window.YMIN_REPLACEMENT_CROSS_REFERENCE || { meta: {}, mappings: [] };
+    var replacementMappings = Array.isArray(replacementCatalog.mappings) ? replacementCatalog.mappings : [];
+    var replacementByCompetitor = {};
+    var productByPartKey = {};
+    var replacementMode = null;
+    products.forEach(function (product) { productByPartKey[partKey(product.itemNo)] = product; });
+    replacementMappings.forEach(function (mapping) {
+        competitorLookupKeys(mapping).forEach(function (key) {
+            replacementByCompetitor[key] = replacementByCompetitor[key] || [];
+            if (replacementByCompetitor[key].indexOf(mapping) < 0) replacementByCompetitor[key].push(mapping);
+        });
+    });
     var filtered = products.slice();
     var page = 1;
     var pageSize = 50;
@@ -28,6 +40,7 @@
     var initialParams = new URLSearchParams(location.search);
     var initialCategory = initialParams.get('category') || initialParams.get('majorCategory') || '';
     var initialSeries = initialParams.get('series') || '';
+    var initialStatus = initialParams.get('status') || '';
     var initialKeyword = initialParams.get('search') || initialParams.get('q') || '';
     var initialSeriesConsumed = false;
     var groupNames = { al: '铝电解电容器', sc: '超级电容器', st: '叠层与钽电容器', fl: '薄膜电容器' };
@@ -68,6 +81,23 @@
     function unique(values) {
         return values.filter(function (value, index, list) { return value && list.indexOf(value) === index; });
     }
+    function partKey(value) {
+        var text = String(value || '');
+        if (text.normalize) text = text.normalize('NFKC');
+        return text.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    }
+    function competitorLookupKeys(mapping) {
+        var raw = String(mapping.competitorPart || '');
+        if (raw.normalize) raw = raw.normalize('NFKC');
+        var withoutNotes = raw.replace(/\([^)]*\)/g, '').trim();
+        var withoutTrailingSize = withoutNotes.replace(/\s+\d+(?:\.\d+)?\s*[X*]\s*\d+(?:\.\d+)?$/i, '').trim();
+        return unique([mapping.competitorPartKey, partKey(raw), partKey(withoutNotes), partKey(withoutTrailingSize)]);
+    }
+    function replacementMatches(value) {
+        var key = partKey(value);
+        if (!key || productByPartKey[key]) return [];
+        return replacementByCompetitor[key] || [];
+    }
     function formatNumber(value, decimals) {
         if (!Number.isFinite(value)) return '—';
         var precision = typeof decimals === 'number' ? decimals : (Math.abs(value) >= 100 ? 0 : Math.abs(value) >= 10 ? 2 : 4);
@@ -106,6 +136,36 @@
         if (/不推荐|新项目/.test(text)) return '新项目不推荐';
         if (/新品/.test(text)) return '新品';
         return '量产品';
+    }
+    function canonicalCategory(category) {
+        var key = String(category || '').replace(/\s+/g, '').replace(/\(/g, '（').replace(/\)/g, '）');
+        return supportedCategories.find(function (name) {
+            return name.replace(/\s+/g, '').replace(/\(/g, '（').replace(/\)/g, '）') === key;
+        }) || '';
+    }
+    function resolveInitialSeriesContext() {
+        initialCategory = canonicalCategory(initialCategory);
+        if (!initialSeries) return;
+
+        var candidates = products.filter(function (product) { return product.series === initialSeries; });
+        if (!initialCategory || !candidates.some(function (product) { return product.category === initialCategory; })) {
+            var categoryCounts = {};
+            candidates.forEach(function (product) {
+                categoryCounts[product.category] = (categoryCounts[product.category] || 0) + 1;
+            });
+            initialCategory = Object.keys(categoryCounts).sort(function (left, right) {
+                return categoryCounts[right] - categoryCounts[left];
+            })[0] || initialCategory;
+        }
+
+        var scoped = initialCategory
+            ? candidates.filter(function (product) { return product.category === initialCategory; })
+            : candidates;
+        var availableStatuses = unique(scoped.map(function (product) { return normalizeStatus(product.status); }));
+        var requestedStatus = initialStatus ? normalizeStatus(initialStatus) : '';
+        initialStatus = requestedStatus && (!availableStatuses.length || availableStatuses.indexOf(requestedStatus) >= 0)
+            ? requestedStatus
+            : (availableStatuses.indexOf('量产品') >= 0 ? '量产品' : (availableStatuses[0] || '量产品'));
     }
     function statusClass(status) {
         if (status === '新品') return 'status-new';
@@ -174,6 +234,9 @@
         var holder = byId('seriesOptions');
         var retained = selectedSeries();
         var series = unique(productScope(true).map(function (product) { return product.series; })).sort(function (a, b) { return String(a).localeCompare(String(b), 'zh-CN'); });
+        if (!initialSeriesConsumed && initialSeries && series.indexOf(initialSeries) < 0) {
+            series.unshift(initialSeries);
+        }
         if (!series.length) {
             holder.innerHTML = '<p class="text-[11px] text-slate-400">当前条件下暂无系列</p>';
             byId('seriesSelectedText').textContent = '全部';
@@ -443,6 +506,7 @@
             dimensions[key] = { min: numberValue(key + 'Min'), max: numberValue(key + 'Max') };
         });
         return {
+            keywordRaw: String(byId('keywordFilter').value || '').trim(),
             keyword: String(byId('keywordFilter').value || '').trim().toLowerCase(),
             categories: selectedCategories(),
             packageName: draftPackage,
@@ -480,6 +544,24 @@
     function applyFilters() {
         if (!validateDraft()) return;
         applied = captureFilters();
+        var mappedReplacements = replacementMatches(applied.keywordRaw);
+        if (mappedReplacements.length) {
+            replacementMode = { query: applied.keywordRaw, mappings: mappedReplacements.slice() };
+            var replacementOrder = {};
+            mappedReplacements.forEach(function (mapping, index) {
+                var key = mapping.yminPartKey || partKey(mapping.yminPart);
+                if (replacementOrder[key] == null) replacementOrder[key] = index;
+            });
+            filtered = unique(mappedReplacements.map(function (mapping) {
+                return productByPartKey[mapping.yminPartKey || partKey(mapping.yminPart)];
+            }).filter(Boolean)).sort(function (left, right) {
+                return replacementOrder[partKey(left.itemNo)] - replacementOrder[partKey(right.itemNo)];
+            });
+            page = 1;
+            renderAll();
+            return;
+        }
+        replacementMode = null;
         filtered = products.filter(function (product) {
             if (applied.keyword) {
                 var haystack = [product.itemNo, product.series, product.category, product.package].join(' ').toLowerCase();
@@ -601,7 +683,10 @@
     function renderRows(pageProducts) {
         var holder = byId('productRows');
         if (!pageProducts.length) {
-            holder.innerHTML = '<tr><td class="p-12 text-center text-slate-400" colspan="22"><span class="material-symbols-outlined mb-2 block text-4xl">search_off</span>没有找到符合当前条件的产品，请调整筛选条件。</td></tr>';
+            var emptyText = replacementMode
+                ? '已找到替代关系，但对应永铭料号的产品详情资料尚未同步。'
+                : '没有找到符合当前条件的产品，请调整筛选条件。';
+            holder.innerHTML = '<tr><td class="p-12 text-center text-slate-400" colspan="22"><span class="material-symbols-outlined mb-2 block text-4xl">search_off</span>' + emptyText + '</td></tr>';
             return;
         }
         holder.innerHTML = pageProducts.map(function (product, index) {
@@ -641,7 +726,7 @@
     function renderGrid(pageProducts) {
         var holder = byId('gridResults');
         if (!pageProducts.length) {
-            holder.innerHTML = '<div class="col-span-full border border-slate-200 bg-white p-12 text-center text-slate-400">没有找到符合当前条件的产品。</div>';
+            holder.innerHTML = '<div class="col-span-full border border-slate-200 bg-white p-12 text-center text-slate-400">' + (replacementMode ? '替代料号已找到，对应产品详情资料尚未同步。' : '没有找到符合当前条件的产品。') + '</div>';
             return;
         }
         holder.innerHTML = pageProducts.map(function (product) {
@@ -690,6 +775,10 @@
 
     function renderChips() {
         if (!applied) return;
+        if (replacementMode) {
+            byId('filterChips').innerHTML = '<span class="border border-primary/15 bg-white px-2 py-1 text-[10px] text-primary">同行料号：' + esc(replacementMode.query) + '</span>';
+            return;
+        }
         var chips = [];
         applied.categories.forEach(function (value) { chips.push(value); });
         if (applied.packageName) chips.push('封装：' + applied.packageName);
@@ -715,17 +804,42 @@
         byId('filterChips').innerHTML = chips.map(function (chip) { return '<span class="border border-primary/15 bg-white px-2 py-1 text-[10px] text-primary">' + esc(chip) + '</span>'; }).join('');
     }
 
+    function renderReplacementSummary() {
+        var holder = byId('replacementSummary');
+        if (!replacementMode) {
+            holder.classList.add('hidden');
+            holder.innerHTML = '';
+            return;
+        }
+        var mappings = replacementMode.mappings;
+        var targetKeys = unique(mappings.map(function (mapping) { return mapping.yminPartKey || partKey(mapping.yminPart); }));
+        var availableCount = targetKeys.filter(function (key) { return !!productByPartKey[key]; }).length;
+        var source = mappings[0] || {};
+        var cards = mappings.map(function (mapping) {
+            var product = productByPartKey[mapping.yminPartKey || partKey(mapping.yminPart)];
+            var specs = product
+                ? [product.category, product.series ? product.series + ' 系列' : '', product.voltage, product.capacitance, product.size].filter(Boolean).join(' · ')
+                : (mapping.yminDescription || '产品资料待同步');
+            var action = product
+                ? '<a class="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline" href="' + productDetailUrl(product) + '">查看产品详情<span class="material-symbols-outlined text-base">arrow_forward</span></a>'
+                : '<span class="inline-flex items-center gap-1 text-xs font-medium text-slate-400"><span class="material-symbols-outlined text-base">sync_problem</span>产品资料待同步</span>';
+            return '<article class="border border-slate-200 bg-white p-5"><div class="flex flex-wrap items-start justify-between gap-3"><div><p class="text-[10px] font-bold text-slate-500">' + esc(mapping.competitorBrand || mapping.competitorBrandRaw || '同行品牌') + '</p><p class="mt-1 break-all font-mono text-sm text-slate-700">' + esc(mapping.competitorPart) + '</p></div><span class="bg-emerald-50 px-2 py-1 text-[10px] font-bold text-emerald-700">' + esc(mapping.matchType || '对应关系') + '</span></div><div class="my-4 flex items-center gap-3 text-primary"><span class="material-symbols-outlined">arrow_downward</span><span class="text-[10px] font-bold tracking-wider">永铭替代料号</span></div><p class="break-all font-mono text-lg font-bold text-primary">' + esc(mapping.yminPart) + '</p><p class="mt-2 text-xs leading-5 text-slate-500">' + esc(specs) + '</p><div class="mt-4 border-t border-slate-100 pt-3">' + action + '</div></article>';
+        }).join('');
+        holder.classList.remove('hidden');
+        holder.innerHTML = '<div class="border-l-4 border-primary bg-primary/[0.04] p-5"><div class="flex flex-wrap items-start justify-between gap-4"><div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">compare_arrows</span><h2 class="text-xl font-bold text-primary">已找到 ' + targetKeys.length + ' 个永铭替代料号</h2></div><p class="mt-2 text-xs text-slate-600">查询：' + esc(source.competitorBrand || source.competitorBrandRaw || '同行品牌') + ' · <span class="font-mono font-bold">' + esc(replacementMode.query) + '</span></p></div><div class="text-right text-[10px] leading-5 text-slate-500"><p>' + availableCount + ' 个可查看产品详情</p><p>' + (targetKeys.length - availableCount) + ' 个产品资料待同步</p></div></div><div class="mt-5 grid grid-cols-1 gap-4 xl:grid-cols-2">' + cards + '</div><p class="mt-4 flex items-start gap-2 text-[11px] leading-5 text-amber-800"><span class="material-symbols-outlined mt-0.5 text-sm">info</span>替代关系来自永铭替代国际品牌数据表；PIN TO PIN 不代表所有电气指标完全等效，批量替换前请核对完整规格并完成工程验证。</p></div>';
+    }
+
     function renderAll() {
         var pages = Math.max(1, Math.ceil(filtered.length / pageSize));
         if (page > pages) page = pages;
         var pageProducts = filtered.slice((page - 1) * pageSize, page * pageSize);
-        byId('resultCount').textContent = filtered.length.toLocaleString('zh-CN');
-        byId('resultTitle').textContent = applied && applied.categories.length === 1 ? applied.categories[0] : '全部电容器产品';
+        byId('resultCount').textContent = (replacementMode ? unique(replacementMode.mappings.map(function (mapping) { return mapping.yminPartKey || partKey(mapping.yminPart); })).length : filtered.length).toLocaleString('zh-CN');
         byId('capacityColumn').textContent = applied && applied.units.capacity === 'F' ? '标称容量 (F)' : '标称容量';
         byId('rippleColumn').innerHTML = '<span class="block">额定纹波电流</span><span class="block text-[9px] font-medium">(' + esc(applied ? applied.units.ripple : 'mArms') + ')</span>';
         byId('esrColumn').textContent = applied ? 'ESR / 阻抗 (' + applied.units.esr + ')' : 'ESR / 阻抗';
         renderRows(pageProducts);
         renderGrid(pageProducts);
+        renderReplacementSummary();
         renderPagination();
         renderChips();
         updateDimensionColumns();
@@ -831,6 +945,7 @@
         initialSeries = '';
         initialSeriesConsumed = true;
         byId('seriesSearch').value = '';
+        replacementMode = null;
         document.querySelectorAll('.cat-cb, .status-cb').forEach(function (checkbox) { checkbox.checked = false; });
         ['voltageMin', 'voltageMax', 'voltageExact', 'capacityMin', 'capacityMax', 'capacityExact', 'lifeMin', 'lifeMax', 'lifeExact', 'rippleMin', 'rippleMax', 'rippleExact', 'esrMin', 'esrMax', 'esrExact'].forEach(function (id) {
             if (byId(id)) byId(id).value = '';
@@ -844,17 +959,29 @@
     }
 
     function exportProducts() {
+        if (replacementMode) {
+            var replacementHeaders = ['同行品牌', '同行料号', '同行系列', '永铭替代料号', '对应关系', '产品详情状态'];
+            var replacementRows = replacementMode.mappings.map(function (mapping) {
+                return [mapping.competitorBrand || mapping.competitorBrandRaw, mapping.competitorPart, mapping.competitorSeries, mapping.yminPart, mapping.matchType, productByPartKey[mapping.yminPartKey || partKey(mapping.yminPart)] ? '可查看' : '资料待同步'];
+            });
+            downloadCsv([replacementHeaders].concat(replacementRows), '永铭替代料查询结果.csv');
+            return;
+        }
         var headers = ['产品线', '系列', '生命周期状态', '产品料号', '封装形式', '工作温度', '额定电压', '标称容量', '直径D', '长度L', '宽度W', '高度H', '厚度T', '漏电流', '额定纹波电流', 'ESR/阻抗', '寿命', '产品认证', 'RoHS', '系列规格书', '3D-CAD'];
         var rows = filtered.map(function (product) {
             return [product.category, product.series, normalizeStatus(product.status), product.itemNo, product.package, productTemperature(product), productVoltage(product), productCapacity(product), product.diameter, product.length, product.width, product.height, product.thickness, product.leakage, productRipple(product), productEsr(product), productLife(product), product.certification, product.rohs, product.datasheet ? '有' : '', numberFrom(product.cadCandidateCount) > 0 ? '有' : '可申请'];
         });
-        var csv = [headers].concat(rows).map(function (row) {
+        downloadCsv([headers].concat(rows), '永铭产品筛选结果.csv');
+    }
+
+    function downloadCsv(rows, fileName) {
+        var csv = rows.map(function (row) {
             return row.map(function (cell) { return '"' + String(cell == null ? '' : cell).replace(/"/g, '""') + '"'; }).join(',');
         }).join('\r\n');
         var blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
         var link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = '永铭产品筛选结果.csv';
+        link.download = fileName;
         link.click();
         URL.revokeObjectURL(link.href);
     }
@@ -896,6 +1023,16 @@
         document.querySelectorAll('[data-exact-button]').forEach(wireExactButton);
 
         byId('applyFilters').addEventListener('click', applyFilters);
+        byId('keywordSearchButton').addEventListener('click', applyFilters);
+        byId('keywordFilter').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                applyFilters();
+            }
+        });
+        byId('keywordFilter').addEventListener('paste', function () {
+            setTimeout(applyFilters, 0);
+        });
         byId('resetFilters').addEventListener('click', resetFilters);
         byId('clearAllTop').addEventListener('click', resetFilters);
         byId('refreshProducts').addEventListener('click', applyFilters);
@@ -943,11 +1080,18 @@
     }
 
     function initialize() {
+        resolveInitialSeriesContext();
         updateCategoryCounts();
         if (initialKeyword) byId('keywordFilter').value = initialKeyword;
         if (initialCategory) {
             var categoryCheckbox = Array.from(document.querySelectorAll('.cat-cb')).find(function (checkbox) { return checkbox.value === initialCategory; });
             if (categoryCheckbox) categoryCheckbox.checked = true;
+        }
+        if (initialStatus) {
+            var statusCheckbox = Array.from(document.querySelectorAll('.status-cb')).find(function (checkbox) {
+                return checkbox.value === normalizeStatus(initialStatus);
+            });
+            if (statusCheckbox) statusCheckbox.checked = true;
         }
         updateCategoryLock();
         updatePackageOptions();

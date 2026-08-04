@@ -28,6 +28,7 @@ YMIN.footer = (function () {
         // 产品中心
         html += '<div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6 tracking-widest">产品中心</h4>';
         html += '<ul class="space-y-3 text-xs uppercase tracking-wider text-slate-500">';
+        html += '<li><a href="product-replacement.html" class="font-bold text-[#1B365D] hover:underline">寻找替代料</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">液态铝电解电容器</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">双电层超级电容</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">高分子固态铝电解电容器</a></li>';

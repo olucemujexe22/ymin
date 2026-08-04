@@ -3,6 +3,15 @@
 
     var catalog = window.YMIN_PRODUCT_CATALOG || { meta: {}, products: [] };
     var products = Array.isArray(catalog.products) ? catalog.products : [];
+    var replacementCatalog = window.YMIN_REPLACEMENT_CROSS_REFERENCE || { meta: {}, mappings: [] };
+    var replacementMappings = Array.isArray(replacementCatalog.mappings) ? replacementCatalog.mappings : [];
+    var replacementByYmin = {};
+    replacementMappings.forEach(function (mapping) {
+        var key = mapping.yminPartKey || partKey(mapping.yminPart);
+        if (!key) return;
+        replacementByYmin[key] = replacementByYmin[key] || [];
+        replacementByYmin[key].push(mapping);
+    });
     var legacyArticles = [
         { title: '混合动力电容器在车载ECU中的应用优势', date: '2024-03-15', category: '技术文章' },
         { title: '如何通过低ESR电容提升DC-DC转换器效率', date: '2024-02-28', category: '设计指南' },
@@ -10,6 +19,12 @@
     ];
 
     function byId(id) { return document.getElementById(id); }
+
+    function partKey(value) {
+        var text = String(value || '');
+        if (text.normalize) text = text.normalize('NFKC');
+        return text.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    }
 
     function esc(value) {
         return String(value == null ? '' : value).replace(/[&<>'"]/g, function (char) {
@@ -76,30 +91,8 @@
         return field && field.value ? field.value : '';
     }
 
-    function comparableNumber(value) {
-        var number = Number(value);
-        return Number.isFinite(number) ? number : null;
-    }
-
-    function relatedProducts(product) {
-        var voltage = comparableNumber(product.voltageNumber);
-        var capacitance = comparableNumber(product.capacitanceUf);
-        return products.filter(function (candidate) {
-            return candidate.itemNo !== product.itemNo && candidate.category === product.category;
-        }).map(function (candidate) {
-            var score = 0;
-            if (product.series && candidate.series === product.series) score += 12;
-            if (product.package && candidate.package === product.package) score += 7;
-            var candidateVoltage = comparableNumber(candidate.voltageNumber);
-            var candidateCapacitance = comparableNumber(candidate.capacitanceUf);
-            if (voltage != null && candidateVoltage != null) score -= Math.abs(candidateVoltage - voltage) / Math.max(voltage, 1);
-            if (capacitance != null && candidateCapacitance != null && capacitance > 0 && candidateCapacitance > 0) {
-                score -= Math.abs(Math.log(candidateCapacitance / capacitance));
-            }
-            return { product: candidate, score: score };
-        }).sort(function (left, right) {
-            return right.score - left.score || left.product.itemNo.localeCompare(right.product.itemNo);
-        }).slice(0, 3).map(function (entry) { return entry.product; });
+    function crossReferencesFor(itemNo) {
+        return replacementByYmin[partKey(itemNo)] || [];
     }
 
     function applicationReferences(category) {
@@ -132,7 +125,7 @@
         var merged = Object.assign({}, product, detail);
         var specFields = Array.isArray(merged.specFields) ? merged.specFields : [];
         var features = descriptionLines(merged.description);
-        var alternatives = relatedProducts(merged);
+        var crossReferences = crossReferencesFor(merged.itemNo);
         var applications = applicationReferences(merged.category);
         var cad = merged.cad;
         var cadAvailable = !!(cad && cad.candidateCount);
@@ -200,9 +193,16 @@
         var cadTitle = cadAvailable ? '3D-CAD 模型' : '申请 3D-CAD';
         var cadSubtitle = cadAvailable ? '已有 STEP 模型，可预览与下载' : '当前暂无模型，可提交需求';
         var cadIcon = cadAvailable ? 'token' : 'add_box';
-        var alternativesHtml = alternatives.length ? alternatives.map(function (candidate) {
-            return '<li><a class="flex items-center gap-3 p-3 bg-slate-50 border hover:border-primary" href="product-detail.html?pn=' + encodeURIComponent(candidate.itemNo) + '"><span class="material-symbols-outlined text-primary">memory</span><div class="min-w-0"><span class="font-mono text-sm font-bold break-all">' + esc(candidate.itemNo) + '</span><p class="text-[10px] text-slate-500">' + display(candidate.voltage) + ' · ' + display(candidate.capacitance) + ' · ' + display(candidate.size) + '</p></div></a></li>';
-        }).join('') : '<li class="p-4 bg-slate-50 border text-xs text-slate-400">暂无可推荐的相近料号</li>';
+        var crossReferencesHtml = crossReferences.length ? crossReferences.map(function (mapping) {
+            var referenceSpecs = [
+                mapping.competitorSeries ? '系列：' + mapping.competitorSeries : '',
+                mapping.voltage ? '电压：' + mapping.voltage : '',
+                mapping.capacitance ? '容量：' + mapping.capacitance : '',
+                mapping.size ? '尺寸：' + mapping.size : '',
+                mapping.life ? '寿命：' + mapping.life : ''
+            ].filter(Boolean).join(' · ');
+            return '<li class="border border-slate-200 bg-slate-50 p-4"><div class="flex flex-wrap items-start justify-between gap-2"><div class="min-w-0"><p class="text-[10px] font-bold text-slate-500">' + esc(mapping.competitorBrand || mapping.competitorBrandRaw || '同行品牌') + '</p><p class="mt-1 break-all font-mono text-sm font-bold text-primary">' + esc(mapping.competitorPart) + '</p></div><span class="bg-emerald-50 px-2 py-1 text-[9px] font-bold text-emerald-700">' + esc(mapping.matchType || '对应关系') + '</span></div>' + (referenceSpecs ? '<p class="mt-2 text-[10px] leading-4 text-slate-500">' + esc(referenceSpecs) + '</p>' : '') + '</li>';
+        }).join('') : '<li class="border border-slate-200 bg-slate-50 p-4 text-xs text-slate-400">暂无已收录的同行替代关系</li>';
 
         var html = '';
         html += '<div class="bg-white border border-slate-200 p-6 lg:p-8 mb-6"><div class="flex flex-col lg:flex-row gap-6 lg:gap-8"><div class="flex-1 min-w-0"><div class="flex flex-col md:flex-row md:items-start gap-6"><div class="flex-1 min-w-0"><div class="text-3xl font-bold text-primary mb-1 leading-tight">' + display(merged.category) + '</div><h1 class="text-4xl font-bold text-primary mb-2 break-all">' + esc(merged.itemNo) + '</h1><div class="flex flex-wrap items-center gap-3 mb-2"><span class="bg-primary text-white text-[11px] px-3 py-1 font-bold uppercase tracking-wider">' + lifecycleStatus + '</span><span class="text-xs text-slate-500">' + display(merged.series) + ' 系列 · ' + display(merged.package) + '</span>' + (updated ? '<span class="text-[10px] text-slate-400">数据更新：' + esc(updated) + '</span>' : '') + '</div>' + featureHtml + certHtml + '</div><div class="md:w-52 lg:w-56 shrink-0">' + productImage + '</div></div><div class="grid grid-cols-2 md:grid-cols-3 gap-4 bg-slate-50 p-5 border border-slate-100 mt-5">' + quickSpecs.map(function (spec) { return '<div><div class="text-[10px] uppercase tracking-wider text-slate-500">' + esc(spec[0]) + '</div><div class="text-base font-semibold text-primary">' + display(spec[1]) + '</div></div>'; }).join('') + '</div></div>';
@@ -212,7 +212,7 @@
         html += '<div class="mt-10 pt-6 border-t"><h3 class="text-xl font-bold text-primary mb-2 flex items-center gap-2"><span class="material-symbols-outlined">straighten</span>产品尺寸图与额定纹波电流、频率条件</h3><p class="text-xs text-slate-500 mb-5">本料号结构化参数与系列技术图对应展示。</p><div class="grid grid-cols-1 xl:grid-cols-2 gap-5"><div><h4 class="font-bold text-sm text-primary mb-3">本料号尺寸（单位：mm）</h4><div class="overflow-x-auto">' + dimensionTable + '</div></div><div><h4 class="font-bold text-sm text-primary mb-3">本料号纹波参数</h4><div class="overflow-x-auto">' + rippleTable + '</div></div></div>' + technicalFigure + '</div></div>';
 
         html += '<aside class="lg:w-80 flex flex-col gap-6"><div class="bg-white border border-slate-200 p-6"><div class="flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-primary text-xl">build</span><h3 class="text-xl font-bold text-primary">设计工具与资源</h3></div><div class="space-y-3">' + resourceItem('timer', '寿命推算工具', '在线计算工作寿命', 'design-life-calc.html', true) + resourceItem('query_stats', 'SPICE 模型', '电路仿真模型', 'design-spice.html', true) + resourceItem(cadIcon, cadTitle, cadSubtitle, cadUrl, true) + resourceItem('picture_as_pdf', '产品规格书', datasheet ? '已提供 PDF' : '暂无 PDF', datasheet, !!datasheet) + resourceItem('fact_check', 'RoHS / REACH', display(merged.rohs), 'support-download.html', true) + resourceItem('monitoring', '可靠性数据', '试验报告', 'design-reliability.html', true) + (sourceUrl ? resourceItem('database', '原始数据页', '查看现官网来源', sourceUrl, true) : '') + '</div></div>';
-        html += '<div class="bg-white border border-slate-200 p-6"><h3 class="text-lg font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">compare_arrows</span>交叉参考</h3><p class="text-xs text-slate-500 mb-4">同类别、同系列/封装的相近规格：</p><ul class="space-y-3">' + alternativesHtml + '</ul><div class="mt-4 p-3 bg-amber-50/50 border border-amber-200"><p class="text-xs flex items-start gap-2"><span class="material-symbols-outlined text-amber-600 text-sm">info</span>替换前请核对完整电气与机械规格。</p></div></div></aside></div>';
+        html += '<div class="bg-white border border-slate-200 p-6"><div class="mb-4 flex items-center justify-between gap-3"><h3 class="text-lg font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">compare_arrows</span>交叉参考</h3><a class="text-[10px] font-bold text-primary hover:underline" href="product-replacement.html?search=' + encodeURIComponent(merged.itemNo || '') + '">查看全部替代料</a></div><p class="text-xs text-slate-500 mb-4">该永铭料号在替代数据表中对应的同行料号：</p><ul class="space-y-3">' + crossReferencesHtml + '</ul><div class="mt-4 p-3 bg-amber-50/50 border border-amber-200"><p class="text-xs flex items-start gap-2"><span class="material-symbols-outlined text-amber-600 text-sm">info</span>PIN TO PIN 不代表所有电气指标完全等效，批量替换前请核对完整规格并完成工程验证。</p></div></div></aside></div>';
 
         html += '<div class="bg-white border border-slate-200 p-8 mb-8"><h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3"><span class="material-symbols-outlined text-2xl">devices</span>推荐应用场景</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-4">' + applications.map(function (application) { return '<a class="bg-slate-50 border p-5 text-center hover:border-primary" href="application-center.html"><span class="material-symbols-outlined text-3xl text-primary mb-2">' + esc(application[0]) + '</span><h4 class="font-bold text-sm mb-1">' + esc(application[1]) + '</h4><p class="text-[10px] text-slate-500 uppercase">典型应用</p></a>'; }).join('') + '</div><div class="mt-6 p-5 bg-primary/5 border-l-4 border-primary"><p class="text-sm text-slate-700"><span class="font-bold">产品类别：</span>' + display(merged.category) + '。应用场景为类别级参考，实际选型请结合额定电压、容量、温度、纹波电流及寿命要求。</p></div></div>';
 

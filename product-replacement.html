@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
+    <title>寻找替代料 - 永铭电子</title>
+    <meta name="description" content="输入同行完整料号，查询对应的永铭替代料号，并浏览永铭已收录的全部替代关系。">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/product-replacement.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config={darkMode:"class",theme:{extend:{colors:{primary:"#1B365D"},borderRadius:{DEFAULT:"0px"},fontFamily:{headline:["Space Grotesk"],body:["Inter"]}}}}
+    </script>
+</head>
+<body class="bg-[#f5f7fa] text-slate-900 flex min-h-screen flex-col">
+    <header id="ymin-navbar"></header>
+
+    <main class="replacement-page flex-1">
+        <div class="replacement-container">
+            <nav class="replacement-breadcrumb" aria-label="面包屑">
+                <a href="index.html">首页</a><span>/</span>
+                <a href="product-center.html">产品中心</a><span>/</span>
+                <span>寻找替代料</span>
+            </nav>
+
+            <section class="replacement-hero" aria-labelledby="replacement-title">
+                <div class="replacement-hero-copy">
+                    <span class="replacement-kicker">产品替代查询</span>
+                    <h1 id="replacement-title">寻找替代料</h1>
+                    <p>输入同行完整料号，查找对应的永铭替代料号；也可以浏览全部已收录的替代关系。</p>
+                </div>
+                <div class="replacement-stat-grid" aria-label="替代料数据概况">
+                    <div><strong id="replacement-competitor-count">—</strong><span>同行料号</span></div>
+                    <div><strong id="replacement-mapping-count">—</strong><span>替代关系</span></div>
+                    <div><strong id="replacement-ymin-count">—</strong><span>永铭料号</span></div>
+                </div>
+            </section>
+
+            <section class="replacement-search-panel" aria-label="替代料搜索">
+                <form id="replacement-search-form" class="replacement-search" role="search">
+                    <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                    <input id="replacement-search-input" type="search" autocomplete="off" placeholder="输入同行完整料号、品牌或永铭料号">
+                    <button type="submit">寻找替代料</button>
+                </form>
+                <div class="replacement-search-foot">
+                    <p>建议输入完整料号以获得准确结果；粘贴完整料号后可直接查询。</p>
+                    <button id="replacement-search-clear" type="button">查看全部替代料号</button>
+                </div>
+            </section>
+
+            <section class="replacement-list-section" aria-labelledby="replacement-list-title">
+                <div class="replacement-section-heading">
+                    <div>
+                        <h2 id="replacement-list-title">全部替代料号</h2>
+                        <p>每条记录均展示同行料号与对应的永铭替代料号；一个同行料号对应多个永铭料号时分行展示。</p>
+                    </div>
+                    <button id="replacement-export" class="replacement-export" type="button">
+                        <span class="material-symbols-outlined" aria-hidden="true">download</span>导出当前结果
+                    </button>
+                </div>
+
+                <div class="replacement-toolbar">
+                    <div class="replacement-filters">
+                        <label>
+                            <span>同行品牌</span>
+                            <select id="replacement-brand-filter"><option value="all">全部品牌</option></select>
+                        </label>
+                        <label>
+                            <span>产品资料</span>
+                            <select id="replacement-status-filter">
+                                <option value="all">全部状态</option>
+                                <option value="available">可查看产品详情</option>
+                                <option value="pending">产品资料待同步</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>每页显示</span>
+                            <select id="replacement-page-size">
+                                <option value="25">25 条</option>
+                                <option value="50" selected>50 条</option>
+                                <option value="100">100 条</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="replacement-result-summary" id="replacement-result-summary" aria-live="polite">正在读取替代关系…</div>
+                </div>
+
+                <div id="replacement-active-query" class="replacement-active-query hidden"></div>
+
+                <div class="replacement-table-wrap">
+                    <table class="replacement-table">
+                        <thead>
+                            <tr>
+                                <th>同行品牌</th>
+                                <th>同行料号</th>
+                                <th>同行系列</th>
+                                <th>同行产品参数</th>
+                                <th class="replacement-direction"><span class="material-symbols-outlined" aria-label="替代为">arrow_forward</span></th>
+                                <th>永铭替代料号</th>
+                                <th>永铭产品资料</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="replacement-table-body"></tbody>
+                    </table>
+                    <div id="replacement-empty" class="replacement-empty hidden">
+                        <span class="material-symbols-outlined" aria-hidden="true">search_off</span>
+                        <h3>暂未找到对应替代料</h3>
+                        <p>请核对料号拼写，或清除筛选后浏览全部替代关系。</p>
+                    </div>
+                </div>
+
+                <div id="replacement-pagination" class="replacement-pagination"></div>
+
+                <div class="replacement-notice">
+                    <span class="material-symbols-outlined" aria-hidden="true">info</span>
+                    <p>替代关系以当前数据表为依据。批量替换前，请核对双方完整规格书，并结合工作电压、容量、尺寸、温度、纹波电流、ESR、寿命及认证要求完成工程验证。</p>
+                </div>
+            </section>
+        </div>
+        <footer id="ymin-footer"></footer>
+    </main>
+
+    <script src="components/navbar.js?v=20260803"></script>
+    <script src="components/footer.js"></script>
+    <script src="data/products.js"></script>
+    <script src="data/replacement-cross-reference.js?v=20260804"></script>
+    <script src="components/product-replacement.js?v=20260804"></script>
+</body>
+</html>
