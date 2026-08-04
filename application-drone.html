@@ -70,26 +70,24 @@
             <div class="bg-white border border-slate-200 p-8 mb-8">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="flex-1">
-                        <h1 class="text-3xl font-bold text-primary mb-3">无人机应用指南</h1>
-                        <p class="text-slate-600 mb-4">永铭为无人机领域提供轻量化、高能量密度电容解决方案，覆盖<strong>飞控系统、电调(ESC)、图传模块、BMS电池管理</strong>等核心组件。</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">轻量化</span> <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">高能量密度</span> <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">低ESR</span> <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">宽温</span>
+                        <h1 id="applicationHeroTitle" class="text-3xl font-bold text-primary mb-3">无人机应用指南</h1>
+                        <p id="applicationHeroDescription" class="text-slate-600 mb-4">面向无人机电子调速器与航点飞行调参，提供适用于滤波、储能和稳定供电的电容方案。</p>
+                        <div id="applicationHeroTags" class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">大纹波</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">高能量密度</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">小型化</span>
                         </div>
                         <button class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition"><span class="material-symbols-outlined text-base align-middle">download</span> 无人机应用选型指南</button>
                     </div>
                     <div class="md:w-72 bg-slate-100 border border-slate-200 flex items-center justify-center p-6">
-                        <span class="material-symbols-outlined text-6xl text-slate-400">flight</span>
+                        <span id="applicationHeroIcon" class="material-symbols-outlined text-6xl text-slate-400">flight</span>
                     </div>
                 </div>
             </div>
 
             <div class="bg-white border border-slate-200 p-4 mb-6">
                 <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择应用领域</p>
-                <div class="flex flex-wrap gap-2" id="tabContainer">
-                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="t0">飞控系统</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t1">电调ESC</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t2">图传与通信</button>
-                </div>
+                <div class="flex flex-wrap gap-2" id="tabContainer"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 mb-8">
@@ -135,182 +133,11 @@
         <!-- 页脚（由 components/footer.js 注入） -->
         <footer id="ymin-footer"></footer>
     </main>
-
-    <script>
-        // renderTopologySVG 已移至 data/topology.js（共享）
-        function renderTopologySVG_deprecated(nodes, highlight, seriesMap) {
-            if (!nodes || nodes.length === 0) return '';
-            var cols = Math.min(nodes.length, 5);
-            var boxW = 90, boxH = 44, gap = 14;
-            var totalW = cols * boxW + (cols - 1) * gap;
-            var svgW = Math.max(totalW + 60, 360);
-            var svgH = 160;
-            var startX = (svgW - totalW) / 2;
-            var midY = svgH / 2;
-            var svg = '<div class="topo-container mb-4"><div class="flex items-center justify-between mb-3"><p class="text-[10px] text-slate-400 uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图</p><div class="flex gap-2 text-[9px]"><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#1B365D] inline-block"></span> 推荐产品位置</span><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#e2e8f0] border border-[#94a3b8] inline-block"></span> 功能模块</span></div></div>';
-            svg += '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" class="topo-svg">';
-            svg += '<defs><pattern id="grid_' + nodes.length + '" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e8ecf1" stroke-width="0.3"/></pattern></defs>';
-            svg += '<rect width="' + svgW + '" height="' + svgH + '" fill="url(#grid_' + nodes.length + ')"/>';
-            svg += '<g class="topo-power">';
-            svg += '<circle cx="22" cy="' + midY + '" r="12" fill="#1B365D" stroke="#1B365D" stroke-width="2"/>';
-            svg += '<text x="22" y="' + (midY + 4) + '" font-size="7" text-anchor="middle" fill="#ffffff" font-weight="bold">VCC</text>';
-            svg += '<line x1="22" y1="' + (midY - 12) + '" x2="22" y2="' + (midY - 18) + '" stroke="#1B365D" stroke-width="2"/>';
-            svg += '<line x1="16" y1="' + (midY - 18) + '" x2="28" y2="' + (midY - 18) + '" stroke="#1B365D" stroke-width="2"/>';
-            svg += '</g>';
-            svg += '<text x="22" y="' + (midY + 24) + '" font-size="6" text-anchor="middle" fill="#64748b">电源输入</text>';
-            svg += '<line x1="34" y1="' + midY + '" x2="' + startX + '" y2="' + midY + '" class="topo-line-flow"/>';
-            for (var i = 0; i < nodes.length; i++) {
-                var x = startX + i * (boxW + gap);
-                var y = midY - boxH/2;
-                var isHL = highlight && highlight.indexOf(i) >= 0;
-                var series = seriesMap && seriesMap[i] ? seriesMap[i] : null;
-                svg += '<g class="topo-node">';
-                svg += '<rect x="' + x + '" y="' + y + '" width="' + boxW + '" height="' + boxH + '" rx="4" class="topo-rect" fill="' + (isHL ? '#dbeafe' : '#e2e8f0') + '" stroke="' + (isHL ? '#1B365D' : '#94a3b8') + '" stroke-width="1.5"/>';
-                svg += '<text x="' + (x + boxW/2) + '" y="' + (y + boxH/2 + 2) + '" font-size="9" text-anchor="middle" class="topo-label" fill="' + (isHL ? '#1B365D' : '#1e293b') + '" font-weight="' + (isHL ? 'bold' : 'normal') + '">' + nodes[i] + '</text>';
-                if (series) {
-                    var tagY = y + boxH + 4, tagW = 50, tagH = 14, tagX = x + (boxW - tagW) / 2;
-                    svg += '<a href="' + series.link + '">';
-                    svg += '<rect x="' + tagX + '" y="' + tagY + '" width="' + tagW + '" height="' + tagH + '" rx="3" class="topo-series-tag" fill="' + (isHL ? '#1B365D' : '#94a3b8') + '" opacity="0.9"/>';
-                    svg += '<text x="' + (tagX + tagW/2) + '" y="' + (tagY + tagH/2 + 1) + '" font-size="7" text-anchor="middle" class="topo-series-text" fill="#ffffff" font-weight="bold">' + series.name + '</text>';
-                    svg += '</a>';
-                }
-                svg += '</g>';
-                if (i < nodes.length - 1) {
-                    var x1 = x + boxW, x2 = x + boxW + gap, cy = midY;
-                    svg += '<line x1="' + x1 + '" y1="' + cy + '" x2="' + x2 + '" y2="' + cy + '" class="topo-line"/>';
-                    svg += '<circle cx="' + x1 + '" cy="' + cy + '" r="2.5" class="topo-dot"/>';
-                    svg += '<circle cx="' + x2 + '" cy="' + cy + '" r="2.5" class="topo-dot"/>';
-                    svg += '<polygon points="' + (x2-3) + ',' + (cy-4) + ' ' + x2 + ',' + cy + ' ' + (x2-3) + ',' + (cy+4) + '" class="topo-arrow"/>';
-                }
-            }
-            var lastX = startX + (nodes.length - 1) * (boxW + gap) + boxW;
-            svg += '<line x1="' + lastX + '" y1="' + midY + '" x2="' + (lastX + 16) + '" y2="' + midY + '" class="topo-line"/>';
-            svg += '<circle cx="' + lastX + '" cy="' + midY + '" r="2.5" class="topo-dot"/>';
-            svg += '<line x1="' + (lastX + 16) + '" y1="' + midY + '" x2="' + (lastX + 16) + '" y2="' + (midY + 8) + '" class="topo-gnd-line"/>';
-            svg += '<line x1="' + (lastX + 10) + '" y1="' + (midY + 8) + '" x2="' + (lastX + 22) + '" y2="' + (midY + 8) + '" class="topo-gnd-line"/>';
-            svg += '<line x1="' + (lastX + 12) + '" y1="' + (midY + 12) + '" x2="' + (lastX + 20) + '" y2="' + (midY + 12) + '" class="topo-gnd-line"/>';
-            svg += '<line x1="' + (lastX + 14) + '" y1="' + (midY + 16) + '" x2="' + (lastX + 18) + '" y2="' + (midY + 16) + '" class="topo-gnd-line"/>';
-            svg += '<text x="' + (lastX + 16) + '" y="' + (midY + 28) + '" font-size="6" text-anchor="middle" fill="#64748b">GND</text>';
-            if (nodes.length >= 2) {
-                var midNodeX = startX + Math.floor(nodes.length/2) * (boxW + gap) + boxW/2;
-                svg += '<line x1="' + midNodeX + '" y1="' + (midY - boxH/2) + '" x2="' + midNodeX + '" y2="' + (midY - boxH/2 - 14) + '" class="topo-line" stroke-dasharray="3,3"/>';
-                svg += '<line x1="' + (midNodeX - 6) + '" y1="' + (midY - boxH/2 - 14) + '" x2="' + (midNodeX + 6) + '" y2="' + (midY - boxH/2 - 14) + '" stroke="#1B365D" stroke-width="2"/>';
-                svg += '<line x1="' + (midNodeX - 6) + '" y1="' + (midY - boxH/2 - 18) + '" x2="' + (midNodeX + 6) + '" y2="' + (midY - boxH/2 - 18) + '" stroke="#1B365D" stroke-width="2"/>';
-                svg += '<text x="' + (midNodeX + 14) + '" y="' + (midY - boxH/2 - 14) + '" font-size="5" fill="#64748b">C</text>';
-            }
-            svg += '</svg></div>';
-            return svg;
-        }
-
-        
-
-        var currentTab = 't0';
-        var currentSub = 0;
-
-        function renderSubTabs(tabKey) {
-            var container = document.getElementById('subtabContainer');
-            var data = appData[tabKey];
-            if (!data) return;
-            var html = '';
-            for (var i = 0; i < data.subApps.length; i++) {
-                var sub = data.subApps[i];
-                var active = i === currentSub ? 'subtab-active' : 'text-slate-600 hover:bg-slate-100';
-                html += '<button class="w-full text-left px-3 py-2 text-xs font-medium ' + active + ' transition-colors" data-sub="' + i + '">';
-                html += '<span class="material-symbols-outlined text-base align-middle mr-1">' + sub.icon + '</span> ' + sub.name + '</button>';
-            }
-            container.innerHTML = html;
-            var btns = container.querySelectorAll('button');
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].addEventListener('click', function() {
-                    currentSub = parseInt(this.dataset.sub);
-                    renderSubTabs(tabKey);
-                    renderContent(tabKey);
-                });
-            }
-        }
-
-        var TAB_MAP = {'t0':'fc','t1':'esc','t2':'video'};
-var appData = {'t0':{name:'飞控系统',description:'',subApps:[{name:'飞控主板',series:[],icon:'developer_board'},{name:'IMU传感器',series:[],icon:'sensors'},],products:[]},'t1':{name:'电调ESC',description:'',subApps:[{name:'无刷电调',series:[],icon:'speed'},],products:[]},'t2':{name:'图传与通信',description:'',subApps:[{name:'图传模块',series:[],icon:'videocam'},{name:'通信模块',series:[],icon:'cell_tower'},],products:[]},};
-function renderContent(tabKey) {
-            var container = document.getElementById('tabContent');
-            var data = appData[tabKey];
-            if (!data) return;
-            var sub = data.subApps[currentSub];
-            if (!sub) return;
-            var html = '';
-            html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
-            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="电路拓扑模块.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
-                        // 先查 SPECS（样式2用，样式1也从中提取系列名）
-            var specs = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getSpecs('drone', TAB_MAP[tabKey]||currentTab, sub.name) : null;
-
-            // === 样式1: 系统模块详解与推荐系列（2列卡片，推荐系列每行一个） ===
-            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules('drone',TAB_MAP[tabKey]||tabKey, sub.name) : null;
-            if (sysMods) {
-                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐系列</h4>';
-                html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
-                sysMods.forEach(function(mod) {
-                    var recSeries = [];
-                    if (specs) { var seen = {}; specs.forEach(function(sp){ if(!seen[sp.series] && recSeries.length < 3){ recSeries.push(sp.series); seen[sp.series]=1; }}); }
-                    if (!recSeries.length && sub.series) recSeries = sub.series;
-                    var rows = recSeries.length ? recSeries.map(function(s){return '<div class="flex items-center gap-2 text-[10px] py-0.5"><span class="material-symbols-outlined text-primary text-xs">check_circle</span><span class="font-medium text-primary">' + s + '</span><span class="text-slate-400">系列</span></div>';}).join('') : '';
-                    html += '<div class="border border-slate-200 p-3 hover:border-primary transition-colors"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div class="flex-1"><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed mb-2">' + mod.desc + '</p>' + rows + '</div></div></div>';
-                });
-                html += '</div>';
-            }
-
-            // === 样式2: 系统模块详解与推荐规格（每个模块占一整行：介绍 + 规格表） ===
-            if (specs && sysMods) {
-                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-base">inventory</span>系统模块详解与推荐规格 <span class="text-[10px] font-normal text-slate-400 ml-1">（数据来源：PDF应用手册）</span></h4>';
-                sysMods.forEach(function(mod) {
-                    html += '<div class="border border-slate-200 p-4 mb-3">';
-                    html += '<div class="flex items-start gap-2 mb-3"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div><h5 class="text-sm font-bold text-primary mb-0.5">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p></div></div>';
-                    html += '<div class="overflow-x-auto"><table class="w-full text-xs border-collapse"><thead class="bg-slate-100"><tr><th class="border border-slate-300 px-2 py-1.5 text-left">系列</th><th class="border border-slate-300 px-2 py-1.5 text-left">料号</th><th class="border border-slate-300 px-2 py-1.5">电压</th><th class="border border-slate-300 px-2 py-1.5">容量</th><th class="border border-slate-300 px-2 py-1.5">尺寸</th><th class="border border-slate-300 px-2 py-1.5">ESR</th><th class="border border-slate-300 px-2 py-1.5">纹波</th><th class="border border-slate-300 px-2 py-1.5">寿命</th><th class="border border-slate-300 px-2 py-1.5 text-left">备注</th></tr></thead><tbody>';
-                    specs.forEach(function(s) {
-                        html += '<tr class="hover:bg-slate-50"><td class="border px-2 py-1.5 font-bold text-primary">' + (s.series||'') + '</td><td class="border px-2 py-1.5"><a href="product-detail.html?pn=' + encodeURIComponent(s.pn||'') + '" class="text-primary hover:underline">' + (s.pn||'') + '</a></td><td class="border px-2 py-1.5 text-center">' + (s.voltage||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.cap||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.size||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.esr||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.ripple||'') + '</td><td class="border px-2 py-1.5 text-center text-[10px]">' + (s.life||'') + '</td><td class="border px-2 py-1.5 text-[10px] text-slate-500">' + (s.note||'') + '</td></tr>';
-                    });
-                    html += '</tbody></table></div></div>';
-                });
-            }
-
-            container.innerHTML = html;
-        }
-
-        function switchTab(tabKey) {
-            currentTab = tabKey;
-            currentSub = 0;
-            var btns = document.querySelectorAll('#tabContainer button');
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].classList.remove('tab-active');
-                btns[i].classList.add('text-slate-500');
-                if (btns[i].dataset.tab === tabKey) {
-                    btns[i].classList.add('tab-active');
-                    btns[i].classList.remove('text-slate-500');
-                }
-            }
-            renderSubTabs(tabKey);
-            renderContent(tabKey);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var btns = document.querySelectorAll('#tabContainer button');
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].addEventListener('click', function() {
-                    switchTab(this.dataset.tab);
-                });
-            }
-        });
-    </script>
     <!-- 共享组件 -->
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
-    <script src="data/topology.js"></script>
-    <script src="data/system-modules.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            YMIN.navbar.inject('applications');
-            YMIN.footer.inject();
-            switchTab('t0');
-        });
-    </script>
+    <script src="data/application-collected-data.js"></script>
+    <script src="components/application-collected-page.js"></script>
+    <script src="components/application-collected-bootstrap.js" data-page-key="drone"></script>
 </body>
 </html>

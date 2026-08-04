@@ -29,7 +29,7 @@
         .mega-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s; }
         .tab-active { color: #1B365D; border-bottom: 3px solid #1B365D; font-weight: 700; }
         .subtab-active { background: #1B365D; color: #ffffff; font-weight: 600; }
-        
+
         /* 电路拓扑方块图 */
         .topo-container { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
         .topo-svg { width: 100%; height: auto; }
@@ -49,17 +49,17 @@
         .topo-power { animation: pulse 2s ease-in-out infinite; }
         @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
         .topo-gnd-line { stroke: #64748b; stroke-width: 1.5; }
-        
+
         /* 产品卡片 */
         .product-card { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
         .product-card:hover { border-color: #1B365D; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(27,54,93,0.1); }
         .product-card:hover .product-icon { color: #1B365D; }
         .product-icon { transition: color 0.25s; }
-        
+
         /* 模块卡片 */
         .module-card { transition: all 0.2s; }
         .module-card:hover { border-color: #1B365D; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        
+
         /* 优势条目 */
         .advantage-item { transition: all 0.2s; }
         .advantage-item:hover { background: #f0f4ff; }
@@ -82,13 +82,12 @@
             <div class="bg-white border border-slate-200 p-8 mb-8">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="flex-1">
-                        <h1 class="text-3xl font-bold text-primary mb-3">汽车电子应用指南</h1>
-                        <p class="text-slate-600 mb-4">永铭为汽车电子全场景提供高可靠性电容解决方案，覆盖<strong>主驱/电驱电控、充电系统、安全部件、ADAS、热管理、智能座舱、车灯、充电桩</strong>等核心领域。浏览下方子应用，了解推荐产品系列与设计资源。</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">AEC-Q200合规</span>
+                        <h1 id="applicationHeroTitle" class="text-3xl font-bold text-primary mb-3">汽车电子应用指南</h1>
+                        <p id="applicationHeroDescription" class="text-slate-600 mb-4">电驱/电控/电源、安全部件、热管理、智能座舱、智能驾驶、车灯、充电桩 —— AEC-Q200合规，耐高温125℃、135℃、150℃，耐振动。</p>
+                        <div id="applicationHeroTags" class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">AEC-Q200</span>
                             <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">135℃耐高温</span>
-                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">低ESR/低漏电流</span>
-                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">抗振动</span>
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold">极低漏电流</span>
                         </div>
                         <div class="flex flex-wrap gap-3">
                             <button class="border border-primary text-primary px-5 py-2 text-sm font-bold hover:bg-primary hover:text-white transition"><span class="material-symbols-outlined text-base align-middle">download</span> 固液混合电容汽车应用选型指南</button>
@@ -96,7 +95,7 @@
                         </div>
                     </div>
                     <div class="md:w-72 bg-slate-100 border border-slate-200 flex items-center justify-center p-6">
-                        <span class="material-symbols-outlined text-6xl text-slate-400">directions_car</span>
+                        <span id="applicationHeroIcon" class="material-symbols-outlined text-6xl text-slate-400">directions_car</span>
                     </div>
                 </div>
             </div>
@@ -104,23 +103,13 @@
             <!-- 一级目录：应用领域类别标签 -->
             <div class="bg-white border border-slate-200 p-4 mb-6">
                 <p class="text-[10px] text-slate-400 uppercase mb-2 tracking-wider">选择应用领域</p>
-                <div class="flex flex-wrap gap-2" id="tabContainer">
-                    <button class="px-5 py-2 text-sm font-semibold tab-active" data-tab="t0">电机驱动</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t1">安全部件</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t2">热管理部件</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t3">新能源车车灯</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t4">智能驾驶</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t5">多媒体系统</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t6">辅助</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t7">车载OBC</button>
-                    <button class="px-5 py-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors" data-tab="t8">充电桩</button>
-                </div>
+                <div class="flex flex-wrap gap-2" id="tabContainer"></div>
             </div>
 
             <!-- 主体内容区 -->
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 mb-8">
                 <div class="bg-white border border-slate-200 p-4">
-                    <p class="text-[10px] text-slate-400 uppercase mb-3 tracking-wider">选择子应用</p>
+                    <p id="applicationSubtabLabel" class="text-[10px] text-slate-400 uppercase mb-3 tracking-wider">选择子应用</p>
                     <div class="space-y-1" id="subtabContainer"></div>
                     <!-- 设计工具入口（统一产品详情页样式） -->
                     <div class="mt-8 pt-4 border-t border-slate-100">
@@ -172,239 +161,12 @@
         <!-- 页脚（由 components/footer.js 注入） -->
         <footer id="ymin-footer"></footer>
     </main>
-
-    <script>
-        // ===== 电路拓扑图渲染函数（电路图风格） =====
-        // renderTopologySVG 已移至 data/topology.js（共享）
-        // ===== 应用数据结构（对齐固液混合手册6大领域） =====
-        const appData = {
-            't0': {
-                name: '电机驱动',
-                description: '',
-                subApps: [
-                    { name: '电机控制器-MCU', series: [], icon: 'precision_manufacturing' },
-                    { name: '直流转直流-DCDC', series: [], icon: 'precision_manufacturing' },
-                    { name: '高压分线盒-PDU', series: [], icon: 'precision_manufacturing' },
-                    { name: '整车控制-VCU', series: [], icon: 'precision_manufacturing' },
-                    { name: '电池管理系统-BMS', series: [], icon: 'precision_manufacturing' },
-                ],
-                products: []
-            },
-            't1': {
-                name: '安全部件',
-                description: '',
-                subApps: [
-                    { name: '刹车制动-BS', series: [], icon: 'shield' },
-                    { name: '电子助力转向-EPS', series: [], icon: 'shield' },
-                    { name: '安全气囊', series: [], icon: 'shield' },
-                    { name: '车窗控制器', series: [], icon: 'shield' },
-                    { name: '座椅通风', series: [], icon: 'shield' },
-                    { name: '车身稳定系统-ESC', series: [], icon: 'shield' },
-                ],
-                products: []
-            },
-            't2': {
-                name: '热管理部件',
-                description: '',
-                subApps: [
-                    { name: '电子水泵/油泵', series: [], icon: 'ac_unit' },
-                    { name: '空调压缩机控制器', series: [], icon: 'ac_unit' },
-                    { name: 'BMS电池管理', series: [], icon: 'ac_unit' },
-                    { name: '冷却风扇控制器', series: [], icon: 'ac_unit' },
-                    { name: '电子水阀', series: [], icon: 'ac_unit' },
-                    { name: 'PTC加热器', series: [], icon: 'ac_unit' },
-                    { name: '电子水泵', series: [], icon: 'ac_unit' },
-                ],
-                products: []
-            },
-            't3': {
-                name: '新能源车车灯',
-                description: '',
-                subApps: [
-                    { name: '新能源车车灯', series: [], icon: 'light' },
-                ],
-                products: []
-            },
-            't4': {
-                name: '智能驾驶',
-                description: '',
-                subApps: [
-                    { name: '底盘域控制器', series: [], icon: 'radar' },
-                    { name: '雷达', series: [], icon: 'radar' },
-                    { name: '域控制器-DCU', series: [], icon: 'radar' },
-                    { name: '雷达摄像头', series: [], icon: 'radar' },
-                    { name: '智能座舱', series: [], icon: 'radar' },
-                    { name: '车门窗控制器', series: [], icon: 'radar' },
-                    { name: '自动换挡器', series: [], icon: 'radar' },
-                    { name: '远程通信模块/T-BOX', series: [], icon: 'radar' },
-                ],
-                products: []
-            },
-            't5': {
-                name: '多媒体系统',
-                description: '',
-                subApps: [
-                    { name: '组合仪表、车载屏、导航', series: [], icon: 'tv' },
-                    { name: '抬头显示HUD', series: [], icon: 'tv' },
-                    { name: '远程通讯模块-T-BOX', series: [], icon: 'tv' },
-                    { name: '音响', series: [], icon: 'tv' },
-                ],
-                products: []
-            },
-            't6': {
-                name: '辅助',
-                description: '',
-                subApps: [
-                    { name: '冰箱控制器', series: [], icon: 'kitchen' },
-                    { name: 'USB/WPT', series: [], icon: 'kitchen' },
-                ],
-                products: []
-            },
-            't7': {
-                name: '车载OBC',
-                description: '',
-                subApps: [
-                    { name: 'OBC-DCDC', series: [], icon: 'ev_station' },
-                ],
-                products: []
-            },
-            't8': {
-                name: '充电桩',
-                description: '',
-                subApps: [
-                    { name: '交流转直流-AC/DC', series: [], icon: 'bolt' },
-                    { name: '直流转直流-DC-DC', series: [], icon: 'bolt' },
-                ],
-                products: []
-            },
-        };
-
-        // ===== 渲染函数 =====
-
-        let currentTab = '电机驱动';
-        let currentSub = 0;
-
-        var TAB_MAP = {'t0':'mainDrive','t1':'safety','t2':'thermal','t3':'lamp','t4':'adas','t5':'cockpit','t6':'charge','t7':'charge','t8':'charger'};
-function getUrlParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        function renderSubTabs(tabKey) {
-            const container = document.getElementById('subtabContainer');
-            const data = appData[tabKey];
-            if (!data) return;
-            container.innerHTML = data.subApps.map((sub, i) => {
-                const active = i === currentSub ? 'subtab-active' : 'text-slate-600 hover:bg-slate-100';
-                return '<button class="w-full text-left px-3 py-2 text-xs font-medium ' + active + ' transition-colors" data-sub="' + i + '">' +
-                    '<span class="material-symbols-outlined text-base align-middle mr-1">' + sub.icon + '</span> ' + sub.name +
-                    '</button>';
-            }).join('');
-            container.querySelectorAll('button').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    currentSub = parseInt(this.dataset.sub);
-                    renderSubTabs(tabKey);
-                    renderContent(tabKey);
-                });
-            });
-        }
-
-        function renderContent(tabKey) {
-            console.log('renderContent called with:', tabKey);
-            const container = document.getElementById('tabContent');
-            if(!container){console.error('tabContent not found!');return;}
-            const data = appData[tabKey];
-            console.log('appData['+tabKey+']:', data ? 'found' : 'NOT FOUND');
-            if (!data) {container.innerHTML='<p>Tab未找到: '+tabKey+'</p>';return;}
-            const sub = data.subApps[currentSub];
-            console.log('subApps['+currentSub+']:', sub ? sub.name : 'NOT FOUND');
-            if (!sub) {container.innerHTML='<p>子应用未找到 index:'+currentSub+'</p>';return;}
-
-            let html = '';
-
-            // 子应用标题
-            html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
-
-            // 电路拓扑图
-            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用）</p></div>';
-
-            // 先查 SPECS
-            var specs = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getSpecs('automotive', TAB_MAP[tabKey]||tabKey, sub.name) : null;
-
-            // === 样式1: 系统模块详解与推荐系列（2列卡片，推荐系列每行一个） ===
-            var sysMods = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getModules(TAB_MAP[tabKey]||tabKey, sub.name) : null;
-            if (sysMods) {
-                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-4 flex items-center gap-1"><span class="material-symbols-outlined text-base">settings_suggest</span> 系统模块详解与推荐系列</h4>';
-                html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
-                sysMods.forEach(function(mod) {
-                    var recSeries = [];
-                    if (specs) { var seen = {}; specs.forEach(function(sp){ if(!seen[sp.series] && recSeries.length < 3){ recSeries.push(sp.series); seen[sp.series]=1; }}); }
-                    if (!recSeries.length && sub.series) recSeries = sub.series;
-                    var rows = recSeries.length ? recSeries.map(function(s){return '<div class="flex items-center gap-2 text-[10px] py-0.5"><span class="material-symbols-outlined text-primary text-xs">check_circle</span><span class="font-medium text-primary">' + s + '</span><span class="text-slate-400">系列</span></div>';}).join('') : '';
-                    html += '<div class="border border-slate-200 p-3 hover:border-primary transition-colors"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div class="flex-1"><h5 class="text-xs font-bold mb-1">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed mb-2">' + mod.desc + '</p>' + rows + '</div></div></div>';
-                });
-                html += '</div>';
-            }
-
-            // === 样式2: 系统模块详解与推荐规格（每个模块占一整行：介绍 + 规格表） ===
-            if (specs && sysMods) {
-                html += '<h4 class="text-sm font-bold text-primary mb-3 mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-base">inventory</span>系统模块详解与推荐规格 <span class="text-[10px] font-normal text-slate-400 ml-1">（数据来源：PDF应用手册）</span></h4>';
-                sysMods.forEach(function(mod) {
-                    html += '<div class="border border-slate-200 p-4 mb-3">';
-                    html += '<div class="flex items-start gap-2 mb-3"><span class="material-symbols-outlined text-primary text-xl">' + (mod.icon || 'memory') + '</span><div><h5 class="text-sm font-bold text-primary mb-0.5">' + mod.name + '</h5><p class="text-[10px] text-slate-600 leading-relaxed">' + mod.desc + '</p></div></div>';
-                    html += '<div class="overflow-x-auto"><table class="w-full text-xs border-collapse"><thead class="bg-slate-100"><tr><th class="border border-slate-300 px-2 py-1.5 text-left">系列</th><th class="border border-slate-300 px-2 py-1.5 text-left">料号</th><th class="border border-slate-300 px-2 py-1.5">电压</th><th class="border border-slate-300 px-2 py-1.5">容量</th><th class="border border-slate-300 px-2 py-1.5">尺寸</th><th class="border border-slate-300 px-2 py-1.5">ESR</th><th class="border border-slate-300 px-2 py-1.5">纹波</th><th class="border border-slate-300 px-2 py-1.5">寿命</th><th class="border border-slate-300 px-2 py-1.5 text-left">备注</th></tr></thead><tbody>';
-                    specs.forEach(function(s) {
-                        html += '<tr class="hover:bg-slate-50"><td class="border px-2 py-1.5 font-bold text-primary">' + (s.series||'') + '</td><td class="border px-2 py-1.5"><a href="product-detail.html?pn=' + encodeURIComponent(s.pn||'') + '" class="text-primary hover:underline">' + (s.pn||'') + '</a></td><td class="border px-2 py-1.5 text-center">' + (s.voltage||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.cap||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.size||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.esr||'') + '</td><td class="border px-2 py-1.5 text-center">' + (s.ripple||'') + '</td><td class="border px-2 py-1.5 text-center text-[10px]">' + (s.life||'') + '</td><td class="border px-2 py-1.5 text-[10px] text-slate-500">' + (s.note||'') + '</td></tr>';
-                    });
-                    html += '</tbody></table></div></div>';
-                });
-            }
-
-            container.innerHTML = html;
-        }
-
-        function switchTab(tabKey) {
-            currentTab = tabKey;
-            currentSub = 0;
-            document.querySelectorAll('#tabContainer button').forEach(btn => {
-                btn.classList.remove('tab-active');
-                btn.classList.add('text-slate-500');
-                if (btn.dataset.tab === tabKey) {
-                    btn.classList.add('tab-active');
-                    btn.classList.remove('text-slate-500');
-                }
-            });
-            renderSubTabs(tabKey);
-            renderContent(tabKey);
-        }
-
-        // 绑定事件（不在这里初始化）
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('#tabContainer button').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    switchTab(this.dataset.tab);
-                });
-            });
-        });
-    </script>
     <!-- 共享组件 -->
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
-    <script src="data/topology.js"></script>
-    <script src="data/system-modules.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            YMIN.navbar.inject('applications');
-            YMIN.footer.inject();
-            console.log('Init: YMIN.sysMod =', typeof YMIN !== 'undefined' && YMIN.sysMod ? 'OK' : 'MISSING');
-            console.log('Init: appData keys =', Object.keys(appData));
-            const tabParam = getUrlParam('tab');
-            if (tabParam && appData[tabParam]) {
-                switchTab(tabParam);
-            } else {
-                switchTab('t0');
-            }
-        });
-    </script>
+    <script src="data/application-collected-data.js"></script>
+    <script src="data/application-automotive-supercapacitor.js"></script>
+    <script src="components/application-collected-page.js"></script>
+    <script src="components/application-collected-bootstrap.js" data-page-key="automotive"></script>
 </body>
 </html>
