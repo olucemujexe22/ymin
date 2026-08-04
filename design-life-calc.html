@@ -60,12 +60,19 @@
       </section>
 
       <section class="panel" aria-labelledby="parameter-heading">
-        <div class="section-heading"><span class="step">02</span><div><h2 id="parameter-heading">填写计算参数</h2><p>先填写规格书中的额定参数，再填写实际使用条件；专业参数可按需展开。</p></div></div>
+        <div class="section-heading"><span class="step">02</span><div><h2 id="parameter-heading">填写计算参数</h2><p>产品规格参数共用；需要比较温度、电压或纹波等差异时，可切换为双工况对比。</p></div></div>
+        <div class="condition-mode-bar" aria-label="计算工况模式">
+          <div><strong>计算模式</strong><p>双工况使用同一套产品规格和计算公式，仅分别填写实际使用条件。</p></div>
+          <div class="condition-mode-buttons" role="group" aria-label="选择计算模式">
+            <button id="single-condition-mode" type="button" class="condition-mode-button is-active" aria-pressed="true">单工况</button>
+            <button id="compare-condition-mode" type="button" class="condition-mode-button" aria-pressed="false">工况1 / 工况2对比</button>
+          </div>
+        </div>
         <div id="parameter-fields"></div>
       </section>
 
       <section class="panel result-panel" aria-labelledby="result-heading">
-        <div class="section-heading"><span class="step">03</span><div><h2 id="result-heading">计算结果</h2><p>查看寿命或可靠性结果、边界提示及关键计算过程；打印报告将自动附带本次输入参数与工况。</p></div></div>
+        <div class="section-heading"><span class="step">03</span><div><h2 id="result-heading">计算结果</h2><p>单独查看当前工况，或对比两组工况的寿命、可靠性结果和关键差异；打印报告将附带全部输入参数。</p></div></div>
         <div class="action-row">
           <button id="calculate" type="button" class="primary-button">开始计算</button>
           <button id="reset" type="button" class="text-button">恢复示例参数</button>
@@ -81,7 +88,7 @@
         <h2 id="method-heading">四步完成计算</h2>
         <div class="method-grid">
           <article><strong>01</strong><h3>选择产品类型</h3><p>八条产品线使用各自的参数页面和结果形式。</p></article>
-          <article><strong>02</strong><h3>填写规格与工况</h3><p>额定参数来自规格书，实际参数来自设备使用条件。</p></article>
+          <article><strong>02</strong><h3>填写规格与工况</h3><p>额定参数来自规格书，可选择单工况或两组实际工况对比。</p></article>
           <article><strong>03</strong><h3>检查边界提示</h3><p>页面自动拦截缺项、负数、超温、超压和超纹波等情况。</p></article>
           <article><strong>04</strong><h3>保存计算结果</h3><p>结果可复制，也可通过打印功能保存为PDF文件。</p></article>
         </div>
