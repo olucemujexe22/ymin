@@ -45,6 +45,12 @@
             height: 100%;
             object-fit: cover;
             object-position: center center;
+            opacity: 0;
+            transition: opacity .7s ease;
+            will-change: opacity;
+        }
+        .home-hero-media.is-active {
+            opacity: 1;
         }
         .home-hero-overlay {
             position: absolute;
@@ -54,6 +60,54 @@
         .home-hero-layout {
             display: flex;
             align-items: center;
+        }
+        .home-hero-carousel-controls {
+            position: absolute;
+            right: max(24px, calc((100vw - 1280px) / 2 + 24px));
+            bottom: 58px;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px;
+            border: 1px solid rgba(255, 255, 255, .28);
+            background: rgba(5, 20, 37, .52);
+            backdrop-filter: blur(10px);
+        }
+        .home-hero-arrow {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, .24);
+            background: rgba(255, 255, 255, .08);
+            transition: background .2s ease, border-color .2s ease;
+        }
+        .home-hero-arrow:hover,
+        .home-hero-arrow:focus-visible {
+            border-color: rgba(255, 255, 255, .7);
+            background: rgba(255, 255, 255, .18);
+            outline: none;
+        }
+        .home-hero-dots {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 2px;
+        }
+        .home-hero-dot {
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .5);
+            transition: width .25s ease, background .25s ease;
+        }
+        .home-hero-dot.is-active {
+            width: 25px;
+            background: #f1bd81;
         }
         .home-search-panel {
             box-shadow: 0 18px 50px rgba(0, 0, 0, .22);
@@ -245,8 +299,16 @@
         }
         @media (max-width: 640px) {
             .home-hero { min-height: auto; }
-            .home-hero-media { object-position: 70% center; opacity: .52; }
+            .home-hero-media { object-position: 70% center; }
+            .home-hero-media.is-active { opacity: .52; }
             .home-hero-overlay { background: linear-gradient(90deg, rgba(5,20,37,.95) 0%, rgba(5,20,37,.76) 100%); }
+            .home-hero-carousel-controls {
+                right: 16px;
+                bottom: 20px;
+                gap: 7px;
+                padding: 5px;
+            }
+            .home-hero-arrow { width: 34px; height: 34px; }
             .home-product-main {
                 grid-template-columns: 42% 58%;
                 min-height: 104px;
@@ -272,9 +334,11 @@
     <header id="ymin-navbar"></header>
 
     <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
-        <!-- 首屏 Banner：按永铭8大产品线典型外观设计的产品家族主视觉 -->
+        <!-- 首屏 Banner：产品家族、无人机应用与机器人应用三张轮播 -->
         <section class="home-hero text-white" aria-labelledby="homeHeroTitle">
-            <img class="home-hero-media" src="assets/home/banner-hero-ymin-products-v2.png" alt="永铭液态、超级电容、固态、混合、叠层、薄膜与钽电容器产品家族主视觉">
+            <img class="home-hero-media is-active" data-home-hero-slide src="assets/home/banner-hero-ymin-products-v2.png" alt="永铭液态、超级电容、固态、混合、叠层、薄膜与钽电容器产品家族主视觉">
+            <img class="home-hero-media" data-home-hero-slide src="assets/home/banner-hero-drone-v1.png" alt="永铭电容器服务工业与民用无人机电源应用">
+            <img class="home-hero-media" data-home-hero-slide src="assets/home/banner-hero-robotics-v1.png" alt="永铭电容器服务工业机器人与伺服驱动应用">
             <div class="home-hero-overlay" aria-hidden="true"></div>
             <div class="home-hero-layout relative z-10 max-w-7xl mx-auto px-6 py-14 md:py-20 min-h-[590px]">
                 <div class="w-full max-w-2xl">
@@ -296,6 +360,19 @@
                         <a href="application-center.html" class="text-white font-bold hover:text-[#f1bd81] transition inline-flex items-center gap-2"><span class="material-symbols-outlined text-lg">apps</span>按应用选型</a>
                     </div>
                 </div>
+            </div>
+            <div class="home-hero-carousel-controls" aria-label="首页Banner轮播控制">
+                <button class="home-hero-arrow" type="button" data-home-hero-prev aria-label="上一张Banner">
+                    <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                </button>
+                <div class="home-hero-dots" role="group" aria-label="选择Banner">
+                    <button class="home-hero-dot is-active" type="button" data-home-hero-dot="0" aria-label="查看产品家族Banner" aria-current="true"></button>
+                    <button class="home-hero-dot" type="button" data-home-hero-dot="1" aria-label="查看无人机应用Banner" aria-current="false"></button>
+                    <button class="home-hero-dot" type="button" data-home-hero-dot="2" aria-label="查看机器人应用Banner" aria-current="false"></button>
+                </div>
+                <button class="home-hero-arrow" type="button" data-home-hero-next aria-label="下一张Banner">
+                    <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                </button>
             </div>
         </section>
 
@@ -466,6 +543,75 @@
     <script src="components/navbar.js?v=20260803"></script>
     <script src="components/footer.js"></script>
     <script>
+        function initHomeHeroCarousel() {
+            var hero = document.querySelector('.home-hero');
+            if (!hero) return;
+
+            var slides = Array.prototype.slice.call(hero.querySelectorAll('[data-home-hero-slide]'));
+            var dots = Array.prototype.slice.call(hero.querySelectorAll('[data-home-hero-dot]'));
+            var previousButton = hero.querySelector('[data-home-hero-prev]');
+            var nextButton = hero.querySelector('[data-home-hero-next]');
+            var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var currentIndex = 0;
+            var timer = null;
+
+            if (slides.length < 2) return;
+
+            function showSlide(index) {
+                currentIndex = (index + slides.length) % slides.length;
+                slides.forEach(function(slide, slideIndex) {
+                    var isActive = slideIndex === currentIndex;
+                    slide.classList.toggle('is-active', isActive);
+                    slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+                });
+                dots.forEach(function(dot, dotIndex) {
+                    var isActive = dotIndex === currentIndex;
+                    dot.classList.toggle('is-active', isActive);
+                    dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+                });
+            }
+
+            function stopAutoplay() {
+                if (timer) window.clearInterval(timer);
+                timer = null;
+            }
+
+            function startAutoplay() {
+                stopAutoplay();
+                if (!reducedMotion && !document.hidden) {
+                    timer = window.setInterval(function() { showSlide(currentIndex + 1); }, 6000);
+                }
+            }
+
+            if (previousButton) previousButton.addEventListener('click', function() {
+                showSlide(currentIndex - 1);
+                startAutoplay();
+            });
+            if (nextButton) nextButton.addEventListener('click', function() {
+                showSlide(currentIndex + 1);
+                startAutoplay();
+            });
+            dots.forEach(function(dot) {
+                dot.addEventListener('click', function() {
+                    showSlide(Number(dot.getAttribute('data-home-hero-dot')) || 0);
+                    startAutoplay();
+                });
+            });
+            hero.addEventListener('mouseenter', stopAutoplay);
+            hero.addEventListener('mouseleave', startAutoplay);
+            hero.addEventListener('focusin', stopAutoplay);
+            hero.addEventListener('focusout', function(event) {
+                if (!hero.contains(event.relatedTarget)) startAutoplay();
+            });
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) stopAutoplay();
+                else startAutoplay();
+            });
+
+            showSlide(0);
+            startAutoplay();
+        }
+
         function renderHomeProductCards() {
             var grid = document.getElementById('homeProductGrid');
             if (!grid) return;
@@ -477,7 +623,7 @@
                 { title: '混合型超级电容（锂离子电容）', line: '混合型超级电容(锂离子电容)', category: '混合型超级电容（锂离子电容）', image: '' },
                 { title: '高分子混合动力铝电解电容器', line: '高分子混合动力铝电解电容器', category: '高分子混合动力铝电解电容器', image: '' },
                 { title: '叠层高分子固态铝电解电容器', line: '叠层高分子固态铝电解电容器', category: '叠层高分子固态铝电解电容器', image: '首页产品图片/3.png' },
-                { title: '薄膜电容器', line: '薄膜电容器', category: '薄膜电容器', image: '首页产品图片/6.png' },
+                { title: '金属化聚丙烯薄膜电容器', line: '薄膜电容器', category: '薄膜电容器', image: '首页产品图片/6.png' },
                 { title: '导电高分子钽电解电容器', line: '导电高分子钽电解电容器', category: '导电高分子钽电解电容器', image: '首页产品图片/2.png' }
             ];
 
@@ -563,6 +709,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            initHomeHeroCarousel();
             renderHomeProductCards();
             renderHomeNews();
             YMIN.navbar.inject('home');
