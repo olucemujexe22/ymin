@@ -202,7 +202,30 @@
                 return;
             }
             listMount.innerHTML = filtered.map(function (job) {
-                return '<article class="career-job-card"><div><span class="honor-tag">' + escapeHtml(job.category) + '</span><h3>' + escapeHtml(job.title) + '</h3>' + (job.description ? '<p>' + escapeHtml(job.description) + '</p>' : '') + '</div><div class="career-job-meta"><span><span class="material-symbols-outlined">badge</span>' + escapeHtml(job.type) + '</span><span><span class="material-symbols-outlined">school</span>' + escapeHtml(job.major) + '</span><span><span class="material-symbols-outlined">location_on</span>' + escapeHtml(job.location) + '</span></div></article>';
+                var hasDetails = (job.responsibilities || []).length || (job.requirements || []).length;
+                var details = hasDetails ?
+                    '<details class="career-job-details"><summary><span>查看岗位详情</span><span class="material-symbols-outlined">expand_more</span></summary>' +
+                        '<div class="career-job-detail-content">' +
+                            ((job.responsibilities || []).length ? '<section><h4>核心职责</h4><ol>' +
+                                job.responsibilities.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') +
+                            '</ol></section>' : '') +
+                            ((job.requirements || []).length ? '<section><h4>任职资格</h4><h5>必备条件</h5><ul>' +
+                                job.requirements.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') +
+                            '</ul>' + ((job.preferred || []).length ? '<h5>加分项</h5><ul>' +
+                                job.preferred.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') +
+                            '</ul>' : '') + '</section>' : '') +
+                            (job.contactPhone ? '<div class="career-job-contact"><span>质量经理岗位咨询</span><a href="tel:' +
+                                escapeHtml(job.contactPhone) + '">' + escapeHtml(job.contactPhone) + '｜' +
+                                escapeHtml(job.contactName || '招聘联系人') + '</a>' +
+                                (job.contactNote ? '<small>' + escapeHtml(job.contactNote) + '</small>' : '') + '</div>' : '') +
+                        '</div></details>' : '';
+                return '<article class="career-job-card' + (hasDetails ? ' is-detailed' : '') + '"><div class="career-job-summary"><span class="honor-tag">' +
+                    escapeHtml(job.category) + '</span><h3>' + escapeHtml(job.title) + '</h3>' +
+                    (job.description ? '<p>' + escapeHtml(job.description) + '</p>' : '') +
+                    '</div><div class="career-job-meta"><span><span class="material-symbols-outlined">badge</span>' +
+                    escapeHtml(job.type) + '</span><span><span class="material-symbols-outlined">school</span>' +
+                    escapeHtml(job.major) + '</span><span><span class="material-symbols-outlined">location_on</span>' +
+                    escapeHtml(job.location) + '</span></div>' + details + '</article>';
             }).join('');
         }
 

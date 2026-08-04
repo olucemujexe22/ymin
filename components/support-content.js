@@ -4,12 +4,13 @@ YMIN.supportContent = (function () {
     'use strict';
 
     var dataCache = {};
+    var powerApplicationLabel = '三代半导体电源（GaN&SiC）';
     var applicationOrder = [
         '汽车电子',
         'AI服务器与数据中心',
         '仪器仪表',
         '新型电机驱动',
-        '电源',
+        powerApplicationLabel,
         '机器人',
         '无人机',
         '光储充（光伏储能充电）',
@@ -20,7 +21,7 @@ YMIN.supportContent = (function () {
         'AI服务器与数据中心': 'dns',
         '仪器仪表': 'speed',
         '新型电机驱动': 'electric_bolt',
-        '电源': 'power',
+        '三代半导体电源（GaN&SiC）': 'power',
         '机器人': 'smart_toy',
         '无人机': 'flight',
         '光储充（光伏储能充电）': 'solar_power',
@@ -69,6 +70,9 @@ YMIN.supportContent = (function () {
         '混合型': '混合',
         'ai服务器': '数据中心',
         'ai': '服务器',
+        '三代半导体电源': '电源',
+        'gan': '电源',
+        'sic': '电源',
         '储能': '光储充',
         '充电桩': '光储充',
         '法拉': '超级电容',
@@ -98,6 +102,15 @@ YMIN.supportContent = (function () {
             seen[key] = true;
             return true;
         });
+    }
+
+    function normalizeApplication(value) {
+        var name = String(value || '').trim();
+        return name === '电源' ? powerApplicationLabel : name;
+    }
+
+    function applicationValues(item) {
+        return unique((item.applications || []).map(normalizeApplication));
     }
 
     function flattenText(value) {
@@ -243,7 +256,7 @@ YMIN.supportContent = (function () {
         var activeNode = document.getElementById('faq-active-filters');
         var state = {
             search: queryValue('q'),
-            app: queryValue('app'),
+            app: normalizeApplication(queryValue('app')),
             productLine: queryValue('line'),
             type: queryValue('type'),
             page: Math.max(1, Number(queryValue('page')) || 1)
@@ -297,7 +310,7 @@ YMIN.supportContent = (function () {
             function render() {
                 var needle = normalizeSearch(state.search);
                 var filtered = faqs.filter(function (faq) {
-                    return (!state.app || (faq.applications || []).indexOf(state.app) !== -1) &&
+                    return (!state.app || applicationValues(faq).indexOf(state.app) !== -1) &&
                         (!state.productLine || faqProductLines(faq).indexOf(state.productLine) !== -1) &&
                         (!state.type || faq.type === state.type) &&
                         matchesSearch(needle, [
@@ -306,7 +319,7 @@ YMIN.supportContent = (function () {
                             faq.type,
                             faqProductLines(faq),
                             faq.series,
-                            faq.applications,
+                            applicationValues(faq),
                             faq.secondaryApplications
                         ]);
                 });
@@ -334,7 +347,7 @@ YMIN.supportContent = (function () {
                                 '<span class="faq-mark">Q</span>' +
                                 '<span><h3>' + escapeHtml(faq.question) + '</h3>' +
                                 '<span class="faq-tags">' +
-                                    renderTags([faq.type].concat(faq.applications || [], faq.series || []), 'faq-tag', 5) +
+                                    renderTags([faq.type].concat(applicationValues(faq), faq.series || []), 'faq-tag', 5) +
                                 '</span></span>' +
                                 '<span class="material-symbols-outlined faq-toggle">expand_more</span>' +
                             '</button>' +
@@ -482,8 +495,8 @@ YMIN.supportContent = (function () {
                 var sameSeries = (item.series || []).some(function (name) {
                     return (faq.series || []).indexOf(name) !== -1;
                 });
-                var sameApp = (item.applications || []).some(function (name) {
-                    return (faq.applications || []).indexOf(name) !== -1;
+                var sameApp = applicationValues(item).some(function (name) {
+                    return applicationValues(faq).indexOf(name) !== -1;
                 });
                 return sameSeries || sameApp;
             }).slice(0, 4);
@@ -500,7 +513,7 @@ YMIN.supportContent = (function () {
                         escapeHtml((faq.series || []).join(' / ') || '通用') + '</span>' +
                 '</div>' +
                 '<div class="faq-tags">' +
-                    renderTags([faq.type].concat(faq.applications || [], faq.series || []), 'faq-tag', 8) +
+                    renderTags([faq.type].concat(applicationValues(faq), faq.series || []), 'faq-tag', 8) +
                 '</div>' +
                 '<div class="faq-detail-answer">' + htmlText(faq.answer) + '</div>' +
                 (relatedArticle ?
@@ -519,7 +532,7 @@ YMIN.supportContent = (function () {
             asideNode.innerHTML =
                 '<div class="support-aside-block"><h3>适用范围</h3>' +
                     '<div class="article-tags">' +
-                        renderTags((faq.applications || []).concat(faq.secondaryApplications || [], faq.series || []),
+                        renderTags(applicationValues(faq).concat(faq.secondaryApplications || [], faq.series || []),
                             'article-tag', 10) +
                     '</div></div>' +
                 '<div class="support-aside-block"><h3>推荐工具</h3><div class="support-link-list">' +
@@ -598,7 +611,7 @@ YMIN.supportContent = (function () {
         var activeNode = document.getElementById('news-active-filters');
         var state = {
             search: queryValue('q'),
-            app: queryValue('app'),
+            app: normalizeApplication(queryValue('app')),
             series: queryValue('series'),
             type: queryValue('type'),
             page: Math.max(1, Number(queryValue('page')) || 1)
@@ -660,7 +673,7 @@ YMIN.supportContent = (function () {
                 var needle = normalizeSearch(state.search);
                 var filtered = articles.filter(function (article) {
                     var seriesText = normalizeSearch(state.series);
-                    return (!state.app || (article.applications || []).indexOf(state.app) !== -1) &&
+                    return (!state.app || applicationValues(article).indexOf(state.app) !== -1) &&
                         (!state.type || article.type === state.type) &&
                         (!seriesText || normalizeSearch((article.series || []).join(' ')).indexOf(seriesText) !== -1) &&
                         matchesSearch(needle, [
@@ -668,7 +681,7 @@ YMIN.supportContent = (function () {
                             article.excerpt,
                             article.plainText,
                             article.series,
-                            article.applications,
+                            applicationValues(article),
                             article.secondaryApplications,
                             article.keywords,
                             article.partNumbers
@@ -703,7 +716,7 @@ YMIN.supportContent = (function () {
                                     escapeHtml(article.title) + '</a></h3>' +
                                 '<p>' + escapeHtml(article.excerpt || '') + '</p>' +
                                 '<div class="article-tags">' +
-                                    renderTags((article.applications || []).concat(article.series || []),
+                                    renderTags(applicationValues(article).concat(article.series || []),
                                         'article-tag', 5) +
                                 '</div>' +
                             '</div>' +
@@ -794,8 +807,8 @@ YMIN.supportContent = (function () {
                 var sameSeries = (item.series || []).some(function (name) {
                     return (article.series || []).indexOf(name) !== -1;
                 });
-                var sameApp = (item.applications || []).some(function (name) {
-                    return (article.applications || []).indexOf(name) !== -1;
+                var sameApp = applicationValues(item).some(function (name) {
+                    return applicationValues(article).indexOf(name) !== -1;
                 });
                 return sameSeries || sameApp;
             }).slice(0, 4);
@@ -817,7 +830,7 @@ YMIN.supportContent = (function () {
                         escapeHtml((article.series || []).join(' / ') || '通用') + '</span>' +
                 '</div>' +
                 '<div class="article-tags">' +
-                    renderTags((article.applications || []).concat(article.series || []), 'article-tag', 10) +
+                    renderTags(applicationValues(article).concat(article.series || []), 'article-tag', 10) +
                 '</div>' +
                 (article.excerpt ? '<div class="article-summary">' + escapeHtml(article.excerpt) + '</div>' : '') +
                 '<div class="article-body">' + (article.contentHtml || '<p>' + htmlText(article.plainText) + '</p>') + '</div>' +
@@ -830,7 +843,7 @@ YMIN.supportContent = (function () {
 
             asideNode.innerHTML =
                 '<div class="support-aside-block"><h3>文章索引</h3><div class="article-tags">' +
-                    renderTags((article.applications || []).concat(article.secondaryApplications || [],
+                    renderTags(applicationValues(article).concat(article.secondaryApplications || [],
                         article.series || []), 'article-tag', 12) +
                 '</div></div>' +
                 (relatedFaqs.length ? '<div class="support-aside-block"><h3>相关FAQ</h3>' +

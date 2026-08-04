@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap">
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/about.css?v=20260803e">
+    <link rel="stylesheet" href="styles/about.css?v=20260804a">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1B365D'},borderRadius:{DEFAULT:'0px'},fontFamily:{headline:['Space Grotesk'],body:['Inter']}}}}</script>
 </head>
@@ -39,12 +39,11 @@
                 <div class="about-cta career-application">
                     <div>
                         <h2>申请职位</h2>
-                        <p>请准备个人简历，并联系公司人事沟通岗位要求与应聘安排。</p>
+                        <p>请准备个人简历，并联系招聘专员沟通岗位要求与应聘安排。</p>
                     </div>
                     <div class="career-application-contact">
-                        <span><span class="material-symbols-outlined">person</span>人事联系人：顾经理</span>
-                        <a href="tel:13816055904"><span class="material-symbols-outlined">call</span>138 1605 5904</a>
-                        <span><span class="material-symbols-outlined">location_on</span>上海市奉贤区南桥镇杨王经济园区光村路258号</span>
+                        <a class="career-primary-contact" href="tel:+862133617848;ext=8412"><span class="material-symbols-outlined">call</span><strong>021-33617848-8412</strong><em>招聘专员</em></a>
+                        <span class="career-application-address"><span class="material-symbols-outlined">location_on</span>上海市奉贤区南桥镇杨王经济园区光村路258号</span>
                     </div>
                 </div>
             </div>
@@ -53,8 +52,8 @@
     </main>
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
-    <script src="data/about-content.js"></script>
-    <script src="components/about-pages.js"></script>
+    <script src="data/about-content.js?v=20260804a"></script>
+    <script src="components/about-pages.js?v=20260804a"></script>
     <script>document.addEventListener('DOMContentLoaded',function(){YMIN.navbar.inject('about');YMIN.footer.inject();});</script>
 </body>
 </html>
