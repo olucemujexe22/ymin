@@ -65,22 +65,26 @@ YMIN.navbar = (function () {
         html += '<div class="group h-full flex items-center relative">';
         html += navLink('product-center.html', '产品中心', activePage === 'products', true);
         html += dropdownMenu([
-            { href: 'product-series.html', label: '产品体系图' },
-            { href: 'product-center.html', label: '系列总览 / 产品搜索' },
-            { href: 'product-detail.html', label: '产品详情页' }
-        ], 'w-56');
+            { href: 'product-center.html?category=' + encodeURIComponent('液态铝电解电容器'), label: '液态铝电解电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('双电层超级电容'), label: '双电层超级电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('高分子固态铝电解电容器'), label: '高分子固态铝电解电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('混合型超级电容（锂离子电容）'), label: '混合型超级电容器（锂离子电容器）' },
+            { href: 'product-center.html?category=' + encodeURIComponent('高分子混合动力铝电解电容器'), label: '高分子混合动力铝电解电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('叠层高分子固态铝电解电容器'), label: '叠层高分子固态铝电解电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('薄膜电容器'), label: '薄膜电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('导电高分子钽电解电容器'), label: '导电高分子钽电解电容器' }
+        ], 'w-72');
         html += '</div>';
 
         // 应用中心
         html += '<div class="group h-full flex items-center relative">';
         html += navLink('application-center.html', '应用中心', activePage === 'applications', true);
         html += dropdownMenu([
-            { href: 'application-center.html', label: '应用总览' },
             { href: 'application-automotive.html', label: '汽车电子' },
             { href: 'application-ai-server.html', label: 'AI服务器与数据中心' },
             { href: 'application-instrument.html', label: '仪器仪表' },
             { href: 'application-motor-drive.html', label: '新型电机驱动' },
-            { href: 'application-power.html', label: '电源' },
+            { href: 'application-power.html', label: '三代半导体电源（GaN&SiC）' },
             { href: 'application-robotics.html', label: '机器人' },
             { href: 'application-drone.html', label: '无人机' },
             { href: 'application-energy-storage.html', label: '储能' },
@@ -93,8 +97,8 @@ YMIN.navbar = (function () {
         html += navLink('design-tools.html', '设计工具', activePage === 'tools', true);
         html += dropdownMenu([
             { href: 'design-life-calc.html', label: '寿命推算工具' },
-            { href: 'design-spice.html', label: 'SPICE 模型' },
             { href: 'design-3d-cad.html', label: '3D-CAD 模型' },
+            { href: 'design-spice.html', label: 'SPICE 模型' },
             { href: 'design-sparams.html', label: 'S参数' },
             { href: 'design-reliability.html', label: '可靠性实验数据' }
         ], 'w-52');
@@ -118,7 +122,6 @@ YMIN.navbar = (function () {
             { href: 'about-company.html', label: '公司简介' },
             { href: 'about-honors.html', label: '企业荣誉' },
             { href: 'about-distributors.html', label: '代理商网络' },
-            { href: 'about-contact.html', label: '联系我们' },
             { href: 'about-careers.html', label: '加入我们' },
             { href: 'about-procurement.html', label: '原材料采购' }
         ], 'w-48');
