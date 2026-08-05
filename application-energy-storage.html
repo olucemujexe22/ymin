@@ -56,7 +56,7 @@
     </style>
 </head>
 <body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
-    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
+    <!-- 顶部导航栏（由 components/navbar.js?v=20260805merge3 注入） -->
     <header id="ymin-navbar"></header>
 
     <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
@@ -135,8 +135,7 @@
             </div>
         </div>
 
-        <!-- 页脚（由 components/footer.js 注入） -->
-        <footer id="ymin-footer"></footer>
+        <!-- 页脚（由 components/footer.js?v=20260805merge4"ymin-footer"></footer>
     </main>
 
     <script>
@@ -242,7 +241,29 @@ function renderContent(tabKey) {
             if (!sub) return;
             var html = '';
             html += '<div class="flex items-center gap-3 mb-4"><span class="material-symbols-outlined text-3xl text-primary">' + sub.icon + '</span><div><h3 class="text-xl font-bold text-primary">' + sub.name + '</h3><p class="text-xs text-slate-400">' + data.name + ' · 推荐系列: ' + sub.series.join(', ') + '</p></div></div>';
-            html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
+            var isEnglish = new URLSearchParams(window.location.search).get('lang') === 'en' || document.documentElement.lang === 'en';
+            if (isEnglish) {
+                var englishEnergyNames = {
+                    '逆变器': 'Inverter', '定日镜': 'Heliostat', '变流器': 'Power Converter',
+                    '电池管理系统-BMS': 'Battery Management System (BMS)'
+                };
+                var englishApplicationName = englishEnergyNames[sub.name] || 'Energy Storage System';
+                var topologySteps = [
+                    ['power', 'DC Input'], ['filter_alt', 'Input Filtering'], ['battery_charging_full', 'DC-Link Energy Storage'],
+                    ['transform', 'Power Conversion / Control'], ['waves', 'Output Filtering'], ['shield', 'Protection / Decoupling']
+                ];
+                html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4" role="img" aria-label="' + englishApplicationName + ' circuit topology">';
+                html += '<p class="text-[10px] text-slate-400 uppercase mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> Circuit Topology — ' + englishApplicationName + '</p>';
+                html += '<div class="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-3xl mx-auto">';
+                topologySteps.forEach(function(step, index) {
+                    html += '<div class="relative bg-white border border-slate-300 px-3 py-4 text-center min-h-24 flex flex-col items-center justify-center"><span class="material-symbols-outlined text-primary text-2xl mb-1">' + step[0] + '</span><span class="text-xs font-bold text-primary">' + step[1] + '</span>';
+                    if (index < topologySteps.length - 1) html += '<span class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 text-primary font-bold">→</span>';
+                    html += '</div>';
+                });
+                html += '</div><p class="text-[10px] text-slate-400 mt-3 text-center">Functional block diagram for ' + englishApplicationName + '</p></div>';
+            } else {
+                html += '<div class="bg-slate-50 border border-slate-200 p-4 mb-4"><p class="text-[10px] text-slate-400 uppercase mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">circuit_board</span> 电路拓扑图 — ' + sub.name + '</p><img src="anquanqinang.png" alt="电路拓扑图" class="w-full max-w-lg mx-auto block border border-slate-200"><p class="text-[10px] text-slate-400 mt-2 text-center">▲ ' + sub.name + ' 电路拓扑（演示用，正式版替换）</p></div>';
+            }
                         // 先查 SPECS（样式2用，样式1也从中提取系列名）
             var specs = (YMIN && YMIN.sysMod) ? YMIN.sysMod.getSpecs('energy', TAB_MAP[tabKey]||currentTab, sub.name) : null;
 
@@ -304,8 +325,11 @@ function renderContent(tabKey) {
         });
     </script>
     <!-- 共享组件 -->
-    <script src="components/navbar.js"></script>
-    <script src="components/footer.js"></script>
+    <script src="data/application-en.js?v=20260805merge1"></script>
+    <script src="data/application-rendered-en.js?v=20260805merge1"></script>
+    <script src="components/i18n.js?v=20260805merge10"></script>
+    <script src="components/navbar.js?v=20260805merge3"></script>
+    <script src="components/footer.js?v=20260805merge4"></script>
     <script src="data/topology.js"></script>
     <script src="data/system-modules.js"></script>
     <script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会员中心 - YMIN</title><meta name="description" content="永铭会员中心：设计工具、专业资料、账户信息与寿命推算记录。">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/common.css"><link rel="stylesheet" href="styles/member.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="member-body" data-member-title="memberCenter">
+  <header id="ymin-navbar"></header>
+  <main class="member-dashboard">
+    <div class="member-shell">
+      <nav class="member-breadcrumb"><a href="index.html" data-member-i18n="home">首页</a><span>/</span><span data-member-i18n="memberCenter">会员中心</span></nav>
+      <header class="member-dashboard-head">
+        <div><h1 data-member-welcome>您好</h1><p data-member-i18n="dashboardSubtitle">使用永铭设计工具、专业资料与会员记录。</p></div>
+        <div class="member-form-row">
+          <div class="member-language"><button type="button" data-member-language="zh-CN">中文</button><button type="button" data-member-language="en">EN</button></div>
+          <button class="member-submit member-submit-secondary" type="button" data-member-logout data-member-i18n="logout">退出登录</button>
+        </div>
+      </header>
+      <div class="member-dashboard-grid">
+        <div>
+          <section class="member-card">
+            <div class="member-card-head"><h2 data-member-i18n="quickServices">会员服务</h2></div>
+            <div class="member-service-grid">
+              <a class="member-service" href="design-life-calc.html"><span class="material-symbols-outlined">calculate</span><strong data-member-i18n="serviceLife">寿命推算工具</strong></a>
+              <a class="member-service" href="design-3d-cad.html"><span class="material-symbols-outlined">view_in_ar</span><strong data-member-i18n="serviceCad">3D-CAD</strong></a>
+              <a class="member-service" href="design-spice.html"><span class="material-symbols-outlined">memory</span><strong data-member-i18n="serviceSpice">SPICE 模型</strong></a>
+              <a class="member-service" href="design-sparams.html"><span class="material-symbols-outlined">multiline_chart</span><strong data-member-i18n="serviceSparams">S 参数</strong></a>
+              <a class="member-service" href="design-reliability.html"><span class="material-symbols-outlined">science</span><strong data-member-i18n="serviceReliability">可靠性数据</strong></a>
+              <a class="member-service" href="support-certification.html"><span class="material-symbols-outlined">verified</span><strong data-member-i18n="serviceCertificates">合规证书</strong></a>
+            </div>
+          </section>
+          <section class="member-card">
+            <div class="member-card-head"><h2 data-member-i18n="lifeHistory">寿命推算记录</h2><button class="member-link" type="button" data-member-clear-history data-member-i18n="clearHistory">清空记录</button></div>
+            <div class="member-message" data-member-center-message role="status"></div>
+            <div data-member-history><div class="member-history-empty" data-member-i18n="noHistory">暂无寿命推算记录。完成一次计算后，结果会保存在这里。</div></div>
+          </section>
+        </div>
+        <aside>
+          <section class="member-card">
+            <div class="member-card-head"><h2 data-member-i18n="profileTitle">账户信息</h2></div>
+            <dl class="member-profile-list" data-member-profile></dl>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <footer id="ymin-footer"></footer>
+  <script src="components/i18n.js?v=20260805merge10"></script>
+  <script src="components/navbar.js?v=20260805merge3"></script><script src="components/footer.js?v=20260805merge4"></script><script src="components/member.js?v=20260805merge3"></script>
+  <script>document.addEventListener("DOMContentLoaded",function(){YMIN.navbar.inject();YMIN.footer.inject();YMIN.member.init();});</script>
+</body>
+</html>

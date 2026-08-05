@@ -1,31 +1,83 @@
-# 忽略产品资料库（2.1GB）
-产品资料库/
-产品资料库
+# Large local source library (managed outside the front-end repository)
+/产品资料库/
 
-# OCR/PDF 工具脚本（非项目必要文件）
-download_tesseract.py
-download_tesseract_portable.py
-install_tesseract.py
-install_tesseract_admin.py
-ocr_pdf_to_text.py
-run_ocr_single.bat
-test_ocr.py
-test_ocr_v2.py
-test_paddleocr.py
-test_paddleocr_mobile.py
-test_pdf_parse.py
-check_download.py
-download_designs.py
-download_remaining.py
+# Requirement, delivery and local working directories
+/02_需求与设计/
+/官网流量监控对接数字智能化系统项目/
+/数据库sql/
+/固态-3dcad文件/
+/backup/
+/outputs/
+/product-admin/
+/ymin-main (1)/
+/reports/
+/runtime/
+/scripts/
+/tmp/
+/.reasonix/
+/.codex-tmp/
+/node_modules/
 
-# 临时截图/图片
-ScreenShot_2026-05-14_140549_566.png
-temp_page_25.png
-
-# awesome-design-md 设计参考（外部资料，非项目代码）
-awesome-design-md/
-
-# 系统文件
-Thumbs.db
+# Local build/test metadata
+/reasonix.toml
+*.bak
 *.log
+*.zip
+*.pyc
+__pycache__/
+~$*
+
+# Generated screenshots and temporary test pages
+/tmp_*.png
+/temp_page_*.png
+/page_[0-9]*.png
+/_*.html
+/_*.json
+/test-*.html
+/ScreenShot_*.png
+/assets/home/banner-hero-v1.png
+
+# Website data-generation sources kept locally, not deployed
+/*.docx
+/*.xlsx
+/build_product_catalog.py
+/download_tp_good.js
+/parse_tp_good_sql.py
+/sync_series_images.py
+/data/product-field-map.json
+/data/products.json
+/data/series-technical-images.json
+/data/tp_good_cad_fields_20260721.csv
+/data/tp_good_export_meta.json
+/data/tp_good_full_20260721.json
+
+# CAD source/project files; the website only publishes STEP files
+/3dcad文件/**/*.prt.*
+/3dcad文件/**/*.asm.*
+/3dcad文件/**/*__out.log.*
+
+# Source diagrams and OCR tables; only web_体系图 is published
+/体系图和系列列表/*
+!/体系图和系列列表/web_体系图/
+!/体系图和系列列表/web_体系图/**
+
+# OCR/PDF helper scripts (not website runtime files)
+/download_tesseract.py
+/download_tesseract_portable.py
+/install_tesseract.py
+/install_tesseract_admin.py
+/ocr_pdf_to_text.py
+/run_ocr_single.bat
+/test_ocr.py
+/test_ocr_v2.py
+/test_paddleocr.py
+/test_paddleocr_mobile.py
+/test_pdf_parse.py
+/check_download.py
+/download_designs.py
+/download_remaining.py
+
+# External design reference and operating-system files
+/awesome-design-md/
+Thumbs.db
 .DS_Store

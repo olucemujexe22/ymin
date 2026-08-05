@@ -3,6 +3,17 @@
 
     var data = window.YMIN_ABOUT_DATA || {};
 
+    function isEnglishPage() {
+        return new URLSearchParams(window.location.search).get('lang') === 'en' ||
+            (window.YMIN && window.YMIN.i18n && window.YMIN.i18n.language === 'en');
+    }
+
+    function localizeDistributorBanner() {
+        var image = document.querySelector('[data-distributor-banner]');
+        if (!image) return;
+        image.src = isEnglishPage() ? image.getAttribute('data-src-en') : image.getAttribute('data-src-zh');
+    }
+
     function escapeHtml(value) {
         return String(value == null ? '' : value)
             .replace(/&/g, '&amp;')
@@ -52,9 +63,9 @@
                     '<img src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.title) + '" loading="lazy"></button>' +
                     '<div class="honor-card-body"><span class="honor-tag">' + escapeHtml(item.category) + '</span>' +
                     '<h3>' + escapeHtml(item.title) + '</h3><div class="honor-meta">' +
-                    '<span>颁发单位：' + escapeHtml(item.issuer) + '</span>' +
-                    '<span>时间：' + escapeHtml(item.date) + '</span>' +
-                    (item.number ? '<span>编号：' + escapeHtml(item.number) + '</span>' : '') +
+                    '<span>颁发单位： ' + escapeHtml(item.issuer) + '</span>' +
+                    '<span>时间： ' + escapeHtml(item.date) + '</span>' +
+                    (item.number ? '<span>编号： ' + escapeHtml(item.number) + '</span>' : '') +
                     '</div></div></article>';
             }).join('');
             bindLightboxButtons();
@@ -113,13 +124,19 @@
         var pageLabel = document.querySelector('[data-page-label]');
         var page = 1;
         var pageSize = 20;
+        var english = isEnglishPage();
+        var englishNames = window.YMIN_DISTRIBUTOR_EN || {};
+
+        function displayName(name) {
+            return english ? (englishNames[name] || name) : name;
+        }
 
         var years = Array.from(new Set((data.distributors || []).map(function (item) {
             return item[1].slice(0, 4);
         }))).sort().reverse();
         if (year) {
-            year.innerHTML = '<option value="">全部授权年份</option>' + years.map(function (item) {
-                return '<option value="' + item + '">' + item + '年</option>';
+            year.innerHTML = '<option value="">' + (english ? 'All Authorization Years' : '全部授权年份') + '</option>' + years.map(function (item) {
+                return '<option value="' + item + '">' + item + (english ? '' : '年') + '</option>';
             }).join('');
         }
 
@@ -127,9 +144,10 @@
             var keyword = search ? search.value.trim().toLowerCase() : '';
             var selectedYear = year ? year.value : '';
             return (data.distributors || []).map(function (item, index) {
-                return { name: item[0], date: item[1], sourceIndex: index + 1 };
+                return { name: item[0], displayName: displayName(item[0]), date: item[1], sourceIndex: index + 1 };
             }).filter(function (item) {
-                return (!keyword || item.name.toLowerCase().indexOf(keyword) !== -1) && (!selectedYear || item.date.indexOf(selectedYear) === 0);
+                return (!keyword || item.name.toLowerCase().indexOf(keyword) !== -1 || item.displayName.toLowerCase().indexOf(keyword) !== -1) &&
+                    (!selectedYear || item.date.indexOf(selectedYear) === 0);
             }).sort(function (a, b) { return b.date.localeCompare(a.date); });
         }
 
@@ -140,10 +158,14 @@
             var start = (page - 1) * pageSize;
             var visible = list.slice(start, start + pageSize);
             tableBody.innerHTML = visible.length ? visible.map(function (item, index) {
-                return '<tr><td>' + (start + index + 1) + '</td><td><strong>' + escapeHtml(item.name) + '</strong></td><td>' + escapeHtml(item.date) + '</td></tr>';
-            }).join('') : '<tr><td colspan="3"><div class="about-empty"><span class="material-symbols-outlined">search_off</span><h3>未找到匹配的代理商</h3><p>请调整公司名称或授权年份后重试。</p></div></td></tr>';
-            if (count) count.textContent = '共 ' + list.length + ' 家';
-            if (summary) summary.textContent = list.length ? '显示第 ' + (start + 1) + '–' + Math.min(start + pageSize, list.length) + ' 条，共 ' + list.length + ' 条' : '共 0 条';
+                return '<tr><td>' + (start + index + 1) + '</td><td><strong>' + escapeHtml(item.displayName) + '</strong></td><td>' + escapeHtml(item.date) + '</td></tr>';
+            }).join('') : '<tr><td colspan="3"><div class="about-empty"><span class="material-symbols-outlined">search_off</span><h3>' +
+                (english ? 'No matching distributors found' : '未找到匹配的代理商') + '</h3><p>' +
+                (english ? 'Adjust the company name or authorization year and try again.' : '请调整公司名称或授权年份后重试。') + '</p></div></td></tr>';
+            if (count) count.textContent = english ? list.length + ' distributors' : '共 ' + list.length + ' 家';
+            if (summary) summary.textContent = english ?
+                (list.length ? 'Showing ' + (start + 1) + '–' + Math.min(start + pageSize, list.length) + ' of ' + list.length : 'Showing 0 distributors') :
+                (list.length ? '显示第 ' + (start + 1) + '–' + Math.min(start + pageSize, list.length) + ' 条，共 ' + list.length + ' 条' : '共 0 条');
             if (pageLabel) pageLabel.textContent = page + ' / ' + totalPages;
             if (previous) previous.disabled = page <= 1;
             if (next) next.disabled = page >= totalPages;
@@ -316,6 +338,7 @@
     }
 
     function init() {
+        localizeDistributorBanner();
         renderStats();
         renderProductLines();
         renderHistory();

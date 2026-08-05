@@ -24,7 +24,7 @@
                     <p>查询永铭公开授权代理商名录。采购前建议核验代理资格、授权有效期与证书信息。</p>
                 </div>
                 <div class="about-distributor-hero-image">
-                    <img src="assets/about/distributor-banner.webp" alt="永铭代理商资格证样式" loading="eager">
+                    <img src="assets/about/distributor-banner.webp" data-distributor-banner data-src-zh="assets/about/distributor-banner.webp" data-src-en="assets/about/distributor-banner-en.png" alt="永铭代理商资格证样式" loading="eager">
                 </div>
             </div>
         </section>
@@ -58,10 +58,12 @@
 
         <footer id="ymin-footer"></footer>
     </main>
-    <script src="components/navbar.js"></script>
-    <script src="components/footer.js"></script>
+    <script src="components/i18n.js?v=20260805merge10"></script>
+    <script src="components/navbar.js?v=20260805merge3"></script>
+    <script src="components/footer.js?v=20260805merge4"></script>
     <script src="data/about-content.js"></script>
-    <script src="components/about-pages.js"></script>
+    <script src="data/about-distributors-en.js?v=20260805merge1"></script>
+    <script src="components/about-pages.js?v=20260805merge2"></script>
     <script>document.addEventListener('DOMContentLoaded',function(){YMIN.navbar.inject('about');YMIN.footer.inject();});</script>
 </body>
 </html>

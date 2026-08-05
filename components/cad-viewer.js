@@ -56,6 +56,27 @@
       .replace(/'/g, "&#039;");
   }
 
+  function isEnglishMode() {
+    return (window.YMIN && window.YMIN.i18n && window.YMIN.i18n.language === "en") ||
+      document.documentElement.lang === "en" ||
+      new URLSearchParams(window.location.search).get("lang") === "en";
+  }
+
+  function cadDisplayText(value) {
+    var text = String(value == null ? "" : value);
+    if (!isEnglishMode()) return text;
+    return text
+      .replace(/液态铝电解电容器/g, "Liquid Aluminum Electrolytic Capacitor")
+      .replace(/涂膜铝壳/g, "Coated Aluminum Case")
+      .replace(/螺栓型(?:\s*Screw-terminal)?/g, "Screw-terminal")
+      .replace(/牛角型(?:\s*Snap-in)?/g, "Snap-in")
+      .replace(/贴片型(?:\s*SMD)?/g, "SMD")
+      .replace(/引线型(?:\s*Radial)?/g, "Radial")
+      .replace(/叠层型/g, "Stacked Type")
+      .replace(/T型/g, "T-Type")
+      .replace(/([A-Za-z0-9]+)型/g, "$1-Type");
+  }
+
   function formatNumber(value, digits) {
     if (value == null || !isFinite(value)) return "—";
     return Number(value).toFixed(digits == null ? 2 : digits).replace(/\.?0+$/, "") + " mm";
@@ -277,11 +298,17 @@
     var productMode = state.viewMode === "product";
     byId("cadResultLabel").textContent = productMode ? "产品 CAD 结果" : "共享 CAD 模型";
     byId("cadFilterTitle").lastChild.textContent = productMode ? "查找产品 CAD" : "筛选共享模型";
-    var headers = productMode
-      ? ["产品料号 / 系列", "产品类别 / 封装", "目录尺寸", "关键参数", "CAD 文件", "格式", "预览与详情"]
-      : ["目录尺寸 / CAD 文件", "产品类别", "封装 / 结构", "安装信息", "可能适用产品", "文件信息", "预览与下载"];
-    byId("cadTableHeadRow").innerHTML = '<th class="cad-check-cell"><input class="cad-checkbox" id="cadSelectAll" type="checkbox" aria-label="选择当前页全部' +
-      (productMode ? "产品" : "模型") + '"></th>' + headers.map(function (header, index) {
+    var headers = isEnglishMode()
+      ? (productMode
+        ? ["Part Number / Series", "Product Category / Package", "Catalog Dimensions", "Key Parameters", "CAD File", "Format", "Preview and Details"]
+        : ["Catalog Dimensions / CAD File", "Product Category", "Package / Structure", "Mounting Information", "Possible Products", "File Information", "Preview and Download"])
+      : (productMode
+        ? ["产品料号 / 系列", "产品类别 / 封装", "目录尺寸", "关键参数", "CAD 文件", "格式", "预览与详情"]
+        : ["目录尺寸 / CAD 文件", "产品类别", "封装 / 结构", "安装信息", "可能适用产品", "文件信息", "预览与下载"]);
+    var selectAllLabel = isEnglishMode()
+      ? "Select all " + (productMode ? "products" : "models") + " on this page"
+      : "选择当前页全部" + (productMode ? "产品" : "模型");
+    byId("cadTableHeadRow").innerHTML = '<th class="cad-check-cell"><input class="cad-checkbox" id="cadSelectAll" type="checkbox" aria-label="' + escapeHtml(selectAllLabel) + '"></th>' + headers.map(function (header, index) {
         return '<th' + (index === headers.length - 1 ? ' style="text-align:right"' : '') + '>' + escapeHtml(header) + '</th>';
       }).join("");
     byId("cadSelectAll").addEventListener("change", toggleCurrentPageSelection);
@@ -412,9 +439,16 @@
     if (state.page > pageCount) state.page = pageCount;
     var rows = currentPageRows();
     var body = byId("cadTableBody");
-    byId("cadResultCount").textContent = state.viewMode === "product"
-      ? "共 " + state.filtered.length.toLocaleString("zh-CN") + " 个已匹配 CAD 的料号"
-      : "共 " + state.filtered.length + " 个 STEP 文件 · " + unique(state.filtered.map(function (row) { return row.model.fileHash || row.model.id; })).length + " 个唯一几何";
+    var uniqueGeometryCount = state.viewMode === "model"
+      ? unique(state.filtered.map(function (row) { return row.model.fileHash || row.model.id; })).length
+      : 0;
+    byId("cadResultCount").textContent = isEnglishMode()
+      ? (state.viewMode === "product"
+        ? state.filtered.length.toLocaleString("en-US") + " part numbers with matching CAD files"
+        : state.filtered.length.toLocaleString("en-US") + " STEP files · " + uniqueGeometryCount.toLocaleString("en-US") + " unique geometries")
+      : (state.viewMode === "product"
+        ? "共 " + state.filtered.length.toLocaleString("zh-CN") + " 个已匹配 CAD 的料号"
+        : "共 " + state.filtered.length + " 个 STEP 文件 · " + uniqueGeometryCount + " 个唯一几何");
 
     if (!rows.length) {
       renderMessage("search_off", "没有符合当前条件的 3D-CAD 模型", "empty");
@@ -424,7 +458,7 @@
       }).join("");
     }
 
-    byId("cadPageIndicator").textContent = state.page + " / " + pageCount + " 页";
+    byId("cadPageIndicator").textContent = state.page + " / " + pageCount + (isEnglishMode() ? " pages" : " 页");
     byId("cadPagePrev").disabled = state.page <= 1;
     byId("cadPageNext").disabled = state.page >= pageCount;
     updateSelectionUI();
@@ -495,20 +529,23 @@
     var selected = state.selected.has(row.id);
     var multiple = models.length > 1;
     var model = models[0];
-    var modelLabel = multiple ? models.length + " 份可选 CAD" : model.nominal + " · " + model.package;
+    var modelLabel = multiple
+      ? (isEnglishMode() ? models.length + " CAD options" : models.length + " 份可选 CAD")
+      : cadDisplayText(model.nominal + " · " + model.package);
     var files = unique(models.map(function (candidate) { return candidate.fileName; }));
+    var displayFiles = files.map(cadDisplayText);
     return '<tr class="' + (selected ? "is-selected" : "") + '" data-row-id="' + escapeHtml(row.id) + '">' +
-      '<td class="cad-check-cell"><input class="cad-checkbox cad-row-check" type="checkbox" aria-label="选择 ' + escapeHtml(product.itemNo) + '" data-row-id="' + escapeHtml(row.id) + '" ' + (selected ? "checked" : "") + '></td>' +
+      '<td class="cad-check-cell"><input class="cad-checkbox cad-row-check" type="checkbox" aria-label="' + escapeHtml((isEnglishMode() ? "Select " : "选择 ") + product.itemNo) + '" data-row-id="' + escapeHtml(row.id) + '" ' + (selected ? "checked" : "") + '></td>' +
       '<td><a class="cad-part-number" href="product-detail.html?pn=' + encodeURIComponent(product.itemNo) + '">' + escapeHtml(product.itemNo) + '</a><span class="cad-series-name">' + escapeHtml(product.series || "系列待补") + ' 系列</span></td>' +
       '<td><span class="cad-category-badge">' + escapeHtml(product.category || "类别待补") + '</span><span class="cad-subline">' + escapeHtml(product.package || model.package || "封装待补") + '</span></td>' +
       '<td>' + productDimensionHtml(product) + '</td>' +
       '<td><span class="cad-electrical-main">' + escapeHtml(product.voltage || "—") + ' · ' + escapeHtml(product.capacitance || "—") + '</span><span class="cad-subline">' + escapeHtml(product.temperature ? "工作温度 " + product.temperature + " ℃" : product.status || "") + '</span></td>' +
-      '<td><span class="cad-model-name">' + escapeHtml(modelLabel) + '</span><span class="cad-subline" title="' + escapeHtml(files.join("、")) + '">' + escapeHtml(files.slice(0, 2).join("、")) + (files.length > 2 ? "…" : "") + '</span>' + (multiple ? '<span class="cad-candidate-status">可切换查看</span>' : '') + '</td>' +
-      '<td><span class="cad-format-badge">STEP</span><span class="cad-size-muted">' + (multiple ? files.length + " 个文件" : escapeHtml(formatFileSize(model.fileSize))) + '</span></td>' +
+      '<td><span class="cad-model-name">' + escapeHtml(modelLabel) + '</span><span class="cad-subline" title="' + escapeHtml(displayFiles.join(isEnglishMode() ? ", " : "、")) + '">' + escapeHtml(displayFiles.slice(0, 2).join(isEnglishMode() ? ", " : "、")) + (files.length > 2 ? "…" : "") + '</span>' + (multiple ? '<span class="cad-candidate-status">' + (isEnglishMode() ? "Switch Models" : "可切换查看") + '</span>' : '') + '</td>' +
+      '<td><span class="cad-format-badge">STEP</span><span class="cad-size-muted">' + (multiple ? files.length + (isEnglishMode() ? (files.length === 1 ? " File" : " Files") : " 个文件") : escapeHtml(formatFileSize(model.fileSize))) + '</span></td>' +
       '<td><div class="cad-row-actions">' +
         '<button type="button" class="cad-row-button preview" data-action="preview" data-row-id="' + escapeHtml(row.id) + '"><span class="material-symbols-outlined">view_in_ar</span>' + (multiple ? "选择 / 预览" : "3D 预览") + '</button>' +
-        (!multiple ? '<a class="cad-row-button icon-only" href="' + escapeHtml(model.step) + '" download="' + escapeHtml(model.fileName) + '" aria-label="下载 ' + escapeHtml(model.fileName) + '"><span class="material-symbols-outlined">download</span></a>' : '') +
-        '<a class="cad-row-button icon-only" href="product-detail.html?pn=' + encodeURIComponent(product.itemNo) + '" aria-label="查看 ' + escapeHtml(product.itemNo) + ' 产品详情"><span class="material-symbols-outlined">open_in_new</span></a>' +
+        (!multiple ? '<a class="cad-row-button icon-only" href="' + escapeHtml(model.step) + '" download="' + escapeHtml(model.fileName) + '" aria-label="' + escapeHtml((isEnglishMode() ? "Download " : "下载 ") + cadDisplayText(model.fileName)) + '"><span class="material-symbols-outlined">download</span></a>' : '') +
+        '<a class="cad-row-button icon-only" href="product-detail.html?pn=' + encodeURIComponent(product.itemNo) + '" aria-label="' + escapeHtml(isEnglishMode() ? "View product details for " + product.itemNo : "查看 " + product.itemNo + " 产品详情") + '"><span class="material-symbols-outlined">open_in_new</span></a>' +
       '</div></td></tr>';
   }
 
@@ -526,8 +563,8 @@
       : '';
     var seriesHtml = renderBadges(model.series, "cad-series-badge", "暂无匹配系列");
     return '<tr class="' + (selected ? "is-selected" : "") + '" data-row-id="' + escapeHtml(row.id) + '">' +
-      '<td class="cad-check-cell"><input class="cad-checkbox cad-row-check" type="checkbox" aria-label="选择 ' + escapeHtml(model.model) + '" data-row-id="' + escapeHtml(row.id) + '" ' + (selected ? "checked" : "") + '></td>' +
-      '<td><span class="cad-model-name">' + escapeHtml(model.nominal) + '</span><span class="cad-subline cad-filename" title="' + escapeHtml(model.step) + '">' + escapeHtml(model.fileName) + '</span></td>' +
+      '<td class="cad-check-cell"><input class="cad-checkbox cad-row-check" type="checkbox" aria-label="' + escapeHtml((isEnglishMode() ? "Select " : "选择 ") + model.model) + '" data-row-id="' + escapeHtml(row.id) + '" ' + (selected ? "checked" : "") + '></td>' +
+      '<td><span class="cad-model-name">' + escapeHtml(cadDisplayText(model.nominal)) + '</span><span class="cad-subline cad-filename" title="' + escapeHtml(cadDisplayText(model.fileName)) + '">' + escapeHtml(cadDisplayText(model.fileName)) + '</span></td>' +
       '<td><span class="cad-category-badge">' + escapeHtml(model.category) + '</span></td>' +
       '<td><span class="cad-package-badge package-' + escapeHtml(model.packageKey) + '">' + escapeHtml(model.package) + '</span><span class="cad-subline">' + escapeHtml(model.subtype || "标准结构") + '</span></td>' +
       '<td><span class="cad-model-size">目录 ' + escapeHtml(model.nominal) + '</span><span class="cad-subline">脚距 ' + escapeHtml(pitch) + '</span></td>' +
@@ -535,7 +572,7 @@
       '<td><span class="cad-candidate-status">' + escapeHtml(mappingStatus) + '</span><span class="cad-size-muted">' + escapeHtml(formatFileSize(model.fileSize)) + '</span>' + duplicate + '</td>' +
       '<td><div class="cad-row-actions">' +
         '<button type="button" class="cad-row-button preview" data-action="preview" data-row-id="' + escapeHtml(row.id) + '"><span class="material-symbols-outlined">view_in_ar</span>3D 预览</button>' +
-        '<a class="cad-row-button" href="' + escapeHtml(model.step) + '" download="' + escapeHtml(model.fileName) + '" aria-label="下载 ' + escapeHtml(model.fileName) + '"><span class="material-symbols-outlined">download</span></a>' +
+        '<a class="cad-row-button" href="' + escapeHtml(model.step) + '" download="' + escapeHtml(model.fileName) + '" aria-label="' + escapeHtml((isEnglishMode() ? "Download " : "下载 ") + cadDisplayText(model.fileName)) + '"><span class="material-symbols-outlined">download</span></a>' +
       '</div></td></tr>';
   }
 
@@ -573,7 +610,9 @@
     var selectAll = byId("cadSelectAll");
     selectAll.checked = pageRows.length > 0 && selectedOnPage === pageRows.length;
     selectAll.indeterminate = selectedOnPage > 0 && selectedOnPage < pageRows.length;
-    byId("cadSelectedCount").textContent = "已选择 " + state.selected.size + " 个" + (state.viewMode === "product" ? "产品" : "模型");
+    byId("cadSelectedCount").textContent = isEnglishMode()
+      ? state.selected.size + " " + (state.viewMode === "product" ? "products" : "models") + " selected"
+      : "已选择 " + state.selected.size + " 个" + (state.viewMode === "product" ? "产品" : "模型");
     byId("cadBatchDownload").disabled = state.selected.size === 0;
   }
 

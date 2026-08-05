@@ -25,6 +25,17 @@
     var elements = {};
     var toastTimer = null;
 
+    function isEnglishPage() {
+        return (window.YMIN && YMIN.i18n && YMIN.i18n.language === 'en') ||
+            new URLSearchParams(window.location.search).get('lang') === 'en';
+    }
+
+    function displayText(value) {
+        return isEnglishPage() && window.YMIN && YMIN.i18n
+            ? YMIN.i18n.t(value)
+            : value;
+    }
+
     function cacheElements() {
         elements.search = document.getElementById('download-search');
         elements.searchButton = document.getElementById('download-search-button');
@@ -283,7 +294,7 @@
 
             return '<article class="download-item' + (checked ? ' is-selected' : '') +
                 '" itemscope itemtype="https://schema.org/DataDownload">' +
-                '<input class="download-checkbox" type="checkbox" aria-label="选择 ' + escapeAttribute(item.title) +
+                '<input class="download-checkbox" type="checkbox" aria-label="' + escapeAttribute((isEnglishPage() ? 'Select ' : '选择 ') + displayText(item.title)) +
                 '" data-download-select="' + escapeAttribute(item.id) + '"' + (checked ? ' checked' : '') + '>' +
                 '<div class="download-file-badge" aria-hidden="true">PDF</div>' +
                 '<div class="download-item-copy">' +

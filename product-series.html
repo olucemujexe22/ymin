@@ -396,8 +396,10 @@
         <footer id="ymin-footer"></footer>
     </main>
 
-    <script src="components/navbar.js?v=20260803"></script>
-    <script src="components/footer.js"></script>
+    <script src="components/i18n.js?v=20260805merge10"></script>
+
+    <script src="components/navbar.js?v=20260805merge3"></script>
+    <script src="components/footer.js?v=20260805merge4"></script>
     <script src="data/series-diagram.js"></script>
     <script src="data/series-table.js"></script>
     <script>
@@ -416,6 +418,166 @@
         var currentLineFilter = null; // 当前产品线筛选
         var currentPackageFilter = null; // 当前封装形式筛选
 
+        var seriesEnglishTerms = {
+            '低阻抗薄型高容量化品': 'Low-impedance, low-profile, high-capacitance product',
+            '高纹波电流耐高温长寿命品': 'High-ripple, high-temperature, long-life product',
+            '高纹波电流长寿命低温启动': 'High ripple current, long life and low-temperature start',
+            '高纹波电流低阻抗小型化': 'High ripple current, low impedance and compact size',
+            '高纹波电流低阻抗标准品': 'High-ripple, low-impedance standard product',
+            '超低ESR耐大纹波电流': 'Ultra-low ESR and high ripple-current capability',
+            '高容量密度定制模块电容': 'Custom high-capacitance-density module capacitor',
+            '矩形干式直流滤波电容': 'Rectangular dry-type DC filter capacitor',
+            '铝壳圆形干式直流滤波电容': 'Round aluminum-case dry-type DC filter capacitor',
+            '4引线方壳电容': 'Four-lead box capacitor',
+            '引线方壳电容': 'Lead-type box capacitor',
+            '高容量密度插针电容': 'High-capacitance-density through-hole capacitor',
+            '高可靠低ESR': 'High reliability and low ESR',
+            '耐高频大纹波': 'High-frequency and high-ripple capability',
+            '超长寿命高可靠': 'Ultra-long life and high reliability',
+            '超小体积耐高温': 'Ultra-compact and high-temperature capable',
+            '大功率高能量品': 'High-power, high-energy product',
+            '大功率高容量品': 'High-power, high-capacitance product',
+            '标准品插针电容': 'Standard through-hole capacitor',
+            '客制化需求应对品': 'Custom product for application-specific requirements',
+            '有困难 找永铭 客户定制品': 'YMIN application-specific custom product',
+            '小型化大容量': 'Compact, high-capacitance design',
+            '大容量小型化': 'High capacitance in a compact design',
+            '高耐热型定制模块电容': 'Custom high-temperature module capacitor',
+            '标准定制模块电容': 'Standard custom module capacitor',
+            '容量/电压/尺寸均可定制': 'Customizable capacitance / voltage / dimensions',
+            '圆柱型双电层超级电容': 'Cylindrical electric double-layer supercapacitor',
+            '混合型超级电容LIC': 'Hybrid supercapacitor LIC',
+            '混合型超级电容 LIC': 'Hybrid supercapacitor LIC',
+            '基板自立型 AI服务器主供电源': 'Snap-in type · AI server main power supply',
+            'AI服务器主供电源': 'AI server main power supply',
+            '大型量身定制产品': 'Large custom products',
+            '螺栓型量身定制产品': 'Screw-terminal custom products',
+            '量身定制产品': 'Custom products',
+            '新能源汽车电子': 'New-energy vehicle electronics',
+            '新能源储能': 'New-energy storage',
+            '电源小型化': 'Compact power supplies',
+            '电源薄型化': 'Low-profile power supplies',
+            '工业控制器': 'Industrial controllers',
+            '工业伺服': 'Industrial servo drives',
+            '工业变频': 'Industrial inverters',
+            '域控制器专用': 'For domain controllers',
+            '热管理专用': 'For thermal management',
+            '路灯专用': 'For street lighting',
+            '定制专用模组': 'Application-specific custom module',
+            '大电流快充': 'High-current fast charging',
+            '毫秒级响应': 'Millisecond response',
+            '耐大纹波电流': 'High ripple-current capability',
+            '超大容量品': 'Ultra-high-capacitance product',
+            '高电压高容量品': 'High-voltage, high-capacitance product',
+            '耐高温车规品': 'High-temperature automotive-grade product',
+            '高温长寿命': 'High-temperature, long-life product',
+            '高压长寿命': 'High-voltage, long-life product',
+            '高耐热插针电容': 'High-temperature through-hole capacitor',
+            '标准品交流电容': 'Standard AC capacitor',
+            'SMD表面贴装品': 'SMD product',
+            '低阻抗长寿命品': 'Low-impedance, long-life product',
+            '低ESR长寿命品': 'Low-ESR, long-life product',
+            '高纹波电流长寿命品': 'High-ripple, long-life product',
+            '高纹波电流标准品': 'High-ripple standard product',
+            '耐高温长寿命品': 'High-temperature, long-life product',
+            '低阻抗标准品': 'Low-impedance standard product',
+            '低阻抗小型化': 'Low impedance and compact size',
+            '低阻抗薄型': 'Low impedance and low profile',
+            '高容量化品': 'High-capacitance product',
+            '低ESR小型化品': 'Low-ESR compact product',
+            '高超小型品': 'Ultra-compact low-profile product',
+            '超小型品': 'Ultra-compact product',
+            '小型化品': 'Compact product',
+            '超薄品': 'Ultra-low-profile product',
+            'LIC超小尺寸品': 'LIC ultra-compact product',
+            '5mm高': '5 mm high',
+            '7mm高': '7 mm high',
+            '3.95mm高度': '3.95 mm high',
+            '大功率': 'High power',
+            '超薄': 'Ultra-low profile',
+            '薄型品': 'Low-profile product',
+            '大容量品': 'High-capacitance product',
+            '高容量品': 'High-capacitance product',
+            '超高容量': 'Ultra-high capacitance',
+            '低温品': 'Low-temperature product',
+            '低温启动': 'Low-temperature start',
+            '高能量品': 'High-energy product',
+            '车规品': 'Automotive-grade product',
+            '标准品': 'Standard product',
+            '定制品': 'Custom product',
+            '低阻抗品': 'Low-impedance product',
+            '低阻抗长寿命': 'Low impedance and long life',
+            '超长寿命': 'Ultra-long life',
+            '长寿命品': 'Long-life product',
+            '长寿命': 'Long life',
+            '高纹波电流': 'High ripple current',
+            '高纹波': 'High ripple current',
+            '超低ESR': 'Ultra-low ESR',
+            '低ESR': 'Low ESR',
+            '低阻抗': 'Low impedance',
+            '高耐压': 'High withstand voltage',
+            '高电压': 'High voltage',
+            '高压': 'High voltage',
+            '耐高电压': 'High-voltage capability',
+            '超高耐温': 'Ultra-high-temperature capability',
+            '高耐温': 'High-temperature capability',
+            '超高温': 'Ultra-high temperature',
+            '耐高温': 'High-temperature capability',
+            '高可靠性': 'High reliability',
+            '高可靠': 'High reliability',
+            '小尺寸化': 'Compact size',
+            '小型化': 'Compact size',
+            '薄型': 'Low profile',
+            '高容量': 'High capacitance',
+            '叠层型': 'Stacked type',
+            '贴片型': 'SMD',
+            '引线型': 'Radial',
+            '牛角型': 'Snap-in',
+            '插针式': 'Through-hole',
+            '基板自立型': 'Snap-in',
+            '螺栓型': 'Screw-terminal',
+            '双电层单体': 'EDLC cells',
+            '双电层模组': 'EDLC modules',
+            '单体': 'Cell',
+            '模组': 'Module',
+            '灌胶': 'Potted',
+            '套管': 'Sleeved',
+            '根据应用': 'Application dependent',
+            '定制': 'Custom',
+            '专用': 'Application specific',
+            '直径': 'diameter',
+            '万次': '0,000 cycles',
+            '逆变器': 'Inverters',
+            '变流器': 'Converters',
+            '变频器': 'Inverters',
+            '中频炉': 'Medium-frequency furnaces',
+            '工控': 'Industrial control',
+            '光伏': 'Photovoltaics',
+            '电源': 'Power supplies',
+            '变频': 'Variable-frequency drives',
+            '开发中 敬请期待': 'Under development',
+            '按产品体系图补充': 'To be supplemented according to the product portfolio',
+            '品': 'product'
+        };
+        var seriesEnglishKeys = Object.keys(seriesEnglishTerms).sort(function(a, b) { return b.length - a.length; });
+
+        function isEnglishSeriesPage() {
+            return !!(window.YMIN && YMIN.i18n && YMIN.i18n.language === 'en');
+        }
+
+        function displaySeriesText(value) {
+            var result = String(value == null ? '' : value);
+            if (!isEnglishSeriesPage()) return result;
+            if (YMIN.i18n && typeof YMIN.i18n.t === 'function') {
+                var translated = YMIN.i18n.t(result);
+                if (!/[\u3400-\u9fff]/.test(translated)) return translated;
+            }
+            seriesEnglishKeys.forEach(function(source) {
+                if (result.indexOf(source) !== -1) result = result.split(source).join(seriesEnglishTerms[source]);
+            });
+            return result.replace(/\s{2,}/g, ' ').trim();
+        }
+
         function initPage() {
             // 填充产品线筛选下拉
             var lineFilter = document.getElementById('lineFilter');
@@ -424,13 +586,13 @@
             lines.forEach(function(line) {
                 var opt = document.createElement('option');
                 opt.value = line;
-                opt.textContent = line;
+                opt.textContent = displaySeriesText(line);
                 lineFilter.appendChild(opt);
             });
             ['贴片型', '引线型', '牛角型', '插针式'].forEach(function(pkg) {
                 var opt = document.createElement('option');
                 opt.value = pkg;
-                opt.textContent = pkg;
+                opt.textContent = displaySeriesText(pkg);
                 packageFilter.appendChild(opt);
             });
 
@@ -507,7 +669,7 @@
 
         function renderTable(data) {
             var tbody = document.getElementById('tableBody');
-            document.getElementById('resultCount').textContent = '共 ' + data.length + ' 个系列';
+            document.getElementById('resultCount').textContent = isEnglishSeriesPage() ? data.length + ' series' : '共 ' + data.length + ' 个系列';
             var html = '';
             data.forEach(function(row) {
                 var aecBadge = row.aec ? '<span class="text-[10px] bg-green-50 text-green-700 px-1.5 py-0.5 font-medium">AEC-Q200</span>' : '<span class="text-[10px] text-slate-300">-</span>';
@@ -518,13 +680,13 @@
 
                 html += '<tr class="hover:bg-slate-50 transition-colors">';
                 html += '<td class="p-4 font-bold text-primary">' + row.series + '</td>';
-                html += '<td class="p-4 text-xs">' + row.productLine + '</td>';
-                html += '<td class="p-4">' + row.pkg + '</td>';
-                html += '<td class="p-4">' + row.voltage + '</td>';
-                html += '<td class="p-4">' + row.cap + '</td>';
-                html += '<td class="p-4">' + row.temp + '</td>';
-                html += '<td class="p-4">' + row.life + '</td>';
-                html += '<td class="p-4 text-xs max-w-[200px]">' + row.feature + '</td>';
+                html += '<td class="p-4 text-xs">' + escapeHtml(displaySeriesText(row.productLine)) + '</td>';
+                html += '<td class="p-4">' + escapeHtml(displaySeriesText(row.pkg)) + '</td>';
+                html += '<td class="p-4">' + escapeHtml(displaySeriesText(row.voltage)) + '</td>';
+                html += '<td class="p-4">' + escapeHtml(displaySeriesText(row.cap)) + '</td>';
+                html += '<td class="p-4">' + escapeHtml(displaySeriesText(row.temp)) + '</td>';
+                html += '<td class="p-4">' + escapeHtml(displaySeriesText(row.life)) + '</td>';
+                html += '<td class="p-4 text-xs max-w-[200px]">' + escapeHtml(displaySeriesText(row.feature)) + '</td>';
                 html += '<td class="p-4 text-center"><div class="flex gap-1 justify-center">' + aecBadge + rohsBadge + '</div></td>';
                 html += '<td class="p-4 text-center">' + pdfHtml + '</td>';
                 html += '</tr>';
@@ -559,10 +721,12 @@
 
         function renderSeriesCard(series, line, index) {
             var seriesName = escapeHtml(series.name);
-            var seriesUrl = 'product-center.html?series=' + encodeURIComponent(series.name);
+            var seriesUrl = 'product-center.html?category=' + encodeURIComponent(line.name) + '&series=' + encodeURIComponent(series.name);
             var cardNo = series.no || index;
-            var meta = [series.temp, series.life, series.voltage].filter(Boolean).map(escapeHtml).join(' · ');
-            var desc = escapeHtml(series.desc || '');
+            var meta = [series.temp, series.life, series.voltage].filter(Boolean).map(function(value) {
+                return escapeHtml(displaySeriesText(value));
+            }).join(' · ');
+            var desc = escapeHtml(displaySeriesText(series.desc || ''));
             var color = escapeHtml(line.color);
             var tint = color + '14';
 
@@ -658,13 +822,13 @@
             var html = '';
             html += '<div class="diagram-package">';
             html += '<div class="diagram-package-head" style="min-width:' + layout.width + 'px;">';
-            html += '<span class="diagram-package-label">' + escapeHtml(pkg.name) + '</span>';
-            html += '<span class="diagram-package-count">' + pkg.series.length + ' 个系列</span>';
+            html += '<span class="diagram-package-label">' + escapeHtml(displaySeriesText(pkg.name)) + '</span>';
+            html += '<span class="diagram-package-count">' + (isEnglishSeriesPage() ? pkg.series.length + ' series' : pkg.series.length + ' 个系列') + '</span>';
             html += '<span class="flex-1 h-px bg-slate-300"></span>';
             html += '</div>';
             html += '<div class="diagram-map" style="--map-width:' + layout.width + 'px; --map-height:' + layout.height + 'px;">';
             if (layout.labelBox) {
-                html += '<div class="diagram-map-label" style="left:' + layout.labelBox.x + 'px; top:' + layout.labelBox.y + 'px; width:' + layout.labelBox.w + 'px; height:' + layout.labelBox.h + 'px;">' + escapeHtml(layout.label || pkg.name) + '</div>';
+                html += '<div class="diagram-map-label" style="left:' + layout.labelBox.x + 'px; top:' + layout.labelBox.y + 'px; width:' + layout.labelBox.w + 'px; height:' + layout.labelBox.h + 'px;">' + escapeHtml(displaySeriesText(layout.label || pkg.name)) + '</div>';
             }
             html += '<svg class="diagram-map-svg" viewBox="0 0 ' + layout.width + ' ' + layout.height + '" preserveAspectRatio="none" aria-hidden="true">';
             html += '<defs><marker id="arrow-' + escapeHtml(layout.type) + '" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"></path></marker></defs>';
@@ -695,8 +859,8 @@
 
             html += '<div class="diagram-package">';
             html += '<div class="diagram-package-head">';
-            html += '<span class="diagram-package-label">' + escapeHtml(pkg.name) + '</span>';
-            html += '<span class="diagram-package-count">' + pkg.series.length + ' 个系列</span>';
+            html += '<span class="diagram-package-label">' + escapeHtml(displaySeriesText(pkg.name)) + '</span>';
+            html += '<span class="diagram-package-count">' + (isEnglishSeriesPage() ? pkg.series.length + ' series' : pkg.series.length + ' 个系列') + '</span>';
             html += '<span class="flex-1 h-px bg-slate-300"></span>';
             html += '</div>';
 
@@ -723,13 +887,13 @@
             if (!images.length) return html;
 
             html += '<details class="diagram-reference">';
-            html += '<summary>查看原始体系图图片</summary>';
+            html += '<summary>' + (isEnglishSeriesPage() ? 'View Original Product Portfolio Image' : '查看原始体系图图片') + '</summary>';
             if (images.length === 1) {
-                html += '<img src="' + escapeHtml(images[0]) + '" alt="' + escapeHtml(line.name) + '体系图" class="w-full border border-slate-200 shadow-sm mt-4" style="max-width:900px;">';
+                html += '<img src="' + escapeHtml(images[0]) + '" alt="' + escapeHtml(displaySeriesText(line.name)) + (isEnglishSeriesPage() ? ' product portfolio' : '体系图') + '" class="w-full border border-slate-200 shadow-sm mt-4" style="max-width:900px;">';
             } else {
                 html += '<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">';
                 images.forEach(function(img) {
-                    html += '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(line.name) + '体系图" class="w-full border border-slate-200 shadow-sm">';
+                    html += '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(displaySeriesText(line.name)) + (isEnglishSeriesPage() ? ' product portfolio' : '体系图') + '" class="w-full border border-slate-200 shadow-sm">';
                 });
                 html += '</div>';
             }
@@ -751,13 +915,13 @@
             var filterName = document.getElementById('diagramFilterName');
             if (lineFilter || packageFilter) {
                 filterBar.classList.remove('hidden');
-                filterName.textContent = [lineFilter, packageFilter].filter(Boolean).join(' / ');
+                filterName.textContent = [lineFilter, packageFilter].filter(Boolean).map(displaySeriesText).join(' / ');
             } else {
                 filterBar.classList.add('hidden');
             }
 
             if (lines.length === 0) {
-                html += '<div class="text-center py-12 text-slate-400"><span class="material-symbols-outlined text-4xl mb-2 block">search_off</span><p>未找到匹配的产品线</p></div>';
+                html += '<div class="text-center py-12 text-slate-400"><span class="material-symbols-outlined text-4xl mb-2 block">search_off</span><p>' + (isEnglishSeriesPage() ? 'No matching product line found' : '未找到匹配的产品线') + '</p></div>';
                 container.innerHTML = html;
                 return;
             }
@@ -773,9 +937,9 @@
                 html += '<section class="diagram-line">';
                 html += '<div class="diagram-line-heading">';
                 html += '<div class="diagram-line-mark" style="background:' + escapeHtml(line.color) + '"></div>';
-                html += '<div><h3 class="text-xl font-bold text-primary">' + escapeHtml(line.name) + '</h3>';
+                html += '<div><h3 class="text-xl font-bold text-primary">' + escapeHtml(displaySeriesText(line.name)) + '</h3>';
                 html += '<p class="text-[10px] text-slate-400 uppercase tracking-wider">' + escapeHtml(line.nameEn) + '</p></div>';
-                html += '<span class="ml-auto text-[10px] text-slate-400 uppercase tracking-wider">' + displayPackages.length + ' 个封装分组</span>';
+                html += '<span class="ml-auto text-[10px] text-slate-400 uppercase tracking-wider">' + (isEnglishSeriesPage() ? displayPackages.length + ' package groups' : displayPackages.length + ' 个封装分组') + '</span>';
                 html += '</div>';
 
                 displayPackages.forEach(function(pkg) {
@@ -790,7 +954,7 @@
 
             container.innerHTML = html;
             if (!html) {
-                container.innerHTML = '<div class="text-center py-12 text-slate-400"><span class="material-symbols-outlined text-4xl mb-2 block">search_off</span><p>未找到匹配的封装形式</p></div>';
+                container.innerHTML = '<div class="text-center py-12 text-slate-400"><span class="material-symbols-outlined text-4xl mb-2 block">search_off</span><p>' + (isEnglishSeriesPage() ? 'No matching package type found' : '未找到匹配的封装形式') + '</p></div>';
             }
         }
 

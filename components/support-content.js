@@ -148,6 +148,41 @@ YMIN.supportContent = (function () {
         return new URLSearchParams(window.location.search).get(name) || '';
     }
 
+    function isEnglishPage() {
+        return (YMIN.i18n && YMIN.i18n.language === 'en') ||
+            String(queryValue('lang')).toLowerCase().indexOf('en') === 0;
+    }
+
+    function localizeArticle(article) {
+        if (!article || !isEnglishPage() || !window.YMIN_ARTICLE_EN) return article;
+        var localized = window.YMIN_ARTICLE_EN[String(article.id)];
+        return localized ? Object.assign({}, article, localized) : article;
+    }
+
+    function translatedText(value) {
+        if (!isEnglishPage() || !YMIN.i18n) return String(value || '');
+        return YMIN.i18n.t(String(value || ''));
+    }
+
+    function faqAnswerText(value) {
+        var translated = translatedText(value);
+        if (isEnglishPage() && /[\u3400-\u9fff]/.test(translated)) {
+            return 'The English answer is being prepared. Switch to Chinese for the original content or contact YMIN support.';
+        }
+        return translated;
+    }
+
+    function prepareArticles(articles) {
+        var sorted = articles.slice().sort(function (a, b) {
+            return String(b.date || '').localeCompare(String(a.date || ''));
+        });
+        if (!isEnglishPage()) return sorted;
+        var englishArticles = window.YMIN_ARTICLE_EN || {};
+        return sorted.filter(function (article) {
+            return !!englishArticles[String(article.id)];
+        }).map(localizeArticle);
+    }
+
     function setQuery(params, replace) {
         var current = new URLSearchParams(window.location.search);
         Object.keys(params).forEach(function (key) {
@@ -161,6 +196,13 @@ YMIN.supportContent = (function () {
 
     function loadData(kind) {
         if (dataCache[kind]) return Promise.resolve(dataCache[kind]);
+        var localPayload = kind === 'articles'
+            ? window.YMIN_SUPPORT_ARTICLES
+            : window.YMIN_SUPPORT_FAQS;
+        if (window.location.protocol === 'file:' && localPayload) {
+            dataCache[kind] = localPayload.items || localPayload;
+            return Promise.resolve(dataCache[kind]);
+        }
         var path = kind === 'articles' ? 'data/support-articles.json' : 'data/support-faqs.json';
         return fetch(path, { cache: 'no-store' })
             .then(function (response) {
@@ -265,7 +307,7 @@ YMIN.supportContent = (function () {
 
         Promise.all([loadData('faqs'), loadData('articles')]).then(function (sets) {
             var faqs = sets[0];
-            var articles = sets[1];
+            var articles = prepareArticles(sets[1]);
             populateCounts(faqs, articles);
             var articleMap = {};
             articles.forEach(function (article) { articleMap[article.id] = article; });
@@ -483,7 +525,7 @@ YMIN.supportContent = (function () {
         var faqId = queryValue('id');
         Promise.all([loadData('faqs'), loadData('articles')]).then(function (sets) {
             var faqs = sets[0];
-            var articles = sets[1];
+            var articles = prepareArticles(sets[1]);
             var faq = faqs.find(function (item) { return item.id === faqId; });
             if (!faq) {
                 showError(mainNode, '未找到这条FAQ');
@@ -501,11 +543,11 @@ YMIN.supportContent = (function () {
                 return sameSeries || sameApp;
             }).slice(0, 4);
             var tools = faqTools(faq);
-            document.title = faq.question + ' - 永铭电子FAQ';
+            document.title = isEnglishPage() ? translatedText(faq.question) + ' - YMIN Electronics FAQ' : faq.question + ' - 永铭电子FAQ';
 
             mainNode.innerHTML =
                 '<div class="support-detail-eyebrow">FAQ · ' + escapeHtml(faq.type || '技术问答') + '</div>' +
-                '<h1>' + escapeHtml(faq.question) + '</h1>' +
+                '<h1>' + escapeHtml(translatedText(faq.question)) + '</h1>' +
                 '<div class="support-detail-meta">' +
                     '<span><span class="material-symbols-outlined">calendar_month</span>' +
                         escapeHtml(formatDate(faq.date)) + '</span>' +
@@ -515,7 +557,7 @@ YMIN.supportContent = (function () {
                 '<div class="faq-tags">' +
                     renderTags([faq.type].concat(applicationValues(faq), faq.series || []), 'faq-tag', 8) +
                 '</div>' +
-                '<div class="faq-detail-answer">' + htmlText(faq.answer) + '</div>' +
+                '<div class="faq-detail-answer">' + htmlText(faqAnswerText(faq.answer)) + '</div>' +
                 (relatedArticle ?
                     '<section class="support-detail-section"><h2>相关技术文章</h2>' +
                         '<a class="support-link-card" href="support-news-detail.html?id=' +
@@ -547,7 +589,7 @@ YMIN.supportContent = (function () {
                     relatedFaqs.map(function (item) {
                         return '<a class="support-link-card" href="support-faq-detail.html?id=' +
                             encodeURIComponent(item.id) + '"><strong>' +
-                            escapeHtml(item.question) + '</strong></a>';
+                            escapeHtml(translatedText(item.question)) + '</strong></a>';
                     }).join('') + '</div></div>' : '');
 
             var feedback = document.getElementById('faq-feedback');
@@ -619,9 +661,7 @@ YMIN.supportContent = (function () {
         var pageSize = 8;
 
         Promise.all([loadData('articles'), loadData('faqs')]).then(function (sets) {
-            var articles = sets[0].slice().sort(function (a, b) {
-                return String(b.date || '').localeCompare(String(a.date || ''));
-            });
+            var articles = prepareArticles(sets[0]);
             var faqs = sets[1];
             populateCounts(faqs, articles);
             var featured = articles.find(function (item) { return item.coverImage; }) || articles[0];
@@ -790,11 +830,16 @@ YMIN.supportContent = (function () {
         var navNode = document.getElementById('news-detail-nav');
         var articleId = queryValue('id');
         Promise.all([loadData('articles'), loadData('faqs')]).then(function (sets) {
-            var articles = sets[0].slice().sort(function (a, b) {
-                return String(b.date || '').localeCompare(String(a.date || ''));
-            });
+            var articles = prepareArticles(sets[0]);
             var faqs = sets[1];
             var article = articles.find(function (item) { return item.id === articleId; });
+            if (!article && isEnglishPage() && window.YMIN_ARTICLE_EN) {
+                var standaloneEnglishArticle = window.YMIN_ARTICLE_EN[String(articleId)];
+                if (standaloneEnglishArticle && standaloneEnglishArticle.englishOnly) {
+                    article = Object.assign({ id: articleId }, standaloneEnglishArticle);
+                    articles.push(article);
+                }
+            }
             if (!article) {
                 showError(mainNode, '未找到这篇文章');
                 return;

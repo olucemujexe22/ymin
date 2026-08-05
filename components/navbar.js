@@ -10,6 +10,23 @@ var YMIN = window.YMIN || {};
 YMIN.navbar = (function () {
     'use strict';
 
+    function isEnglishPage() {
+        return (YMIN.i18n && YMIN.i18n.language === 'en') ||
+            new URLSearchParams(window.location.search).get('lang') === 'en' ||
+            document.documentElement.lang === 'en';
+    }
+
+    function languageSwitcher() {
+        if (YMIN.i18n && typeof YMIN.i18n.switcher === 'function') {
+            return YMIN.i18n.switcher();
+        }
+        return '<div class="ymin-language-switcher flex items-center border border-slate-300 bg-white" role="group" aria-label="Language">' +
+            '<a class="px-2 py-1 text-[11px] font-bold text-slate-500" href="?lang=zh-CN" data-i18n-ignore>中</a>' +
+            '<span class="text-slate-300" aria-hidden="true">/</span>' +
+            '<a class="px-2 py-1 text-[11px] font-bold text-slate-500" href="?lang=en" data-i18n-ignore>EN</a>' +
+            '</div>';
+    }
+
     function navLink(href, label, activeClass, hasDropdown) {
         var cls = 'flex h-full items-center justify-center gap-1.5 px-1 font-[\'Space_Grotesk\'] tracking-[0.01em] text-[15px] font-bold whitespace-nowrap ';
         cls += activeClass
@@ -42,6 +59,7 @@ YMIN.navbar = (function () {
      */
     function render(active) {
         var activePage = active || 'home';
+        var english = isEnglishPage();
 
         var html = '';
         html += '<header class="bg-white dark:bg-slate-950 w-full border-b border-slate-200 dark:border-slate-800 z-50 flex-shrink-0">';
@@ -118,13 +136,16 @@ YMIN.navbar = (function () {
         // 关于永铭
         html += '<div class="group h-full flex items-center relative">';
         html += navLink('about.html', '关于永铭', activePage === 'about', true);
-        html += dropdownMenuRight([
+        var aboutItems = [
             { href: 'about-company.html', label: '公司简介' },
             { href: 'about-honors.html', label: '企业荣誉' },
-            { href: 'about-distributors.html', label: '代理商网络' },
-            { href: 'about-careers.html', label: '加入我们' },
-            { href: 'about-procurement.html', label: '原材料采购' }
-        ], 'w-48');
+            { href: 'about-distributors.html', label: '代理商网络' }
+        ];
+        if (!english) {
+            aboutItems.push({ href: 'about-careers.html', label: '加入我们' });
+            aboutItems.push({ href: 'about-procurement.html', label: '原材料采购' });
+        }
+        html += dropdownMenuRight(aboutItems, 'w-48');
         html += '</div>';
 
         html += '</nav>';
@@ -135,11 +156,11 @@ YMIN.navbar = (function () {
         html += '<input class="bg-[#f3f3f7] dark:bg-slate-900 border-b-2 border-outline-variant px-4 py-2 focus:border-primary outline-none text-xs w-56 no-radius font-[\'Inter\']" placeholder="搜索型号或参数..." type="text">';
         html += '<span class="material-symbols-outlined absolute right-2 top-2 text-on-surface-variant text-lg">search</span>';
         html += '</div>';
-        html += '<div class="hidden xl:flex items-center gap-1">';
-        html += '<span class="material-symbols-outlined p-2 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors cursor-pointer text-slate-600 dark:text-slate-400" title="Language">language</span>';
-        html += '<span class="material-symbols-outlined p-2 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors cursor-pointer text-slate-600 dark:text-slate-400" title="Account">person</span>';
+        html += '<div class="hidden xl:flex items-center gap-2">';
+        html += languageSwitcher();
+        html += '<a data-member-account-icon class="flex items-center p-2 hover:bg-[#edeef1] dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400" href="member-login.html" title="会员账户" aria-label="会员账户"><span class="material-symbols-outlined">person</span></a>';
         html += '</div>';
-        html += '<button class="hidden lg:block bg-[#1B365D] text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all active:scale-95 no-radius">登录</button>';
+        html += '<a data-member-nav class="hidden lg:block bg-[#1B365D] text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all active:scale-95 no-radius" href="member-login.html">登录</a>';
         html += '</div>';
 
         html += '</div>';
@@ -158,8 +179,26 @@ YMIN.navbar = (function () {
         var el = document.getElementById(id);
         if (el) {
             el.outerHTML = render(activePage);
+            loadMemberModule();
         }
     }
+
+    // YMIN_MEMBER_BEGIN：会员功能独立加载区。合并中英文导航时请保留此区块。
+    function loadMemberModule() {
+        if (YMIN.member && typeof YMIN.member.init === 'function') {
+            YMIN.member.init();
+            return;
+        }
+        if (document.querySelector('script[data-ymin-member-module]')) return;
+        var script = document.createElement('script');
+        script.src = 'components/member.js?v=20260805merge3';
+        script.setAttribute('data-ymin-member-module', 'true');
+        script.onload = function () {
+            if (YMIN.member && typeof YMIN.member.init === 'function') YMIN.member.init();
+        };
+        document.head.appendChild(script);
+    }
+    // YMIN_MEMBER_END
 
     return {
         render: render,

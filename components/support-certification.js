@@ -20,6 +20,11 @@ YMIN.supportCertification = (function () {
         openId: ''
     };
     var toastTimer = 0;
+    function isEnglishPage() {
+        return (window.YMIN && YMIN.i18n && YMIN.i18n.language === 'en') ||
+            new URLSearchParams(window.location.search).get('lang') === 'en';
+    }
+
     function byId(id) {
         return document.getElementById(id);
     }
@@ -37,6 +42,9 @@ YMIN.supportCertification = (function () {
         if (!value) return '—';
         var date = new Date(value + 'T00:00:00');
         if (Number.isNaN(date.getTime())) return value;
+        if (isEnglishPage()) {
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
         return date.getFullYear() + '年' + String(date.getMonth() + 1).padStart(2, '0') + '月' + String(date.getDate()).padStart(2, '0') + '日';
     }
 
@@ -124,7 +132,7 @@ YMIN.supportCertification = (function () {
             '<div class="certification-report-field"><small>报告编号</small><strong>' + escapeHtml(document.reportNo || '—') + '</strong></div>' +
             '<div class="certification-report-field"><small>检测日期</small><strong>' + escapeHtml(formatDate(document.reportDate)) + '</strong></div>' +
             '<div class="certification-report-actions">' +
-            '<button class="certification-report-action" type="button" data-toggle-report="' + escapeHtml(document.id) + '"><span class="material-symbols-outlined">article</span>详情</button>' +
+            '<button class="certification-report-action" type="button" data-toggle-report="' + escapeHtml(document.id) + '"><span class="material-symbols-outlined">article</span>' + (isEnglishPage() ? 'Details' : '详情') + '</button>' +
             fileAction +
             '</div></div>' + documentDetail(document) + '</article>';
     }
@@ -153,7 +161,9 @@ YMIN.supportCertification = (function () {
         var list = byId('cert-report-results');
         var pagination = byId('cert-report-pagination');
         if (count) {
-            count.innerHTML = '共 <strong>' + filtered.length + '</strong> 条产品认证文件' + (filtered.length ? '，按检测日期排序' : '');
+            count.innerHTML = isEnglishPage()
+                ? 'Found <strong>' + filtered.length + '</strong> product certification documents' + (filtered.length ? ', sorted by test date' : '')
+                : '共 <strong>' + filtered.length + '</strong> 条产品认证文件' + (filtered.length ? '，按检测日期排序' : '');
         }
         if (list) {
             list.innerHTML = visible.length

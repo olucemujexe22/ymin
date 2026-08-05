@@ -22,6 +22,34 @@ YMIN.productReplacement = (function () {
         return document.getElementById(id);
     }
 
+    function isEnglishPage() {
+        return (YMIN.i18n && YMIN.i18n.language === 'en') ||
+            new URLSearchParams(window.location.search).get('lang') === 'en';
+    }
+
+    function displayText(value) {
+        return isEnglishPage() && YMIN.i18n ? YMIN.i18n.t(value) : value;
+    }
+
+    function brandDisplayName(value) {
+        var name = String(value || '');
+        if (!isEnglishPage()) return name;
+        var brands = {
+            '贵弥功（NCC）': 'Nippon Chemi-Con (NCC)', '禾伸堂（IHHEC）': 'IHHEC',
+            '红宝石（Rubycon）': 'Rubycon', '基美': 'KEMET', '其他品牌': 'Other Brands',
+            '三莹': 'Samyoung', '松下（Panasonic）': 'Panasonic', '威世（Vishay）': 'Vishay',
+            'APAQ(钰邦)': 'APAQ', 'BERYL(绿宝石)': 'BERYL', 'KEMET (基美)': 'KEMET',
+            'KEMET(基美)': 'KEMET', 'TAIYO YUDEN(太诱)': 'TAIYO YUDEN',
+            '伊顿（Eaton）': 'Eaton', '尼吉康（Nichicon）': 'Nichicon'
+        };
+        if (brands[name]) return brands[name];
+        var westernInChinese = name.match(/^[\u3400-\u9fff]+（([A-Za-z0-9 .&-]+)）$/);
+        if (westernInChinese) return westernInChinese[1];
+        var westernFirst = name.match(/^([A-Za-z0-9 .&-]+)\([^)]*[\u3400-\u9fff][^)]*\)$/);
+        if (westernFirst) return westernFirst[1].trim();
+        return /[\u3400-\u9fff]/.test(name) ? 'Other Brand' : name;
+    }
+
     function esc(value) {
         return String(value == null ? '' : value)
             .replace(/&/g, '&amp;')
@@ -80,15 +108,16 @@ YMIN.productReplacement = (function () {
         var meta = source.meta || {};
         var competitorCount = Number(meta.competitorPartCount) || unique(mappings.map(mappingCompetitorKey)).length;
         var yminCount = Number(meta.yminPartCount) || unique(mappings.map(mappingYminKey)).length;
-        byId('replacement-competitor-count').textContent = competitorCount.toLocaleString('zh-CN');
-        byId('replacement-mapping-count').textContent = mappings.length.toLocaleString('zh-CN');
-        byId('replacement-ymin-count').textContent = yminCount.toLocaleString('zh-CN');
+        var locale = isEnglishPage() ? 'en-US' : 'zh-CN';
+        byId('replacement-competitor-count').textContent = competitorCount.toLocaleString(locale);
+        byId('replacement-mapping-count').textContent = mappings.length.toLocaleString(locale);
+        byId('replacement-ymin-count').textContent = yminCount.toLocaleString(locale);
     }
 
     function fillBrandFilter() {
         var brands = unique(mappings.map(brandName)).sort(function (a, b) { return a.localeCompare(b, 'zh-CN'); });
-        byId('replacement-brand-filter').innerHTML = '<option value="all">全部品牌</option>' + brands.map(function (brand) {
-            return '<option value="' + esc(brand) + '">' + esc(brand) + '</option>';
+        byId('replacement-brand-filter').innerHTML = '<option value="all">' + (isEnglishPage() ? 'All Brands' : '全部品牌') + '</option>' + brands.map(function (brand) {
+            return '<option value="' + esc(brand) + '">' + esc(brandDisplayName(brand)) + '</option>';
         }).join('');
     }
 
@@ -140,34 +169,36 @@ YMIN.productReplacement = (function () {
 
     function specText(mapping) {
         return [
-            mapping.voltage ? '电压：' + mapping.voltage : '',
-            mapping.capacitance ? '容量：' + mapping.capacitance : '',
-            mapping.size ? '尺寸：' + mapping.size : '',
-            mapping.temperature ? '温度：' + mapping.temperature : '',
-            mapping.esr ? 'ESR：' + mapping.esr : '',
-            mapping.life ? '寿命：' + mapping.life : ''
-        ].filter(Boolean).join(' · ') || '参数待补充';
+            mapping.voltage ? (isEnglishPage() ? 'Voltage: ' : '电压：') + mapping.voltage : '',
+            mapping.capacitance ? (isEnglishPage() ? 'Capacitance: ' : '容量：') + mapping.capacitance : '',
+            mapping.size ? (isEnglishPage() ? 'Dimensions: ' : '尺寸：') + mapping.size : '',
+            mapping.temperature ? (isEnglishPage() ? 'Temperature: ' : '温度：') + mapping.temperature : '',
+            mapping.esr ? (isEnglishPage() ? 'ESR: ' : 'ESR：') + mapping.esr : '',
+            mapping.life ? (isEnglishPage() ? 'Lifetime: ' : '寿命：') + mapping.life : ''
+        ].filter(Boolean).join(' · ') || (isEnglishPage() ? 'Parameters pending' : '参数待补充');
     }
 
     function productDescription(mapping, product) {
         if (product) {
-            return [product.category, product.series ? product.series + ' 系列' : '', product.package].filter(Boolean).join(' · ') || '产品资料';
+            return [displayText(product.category), product.series ? product.series + (isEnglishPage() ? ' Series' : ' 系列') : '', displayText(product.package)].filter(Boolean).join(' · ') || (isEnglishPage() ? 'Product Data' : '产品资料');
         }
-        return mapping.yminDescription || '产品资料待同步';
+        var description = displayText(mapping.yminDescription);
+        if (isEnglishPage() && /[\u3400-\u9fff]/.test(String(description || ''))) description = '';
+        return description || (isEnglishPage() ? 'Product data pending synchronization' : '产品资料待同步');
     }
 
     function rowHtml(mapping) {
         var product = productFor(mapping);
         var targetCount = competitorTargetCounts[mappingCompetitorKey(mapping)] ? competitorTargetCounts[mappingCompetitorKey(mapping)].size : 1;
-        var countBadge = targetCount > 1 ? '<span class="replacement-count-badge">对应 ' + targetCount + ' 个永铭料号</span>' : '';
+        var countBadge = targetCount > 1 ? '<span class="replacement-count-badge">' + (isEnglishPage() ? targetCount + ' YMIN alternatives' : '对应 ' + targetCount + ' 个永铭料号') + '</span>' : '';
         var statusBadge = product
-            ? '<span class="replacement-status-badge is-available">可查看详情</span>'
-            : '<span class="replacement-status-badge is-pending">资料待同步</span>';
+            ? '<span class="replacement-status-badge is-available">' + (isEnglishPage() ? 'Details Available' : '可查看详情') + '</span>'
+            : '<span class="replacement-status-badge is-pending">' + (isEnglishPage() ? 'Data Pending' : '资料待同步') + '</span>';
         var action = product
-            ? '<a class="replacement-detail-link" href="product-detail.html?pn=' + encodeURIComponent(product.itemNo || mapping.yminPart) + '">查看详情<span class="material-symbols-outlined">arrow_forward</span></a>'
-            : '<span class="replacement-muted">暂无详情页</span>';
+            ? '<a class="replacement-detail-link" href="product-detail.html?pn=' + encodeURIComponent(product.itemNo || mapping.yminPart) + '">' + (isEnglishPage() ? 'View Details' : '查看详情') + '<span class="material-symbols-outlined">arrow_forward</span></a>'
+            : '<span class="replacement-muted">' + (isEnglishPage() ? 'No Detail Page' : '暂无详情页') + '</span>';
         return '<tr>' +
-            '<td><strong>' + esc(brandName(mapping)) + '</strong></td>' +
+            '<td><strong>' + esc(brandDisplayName(brandName(mapping))) + '</strong></td>' +
             '<td><div class="replacement-part">' + esc(mapping.competitorPart) + '</div>' + countBadge + '</td>' +
             '<td>' + esc(mapping.competitorSeries || '—') + '</td>' +
             '<td>' + esc(specText(mapping)) + '</td>' +
@@ -197,7 +228,7 @@ YMIN.productReplacement = (function () {
             byId('replacement-pagination').innerHTML = '';
             return;
         }
-        var parts = [paginationButton('上一页', state.page - 1, state.page === 1, false)];
+        var parts = [paginationButton(isEnglishPage() ? 'Previous' : '上一页', state.page - 1, state.page === 1, false)];
         var start = Math.max(1, state.page - 2);
         var end = Math.min(totalPages, state.page + 2);
         if (start > 1) {
@@ -211,16 +242,19 @@ YMIN.productReplacement = (function () {
             if (end < totalPages - 1) parts.push('<span>…</span>');
             parts.push(paginationButton(String(totalPages), totalPages, false, state.page === totalPages));
         }
-        parts.push(paginationButton('下一页', state.page + 1, state.page === totalPages, false));
+        parts.push(paginationButton(isEnglishPage() ? 'Next' : '下一页', state.page + 1, state.page === totalPages, false));
         byId('replacement-pagination').innerHTML = parts.join('');
     }
 
     function renderSummary() {
         var availableCount = filtered.reduce(function (count, mapping) { return count + (productFor(mapping) ? 1 : 0); }, 0);
-        byId('replacement-result-summary').innerHTML = '共 <strong>' + filtered.length.toLocaleString('zh-CN') + '</strong> 条替代关系，其中 ' + availableCount.toLocaleString('zh-CN') + ' 条可查看产品详情';
+        var locale = isEnglishPage() ? 'en-US' : 'zh-CN';
+        byId('replacement-result-summary').innerHTML = isEnglishPage()
+            ? '<strong>' + filtered.length.toLocaleString(locale) + '</strong> cross-reference records; ' + availableCount.toLocaleString(locale) + ' have product detail pages'
+            : '共 <strong>' + filtered.length.toLocaleString(locale) + '</strong> 条替代关系，其中 ' + availableCount.toLocaleString(locale) + ' 条可查看产品详情';
         var queryBox = byId('replacement-active-query');
         queryBox.classList.toggle('hidden', !state.search);
-        queryBox.innerHTML = state.search ? '当前查询：<strong>' + esc(state.search) + '</strong>　<a href="#" id="replacement-query-clear">清除查询</a>' : '';
+        queryBox.innerHTML = state.search ? (isEnglishPage() ? 'Current query: ' : '当前查询：') + '<strong>' + esc(state.search) + '</strong>　<a href="#" id="replacement-query-clear">' + (isEnglishPage() ? 'Clear Query' : '清除查询') + '</a>' : '';
     }
 
     function render() {
@@ -234,6 +268,7 @@ YMIN.productReplacement = (function () {
         var params = new URLSearchParams();
         if (state.search) params.set('search', state.search);
         if (state.brand !== 'all') params.set('brand', state.brand);
+        params.set('lang', isEnglishPage() ? 'en' : 'zh-CN');
         var query = params.toString();
         window.history.replaceState(null, '', 'product-replacement.html' + (query ? '?' + query : ''));
     }
@@ -245,9 +280,11 @@ YMIN.productReplacement = (function () {
     }
 
     function downloadCsv() {
-        var header = ['同行品牌', '同行料号', '同行系列', '电压', '容量', '尺寸', '温度', 'ESR', '寿命', '永铭替代料号', '产品详情状态'];
+        var header = isEnglishPage()
+            ? ['Competitor Brand', 'Competitor Part Number', 'Competitor Series', 'Voltage', 'Capacitance', 'Dimensions', 'Temperature', 'ESR', 'Lifetime', 'YMIN Cross-reference Part Number', 'Product Detail Status']
+            : ['同行品牌', '同行料号', '同行系列', '电压', '容量', '尺寸', '温度', 'ESR', '寿命', '永铭替代料号', '产品详情状态'];
         var rows = filtered.map(function (mapping) {
-            return [brandName(mapping), mapping.competitorPart, mapping.competitorSeries, mapping.voltage, mapping.capacitance, mapping.size, mapping.temperature, mapping.esr, mapping.life, mapping.yminPart, productFor(mapping) ? '可查看详情' : '产品资料待同步'];
+            return [brandDisplayName(brandName(mapping)), mapping.competitorPart, mapping.competitorSeries, mapping.voltage, mapping.capacitance, mapping.size, mapping.temperature, mapping.esr, mapping.life, mapping.yminPart, productFor(mapping) ? (isEnglishPage() ? 'Details Available' : '可查看详情') : (isEnglishPage() ? 'Product Data Pending' : '产品资料待同步')];
         });
         var csv = [header].concat(rows).map(function (row) {
             return row.map(function (cell) { return '"' + String(cell == null ? '' : cell).replace(/"/g, '""') + '"'; }).join(',');
@@ -255,7 +292,7 @@ YMIN.productReplacement = (function () {
         var blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
         var link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = '永铭替代料号查询结果.csv';
+        link.download = isEnglishPage() ? 'YMIN_cross_reference_results.csv' : '永铭替代料号查询结果.csv';
         link.click();
         URL.revokeObjectURL(link.href);
     }

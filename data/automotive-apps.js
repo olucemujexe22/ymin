@@ -33,7 +33,7 @@ const appData = {
         name: '安全部件',
         description: '安全部件包括安全气囊ECU、ABS防抱死系统、EPS、one-box/ESC/EBS等。永铭LK系列通过AEC-Q200认证，专为安全气囊ECU设计。',
         subApps: [
-            { name: '安全气囊', series: ['LK(引线型)', 'VKO(贴片型)'], icon: 'airbag', link: 'application-airbag.html' },
+            { name: '安全气囊', series: ['LK(引线型)', 'VKO(贴片型)'], icon: 'airbag', link: 'application-automotive.html?tab=safety' },
             { name: 'ABS防抱死系统', series: ['VKO', 'VKM'], icon: 'car_brake' },
             { name: 'EPS', series: ['LKL(R)', '液态抗震SMD'], icon: 'steering' },
             { name: 'one-box / ESC / EBS', series: ['VKO', 'LKL(R)'], icon: 'emergency' }

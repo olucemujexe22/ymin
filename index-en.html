@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="zh-CN">
+<html class="light" lang="en">
 <head>
     <meta charset="utf-8">
     <script>
@@ -7,14 +7,21 @@
             var params = new URLSearchParams(window.location.search);
             var requested = params.get('lang');
             if (!requested) {
-                try { requested = localStorage.getItem('ymin-language') || ''; } catch (error) {}
+                try { requested = localStorage.getItem('ymin-language') || 'en'; } catch (error) { requested = 'en'; }
             }
-            if (String(requested).toLowerCase() === 'en') {
-                var url = new URL(window.location.href);
-                url.pathname = url.pathname.replace(/\/index\.html$/i, '/index-en.html');
-                url.searchParams.set('lang', 'en');
-                window.location.replace(url.toString());
+            if (String(requested).toLowerCase() !== 'en') {
+                var chineseUrl = new URL(window.location.href);
+                chineseUrl.pathname = chineseUrl.pathname.replace(/\/index-en\.html$/i, '/index.html');
+                chineseUrl.searchParams.set('lang', 'zh-CN');
+                window.location.replace(chineseUrl.toString());
+                return;
             }
+            if (!params.get('lang')) {
+                var englishUrl = new URL(window.location.href);
+                englishUrl.searchParams.set('lang', 'en');
+                window.history.replaceState(null, '', englishUrl.toString());
+            }
+            try { localStorage.setItem('ymin-language', 'en'); } catch (error) {}
         })();
     </script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -52,6 +59,13 @@
             min-height: 590px;
             overflow: hidden;
             background: #061526;
+            cursor: grab;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .home-hero.is-dragging {
+            cursor: grabbing;
         }
         .home-hero-media {
             position: absolute;
@@ -61,8 +75,12 @@
             object-fit: cover;
             object-position: center center;
             opacity: 0;
-            transition: opacity .7s ease;
-            will-change: opacity;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            transform: translate3d(0, 0, 0);
+            transition: opacity .55s ease, transform .28s ease;
+            will-change: opacity, transform;
         }
         .home-hero-media.is-active {
             opacity: 1;
@@ -78,8 +96,8 @@
         }
         .home-hero-carousel-controls {
             position: absolute;
-            right: max(24px, calc((100vw - 1280px) / 2 + 24px));
-            bottom: 58px;
+            left: 50%;
+            bottom: 30px;
             z-index: 20;
             display: flex;
             align-items: center;
@@ -88,18 +106,26 @@
             border: 1px solid rgba(255, 255, 255, .28);
             background: rgba(5, 20, 37, .52);
             backdrop-filter: blur(10px);
+            transform: translateX(-50%);
         }
         .home-hero-arrow {
-            width: 38px;
-            height: 38px;
+            position: absolute;
+            top: 50%;
+            z-index: 24;
+            width: 48px;
+            height: 48px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: #fff;
             border: 1px solid rgba(255, 255, 255, .24);
-            background: rgba(255, 255, 255, .08);
+            background: rgba(5, 20, 37, .48);
+            backdrop-filter: blur(8px);
+            transform: translateY(-50%);
             transition: background .2s ease, border-color .2s ease;
         }
+        .home-hero-arrow--previous { left: 24px; }
+        .home-hero-arrow--next { right: 24px; }
         .home-hero-arrow:hover,
         .home-hero-arrow:focus-visible {
             border-color: rgba(255, 255, 255, .7);
@@ -123,6 +149,23 @@
         .home-hero-dot.is-active {
             width: 25px;
             background: #f1bd81;
+        }
+        .home-hero-pause {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            border-left: 1px solid rgba(255, 255, 255, .25);
+            background: transparent;
+            transition: color .2s ease, background .2s ease;
+        }
+        .home-hero-pause:hover,
+        .home-hero-pause:focus-visible {
+            color: #f1bd81;
+            background: rgba(255, 255, 255, .09);
+            outline: none;
         }
         .home-search-panel {
             box-shadow: 0 18px 50px rgba(0, 0, 0, .22);
@@ -171,6 +214,40 @@
             color: #1B365D;
             background: #e3edf5;
         }
+        .home-section-action {
+            min-height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 17px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1;
+            text-decoration: none;
+            border: 1px solid #294b72;
+            background: #102a4b;
+            box-shadow: 0 6px 14px rgba(15, 35, 58, .16);
+            transition: transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+        }
+        .home-section-action .material-symbols-outlined {
+            transition: transform .22s ease;
+        }
+        .home-section-action:hover,
+        .home-section-action:focus-visible {
+            color: #ffffff;
+            text-decoration: none;
+            border-color: #537ba3;
+            background: #1b416b;
+            box-shadow: 0 12px 24px rgba(15, 35, 58, .26);
+            transform: translateY(-3px);
+            outline: none;
+        }
+        .home-section-action:hover .material-symbols-outlined,
+        .home-section-action:focus-visible .material-symbols-outlined {
+            transform: translateX(4px);
+        }
         .home-product-hub {
             position: relative;
             overflow: hidden;
@@ -207,6 +284,7 @@
             background: #f4f7fa;
         }
         .home-news-thumb {
+            position: relative;
             width: 112px;
             height: 72px;
             overflow: hidden;
@@ -216,6 +294,50 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        .home-news-new {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            z-index: 3;
+            min-width: 38px;
+            padding: 4px 7px 3px;
+            overflow: hidden;
+            color: #ffffff;
+            font-size: 9px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: .12em;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, .72);
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ff4b4b 0%, #c61025 72%);
+            box-shadow: 0 4px 10px rgba(190, 18, 38, .35);
+            transition: transform .25s ease, box-shadow .25s ease;
+            animation: homeNewsNewPulse 1.8s ease-in-out infinite;
+        }
+        .home-news-new::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -70%;
+            width: 45%;
+            height: 200%;
+            background: rgba(255, 255, 255, .55);
+            transform: rotate(24deg);
+            animation: homeNewsNewShine 2.4s ease-in-out infinite;
+        }
+        .home-news-row:hover .home-news-new {
+            transform: translateY(-2px) scale(1.06);
+            box-shadow: 0 7px 15px rgba(190, 18, 38, .48);
+        }
+        @keyframes homeNewsNewPulse {
+            0%, 100% { box-shadow: 0 4px 10px rgba(190, 18, 38, .32); }
+            50% { box-shadow: 0 4px 15px rgba(239, 35, 60, .62); }
+        }
+        @keyframes homeNewsNewShine {
+            0%, 58% { left: -70%; }
+            82%, 100% { left: 140%; }
         }
         .home-news-placeholder {
             width: 100%;
@@ -250,38 +372,59 @@
         .home-product-card {
             display: flex;
             flex-direction: column;
-            min-height: 138px;
+            min-height: 286px;
             background: #ffffff;
             border: 1px solid #d5e0e9;
             overflow: hidden;
             box-shadow: 0 10px 24px rgba(15, 35, 58, .06);
-            transition: transform .2s ease, box-shadow .2s ease;
+            transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
         }
         .home-product-card:hover {
             transform: translateY(-4px);
+            border-color: #91a9bf;
             box-shadow: 0 18px 34px rgba(15, 23, 42, 0.12);
         }
-        .home-product-main {
-            flex: 1;
-            min-height: 102px;
-            display: grid;
-            grid-template-columns: 44% 56%;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
+        .home-product-media {
+            position: relative;
+            width: calc(100% - 20px);
+            aspect-ratio: 16 / 9;
+            margin: 10px 10px 0;
+            overflow: hidden;
+            border-radius: 7px 7px 3px 3px;
+            background: #edf3f7;
         }
         .home-product-image {
             width: 100%;
-            max-height: 78px;
-            object-fit: contain;
+            height: 118%;
+            display: block;
+            object-fit: cover;
+            object-position: center center;
+            transform: translate3d(0, -7%, 0) scale(1.02);
+            transform-origin: center center;
+            transition: all .6s ease-in-out;
+            will-change: transform, object-position;
+        }
+        .home-product-card:hover .home-product-image,
+        .home-product-card:focus-within .home-product-image,
+        .home-application-card:hover .home-product-image,
+        .home-application-card:focus-visible .home-product-image {
+            object-position: center top;
+            transform: translate3d(0, -15%, 0) scale(1.06);
+        }
+        .home-product-content {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            padding: 17px 16px 18px;
         }
         .home-product-empty {
             width: 100%;
-            height: 86px;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #7890aa;
+            background: linear-gradient(145deg, #e8f0f6, #d8e5ef);
         }
         .home-product-title {
             color: #0f2236;
@@ -312,23 +455,101 @@
         .home-product-actions a:hover {
             background: #123153;
         }
+        .home-application-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 322px;
+            overflow: hidden;
+            color: #0f2236;
+            text-decoration: none;
+            border: 1px solid #cbd8e4;
+            background: #ffffff;
+            box-shadow: 0 9px 22px rgba(15, 35, 58, .06);
+            transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+        }
+        .home-application-card:hover,
+        .home-application-card:focus-visible {
+            color: #0f2236;
+            border-color: #1b365d;
+            box-shadow: 0 18px 34px rgba(15, 35, 58, .14);
+            transform: translateY(-5px);
+            outline: none;
+        }
+        .home-application-media {
+            position: relative;
+            width: calc(100% - 20px);
+            aspect-ratio: 16 / 9;
+            margin: 10px 10px 0;
+            overflow: hidden;
+            border-radius: 7px 7px 3px 3px;
+            background: #e7eef5;
+        }
+        .home-application-body {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 19px 20px 22px;
+            perspective: 800px;
+        }
+        .home-application-icon {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #1b365d;
+            background: #e7eef5;
+            backface-visibility: hidden;
+            transform: rotateY(0deg);
+            transform-style: preserve-3d;
+            transition: color .28s ease, background .28s ease, transform .7s ease-in-out;
+        }
+        .home-application-card:hover .home-application-icon,
+        .home-application-card:focus-visible .home-application-icon,
+        .home-application-icon:hover {
+            color: #ffffff;
+            background: #1b365d;
+            transform: rotateY(360deg);
+        }
+        .home-application-copy {
+            min-width: 0;
+        }
+        .home-application-copy h3 {
+            color: #12355d;
+            font-size: 17px;
+            line-height: 1.35;
+            font-weight: 800;
+        }
+        .home-application-copy p {
+            margin-top: 7px;
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.65;
+        }
         @media (max-width: 640px) {
             .home-hero { min-height: auto; }
             .home-hero-media { object-position: 70% center; }
             .home-hero-media.is-active { opacity: .52; }
             .home-hero-overlay { background: linear-gradient(90deg, rgba(5,20,37,.95) 0%, rgba(5,20,37,.76) 100%); }
             .home-hero-carousel-controls {
-                right: 16px;
+                left: 50%;
                 bottom: 20px;
                 gap: 7px;
                 padding: 5px;
             }
-            .home-hero-arrow { width: 34px; height: 34px; }
-            .home-product-main {
-                grid-template-columns: 42% 58%;
-                min-height: 104px;
-                padding: 12px;
+            .home-hero-arrow {
+                width: 42px;
+                height: 42px;
             }
+            .home-hero-arrow--previous { left: 10px; }
+            .home-hero-arrow--next { right: 10px; }
+            .home-hero-arrow { width: 34px; height: 34px; }
+            .home-product-card { min-height: 270px; }
+            .home-product-content { padding: 15px 14px 17px; }
+            .home-application-card { min-height: 300px; }
+            .home-application-body { padding: 16px; }
             .home-product-title {
                 font-size: 13px;
             }
@@ -349,11 +570,11 @@
     <header id="ymin-navbar"></header>
 
     <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
-        <!-- 首屏 Banner：产品家族、无人机应用与机器人应用三张轮播 -->
+        <!-- 首屏 Banner：工业机器人、AI 数据中心与智能汽车三张轮播 -->
         <section class="home-hero text-white" aria-labelledby="homeHeroTitle">
-            <img class="home-hero-media is-active" data-home-hero-slide src="assets/home/banner-hero-ymin-products-v2.png" alt="永铭液态、超级电容、固态、混合、叠层、薄膜与钽电容器产品家族主视觉">
-            <img class="home-hero-media" data-home-hero-slide src="assets/home/banner-hero-drone-v1.png" alt="永铭电容器服务工业与民用无人机电源应用">
-            <img class="home-hero-media" data-home-hero-slide src="assets/home/banner-hero-robotics-v1.png" alt="永铭电容器服务工业机器人与伺服驱动应用">
+            <img class="home-hero-media is-active" data-home-hero-slide src="assets/home/banner-industrial-robotics.png?v=20260805hd" alt="Industrial robots and humanoid robotics in a smart factory" draggable="false">
+            <img class="home-hero-media" data-home-hero-slide src="assets/home/banner-smart-automotive.png?v=20260805hd" alt="Smart connected automotive cockpit" draggable="false">
+            <img class="home-hero-media" data-home-hero-slide src="assets/home/banner-ai-data-center.png?v=20260805hd" alt="AI computing infrastructure in a modern data center" draggable="false">
             <div class="home-hero-overlay" aria-hidden="true"></div>
             <div class="home-hero-layout relative z-10 max-w-7xl mx-auto px-6 py-14 md:py-20 min-h-[590px]">
                 <div class="w-full max-w-2xl">
@@ -376,23 +597,26 @@
                     </div>
                 </div>
             </div>
-            <div class="home-hero-carousel-controls" aria-label="首页Banner轮播控制">
-                <button class="home-hero-arrow" type="button" data-home-hero-prev aria-label="上一张Banner">
-                    <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-                </button>
-                <div class="home-hero-dots" role="group" aria-label="选择Banner">
-                    <button class="home-hero-dot is-active" type="button" data-home-hero-dot="0" aria-label="查看产品家族Banner" aria-current="true"></button>
-                    <button class="home-hero-dot" type="button" data-home-hero-dot="1" aria-label="查看无人机应用Banner" aria-current="false"></button>
-                    <button class="home-hero-dot" type="button" data-home-hero-dot="2" aria-label="查看机器人应用Banner" aria-current="false"></button>
+            <button class="home-hero-arrow home-hero-arrow--previous" type="button" data-home-hero-prev aria-label="Previous banner">
+                <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            </button>
+            <div class="home-hero-carousel-controls" aria-label="Homepage banner carousel controls">
+                <div class="home-hero-dots" role="group" aria-label="Select banner">
+                    <button class="home-hero-dot is-active" type="button" data-home-hero-dot="0" aria-label="View industrial robotics banner" aria-current="true"></button>
+                    <button class="home-hero-dot" type="button" data-home-hero-dot="1" aria-label="View smart automotive banner" aria-current="false"></button>
+                    <button class="home-hero-dot" type="button" data-home-hero-dot="2" aria-label="View AI data center banner" aria-current="false"></button>
                 </div>
-                <button class="home-hero-arrow" type="button" data-home-hero-next aria-label="下一张Banner">
-                    <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                <button class="home-hero-pause" type="button" data-home-hero-pause aria-label="Pause slideshow" aria-pressed="false">
+                    <span class="material-symbols-outlined" data-home-hero-pause-icon aria-hidden="true">pause</span>
                 </button>
             </div>
+            <button class="home-hero-arrow home-hero-arrow--next" type="button" data-home-hero-next aria-label="Next banner">
+                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+            </button>
         </section>
 
         <!-- 可核对的首页数据 -->
-        <section class="max-w-7xl mx-auto px-6 -mt-8 relative z-20" aria-label="永铭业务概览">
+        <section class="max-w-7xl mx-auto px-6 mt-0 relative z-20" aria-label="YMIN business overview">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 <div class="home-stat">
                     <p class="stat-number text-3xl md:text-4xl font-bold text-primary">20+</p>
@@ -421,7 +645,7 @@
                     <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1">产品中心</p>
                     <h2 id="productHubHeading" class="text-2xl font-bold text-primary">全系列电容器产品</h2>
                 </div>
-                <a href="product-series.html" class="text-sm text-primary font-bold hover:underline flex items-center gap-1">产品体系图 <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                <a href="product-series.html" class="home-section-action">产品体系图 <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
             </div>
             <div id="homeProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="bg-white border-2 border-slate-200 p-6 hover-card group relative">
@@ -503,7 +727,7 @@
                         <h2 id="toolsHeading" class="text-lg font-bold text-primary">设计工具与数据资源</h2>
                         <p class="text-xs text-slate-500">选型、结构设计、寿命评估与仿真验证</p>
                     </div>
-                    <a href="design-tools.html" class="text-sm text-primary font-bold hover:underline inline-flex items-center gap-1">全部工具 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+                    <a href="design-tools.html" class="home-section-action">全部工具 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
                     <a href="design-3d-cad.html" class="home-tool-card"><span class="material-symbols-outlined">view_in_ar</span><span><strong class="block text-sm">3D-CAD</strong><small class="block text-[11px] text-slate-500 mt-1">产品结构模型</small></span></a>
@@ -523,18 +747,18 @@
                     <h2 id="applicationHeading" class="text-3xl font-bold text-primary">按应用领域快速进入</h2>
                     <p class="text-sm text-slate-500 mt-3">从应用整机与关键电路出发，查看对应的电容器解决方案。</p>
                 </div>
-                <a href="application-center.html" class="text-sm text-primary font-bold hover:underline inline-flex items-center gap-1">查看应用中心 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+                <a href="application-center.html" class="home-section-action">查看应用中心 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <a href="application-automotive.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">directions_car</span><h3 class="text-lg font-bold text-primary mt-4">汽车电子</h3><p class="text-xs text-slate-500 mt-2">电驱电控 · 热管理 · 智能座舱 · 充电系统</p></a>
-                <a href="application-ai-server.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">dns</span><h3 class="text-lg font-bold text-primary mt-4">AI服务器与数据中心</h3><p class="text-xs text-slate-500 mt-2">CPU/GPU供电 · VRM · 备份电源 · DC-Link</p></a>
-                <a href="application-power.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">power</span><h3 class="text-lg font-bold text-primary mt-4">三代半导体电源（GaN&amp;SiC）</h3><p class="text-xs text-slate-500 mt-2">GaN高频 · SiC高压 · 高功率密度 · 高效率低ESR方案</p></a>
-                <a href="application-motor-drive.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">precision_manufacturing</span><h3 class="text-lg font-bold text-primary mt-4">新型电机驱动</h3><p class="text-xs text-slate-500 mt-2">伺服驱动 · 电调 · 变频器 · 热管理</p></a>
-                <a href="application-robotics.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">smart_toy</span><h3 class="text-lg font-bold text-primary mt-4">机器人</h3><p class="text-xs text-slate-500 mt-2">关节电机 · 控制器 · 伺服驱动 · 传感器</p></a>
-                <a href="application-drone.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">flight</span><h3 class="text-lg font-bold text-primary mt-4">无人机</h3><p class="text-xs text-slate-500 mt-2">飞控 · 电调ESC · 图传 · BMS</p></a>
-                <a href="application-energy-storage.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">solar_power</span><h3 class="text-lg font-bold text-primary mt-4">储能</h3><p class="text-xs text-slate-500 mt-2">光伏逆变器 · PCS · BMS · 高压DC-Link</p></a>
-                <a href="application-instrument.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">speed</span><h3 class="text-lg font-bold text-primary mt-4">仪器仪表</h3><p class="text-xs text-slate-500 mt-2">智能电表 · 气表 · 水表 · 工业自动化</p></a>
-                <a href="application-consumer.html" class="bg-white border border-slate-200 p-6 hover-card group"><span class="material-symbols-outlined text-3xl text-primary">devices</span><h3 class="text-lg font-bold text-primary mt-4">消费类电子</h3><p class="text-xs text-slate-500 mt-2">快充 · 智能照明 · 电子笔 · 安防设备</p></a>
+                <a href="application-automotive.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-smart-automotive.png?v=20260805hd" alt="汽车电子应用" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">directions_car</span><div class="home-application-copy"><h3>汽车电子</h3><p>电驱电控 · 热管理 · 智能座舱 · 充电系统</p></div></div></a>
+                <a href="application-ai-server.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-ai-data-center.png?v=20260805hd" alt="AI服务器与数据中心应用" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">dns</span><div class="home-application-copy"><h3>AI服务器与数据中心</h3><p>CPU/GPU供电 · VRM · 备份电源 · DC-Link</p></div></div></a>
+                <a href="application-power.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-hero-ymin-products-v2.png" alt="Third-generation semiconductor power application" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">power</span><div class="home-application-copy"><h3>三代半导体电源（GaN&amp;SiC）</h3><p>GaN高频 · SiC高压 · 高功率密度 · 高效率低ESR方案</p></div></div></a>
+                <a href="application-motor-drive.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-industrial-robotics.png?v=20260805hd" alt="新型电机驱动应用" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">precision_manufacturing</span><div class="home-application-copy"><h3>新型电机驱动</h3><p>伺服驱动 · 电调 · 变频器 · 热管理</p></div></div></a>
+                <a href="application-robotics.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-hero-robotics-v1.png" alt="机器人应用" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">smart_toy</span><div class="home-application-copy"><h3>机器人</h3><p>关节电机 · 控制器 · 伺服驱动 · 传感器</p></div></div></a>
+                <a href="application-drone.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-hero-drone-v1.png" alt="无人机应用" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">flight</span><div class="home-application-copy"><h3>无人机</h3><p>飞控 · 电调ESC · 图传 · BMS</p></div></div></a>
+                <a href="application-energy-storage.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-ai-data-center.png?v=20260805hd" alt="储能应用" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">solar_power</span><div class="home-application-copy"><h3>储能</h3><p>光伏逆变器 · PCS · BMS · 高压DC-Link</p></div></div></a>
+                <a href="application-instrument.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-industrial-robotics.png?v=20260805hd" alt="仪器仪表应用" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">speed</span><div class="home-application-copy"><h3>仪器仪表</h3><p>智能电表 · 气表 · 水表 · 工业自动化</p></div></div></a>
+                <a href="application-consumer.html" class="home-application-card"><div class="home-application-media"><img class="home-product-image" src="assets/home/banner-smart-automotive.png?v=20260805hd" alt="消费类电子应用" loading="lazy"></div><div class="home-application-body"><span class="home-application-icon material-symbols-outlined">devices</span><div class="home-application-copy"><h3>消费类电子</h3><p>快充 · 智能照明 · 电子笔 · 安防设备</p></div></div></a>
             </div>
         </section>
 
@@ -545,7 +769,7 @@
                     <h2 id="newsHeading" class="text-3xl font-bold text-primary">最新动态与技术文章</h2>
                     <p class="text-sm text-slate-500 mt-3">了解新产品、应用方案与技术观点。</p>
                 </div>
-                <a href="support-news.html" class="text-sm text-primary font-bold hover:underline inline-flex items-center gap-1">进入新闻资讯 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+                <a href="support-news.html" class="home-section-action">进入新闻资讯 <span class="material-symbols-outlined text-base">arrow_forward</span></a>
             </div>
             <div id="homeNewsGrid" class="home-news-list" aria-live="polite">
                 <div class="py-8 text-sm text-slate-400">正在加载最新内容…</div>
@@ -556,7 +780,6 @@
     </main>
 
     <script src="components/i18n.js?v=20260805merge10"></script>
-
     <script src="components/navbar.js?v=20260805merge3"></script>
     <script src="components/footer.js?v=20260805merge4"></script>
     <script>
@@ -568,21 +791,22 @@
             var dots = Array.prototype.slice.call(hero.querySelectorAll('[data-home-hero-dot]'));
             var previousButton = hero.querySelector('[data-home-hero-prev]');
             var nextButton = hero.querySelector('[data-home-hero-next]');
+            var pauseButton = hero.querySelector('[data-home-hero-pause]');
+            var pauseIcon = hero.querySelector('[data-home-hero-pause-icon]');
             var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            var slideStorageKey = 'ymin-home-hero-slide';
             var currentIndex = 0;
             var timer = null;
-
-            try {
-                var savedIndex = Number(window.sessionStorage.getItem(slideStorageKey));
-                if (Number.isFinite(savedIndex)) currentIndex = savedIndex;
-            } catch (error) {}
+            var isPointerOver = false;
+            var isDragging = false;
+            var dragPointerId = null;
+            var dragStartX = 0;
+            var dragDeltaX = 0;
+            var isManuallyPaused = false;
 
             if (slides.length < 2) return;
 
             function showSlide(index) {
                 currentIndex = (index + slides.length) % slides.length;
-                try { window.sessionStorage.setItem(slideStorageKey, String(currentIndex)); } catch (error) {}
                 slides.forEach(function(slide, slideIndex) {
                     var isActive = slideIndex === currentIndex;
                     slide.classList.toggle('is-active', isActive);
@@ -602,9 +826,68 @@
 
             function startAutoplay() {
                 stopAutoplay();
-                if (!reducedMotion && !document.hidden) {
-                    timer = window.setInterval(function() { showSlide(currentIndex + 1); }, 6000);
+                if (!reducedMotion && !document.hidden && !isPointerOver && !isDragging && !isManuallyPaused) {
+                    timer = window.setInterval(function() { showSlide(currentIndex + 1); }, 3000);
                 }
+            }
+
+            function updatePauseButton() {
+                if (!pauseButton) return;
+                pauseButton.setAttribute('aria-pressed', isManuallyPaused ? 'true' : 'false');
+                pauseButton.setAttribute('aria-label', isManuallyPaused ? 'Resume slideshow' : 'Pause slideshow');
+                if (pauseIcon) pauseIcon.textContent = isManuallyPaused ? 'play_arrow' : 'pause';
+            }
+
+            function clearDragPreview(animateBack) {
+                slides.forEach(function(slide) {
+                    slide.style.transition = animateBack ? 'opacity .22s ease, transform .22s ease' : '';
+                    slide.style.transform = '';
+                    slide.style.opacity = '';
+                });
+                if (animateBack) {
+                    window.setTimeout(function() {
+                        slides.forEach(function(slide) { slide.style.transition = ''; });
+                    }, 230);
+                }
+            }
+
+            function previewDrag(deltaX) {
+                var width = Math.max(hero.clientWidth, 1);
+                var progress = Math.min(Math.abs(deltaX) / (width * .35), 1);
+                var targetIndex = (currentIndex + (deltaX < 0 ? 1 : -1) + slides.length) % slides.length;
+                var activeSlide = slides[currentIndex];
+                var targetSlide = slides[targetIndex];
+
+                slides.forEach(function(slide, index) {
+                    if (index !== currentIndex && index !== targetIndex) {
+                        slide.style.opacity = '';
+                        slide.style.transform = '';
+                    }
+                });
+                activeSlide.style.transition = 'none';
+                activeSlide.style.transform = 'translate3d(' + deltaX + 'px,0,0)';
+                activeSlide.style.opacity = String(1 - progress * .55);
+                targetSlide.style.transition = 'none';
+                targetSlide.style.transform = 'translate3d(' + (deltaX + (deltaX < 0 ? width : -width)) + 'px,0,0)';
+                targetSlide.style.opacity = String(progress * .9);
+            }
+
+            function finishDrag(event) {
+                if (!isDragging || (event.pointerId != null && dragPointerId !== event.pointerId)) return;
+                var threshold = Math.min(140, Math.max(60, hero.clientWidth * .08));
+                var shouldChange = Math.abs(dragDeltaX) >= threshold;
+                var direction = dragDeltaX < 0 ? 1 : -1;
+
+                if (hero.releasePointerCapture && dragPointerId != null) {
+                    try { hero.releasePointerCapture(dragPointerId); } catch (error) {}
+                }
+                isDragging = false;
+                dragPointerId = null;
+                hero.classList.remove('is-dragging');
+                clearDragPreview(!shouldChange);
+                if (shouldChange) showSlide(currentIndex + direction);
+                dragDeltaX = 0;
+                startAutoplay();
             }
 
             if (previousButton) previousButton.addEventListener('click', function() {
@@ -621,8 +904,39 @@
                     startAutoplay();
                 });
             });
-            hero.addEventListener('mouseenter', stopAutoplay);
-            hero.addEventListener('mouseleave', startAutoplay);
+            if (pauseButton) pauseButton.addEventListener('click', function() {
+                isManuallyPaused = !isManuallyPaused;
+                updatePauseButton();
+                if (isManuallyPaused) stopAutoplay();
+                else startAutoplay();
+            });
+            hero.addEventListener('mouseenter', function() {
+                isPointerOver = true;
+                stopAutoplay();
+            });
+            hero.addEventListener('mouseleave', function() {
+                isPointerOver = false;
+                if (!isDragging) startAutoplay();
+            });
+            hero.addEventListener('pointerdown', function(event) {
+                if (event.button != null && event.button !== 0) return;
+                if (event.target.closest('a, button, input, select, textarea, form')) return;
+                isDragging = true;
+                dragPointerId = event.pointerId;
+                dragStartX = event.clientX;
+                dragDeltaX = 0;
+                hero.classList.add('is-dragging');
+                stopAutoplay();
+                if (hero.setPointerCapture) hero.setPointerCapture(event.pointerId);
+            });
+            hero.addEventListener('pointermove', function(event) {
+                if (!isDragging || dragPointerId !== event.pointerId) return;
+                dragDeltaX = event.clientX - dragStartX;
+                if (Math.abs(dragDeltaX) > 5) event.preventDefault();
+                previewDrag(dragDeltaX);
+            });
+            hero.addEventListener('pointerup', finishDrag);
+            hero.addEventListener('pointercancel', finishDrag);
             hero.addEventListener('focusin', stopAutoplay);
             hero.addEventListener('focusout', function(event) {
                 if (!hero.contains(event.relatedTarget)) startAutoplay();
@@ -632,7 +946,8 @@
                 else startAutoplay();
             });
 
-            showSlide(currentIndex);
+            showSlide(0);
+            updatePauseButton();
             startAutoplay();
         }
 
@@ -644,8 +959,8 @@
                 { title: '液态铝电解电容器', line: '液态铝电解电容器', category: '液态铝电解电容器', image: '首页产品图片/4.png' },
                 { title: '双电层超级电容器', line: '双电层超级电容', category: '双电层超级电容', image: '首页产品图片/5.png' },
                 { title: '高分子固态铝电解电容器', line: '高分子固态铝电解电容器', category: '高分子固态铝电解电容器', image: '首页产品图片/1.png' },
-                { title: '混合型超级电容（锂离子电容）', line: '混合型超级电容(锂离子电容)', category: '混合型超级电容（锂离子电容）', image: '' },
-                { title: '高分子混合动力铝电解电容器', line: '高分子混合动力铝电解电容器', category: '高分子混合动力铝电解电容器', image: '' },
+                { title: '混合型超级电容（锂离子电容）', line: '混合型超级电容(锂离子电容)', category: '混合型超级电容（锂离子电容）', image: '首页产品图片/5.png' },
+                { title: '高分子混合动力铝电解电容器', line: '高分子混合动力铝电解电容器', category: '高分子混合动力铝电解电容器', image: '首页产品图片/1.png' },
                 { title: '叠层高分子固态铝电解电容器', line: '叠层高分子固态铝电解电容器', category: '叠层高分子固态铝电解电容器', image: '首页产品图片/3.png' },
                 { title: '金属化聚丙烯薄膜电容器', line: '薄膜电容器', category: '薄膜电容器', image: '首页产品图片/6.png' },
                 { title: '导电高分子钽电解电容器', line: '导电高分子钽电解电容器', category: '导电高分子钽电解电容器', image: '首页产品图片/2.png' }
@@ -660,8 +975,8 @@
 
                 return '' +
                     '<article class="home-product-card">' +
-                        '<div class="home-product-main">' +
-                            '<div>' + imageHtml + '</div>' +
+                        '<div class="home-product-media">' + imageHtml + '</div>' +
+                        '<div class="home-product-content">' +
                             '<h3 class="home-product-title">' + card.title + '</h3>' +
                         '</div>' +
                         '<div class="home-product-actions">' +
@@ -682,14 +997,15 @@
         }
 
         function renderHomeNewsItems(grid, items) {
-            grid.innerHTML = items.map(function(item) {
+            grid.innerHTML = items.map(function(item, index) {
                 var date = String(item.date || '').replace(/-/g, '/');
                 var series = (item.series || []).slice(0, 2).join(' · ') || 'YMIN';
+                var newBadge = index < 3 ? '<span class="home-news-new" aria-label="New article">NEW</span>' : '';
                 var media = item.coverImage
                     ? '<img src="' + escapeHomeHtml(item.coverImage) + '" alt="' + escapeHomeHtml(item.title || '') + '" loading="lazy">'
                     : '<div class="home-news-placeholder"><strong class="text-xs tracking-[0.16em]">YMIN</strong><small class="mt-1 text-[9px] leading-3 opacity-80">' + escapeHomeHtml(series) + '</small></div>';
                 return '<a class="home-news-row group" href="support-news-detail.html?id=' + encodeURIComponent(item.id || '') + '">' +
-                    '<div class="home-news-thumb">' + media + '</div>' +
+                    '<div class="home-news-thumb">' + media + newBadge + '</div>' +
                     '<div class="min-w-0">' +
                         '<div class="flex flex-wrap items-center gap-3 mb-2">' +
                             '<time class="text-xs font-semibold text-slate-500" datetime="' + escapeHomeHtml(item.date || '') + '">' + escapeHomeHtml(date) + '</time>' +
