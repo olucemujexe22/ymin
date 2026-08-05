@@ -5,13 +5,32 @@
     var pageSize = 10;
     var state = {
         query: '',
-        group: 'all',
         type: 'all',
-        scope: 'all',
-        language: 'all',
+        productCategory: 'all',
+        packageType: 'all',
         page: 1,
         selected: new Set()
     };
+
+    var productCategoryDefinitions = [
+        { value: 'all', label: '全部产品类别', packageTypes: ['贴片型', '引线型', '基板自立型／牛角型', '螺栓型'] },
+        { value: '液态铝电解电容器', label: '液态铝电解电容器', packageTypes: ['贴片型', '引线型', '基板自立型／牛角型', '螺栓型'] },
+        { value: '双电层超级电容器', label: '双电层超级电容器', packageTypes: ['贴片型', '引线型', '基板自立型／牛角型'] },
+        { value: '高分子固态铝电解电容器', label: '高分子固态铝电解电容器', packageTypes: ['贴片型', '引线型'] },
+        { value: '混合型超级电容器（锂离子电容器）', label: '混合型超级电容器（锂离子电容器）', packageTypes: ['引线型'] },
+        { value: '高分子混合动力铝电解电容器', label: '高分子混合动力铝电解电容器', packageTypes: ['贴片型', '引线型'] },
+        { value: '叠层高分子固态铝电解电容器', label: '叠层高分子固态铝电解电容器', packageTypes: ['贴片型'] },
+        { value: '金属化聚丙烯薄膜电容器', label: '金属化聚丙烯薄膜电容器', packageTypes: ['引线型'] },
+        { value: '导电高分子钽电解电容器', label: '导电高分子钽电解电容器', packageTypes: ['贴片型'] }
+    ];
+
+    var packageTypeDefinitions = [
+        { value: 'all', label: '全部封装／结构形式' },
+        { value: '贴片型', label: '贴片型' },
+        { value: '引线型', label: '引线型' },
+        { value: '基板自立型／牛角型', label: '基板自立型／牛角型' },
+        { value: '螺栓型', label: '螺栓型' }
+    ];
 
     var typeDefinitions = [
         { value: 'all', label: '全部' },
@@ -40,8 +59,8 @@
         elements.search = document.getElementById('download-search');
         elements.searchButton = document.getElementById('download-search-button');
         elements.typeTabs = document.getElementById('download-type-tabs');
-        elements.scopeSelect = document.getElementById('download-scope-select');
-        elements.languageSelect = document.getElementById('download-language-select');
+        elements.categorySelect = document.getElementById('download-category-select');
+        elements.packageSelect = document.getElementById('download-package-select');
         elements.reset = document.getElementById('download-reset');
         elements.count = document.getElementById('download-count');
         elements.activeFilters = document.getElementById('download-active-filters');
@@ -62,8 +81,8 @@
 
         cacheElements();
         renderStats();
+        renderStructuredOptions();
         renderTypeTabs();
-        renderScopeOptions();
         bindEvents();
         render();
     }
@@ -76,12 +95,30 @@
         document.getElementById('download-product-count').textContent = productCount;
         document.getElementById('download-application-count').textContent = applicationCount;
 
-        document.querySelectorAll('[data-group-count]').forEach(function (node) {
-            var group = node.getAttribute('data-group-count');
-            node.textContent = group === 'all'
-                ? library.length
-                : library.filter(function (item) { return item.group === group; }).length;
+    }
+
+    function renderStructuredOptions() {
+        elements.categorySelect.innerHTML = productCategoryDefinitions.map(function (item) {
+            return '<option value="' + escapeAttribute(item.value) + '">' + escapeHtml(displayText(item.label)) + '</option>';
+        }).join('');
+        renderPackageOptions();
+    }
+
+    function renderPackageOptions() {
+        var categoryDefinition = productCategoryDefinitions.find(function (item) {
+            return item.value === state.productCategory;
+        }) || productCategoryDefinitions[0];
+        var availablePackages = categoryDefinition.packageTypes || [];
+        var visibleDefinitions = packageTypeDefinitions.filter(function (item) {
+            return item.value === 'all' || availablePackages.indexOf(item.value) !== -1;
         });
+        elements.packageSelect.innerHTML = visibleDefinitions.map(function (item) {
+            return '<option value="' + escapeAttribute(item.value) + '">' + escapeHtml(displayText(item.label)) + '</option>';
+        }).join('');
+        if (!visibleDefinitions.some(function (item) { return item.value === state.packageType; })) {
+            state.packageType = 'all';
+        }
+        elements.packageSelect.value = state.packageType;
     }
 
     function renderTypeTabs() {
@@ -91,30 +128,8 @@
                 : library.filter(function (record) { return record.type === item.value; }).length;
             return '<button class="support-chip' + (state.type === item.value ? ' is-active' : '') +
                 '" type="button" data-download-type="' + item.value + '">' +
-                escapeHtml(item.label) + ' <span>' + count + '</span></button>';
+                escapeHtml(displayText(item.label)) + ' <span>' + count + '</span></button>';
         }).join('');
-    }
-
-    function renderScopeOptions() {
-        var productLines = uniqueSorted(library.map(function (item) { return item.productLine; }).filter(Boolean));
-        var applications = uniqueSorted(library.map(function (item) { return item.application; }).filter(Boolean));
-
-        var html = '<option value="all">全部分类</option>';
-        if (productLines.length) {
-            html += '<optgroup label="产品类别">';
-            html += productLines.map(function (name) {
-                return '<option value="product|' + escapeAttribute(name) + '">' + escapeHtml(name) + '</option>';
-            }).join('');
-            html += '</optgroup>';
-        }
-        if (applications.length) {
-            html += '<optgroup label="应用领域">';
-            html += applications.map(function (name) {
-                return '<option value="application|' + escapeAttribute(name) + '">' + escapeHtml(name) + '</option>';
-            }).join('');
-            html += '</optgroup>';
-        }
-        elements.scopeSelect.innerHTML = html;
     }
 
     function bindEvents() {
@@ -141,26 +156,16 @@
             render();
         });
 
-        document.querySelectorAll('[data-download-group]').forEach(function (button) {
-            button.addEventListener('click', function () {
-                state.group = button.getAttribute('data-download-group');
-                state.page = 1;
-                document.querySelectorAll('[data-download-group]').forEach(function (node) {
-                    node.classList.toggle('is-active', node === button);
-                });
-                render();
-                document.querySelector('.download-content-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        elements.scopeSelect.addEventListener('change', function () {
-            state.scope = elements.scopeSelect.value;
+        elements.categorySelect.addEventListener('change', function () {
+            state.productCategory = elements.categorySelect.value;
+            state.packageType = 'all';
+            renderPackageOptions();
             state.page = 1;
             render();
         });
 
-        elements.languageSelect.addEventListener('change', function () {
-            state.language = elements.languageSelect.value;
+        elements.packageSelect.addEventListener('change', function () {
+            state.packageType = elements.packageSelect.value;
             state.page = 1;
             render();
         });
@@ -179,17 +184,13 @@
 
     function resetFilters() {
         state.query = '';
-        state.group = 'all';
         state.type = 'all';
-        state.scope = 'all';
-        state.language = 'all';
+        state.productCategory = 'all';
+        state.packageType = 'all';
         state.page = 1;
         elements.search.value = '';
-        elements.scopeSelect.value = 'all';
-        elements.languageSelect.value = 'all';
-        document.querySelectorAll('[data-download-group]').forEach(function (node) {
-            node.classList.toggle('is-active', node.getAttribute('data-download-group') === 'all');
-        });
+        elements.categorySelect.value = 'all';
+        elements.packageSelect.value = 'all';
         renderTypeTabs();
         render();
     }
@@ -197,20 +198,16 @@
     function getFilteredRecords() {
         var query = normalize(state.query);
         return library.filter(function (item) {
-            if (state.group !== 'all' && item.group !== state.group) return false;
             if (state.type !== 'all' && item.type !== state.type) return false;
-            if (state.language !== 'all' && item.language !== state.language) return false;
-
-            if (state.scope !== 'all') {
-                var parts = state.scope.split('|');
-                if (parts[0] === 'product' && item.productLine !== parts.slice(1).join('|')) return false;
-                if (parts[0] === 'application' && item.application !== parts.slice(1).join('|')) return false;
-            }
+            if (state.productCategory !== 'all' && item.productCategories.indexOf(state.productCategory) === -1) return false;
+            if (state.packageType !== 'all' && item.packageTypes.indexOf(state.packageType) === -1) return false;
 
             if (query) {
                 var haystack = normalize([
                     item.title,
                     item.typeLabel,
+                    item.productCategories.join(' '),
+                    item.packageTypes.join(' '),
                     item.productLine,
                     item.application,
                     item.keywords
@@ -251,26 +248,15 @@
 
     function renderActiveFilters() {
         var labels = [];
-        if (state.group !== 'all') {
-            var groupLabels = {
-                'product-catalog': '产品目录册',
-                'application-catalog': '应用选型手册',
-                'comprehensive-catalog': '综合目录册',
-                guidance: '编码与使用资料'
-            };
-            labels.push(groupLabels[state.group]);
-        }
         if (state.type !== 'all') {
             labels.push(typeDefinitions.find(function (item) { return item.value === state.type; }).label);
         }
-        if (state.scope !== 'all') {
-            labels.push(state.scope.split('|').slice(1).join('|'));
-        }
-        if (state.language !== 'all') labels.push(state.language === 'CN' ? '中文' : '英文');
+        if (state.productCategory !== 'all') labels.push(state.productCategory);
+        if (state.packageType !== 'all') labels.push(state.packageType);
         if (state.query) labels.push('关键词：' + state.query);
 
         elements.activeFilters.innerHTML = labels.map(function (label) {
-            return '<span class="support-active-filter">' + escapeHtml(label) + '</span>';
+            return '<span class="support-active-filter">' + escapeHtml(displayText(label)) + '</span>';
         }).join('');
     }
 
@@ -289,7 +275,9 @@
             var href = encodeURI(item.href);
             var checked = state.selected.has(item.id);
             var scopeTags = [];
-            if (item.productLine) scopeTags.push(item.productLine);
+            item.productCategories.forEach(function (category) { scopeTags.push(category); });
+            item.packageTypes.forEach(function (packageType) { scopeTags.push(packageType); });
+            if (!item.productCategories.length && item.productLine) scopeTags.push(item.productLine);
             if (item.application) scopeTags.push(item.application);
 
             return '<article class="download-item' + (checked ? ' is-selected' : '') +
@@ -301,8 +289,8 @@
                 '<h3 class="download-item-title" itemprop="name">' + escapeHtml(item.title) + '</h3>' +
                 (item.external ? '<span class="download-source-mark">现官网资料</span>' : '') +
                 '<div class="download-tags">' +
-                '<span class="download-tag is-type">' + escapeHtml(item.typeLabel) + '</span>' +
-                scopeTags.map(function (tag) { return '<span class="download-tag">' + escapeHtml(tag) + '</span>'; }).join('') +
+                '<span class="download-tag is-type">' + escapeHtml(displayText(item.typeLabel)) + '</span>' +
+                scopeTags.map(function (tag) { return '<span class="download-tag">' + escapeHtml(displayText(tag)) + '</span>'; }).join('') +
                 '</div>' +
                 '<div class="download-meta">' +
                 '<span><span class="material-symbols-outlined">translate</span>' + escapeHtml(item.language) + '</span>' +
@@ -401,10 +389,6 @@
         toastTimer = window.setTimeout(function () {
             elements.toast.classList.remove('is-visible');
         }, 3600);
-    }
-
-    function uniqueSorted(values) {
-        return Array.from(new Set(values)).sort(function (a, b) { return a.localeCompare(b, 'zh-CN'); });
     }
 
     function normalize(value) {

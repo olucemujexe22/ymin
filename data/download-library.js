@@ -12,6 +12,10 @@
             group: config.group,
             productLine: config.productLine || '',
             application: config.application || '',
+            productCategories: Array.isArray(config.productCategories)
+                ? config.productCategories.slice()
+                : (config.productCategory ? [config.productCategory] : []),
+            packageTypes: Array.isArray(config.packageTypes) ? config.packageTypes.slice() : [],
             language: config.language || 'CN',
             updated: config.updated || '',
             version: config.version || config.updated || '',
@@ -26,6 +30,8 @@
             id: 'catalog-liquid-small',
             title: '液态小型铝电解电容器目录册',
             productLine: '液态小型铝电解电容器',
+            productCategory: '液态铝电解电容器',
+            packageTypes: ['贴片型', '引线型'],
             updated: '2025-06-04',
             href: '产品资料库/01 产品目录册/液态小型目录册20250604(已确定，最新)/液态小型目录册20250604_optimize.pdf',
             keywords: '贴片 引线 液态小型 目录'
@@ -34,6 +40,8 @@
             id: 'catalog-liquid-large',
             title: '液态大型铝电解电容器目录册',
             productLine: '液态大型铝电解电容器',
+            productCategory: '液态铝电解电容器',
+            packageTypes: ['基板自立型／牛角型', '螺栓型'],
             updated: '2026-01-13',
             href: '产品资料库/01 产品目录册/液态大型品目录册20250630(已确定，最新)/液态大型品目录册20260113.pdf',
             keywords: '牛角 基板自立 螺栓 液态大型 目录'
@@ -42,6 +50,8 @@
             id: 'catalog-solid-hybrid',
             title: '高分子固态及固液混合铝电解电容器目录册',
             productLine: '固态及固液混合铝电解电容器',
+            productCategories: ['高分子固态铝电解电容器', '高分子混合动力铝电解电容器'],
+            packageTypes: ['贴片型', '引线型'],
             updated: '2025-08-05',
             href: '产品资料库/01 产品目录册/固态、固液混合目录册20250805(已确定，最新)/固态固液混合目录册20250805.pdf',
             keywords: '固态 固液混合 混合动力 目录'
@@ -50,6 +60,8 @@
             id: 'catalog-stacked',
             title: '叠层高分子固态铝电解电容器目录册',
             productLine: '叠层高分子固态铝电解电容器',
+            productCategory: '叠层高分子固态铝电解电容器',
+            packageTypes: ['贴片型'],
             updated: '2024-09-11',
             href: '产品资料库/01 产品目录册/叠层目录册20240911(已确定，最新)/叠层目录册20240911.pdf',
             keywords: '叠层 高分子 固态 目录'
@@ -58,6 +70,8 @@
             id: 'catalog-supercap',
             title: '超级电容器目录册',
             productLine: '超级电容器',
+            productCategories: ['双电层超级电容器', '混合型超级电容器（锂离子电容器）'],
+            packageTypes: ['贴片型', '引线型', '基板自立型／牛角型'],
             updated: '2026-04-22',
             href: '产品资料库/01 产品目录册/超电目录册20260422(已确定，最新)/超电目录册20260422.pdf',
             keywords: '双电层 锂离子 LIC 超级电容 目录'
@@ -66,6 +80,8 @@
             id: 'catalog-film',
             title: '金属化聚丙烯薄膜电容器目录册',
             productLine: '金属化聚丙烯薄膜电容器',
+            productCategory: '金属化聚丙烯薄膜电容器',
+            packageTypes: ['引线型'],
             updated: '2025-10-25',
             href: '产品资料库/01 产品目录册/薄膜电容器目录册 20251025（已确定，最新）/薄膜目录册20251025.pdf',
             keywords: '薄膜 DC-Link 目录'
@@ -74,6 +90,8 @@
             id: 'catalog-tantalum',
             title: '导电高分子钽电解电容器目录册',
             productLine: '导电高分子钽电解电容器',
+            productCategory: '导电高分子钽电解电容器',
+            packageTypes: ['贴片型'],
             updated: '2026-04-27',
             href: '产品资料库/01 产品目录册/导电高分子钽电容器20260427(已确定，最新)/导电高分子钽电解电容20260427.pdf',
             keywords: '钽电容 导电高分子 目录'
@@ -102,6 +120,8 @@
             id: 'application-automotive-liquid',
             title: '汽车电子液态铝电解电容应用手册',
             productLine: '液态铝电解电容器',
+            productCategory: '液态铝电解电容器',
+            packageTypes: ['贴片型', '引线型', '基板自立型／牛角型', '螺栓型'],
             application: '汽车电子',
             updated: '2025-06-14',
             href: '产品资料库/02 应用宣传目录/汽车电子-液态铝电解电容手册20250614/液态铝电解电容-汽车电子手册20250614_optimize.pdf',
@@ -111,6 +131,8 @@
             id: 'application-automotive-hybrid',
             title: '汽车电子固液混合电容应用手册',
             productLine: '固态及固液混合铝电解电容器',
+            productCategories: ['高分子固态铝电解电容器', '高分子混合动力铝电解电容器'],
+            packageTypes: ['贴片型', '引线型'],
             application: '汽车电子',
             updated: '2026-04-21',
             href: '产品资料库/02 应用宣传目录/汽车电子-固液混合电容手册20250603/汽车电子固液混合电容手册20260421.pdf',
@@ -167,6 +189,8 @@
         {
             id: 'application-pd',
             title: 'PD快充专用铝电解电容产品应用手册',
+            productCategory: '液态铝电解电容器',
+            packageTypes: ['贴片型', '引线型'],
             application: '消费类电子与PD快充',
             updated: '2024-06-13',
             href: '产品资料库/02 应用宣传目录/PD快充专用铝电解电容产品应用手册20240613(已确定，最新)/20240613 PD快充专用铝电解电容产品应用手册.pdf',
@@ -177,7 +201,7 @@
     applicationCatalogs.forEach(function (item) {
         add(Object.assign({}, item, {
             type: 'application-catalog',
-            typeLabel: '应用手册',
+            typeLabel: '应用选型手册',
             group: 'application-catalog'
         }));
     });
@@ -186,7 +210,7 @@
         id: 'selection-automotive',
         title: '汽车电子电容应用手册',
         type: 'application-catalog',
-        typeLabel: '应用手册',
+        typeLabel: '应用选型手册',
         group: 'application-catalog',
         application: '汽车电子',
         updated: '2025-01-14',
@@ -200,6 +224,8 @@
             id: 'rule-liquid-small',
             title: '液态小型铝电解电容器产品编码规则',
             productLine: '液态小型铝电解电容器',
+            productCategory: '液态铝电解电容器',
+            packageTypes: ['贴片型', '引线型'],
             updated: '2024-05-18',
             href: '产品资料库/各事业部编码规则/20240518液态小型铝电解电容器编码规则.pdf'
         },
@@ -207,6 +233,8 @@
             id: 'rule-liquid-large-snapin',
             title: '液态大型铝电解电容器产品编码规则（基板自立型）',
             productLine: '液态大型铝电解电容器',
+            productCategory: '液态铝电解电容器',
+            packageTypes: ['基板自立型／牛角型'],
             updated: '2024-05-18',
             href: '产品资料库/各事业部编码规则/20240518液态大型铝电解电容器产品编码规则-基板自立型.pdf'
         },
@@ -214,6 +242,8 @@
             id: 'rule-liquid-large-screw',
             title: '液态大型铝电解电容器产品编码规则（螺栓型）',
             productLine: '液态大型铝电解电容器',
+            productCategory: '液态铝电解电容器',
+            packageTypes: ['螺栓型'],
             updated: '2024-05-18',
             href: '产品资料库/各事业部编码规则/20240518液态大型铝电解电容器产品编码规则-螺栓型.pdf'
         },
@@ -221,6 +251,8 @@
             id: 'rule-solid-hybrid',
             title: '高分子固态及固液混合铝电解电容器产品编码规则',
             productLine: '固态及固液混合铝电解电容器',
+            productCategories: ['高分子固态铝电解电容器', '高分子混合动力铝电解电容器'],
+            packageTypes: ['贴片型', '引线型'],
             updated: '2024-05-18',
             href: '产品资料库/各事业部编码规则/20240518高分子固态及固液混合铝电解电容器产品编码规则.pdf'
         },
@@ -228,6 +260,8 @@
             id: 'rule-stacked',
             title: '叠层高分子固态铝电解电容器产品编码规则',
             productLine: '叠层高分子固态铝电解电容器',
+            productCategory: '叠层高分子固态铝电解电容器',
+            packageTypes: ['贴片型'],
             updated: '2024-05-18',
             href: '产品资料库/各事业部编码规则/20240518叠层高分子固态铝电解电容器产品编码规则.pdf'
         },
@@ -235,6 +269,8 @@
             id: 'rule-supercap',
             title: '超级电容器产品编码规则',
             productLine: '超级电容器',
+            productCategories: ['双电层超级电容器', '混合型超级电容器（锂离子电容器）'],
+            packageTypes: ['贴片型', '引线型', '基板自立型／牛角型'],
             updated: '2024-05-18',
             href: '产品资料库/各事业部编码规则/20240518超级电容器编码规则.pdf'
         },
@@ -242,6 +278,8 @@
             id: 'rule-tantalum',
             title: '导电高分子钽电解电容器产品编码规则',
             productLine: '导电高分子钽电解电容器',
+            productCategory: '导电高分子钽电解电容器',
+            packageTypes: ['贴片型'],
             updated: '2024-05-18',
             href: '产品资料库/各事业部编码规则/20240518导电高分子钽电解电容器产品编码规则.pdf'
         },

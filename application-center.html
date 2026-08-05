@@ -43,7 +43,7 @@
     </style>
 </head>
 <body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
-    <!-- 顶部导航栏（由 components/navbar.js?v=20260805merge3 注入） -->
+    <!-- 顶部导航栏（由 components/navbar.js 注入） -->
     <header id="ymin-navbar"></header>
 
     <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
@@ -201,32 +201,32 @@
                 </a>
             </div>
 
-            <!-- 热门终端快速入口 - 直接跳转终端详情页 -->
+            <!-- 热门终端应用展示 -->
             <div class="mb-12">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-2xl font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">bolt</span> 热门终端应用</h2>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <a href="application-automotive.html?tab=safety" class="bg-white border border-slate-200 p-5 hover:border-primary transition-all group">
+                    <div class="bg-white border border-slate-200 p-5">
                         <span class="material-symbols-outlined text-3xl text-primary mb-3">shield</span>
-                        <h4 class="font-bold text-sm mb-1 group-hover:text-primary">安全气囊ECU</h4>
+                        <h4 class="font-bold text-sm mb-1">安全气囊ECU</h4>
                         <p class="text-[10px] text-slate-500">LK/VKO系列 · AEC-Q200</p>
-                    </a>
-                    <a href="application-automotive.html?tab=t1" class="bg-white border border-slate-200 p-5 hover:border-primary transition-all group">
+                    </div>
+                    <div class="bg-white border border-slate-200 p-5">
                         <span class="material-symbols-outlined text-3xl text-primary mb-3">warning</span>
-                        <h4 class="font-bold text-sm mb-1 group-hover:text-primary">ABS防抱死系统</h4>
+                        <h4 class="font-bold text-sm mb-1">ABS防抱死系统</h4>
                         <p class="text-[10px] text-slate-500">VKO系列 · 耐大纹波</p>
-                    </a>
-                    <a href="application-automotive.html?tab=adas" class="bg-white border border-slate-200 p-5 hover:border-primary transition-all group">
+                    </div>
+                    <div class="bg-white border border-slate-200 p-5">
                         <span class="material-symbols-outlined text-3xl text-primary mb-3">radar</span>
-                        <h4 class="font-bold text-sm mb-1 group-hover:text-primary">ADAS自动驾驶</h4>
+                        <h4 class="font-bold text-sm mb-1">ADAS自动驾驶</h4>
                         <p class="text-[10px] text-slate-500">NPX/VHT系列</p>
-                    </a>
-                    <a href="application-ai-server.html" class="bg-white border border-slate-200 p-5 hover:border-primary transition-all group">
+                    </div>
+                    <div class="bg-white border border-slate-200 p-5">
                         <span class="material-symbols-outlined text-3xl text-primary mb-3">memory</span>
-                        <h4 class="font-bold text-sm mb-1 group-hover:text-primary">GPU加速卡VRM</h4>
+                        <h4 class="font-bold text-sm mb-1">GPU加速卡VRM</h4>
                         <p class="text-[10px] text-slate-500">VHT/NPX系列</p>
-                    </a>
+                    </div>
                 </div>
             </div>
 
@@ -265,7 +265,7 @@
     <script src="data/application-en.js?v=20260805merge1"></script>
     <script src="data/application-rendered-en.js?v=20260805film1"></script>
     <script src="components/i18n.js?v=20260805film1"></script>
-    <script src="components/navbar.js?v=20260805film1"></script>
+    <script src="components/navbar.js?v=20260805logo1"></script>
     <script src="components/footer.js?v=20260805film1"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

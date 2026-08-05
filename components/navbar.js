@@ -68,7 +68,6 @@ YMIN.navbar = (function () {
         // Logo
         html += '<a class="relative z-10 flex shrink-0 items-center gap-3" href="index.html" aria-label="永铭电子首页">';
         html += '<img alt="YMIN" class="h-11 w-auto object-contain" src="logo.png">';
-        html += '<span class="text-[26px] font-bold tracking-tighter text-[#1B365D] dark:text-white font-[\'Space_Grotesk\']">YMIN</span>';
         html += '</a>';
 
         // 导航菜单
