@@ -16,7 +16,7 @@
     lic: { name: "混合型超级电容（锂离子电容）", model: "lic", review: "日历寿命与循环寿命" },
     hybrid: { name: "高分子混合动力铝电解电容器", model: "aluminum", review: "温度、纹波与工作电压" },
     stacked: { name: "叠层高分子固态铝电解电容器", model: "stacked", review: "本体温度寿命推算" },
-    film: { name: "薄膜电容器", model: "film", review: "热点温度与工作电压" },
+    film: { name: "金属化聚丙烯薄膜电容器", model: "film", review: "热点温度与工作电压" },
     tantalum: { name: "导电高分子钽电解电容器", model: "tantalum", review: "FIT与MTBF可靠性" }
   };
 

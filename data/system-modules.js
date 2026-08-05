@@ -18,9 +18,9 @@ automotive: {
       {name:'低压负载端旁路',icon:'electrical_services',desc:'ECU、传感器等负载就地旁路，抑制电源总线瞬态波动。推荐VKM系列SMD电容，9000h长寿命。'}
     ],
     'DC-AC逆变器': [
-      {name:'直流母线支撑',icon:'electric_bolt',desc:'逆变器直流母线DC-Link电容，为IGBT/SiC模块提供瞬时大电流。需高耐压、低ESL、大纹波能力，推荐薄膜电容。'},
-      {name:'开关吸收缓冲',icon:'speed',desc:'IGBT/SiC开关瞬间的浪涌吸收，需极低ESL和ESR。推荐薄膜电容就近安装于功率模块，降低开关损耗。'},
-      {name:'输出滤波',icon:'filter_alt',desc:'逆变输出端的LC滤波器，滤除PWM载波高频分量。推荐薄膜电容配合电感组成低通滤波。'},
+      {name:'直流母线支撑',icon:'electric_bolt',desc:'逆变器直流母线DC-Link电容，为IGBT/SiC模块提供瞬时大电流。需高耐压、低ESL、大纹波能力，推荐金属化聚丙烯薄膜电容器。'},
+      {name:'开关吸收缓冲',icon:'speed',desc:'IGBT/SiC开关瞬间的浪涌吸收，需极低ESL和ESR。推荐金属化聚丙烯薄膜电容器就近安装于功率模块，降低开关损耗。'},
+      {name:'输出滤波',icon:'filter_alt',desc:'逆变输出端的LC滤波器，滤除PWM载波高频分量。推荐金属化聚丙烯薄膜电容器配合电感组成低通滤波。'},
       {name:'控制电源滤波',icon:'developer_board',desc:'DSP/MCU控制板的辅助电源滤波，需小体积高可靠。推荐NPX系列贴片型电容。'}
     ],
     'EPS转向控制': [
@@ -30,7 +30,7 @@ automotive: {
       {name:'传感器信号滤波',icon:'sensors',desc:'扭矩/角度传感器的电源去耦，保证信号精度。推荐NPX系列超低ESR电容。'}
     ],
     '电机驱动': [
-      {name:'DC-Link支撑',icon:'electric_bolt',desc:'牵引电机逆变器DC-Link电容，需大容量高纹波。推荐VPG系列引线型电容和薄膜电容组合。'},
+      {name:'DC-Link支撑',icon:'electric_bolt',desc:'牵引电机逆变器DC-Link电容，需大容量高纹波。推荐VPG系列引线型电容和金属化聚丙烯薄膜电容器组合。'},
       {name:'门极驱动供电',icon:'flash_on',desc:'IGBT/SiC门极驱动器的隔离电源滤波，需高耐压小体积。推荐VHT系列贴片型电容。'},
       {name:'相电流检测滤波',icon:'speed',desc:'电机相电流采样的RC滤波，保证FOC控制精度。推荐NPX系列低ESR电容。'},
       {name:'旋变/编码器供电',icon:'settings_input_antenna',desc:'位置传感器供电去耦，需低噪声。推荐VKM系列SMD电容。'}
@@ -38,14 +38,14 @@ automotive: {
   },
   charge: {
     'OBC车载充电机': [
-      {name:'AC输入滤波',icon:'power',desc:'电网侧的EMI滤波和PFC输入电容，需高耐压AC规格。推荐薄膜电容和VPG系列组合。'},
+      {name:'AC输入滤波',icon:'power',desc:'电网侧的EMI滤波和PFC输入电容，需高耐压AC规格。推荐金属化聚丙烯薄膜电容器和VPG系列组合。'},
       {name:'PFC升压输出',icon:'trending_up',desc:'PFC升压后的DC-Link电容，400-500V高压。推荐CW3H系列牛角型电容，专为800V平台设计。'},
-      {name:'DC-DC谐振电容',icon:'waves',desc:'LLC谐振变换器的谐振电容，需高频低损耗。推荐薄膜电容，低ESR高纹波。'},
+      {name:'DC-DC谐振电容',icon:'waves',desc:'LLC谐振变换器的谐振电容，需高频低损耗。推荐金属化聚丙烯薄膜电容器，低ESR高纹波。'},
       {name:'低压辅助电源',icon:'electrical_services',desc:'OBC控制板和通信模块的辅助电源滤波。推荐VKM系列贴片型电容。'}
     ],
     'DC-DC转换器': [
       {name:'高压输入滤波',icon:'power',desc:'400V/800V高压输入端滤波电容，吸收母线纹波。推荐CW3H系列牛角型电容。'},
-      {name:'变压器原边',icon:'transform',desc:'全桥/半桥变换器原边直流支撑，提供瞬态大电流。推荐薄膜电容和LKD系列组合。'},
+      {name:'变压器原边',icon:'transform',desc:'全桥/半桥变换器原边直流支撑，提供瞬态大电流。推荐金属化聚丙烯薄膜电容器和LKD系列组合。'},
       {name:'同步整流输出',icon:'filter_alt',desc:'12V/48V输出端滤波，大电流低纹波要求。推荐VPG系列高纹波电容。'},
       {name:'控制IC供电',icon:'developer_board',desc:'PWM控制器和隔离驱动供电去耦。推荐NPX系列贴片电容。'}
     ],
@@ -110,8 +110,8 @@ automotive: {
       {name:'LIN通信接口',icon:'cell_tower',desc:'LIN总线收发器供电去耦。推荐NPX系列小型电容。'}
     ],
     '空调压缩机': [
-      {name:'高压DC-Link',icon:'ac_unit',desc:'电动压缩机400V/800V直流母线支撑，高功率密度。推荐VHE系列135℃电容和薄膜电容。'},
-      {name:'IPM模块吸收',icon:'speed',desc:'IPM智能功率模块的开关浪涌吸收。推荐薄膜电容靠近IPM安装。'},
+      {name:'高压DC-Link',icon:'ac_unit',desc:'电动压缩机400V/800V直流母线支撑，高功率密度。推荐VHE系列135℃电容和金属化聚丙烯薄膜电容器。'},
+      {name:'IPM模块吸收',icon:'speed',desc:'IPM智能功率模块的开关浪涌吸收。推荐金属化聚丙烯薄膜电容器靠近IPM安装。'},
       {name:'隔离驱动供电',icon:'flash_on',desc:'高压隔离栅极驱动器的供电滤波。推荐VHT系列固液混合电容。'},
       {name:'控制器供电',icon:'developer_board',desc:'压缩机控制器MCU和通信模块供电。推荐VKM系列SMD电容。'}
     ],
@@ -164,9 +164,9 @@ automotive: {
   },
   charger: {
     'AC-DC整流': [
-      {name:'AC输入EMI',icon:'power',desc:'交流输入端的X/Y电容和共模滤波。推荐薄膜电容用于EMI抑制。'},
+      {name:'AC输入EMI',icon:'power',desc:'交流输入端的X/Y电容和共模滤波。推荐金属化聚丙烯薄膜电容器用于EMI抑制。'},
       {name:'PFC输出DC-Link',icon:'trending_up',desc:'PFC升压后的直流母线支撑，400-500V高压。推荐VPG系列引线型电容。'},
-      {name:'整流桥吸收',icon:'speed',desc:'整流二极管反向恢复尖峰吸收。推荐薄膜电容小型化方案。'},
+      {name:'整流桥吸收',icon:'speed',desc:'整流二极管反向恢复尖峰吸收。推荐金属化聚丙烯薄膜电容器小型化方案。'},
       {name:'辅助电源滤波',icon:'electrical_services',desc:'待机辅助电源的输入输出滤波。推荐LK系列长寿命电容。'}
     ],
     'DC-DC变换': [
@@ -269,7 +269,7 @@ aiserver: {
   pdn: {
     '400V/800V DC-Link': [
       {name:'整流后母线滤波',icon:'electric_bolt',desc:'AC整流后的400V/800V直流母线支撑电容组。推荐CW3H系列牛角型高压电容。'},
-      {name:'均压电阻旁路',icon:'balance',desc:'串联电容均压电阻的高频旁路。推荐薄膜电容低ESL方案。'},
+      {name:'均压电阻旁路',icon:'balance',desc:'串联电容均压电阻的高频旁路。推荐金属化聚丙烯薄膜电容器低ESL方案。'},
       {name:'母线放电电容',icon:'speed',desc:'安全放电回路的定时电容。推荐LK系列长寿命电容。'},
       {name:'电压采样滤波',icon:'sensors',desc:'直流母线电压采样调理电路滤波。推荐VKM系列SMD电容。'}
     ],
@@ -277,11 +277,11 @@ aiserver: {
       {name:'母线输入滤波',icon:'power_input',desc:'48V中间总线的输入端大容量滤波。推荐VPG系列高纹波电容。'},
       {name:'母线输出滤波',icon:'filter_alt',desc:'48V总线各分支的输出去耦。推荐VHT系列固液混合电容。'},
       {name:'热插拔保护',icon:'swap_horiz',desc:'48V热插拔/Hot-Swap控制器的保护电容。推荐VPG系列大容量电容。'},
-      {name:'EMI滤波',icon:'shield',desc:'48V总线的共模/差模EMI滤波。推荐薄膜电容+磁珠组合。'}
+      {name:'EMI滤波',icon:'shield',desc:'48V总线的共模/差模EMI滤波。推荐金属化聚丙烯薄膜电容器+磁珠组合。'}
     ],
     'SiC/IGBT吸收': [
-      {name:'DC-Link支撑',icon:'electric_bolt',desc:'SiC/IGBT模块直流端子的DC-Link支撑电容。推荐薄膜电容超低ESL方案。'},
-      {name:'开关浪涌吸收',icon:'speed',desc:'SiC高速开关产生浪涌电压的吸收电容。推荐薄膜电容紧贴模块安装。'},
+      {name:'DC-Link支撑',icon:'electric_bolt',desc:'SiC/IGBT模块直流端子的DC-Link支撑电容。推荐金属化聚丙烯薄膜电容器超低ESL方案。'},
+      {name:'开关浪涌吸收',icon:'speed',desc:'SiC高速开关产生浪涌电压的吸收电容。推荐金属化聚丙烯薄膜电容器紧贴模块安装。'},
       {name:'栅极驱动供电',icon:'flash_on',desc:'隔离栅极驱动器的供电滤波。推荐VHT系列固液混合电容。'},
       {name:'温度采样滤波',icon:'sensors',desc:'SiC/IGBT NTC温度采样的滤波。推荐VKM系列SMD电容。'}
     ]
@@ -294,32 +294,32 @@ energy: {
     '组串式逆变器': [
       {name:'MPPT输入滤波',icon:'solar_power',desc:'光伏组串MPPT输入端的直流滤波电容。推荐CW3H系列牛角型高压电容。'},
       {name:'DC-Link支撑',icon:'electric_bolt',desc:'逆变器直流母线DC-Link储能电容组。推荐CW3H系列高纹波长寿命电容。'},
-      {name:'逆变输出滤波',icon:'filter_alt',desc:'逆变器交流输出端的LC滤波。推荐薄膜电容高频低损耗方案。'},
+      {name:'逆变输出滤波',icon:'filter_alt',desc:'逆变器交流输出端的LC滤波。推荐金属化聚丙烯薄膜电容器高频低损耗方案。'},
       {name:'辅助电源滤波',icon:'electrical_services',desc:'逆变器控制板和通信模块辅助电源滤波。推荐VPG系列引线型电容。'}
     ],
     '集中式逆变器': [
       {name:'直流汇流滤波',icon:'power',desc:'光伏阵列汇流后的高压直流母线滤波。推荐CW3H系列大容量牛角型电容。'},
       {name:'DC-Link电容组',icon:'electric_bolt',desc:'大功率集中式逆变器DC-Link电容组。推荐CW3H系列多并联方案。'},
-      {name:'LCL滤波',icon:'filter_alt',desc:'并网LCL滤波器的电容，需高耐压。推荐薄膜电容方案。'},
+      {name:'LCL滤波',icon:'filter_alt',desc:'并网LCL滤波器的电容，需高耐压。推荐金属化聚丙烯薄膜电容器方案。'},
       {name:'控制系统供电',icon:'developer_board',desc:'逆变器DSP控制板和PLC通信供电滤波。推荐VPG系列电容。'}
     ],
     '微型逆变器': [
       {name:'PV输入去耦',icon:'home',desc:'单块光伏板的输入去耦电容。推荐VPX系列耐大纹波电容。'},
       {name:'Flyback变压器',icon:'transform',desc:'微型逆变器反激变换器的输入支撑。推荐VPG系列引线型电容。'},
-      {name:'输出EMI滤波',icon:'shield',desc:'微型逆变器交流输出EMI滤波。推荐薄膜电容X/Y电容。'},
+      {name:'输出EMI滤波',icon:'shield',desc:'微型逆变器交流输出EMI滤波。推荐金属化聚丙烯薄膜电容器X/Y电容。'},
       {name:'通信模块供电',icon:'cell_tower',desc:'PLC/WiFi通信模块的供电滤波。推荐VKM系列SMD电容。'}
     ],
     '储能混合逆变器': [
       {name:'PV侧DC-Link',icon:'battery_charging_full',desc:'光伏侧和储能侧的双向DC-Link支撑。推荐CW3H系列牛角型电容。'},
       {name:'电池侧滤波',icon:'battery_horiz_075',desc:'储能电池48V/400V侧的充放电滤波。推荐VPG系列高纹波电容。'},
-      {name:'双向DC-DC',icon:'swap_horiz',desc:'双向DC-DC变换器的谐振/滤波电容。推荐薄膜电容高频低损耗。'},
-      {name:'离网输出滤波',icon:'power',desc:'离网模式下交流输出的滤波电容组。推荐薄膜电容方案。'}
+      {name:'双向DC-DC',icon:'swap_horiz',desc:'双向DC-DC变换器的谐振/滤波电容。推荐金属化聚丙烯薄膜电容器高频低损耗。'},
+      {name:'离网输出滤波',icon:'power',desc:'离网模式下交流输出的滤波电容组。推荐金属化聚丙烯薄膜电容器方案。'}
     ]
   },
   pcs: {
     '储能变流器PCS': [
       {name:'直流侧DC-Link',icon:'electric_bolt',desc:'储能电池直流侧的DC-Link支撑电容组。推荐CW3H系列牛角型高压电容。'},
-      {name:'交流侧滤波',icon:'filter_alt',desc:'PCS交流侧并网滤波的LCL电容。推荐薄膜电容高耐压方案。'},
+      {name:'交流侧滤波',icon:'filter_alt',desc:'PCS交流侧并网滤波的LCL电容。推荐金属化聚丙烯薄膜电容器高耐压方案。'},
       {name:'预充电回路',icon:'flash_on',desc:'DC-Link预充电回路的限流与储能电容。推荐VPG系列大容量电容。'},
       {name:'控制电源滤波',icon:'developer_board',desc:'PCS控制器和通信模块供电滤波。推荐LK系列长寿命电容。'}
     ],
@@ -340,7 +340,7 @@ energy: {
     '在线式UPS': [
       {name:'整流DC-Link',icon:'power',desc:'UPS整流后的直流母线支撑电容组。推荐CW3H系列大容量牛角型电容。'},
       {name:'电池组滤波',icon:'battery_horiz_075',desc:'蓄电池组的直流滤波电容。推荐VPG系列高纹波电容。'},
-      {name:'逆变输出滤波',icon:'filter_alt',desc:'UPS逆变输出端的LC滤波。推荐薄膜电容高频方案。'},
+      {name:'逆变输出滤波',icon:'filter_alt',desc:'UPS逆变输出端的LC滤波。推荐金属化聚丙烯薄膜电容器高频方案。'},
       {name:'旁路静态开关',icon:'swap_horiz',desc:'静态旁路开关的缓冲与滤波电容。推荐VPG系列大容量电容。'}
     ],
     '后备式UPS': [
@@ -384,19 +384,19 @@ motor: {
     '通用变频器': [
       {name:'整流DC-Link',icon:'settings',desc:'三相整流后的直流母线支撑电容组。推荐CW3H系列牛角型大容量电容。'},
       {name:'制动回路',icon:'speed',desc:'制动IGBT和制动电阻的缓冲电容。推荐VPG系列高纹波引线型电容。'},
-      {name:'逆变输出滤波',icon:'filter_alt',desc:'逆变输出端的du/dt滤波和EMI抑制。推荐薄膜电容高频方案。'},
+      {name:'逆变输出滤波',icon:'filter_alt',desc:'逆变输出端的du/dt滤波和EMI抑制。推荐金属化聚丙烯薄膜电容器高频方案。'},
       {name:'控制板供电',icon:'developer_board',desc:'变频器DSP控制板和IO模块的供电滤波。推荐LK系列长寿命电容。'}
     ],
     '高压变频器': [
       {name:'输入变压器滤波',icon:'bolt',desc:'高压输入移相变压器的次级滤波。推荐CW3H系列高压牛角型电容。'},
-      {name:'单元级DC-Link',icon:'electric_bolt',desc:'功率单元级联的独立DC-Link支撑电容。推荐薄膜电容方案。'},
+      {name:'单元级DC-Link',icon:'electric_bolt',desc:'功率单元级联的独立DC-Link支撑电容。推荐金属化聚丙烯薄膜电容器方案。'},
       {name:'单元旁路',icon:'swap_horiz',desc:'功率单元故障旁路电路的缓冲电容。推荐VPG系列大容量电容。'},
       {name:'光纤通信供电',icon:'cell_tower',desc:'高压隔离光纤通信接口的供电去耦。推荐VKM系列SMD电容。'}
     ],
     '中压变频器': [
       {name:'多脉整流滤波',icon:'power',desc:'12/18脉整流后的直流滤波电容组。推荐CW3H系列牛角型电容。'},
       {name:'NPC三电平DC-Link',icon:'electric_bolt',desc:'NPC三电平逆变器上下母线电容。推荐CW3H系列均压电容组。'},
-      {name:'中点电位平衡',icon:'balance',desc:'NPC逆变器中点电位平衡的支撑电容。推荐薄膜电容方案。'},
+      {name:'中点电位平衡',icon:'balance',desc:'NPC逆变器中点电位平衡的支撑电容。推荐金属化聚丙烯薄膜电容器方案。'},
       {name:'驱动供电',icon:'flash_on',desc:'中压IGBT隔离驱动器的供电滤波。推荐VHT系列固液混合电容。'}
     ],
     '专用变频器': [
@@ -410,12 +410,12 @@ motor: {
     '通用伺服': [
       {name:'整流DC-Link',icon:'settings',desc:'伺服驱动器整流后的直流母线支撑。推荐CW3H系列牛角型电容。'},
       {name:'制动吸收',icon:'speed',desc:'伺服电机制动能量回馈的吸收电容。推荐VPG系列高纹波电容。'},
-      {name:'逆变输出滤波',icon:'filter_alt',desc:'伺服电机PWM驱动的输出滤波。推荐薄膜电容低ESL方案。'},
+      {name:'逆变输出滤波',icon:'filter_alt',desc:'伺服电机PWM驱动的输出滤波。推荐金属化聚丙烯薄膜电容器低ESL方案。'},
       {name:'编码器接口',icon:'sensors',desc:'绝对值编码器通信接口的供电滤波。推荐VKM系列SMD电容。'}
     ],
     '高端伺服': [
       {name:'共DC母线',icon:'electric_bolt',desc:'多轴共用直流母线的支撑电容。推荐CW3H系列大容量牛角型电容。'},
-      {name:'轴模块DC-Link',icon:'power',desc:'单轴模块的独立DC-Link支撑电容。推荐薄膜电容超低ESL方案。'},
+      {name:'轴模块DC-Link',icon:'power',desc:'单轴模块的独立DC-Link支撑电容。推荐金属化聚丙烯薄膜电容器超低ESL方案。'},
       {name:'EtherCAT通信',icon:'cell_tower',desc:'EtherCAT实时以太网通信供电去耦。推荐NPX系列贴片电容。'},
       {name:'功能安全供电',icon:'shield',desc:'SIL3功能安全回路的独立供电滤波。推荐VHT系列固液混合电容。'}
     ],
@@ -456,13 +456,13 @@ motor: {
     '无感BLDC': [
       {name:'DC-Link支撑',icon:'electric_bolt',desc:'无感BLDC的直流母线支撑。推荐VPG系列高纹波电容。'},
       {name:'反电动势检测',icon:'sensors',desc:'BEMF过零检测的分压滤波电容。推荐NPX系列精密电容。'},
-      {name:'三相桥吸收',icon:'motor',desc:'MOSFET开关噪声的吸收电容。推荐薄膜电容+NPX组合。'},
+      {name:'三相桥吸收',icon:'motor',desc:'MOSFET开关噪声的吸收电容。推荐金属化聚丙烯薄膜电容器+NPX组合。'},
       {name:'启动控制供电',icon:'developer_board',desc:'无感启动算法的MCU供电滤波。推荐VKM系列SMD电容。'}
     ],
     'FOC驱动': [
       {name:'DC-Link支撑',icon:'electric_bolt',desc:'FOC磁场定向控制的直流母线支撑。推荐VPG系列大容量电容。'},
       {name:'电流采样滤波',icon:'sensors',desc:'双/三电阻相电流采样的RC滤波。推荐NPX系列超低ESR电容。'},
-      {name:'三相桥吸收',icon:'motor',desc:'SVPWM调制下的开关吸收电容。推荐薄膜电容+NPX组合。'},
+      {name:'三相桥吸收',icon:'motor',desc:'SVPWM调制下的开关吸收电容。推荐金属化聚丙烯薄膜电容器+NPX组合。'},
       {name:'编码器/旋变供电',icon:'settings_input_antenna',desc:'位置传感器的激励和信号调理供电。推荐VKM系列SMD电容。'}
     ]
   }
@@ -530,7 +530,7 @@ instrument: {
       {name:'NIBP气泵驱动',icon:'air',desc:'无创血压气泵电机的驱动和滤波。推荐VPG系列高纹波电容。'}
     ],
     '超声诊断': [
-      {name:'高压发射供电',icon:'waves',desc:'超声探头高压发射脉冲的储能电容。推荐薄膜电容高压方案。'},
+      {name:'高压发射供电',icon:'waves',desc:'超声探头高压发射脉冲的储能电容。推荐金属化聚丙烯薄膜电容器高压方案。'},
       {name:'接收前端供电',icon:'sensors',desc:'超声回波接收LNA的低噪声供电滤波。推荐NPX系列超低ESR电容。'},
       {name:'波束合成FPGA供电',icon:'memory',desc:'数字波束合成FPGA的core供电滤波。推荐VHT系列固液混合电容。'},
       {name:'图像处理GPU供电',icon:'developer_board',desc:'超声图像处理GPU的大电流供电滤波。推荐NPX系列高分子固态电容。'}
@@ -544,7 +544,7 @@ instrument: {
     'CT/MRI': [
       {name:'高压发生器滤波',icon:'flash_on',desc:'CT球管高压发生器的DC-Link储能电容。推荐CW3H系列牛角型高压电容。'},
       {name:'旋转部分供电',icon:'rotate_right',desc:'CT滑环旋转部件的供电滤波。推荐VPG系列高纹波电容。'},
-      {name:'梯度放大器供电',icon:'waves',desc:'MRI梯度功率放大器的DC-Link支撑。推荐薄膜电容方案。'},
+      {name:'梯度放大器供电',icon:'waves',desc:'MRI梯度功率放大器的DC-Link支撑。推荐金属化聚丙烯薄膜电容器方案。'},
       {name:'RF功放供电',icon:'settings_input_antenna',desc:'MRI射频功放的供电滤波和储能。推荐VPG系列大容量电容组。'}
     ]
   },
@@ -557,7 +557,7 @@ instrument: {
     ],
     '质谱仪': [
       {name:'真空泵驱动',icon:'air',desc:'涡轮分子泵和机械泵电机的驱动滤波。推荐VPG系列大容量电容。'},
-      {name:'高压电源滤波',icon:'flash_on',desc:'离子源/质量分析器高压电源的滤波。推荐薄膜电容高压方案。'},
+      {name:'高压电源滤波',icon:'flash_on',desc:'离子源/质量分析器高压电源的滤波。推荐金属化聚丙烯薄膜电容器高压方案。'},
       {name:'检测器供电',icon:'sensors',desc:'电子倍增器/法拉第杯检测器供电滤波。推荐NPX系列精密电容。'},
       {name:'控制系统供电',icon:'developer_board',desc:'质谱仪主控和真空控制系统供电滤波。推荐VHT系列固液混合电容。'}
     ],
@@ -633,7 +633,7 @@ consumer: {
     ],
     '变频电机驱动': [
       {name:'整流DC-Link',icon:'motor',desc:'变频电机驱动的直流母线支撑电容。推荐VPG系列高纹波电容。'},
-      {name:'IPM模块吸收',icon:'speed',desc:'IPM智能功率模块的开关浪涌吸收。推荐薄膜电容+NPX组合。'},
+      {name:'IPM模块吸收',icon:'speed',desc:'IPM智能功率模块的开关浪涌吸收。推荐金属化聚丙烯薄膜电容器+NPX组合。'},
       {name:'相电流采样',icon:'sensors',desc:'单电阻/三电阻相电流检测的滤波。推荐NPX系列超低ESR电容。'},
       {name:'霍尔传感器供电',icon:'settings_input_antenna',desc:'转子位置霍尔传感器的供电去耦。推荐VKM系列SMD电容。'}
     ],
@@ -659,7 +659,7 @@ consumer: {
     ],
     'LED灯管/面板灯': [
       {name:'PFC输出滤波',icon:'light_group',desc:'有源PFC升压后的DC滤波电容。推荐VPG系列高纹波引线型电容。'},
-      {name:'LLC谐振电容',icon:'waves',desc:'LLC半桥谐振变换器的谐振电容。推荐薄膜电容高频低损耗。'},
+      {name:'LLC谐振电容',icon:'waves',desc:'LLC半桥谐振变换器的谐振电容。推荐金属化聚丙烯薄膜电容器高频低损耗。'},
       {name:'次级整流滤波',icon:'filter_alt',desc:'次级同步整流后的输出滤波。推荐LK系列长寿命电容。'},
       {name:'辅助供电滤波',icon:'electrical_services',desc:'待机辅助电源的输入输出滤波。推荐VKM系列SMD电容。'}
     ],
@@ -876,7 +876,7 @@ drone: {
       },
       'pcs': {
         '变流器': [
-          {series:'MDP',pn:'—',voltage:'600-1600V',cap:'20~2000µF',size:'—',esr:'≤1~5.5mΩ',ripple:'60~500A',life:'105-125℃ 10000H',note:'[储能]P10 · 薄膜电容插针式'},
+          {series:'MDP',pn:'—',voltage:'600-1600V',cap:'20~2000µF',size:'—',esr:'≤1~5.5mΩ',ripple:'60~500A',life:'105-125℃ 10000H',note:'[储能]P10 · 金属化聚丙烯薄膜电容器插针式'},
           {series:'CW3',pn:'CW32V122MNNAS07',voltage:'350V',cap:'1200µF',size:'35×50',esr:'—',ripple:'—',life:'105℃ 3000H',note:'[储能]P13 · 基板自立型'},
           {series:'LKM',pn:'LKML2501H102MF',voltage:'50V',cap:'1000µF',size:'12.5×25',esr:'—',ripple:'—',life:'105℃ 10000H',note:'[储能]P13 · 引线型'},
         ],

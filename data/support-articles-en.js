@@ -112,7 +112,7 @@ window.YMIN_ARTICLE_EN = {
 <tr><td>High-voltage charging module</td><td>CW3H / CW6H</td><td>550 V, 120 μF, 30 × 35 mm</td><td>High voltage and compact layout</td></tr>
 <tr><td>800 V platform</td><td>CW3H / CW6H</td><td>550 V, 270 μF, 35 × 40 mm</td><td>High capacitance and high ripple capability</td></tr>
 </tbody></table>
-<p>YMIN also supplies MDR and MDP film capacitors for high-frequency SiC and GaN solutions.</p>
+<p>YMIN also supplies MDR and MDP metallized polypropylene film capacitors for high-frequency SiC and GaN solutions.</p>
 
 <h2>5. Total-cost Comparison</h2>
 <table><thead><tr><th>Cost Item</th><th>Conventional Capacitor</th><th>YMIN CW3H/CW6H</th></tr></thead><tbody>

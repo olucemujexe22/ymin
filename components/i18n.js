@@ -35,7 +35,7 @@ YMIN.i18n = (function () {
         '液态铝电解电容器': 'Liquid Aluminum Electrolytic Capacitors',
         '双电层超级电容器': 'Electric Double-layer Supercapacitors',
         '双电层超级电容': 'Electric Double-layer Supercapacitors',
-        '薄膜电容器': 'Film Capacitors',
+        '金属化聚丙烯薄膜电容器': 'Metallized Polypropylene Film Capacitors',
         '铝电解电容器': 'Aluminum Electrolytic Capacitors',
         '超级电容器': 'Supercapacitors',
 
@@ -143,7 +143,7 @@ YMIN.i18n = (function () {
         '高分子固态及固液混合铝电解电容器目录册': 'Polymer Solid and Hybrid Aluminum Electrolytic Capacitor Catalog',
         '叠层高分子固态铝电解电容器目录册': 'Stacked Polymer Solid Aluminum Electrolytic Capacitor Catalog',
         '超级电容器目录册': 'Supercapacitor Catalog',
-        '薄膜电容器目录册': 'Film Capacitor Catalog',
+        '金属化聚丙烯薄膜电容器目录册': 'Metallized Polypropylene Film Capacitor Catalog',
         '导电高分子钽电解电容器目录册': 'Conductive Polymer Tantalum Electrolytic Capacitor Catalog',
         '多层陶瓷片式电容器（MLCC）目录册': 'Multilayer Ceramic Chip Capacitor (MLCC) Catalog',
         '汽车电子液态铝电解电容应用手册': 'Automotive Liquid Aluminum Electrolytic Capacitor Application Guide',
@@ -273,7 +273,6 @@ YMIN.i18n = (function () {
         '了解新产品、应用方案与技术观点。': 'Discover new products, application solutions and technical insights.',
         '查看产品体系图': 'View Product Portfolio',
         '匹配单个产品': 'Find Products',
-        '金属化聚丙烯薄膜电容器': 'Metallized Polypropylene Film Capacitors',
         '技术文章': 'Technical Article',
         '产品动态': 'Product Updates',
         '扫码关注服务号': 'Follow Our WeChat Service Account',
@@ -331,7 +330,7 @@ YMIN.i18n = (function () {
         '做客户尊重的产品': 'Create Products Respected by Customers',
         '做社会尊敬的团队': 'Build a Team Respected by Society',
         '围绕不同材料体系、结构形式与应用需求，形成覆盖八大类别的电容器产品布局。': 'A capacitor portfolio spanning eight product categories, built around diverse material systems, structures and application requirements.',
-        '产品包括液态铝电解电容器、双电层超级电容器、混合型超级电容（锂离子电容）、高分子固态铝电解电容器、高分子混合动力铝电解电容器、叠层高分子固态铝电解电容器、薄膜电容器和导电高分子钽电解电容器。产品资料按产品线、系列和料号组织，便于客户检索、比较与获取相关技术资料。': 'Our products include liquid aluminum electrolytic capacitors, electric double-layer supercapacitors, hybrid supercapacitors (lithium-ion capacitors), polymer solid aluminum electrolytic capacitors, polymer hybrid aluminum electrolytic capacitors, stacked polymer solid aluminum electrolytic capacitors, film capacitors and conductive polymer tantalum electrolytic capacitors. Product information is organized by product line, series and part number for convenient search, comparison and access to technical resources.',
+        '产品包括液态铝电解电容器、双电层超级电容器、混合型超级电容（锂离子电容）、高分子固态铝电解电容器、高分子混合动力铝电解电容器、叠层高分子固态铝电解电容器、金属化聚丙烯薄膜电容器和导电高分子钽电解电容器。产品资料按产品线、系列和料号组织，便于客户检索、比较与获取相关技术资料。': 'Our products include liquid aluminum electrolytic capacitors, electric double-layer supercapacitors, hybrid supercapacitors (lithium-ion capacitors), polymer solid aluminum electrolytic capacitors, polymer hybrid aluminum electrolytic capacitors, stacked polymer solid aluminum electrolytic capacitors, metallized polypropylene film capacitors and conductive polymer tantalum electrolytic capacitors. Product information is organized by product line, series and part number for convenient search, comparison and access to technical resources.',
         '从铝电解电容器起步，持续推进小型化、固态化和多材料体系产品布局。': 'Starting with aluminum electrolytic capacitors, YMIN has continued to advance miniaturization, solid-state technologies and a multi-material product portfolio.',
         '企业创立': 'Company Founded',
         '上虞永铭电子有限公司成立，开启电容器研发与制造。': 'Shangyu YMIN Electronics Co., Ltd. was established, marking the beginning of capacitor research, development and manufacturing.',
@@ -1355,7 +1354,11 @@ YMIN.i18n = (function () {
             if (window.location.protocol === 'file:') {
                 anchor.setAttribute('href', url.pathname.split('/').pop() + url.search + url.hash);
             } else {
-                anchor.setAttribute('href', url.pathname.replace(/^\//, '') + url.search + url.hash);
+                // Keep the root-relative pathname on hosted subdirectories such as
+                // GitHub Pages (/ymin/). Removing the leading slash would turn
+                // /ymin/product-center.html into ymin/product-center.html and the
+                // browser would resolve it as /ymin/ymin/product-center.html.
+                anchor.setAttribute('href', url.pathname + url.search + url.hash);
             }
         } catch (error) {}
     }

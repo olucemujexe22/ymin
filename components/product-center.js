@@ -11,7 +11,7 @@
         '混合型超级电容（锂离子电容）',
         '叠层高分子固态铝电解电容器',
         '导电高分子钽电解电容器',
-        '薄膜电容器'
+        '金属化聚丙烯薄膜电容器'
     ];
     var products = (Array.isArray(catalog.products) ? catalog.products : [])
         .filter(function (product) { return product && supportedCategories.indexOf(product.category) >= 0; })
@@ -59,7 +59,7 @@
         '混合型超级电容（锂离子电容）': ['diameter', 'length'],
         '叠层高分子固态铝电解电容器': ['length', 'width', 'height'],
         '导电高分子钽电解电容器': ['length', 'width', 'height'],
-        '薄膜电容器': ['length', 'width', 'height']
+        '金属化聚丙烯薄膜电容器': ['length', 'width', 'height']
     };
 
     function byId(id) { return document.getElementById(id); }
@@ -129,7 +129,7 @@
     function isSuperCategory(category) {
         return category === '双电层超级电容' || category === '混合型超级电容（锂离子电容）';
     }
-    function isFilmCategory(category) { return category === '薄膜电容器'; }
+    function isFilmCategory(category) { return category === '金属化聚丙烯薄膜电容器'; }
     function isLiquidCategory(category) { return category === '液态铝电解电容器'; }
     function normalizeStatus(status) {
         var text = String(status || '');

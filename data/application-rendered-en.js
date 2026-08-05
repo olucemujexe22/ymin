@@ -341,7 +341,7 @@ Object.assign(window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN, {
     "电池管理系统-BMS的储能与旁路电容提供瞬态电流支持，减小电源总线波动。请参阅对应产品系列推荐。": "BMS energy-storage and bypass capacitors provide transient-current support and reduce power-bus fluctuations. See the corresponding recommended product series.",
     "电池管理系统-BMS的输出端需滤波电容以平滑电压波形，确保负载端获得纯净电源。请参阅对应产品系列推荐。": "The BMS output requires filter capacitors to smooth the voltage waveform and provide clean power to the load. See the corresponding recommended product series.",
     "电池管理系统-BMS的去耦与保护电容吸收高频噪声和电压尖峰，保障系统EMC合规与长期可靠性。请参阅对应产品系列推荐。": "BMS decoupling and protection capacitors absorb high-frequency noise and voltage spikes, supporting EMC compliance and long-term reliability. See the corresponding recommended product series.",
-    "[储能]P10 · 薄膜电容插针式": "[Energy Storage] P10 · Radial Film Capacitor",
+    "[储能]P10 · 金属化聚丙烯薄膜电容器插针式": "[Energy Storage] P10 · Radial Metallized Polypropylene Film Capacitor",
     "[储能]P16 · 固液混合": "[Energy Storage] P16 · Hybrid Aluminum Electrolytic"
 });
 Object.assign(window.YMIN_APPLICATION_TRANSLATIONS_EN, window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN);

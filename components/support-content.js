@@ -35,7 +35,7 @@ YMIN.supportContent = (function () {
         '混合型超级电容（锂离子电容）',
         '叠层高分子固态铝电解电容器',
         '导电高分子钽电解电容器',
-        '薄膜电容器'
+        '金属化聚丙烯薄膜电容器'
     ];
     var faqSeriesProductLineMap = {
         'CW3H': '液态铝电解电容器',

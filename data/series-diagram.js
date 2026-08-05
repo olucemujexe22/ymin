@@ -199,9 +199,9 @@ YMIN.seriesDiagram = (function(){
       ]
     },
     {
-      name: '薄膜电容器',
+      name: '金属化聚丙烯薄膜电容器',
       diagramImages: ['体系图和系列列表/web_体系图/薄膜电容器.png'],
-      nameEn: 'Metallized Film Capacitor',
+      nameEn: 'Metallized Polypropylene Film Capacitor',
       icon: 'filter_alt',
       color: '#3a4a1a',
       packages: [
@@ -635,7 +635,7 @@ YMIN.seriesDiagram = (function(){
     }
   ]);
 
-  setPackages('薄膜电容器', [
+  setPackages('金属化聚丙烯薄膜电容器', [
     {
       name: '4引线方壳电容',
       layout: makeLayout('film-box', '4引线方壳电容', 980, 330, 190, 124, { x: 10, y: 84, w: 170, h: 32 }, {

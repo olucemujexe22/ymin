@@ -66,7 +66,7 @@ YMIN.complianceCertificates = (function () {
         { id: 'hybrid-supercap', name: '混合型超级电容（锂离子电容）' },
         { id: 'stacked-polymer', name: '叠层高分子固态铝电解电容器' },
         { id: 'polymer-tantalum', name: '导电高分子钽电解电容器' },
-        { id: 'film', name: '薄膜电容器' }
+        { id: 'film', name: '金属化聚丙烯薄膜电容器' }
     ];
     var documentTypes = ['REACH', 'RoHS', '无卤'];
 

@@ -64,8 +64,8 @@
         },
         {
             id: 'catalog-film',
-            title: '薄膜电容器目录册',
-            productLine: '薄膜电容器',
+            title: '金属化聚丙烯薄膜电容器目录册',
+            productLine: '金属化聚丙烯薄膜电容器',
             updated: '2025-10-25',
             href: '产品资料库/01 产品目录册/薄膜电容器目录册 20251025（已确定，最新）/薄膜目录册20251025.pdf',
             keywords: '薄膜 DC-Link 目录'

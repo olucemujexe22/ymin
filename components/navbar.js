@@ -89,7 +89,7 @@ YMIN.navbar = (function () {
             { href: 'product-center.html?category=' + encodeURIComponent('混合型超级电容（锂离子电容）'), label: '混合型超级电容器（锂离子电容器）' },
             { href: 'product-center.html?category=' + encodeURIComponent('高分子混合动力铝电解电容器'), label: '高分子混合动力铝电解电容器' },
             { href: 'product-center.html?category=' + encodeURIComponent('叠层高分子固态铝电解电容器'), label: '叠层高分子固态铝电解电容器' },
-            { href: 'product-center.html?category=' + encodeURIComponent('薄膜电容器'), label: '薄膜电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('金属化聚丙烯薄膜电容器'), label: '金属化聚丙烯薄膜电容器' },
             { href: 'product-center.html?category=' + encodeURIComponent('导电高分子钽电解电容器'), label: '导电高分子钽电解电容器' }
         ], 'w-72');
         html += '</div>';

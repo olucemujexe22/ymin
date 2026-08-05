@@ -38,7 +38,7 @@ YMIN.footer = (function () {
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">混合型超级电容(锂离子电容)</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">高分子混合动力铝电解电容器</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">叠层高分子固态铝电解电容器</a></li>';
-        html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">薄膜电容器</a></li>';
+        html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">金属化聚丙烯薄膜电容器</a></li>';
         html += '<li><a href="product-center.html" class="hover:text-[#1B365D]">导电高分子钽电解电容器</a></li>';
         html += '</ul></div>';
 
@@ -92,7 +92,7 @@ YMIN.footer = (function () {
         html += '<li><a href="product-center.html">Hybrid Supercapacitors (Lithium-ion Capacitors)</a></li>';
         html += '<li><a href="product-center.html">Polymer Hybrid Aluminum Electrolytic Capacitors</a></li>';
         html += '<li><a href="product-center.html">Stacked Polymer Solid Aluminum Electrolytic Capacitors</a></li>';
-        html += '<li><a href="product-center.html">Film Capacitors</a></li>';
+        html += '<li><a href="product-center.html">Metallized Polypropylene Film Capacitors</a></li>';
         html += '<li><a href="product-center.html">Conductive Polymer Tantalum Electrolytic Capacitors</a></li>';
         html += '</ul></div>';
 

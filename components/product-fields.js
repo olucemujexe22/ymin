@@ -11,7 +11,7 @@ YMIN.productFields = (function () {
         lithium: '混合型超级电容（锂离子电容）',
         stacked: '叠层高分子固态铝电解电容器',
         tantalum: '导电高分子钽电解电容器',
-        film: '薄膜电容器'
+        film: '金属化聚丙烯薄膜电容器'
     };
 
     var commonFields = [

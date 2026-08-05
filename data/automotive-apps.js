@@ -4,7 +4,7 @@ const appData = {
         description: '电驱电控系统是新能源汽车的核心动力单元，包含DC-DC转换器、DC-AC逆变器、EPS转向控制等。永铭液态抗震座板贴片型铝电解电容器广泛应用于热管理系统/水泵/油泵/助力转向控制系统，兼具高抗震需求与成本效益。',
         subApps: [
             { name: 'DC-DC转换器', series: ['VHT/VHU', 'VPG'], icon: 'power' },
-            { name: 'DC-AC逆变器', series: ['薄膜电容'], icon: 'conversion_path' },
+            { name: 'DC-AC逆变器', series: ['金属化聚丙烯薄膜电容器'], icon: 'conversion_path' },
             { name: 'EPS转向控制', series: ['LKL(R)', 'VKM'], icon: 'settings_suggest' },
             { name: '电机驱动', series: ['VHT', 'VPG'], icon: 'precision_manufacturing' }
         ],
@@ -20,7 +20,7 @@ const appData = {
         description: '充电系统包含OBC车载充电机和DC-DC转换器。永铭针对性推出高性能电容产品矩阵，应对高压系统下对电容器耐高压、小尺寸、长寿命、耐大纹波电流的严苛要求。',
         subApps: [
             { name: 'OBC车载充电机', series: ['VHT/VHU', 'CW3H', 'LKD'], icon: 'ev_station' },
-            { name: 'DC-DC转换器', series: ['VHT/VHU', '薄膜电容'], icon: 'transform' },
+            { name: 'DC-DC转换器', series: ['VHT/VHU', '金属化聚丙烯薄膜电容器'], icon: 'transform' },
             { name: 'BMS电池管理', series: ['VHT', 'VPT'], icon: 'battery_horiz_075' }
         ],
         seriesCards: [
@@ -100,7 +100,7 @@ const appData = {
         name: '充电桩',
         description: '充电桩需处理大功率AC-DC和DC-DC转换，要求高耐压、大容量、低ESR和长寿命。',
         subApps: [
-            { name: 'AC-DC整流', series: ['VPG', '薄膜电容'], icon: 'power' },
+            { name: 'AC-DC整流', series: ['VPG', '金属化聚丙烯薄膜电容器'], icon: 'power' },
             { name: 'DC-DC变换', series: ['CW3H', 'LKD'], icon: 'transform' }
         ],
         seriesCards: [

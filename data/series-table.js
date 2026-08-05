@@ -69,9 +69,9 @@ YMIN.seriesTable = (function(){
     {series:'MPS',  productLine:'叠层高分子固态铝电解电容器', pkg:'贴片型', voltage:'2~2.5V', cap:'470~560µF', temp:'-55~105℃', life:'2000H', esr:'超低', feature:'叠层型 7.3×4.3×1.9mm', aec:false, rohs:true, pdf:null},
     {series:'MPD19',productLine:'叠层高分子固态铝电解电容器', pkg:'贴片型', voltage:'2~50V', cap:'10~560µF', temp:'-55~105℃', life:'2000H', esr:'超低', feature:'叠层型 7.3×4.3×1.9mm 高压', aec:false, rohs:true, pdf:null},
 
-    // ==================== 薄膜电容器 ====================
-    {series:'MDP',  productLine:'薄膜电容器', pkg:'插针式', voltage:'500~1600V', cap:'0.47~250µF', temp:'-40~105℃', life:'—', esr:'极低', feature:'标准品插针电容', aec:false, rohs:true, pdf:null},
-    {series:'MDR',  productLine:'薄膜电容器', pkg:'插针式', voltage:'1400~1600V', cap:'500~2000µF', temp:'-40~105℃', life:'100000H', esr:'极低', feature:'定制品 高容量 超长寿命', aec:false, rohs:true, pdf:null},
+    // ==================== 金属化聚丙烯薄膜电容器 ====================
+    {series:'MDP',  productLine:'金属化聚丙烯薄膜电容器', pkg:'插针式', voltage:'500~1600V', cap:'0.47~250µF', temp:'-40~105℃', life:'—', esr:'极低', feature:'标准品插针电容', aec:false, rohs:true, pdf:null},
+    {series:'MDR',  productLine:'金属化聚丙烯薄膜电容器', pkg:'插针式', voltage:'1400~1600V', cap:'500~2000µF', temp:'-40~105℃', life:'100000H', esr:'极低', feature:'定制品 高容量 超长寿命', aec:false, rohs:true, pdf:null},
 
     // ==================== 导电高分子钽电解电容器 ====================
     {series:'TPB19',productLine:'导电高分子钽电解电容器', pkg:'贴片型', voltage:'16~100V', cap:'1.5~47µF', temp:'-55~105℃', life:'2000H', esr:'低', feature:'7.3×4.3×1.9mm 16~100V', aec:false, rohs:true, pdf:null},
@@ -157,7 +157,7 @@ YMIN.seriesTable = (function(){
       add(stacked, '贴片型', series, '—', '-55~105℃', '2000H', '按产品体系图补充');
     });
 
-    var film = '薄膜电容器';
+    var film = '金属化聚丙烯薄膜电容器';
     ['MDP(X)','MDP(H)','MAP','MDR(X)','MDR(H)','MDA'].forEach(function(series) {
       add(film, series.indexOf('MDR') === 0 ? '矩形干式直流滤波电容' : (series === 'MDA' ? '铝壳圆形干式直流滤波电容' : '4引线方壳电容'), series, '—', '-40~105℃', '—', '按产品体系图补充');
     });
