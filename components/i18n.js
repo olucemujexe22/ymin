@@ -1390,6 +1390,10 @@ YMIN.i18n = (function () {
         root.querySelectorAll('[data-zh-only]').forEach(function (node) {
             node.hidden = language === 'en';
         });
+        if (root.matches && root.matches('[data-en-only]')) root.hidden = language !== 'en';
+        root.querySelectorAll('[data-en-only]').forEach(function (node) {
+            node.hidden = language !== 'en';
+        });
     }
 
     function process(root) {
