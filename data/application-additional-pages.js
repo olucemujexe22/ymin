@@ -46,10 +46,10 @@
     }
 
     dataset.pages.power = {
-        sheet: '三代半导体电源（GaN&SiC）',
+        sheet: '第三代半导体电源（GaN&SiC）',
         icon: 'power',
         hero: {
-            title: '三代半导体电源（GaN&SiC）应用指南',
+            title: '第三代半导体电源（GaN&SiC）应用指南',
             description: '面向高频、高压及高功率密度电源应用，提供输入、输出与DC-Link关键位置的电容选型参考。',
             tags: ['GaN&SiC', '低ESR', '高纹波', '长寿命']
         },
@@ -79,10 +79,10 @@
     };
 
     dataset.pages['energy-storage'] = {
-        sheet: '储能',
+        sheet: '光储充',
         icon: 'battery_charging_full',
         hero: {
-            title: '储能应用指南',
+            title: '光储充应用指南',
             description: '覆盖逆变器、变流器和电池管理系统的DC-Link、母线支撑、滤波与浪涌吸收应用。',
             tags: ['高耐压', '高纹波', 'DC-Link', '长寿命']
         },

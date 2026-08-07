@@ -4,7 +4,7 @@ YMIN.supportContent = (function () {
     'use strict';
 
     var dataCache = {};
-    var powerApplicationLabel = '三代半导体电源（GaN&SiC）';
+    var powerApplicationLabel = '第三代半导体电源（GaN&SiC）';
     var applicationOrder = [
         '汽车电子',
         'AI服务器与数据中心',
@@ -21,7 +21,7 @@ YMIN.supportContent = (function () {
         'AI服务器与数据中心': 'dns',
         '仪器仪表': 'speed',
         '新型电机驱动': 'electric_bolt',
-        '三代半导体电源（GaN&SiC）': 'power',
+        '第三代半导体电源（GaN&SiC）': 'power',
         '机器人': 'smart_toy',
         '无人机': 'flight',
         '光储充（光伏储能充电）': 'solar_power',
@@ -70,7 +70,7 @@ YMIN.supportContent = (function () {
         '混合型': '混合',
         'ai服务器': '数据中心',
         'ai': '服务器',
-        '三代半导体电源': '电源',
+        '第三代半导体电源': '电源',
         'gan': '电源',
         'sic': '电源',
         '储能': '光储充',

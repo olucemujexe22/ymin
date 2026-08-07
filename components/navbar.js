@@ -98,10 +98,10 @@ YMIN.navbar = (function () {
             { href: 'application-ai-server.html', label: 'AI服务器与数据中心' },
             { href: 'application-instrument.html', label: '仪器仪表' },
             { href: 'application-motor-drive.html', label: '新型电机驱动' },
-            { href: 'application-power.html', label: '三代半导体电源（GaN&SiC）' },
+            { href: 'application-power.html', label: '第三代半导体电源（GaN&SiC）' },
             { href: 'application-robotics.html', label: '机器人' },
             { href: 'application-drone.html', label: '无人机' },
-            { href: 'application-energy-storage.html', label: '储能' },
+            { href: 'application-energy-storage.html', label: '光储充' },
             { href: 'application-consumer.html', label: '消费类电子' }
         ], 'w-60');
         html += '</div>';
