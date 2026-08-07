@@ -56,6 +56,43 @@ h1, h2, h3, h4, h5 {
     transition: all 0.2s ease-in-out;
 }
 
+/* Shared desktop logo position. Kept in common.css so every page uses the
+   same offset even when its remaining layout styles are compiled separately. */
+.ymin-site-logo {
+    margin-left: 0;
+}
+@media (min-width: 768px) {
+    .ymin-site-logo {
+        position: absolute !important;
+        top: 50%;
+        left: clamp(140px, calc(8vw + 84px), 240px);
+        margin-left: 0;
+        transform: translateY(-50%);
+    }
+
+    .ymin-site-header nav {
+        left: calc(50vw - max(0px, (100vw - 1680px) / 2)) !important;
+        gap: .75rem;
+    }
+}
+@media (min-width: 1024px) {
+    .ymin-site-header nav {
+        left: calc(50vw - max(0px, (100vw - 1680px) / 2) - 70px) !important;
+        gap: 1.25rem;
+    }
+}
+@media (min-width: 1280px) {
+    .ymin-site-header nav {
+        left: calc(50vw - max(0px, (100vw - 1680px) / 2) - 90px) !important;
+        gap: 2rem;
+    }
+}
+@media (min-width: 1536px) {
+    .ymin-site-header nav {
+        gap: 2.5rem;
+    }
+}
+
 /* ---------- 通用 ---------- */
 .no-radius {
     border-radius: 0 !important;

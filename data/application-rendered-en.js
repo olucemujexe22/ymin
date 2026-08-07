@@ -326,6 +326,21 @@ window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN = {
 };
 Object.assign(window.YMIN_APPLICATION_TRANSLATIONS_EN, window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN);
 
+// AI server and data center: supplemental supercapacitor application fields.
+Object.assign(window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN, {
+    "BBU备用电源": "BBU Backup Power",
+    "RAID磁盘阵列": "RAID Disk Array",
+    "PLP存储": "PLP Storage",
+    "量产": "In Production",
+    "超级电容单元": "Supercapacitor Unit",
+    "PCS系统在功率突变、母线波动或短时断电时，需要超级电容提供瞬时功率支撑与短时备用能量。": "When power demand changes suddenly, the DC bus fluctuates, or a short outage occurs, the PCS uses supercapacitors for instantaneous power support and short-term backup energy.",
+    "BBU备用电源在主电源异常或负载突变时，由超级电容提供快速响应的短时备用能量。": "When the main supply fails or the load changes suddenly, the BBU uses supercapacitors to provide fast-response short-term backup energy.",
+    "RAID磁盘阵列在掉电保护与数据写回过程中，由超级电容提供短时能量，支持关键数据安全保存。": "During power-loss protection and data write-back, the RAID disk array uses supercapacitors to provide short-term energy for safely saving critical data.",
+    "PLP存储在系统意外断电时，由超级电容为缓存数据写入非易失性存储提供短时备用电源。": "If the system loses power unexpectedly, PLP storage uses supercapacitors to provide short-term backup power while cached data is written to non-volatile storage.",
+    "利用超级电容快速充放电、低温性能和大电流输出能力，为系统提供短时高功率支撑与备用能量。": "Fast charging and discharging, low-temperature performance, and high-current output enable the supercapacitor unit to provide short-duration high-power support and backup energy."
+});
+Object.assign(window.YMIN_APPLICATION_TRANSLATIONS_EN, window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN);
+
 // Keep the compact GaN/SiC page summary on the same English-base translation
 // path as the other application pages.
 window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN["面向高频、高压及高功率密度电源应用，提供输入、输出与DC-Link关键位置的电容选型参考。"] = "For high-frequency, high-voltage and high-power-density power applications, this guide provides capacitor selection references for key input, output and DC-Link positions.";

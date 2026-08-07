@@ -63,7 +63,7 @@ YMIN.navbar = (function () {
         html += '<div class="relative flex items-center w-full px-6 lg:px-8 2xl:px-12 h-[72px] max-w-[1680px] mx-auto">';
 
         // Logo
-        html += '<a class="relative z-10 flex shrink-0 items-center gap-3" href="index.html" aria-label="永铭电子首页">';
+        html += '<a class="ymin-site-logo relative z-10 flex shrink-0 items-center gap-3" href="index.html" aria-label="永铭电子首页">';
         html += '<img alt="YMIN" class="h-11 w-auto object-contain" src="logo.png">';
         html += '</a>';
 
@@ -80,13 +80,13 @@ YMIN.navbar = (function () {
         html += navLink('product-center.html', '产品中心', activePage === 'products', true);
         html += dropdownMenu([
             { href: 'product-center.html?category=' + encodeURIComponent('液态铝电解电容器'), label: '液态铝电解电容器' },
-            { href: 'product-center.html?category=' + encodeURIComponent('双电层超级电容'), label: '双电层超级电容器' },
             { href: 'product-center.html?category=' + encodeURIComponent('高分子固态铝电解电容器'), label: '高分子固态铝电解电容器' },
-            { href: 'product-center.html?category=' + encodeURIComponent('混合型超级电容（锂离子电容）'), label: '混合型超级电容器（锂离子电容器）' },
             { href: 'product-center.html?category=' + encodeURIComponent('高分子混合动力铝电解电容器'), label: '高分子混合动力铝电解电容器' },
             { href: 'product-center.html?category=' + encodeURIComponent('叠层高分子固态铝电解电容器'), label: '叠层高分子固态铝电解电容器' },
-            { href: 'product-center.html?category=' + encodeURIComponent('金属化聚丙烯薄膜电容器'), label: '金属化聚丙烯薄膜电容器' },
-            { href: 'product-center.html?category=' + encodeURIComponent('导电高分子钽电解电容器'), label: '导电高分子钽电解电容器' }
+            { href: 'product-center.html?category=' + encodeURIComponent('导电高分子钽电解电容器'), label: '导电高分子钽电解电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('双电层超级电容'), label: '双电层超级电容器' },
+            { href: 'product-center.html?category=' + encodeURIComponent('混合型超级电容（锂离子电容）'), label: '混合型超级电容器（锂离子电容器）' },
+            { href: 'product-center.html?category=' + encodeURIComponent('金属化聚丙烯薄膜电容器'), label: '金属化聚丙烯薄膜电容器' }
         ], 'w-72');
         html += '</div>';
 
