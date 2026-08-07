@@ -21,7 +21,6 @@
     "design-3d-cad.html": "cad",
     "design-3d-cad-request.html": "cadRequest",
     "design-spice.html": "spice",
-    "design-sparams.html": "sparams",
     "design-reliability.html": "reliability"
   };
 
@@ -30,9 +29,63 @@
     cad: "reasonCad",
     cadRequest: "reasonCadRequest",
     spice: "reasonSpice",
-    sparams: "reasonSparams",
     reliability: "reasonReliability",
     certificate: "reasonCertificate"
+  };
+
+  var REGION_GROUPS = [
+    { key: "regionGroupChina", codes: ["CN", "HK", "MO", "TW"] },
+    { key: "regionGroupAsiaPacific", codes: ["JP", "KR", "SG", "MY", "TH", "VN", "ID", "IN", "PH", "PK", "BD", "LK", "NP", "MM", "KH", "LA", "BN", "MN", "KZ", "UZ", "AF", "AM", "AZ", "BH", "BT", "CY", "GE", "IR", "IQ", "IL", "JO", "KW", "KG", "LB", "MV", "KP", "OM", "PS", "QA", "SA", "SY", "TJ", "TL", "TR", "TM", "AE", "YE"] },
+    { key: "regionGroupEurope", codes: ["GB", "DE", "FR", "IT", "ES", "PT", "NL", "PL", "RU", "IE", "BE", "LU", "CH", "AT", "SE", "NO", "DK", "FI", "IS", "CZ", "SK", "HU", "RO", "BG", "GR", "UA", "HR", "SI", "EE", "LV", "LI", "LT", "AL", "AD", "BY", "BA", "MT", "MD", "MC", "ME", "MK", "SM", "RS", "VA"] },
+    { key: "regionGroupAmericas", codes: ["US", "CA", "MX", "BR", "AR", "CL", "CO", "PE", "VE", "EC", "UY", "PY", "BO", "CR", "PA", "GT", "DO", "AG", "BS", "BB", "BZ", "CU", "DM", "SV", "GD", "GY", "HT", "HN", "JM", "NI", "KN", "LC", "SR", "TT", "VC"] },
+    { key: "regionGroupAfrica", codes: ["ZA", "EG", "NG", "KE", "MA", "DZ", "TN", "GH", "ET", "TZ", "AO", "BJ", "BW", "BF", "BI", "CV", "CM", "CF", "TD", "KM", "CD", "CG", "CI", "DJ", "GQ", "ER", "SZ", "GA", "GM", "GN", "GW", "LS", "LR", "LY", "MG", "MW", "ML", "MR", "MU", "MZ", "NA", "NE", "RW", "ST", "SN", "SC", "SL", "SO", "SS", "SD", "TG", "UG", "ZM", "ZW"] },
+    { key: "regionGroupOceania", codes: ["AU", "NZ", "FJ", "PG", "WS", "SB", "TO", "TV", "VU", "KI", "MH", "FM", "NR", "PW"] }
+  ];
+
+  var REGION_UI_TEXT = {
+    "zh-CN": { placeholder: "请选择国家 / 地区", other: "其他国家或地区" },
+    "zh-TW": { placeholder: "請選擇國家 / 地區", other: "其他國家或地區" },
+    en: { placeholder: "Select a country or region", other: "Other country or region" },
+    es: { placeholder: "Seleccione un país o región", other: "Otro país o región" },
+    ar: { placeholder: "اختر دولة أو منطقة", other: "دولة أو منطقة أخرى" },
+    pt: { placeholder: "Selecione um país ou região", other: "Outro país ou região" },
+    fr: { placeholder: "Sélectionnez un pays ou une région", other: "Autre pays ou région" },
+    de: { placeholder: "Land oder Region auswählen", other: "Anderes Land oder andere Region" },
+    ru: { placeholder: "Выберите страну или регион", other: "Другая страна или регион" },
+    ja: { placeholder: "国または地域を選択", other: "その他の国・地域" },
+    ko: { placeholder: "국가 또는 지역 선택", other: "기타 국가 또는 지역" },
+    it: { placeholder: "Seleziona un paese o una regione", other: "Altro paese o regione" },
+    tr: { placeholder: "Ülke veya bölge seçin", other: "Diğer ülke veya bölge" },
+    vi: { placeholder: "Chọn quốc gia hoặc khu vực", other: "Quốc gia hoặc khu vực khác" },
+    id: { placeholder: "Pilih negara atau wilayah", other: "Negara atau wilayah lain" },
+    th: { placeholder: "เลือกประเทศหรือภูมิภาค", other: "ประเทศหรือภูมิภาคอื่น" },
+    hi: { placeholder: "देश या क्षेत्र चुनें", other: "अन्य देश या क्षेत्र" },
+    pl: { placeholder: "Wybierz kraj lub region", other: "Inny kraj lub region" },
+    nl: { placeholder: "Selecteer een land of regio", other: "Ander land of andere regio" },
+    ms: { placeholder: "Pilih negara atau rantau", other: "Negara atau rantau lain" }
+  };
+
+  var REGION_GROUP_TEXT = {
+    "zh-CN": ["中国及地区", "亚洲", "欧洲", "美洲", "非洲", "大洋洲"],
+    "zh-TW": ["中國及地區", "亞洲", "歐洲", "美洲", "非洲", "大洋洲"],
+    en: ["China and regions", "Asia", "Europe", "Americas", "Africa", "Oceania"],
+    es: ["China y regiones", "Asia", "Europa", "América", "África", "Oceanía"],
+    ar: ["الصين والمناطق", "آسيا", "أوروبا", "الأمريكتان", "أفريقيا", "أوقيانوسيا"],
+    pt: ["China e regiões", "Ásia", "Europa", "Américas", "África", "Oceania"],
+    fr: ["Chine et régions", "Asie", "Europe", "Amériques", "Afrique", "Océanie"],
+    de: ["China und Regionen", "Asien", "Europa", "Amerika", "Afrika", "Ozeanien"],
+    ru: ["Китай и регионы", "Азия", "Европа", "Америка", "Африка", "Океания"],
+    ja: ["中国および地域", "アジア", "ヨーロッパ", "アメリカ", "アフリカ", "オセアニア"],
+    ko: ["중국 및 지역", "아시아", "유럽", "아메리카", "아프리카", "오세아니아"],
+    it: ["Cina e regioni", "Asia", "Europa", "Americhe", "Africa", "Oceania"],
+    tr: ["Çin ve bölgeler", "Asya", "Avrupa", "Amerika", "Afrika", "Okyanusya"],
+    vi: ["Trung Quốc và các khu vực", "Châu Á", "Châu Âu", "Châu Mỹ", "Châu Phi", "Châu Đại Dương"],
+    id: ["Tiongkok dan wilayah", "Asia", "Eropa", "Amerika", "Afrika", "Oseania"],
+    th: ["จีนและภูมิภาค", "เอเชีย", "ยุโรป", "อเมริกา", "แอฟริกา", "โอเชียเนีย"],
+    hi: ["चीन और क्षेत्र", "एशिया", "यूरोप", "अमेरिका", "अफ्रीका", "ओशिनिया"],
+    pl: ["Chiny i regiony", "Azja", "Europa", "Ameryki", "Afryka", "Oceania"],
+    nl: ["China en regio's", "Azië", "Europa", "Amerika", "Afrika", "Oceanië"],
+    ms: ["China dan wilayah", "Asia", "Eropah", "Amerika", "Afrika", "Oceania"]
   };
 
   var TEXT = {
@@ -55,7 +108,7 @@
       resetIntroText: "使用注册邮箱确认账户并设置新密码，完成后即可重新登录会员服务。",
       benefitLife: "寿命推算与历史记录",
       benefitCad: "3D-CAD 模型与申请",
-      benefitSimulation: "SPICE 模型与 S 参数",
+      benefitSimulation: "SPICE 模型",
       benefitReliability: "可靠性数据与合规文件",
       loginTitle: "登录永铭会员",
       loginSubtitle: "使用注册邮箱和密码登录",
@@ -93,6 +146,13 @@
       regionMacao: "中国澳门",
       regionTaiwan: "中国台湾",
       regionOther: "其他国家或地区",
+      regionSelectPlaceholder: "请选择国家 / 地区",
+      regionGroupChina: "中国及地区",
+      regionGroupAsiaPacific: "亚太地区",
+      regionGroupEurope: "欧洲",
+      regionGroupAmericas: "美洲",
+      regionGroupAfrica: "非洲",
+      regionGroupOceania: "大洋洲",
       acceptTermsPrefix: "我已阅读并同意",
       acceptTermsLink: "《会员服务条款》",
       nonMilitary: "我确认会员资源不用于军事用途或受限制用途",
@@ -115,7 +175,6 @@
       reasonCad: "3D-CAD 模型下载面向会员开放，请登录后继续。",
       reasonCadRequest: "3D-CAD 申请面向会员开放，请登录后提交需求。",
       reasonSpice: "SPICE 模型面向会员开放，请登录后查询和下载。",
-      reasonSparams: "S 参数文件面向会员开放，请登录后查询和下载。",
       reasonReliability: "可靠性实验数据面向会员开放，请登录后查看。",
       reasonCertificate: "合规证书 PDF 面向会员提供下载，请登录后继续。",
       dashboardTitle: "会员中心",
@@ -131,14 +190,13 @@
       serviceLife: "寿命推算工具",
       serviceCad: "3D-CAD",
       serviceSpice: "SPICE 模型",
-      serviceSparams: "S 参数",
       serviceReliability: "可靠性数据",
       serviceCertificates: "合规证书",
       createdAt: "注册时间",
       languageLabel: "语言",
       termsLead: "本条款用于说明永铭会员服务的注册、使用、信息处理与账户责任。",
       terms1Title: "一、会员服务范围",
-      terms1Text: "会员可使用寿命推算、3D-CAD、SPICE 模型、S 参数、可靠性数据及合规文件下载等服务。具体服务内容可随网站建设进度调整。",
+      terms1Text: "会员可使用寿命推算、3D-CAD、SPICE 模型、可靠性数据及合规文件下载等服务。具体服务内容可随网站建设进度调整。",
       terms2Title: "二、注册信息与账户安全",
       terms2Text: "会员应提供真实、准确的公司与联系信息，妥善保管登录凭证，并对账户下的操作负责。发现异常使用时应及时联系永铭。",
       terms3Title: "三、信息使用",
@@ -173,7 +231,7 @@
       resetIntroText: "Confirm your account with the registered email address and set a new password.",
       benefitLife: "Lifetime calculation and history",
       benefitCad: "3D-CAD models and requests",
-      benefitSimulation: "SPICE models and S-parameters",
+      benefitSimulation: "SPICE models",
       benefitReliability: "Reliability data and compliance files",
       loginTitle: "Sign in to YMIN",
       loginSubtitle: "Use your registered email and password",
@@ -211,6 +269,13 @@
       regionMacao: "Macao, China",
       regionTaiwan: "Taiwan, China",
       regionOther: "Other country or region",
+      regionSelectPlaceholder: "Select a country or region",
+      regionGroupChina: "China and Regions",
+      regionGroupAsiaPacific: "Asia-Pacific",
+      regionGroupEurope: "Europe",
+      regionGroupAmericas: "Americas",
+      regionGroupAfrica: "Africa",
+      regionGroupOceania: "Oceania",
       acceptTermsPrefix: "I have read and agree to the",
       acceptTermsLink: "Member Service Terms",
       nonMilitary: "I confirm that member resources will not be used for military or restricted purposes",
@@ -233,7 +298,6 @@
       reasonCad: "3D-CAD model downloads are available to members. Please sign in to continue.",
       reasonCadRequest: "3D-CAD requests are available to members. Please sign in to submit a request.",
       reasonSpice: "SPICE models are available to members. Please sign in to search and download.",
-      reasonSparams: "S-parameter files are available to members. Please sign in to search and download.",
       reasonReliability: "Reliability test data is available to members. Please sign in to view it.",
       reasonCertificate: "Compliance certificate PDFs are available to members. Please sign in to download.",
       dashboardTitle: "Member Center",
@@ -249,14 +313,13 @@
       serviceLife: "Lifetime Calculator",
       serviceCad: "3D-CAD",
       serviceSpice: "SPICE Models",
-      serviceSparams: "S-Parameters",
       serviceReliability: "Reliability Data",
       serviceCertificates: "Compliance Certificates",
       createdAt: "Registered",
       languageLabel: "Language",
       termsLead: "These terms describe registration, use, information processing and account responsibilities for YMIN member services.",
       terms1Title: "1. Member service scope",
-      terms1Text: "Members may use the lifetime calculator, 3D-CAD, SPICE models, S-parameters, reliability data and compliance downloads. Services may be updated as the website evolves.",
+      terms1Text: "Members may use the lifetime calculator, 3D-CAD, SPICE models, reliability data and compliance downloads. Services may be updated as the website evolves.",
       terms2Title: "2. Registration and account security",
       terms2Text: "Members must provide accurate company and contact information, protect their credentials and remain responsible for account activity. Suspicious use should be reported to YMIN promptly.",
       terms3Title: "3. Use of information",
@@ -278,7 +341,28 @@
   var memoryStore = {};
 
   function normalizeLanguage(value) {
-    return String(value || "").toLowerCase().indexOf("en") === 0 ? "en" : "zh-CN";
+    var normalized = String(value || "").toLowerCase();
+    if (normalized === "zh" || normalized === "zh-cn" || normalized === "zh-hans") return "zh-CN";
+    if (normalized === "zh-tw" || normalized === "zh-hk" || normalized === "zh-hant") return "zh-TW";
+    if (normalized.indexOf("en") === 0) return "en";
+    if (normalized.indexOf("ja") === 0) return "ja";
+    if (normalized.indexOf("ko") === 0) return "ko";
+    if (normalized.indexOf("de") === 0) return "de";
+    if (normalized.indexOf("fr") === 0) return "fr";
+    if (normalized.indexOf("es") === 0) return "es";
+    if (normalized.indexOf("pt") === 0) return "pt";
+    if (normalized.indexOf("ru") === 0) return "ru";
+    if (normalized.indexOf("ar") === 0) return "ar";
+    if (normalized.indexOf("it") === 0) return "it";
+    if (normalized.indexOf("tr") === 0) return "tr";
+    if (normalized.indexOf("vi") === 0) return "vi";
+    if (normalized.indexOf("id") === 0) return "id";
+    if (normalized.indexOf("th") === 0) return "th";
+    if (normalized.indexOf("hi") === 0) return "hi";
+    if (normalized.indexOf("pl") === 0) return "pl";
+    if (normalized.indexOf("nl") === 0) return "nl";
+    if (normalized.indexOf("ms") === 0) return "ms";
+    return "zh-CN";
   }
 
   function getLanguage() {
@@ -296,7 +380,8 @@
 
   function t(key) {
     var lang = getLanguage();
-    return (TEXT[lang] && TEXT[lang][key]) || TEXT["zh-CN"][key] || key;
+    var fallback = lang === "zh-CN" ? TEXT["zh-CN"] : TEXT.en;
+    return (TEXT[lang] && TEXT[lang][key]) || (fallback && fallback[key]) || TEXT["zh-CN"][key] || key;
   }
 
   function setLanguage(language) {
@@ -446,7 +531,7 @@
   function withLanguage(value) {
     try {
       var url = new URL(value, document.baseURI);
-      url.searchParams.set("lang", getLanguage() === "en" ? "en" : "zh-CN");
+      url.searchParams.set("lang", getLanguage());
       return url.pathname.split("/").pop() + url.search + url.hash;
     } catch (ignore) {
       return value;
@@ -466,7 +551,7 @@
     var params = new URLSearchParams();
     if (returnUrl) params.set("return", safeReturn(returnUrl, "member-center.html"));
     if (service) params.set("service", service);
-    params.set("lang", getLanguage() === "en" ? "en" : "zh-CN");
+    params.set("lang", getLanguage());
     return "member-login.html?" + params.toString();
   }
 
@@ -487,9 +572,83 @@
     return false;
   }
 
+  function regionDisplayName(code, language) {
+    var specialKeys = { CN: "regionChina", HK: "regionHongKong", MO: "regionMacao", TW: "regionTaiwan" };
+    var traditionalChinese = { CN: "中國大陸", HK: "中國香港", MO: "中國澳門", TW: "中國台灣" };
+    if (language === "zh-TW" && traditionalChinese[code]) return traditionalChinese[code];
+    if ((language === "zh-CN" || language === "en") && specialKeys[code]) return t(specialKeys[code]);
+    try {
+      if (window.Intl && Intl.DisplayNames) {
+        return new Intl.DisplayNames([language], { type: "region" }).of(code) || code;
+      }
+    } catch (ignore) {}
+    return code;
+  }
+
+  function regionUiText(key, language) {
+    var pack = REGION_UI_TEXT[language] || REGION_UI_TEXT.en;
+    return pack[key] || REGION_UI_TEXT.en[key] || "";
+  }
+
+  function regionGroupDisplayName(group, language) {
+    var groupKeys = [
+      "regionGroupChina",
+      "regionGroupAsiaPacific",
+      "regionGroupEurope",
+      "regionGroupAmericas",
+      "regionGroupAfrica",
+      "regionGroupOceania"
+    ];
+    var groupIndex = groupKeys.indexOf(group.key);
+    var pack = REGION_GROUP_TEXT[language] || REGION_GROUP_TEXT.en;
+    return groupIndex >= 0 ? pack[groupIndex] : t(group.key);
+  }
+
+  function populateRegionSelect() {
+    var select = document.querySelector("[data-member-region-select]");
+    if (!select) return;
+    // Region names are already localized by Intl.DisplayNames and the
+    // dedicated region packs. Keep the global DOM translator from processing
+    // the generated options a second time.
+    select.setAttribute("data-i18n-ignore", "");
+    var language = getLanguage();
+    var selectedValue = select.value;
+    select.innerHTML = "";
+
+    var placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = regionUiText("placeholder", language);
+    placeholder.disabled = true;
+    select.appendChild(placeholder);
+
+    REGION_GROUPS.forEach(function (group) {
+      var optgroup = document.createElement("optgroup");
+      optgroup.label = regionGroupDisplayName(group, language);
+      group.codes.forEach(function (code) {
+        var option = document.createElement("option");
+        option.value = code;
+        option.textContent = regionDisplayName(code, language);
+        optgroup.appendChild(option);
+      });
+      select.appendChild(optgroup);
+    });
+
+    var other = document.createElement("option");
+    other.value = "OTHER";
+    other.textContent = regionUiText("other", language);
+    select.appendChild(other);
+
+    if (selectedValue && select.querySelector('option[value="' + selectedValue + '"]')) select.value = selectedValue;
+    else select.value = "";
+  }
+
   function applyTranslations() {
     var lang = getLanguage();
     document.documentElement.lang = lang;
+    // Member features are loaded on every page. Keep the confirmed English
+    // layout direction and do not mirror the whole site for Arabic.
+    document.documentElement.dir = "ltr";
+    document.documentElement.setAttribute("data-language-direction", lang === "ar" ? "rtl" : "ltr");
     document.querySelectorAll("[data-member-i18n]").forEach(function (node) {
       node.textContent = t(node.getAttribute("data-member-i18n"));
     });
@@ -504,6 +663,7 @@
     document.querySelectorAll("[data-member-language]").forEach(function (button) {
       button.classList.toggle("is-active", normalizeLanguage(button.getAttribute("data-member-language")) === lang);
     });
+    populateRegionSelect();
     updateNavigation();
     renderLoginReason();
     if (currentFile() === "member-center.html") renderMemberCenter();
@@ -735,19 +895,16 @@
   }
 
   function formatRegion(value) {
-    var keys = {
-      CN: "regionChina",
-      HK: "regionHongKong",
-      MO: "regionMacao",
-      TW: "regionTaiwan",
-      OTHER: "regionOther",
-      "中国大陆": "regionChina",
-      "中国香港": "regionHongKong",
-      "中国澳门": "regionMacao",
-      "中国台湾": "regionTaiwan",
-      "其他": "regionOther"
+    var legacy = {
+      "中国大陆": "CN",
+      "中国香港": "HK",
+      "中国澳门": "MO",
+      "中国台湾": "TW",
+      "其他": "OTHER"
     };
-    return keys[value] ? t(keys[value]) : value;
+    var code = legacy[value] || String(value || "").toUpperCase();
+    if (code === "OTHER") return regionUiText("other", getLanguage());
+    return /^[A-Z]{2}$/.test(code) ? regionDisplayName(code, getLanguage()) : value;
   }
 
   function renderMemberCenter() {

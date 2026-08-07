@@ -1,5 +1,14 @@
 /** English translations for rendered Applications text composed at runtime. */
 window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN = {
+    "电解电容模板": "Electrolytic capacitor template",
+    "超级电容模板": "Supercapacitor template",
+    "终端图片": "End-product image",
+    "终端 / 模块描述": "End-product / module description",
+    "优势介绍": "Advantages",
+    "电路拓扑图": "Circuit topology",
+    "推荐系列": "Recommended series",
+    "个推荐料号": "recommended part numbers",
+    "关键电容应用位置": "Key capacitor application positions",
     "面向机器人关节模组、雷达/摄像头感知系统与高压输入滤波的电容方案。": "Capacitor solutions for robot joint modules, radar/camera sensing systems and high-voltage input filtering.",
     "3个应用子领域 · 31个推荐料号": "3 application subfields · 31 recommended part numbers",
     "面向无人机电子调速器与航点飞行调参的滤波、储能及稳定供电电容方案。": "Filtering, energy storage and stable power supply capacitor solutions for UAV electronic speed regulators and waypoint flight parameter adjustment.",
@@ -316,6 +325,11 @@ window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN = {
     "无人机航点飞行调参 · 3 个电路位置 · 5 个推荐料号": "UAV waypoint flight parameter adjustment · 3 circuit positions · 5 recommended part numbers"
 };
 Object.assign(window.YMIN_APPLICATION_TRANSLATIONS_EN, window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN);
+
+// Keep the compact GaN/SiC page summary on the same English-base translation
+// path as the other application pages.
+window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN["面向高频、高压及高功率密度电源应用，提供输入、输出与DC-Link关键位置的电容选型参考。"] = "For high-frequency, high-voltage and high-power-density power applications, this guide provides capacitor selection references for key input, output and DC-Link positions.";
+window.YMIN_APPLICATION_TRANSLATIONS_EN["面向高频、高压及高功率密度电源应用，提供输入、输出与DC-Link关键位置的电容选型参考。"] = window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN["面向高频、高压及高功率密度电源应用，提供输入、输出与DC-Link关键位置的电容选型参考。"];
 
 // Energy Storage page: Heliostat, Power Converter, and BMS modules.
 Object.assign(window.YMIN_APPLICATION_RENDERED_TRANSLATIONS_EN, {

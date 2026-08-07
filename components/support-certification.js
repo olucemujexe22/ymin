@@ -21,8 +21,10 @@ YMIN.supportCertification = (function () {
     };
     var toastTimer = 0;
     function isEnglishPage() {
-        return (window.YMIN && YMIN.i18n && YMIN.i18n.language === 'en') ||
-            new URLSearchParams(window.location.search).get('lang') === 'en';
+        var language = (window.YMIN && YMIN.i18n && YMIN.i18n.language) ||
+            new URLSearchParams(window.location.search).get('lang') ||
+            document.documentElement.lang || 'zh-CN';
+        return String(language).toLowerCase() !== 'zh-cn';
     }
 
     function byId(id) {

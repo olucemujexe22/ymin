@@ -10,21 +10,19 @@ var YMIN = window.YMIN || {};
 YMIN.navbar = (function () {
     'use strict';
 
-    function isEnglishPage() {
-        return (YMIN.i18n && YMIN.i18n.language === 'en') ||
-            new URLSearchParams(window.location.search).get('lang') === 'en' ||
-            document.documentElement.lang === 'en';
+    function isInternationalPage() {
+        var language = (YMIN.i18n && YMIN.i18n.language) ||
+            new URLSearchParams(window.location.search).get('lang') ||
+            document.documentElement.lang || 'zh-CN';
+        return String(language).toLowerCase() !== 'zh-cn' && String(language).toLowerCase() !== 'zh';
     }
 
     function languageSwitcher() {
         if (YMIN.i18n && typeof YMIN.i18n.switcher === 'function') {
             return YMIN.i18n.switcher();
         }
-        return '<div class="ymin-language-switcher flex items-center border border-slate-300 bg-white" role="group" aria-label="Language">' +
-            '<a class="px-2 py-1 text-[11px] font-bold text-slate-500" href="?lang=zh-CN" data-i18n-ignore>中</a>' +
-            '<span class="text-slate-300" aria-hidden="true">/</span>' +
-            '<a class="px-2 py-1 text-[11px] font-bold text-slate-500" href="?lang=en" data-i18n-ignore>EN</a>' +
-            '</div>';
+        return '<a class="inline-flex items-center gap-1 border border-slate-300 bg-white px-3 py-2 text-[11px] font-bold text-slate-600" href="?lang=zh-CN" data-i18n-ignore>' +
+            '<span class="material-symbols-outlined text-[18px]">language</span><span>Language</span></a>';
     }
 
     function navLink(href, label, activeClass, hasDropdown) {
@@ -59,10 +57,9 @@ YMIN.navbar = (function () {
      */
     function render(active) {
         var activePage = active || 'home';
-        var english = isEnglishPage();
-
+        var international = isInternationalPage();
         var html = '';
-        html += '<header class="bg-white dark:bg-slate-950 w-full border-b border-slate-200 dark:border-slate-800 z-50 flex-shrink-0">';
+        html += '<header class="ymin-site-header relative z-[100] bg-white dark:bg-slate-950 w-full border-b border-slate-200 dark:border-slate-800 flex-shrink-0">';
         html += '<div class="relative flex items-center w-full px-6 lg:px-8 2xl:px-12 h-[72px] max-w-[1680px] mx-auto">';
 
         // Logo
@@ -116,7 +113,6 @@ YMIN.navbar = (function () {
             { href: 'design-life-calc.html', label: '寿命推算工具' },
             { href: 'design-3d-cad.html', label: '3D-CAD 模型' },
             { href: 'design-spice.html', label: 'SPICE 模型' },
-            { href: 'design-sparams.html', label: 'S参数' },
             { href: 'design-reliability.html', label: '可靠性实验数据' }
         ], 'w-52');
         html += '</div>';
@@ -140,7 +136,7 @@ YMIN.navbar = (function () {
             { href: 'about-honors.html', label: '企业荣誉' },
             { href: 'about-distributors.html', label: '代理商网络' }
         ];
-        if (!english) {
+        if (!international) {
             aboutItems.push({ href: 'about-careers.html', label: '加入我们' });
             aboutItems.push({ href: 'about-procurement.html', label: '原材料采购' });
         }
@@ -190,7 +186,7 @@ YMIN.navbar = (function () {
         }
         if (document.querySelector('script[data-ymin-member-module]')) return;
         var script = document.createElement('script');
-        script.src = 'components/member.js?v=20260805merge3';
+        script.src = 'components/member.js?v=20260807ui3';
         script.setAttribute('data-ymin-member-module', 'true');
         script.onload = function () {
             if (YMIN.member && typeof YMIN.member.init === 'function') YMIN.member.init();

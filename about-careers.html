@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap">
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/about.css?v=20260804a">
+    <link rel="stylesheet" href="styles/about.css?v=20260807hero1">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1B365D'},borderRadius:{DEFAULT:'0px'},fontFamily:{headline:['Space Grotesk'],body:['Inter']}}}}</script>
 </head>
@@ -19,9 +19,8 @@
     <main class="about-main flex-1 overflow-y-auto custom-scrollbar">
         <section class="about-hero" style="--hero-image: url('assets/about/careers-hero.webp')">
             <div class="about-hero-content">
-                <span class="about-kicker">加入我们</span>
-                <h1>发展您的职业生涯</h1>
-                <p>在产品研发、精密制造、质量管理与应用服务中，与永铭共同成长。</p>
+                <h1>加入我们</h1>
+                <p class="about-hero-lead">在产品研发、精密制造、质量管理与应用服务中，与永铭共同成长。</p>
             </div>
         </section>
 
@@ -50,12 +49,13 @@
         </section>
         <footer id="ymin-footer"></footer>
     </main>
-    <script src="components/i18n.js?v=20260805film1"></script>
-    <script>if (window.YMIN && YMIN.i18n && YMIN.i18n.language === 'en') window.location.replace('about.html?lang=en');</script>
-    <script src="components/navbar.js?v=20260805logo1"></script>
-    <script src="components/footer.js?v=20260805film1"></script>
+    <script src="data/i18n-language-packs.js?v=20260807ui5"></script>
+    <script src="components/i18n.js?v=20260807ui5"></script>
+    <script>if (window.YMIN && YMIN.i18n && YMIN.i18n.language !== 'zh-CN') window.location.replace('about.html?lang=' + encodeURIComponent(YMIN.i18n.language));</script>
+    <script src="components/navbar.js?v=20260807ui3"></script>
+    <script src="components/footer.js?v=20260806multi2"></script>
     <script src="data/about-content.js?v=20260805film1"></script>
-    <script src="components/about-pages.js?v=20260805merge2"></script>
+    <script src="components/about-pages.js?v=20260806multi3"></script>
     <script>document.addEventListener('DOMContentLoaded',function(){YMIN.navbar.inject('about');YMIN.footer.inject();});</script>
 </body>
 </html>

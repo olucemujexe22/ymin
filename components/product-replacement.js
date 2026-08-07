@@ -22,9 +22,14 @@ YMIN.productReplacement = (function () {
         return document.getElementById(id);
     }
 
+    function currentLanguage() {
+        return (YMIN.i18n && YMIN.i18n.language) ||
+            new URLSearchParams(window.location.search).get('lang') ||
+            document.documentElement.lang || 'zh-CN';
+    }
+
     function isEnglishPage() {
-        return (YMIN.i18n && YMIN.i18n.language === 'en') ||
-            new URLSearchParams(window.location.search).get('lang') === 'en';
+        return String(currentLanguage()).toLowerCase() !== 'zh-cn';
     }
 
     function displayText(value) {
@@ -268,7 +273,7 @@ YMIN.productReplacement = (function () {
         var params = new URLSearchParams();
         if (state.search) params.set('search', state.search);
         if (state.brand !== 'all') params.set('brand', state.brand);
-        params.set('lang', isEnglishPage() ? 'en' : 'zh-CN');
+        params.set('lang', currentLanguage());
         var query = params.toString();
         window.history.replaceState(null, '', 'product-replacement.html' + (query ? '?' + query : ''));
     }

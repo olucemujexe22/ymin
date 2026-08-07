@@ -14,6 +14,7 @@ YMIN.i18n = (function () {
     var PARAM_KEY = 'lang';
     var DEFAULT_LANGUAGE = 'zh-CN';
     var observer = null;
+    var translatedTextCache = new WeakMap();
 
     var translations = {
         '上海永铭电子股份有限公司': 'Shanghai YMIN Electronics Co., Ltd.',
@@ -81,9 +82,6 @@ YMIN.i18n = (function () {
         '低ESR': 'Low ESR',
         'Q系列 0.1µF/50V': 'Q Series 0.1µF/50V',
         '永铭电子SPICE模型库 - 电容等效电路仿真模型下载，支持LTspice/PSpice/ADS，覆盖频率特性、ESR/ESL参数。': 'YMIN SPICE model library—download capacitor equivalent-circuit simulation models for LTspice, PSpice and ADS, covering frequency characteristics and ESR/ESL parameters.',
-        'S参数文件下载': 'S-parameter Downloads',
-        'S参数': 'S-parameters',
-        '提供MLCC及高分子电容的Touchstone(S2P)格式S参数文件，覆盖100kHz~8.5GHz频段，适用于Keysight ADS、Ansys HFSS、Cadence Sigrity等高速信号完整性(SI)和电源完整性(PI)仿真工具。': 'Touchstone (S2P) S-parameter files for MLCCs and polymer capacitors, covering frequencies from 100 kHz to 8.5 GHz and compatible with high-speed signal-integrity (SI) and power-integrity (PI) simulation tools including Keysight ADS, Ansys HFSS and Cadence Sigrity.',
         'MLCC Q系列': 'MLCC Q Series',
         'MLCC H系列': 'MLCC H Series',
         'Q系列 0.1µF': 'Q Series 0.1µF',
@@ -91,7 +89,6 @@ YMIN.i18n = (function () {
         'Q系列 10µF': 'Q Series 10µF',
         '高分子固态': 'Polymer Solid',
         '贴片型': 'SMD',
-        '永铭电子S参数文件下载 - Touchstone格式(S2P)，用于信号完整性(SI)和电源完整性(PI)仿真分析。': 'Download YMIN S-parameter files in Touchstone (S2P) format for signal-integrity (SI) and power-integrity (PI) simulation and analysis.',
         '可靠性实验数据': 'Reliability Test Data',
         '永铭电容全系列经过严格的可靠性验证，以下为各实验项目的测试条件与实测结果，可按系列筛选查看。': 'All YMIN capacitor series undergo rigorous reliability verification. The test conditions and measured results for each test item are shown below and can be filtered by series.',
         '永铭电子电容可靠性实验数据 - 高温负荷、耐湿、温度循环、耐振等实测数据，按系列查询，支撑设计评审。': 'YMIN capacitor reliability test data—including measured high-temperature load, damp-heat, temperature-cycling and vibration-resistance results—searchable by series to support design reviews.',
@@ -239,7 +236,6 @@ YMIN.i18n = (function () {
         '大应用领域入口': 'Application Areas',
         '项设计工具与数据资源': 'Design Tools and Data Resources',
         '系列列表': 'Series List',
-        '找到一个产品': 'Find a Product',
         '贴片型 · 引线型 · 牛角型 · 螺栓型': 'SMD · Radial · Snap-in · Screw-terminal',
         '双电层单体 · 模组 · 大功率高能量': 'EDLC Cells · Modules · High Power and High Energy',
         '贴片型 · 引线型 · 超低ESR': 'SMD · Radial · Ultra-low ESR',
@@ -253,7 +249,6 @@ YMIN.i18n = (function () {
         '在线交互式电容工作寿命推算器。输入工作温度、施加电压、纹波电流等参数，实时预估实际使用寿命。': 'An interactive online capacitor lifetime calculator that estimates operating life from working temperature, applied voltage, ripple current and other conditions.',
         '高温负荷、耐湿、温度循环、耐振等可靠性试验的实测数据，按系列查询，为设计评审提供数据支撑。': 'Measured high-temperature load, humidity, temperature-cycle and vibration test data, searchable by series for design review.',
         '电容等效电路仿真模型库，支持 LTspice / PSpice / ADS 等主流平台，覆盖频率特性、ESR/ESL 等关键参数。': 'Capacitor equivalent-circuit simulation models for LTspice, PSpice, ADS and other mainstream platforms, including frequency characteristics, ESR, ESL and other key parameters.',
-        'MLCC及高分子电容的S参数（Touchstone格式）文件下载，用于高速信号完整性(SI)和电源完整性(PI)仿真分析。': 'Download S-parameter files in Touchstone format for MLCC and polymer capacitors for high-speed signal-integrity (SI) and power-integrity (PI) simulation.',
         '推荐设计工作流': 'Recommended Design Workflow',
         '选型 → 下载SPICE模型仿真 → 使用寿命计算器验证 → 下载3D-CAD做Layout → 查阅可靠性数据确认': 'Select a product → Simulate with a SPICE model → Verify lifetime → Complete layout with 3D-CAD → Review reliability data',
         '全部工具': 'All Tools',
@@ -278,7 +273,6 @@ YMIN.i18n = (function () {
         '最新动态与技术文章': 'Latest News and Technical Articles',
         '了解新产品、应用方案与技术观点。': 'Discover new products, application solutions and technical insights.',
         '查看产品体系图': 'View Product Portfolio',
-        '匹配单个产品': 'Find Products',
         '技术文章': 'Technical Article',
         '产品动态': 'Product Updates',
         '扫码关注服务号': 'Follow Our WeChat Service Account',
@@ -336,7 +330,7 @@ YMIN.i18n = (function () {
         '做客户尊重的产品': 'Create Products Respected by Customers',
         '做社会尊敬的团队': 'Build a Team Respected by Society',
         '围绕不同材料体系、结构形式与应用需求，形成覆盖八大类别的电容器产品布局。': 'A capacitor portfolio spanning eight product categories, built around diverse material systems, structures and application requirements.',
-        '产品包括液态铝电解电容器、双电层超级电容器、混合型超级电容（锂离子电容）、高分子固态铝电解电容器、高分子混合动力铝电解电容器、叠层高分子固态铝电解电容器、金属化聚丙烯薄膜电容器和导电高分子钽电解电容器。产品资料按产品线、系列和料号组织，便于客户检索、比较与获取相关技术资料。': 'Our products include liquid aluminum electrolytic capacitors, electric double-layer supercapacitors, hybrid supercapacitors (lithium-ion capacitors), polymer solid aluminum electrolytic capacitors, polymer hybrid aluminum electrolytic capacitors, stacked polymer solid aluminum electrolytic capacitors, metallized polypropylene film capacitors and conductive polymer tantalum electrolytic capacitors. Product information is organized by product line, series and part number for convenient search, comparison and access to technical resources.',
+        '产品包括液态铝电解电容器、高分子固态铝电解电容器、高分子混合动力铝电解电容器、叠层高分子固态铝电解电容器、导电高分子钽电解电容器、双电层超级电容器、混合型超级电容（锂离子电容）和金属化聚丙烯薄膜电容器。产品资料按产品线、系列和料号组织，便于客户检索、比较与获取相关技术资料。': 'Our products include liquid aluminum electrolytic capacitors, polymer solid aluminum electrolytic capacitors, polymer hybrid aluminum electrolytic capacitors, stacked polymer solid aluminum electrolytic capacitors, conductive polymer tantalum electrolytic capacitors, electric double-layer supercapacitors, hybrid supercapacitors (lithium-ion capacitors) and metallized polypropylene film capacitors. Product information is organized by product line, series and part number for convenient search, comparison and access to technical resources.',
         '从铝电解电容器起步，持续推进小型化、固态化和多材料体系产品布局。': 'Starting with aluminum electrolytic capacitors, YMIN has continued to advance miniaturization, solid-state technologies and a multi-material product portfolio.',
         '企业创立': 'Company Founded',
         '上虞永铭电子有限公司成立，开启电容器研发与制造。': 'Shangyu YMIN Electronics Co., Ltd. was established, marking the beginning of capacitor research, development and manufacturing.',
@@ -776,6 +770,7 @@ YMIN.i18n = (function () {
         '产品图片': 'Product Image',
         '系列产品尺寸与额定纹波电流条件': 'Series Product Dimensions and Rated Ripple Current Conditions',
         '产品规格书': 'Product Datasheet',
+        '产品PDF下载': 'Download Product PDF',
         '暂无 PDF': 'PDF Not Available',
         '试验报告': 'Test Report',
         '交叉参考': 'Cross-reference',
@@ -1250,13 +1245,322 @@ YMIN.i18n = (function () {
         translations[source] = applicationRenderedTranslations[source];
     });
 
+    var locales = [
+        { code: 'zh-CN', label: '简体中文', shortLabel: '中文', htmlLang: 'zh-CN', dir: 'ltr', group: 'popular' },
+        { code: 'en', label: 'English', shortLabel: 'EN', htmlLang: 'en', dir: 'ltr', group: 'popular' },
+        { code: 'es', label: 'Español', shortLabel: 'ES', htmlLang: 'es', dir: 'ltr', group: 'popular' },
+        { code: 'ar', label: 'العربية', shortLabel: 'العربية', htmlLang: 'ar', dir: 'rtl', group: 'popular' },
+        { code: 'pt', label: 'Português', shortLabel: 'PT', htmlLang: 'pt', dir: 'ltr', group: 'popular' },
+        { code: 'fr', label: 'Français', shortLabel: 'FR', htmlLang: 'fr', dir: 'ltr', group: 'popular' },
+        { code: 'de', label: 'Deutsch', shortLabel: 'DE', htmlLang: 'de', dir: 'ltr', group: 'popular' },
+        { code: 'ru', label: 'Русский', shortLabel: 'RU', htmlLang: 'ru', dir: 'ltr', group: 'popular' },
+        { code: 'ja', label: '日本語', shortLabel: '日本語', htmlLang: 'ja', dir: 'ltr', group: 'popular' },
+        { code: 'ko', label: '한국어', shortLabel: '한국어', htmlLang: 'ko', dir: 'ltr', group: 'popular' },
+        { code: 'zh-TW', label: '繁體中文', shortLabel: '繁中', htmlLang: 'zh-Hant', dir: 'ltr', group: 'more' },
+        { code: 'it', label: 'Italiano', shortLabel: 'IT', htmlLang: 'it', dir: 'ltr', group: 'more' },
+        { code: 'tr', label: 'Türkçe', shortLabel: 'TR', htmlLang: 'tr', dir: 'ltr', group: 'more' },
+        { code: 'vi', label: 'Tiếng Việt', shortLabel: 'VI', htmlLang: 'vi', dir: 'ltr', group: 'more' },
+        { code: 'id', label: 'Bahasa Indonesia', shortLabel: 'ID', htmlLang: 'id', dir: 'ltr', group: 'more' },
+        { code: 'th', label: 'ไทย', shortLabel: 'ไทย', htmlLang: 'th', dir: 'ltr', group: 'more' },
+        { code: 'hi', label: 'हिन्दी', shortLabel: 'हिन्दी', htmlLang: 'hi', dir: 'ltr', group: 'more' },
+        { code: 'pl', label: 'Polski', shortLabel: 'PL', htmlLang: 'pl', dir: 'ltr', group: 'more' },
+        { code: 'nl', label: 'Nederlands', shortLabel: 'NL', htmlLang: 'nl', dir: 'ltr', group: 'more' },
+        { code: 'ms', label: 'Bahasa Melayu', shortLabel: 'MS', htmlLang: 'ms', dir: 'ltr', group: 'more' }
+    ];
+
+    /*
+     * The Chinese pages remain the presentation source of truth. These compact
+     * local packs translate the global shell and the most visible entry labels.
+     * Page-specific maintained copy falls back to the complete English pack
+     * above until a dedicated translation is supplied by the future CMS.
+     */
+    var commonTranslations = {
+        ja: {
+            '首页': 'ホーム', '产品中心': '製品センター', '应用中心': 'アプリケーション', '设计工具': '設計ツール', '服务支持': 'サポート', '关于永铭': 'YMINについて',
+            '新闻资讯': 'ニュース', '知识库': 'ナレッジベース', '下载中心': 'ダウンロード', '合规证书': '認証・適合資料', '公司简介': '会社概要', '企业荣誉': '企業表彰',
+            '代理商网络': '代理店ネットワーク', '加入我们': '採用情報', '原材料采购': '原材料調達', '登录': 'ログイン', '会员账户': '会員アカウント', '搜索型号或参数...': '型番または仕様を検索...',
+            '汽车电子': '車載電子', 'AI服务器与数据中心': 'AIサーバー・データセンター', '仪器仪表': '計測機器', '新型电机驱动': '次世代モータードライブ', '三代半导体电源（GaN&SiC）': '第3世代半導体電源（GaN&SiC）',
+            '机器人': 'ロボット', '无人机': 'ドローン', '储能': 'エネルギー貯蔵', '消费类电子': 'コンシューマーエレクトロニクス', '寿命推算工具': '寿命計算ツール', '可靠性实验数据': '信頼性試験データ',
+            '网站导航': 'サイトナビゲーション', '关于我们': '会社情報', '联系支持': 'お問い合わせ', '寻找替代料': '代替品検索', '新闻中心': 'ニュースセンター', '联系我们': 'お問い合わせ',
+            '隐私政策': 'プライバシーポリシー', '使用条款': '利用規約', '系列列表': 'シリーズ一覧', '产品选型': '製品選定', '全部工具': 'すべてのツール', '查看应用中心': 'アプリケーションを見る',
+            '产品体系图': '製品体系図', '查询产品': '製品検索', '按参数选型': '仕様から選ぶ', '查看产品体系图': '製品体系図を見る', '按应用选型': '用途から選ぶ', '全系列电容器产品': 'コンデンサ製品ラインアップ',
+            '设计工具与数据资源': '設計ツールとデータ', '按应用领域快速进入': '用途分野から探す', '最新动态与技术文章': '最新ニュース・技術記事', '进入新闻资讯': 'ニュースを見る', '电容应用，': 'コンデンサの課題は、', '有困难找永铭': 'YMINにご相談ください'
+        },
+        ko: {
+            '首页': '홈', '产品中心': '제품 센터', '应用中心': '애플리케이션', '设计工具': '설계 도구', '服务支持': '고객 지원', '关于永铭': 'YMIN 소개',
+            '新闻资讯': '뉴스', '知识库': '지식 센터', '下载中心': '다운로드', '合规证书': '규정 준수 인증', '公司简介': '회사 소개', '企业荣誉': '기업 수상',
+            '代理商网络': '공식 대리점', '加入我们': '채용', '原材料采购': '원자재 조달', '登录': '로그인', '会员账户': '회원 계정', '搜索型号或参数...': '모델 또는 사양 검색...',
+            '汽车电子': '자동차 전자', 'AI服务器与数据中心': 'AI 서버 및 데이터 센터', '仪器仪表': '계측기', '新型电机驱动': '차세대 모터 드라이브', '三代半导体电源（GaN&SiC）': '3세대 반도체 전원(GaN&SiC)',
+            '机器人': '로봇', '无人机': '드론', '储能': '에너지 저장', '消费类电子': '소비자 전자제품', '寿命推算工具': '수명 계산 도구', '可靠性实验数据': '신뢰성 시험 데이터',
+            '网站导航': '사이트 탐색', '关于我们': '회사 소개', '联系支持': '지원 문의', '寻找替代料': '대체품 찾기', '新闻中心': '뉴스 센터', '联系我们': '문의하기',
+            '隐私政策': '개인정보 보호정책', '使用条款': '이용약관', '系列列表': '시리즈 목록', '产品选型': '제품 선택', '全部工具': '모든 도구', '查看应用中心': '애플리케이션 보기',
+            '产品体系图': '제품 포트폴리오', '查询产品': '제품 검색', '按参数选型': '사양별 선택', '查看产品体系图': '제품 포트폴리오 보기', '按应用选型': '용도별 선택', '全系列电容器产品': '전체 커패시터 제품군',
+            '设计工具与数据资源': '설계 도구 및 데이터', '按应用领域快速进入': '애플리케이션별 찾아보기', '最新动态与技术文章': '최신 뉴스 및 기술 자료', '进入新闻资讯': '뉴스 보기', '电容应用，': '커패시터 적용이 어렵다면,', '有困难找永铭': 'YMIN에 문의하세요'
+        },
+        de: {
+            '首页': 'Startseite', '产品中心': 'Produkte', '应用中心': 'Anwendungen', '设计工具': 'Design-Tools', '服务支持': 'Support', '关于永铭': 'Über YMIN',
+            '新闻资讯': 'Neuigkeiten', '知识库': 'Wissensdatenbank', '下载中心': 'Downloads', '合规证书': 'Konformitätsnachweise', '公司简介': 'Unternehmensprofil', '企业荣誉': 'Auszeichnungen',
+            '代理商网络': 'Vertriebspartner', '加入我们': 'Karriere', '原材料采购': 'Rohstoffeinkauf', '登录': 'Anmelden', '会员账户': 'Mitgliedskonto', '搜索型号或参数...': 'Modell oder Parameter suchen...',
+            '汽车电子': 'Automobilelektronik', 'AI服务器与数据中心': 'KI-Server und Rechenzentren', '仪器仪表': 'Mess- und Regeltechnik', '新型电机驱动': 'Neue Motorantriebe', '三代半导体电源（GaN&SiC）': 'Halbleiternetzteile der 3. Generation (GaN&SiC)',
+            '机器人': 'Robotik', '无人机': 'Drohnen', '储能': 'Energiespeicher', '消费类电子': 'Unterhaltungselektronik', '寿命推算工具': 'Lebensdauerrechner', '可靠性实验数据': 'Zuverlässigkeitsdaten',
+            '网站导航': 'Seitennavigation', '关于我们': 'Über uns', '联系支持': 'Support kontaktieren', '寻找替代料': 'Ersatzprodukt finden', '新闻中心': 'Newscenter', '联系我们': 'Kontakt',
+            '隐私政策': 'Datenschutz', '使用条款': 'Nutzungsbedingungen', '系列列表': 'Serienübersicht', '产品选型': 'Produktauswahl', '全部工具': 'Alle Tools', '查看应用中心': 'Anwendungen ansehen',
+            '产品体系图': 'Produktportfolio', '查询产品': 'Produkt suchen', '按参数选型': 'Nach Parametern wählen', '查看产品体系图': 'Produktportfolio ansehen', '按应用选型': 'Nach Anwendung wählen', '全系列电容器产品': 'Vollständiges Kondensatorportfolio',
+            '设计工具与数据资源': 'Design-Tools und Daten', '按应用领域快速进入': 'Nach Anwendungsbereich auswählen', '最新动态与技术文章': 'Neuigkeiten und technische Artikel', '进入新闻资讯': 'Neuigkeiten ansehen', '电容应用，': 'Kondensatoranwendung –', '有困难找永铭': 'bei Fragen hilft YMIN'
+        },
+        fr: {
+            '首页': 'Accueil', '产品中心': 'Produits', '应用中心': 'Applications', '设计工具': 'Outils de conception', '服务支持': 'Assistance', '关于永铭': 'À propos de YMIN',
+            '新闻资讯': 'Actualités', '知识库': 'Base de connaissances', '下载中心': 'Téléchargements', '合规证书': 'Certificats de conformité', '公司简介': 'Présentation', '企业荣誉': 'Distinctions',
+            '代理商网络': 'Réseau de distributeurs', '加入我们': 'Carrières', '原材料采购': 'Achats de matières premières', '登录': 'Connexion', '会员账户': 'Compte membre', '搜索型号或参数...': 'Rechercher un modèle ou un paramètre...',
+            '汽车电子': 'Électronique automobile', 'AI服务器与数据中心': 'Serveurs IA et centres de données', '仪器仪表': 'Instrumentation', '新型电机驱动': 'Entraînements moteurs nouvelle génération', '三代半导体电源（GaN&SiC）': 'Alimentations à semi-conducteurs de 3e génération (GaN&SiC)',
+            '机器人': 'Robotique', '无人机': 'Drones', '储能': 'Stockage d’énergie', '消费类电子': 'Électronique grand public', '寿命推算工具': 'Calculateur de durée de vie', '可靠性实验数据': 'Données de fiabilité',
+            '网站导航': 'Navigation', '关于我们': 'À propos', '联系支持': 'Contacter l’assistance', '寻找替代料': 'Trouver un équivalent', '新闻中心': 'Centre d’actualités', '联系我们': 'Nous contacter',
+            '隐私政策': 'Politique de confidentialité', '使用条款': 'Conditions d’utilisation', '系列列表': 'Liste des séries', '产品选型': 'Sélection de produits', '全部工具': 'Tous les outils', '查看应用中心': 'Voir les applications',
+            '产品体系图': 'Portefeuille produits', '查询产品': 'Rechercher un produit', '按参数选型': 'Sélection par paramètres', '查看产品体系图': 'Voir le portefeuille', '按应用选型': 'Sélection par application', '全系列电容器产品': 'Gamme complète de condensateurs',
+            '设计工具与数据资源': 'Outils de conception et données', '按应用领域快速进入': 'Explorer par domaine d’application', '最新动态与技术文章': 'Actualités et articles techniques', '进入新闻资讯': 'Voir les actualités', '电容应用，': 'Pour vos applications de condensateurs,', '有困难找永铭': 'comptez sur YMIN'
+        },
+        es: {
+            '首页': 'Inicio', '产品中心': 'Productos', '应用中心': 'Aplicaciones', '设计工具': 'Herramientas de diseño', '服务支持': 'Soporte', '关于永铭': 'Acerca de YMIN',
+            '新闻资讯': 'Noticias', '知识库': 'Base de conocimientos', '下载中心': 'Descargas', '合规证书': 'Certificados de conformidad', '公司简介': 'Perfil de la empresa', '企业荣誉': 'Reconocimientos',
+            '代理商网络': 'Red de distribuidores', '加入我们': 'Empleo', '原材料采购': 'Compra de materias primas', '登录': 'Iniciar sesión', '会员账户': 'Cuenta de miembro', '搜索型号或参数...': 'Buscar modelo o parámetro...',
+            '汽车电子': 'Electrónica automotriz', 'AI服务器与数据中心': 'Servidores de IA y centros de datos', '仪器仪表': 'Instrumentación', '新型电机驱动': 'Nuevos accionamientos de motor', '三代半导体电源（GaN&SiC）': 'Fuentes de alimentación de semiconductores de 3.ª generación (GaN&SiC)',
+            '机器人': 'Robótica', '无人机': 'Drones', '储能': 'Almacenamiento de energía', '消费类电子': 'Electrónica de consumo', '寿命推算工具': 'Calculadora de vida útil', '可靠性实验数据': 'Datos de fiabilidad',
+            '网站导航': 'Navegación', '关于我们': 'Acerca de nosotros', '联系支持': 'Contactar con soporte', '寻找替代料': 'Buscar equivalente', '新闻中心': 'Centro de noticias', '联系我们': 'Contacto',
+            '隐私政策': 'Política de privacidad', '使用条款': 'Condiciones de uso', '系列列表': 'Lista de series', '产品选型': 'Selección de productos', '全部工具': 'Todas las herramientas', '查看应用中心': 'Ver aplicaciones',
+            '产品体系图': 'Portafolio de productos', '查询产品': 'Buscar producto', '按参数选型': 'Seleccionar por parámetros', '查看产品体系图': 'Ver portafolio', '按应用选型': 'Seleccionar por aplicación', '全系列电容器产品': 'Gama completa de condensadores',
+            '设计工具与数据资源': 'Herramientas y datos de diseño', '按应用领域快速进入': 'Explorar por aplicación', '最新动态与技术文章': 'Noticias y artículos técnicos', '进入新闻资讯': 'Ver noticias', '电容应用，': 'Para aplicaciones de condensadores,', '有困难找永铭': 'cuente con YMIN'
+        },
+        pt: {
+            '首页': 'Início', '产品中心': 'Produtos', '应用中心': 'Aplicações', '设计工具': 'Ferramentas de projeto', '服务支持': 'Suporte', '关于永铭': 'Sobre a YMIN',
+            '新闻资讯': 'Notícias', '知识库': 'Base de conhecimento', '下载中心': 'Downloads', '合规证书': 'Certificados de conformidade', '公司简介': 'Perfil da empresa', '企业荣誉': 'Reconhecimentos',
+            '代理商网络': 'Rede de distribuidores', '加入我们': 'Carreiras', '原材料采购': 'Compras de matérias-primas', '登录': 'Entrar', '会员账户': 'Conta de membro', '搜索型号或参数...': 'Pesquisar modelo ou parâmetro...',
+            '汽车电子': 'Eletrônica automotiva', 'AI服务器与数据中心': 'Servidores de IA e data centers', '仪器仪表': 'Instrumentação', '新型电机驱动': 'Acionamentos de motor de nova geração', '三代半导体电源（GaN&SiC）': 'Fontes de semicondutores de 3ª geração (GaN&SiC)',
+            '机器人': 'Robótica', '无人机': 'Drones', '储能': 'Armazenamento de energia', '消费类电子': 'Eletrônicos de consumo', '寿命推算工具': 'Calculadora de vida útil', '可靠性实验数据': 'Dados de confiabilidade',
+            '网站导航': 'Navegação', '关于我们': 'Sobre nós', '联系支持': 'Fale com o suporte', '寻找替代料': 'Encontrar equivalente', '新闻中心': 'Central de notícias', '联系我们': 'Contato',
+            '隐私政策': 'Política de privacidade', '使用条款': 'Termos de uso', '系列列表': 'Lista de séries', '产品选型': 'Seleção de produtos', '全部工具': 'Todas as ferramentas', '查看应用中心': 'Ver aplicações',
+            '产品体系图': 'Portfólio de produtos', '查询产品': 'Pesquisar produto', '按参数选型': 'Selecionar por parâmetros', '查看产品体系图': 'Ver portfólio', '按应用选型': 'Selecionar por aplicação', '全系列电容器产品': 'Linha completa de capacitores',
+            '设计工具与数据资源': 'Ferramentas e dados de projeto', '按应用领域快速进入': 'Explorar por aplicação', '最新动态与技术文章': 'Notícias e artigos técnicos', '进入新闻资讯': 'Ver notícias', '电容应用，': 'Em aplicações de capacitores,', '有困难找永铭': 'conte com a YMIN'
+        },
+        ru: {
+            '首页': 'Главная', '产品中心': 'Продукция', '应用中心': 'Применения', '设计工具': 'Инструменты проектирования', '服务支持': 'Поддержка', '关于永铭': 'О компании YMIN',
+            '新闻资讯': 'Новости', '知识库': 'База знаний', '下载中心': 'Загрузки', '合规证书': 'Сертификаты соответствия', '公司简介': 'О компании', '企业荣誉': 'Награды',
+            '代理商网络': 'Дистрибьюторы', '加入我们': 'Карьера', '原材料采购': 'Закупка сырья', '登录': 'Войти', '会员账户': 'Личный кабинет', '搜索型号或参数...': 'Поиск модели или параметра...',
+            '汽车电子': 'Автомобильная электроника', 'AI服务器与数据中心': 'ИИ-серверы и центры обработки данных', '仪器仪表': 'Контрольно-измерительные приборы', '新型电机驱动': 'Приводы нового поколения', '三代半导体电源（GaN&SiC）': 'Источники питания 3-го поколения (GaN&SiC)',
+            '机器人': 'Робототехника', '无人机': 'БПЛА', '储能': 'Накопители энергии', '消费类电子': 'Бытовая электроника', '寿命推算工具': 'Калькулятор срока службы', '可靠性实验数据': 'Данные надежности',
+            '网站导航': 'Навигация', '关于我们': 'О нас', '联系支持': 'Связаться с поддержкой', '寻找替代料': 'Найти аналог', '新闻中心': 'Центр новостей', '联系我们': 'Контакты',
+            '隐私政策': 'Политика конфиденциальности', '使用条款': 'Условия использования', '系列列表': 'Список серий', '产品选型': 'Подбор продукции', '全部工具': 'Все инструменты', '查看应用中心': 'Смотреть применения',
+            '产品体系图': 'Портфель продукции', '查询产品': 'Поиск продукта', '按参数选型': 'Подбор по параметрам', '查看产品体系图': 'Смотреть портфель', '按应用选型': 'Подбор по применению', '全系列电容器产品': 'Полная линейка конденсаторов',
+            '设计工具与数据资源': 'Инструменты и данные', '按应用领域快速进入': 'Выбор по области применения', '最新动态与技术文章': 'Новости и технические статьи', '进入新闻资讯': 'Смотреть новости', '电容应用，': 'Для сложных задач с конденсаторами', '有困难找永铭': 'обращайтесь в YMIN'
+        },
+        ar: {
+            '首页': 'الرئيسية', '产品中心': 'المنتجات', '应用中心': 'التطبيقات', '设计工具': 'أدوات التصميم', '服务支持': 'الدعم', '关于永铭': 'عن YMIN',
+            '新闻资讯': 'الأخبار', '知识库': 'قاعدة المعرفة', '下载中心': 'التنزيلات', '合规证书': 'شهادات المطابقة', '公司简介': 'نبذة عن الشركة', '企业荣誉': 'الجوائز',
+            '代理商网络': 'شبكة الموزعين', '加入我们': 'الوظائف', '原材料采购': 'شراء المواد الخام', '登录': 'تسجيل الدخول', '会员账户': 'حساب العضو', '搜索型号或参数...': 'ابحث عن طراز أو مواصفة...',
+            '汽车电子': 'إلكترونيات السيارات', 'AI服务器与数据中心': 'خوادم الذكاء الاصطناعي ومراكز البيانات', '仪器仪表': 'أجهزة القياس', '新型电机驱动': 'محركات الجيل الجديد', '三代半导体电源（GaN&SiC）': 'مصادر طاقة أشباه الموصلات من الجيل الثالث (GaN&SiC)',
+            '机器人': 'الروبوتات', '无人机': 'الطائرات المسيّرة', '储能': 'تخزين الطاقة', '消费类电子': 'الإلكترونيات الاستهلاكية', '寿命推算工具': 'حاسبة العمر التشغيلي', '可靠性实验数据': 'بيانات الموثوقية',
+            '网站导航': 'التنقل في الموقع', '关于我们': 'عن الشركة', '联系支持': 'اتصل بالدعم', '寻找替代料': 'البحث عن بديل', '新闻中心': 'مركز الأخبار', '联系我们': 'اتصل بنا',
+            '隐私政策': 'سياسة الخصوصية', '使用条款': 'شروط الاستخدام', '系列列表': 'قائمة السلاسل', '产品选型': 'اختيار المنتج', '全部工具': 'جميع الأدوات', '查看应用中心': 'عرض التطبيقات',
+            '产品体系图': 'مجموعة المنتجات', '查询产品': 'بحث المنتجات', '按参数选型': 'الاختيار حسب المواصفات', '查看产品体系图': 'عرض مجموعة المنتجات', '按应用选型': 'الاختيار حسب التطبيق', '全系列电容器产品': 'مجموعة المكثفات الكاملة',
+            '设计工具与数据资源': 'أدوات وبيانات التصميم', '按应用领域快速进入': 'استعراض حسب التطبيق', '最新动态与技术文章': 'آخر الأخبار والمقالات التقنية', '进入新闻资讯': 'عرض الأخبار', '电容应用，': 'لتطبيقات المكثفات الصعبة،', '有困难找永铭': 'اعتمد على YMIN'
+        }
+    };
+
+    Object.assign(commonTranslations, {
+        'zh-TW': {
+            '首页': '首頁', '产品中心': '產品中心', '应用中心': '應用中心', '设计工具': '設計工具', '服务支持': '服務支援', '关于永铭': '關於永銘',
+            '新闻资讯': '新聞資訊', '知识库': '知識庫', '下载中心': '下載中心', '合规证书': '合規證書', '公司简介': '公司簡介', '企业荣誉': '企業榮譽',
+            '代理商网络': '代理商網路', '加入我们': '加入我們', '原材料采购': '原材料採購', '登录': '登入', '会员账户': '會員帳戶', '搜索型号或参数...': '搜尋型號或參數...',
+            '汽车电子': '汽車電子', 'AI服务器与数据中心': 'AI伺服器與資料中心', '仪器仪表': '儀器儀表', '新型电机驱动': '新型馬達驅動', '三代半导体电源（GaN&SiC）': '第三代半導體電源（GaN&SiC）',
+            '机器人': '機器人', '无人机': '無人機', '储能': '儲能', '消费类电子': '消費性電子', '寿命推算工具': '壽命推算工具', '可靠性实验数据': '可靠性實驗資料',
+            '网站导航': '網站導覽', '关于我们': '關於我們', '联系支持': '聯絡支援', '寻找替代料': '尋找替代料', '新闻中心': '新聞中心', '联系我们': '聯絡我們',
+            '隐私政策': '隱私政策', '使用条款': '使用條款', '系列列表': '系列清單', '产品选型': '產品選型', '全部工具': '全部工具', '查看应用中心': '查看應用中心',
+            '产品体系图': '產品體系圖', '查询产品': '查詢產品', '按参数选型': '依參數選型', '查看产品体系图': '查看產品體系圖', '按应用选型': '依應用選型', '全系列电容器产品': '全系列電容器產品',
+            '设计工具与数据资源': '設計工具與資料資源', '按应用领域快速进入': '依應用領域快速進入', '最新动态与技术文章': '最新動態與技術文章', '进入新闻资讯': '進入新聞資訊', '电容应用，': '電容應用，', '有困难找永铭': '有困難找永銘'
+        },
+        it: {
+            '首页': 'Home', '产品中心': 'Prodotti', '应用中心': 'Applicazioni', '设计工具': 'Strumenti di progettazione', '服务支持': 'Supporto', '关于永铭': 'Informazioni su YMIN',
+            '新闻资讯': 'Notizie', '知识库': 'Knowledge base', '下载中心': 'Download', '合规证书': 'Certificati di conformità', '公司简介': 'Profilo aziendale', '企业荣誉': 'Riconoscimenti',
+            '代理商网络': 'Rete di distributori', '加入我们': 'Lavora con noi', '原材料采购': 'Acquisto materie prime', '登录': 'Accedi', '会员账户': 'Account membro', '搜索型号或参数...': 'Cerca modello o parametro...',
+            '汽车电子': 'Elettronica automobilistica', 'AI服务器与数据中心': 'Server AI e data center', '仪器仪表': 'Strumentazione', '新型电机驱动': 'Azionamenti motore di nuova generazione', '三代半导体电源（GaN&SiC）': 'Alimentatori a semiconduttori di terza generazione (GaN&SiC)',
+            '机器人': 'Robotica', '无人机': 'Droni', '储能': 'Accumulo di energia', '消费类电子': 'Elettronica di consumo', '寿命推算工具': 'Calcolatore della durata', '可靠性实验数据': 'Dati di affidabilità',
+            '网站导航': 'Navigazione', '关于我们': 'Chi siamo', '联系支持': 'Contatta il supporto', '寻找替代料': 'Trova un equivalente', '新闻中心': 'Centro notizie', '联系我们': 'Contatti',
+            '隐私政策': 'Informativa sulla privacy', '使用条款': 'Termini di utilizzo', '系列列表': 'Elenco serie', '产品选型': 'Selezione prodotti', '全部工具': 'Tutti gli strumenti', '查看应用中心': 'Vedi applicazioni',
+            '产品体系图': 'Portafoglio prodotti', '查询产品': 'Cerca prodotto', '按参数选型': 'Seleziona per parametri', '查看产品体系图': 'Vedi il portafoglio prodotti', '按应用选型': 'Seleziona per applicazione', '全系列电容器产品': 'Gamma completa di condensatori',
+            '设计工具与数据资源': 'Strumenti e dati di progettazione', '按应用领域快速进入': 'Esplora per applicazione', '最新动态与技术文章': 'Notizie e articoli tecnici', '进入新闻资讯': 'Vedi le notizie', '电容应用，': 'Per le applicazioni dei condensatori,', '有困难找永铭': 'affidati a YMIN'
+        },
+        tr: {
+            '首页': 'Ana Sayfa', '产品中心': 'Ürünler', '应用中心': 'Uygulamalar', '设计工具': 'Tasarım Araçları', '服务支持': 'Destek', '关于永铭': 'YMIN Hakkında',
+            '新闻资讯': 'Haberler', '知识库': 'Bilgi Bankası', '下载中心': 'İndirmeler', '合规证书': 'Uygunluk Belgeleri', '公司简介': 'Şirket Profili', '企业荣誉': 'Ödüller',
+            '代理商网络': 'Distribütör Ağı', '加入我们': 'Kariyer', '原材料采购': 'Hammadde Tedariki', '登录': 'Giriş Yap', '会员账户': 'Üye Hesabı', '搜索型号或参数...': 'Model veya parametre ara...',
+            '汽车电子': 'Otomotiv Elektroniği', 'AI服务器与数据中心': 'Yapay Zekâ Sunucuları ve Veri Merkezleri', '仪器仪表': 'Ölçüm Cihazları', '新型电机驱动': 'Yeni Nesil Motor Sürücüleri', '三代半导体电源（GaN&SiC）': '3. Nesil Yarı İletken Güç Kaynakları (GaN&SiC)',
+            '机器人': 'Robotik', '无人机': 'İnsansız Hava Araçları', '储能': 'Enerji Depolama', '消费类电子': 'Tüketici Elektroniği', '寿命推算工具': 'Ömür Hesaplayıcı', '可靠性实验数据': 'Güvenilirlik Verileri',
+            '网站导航': 'Site Gezinmesi', '关于我们': 'Hakkımızda', '联系支持': 'Destekle İletişim', '寻找替代料': 'Muadil Ürün Bul', '新闻中心': 'Haber Merkezi', '联系我们': 'Bize Ulaşın',
+            '隐私政策': 'Gizlilik Politikası', '使用条款': 'Kullanım Koşulları', '系列列表': 'Seri Listesi', '产品选型': 'Ürün Seçimi', '全部工具': 'Tüm Araçlar', '查看应用中心': 'Uygulamaları Görüntüle',
+            '产品体系图': 'Ürün Portföyü', '查询产品': 'Ürün Ara', '按参数选型': 'Parametreye Göre Seç', '查看产品体系图': 'Ürün Portföyünü Gör', '按应用选型': 'Uygulamaya Göre Seç', '全系列电容器产品': 'Eksiksiz Kondansatör Ürün Gamı',
+            '设计工具与数据资源': 'Tasarım Araçları ve Veriler', '按应用领域快速进入': 'Uygulama Alanına Göre Keşfet', '最新动态与技术文章': 'Haberler ve Teknik Makaleler', '进入新闻资讯': 'Haberleri Gör', '电容应用，': 'Kondansatör uygulamalarında,', '有困难找永铭': 'YMIN yanınızda'
+        },
+        vi: {
+            '首页': 'Trang chủ', '产品中心': 'Sản phẩm', '应用中心': 'Ứng dụng', '设计工具': 'Công cụ thiết kế', '服务支持': 'Hỗ trợ', '关于永铭': 'Về YMIN',
+            '新闻资讯': 'Tin tức', '知识库': 'Cơ sở kiến thức', '下载中心': 'Tải xuống', '合规证书': 'Chứng nhận tuân thủ', '公司简介': 'Giới thiệu công ty', '企业荣誉': 'Giải thưởng',
+            '代理商网络': 'Mạng lưới phân phối', '加入我们': 'Tuyển dụng', '原材料采购': 'Thu mua nguyên liệu', '登录': 'Đăng nhập', '会员账户': 'Tài khoản thành viên', '搜索型号或参数...': 'Tìm model hoặc thông số...',
+            '汽车电子': 'Điện tử ô tô', 'AI服务器与数据中心': 'Máy chủ AI và trung tâm dữ liệu', '仪器仪表': 'Thiết bị đo lường', '新型电机驱动': 'Truyền động động cơ thế hệ mới', '三代半导体电源（GaN&SiC）': 'Nguồn bán dẫn thế hệ thứ ba (GaN&SiC)',
+            '机器人': 'Robot', '无人机': 'Máy bay không người lái', '储能': 'Lưu trữ năng lượng', '消费类电子': 'Điện tử tiêu dùng', '寿命推算工具': 'Công cụ tính tuổi thọ', '可靠性实验数据': 'Dữ liệu độ tin cậy',
+            '网站导航': 'Điều hướng trang', '关于我们': 'Về chúng tôi', '联系支持': 'Liên hệ hỗ trợ', '寻找替代料': 'Tìm sản phẩm thay thế', '新闻中心': 'Trung tâm tin tức', '联系我们': 'Liên hệ',
+            '隐私政策': 'Chính sách quyền riêng tư', '使用条款': 'Điều khoản sử dụng', '系列列表': 'Danh sách dòng sản phẩm', '产品选型': 'Lựa chọn sản phẩm', '全部工具': 'Tất cả công cụ', '查看应用中心': 'Xem ứng dụng',
+            '产品体系图': 'Danh mục sản phẩm', '查询产品': 'Tìm kiếm sản phẩm', '按参数选型': 'Chọn theo thông số', '查看产品体系图': 'Xem danh mục sản phẩm', '按应用选型': 'Chọn theo ứng dụng', '全系列电容器产品': 'Đầy đủ dòng sản phẩm tụ điện',
+            '设计工具与数据资源': 'Công cụ và dữ liệu thiết kế', '按应用领域快速进入': 'Khám phá theo ứng dụng', '最新动态与技术文章': 'Tin tức và bài viết kỹ thuật', '进入新闻资讯': 'Xem tin tức', '电容应用，': 'Với ứng dụng tụ điện,', '有困难找永铭': 'hãy tìm đến YMIN'
+        },
+        id: {
+            '首页': 'Beranda', '产品中心': 'Produk', '应用中心': 'Aplikasi', '设计工具': 'Alat Desain', '服务支持': 'Dukungan', '关于永铭': 'Tentang YMIN',
+            '新闻资讯': 'Berita', '知识库': 'Pusat Pengetahuan', '下载中心': 'Unduhan', '合规证书': 'Sertifikat Kepatuhan', '公司简介': 'Profil Perusahaan', '企业荣誉': 'Penghargaan',
+            '代理商网络': 'Jaringan Distributor', '加入我们': 'Karier', '原材料采购': 'Pengadaan Bahan Baku', '登录': 'Masuk', '会员账户': 'Akun Anggota', '搜索型号或参数...': 'Cari model atau parameter...',
+            '汽车电子': 'Elektronik Otomotif', 'AI服务器与数据中心': 'Server AI dan Pusat Data', '仪器仪表': 'Instrumentasi', '新型电机驱动': 'Penggerak Motor Generasi Baru', '三代半导体电源（GaN&SiC）': 'Catu Daya Semikonduktor Generasi Ketiga (GaN&SiC)',
+            '机器人': 'Robotika', '无人机': 'Drone', '储能': 'Penyimpanan Energi', '消费类电子': 'Elektronik Konsumen', '寿命推算工具': 'Kalkulator Masa Pakai', '可靠性实验数据': 'Data Keandalan',
+            '网站导航': 'Navigasi Situs', '关于我们': 'Tentang Kami', '联系支持': 'Hubungi Dukungan', '寻找替代料': 'Cari Produk Pengganti', '新闻中心': 'Pusat Berita', '联系我们': 'Hubungi Kami',
+            '隐私政策': 'Kebijakan Privasi', '使用条款': 'Ketentuan Penggunaan', '系列列表': 'Daftar Seri', '产品选型': 'Pemilihan Produk', '全部工具': 'Semua Alat', '查看应用中心': 'Lihat Aplikasi',
+            '产品体系图': 'Portofolio Produk', '查询产品': 'Cari Produk', '按参数选型': 'Pilih Berdasarkan Parameter', '查看产品体系图': 'Lihat Portofolio Produk', '按应用选型': 'Pilih Berdasarkan Aplikasi', '全系列电容器产品': 'Rangkaian Lengkap Produk Kapasitor',
+            '设计工具与数据资源': 'Alat dan Data Desain', '按应用领域快速进入': 'Jelajahi Berdasarkan Aplikasi', '最新动态与技术文章': 'Berita dan Artikel Teknis', '进入新闻资讯': 'Lihat Berita', '电容应用，': 'Untuk aplikasi kapasitor,', '有困难找永铭': 'andalkan YMIN'
+        }
+    });
+
+    Object.assign(commonTranslations, {
+        th: {
+            '首页': 'หน้าหลัก', '产品中心': 'ผลิตภัณฑ์', '应用中心': 'การใช้งาน', '设计工具': 'เครื่องมือออกแบบ', '服务支持': 'ฝ่ายสนับสนุน', '关于永铭': 'เกี่ยวกับ YMIN',
+            '新闻资讯': 'ข่าวสาร', '知识库': 'ฐานความรู้', '下载中心': 'ดาวน์โหลด', '合规证书': 'ใบรับรองการปฏิบัติตามข้อกำหนด', '公司简介': 'ข้อมูลบริษัท', '企业荣誉': 'รางวัลและเกียรติยศ',
+            '代理商网络': 'เครือข่ายผู้จัดจำหน่าย', '加入我们': 'ร่วมงานกับเรา', '原材料采购': 'การจัดซื้อวัตถุดิบ', '登录': 'เข้าสู่ระบบ', '会员账户': 'บัญชีสมาชิก', '搜索型号或参数...': 'ค้นหารุ่นหรือพารามิเตอร์...',
+            '汽车电子': 'อิเล็กทรอนิกส์ยานยนต์', 'AI服务器与数据中心': 'เซิร์ฟเวอร์ AI และศูนย์ข้อมูล', '仪器仪表': 'เครื่องมือวัด', '新型电机驱动': 'ระบบขับเคลื่อนมอเตอร์รุ่นใหม่', '三代半导体电源（GaN&SiC）': 'แหล่งจ่ายไฟเซมิคอนดักเตอร์รุ่นที่ 3 (GaN&SiC)',
+            '机器人': 'หุ่นยนต์', '无人机': 'โดรน', '储能': 'ระบบกักเก็บพลังงาน', '消费类电子': 'อิเล็กทรอนิกส์สำหรับผู้บริโภค', '寿命推算工具': 'เครื่องคำนวณอายุการใช้งาน', '可靠性实验数据': 'ข้อมูลความน่าเชื่อถือ',
+            '网站导航': 'เมนูเว็บไซต์', '关于我们': 'เกี่ยวกับเรา', '联系支持': 'ติดต่อฝ่ายสนับสนุน', '寻找替代料': 'ค้นหาผลิตภัณฑ์ทดแทน', '新闻中心': 'ศูนย์ข่าว', '联系我们': 'ติดต่อเรา',
+            '隐私政策': 'นโยบายความเป็นส่วนตัว', '使用条款': 'ข้อกำหนดการใช้งาน', '系列列表': 'รายการซีรีส์', '产品选型': 'การเลือกผลิตภัณฑ์', '全部工具': 'เครื่องมือทั้งหมด', '查看应用中心': 'ดูการใช้งาน',
+            '产品体系图': 'กลุ่มผลิตภัณฑ์', '查询产品': 'ค้นหาผลิตภัณฑ์', '按参数选型': 'เลือกตามพารามิเตอร์', '查看产品体系图': 'ดูกลุ่มผลิตภัณฑ์', '按应用选型': 'เลือกตามการใช้งาน', '全系列电容器产品': 'ผลิตภัณฑ์ตัวเก็บประจุครบทุกประเภท',
+            '设计工具与数据资源': 'เครื่องมือและข้อมูลการออกแบบ', '按应用领域快速进入': 'เลือกดูตามการใช้งาน', '最新动态与技术文章': 'ข่าวสารและบทความทางเทคนิค', '进入新闻资讯': 'ดูข่าวสาร', '电容应用，': 'สำหรับการใช้งานตัวเก็บประจุ', '有困难找永铭': 'ไว้วางใจ YMIN'
+        },
+        hi: {
+            '首页': 'मुखपृष्ठ', '产品中心': 'उत्पाद', '应用中心': 'अनुप्रयोग', '设计工具': 'डिज़ाइन उपकरण', '服务支持': 'सहायता', '关于永铭': 'YMIN के बारे में',
+            '新闻资讯': 'समाचार', '知识库': 'ज्ञान केंद्र', '下载中心': 'डाउनलोड', '合规证书': 'अनुपालन प्रमाणपत्र', '公司简介': 'कंपनी परिचय', '企业荣誉': 'पुरस्कार',
+            '代理商网络': 'वितरक नेटवर्क', '加入我们': 'करियर', '原材料采购': 'कच्चे माल की खरीद', '登录': 'लॉग इन', '会员账户': 'सदस्य खाता', '搜索型号或参数...': 'मॉडल या पैरामीटर खोजें...',
+            '汽车电子': 'ऑटोमोटिव इलेक्ट्रॉनिक्स', 'AI服务器与数据中心': 'AI सर्वर और डेटा सेंटर', '仪器仪表': 'मापन उपकरण', '新型电机驱动': 'नई पीढ़ी के मोटर ड्राइव', '三代半导体电源（GaN&SiC）': 'तीसरी पीढ़ी की सेमीकंडक्टर पावर सप्लाई (GaN&SiC)',
+            '机器人': 'रोबोटिक्स', '无人机': 'ड्रोन', '储能': 'ऊर्जा भंडारण', '消费类电子': 'उपभोक्ता इलेक्ट्रॉनिक्स', '寿命推算工具': 'जीवनकाल कैलकुलेटर', '可靠性实验数据': 'विश्वसनीयता डेटा',
+            '网站导航': 'साइट नेविगेशन', '关于我们': 'हमारे बारे में', '联系支持': 'सहायता से संपर्क करें', '寻找替代料': 'वैकल्पिक उत्पाद खोजें', '新闻中心': 'समाचार केंद्र', '联系我们': 'संपर्क करें',
+            '隐私政策': 'गोपनीयता नीति', '使用条款': 'उपयोग की शर्तें', '系列列表': 'सीरीज़ सूची', '产品选型': 'उत्पाद चयन', '全部工具': 'सभी उपकरण', '查看应用中心': 'अनुप्रयोग देखें',
+            '产品体系图': 'उत्पाद पोर्टफोलियो', '查询产品': 'उत्पाद खोजें', '按参数选型': 'पैरामीटर के अनुसार चुनें', '查看产品体系图': 'उत्पाद पोर्टफोलियो देखें', '按应用选型': 'अनुप्रयोग के अनुसार चुनें', '全系列电容器产品': 'कैपेसिटर उत्पादों की पूरी श्रृंखला',
+            '设计工具与数据资源': 'डिज़ाइन उपकरण और डेटा', '按应用领域快速进入': 'अनुप्रयोग के अनुसार देखें', '最新动态与技术文章': 'समाचार और तकनीकी लेख', '进入新闻资讯': 'समाचार देखें', '电容应用，': 'कैपेसिटर अनुप्रयोगों के लिए,', '有困难找永铭': 'YMIN पर भरोसा करें'
+        },
+        pl: {
+            '首页': 'Strona główna', '产品中心': 'Produkty', '应用中心': 'Zastosowania', '设计工具': 'Narzędzia projektowe', '服务支持': 'Wsparcie', '关于永铭': 'O YMIN',
+            '新闻资讯': 'Aktualności', '知识库': 'Baza wiedzy', '下载中心': 'Pliki do pobrania', '合规证书': 'Certyfikaty zgodności', '公司简介': 'Profil firmy', '企业荣誉': 'Nagrody',
+            '代理商网络': 'Sieć dystrybutorów', '加入我们': 'Kariera', '原材料采购': 'Zakup surowców', '登录': 'Zaloguj się', '会员账户': 'Konto użytkownika', '搜索型号或参数...': 'Szukaj modelu lub parametru...',
+            '汽车电子': 'Elektronika samochodowa', 'AI服务器与数据中心': 'Serwery AI i centra danych', '仪器仪表': 'Aparatura pomiarowa', '新型电机驱动': 'Napędy silnikowe nowej generacji', '三代半导体电源（GaN&SiC）': 'Zasilacze półprzewodnikowe trzeciej generacji (GaN&SiC)',
+            '机器人': 'Robotyka', '无人机': 'Drony', '储能': 'Magazynowanie energii', '消费类电子': 'Elektronika użytkowa', '寿命推算工具': 'Kalkulator żywotności', '可靠性实验数据': 'Dane niezawodności',
+            '网站导航': 'Nawigacja', '关于我们': 'O nas', '联系支持': 'Kontakt ze wsparciem', '寻找替代料': 'Znajdź zamiennik', '新闻中心': 'Centrum wiadomości', '联系我们': 'Kontakt',
+            '隐私政策': 'Polityka prywatności', '使用条款': 'Warunki użytkowania', '系列列表': 'Lista serii', '产品选型': 'Dobór produktów', '全部工具': 'Wszystkie narzędzia', '查看应用中心': 'Zobacz zastosowania',
+            '产品体系图': 'Portfolio produktów', '查询产品': 'Szukaj produktu', '按参数选型': 'Wybierz według parametrów', '查看产品体系图': 'Zobacz portfolio produktów', '按应用选型': 'Wybierz według zastosowania', '全系列电容器产品': 'Pełna oferta kondensatorów',
+            '设计工具与数据资源': 'Narzędzia i dane projektowe', '按应用领域快速进入': 'Przeglądaj według zastosowania', '最新动态与技术文章': 'Aktualności i artykuły techniczne', '进入新闻资讯': 'Zobacz aktualności', '电容应用，': 'W zastosowaniach kondensatorów', '有困难找永铭': 'postaw na YMIN'
+        },
+        nl: {
+            '首页': 'Home', '产品中心': 'Producten', '应用中心': 'Toepassingen', '设计工具': 'Ontwerptools', '服务支持': 'Ondersteuning', '关于永铭': 'Over YMIN',
+            '新闻资讯': 'Nieuws', '知识库': 'Kennisbank', '下载中心': 'Downloads', '合规证书': 'Conformiteitscertificaten', '公司简介': 'Bedrijfsprofiel', '企业荣誉': 'Onderscheidingen',
+            '代理商网络': 'Distributienetwerk', '加入我们': 'Werken bij', '原材料采购': 'Inkoop van grondstoffen', '登录': 'Inloggen', '会员账户': 'Ledenaccount', '搜索型号或参数...': 'Zoek model of parameter...',
+            '汽车电子': 'Automotive-elektronica', 'AI服务器与数据中心': 'AI-servers en datacenters', '仪器仪表': 'Meetinstrumenten', '新型电机驱动': 'Nieuwe generatie motoraandrijvingen', '三代半导体电源（GaN&SiC）': 'Halfgeleidervoedingen van de derde generatie (GaN&SiC)',
+            '机器人': 'Robotica', '无人机': 'Drones', '储能': 'Energieopslag', '消费类电子': 'Consumentenelektronica', '寿命推算工具': 'Levensduurcalculator', '可靠性实验数据': 'Betrouwbaarheidsgegevens',
+            '网站导航': 'Sitenavigatie', '关于我们': 'Over ons', '联系支持': 'Contact met ondersteuning', '寻找替代料': 'Vind een alternatief', '新闻中心': 'Nieuwscentrum', '联系我们': 'Contact',
+            '隐私政策': 'Privacybeleid', '使用条款': 'Gebruiksvoorwaarden', '系列列表': 'Serielijst', '产品选型': 'Productselectie', '全部工具': 'Alle tools', '查看应用中心': 'Bekijk toepassingen',
+            '产品体系图': 'Productportfolio', '查询产品': 'Product zoeken', '按参数选型': 'Selecteren op parameters', '查看产品体系图': 'Productportfolio bekijken', '按应用选型': 'Selecteren op toepassing', '全系列电容器产品': 'Volledig assortiment condensatoren',
+            '设计工具与数据资源': 'Ontwerptools en gegevens', '按应用领域快速进入': 'Bladeren op toepassing', '最新动态与技术文章': 'Nieuws en technische artikelen', '进入新闻资讯': 'Nieuws bekijken', '电容应用，': 'Voor condensatortoepassingen,', '有困难找永铭': 'vertrouw op YMIN'
+        },
+        ms: {
+            '首页': 'Laman Utama', '产品中心': 'Produk', '应用中心': 'Aplikasi', '设计工具': 'Alat Reka Bentuk', '服务支持': 'Sokongan', '关于永铭': 'Tentang YMIN',
+            '新闻资讯': 'Berita', '知识库': 'Pangkalan Pengetahuan', '下载中心': 'Muat Turun', '合规证书': 'Sijil Pematuhan', '公司简介': 'Profil Syarikat', '企业荣誉': 'Anugerah',
+            '代理商网络': 'Rangkaian Pengedar', '加入我们': 'Kerjaya', '原材料采购': 'Perolehan Bahan Mentah', '登录': 'Log Masuk', '会员账户': 'Akaun Ahli', '搜索型号或参数...': 'Cari model atau parameter...',
+            '汽车电子': 'Elektronik Automotif', 'AI服务器与数据中心': 'Pelayan AI dan Pusat Data', '仪器仪表': 'Instrumentasi', '新型电机驱动': 'Pemacu Motor Generasi Baharu', '三代半导体电源（GaN&SiC）': 'Bekalan Kuasa Semikonduktor Generasi Ketiga (GaN&SiC)',
+            '机器人': 'Robotik', '无人机': 'Dron', '储能': 'Penyimpanan Tenaga', '消费类电子': 'Elektronik Pengguna', '寿命推算工具': 'Kalkulator Jangka Hayat', '可靠性实验数据': 'Data Kebolehpercayaan',
+            '网站导航': 'Navigasi Laman', '关于我们': 'Tentang Kami', '联系支持': 'Hubungi Sokongan', '寻找替代料': 'Cari Produk Ganti', '新闻中心': 'Pusat Berita', '联系我们': 'Hubungi Kami',
+            '隐私政策': 'Dasar Privasi', '使用条款': 'Terma Penggunaan', '系列列表': 'Senarai Siri', '产品选型': 'Pemilihan Produk', '全部工具': 'Semua Alat', '查看应用中心': 'Lihat Aplikasi',
+            '产品体系图': 'Portfolio Produk', '查询产品': 'Cari Produk', '按参数选型': 'Pilih Mengikut Parameter', '查看产品体系图': 'Lihat Portfolio Produk', '按应用选型': 'Pilih Mengikut Aplikasi', '全系列电容器产品': 'Rangkaian Lengkap Produk Kapasitor',
+            '设计工具与数据资源': 'Alat dan Data Reka Bentuk', '按应用领域快速进入': 'Teroka Mengikut Aplikasi', '最新动态与技术文章': 'Berita dan Artikel Teknikal', '进入新闻资讯': 'Lihat Berita', '电容应用，': 'Untuk aplikasi kapasitor,', '有困难找永铭': 'percayakan YMIN'
+        }
+    });
+
     var translationKeys = Object.keys(translations).sort(function (a, b) {
         return b.length - a.length;
     });
 
+    var commonTranslationKeys = {};
+    var commonEnglishTranslations = {};
+    var commonEnglishTranslationKeys = {};
+    var fullLanguagePacks = window.YMIN_FULL_LANGUAGE_PACKS || {};
+    var fixedEnglishTranslations = {
+        es: { 'All rights reserved.': 'Todos los derechos reservados.' },
+        ar: { 'All rights reserved.': 'جميع الحقوق محفوظة.' },
+        pt: { 'All rights reserved.': 'Todos os direitos reservados.' },
+        fr: { 'All rights reserved.': 'Tous droits réservés.' },
+        de: { 'All rights reserved.': 'Alle Rechte vorbehalten.' },
+        ru: { 'All rights reserved.': 'Все права защищены.' },
+        ja: { 'All rights reserved.': '無断転載を禁じます。' },
+        ko: { 'All rights reserved.': '모든 권리 보유.' },
+        'zh-TW': { 'All rights reserved.': '版權所有。' },
+        it: { 'All rights reserved.': 'Tutti i diritti riservati.' },
+        tr: { 'All rights reserved.': 'Tüm hakları saklıdır.' },
+        vi: { 'All rights reserved.': 'Bảo lưu mọi quyền.' },
+        id: { 'All rights reserved.': 'Hak cipta dilindungi.' },
+        th: { 'All rights reserved.': 'สงวนลิขสิทธิ์' },
+        hi: { 'All rights reserved.': 'सर्वाधिकार सुरक्षित।' },
+        pl: { 'All rights reserved.': 'Wszelkie prawa zastrzeżone.' },
+        nl: { 'All rights reserved.': 'Alle rechten voorbehouden.' },
+        ms: { 'All rights reserved.': 'Hak cipta terpelihara.' }
+    };
+    var fullLanguagePackKeys = {};
+    var fullLanguagePackMatchers = {};
+    Object.keys(fixedEnglishTranslations).forEach(function (locale) {
+        fullLanguagePacks[locale] = Object.assign({}, fullLanguagePacks[locale] || {}, fixedEnglishTranslations[locale]);
+    });
+    Object.keys(commonTranslations).forEach(function (locale) {
+        commonTranslationKeys[locale] = Object.keys(commonTranslations[locale]).sort(function (a, b) {
+            return b.length - a.length;
+        });
+        commonEnglishTranslations[locale] = {};
+        Object.keys(commonTranslations[locale]).forEach(function (source) {
+            var englishSource = translations[source];
+            if (englishSource) commonEnglishTranslations[locale][englishSource] = commonTranslations[locale][source];
+        });
+        commonEnglishTranslationKeys[locale] = Object.keys(commonEnglishTranslations[locale]).sort(function (a, b) {
+            return b.length - a.length;
+        });
+    });
+    // Fold the curated terminology into each generated English-base pack.
+    // A single longest-match pass prevents translated words from being
+    // translated again (for example Italian "Supporto" becoming
+    // "Supportooo").
+    Object.keys(commonEnglishTranslations).forEach(function (locale) {
+        fullLanguagePacks[locale] = Object.assign({}, fullLanguagePacks[locale] || {}, commonEnglishTranslations[locale]);
+    });
+    Object.keys(fullLanguagePacks).forEach(function (locale) {
+        fullLanguagePackKeys[locale] = Object.keys(fullLanguagePacks[locale]).sort(function (a, b) {
+            return b.length - a.length;
+        });
+        fullLanguagePackMatchers[locale] = {};
+        fullLanguagePackKeys[locale].forEach(function (source) {
+            var firstCharacter = source.charAt(0);
+            if (!fullLanguagePackMatchers[locale][firstCharacter]) fullLanguagePackMatchers[locale][firstCharacter] = [];
+            fullLanguagePackMatchers[locale][firstCharacter].push(source);
+        });
+    });
+
     function normalizeLanguage(value) {
         var normalized = String(value || '').toLowerCase();
-        return normalized === 'en' || normalized.indexOf('en-') === 0 ? 'en' : DEFAULT_LANGUAGE;
+        var aliases = {
+            'zh': 'zh-CN', 'zh-cn': 'zh-CN', 'zh-hans': 'zh-CN',
+            'zh-tw': 'zh-TW', 'zh-hk': 'zh-TW', 'zh-hant': 'zh-TW',
+            'en-us': 'en', 'en-gb': 'en',
+            'ja-jp': 'ja', 'ko-kr': 'ko',
+            'de-de': 'de', 'fr-fr': 'fr', 'es-es': 'es',
+            'pt-br': 'pt', 'pt-pt': 'pt', 'ru-ru': 'ru', 'ar-sa': 'ar',
+            'it-it': 'it', 'tr-tr': 'tr', 'vi-vn': 'vi', 'id-id': 'id',
+            'th-th': 'th', 'hi-in': 'hi', 'pl-pl': 'pl', 'nl-nl': 'nl', 'ms-my': 'ms'
+        };
+        normalized = aliases[normalized] || normalized;
+        var match = locales.find(function (locale) { return locale.code.toLowerCase() === String(normalized).toLowerCase(); });
+        return match ? match.code : DEFAULT_LANGUAGE;
     }
 
     function readLanguage() {
@@ -1278,17 +1582,62 @@ YMIN.i18n = (function () {
 
     var language = readLanguage();
 
+    function currentLocale() {
+        return locales.find(function (locale) { return locale.code === language; }) || locales[0];
+    }
+
+    function applyPhraseMap(value, map, keys) {
+        var result = String(value == null ? '' : value);
+        (keys || []).forEach(function (source) {
+            if (result.indexOf(source) !== -1) result = result.split(source).join(map[source]);
+        });
+        return result;
+    }
+
+    function applyPhraseMapOnce(value, map, matcher) {
+        var sourceText = String(value == null ? '' : value);
+        if (!map || !matcher) return sourceText;
+        var result = '';
+        var index = 0;
+        while (index < sourceText.length) {
+            var candidates = matcher[sourceText.charAt(index)] || [];
+            var matched = '';
+            for (var candidateIndex = 0; candidateIndex < candidates.length; candidateIndex++) {
+                var candidate = candidates[candidateIndex];
+                if (sourceText.substr(index, candidate.length) === candidate) {
+                    matched = candidate;
+                    break;
+                }
+            }
+            if (matched) {
+                result += map[matched];
+                index += matched.length;
+            } else {
+                result += sourceText.charAt(index);
+                index += 1;
+            }
+        }
+        return result;
+    }
+
     function translateString(value) {
         var original = String(value == null ? '' : value);
         var result = original;
-        if (language !== 'en' || !/[\u3400-\u9fff]/.test(result)) return result;
-        translationKeys.forEach(function (source) {
-            if (result.indexOf(source) !== -1) result = result.split(source).join(translations[source]);
-        });
-        // Never expose awkward half-translated sentences. Unmapped maintained
-        // content stays in its original language until an approved translation
-        // is added, while fully covered UI labels are shown in English.
-        return /[\u3400-\u9fff]/.test(result) ? original : result;
+        if (language === DEFAULT_LANGUAGE) return result;
+        if (language === 'en') {
+            return /[\u3400-\u9fff]/.test(result)
+                ? applyPhraseMap(result, translations, translationKeys)
+                : result;
+        }
+
+        // All international languages share the approved English content as
+        // their base. Curated common terms take priority, then the complete
+        // generated language pack translates the remaining English content.
+        if (/[\u3400-\u9fff]/.test(result)) result = applyPhraseMap(result, translations, translationKeys);
+        if (fullLanguagePacks[language]) {
+            result = applyPhraseMapOnce(result, fullLanguagePacks[language], fullLanguagePackMatchers[language]);
+        }
+        return result;
     }
 
     function shouldSkipElement(element) {
@@ -1299,8 +1648,11 @@ YMIN.i18n = (function () {
 
     function translateTextNode(node) {
         if (!node || !node.parentElement || shouldSkipElement(node.parentElement)) return;
-        var translated = translateString(node.nodeValue);
-        if (translated !== node.nodeValue) node.nodeValue = translated;
+        var current = node.nodeValue;
+        if (translatedTextCache.get(node) === current) return;
+        var translated = translateString(current);
+        translatedTextCache.set(node, translated);
+        if (translated !== current) node.nodeValue = translated;
     }
 
     function translateAttributes(element) {
@@ -1318,7 +1670,7 @@ YMIN.i18n = (function () {
     }
 
     function translateTree(root) {
-        if (language !== 'en' || !root) return;
+        if (language === DEFAULT_LANGUAGE || !root) return;
         if (root.nodeType === 3) {
             translateTextNode(root);
             return;
@@ -1351,12 +1703,12 @@ YMIN.i18n = (function () {
         try {
             var href = anchor.getAttribute('href');
             var url = new URL(href, document.baseURI);
-            if (language === 'en' && /\/index\.html$/i.test(url.pathname)) {
-                url.pathname = url.pathname.replace(/\/index\.html$/i, '/index-en.html');
-            } else if (language !== 'en' && /\/index-en\.html$/i.test(url.pathname)) {
+            if (language === DEFAULT_LANGUAGE && /\/index-en\.html$/i.test(url.pathname)) {
                 url.pathname = url.pathname.replace(/\/index-en\.html$/i, '/index.html');
+            } else if (language !== DEFAULT_LANGUAGE && /\/index\.html$/i.test(url.pathname)) {
+                url.pathname = url.pathname.replace(/\/index\.html$/i, '/index-en.html');
             }
-            url.searchParams.set(PARAM_KEY, language === 'en' ? 'en' : DEFAULT_LANGUAGE);
+            url.searchParams.set(PARAM_KEY, language);
             if (window.location.protocol === 'file:') {
                 anchor.setAttribute('href', url.pathname.split('/').pop() + url.search + url.hash);
             } else {
@@ -1376,8 +1728,14 @@ YMIN.i18n = (function () {
     }
 
     function translateMetadata() {
-        document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
-        if (language !== 'en') return;
+        var locale = currentLocale();
+        document.documentElement.lang = locale.htmlLang;
+        // Keep the approved English page structure for every international
+        // language. Setting dir="rtl" on <html> mirrors flex/grid layouts,
+        // sidebars, navigation and media instead of only shaping Arabic text.
+        document.documentElement.dir = 'ltr';
+        document.documentElement.setAttribute('data-language-direction', locale.dir);
+        if (language === DEFAULT_LANGUAGE) return;
         document.title = translateString(document.title);
         document.querySelectorAll('meta[name="description"], meta[name="keywords"], meta[property="og:title"], meta[property="og:description"]').forEach(function (meta) {
             meta.setAttribute('content', translateString(meta.getAttribute('content') || ''));
@@ -1386,13 +1744,13 @@ YMIN.i18n = (function () {
 
     function applyLanguageVisibility(root) {
         if (!root || !root.querySelectorAll) return;
-        if (root.matches && root.matches('[data-zh-only]')) root.hidden = language === 'en';
+        if (root.matches && root.matches('[data-zh-only]')) root.hidden = language !== DEFAULT_LANGUAGE;
         root.querySelectorAll('[data-zh-only]').forEach(function (node) {
-            node.hidden = language === 'en';
+            node.hidden = language !== DEFAULT_LANGUAGE;
         });
-        if (root.matches && root.matches('[data-en-only]')) root.hidden = language !== 'en';
+        if (root.matches && root.matches('[data-en-only]')) root.hidden = language === DEFAULT_LANGUAGE;
         root.querySelectorAll('[data-en-only]').forEach(function (node) {
-            node.hidden = language !== 'en';
+            node.hidden = language === DEFAULT_LANGUAGE;
         });
     }
 
@@ -1421,12 +1779,12 @@ YMIN.i18n = (function () {
         try { localStorage.setItem(STORAGE_KEY, normalized); } catch (error) {}
         try {
             var url = new URL(window.location.href);
-            if (normalized === 'en' && /\/index\.html$/i.test(url.pathname)) {
-                url.pathname = url.pathname.replace(/\/index\.html$/i, '/index-en.html');
-            } else if (normalized !== 'en' && /\/index-en\.html$/i.test(url.pathname)) {
+            if (normalized === DEFAULT_LANGUAGE && /\/index-en\.html$/i.test(url.pathname)) {
                 url.pathname = url.pathname.replace(/\/index-en\.html$/i, '/index.html');
+            } else if (normalized !== DEFAULT_LANGUAGE && /\/index\.html$/i.test(url.pathname)) {
+                url.pathname = url.pathname.replace(/\/index\.html$/i, '/index-en.html');
             }
-            url.searchParams.set(PARAM_KEY, normalized === 'en' ? 'en' : DEFAULT_LANGUAGE);
+            url.searchParams.set(PARAM_KEY, normalized);
             window.location.href = url.toString();
         } catch (error) {
             window.location.reload();
@@ -1434,18 +1792,46 @@ YMIN.i18n = (function () {
     }
 
     function languageSwitcher() {
-        var zhActive = language !== 'en';
-        var base = 'px-2 py-1 text-[11px] font-bold transition-colors';
-        var active = ' bg-[#1B365D] text-white';
-        var inactive = ' text-slate-500 hover:text-[#1B365D]';
-        return '<div class="ymin-language-switcher flex items-center border border-slate-300 bg-white" role="group" aria-label="Language">' +
-            '<button type="button" class="' + base + (zhActive ? active : inactive) + '" data-i18n-ignore onclick="YMIN.i18n.setLanguage(\'zh-CN\')" aria-pressed="' + zhActive + '">中</button>' +
-            '<span class="text-slate-300" aria-hidden="true">/</span>' +
-            '<button type="button" class="' + base + (!zhActive ? active : inactive) + '" data-i18n-ignore onclick="YMIN.i18n.setLanguage(\'en\')" aria-pressed="' + (!zhActive) + '">EN</button>' +
-            '</div>';
+        var locale = currentLocale();
+        var items = locales.map(function (item) {
+            var selected = item.code === language;
+            return '<button type="button" role="option" aria-selected="' + selected + '" class="ymin-language-option flex w-full items-center justify-between gap-5 px-4 py-2.5 text-left text-xs transition-colors ' +
+                (selected ? 'bg-[#edf3fa] text-[#1B365D] font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-[#1B365D]') +
+                '" onclick="YMIN.i18n.setLanguage(\'' + item.code + '\')"><span>' + item.label + '</span>' +
+                (selected ? '<span class="material-symbols-outlined text-base">check</span>' : '') + '</button>';
+        }).join('');
+        return '<div class="ymin-language-switcher relative" data-i18n-ignore>' +
+            '<button type="button" class="inline-flex min-w-[96px] items-center justify-center gap-1.5 border border-slate-300 bg-white px-3 py-2 text-[11px] font-bold text-slate-700 hover:border-[#1B365D] hover:text-[#1B365D]" onclick="YMIN.i18n.toggleSwitcher(event)" aria-haspopup="listbox" aria-expanded="false">' +
+            '<span class="material-symbols-outlined text-[18px]">language</span><span>' + locale.shortLabel + '</span><span class="material-symbols-outlined text-[16px]">expand_more</span></button>' +
+            '<div class="ymin-language-options absolute right-0 top-[calc(100%+8px)] z-[80] hidden max-h-[min(72vh,560px)] w-56 overflow-y-auto border border-slate-200 bg-white shadow-xl" role="listbox" aria-label="Language">' + items + '</div></div>';
     }
 
-    if (language === 'en') {
+    function closeSwitchers() {
+        document.querySelectorAll('.ymin-language-options').forEach(function (menu) { menu.classList.add('hidden'); });
+        document.querySelectorAll('.ymin-language-switcher > button[aria-expanded]').forEach(function (button) { button.setAttribute('aria-expanded', 'false'); });
+    }
+
+    function toggleSwitcher(event) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        var button = event && event.currentTarget;
+        var menu = button && button.parentElement ? button.parentElement.querySelector('.ymin-language-options') : null;
+        var opening = menu && menu.classList.contains('hidden');
+        closeSwitchers();
+        if (opening) {
+            menu.classList.remove('hidden');
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    document.addEventListener('click', closeSwitchers);
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeSwitchers();
+    });
+
+    if (language !== DEFAULT_LANGUAGE) {
         var nativeAlert = window.alert;
         var nativeConfirm = window.confirm;
         window.alert = function (message) { return nativeAlert.call(window, translateString(message)); };
@@ -1457,8 +1843,10 @@ YMIN.i18n = (function () {
 
     return {
         language: language,
+        locales: locales.slice(),
         t: translateString,
         setLanguage: setLanguage,
+        toggleSwitcher: toggleSwitcher,
         switcher: languageSwitcher,
         translate: process
     };

@@ -22,8 +22,10 @@
     function byId(id) { return document.getElementById(id); }
 
     function isEnglishPage() {
-        return (window.YMIN && YMIN.i18n && YMIN.i18n.language === 'en') ||
-            new URLSearchParams(window.location.search).get('lang') === 'en';
+        var language = (window.YMIN && YMIN.i18n && YMIN.i18n.language) ||
+            new URLSearchParams(window.location.search).get('lang') ||
+            document.documentElement.lang || 'zh-CN';
+        return String(language).toLowerCase() !== 'zh-cn';
     }
 
     function translated(value) {
@@ -49,6 +51,13 @@
         if (/^https?:\/\//i.test(path)) return path.replace(/&amp;/g, '&');
         if (path.charAt(0) === '/') return 'https://www.ymin.com' + path;
         return path;
+    }
+
+    function productDatasheet(product) {
+        var value = product && product.datasheet;
+        var library = window.YMIN_SERIES_DATASHEETS;
+        if (!value && library && typeof library.resolve === 'function') value = library.resolve(product);
+        return externalAsset(value);
     }
 
     function seriesImage(product) {
@@ -165,7 +174,7 @@
         var cadUrl = cadAvailable
             ? 'design-3d-cad.html?item=' + encodeURIComponent(merged.itemNo)
             : 'design-3d-cad-request.html?' + cadRequestParams.toString();
-        var datasheet = externalAsset(merged.datasheet);
+        var datasheet = productDatasheet(merged);
         var sourceUrl = externalAsset(merged.sourceUrl);
         var imageUrl = externalAsset(merged.image || seriesImage(merged));
         var technicalAsset = seriesTechnicalAsset(merged);
@@ -224,6 +233,9 @@
         var cadTitle = cadAvailable ? '3D-CAD 模型' : '申请 3D-CAD';
         var cadSubtitle = cadAvailable ? '已有 STEP 模型，可预览与下载' : '当前暂无模型，可提交需求';
         var cadIcon = cadAvailable ? 'token' : 'add_box';
+        var pdfDownloadAction = datasheet
+            ? '<a class="mt-4 inline-flex min-w-[190px] items-center justify-center gap-2.5 bg-primary px-4 py-2.5 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#254b7c]" href="' + esc(datasheet) + '" target="_blank" rel="noopener"><span class="material-symbols-outlined text-lg">picture_as_pdf</span><span>产品PDF下载</span><span class="material-symbols-outlined ml-auto text-sm">download</span></a>'
+            : '<div class="mt-4 inline-flex min-w-[190px] cursor-not-allowed items-center gap-2.5 border border-slate-200 bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-400" aria-disabled="true"><span class="material-symbols-outlined text-lg">picture_as_pdf</span><span>产品PDF下载</span><span class="ml-auto text-[10px] font-normal">暂无 PDF</span></div>';
         var crossReferencesHtml = crossReferences.length ? crossReferences.map(function (mapping) {
             var referenceSpecs = [
                 mapping.competitorSeries ? (isEnglishPage() ? 'Series: ' : '系列：') + mapping.competitorSeries : '',
@@ -236,13 +248,13 @@
         }).join('') : '<li class="border border-slate-200 bg-slate-50 p-4 text-xs text-slate-400">暂无已收录的同行替代关系</li>';
 
         var html = '';
-        html += '<div class="bg-white border border-slate-200 p-6 lg:p-8 mb-6"><div class="flex flex-col lg:flex-row gap-6 lg:gap-8"><div class="flex-1 min-w-0"><div class="flex flex-col md:flex-row md:items-start gap-6"><div class="flex-1 min-w-0"><div class="text-3xl font-bold text-primary mb-1 leading-tight">' + display(merged.category) + '</div><h1 class="text-4xl font-bold text-primary mb-2 break-all">' + esc(merged.itemNo) + '</h1><div class="flex flex-wrap items-center gap-3 mb-2"><span class="bg-primary text-white text-[11px] px-3 py-1 font-bold uppercase tracking-wider">' + lifecycleStatus + '</span><span class="text-xs text-slate-500">' + display(merged.series) + ' 系列 · ' + display(merged.package) + '</span>' + (updated ? '<span class="text-[10px] text-slate-400">数据更新：' + esc(updated) + '</span>' : '') + '</div>' + featureHtml + certHtml + '</div><div class="md:w-52 lg:w-56 shrink-0">' + productImage + '</div></div><div class="grid grid-cols-2 md:grid-cols-3 gap-4 bg-slate-50 p-5 border border-slate-100 mt-5">' + quickSpecs.map(function (spec) { return '<div><div class="text-[10px] uppercase tracking-wider text-slate-500">' + esc(spec[0]) + '</div><div class="text-base font-semibold text-primary">' + display(spec[1]) + '</div></div>'; }).join('') + '</div></div>';
+        html += '<div class="bg-white border border-slate-200 p-6 lg:p-8 mb-6"><div class="flex flex-col lg:flex-row gap-6 lg:gap-8"><div class="flex-1 min-w-0"><div class="flex flex-col md:flex-row md:items-start gap-6"><div class="flex-1 min-w-0"><div class="text-3xl font-bold text-primary mb-1 leading-tight">' + display(merged.category) + '</div><h1 class="text-4xl font-bold text-primary mb-2 break-all">' + esc(merged.itemNo) + '</h1><div class="flex flex-wrap items-center gap-3 mb-2"><span class="bg-primary text-white text-[11px] px-3 py-1 font-bold uppercase tracking-wider">' + lifecycleStatus + '</span><span class="text-xs text-slate-500">' + display(merged.series) + ' 系列 · ' + display(merged.package) + '</span>' + (updated ? '<span class="text-[10px] text-slate-400">数据更新：' + esc(updated) + '</span>' : '') + '</div>' + featureHtml + certHtml + pdfDownloadAction + '</div><div class="md:w-52 lg:w-56 shrink-0">' + productImage + '</div></div><div class="grid grid-cols-2 md:grid-cols-3 gap-4 bg-slate-50 p-5 border border-slate-100 mt-5">' + quickSpecs.map(function (spec) { return '<div><div class="text-[10px] uppercase tracking-wider text-slate-500">' + esc(spec[0]) + '</div><div class="text-base font-semibold text-primary">' + display(spec[1]) + '</div></div>'; }).join('') + '</div></div>';
         html += '<div class="lg:w-80 shrink-0"><div class="bg-slate-50 border border-slate-200 p-5"><h4 class="text-sm font-bold text-primary mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-base">storefront</span>网销商城</h4><div class="text-xs space-y-2"><div class="flex justify-between gap-4"><span class="text-slate-500">最小包装量 (MOQ):</span><span class="font-semibold text-right">' + display(packageQuantity) + '</span></div><div class="flex justify-between gap-4"><span class="text-slate-500">封装形式:</span><span class="font-semibold text-right">' + display(merged.package) + '</span></div><div class="space-y-2 mt-4">' + shopButtons + '</div></div></div></div></div></div>';
 
         html += '<div class="flex flex-col lg:flex-row gap-8 mb-8"><div class="flex-1 bg-white border border-slate-200 p-8"><div class="flex items-center justify-between mb-6"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">description</span><h2 class="text-2xl font-bold text-primary">详细规格参数</h2></div><div class="flex gap-2"><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100" id="downloadTableBtn" title="下载规格表"><span class="material-symbols-outlined text-lg">download</span></button><button class="bg-white p-2 border border-slate-200 hover:bg-slate-100" id="printTableBtn" title="打印"><span class="material-symbols-outlined text-lg">print</span></button></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">' + allSpecs.map(function (field) { return '<div class="flex justify-between items-start gap-5 py-3 border-b border-slate-100"><span class="text-slate-600 text-sm">' + esc(field[0]) + '</span><span class="font-medium text-sm text-primary text-right">' + display(field[1]) + '</span></div>'; }).join('') + '</div><p class="text-[10px] text-slate-400 mt-6">* 具体参数及测试条件以正式规格书为准。</p>';
         html += '<div class="mt-10 pt-6 border-t"><h3 class="text-xl font-bold text-primary mb-2 flex items-center gap-2"><span class="material-symbols-outlined">straighten</span>产品尺寸图与额定纹波电流、频率条件</h3><p class="text-xs text-slate-500 mb-5">本料号结构化参数与系列技术图对应展示。</p><div class="grid grid-cols-1 xl:grid-cols-2 gap-5"><div><h4 class="font-bold text-sm text-primary mb-3">本料号尺寸（单位：mm）</h4><div class="overflow-x-auto">' + dimensionTable + '</div></div><div><h4 class="font-bold text-sm text-primary mb-3">本料号纹波参数</h4><div class="overflow-x-auto">' + rippleTable + '</div></div></div>' + technicalFigure + '</div></div>';
 
-        html += '<aside class="lg:w-80 flex flex-col gap-6"><div class="bg-white border border-slate-200 p-6"><div class="flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-primary text-xl">build</span><h3 class="text-xl font-bold text-primary">设计工具与资源</h3></div><div class="space-y-3">' + resourceItem('timer', '寿命推算工具', '在线计算工作寿命', 'design-life-calc.html', true) + resourceItem('query_stats', 'SPICE 模型', '电路仿真模型', 'design-spice.html', true) + resourceItem(cadIcon, cadTitle, cadSubtitle, cadUrl, true) + resourceItem('picture_as_pdf', '产品规格书', datasheet ? '已提供 PDF' : '暂无 PDF', datasheet, !!datasheet) + resourceItem('fact_check', 'RoHS / REACH', display(merged.rohs), 'support-download.html', true) + resourceItem('monitoring', '可靠性数据', '试验报告', 'design-reliability.html', true) + (sourceUrl ? resourceItem('database', '原始数据页', '查看现官网来源', sourceUrl, true) : '') + '</div></div>';
+        html += '<aside class="lg:w-80 flex flex-col gap-6"><div class="bg-white border border-slate-200 p-6"><div class="flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-primary text-xl">build</span><h3 class="text-xl font-bold text-primary">设计工具与资源</h3></div><div class="space-y-3">' + resourceItem('timer', '寿命推算工具', '在线计算工作寿命', 'design-life-calc.html', true) + resourceItem(cadIcon, cadTitle, cadSubtitle, cadUrl, true) + resourceItem('query_stats', 'SPICE 模型', '电路仿真模型', 'design-spice.html', true) + resourceItem('monitoring', '可靠性实验数据', '试验报告', 'design-reliability.html', true) + (sourceUrl ? resourceItem('database', '原始数据页', '查看现官网来源', sourceUrl, true) : '') + '</div></div>';
         html += '<div class="bg-white border border-slate-200 p-6"><div class="mb-4 flex items-center justify-between gap-3"><h3 class="text-lg font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">compare_arrows</span>交叉参考</h3><a class="text-[10px] font-bold text-primary hover:underline" href="product-replacement.html?search=' + encodeURIComponent(merged.itemNo || '') + '">查看全部替代料</a></div><p class="text-xs text-slate-500 mb-4">该永铭料号在替代数据表中对应的同行料号：</p><ul class="space-y-3">' + crossReferencesHtml + '</ul><div class="mt-4 p-3 bg-amber-50/50 border border-amber-200"><p class="text-xs flex items-start gap-2"><span class="material-symbols-outlined text-amber-600 text-sm">info</span>PIN TO PIN 不代表所有电气指标完全等效，批量替换前请核对完整规格并完成工程验证。</p></div></div></aside></div>';
 
         html += '<div class="bg-white border border-slate-200 p-8 mb-8"><h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3"><span class="material-symbols-outlined text-2xl">devices</span>推荐应用场景</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-4">' + applications.map(function (application) { return '<a class="bg-slate-50 border p-5 text-center hover:border-primary" href="application-center.html"><span class="material-symbols-outlined text-3xl text-primary mb-2">' + esc(application[0]) + '</span><h4 class="font-bold text-sm mb-1">' + esc(translated(application[1])) + '</h4><p class="text-[10px] text-slate-500 uppercase">典型应用</p></a>'; }).join('') + '</div><div class="mt-6 p-5 bg-primary/5 border-l-4 border-primary"><p class="text-sm text-slate-700">' + (isEnglishPage() ? '<span class="font-bold">Product Category: </span>' + display(merged.category) + '. Application scenarios are category-level references. Select the final product using rated voltage, capacitance, temperature, ripple current and lifetime requirements.' : '<span class="font-bold">产品类别：</span>' + display(merged.category) + '。应用场景为类别级参考，实际选型请结合额定电压、容量、温度、纹波电流及寿命要求。') + '</p></div></div>';
@@ -270,12 +282,12 @@
         if (window.YMIN && YMIN.footer) YMIN.footer.inject();
         var itemNo = new URLSearchParams(location.search).get('pn');
         if (!itemNo) {
-            renderError('地址中缺少产品料号参数 pn。');
+            renderError(isEnglishPage() ? 'The URL is missing the product part-number parameter pn.' : '地址中缺少产品料号参数 pn。');
             return;
         }
         var product = findProduct(itemNo);
         if (!product) {
-            renderError('生产库中没有找到料号“' + itemNo + '”。');
+            renderError(isEnglishPage() ? 'The production catalog does not contain part number “' + itemNo + '”.' : '生产库中没有找到料号“' + itemNo + '”。');
             return;
         }
         loadDetail(product, function (detail) { renderProduct(product, detail); });

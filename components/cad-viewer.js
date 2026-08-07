@@ -57,9 +57,10 @@
   }
 
   function isEnglishMode() {
-    return (window.YMIN && window.YMIN.i18n && window.YMIN.i18n.language === "en") ||
-      document.documentElement.lang === "en" ||
-      new URLSearchParams(window.location.search).get("lang") === "en";
+    var language = (window.YMIN && window.YMIN.i18n && window.YMIN.i18n.language) ||
+      new URLSearchParams(window.location.search).get("lang") ||
+      document.documentElement.lang || "zh-CN";
+    return String(language).toLowerCase() !== "zh-cn";
   }
 
   function cadDisplayText(value) {

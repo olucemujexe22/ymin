@@ -1,16 +1,17 @@
 /**
- * 永铭官网 — 中英文独立页脚组件
- * 中文页脚保留国内联系方式与微信/抖音入口；英文页脚采用国际业务联系方式与海外社媒入口。
+ * 永铭官网 — 统一多语言页脚组件
+ * 中文结构作为页面模板，显示文案由 i18n 组件按当前语言处理。
  */
 var YMIN = window.YMIN || {};
 
 YMIN.footer = (function () {
     'use strict';
 
-    function isEnglishPage() {
-        return (YMIN.i18n && YMIN.i18n.language === 'en') ||
-            new URLSearchParams(window.location.search).get('lang') === 'en' ||
-            document.documentElement.lang === 'en';
+    function isInternationalPage() {
+        var language = (YMIN.i18n && YMIN.i18n.language) ||
+            new URLSearchParams(window.location.search).get('lang') ||
+            document.documentElement.lang || 'zh-CN';
+        return String(language).toLowerCase() !== 'zh-cn' && String(language).toLowerCase() !== 'zh';
     }
 
     function renderChinese() {
@@ -75,7 +76,7 @@ YMIN.footer = (function () {
 
     function renderEnglish() {
         var html = '';
-        html += '<footer class="ymin-site-footer w-full bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-16 px-6 mt-12" data-footer-language="en" data-i18n-ignore>';
+        html += '<footer class="ymin-site-footer w-full bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-16 px-6 mt-12" data-footer-language="international">';
         html += '<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">';
 
         html += '<div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6 tracking-widest">Site Navigation</h4>';
@@ -123,7 +124,7 @@ YMIN.footer = (function () {
     }
 
     function render() {
-        return isEnglishPage() ? renderEnglish() : renderChinese();
+        return isInternationalPage() ? renderEnglish() : renderChinese();
     }
 
     function inject(containerId) {

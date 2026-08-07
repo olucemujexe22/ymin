@@ -28,7 +28,7 @@
                 key: 'cpm-collision-module',
                 name: 'CPM碰撞模块',
                 icon: 'car_crash',
-                template: 'legacy',
+                template: 'supercapacitor',
                 subApps: [
                     {
                         name: '电子门锁应急解锁',
@@ -91,7 +91,7 @@
                 key: 'parking-lithium',
                 name: '驻车锂电',
                 icon: 'local_shipping',
-                template: 'legacy',
+                template: 'supercapacitor',
                 subApps: [
                     {
                         name: '重卡4G智联锂电一键强启',

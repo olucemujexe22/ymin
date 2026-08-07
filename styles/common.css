@@ -7,6 +7,14 @@
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
+.material-symbols-outlined.material-symbol-fallback {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-variation-settings: normal;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+}
 
 /* ---------- 字体 ---------- */
 body {

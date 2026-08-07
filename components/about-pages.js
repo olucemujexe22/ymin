@@ -4,8 +4,10 @@
     var data = window.YMIN_ABOUT_DATA || {};
 
     function isEnglishPage() {
-        return new URLSearchParams(window.location.search).get('lang') === 'en' ||
-            (window.YMIN && window.YMIN.i18n && window.YMIN.i18n.language === 'en');
+        var language = (window.YMIN && window.YMIN.i18n && window.YMIN.i18n.language) ||
+            new URLSearchParams(window.location.search).get('lang') ||
+            document.documentElement.lang || 'zh-CN';
+        return String(language).toLowerCase() !== 'zh-cn';
     }
 
     function localizeDistributorBanner() {

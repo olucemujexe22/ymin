@@ -287,6 +287,7 @@ a.about-card:hover {
 .about-prose li { position: relative; padding-left: 22px; color: #48576a; line-height: 1.7; }
 .about-prose li::before { content: ""; position: absolute; left: 0; top: .75em; width: 8px; height: 2px; background: var(--about-blue); }
 
+.about-hero .about-hero-lead,
 .about-hero .about-company-hero-lead {
     max-width: 1000px;
     color: white;
@@ -295,19 +296,30 @@ a.about-card:hover {
     line-height: 1.7;
 }
 
-[data-about-page="company"] .about-hero {
+[data-about-page="company"] .about-hero,
+[data-about-page="careers"] .about-hero,
+[data-about-page="procurement"] .about-hero {
     min-height: 340px;
     align-items: center;
     background: #0d2848;
 }
-[data-about-page="company"] .about-hero::before {
+[data-about-page="company"] .about-hero::before,
+[data-about-page="careers"] .about-hero::before,
+[data-about-page="procurement"] .about-hero::before {
     background:
         radial-gradient(circle at 82% 28%, rgba(75, 137, 193, .28), transparent 35%),
-        linear-gradient(112deg, #0a223f 0%, #123456 62%, #183d63 100%);
+        linear-gradient(112deg, rgba(10, 34, 63, .97) 0%, rgba(18, 52, 86, .95) 62%, rgba(24, 61, 99, .93) 100%),
+        var(--hero-image, none) center / cover no-repeat;
 }
-[data-about-page="company"] .about-hero::after { opacity: .08; }
-[data-about-page="company"] .about-hero-content { padding: 56px 0 72px; }
-[data-about-page="company"] .about-hero h1 { margin-bottom: 22px; }
+[data-about-page="company"] .about-hero::after,
+[data-about-page="careers"] .about-hero::after,
+[data-about-page="procurement"] .about-hero::after { opacity: .08; }
+[data-about-page="company"] .about-hero-content,
+[data-about-page="careers"] .about-hero-content,
+[data-about-page="procurement"] .about-hero-content { padding: 56px 0 64px; }
+[data-about-page="company"] .about-hero h1,
+[data-about-page="careers"] .about-hero h1,
+[data-about-page="procurement"] .about-hero h1 { margin-bottom: 18px; }
 [data-about-page="company"] .about-stats {
     margin-top: -24px;
     box-shadow: 0 12px 30px rgba(24, 47, 77, .09);
@@ -710,8 +722,12 @@ a.about-card:hover {
     .about-positioning-item { min-height: auto; padding: 28px 24px; }
     .about-positioning-item + .about-positioning-item { border-left: 0; border-top: 1px solid #dce4ec; }
     .about-product-lines-copy { padding: 24px 22px; font-size: 15px; line-height: 1.85; }
-    [data-about-page="company"] .about-hero { min-height: 330px; }
-    [data-about-page="company"] .about-hero-content { padding: 52px 0 66px; }
+    [data-about-page="company"] .about-hero,
+    [data-about-page="careers"] .about-hero,
+    [data-about-page="procurement"] .about-hero { min-height: 330px; }
+    [data-about-page="company"] .about-hero-content,
+    [data-about-page="careers"] .about-hero-content,
+    [data-about-page="procurement"] .about-hero-content { padding: 52px 0 58px; }
     .about-timeline { padding-left: 92px; }
     .about-timeline::before { left: 70px; }
     .about-timeline-item { padding-left: 18px; }

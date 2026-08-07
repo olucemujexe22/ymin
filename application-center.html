@@ -10,23 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/common.css">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#1B365D",
-                        "surface": "#f9f9fd",
-                        "on-surface": "#191c1e",
-                    },
-                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
-                    fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"] }
-                }
-            },
-        }
-    </script>
+    <link rel="stylesheet" href="styles/generated/application-tailwind.css?v=20260807local4">
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         body { font-family: 'Inter', sans-serif; }
@@ -163,7 +147,7 @@
                 <!-- 新型电机驱动 -->
                 <a href="application-motor-drive.html" class="bg-white border-2 border-slate-200 p-8 hover-card group cursor-pointer">
                     <div class="flex items-start justify-between mb-4">
-                        <span class="material-symbols-outlined text-4xl text-primary">motor</span>
+                        <span class="material-symbols-outlined text-4xl text-primary">settings</span>
                         <span class="material-symbols-outlined text-slate-300 group-hover:text-primary card-arrow text-xl">arrow_forward</span>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">新型电机驱动</h3>
@@ -283,7 +267,7 @@
             </div>
 
             <!-- English-only enquiry form -->
-            <section class="application-enquiry" data-en-only data-i18n-ignore hidden lang="en" aria-labelledby="application-enquiry-title">
+            <section class="application-enquiry" data-en-only hidden aria-labelledby="application-enquiry-title">
                 <div class="application-enquiry-intro">
                     <h2 id="application-enquiry-title">Have Questions?</h2>
                     <p>How can we help?</p>
@@ -331,20 +315,25 @@
             </div>
 
             <!-- 设计工具入口 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 mb-4">
-                <a href="#" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8 mb-4">
+                <a href="design-life-calc.html" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
                     <span class="material-symbols-outlined text-3xl text-primary">timer</span>
                     <div><h4 class="font-bold text-sm">寿命推算工具</h4><p class="text-xs text-slate-500">在线计算电容工作寿命</p></div>
                     <span class="material-symbols-outlined ml-auto text-slate-300 group-hover:text-primary">arrow_forward</span>
                 </a>
-                <a href="#" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
+                <a href="design-spice.html" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
                     <span class="material-symbols-outlined text-3xl text-primary">query_stats</span>
                     <div><h4 class="font-bold text-sm">SPICE模型</h4><p class="text-xs text-slate-500">下载仿真模型库</p></div>
                     <span class="material-symbols-outlined ml-auto text-slate-300 group-hover:text-primary">arrow_forward</span>
                 </a>
-                <a href="#" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
+                <a href="design-3d-cad.html" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
                     <span class="material-symbols-outlined text-3xl text-primary">token</span>
                     <div><h4 class="font-bold text-sm">3D-CAD模型</h4><p class="text-xs text-slate-500">STEP/IGES格式</p></div>
+                    <span class="material-symbols-outlined ml-auto text-slate-300 group-hover:text-primary">arrow_forward</span>
+                </a>
+                <a href="design-reliability.html" class="bg-white border border-slate-200 p-5 flex items-center gap-4 hover:border-primary transition-colors group">
+                    <span class="material-symbols-outlined text-3xl text-primary">verified</span>
+                    <div><h4 class="font-bold text-sm">可靠性实验数据</h4><p class="text-xs text-slate-500">高温负荷、耐湿、温度循环、耐振等可靠性试验的实测数据，按系列查询，为设计评审提供数据支撑。</p></div>
                     <span class="material-symbols-outlined ml-auto text-slate-300 group-hover:text-primary">arrow_forward</span>
                 </a>
             </div>
@@ -355,10 +344,11 @@
     </main>
     <!-- 共享组件 -->
     <script src="data/application-en.js?v=20260805merge1"></script>
-    <script src="data/application-rendered-en.js?v=20260805film1"></script>
-    <script src="components/i18n.js?v=20260806enform1"></script>
-    <script src="components/navbar.js?v=20260805logo1"></script>
-    <script src="components/footer.js?v=20260805film1"></script>
+    <script src="data/application-rendered-en.js?v=20260807i18n1"></script>
+    <script src="data/i18n-language-packs.js?v=20260807ui5"></script>
+    <script src="components/i18n.js?v=20260807ui5"></script>
+    <script src="components/navbar.js?v=20260807ui3"></script>
+    <script src="components/footer.js?v=20260806multi2"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             YMIN.navbar.inject('applications');
@@ -383,5 +373,6 @@
             });
         });
     </script>
+    <script src="components/material-symbol-fallback.js?v=20260806local2"></script>
 </body>
 </html>

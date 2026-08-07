@@ -108,6 +108,12 @@
         if (/^https?:\/\//i.test(value)) return value;
         return value.charAt(0) === '/' ? 'https://www.ymin.com' + value : value;
     }
+    function productDatasheet(product) {
+        var value = product && product.datasheet;
+        var library = window.YMIN_SERIES_DATASHEETS;
+        if (!value && library && typeof library.resolve === 'function') value = library.resolve(product);
+        return externalAsset(value);
+    }
     function seriesImage(product) {
         var library = window.YMIN_SERIES_IMAGES || {};
         var categoryImages = (library.images || {})[product.category] || {};
@@ -717,7 +723,7 @@
         }
         holder.innerHTML = pageProducts.map(function (product, index) {
             var checked = selectedCompare.indexOf(product.__compareKey) >= 0;
-            var pdfUrl = externalAsset(product.datasheet);
+            var pdfUrl = productDatasheet(product);
             var pdf = pdfUrl ? '<a class="text-red-600 hover:text-red-700" href="' + esc(pdfUrl) + '" target="_blank" rel="noopener" title="查看系列规格书"><span class="material-symbols-outlined text-xl">picture_as_pdf</span></a>' : '—';
             var certification = productAec(product);
             var status = normalizeStatus(product.status);
@@ -925,7 +931,7 @@
         return rows.concat([
             ['AEC-Q200', productAec],
             ['RoHS指令', function (product) { return product.rohs; }],
-            ['系列规格书', function (product) { return product.datasheet ? '有' : '—'; }],
+            ['系列规格书', function (product) { return productDatasheet(product) ? '有' : '—'; }],
             ['3D-CAD', function (product) { return numberFrom(product.cadCandidateCount) > 0 ? '有' : '可申请'; }]
         ]);
     }
@@ -998,7 +1004,7 @@
         }
         var headers = ['产品线', '系列', '全生命周期状态', '产品料号', '形状/封装', '工作温度', '额定电压', '标称容量', '直径/尺寸D', '高度/长/尺寸L', '宽W', '高/尺寸H', '漏电流', '额定纹波电流', 'ESR/阻抗', '额定寿命', 'AEC-Q200', 'RoHS指令', '系列规格书', '3D-CAD'];
         var rows = filtered.map(function (product) {
-            return [product.category, product.series, normalizeStatus(product.status), product.itemNo, product.package, productTemperature(product), productVoltage(product), productCapacity(product), dimensionValue(product, 'diameter'), dimensionValue(product, 'length'), dimensionValue(product, 'width'), dimensionValue(product, 'height'), product.leakage, productRipple(product), productEsr(product), productLife(product), productAec(product), product.rohs, product.datasheet ? '有' : '', numberFrom(product.cadCandidateCount) > 0 ? '有' : '可申请'];
+            return [product.category, product.series, normalizeStatus(product.status), product.itemNo, product.package, productTemperature(product), productVoltage(product), productCapacity(product), dimensionValue(product, 'diameter'), dimensionValue(product, 'length'), dimensionValue(product, 'width'), dimensionValue(product, 'height'), product.leakage, productRipple(product), productEsr(product), productLife(product), productAec(product), product.rohs, productDatasheet(product) ? '有' : '', numberFrom(product.cadCandidateCount) > 0 ? '有' : '可申请'];
         });
         downloadCsv([headers].concat(rows), '永铭产品筛选结果.csv');
     }

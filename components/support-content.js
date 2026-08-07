@@ -149,8 +149,9 @@ YMIN.supportContent = (function () {
     }
 
     function isEnglishPage() {
-        return (YMIN.i18n && YMIN.i18n.language === 'en') ||
-            String(queryValue('lang')).toLowerCase().indexOf('en') === 0;
+        var language = (YMIN.i18n && YMIN.i18n.language) ||
+            queryValue('lang') || document.documentElement.lang || 'zh-CN';
+        return String(language).toLowerCase() !== 'zh-cn';
     }
 
     function localizeArticle(article) {
