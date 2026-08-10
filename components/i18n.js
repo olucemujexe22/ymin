@@ -1074,6 +1074,7 @@ YMIN.i18n = (function () {
         '下载AI服务器应用白皮书': 'Download the AI Server Application White Paper',
         '固液混合电容汽车应用选型指南': 'Polymer Hybrid Capacitor Automotive Selection Guide',
         '液态电容汽车应用选型指南': 'Liquid Electrolytic Capacitor Automotive Selection Guide',
+        '超级电容汽车应用选型指南': 'Supercapacitor Automotive Selection Guide',
         '消费类电子应用选型指南': 'Consumer Electronics Selection Guide',
         '无人机应用选型指南': 'Drone Application Selection Guide',
         '储能应用选型指南': 'Energy Storage Application Selection Guide',

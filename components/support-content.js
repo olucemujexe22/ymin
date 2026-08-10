@@ -239,6 +239,31 @@ YMIN.supportContent = (function () {
         return parts[0] + '.' + parts[1] + '.' + parts[2];
     }
 
+    function articleProductDetailUrl(partNumber) {
+        var language = (YMIN.i18n && YMIN.i18n.language) ||
+            queryValue('lang') || document.documentElement.lang || 'zh-CN';
+        var languageQuery = String(language).toLowerCase() === 'zh-cn'
+            ? ''
+            : '&lang=' + encodeURIComponent(language);
+        return 'product-detail.html?pn=' + encodeURIComponent(partNumber || '') + languageQuery;
+    }
+
+    function linkArticleProductSpecs(article, contentHtml) {
+        var rendered = String(contentHtml || '');
+        (article.productLinks || []).forEach(function (productLink) {
+            if (!productLink || !productLink.partNumber) return;
+            var href = articleProductDetailUrl(productLink.partNumber);
+            (productLink.labels || []).forEach(function (label) {
+                if (!label || rendered.indexOf(label) === -1) return;
+                var linkedLabel = '<a class="article-product-link" href="' + escapeHtml(href) +
+                    '" title="查看 ' + escapeHtml(productLink.partNumber) + ' 产品详情">' +
+                    escapeHtml(label) + '<span class="material-symbols-outlined">north_east</span></a>';
+                rendered = rendered.split(label).join(linkedLabel);
+            });
+        });
+        return rendered;
+    }
+
     function renderPagination(container, total, page, size, onChange) {
         if (!container) return;
         var pages = Math.ceil(total / size);
@@ -879,7 +904,8 @@ YMIN.supportContent = (function () {
                     renderTags(applicationValues(article).concat(article.series || []), 'article-tag', 10) +
                 '</div>' +
                 (article.excerpt ? '<div class="article-summary">' + escapeHtml(article.excerpt) + '</div>' : '') +
-                '<div class="article-body">' + (article.contentHtml || '<p>' + htmlText(article.plainText) + '</p>') + '</div>' +
+                '<div class="article-body">' + linkArticleProductSpecs(article,
+                    article.contentHtml || '<p>' + htmlText(article.plainText) + '</p>') + '</div>' +
                 '<section class="support-detail-section"><div class="support-feedback">' +
                     '<span>本文内容来自永铭官网原文，产品选型请以最新规格书为准。</span>' +
                     '<a class="support-text-link" target="_blank" rel="noopener" href="' +

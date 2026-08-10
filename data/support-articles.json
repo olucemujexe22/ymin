@@ -171,6 +171,15 @@
         "10F(4x25)",
         "70F(6.3x38)"
       ],
+      "productLinks": [
+        {
+          "partNumber": "SLX3R8O1550307",
+          "labels": [
+            "SLX 3.8V 1.5F (Φ3.55×7mm)",
+            "SLX 3.8 V, 1.5 F"
+          ]
+        }
+      ],
       "specifications": "SLX 3.8V 1.5F phi3.55x7mm 业内最小 SLX 3.8V 10F phi4x25mm SLX 3.8V 70F phi6.3x38mm 15-30秒快充 循环>10万次 -20~85度C 不受欧盟电池法规约束",
       "sellingPoints": "1. phi3.55mm业内最小直径: 适配狭长设备 2. 15-30秒快充 3. 循环>10万次: 寿命>5年 4. 不受欧盟电池法规约束 5. UL810A+UN38.3+RoHS+REACH 6. 认证周期缩短50%+合规成本降低60%+",
       "certifications": [
