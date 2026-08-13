@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap">
     <link rel="stylesheet" href="styles/common.css?v=20260807nav9">
     <link rel="stylesheet" href="styles/about.css?v=20260807hero2">
+    <link rel="stylesheet" href="styles/about-company-history.css?v=20260813history5">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1B365D'},borderRadius:{DEFAULT:'0px'},fontFamily:{headline:['Space Grotesk'],body:['Inter']}}}}</script>
     <script type="application/ld+json">
@@ -64,12 +65,16 @@
             </div>
         </section>
 
-        <section class="about-section" style="background-image:linear-gradient(rgba(247,249,252,.94),rgba(247,249,252,.94)),url('assets/about/history-background.webp');background-size:cover;background-position:center">
+        <section class="about-section about-history-section">
             <div class="about-container">
                 <div class="about-section-head">
-                    <div><h2>发展历程</h2><p>从铝电解电容器起步，持续推进小型化、固态化和多材料体系产品布局。</p></div>
+                    <div><h2>发展历程</h2><p>公司建设与产品创新沿同一时间轴持续推进。</p></div>
                 </div>
-                <div class="about-timeline" data-company-history></div>
+                <div class="about-history-lanes" aria-hidden="true">
+                    <span>公司发展</span>
+                    <span>产品发展</span>
+                </div>
+                <div class="about-history-dual" data-about-dual-timeline></div>
             </div>
         </section>
 
@@ -80,7 +85,9 @@
     <script src="components/navbar.js?v=20260807nav7"></script>
     <script src="components/footer.js?v=20260806multi2"></script>
     <script src="data/about-content.js?v=20260805film1"></script>
+    <script src="data/about-timeline-data.js?v=20260813history1"></script>
     <script src="components/about-pages.js?v=20260806multi3"></script>
+    <script src="components/about-company-history.js?v=20260813history3"></script>
     <script>document.addEventListener('DOMContentLoaded',function(){YMIN.navbar.inject('about');YMIN.footer.inject();});</script>
 </body>
 </html>
