@@ -14,13 +14,13 @@
             { year: '2018', items: ['第三期厂房开始动工，新增2.8万㎡生产面积。'] },
             { year: '2020', items: ['公司管理方式改为事业部制。'] },
             { year: '2021', items: ['通过IATF 16949汽车行业质量管理体系认证。'] },
-            { year: '2022', items: ['首次通过GJB 9001C-2017武器装备质量管理体系认证。'] },
+            { year: '2022', items: ['通过GJB 9001C-2017武器装备质量管理体系认证。'] },
             { year: '2024', items: ['第四期厂房新增生产面积，总生产面积达到约6.5万平方米。', '入选第六批国家级专精特新“小巨人”企业。'] },
             { year: '2025', items: ['入选国家重点支持的专精特新“小巨人”企业名单。', '获得中国合格评定国家认可委员会（CNAS）实验室认可。'] }
         ],
         product: [
             { year: '2001', events: [
-                { text: '专注于照明电源专用电解电容器，并建立液态铝电解电容器产品线。', major: true, image: 'assets/product-series/a16b180d2f626906.png' }
+                { text: '专注于照明电源专用电解电容器，液态铝电解电容器。' }
             ] },
             { year: '2005', events: [
                 { text: '推出照明电源专用小型化电解电容。', highlight: ['小型化'] }
@@ -39,15 +39,17 @@
                 { text: '业内首推直流充电桩专用系列，并推出智能电表专用LKJ系列（获得国网计量中心检验认定）。', highlight: ['直流充电桩专用', '智能电表专用'] },
                 { text: '业内首推直流充电桩专用小型化CW3S系列（获得许继集团的应用）。', highlight: ['小型化'] }
             ] },
-            { year: '2017', events: [
+            { year: '2016', events: [
                 { text: '推出新产品线高分子固态铝电解电容器（引线型、贴片型）。', major: true, image: 'assets/product-series/7ecdb00e500b7ca3.png' },
-                { text: '推出新产品线高分子混合动力铝电解电容器。', major: true, image: 'assets/product-series/180776b3a8e480d6.png' },
-                { text: '推出新产品线叠层高分子固态铝电解电容器。', major: true, image: 'assets/product-series/54ad3f85318e3277.png' },
+                { text: '推出新产品线高分子混合动力铝电解电容器。', major: true, image: 'assets/product-series/180776b3a8e480d6.png' }
+            ] },
+            { year: '2017', events: [
                 { text: '推出新产品线超级电容器（引线型、纽扣型、模组型）。', major: true, image: 'assets/product-series/bf8e4007bf68a1c5.png' },
                 { text: '推出超小体型、低阻抗液态贴片V3M系列。', highlight: ['超小体型', '低阻抗'] },
                 { text: '推出135℃耐高温液态贴片VKL（R）系列。', highlight: ['135℃耐高温'] }
             ] },
             { year: '2018', events: [
+                { text: '推出新产品线叠层高分子固态铝电解电容器。', major: true, image: 'assets/product-series/54ad3f85318e3277.png' },
                 { text: '业内首推薄型化、全电压、5mm高SMD贴片型VMM系列。', highlight: ['薄型化', '全电压', '5mm高'] },
                 { text: '推出快充电源专用高压、超小型KC系列。', highlight: ['快充电源专用', '高压', '超小型'] },
                 { text: '推出低ESR大容量小型化NPG系列。', highlight: ['低ESR', '大容量', '小型化'] },
