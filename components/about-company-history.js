@@ -16,9 +16,11 @@
         if (!company) {
             return '<article class="about-history-card is-empty" aria-hidden="true"><span>—</span></article>';
         }
+        var items = company.items || [company.text || company.title].filter(Boolean);
         return '<article class="about-history-card is-company">' +
-            '<h3>' + escapeHtml(company.title) + '</h3>' +
-            (company.text ? '<p>' + escapeHtml(company.text) + '</p>' : '') +
+            '<ul class="about-history-company-list">' + items.map(function (item) {
+                return '<li>' + escapeHtml(item) + '</li>';
+            }).join('') + '</ul>' +
         '</article>';
     }
 
@@ -28,6 +30,9 @@
 
     function renderEventText(event) {
         var text = String(event.text == null ? '' : event.text);
+        if (window.YMIN && YMIN.i18n && YMIN.i18n.language !== 'zh-CN') {
+            return escapeHtml(YMIN.i18n.t(text));
+        }
         var keywords = event.highlight || [];
         if (!keywords.length) return escapeHtml(text);
 
@@ -63,7 +68,7 @@
         var majorPanel = '<article class="about-history-major">' +
             '<div class="about-history-major-head"><span>新产品线</span></div>' +
             '<div class="about-history-major-list">' + majorEvents.map(function (event) {
-                return '<div class="about-history-major-row">' +
+                return '<div class="about-history-major-row' + (event.image ? '' : ' has-no-image') + '">' +
                     '<strong>' + escapeHtml(event.text) + '</strong>' +
                     (event.image ? '<img src="' + escapeHtml(event.image) + '" alt="" loading="lazy">' : '') +
                 '</div>';
