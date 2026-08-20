@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102c50">
+  <title>永铭新官网运营后台</title>
+  <link rel="stylesheet" href="styles.css?v=20260820global6">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <img src="../logo.png" alt="永铭">
+        <div>
+          <strong>新官网运营后台</strong>
+          <span>数字智能系统 · 官网管理</span>
+        </div>
+      </div>
+
+      <button class="nav-search-trigger" id="navSearchTrigger" type="button">
+        <span aria-hidden="true">⌕</span>
+        <span>搜索后台功能</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
+      <nav class="side-nav" id="sideNav" aria-label="后台功能导航"></nav>
+
+      <div class="sidebar-footer">
+        <div class="environment-dot"></div>
+        <div>
+          <strong>系统状态</strong>
+          <span>运行正常</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <button class="mobile-nav-button" id="mobileNavButton" type="button" aria-label="展开导航">☰</button>
+        <div class="breadcrumb" id="breadcrumb">工作台</div>
+        <div class="topbar-actions">
+          <label class="role-view-switcher" for="roleViewSelect">
+            <span>账号视角</span>
+            <select id="roleViewSelect" aria-label="切换CRM账号权限视角">
+              <option value="zh">中文官网运营人员</option>
+              <option value="international">国际官网运营人员</option>
+            </select>
+          </label>
+          <span class="site-scope-chip" id="siteScopeChip">中文官网</span>
+          <button class="icon-text-button" id="previewSiteButton" type="button"><span>↗</span> 查看官网</button>
+          <button class="user-menu" type="button">
+            <span class="avatar">王</span>
+            <span><strong id="currentUserName">王傑维</strong><small id="currentUserRole">中文官网运营人员</small></span>
+            <b>⌄</b>
+          </button>
+        </div>
+      </header>
+
+      <main class="content" id="mainContent" tabindex="-1">
+        <div class="page-loading">正在载入后台模块…</div>
+      </main>
+    </div>
+  </div>
+
+  <div class="command-backdrop" id="commandPalette" hidden>
+    <div class="command-panel" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
+      <div class="command-input-row">
+        <span>⌕</span>
+        <input id="commandInput" type="search" placeholder="搜索产品、文章、文件或后台功能…" autocomplete="off">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="command-results" id="commandResults"></div>
+    </div>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="drawer" id="editorDrawer" aria-hidden="true">
+    <form id="editorForm">
+      <header class="drawer-header">
+        <div>
+          <span class="eyebrow" id="drawerEyebrow">内容维护</span>
+          <h2 id="drawerTitle">新建内容</h2>
+        </div>
+        <button class="close-button" id="drawerClose" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="drawer-body" id="drawerBody"></div>
+      <footer class="drawer-footer">
+        <button class="button button-ghost" id="drawerCancel" type="button">取消</button>
+        <button class="button button-secondary" id="saveDraftButton" type="button">保存草稿</button>
+        <button class="button button-primary" type="submit">保存</button>
+      </footer>
+    </form>
+  </aside>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <header class="modal-header">
+        <div><span class="eyebrow" id="modalEyebrow">操作确认</span><h2 id="modalTitle">确认操作</h2></div>
+        <button class="close-button" id="modalClose" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="modal-body" id="modalBody"></div>
+      <footer class="modal-footer" id="modalFooter"></footer>
+    </div>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <input type="file" id="importFileInput" accept=".csv,.json,.xlsx,.xls" hidden>
+
+  <!-- 官网后台数据与页面配置 -->
+  <script src="../data/system-modules.js?v=20260819"></script>
+  <script src="../data/application-product-index.js?v=20260819"></script>
+  <script src="../data/application-collected-data.js?v=20260819"></script>
+  <script src="../data/application-additional-pages.js?v=20260819"></script>
+  <script src="../data/application-ai-server-supercapacitor.js?v=20260819"></script>
+  <script src="../data/application-automotive-supercapacitor.js?v=20260819"></script>
+  <script src="../data/download-library.js?v=20260819"></script>
+  <script src="../data/compliance-certificates.js?v=20260819"></script>
+  <script src="../data/series-table.js?v=20260819"></script>
+  <script src="../data/series-images.js?v=20260819"></script>
+  <script src="../data/series-datasheets.js?v=20260819"></script>
+  <script src="../data/cad-models.js?v=20260819"></script>
+  <script src="../data/about-content.js?v=20260819"></script>
+  <script src="data.js?v=20260820global7"></script>
+  <script src="frontend-validation-data.js?v=20260820global6"></script>
+  <script src="app.js?v=20260820global7"></script>
+</body>
+</html>
