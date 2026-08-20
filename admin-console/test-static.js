@@ -204,9 +204,14 @@ crmFormModules.forEach((moduleName) => {
 });
 
 const workbenchGroup = dailyGroups.find((group) => group.label === "工作台");
-if (!workbenchGroup || JSON.stringify(workbenchGroup.items.map((item) => item[0])) !== JSON.stringify(["dashboard", "trafficAnalytics"])) failures.push("工作台应包含运营工作台和独立流量分析入口");
-if (!data.moduleConfigs.trafficAnalytics || data.moduleConfigs.trafficAnalytics.kind !== "traffic-analytics") failures.push("缺少流量分析演示模块");
-["trafficTrend", "trafficPages", "trafficChannels", "trafficEvents", "trafficAlerts", "trafficLanguages", "trafficKeywords", "trafficDevices", "trafficRegions", "trafficVisitors", "contentMetrics", "trafficFoundation"].forEach((dataset) => {
+if (!workbenchGroup || JSON.stringify(workbenchGroup.items.map((item) => item[0])) !== JSON.stringify(["dashboard"])) failures.push("工作台应只保留官网运营维护入口");
+const trafficGroup = data.navGroups.find((group) => group.label === "流量分析");
+const trafficModules = ["trafficAnalytics", "pageValueAnalytics", "trafficSourceAnalytics", "aiTrafficAnalytics", "keywordAnalytics", "operationsAlerts"];
+if (!trafficGroup || JSON.stringify(trafficGroup.items.map((item) => item[0])) !== JSON.stringify(trafficModules)) failures.push("流量分析应为独立模块并包含六个分析页面");
+trafficModules.forEach((moduleName) => {
+  if (!data.moduleConfigs[moduleName] || data.moduleConfigs[moduleName].kind !== "traffic-module") failures.push(`缺少流量分析页面：${moduleName}`);
+});
+["trafficTrend", "trafficPages", "trafficChannels", "trafficEvents", "trafficAlerts", "trafficLanguages", "trafficKeywords", "trafficStatusCodes", "trafficAiSources", "trafficAiCrawlers", "trafficOpportunities", "trafficDevices", "trafficRegions", "trafficVisitors", "contentMetrics", "trafficFoundation"].forEach((dataset) => {
   if (!Array.isArray(data.datasets[dataset]) || !data.datasets[dataset].length) failures.push(`流量分析数据基座缺少演示数据：${dataset}`);
 });
 if (!data.datasets.trafficFoundation.some((item) => item.layer === "页面注册表")) failures.push("新官网流量基座缺少页面注册表层");

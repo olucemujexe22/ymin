@@ -684,11 +684,39 @@
       { id: "LANGTRAFFIC-OTHER", language: "其他语言", users: 578, pv: 1146, actions: 54, conversionRate: "9.3%" }
     ],
     trafficKeywords: [
-      { id: "KEY-ZH-01", site: "中文站", keyword: "超级电容 BBU", users: 186, clicks: 142, landingPage: "AI服务器与数据中心", conversionRate: "18.3%" },
-      { id: "KEY-ZH-02", site: "中文站", keyword: "VMM 贴片电容", users: 154, clicks: 119, landingPage: "VMM系列产品", conversionRate: "16.8%" },
-      { id: "KEY-ZH-03", site: "中文站", keyword: "铝电解电容寿命计算", users: 131, clicks: 96, landingPage: "寿命推算工具", conversionRate: "21.4%" },
-      { id: "KEY-EN-01", site: "国际站", keyword: "supercapacitor for BBU", users: 98, clicks: 72, landingPage: "AI Server & Data Center", conversionRate: "19.1%" },
-      { id: "KEY-EN-02", site: "国际站", keyword: "YMIN VMM capacitor", users: 76, clicks: 58, landingPage: "VMM Series", conversionRate: "17.2%" }
+      { id: "KEY-ZH-01", site: "中文站", keyword: "超级电容 BBU", domain: "AI服务器与数据中心", intent: "应用选型", users: 186, clicks: 142, landingPage: "AI服务器与数据中心", conversionRate: "18.3%" },
+      { id: "KEY-ZH-02", site: "中文站", keyword: "VMM 贴片电容", domain: "汽车电子", intent: "型号参数", users: 154, clicks: 119, landingPage: "VMM系列产品", conversionRate: "16.8%" },
+      { id: "KEY-ZH-03", site: "中文站", keyword: "铝电解电容寿命计算", domain: "设计工具", intent: "工具使用", users: 131, clicks: 96, landingPage: "寿命推算工具", conversionRate: "21.4%" },
+      { id: "KEY-ZH-04", site: "中文站", keyword: "电容替代料查询", domain: "产品中心", intent: "替代选型", users: 118, clicks: 83, landingPage: "寻找替代料", conversionRate: "19.5%" },
+      { id: "KEY-ZH-05", site: "中文站", keyword: "汽车电子电容选型", domain: "汽车电子", intent: "应用选型", users: 106, clicks: 79, landingPage: "汽车电子应用指南", conversionRate: "17.8%" },
+      { id: "KEY-EN-01", site: "国际站", keyword: "supercapacitor for BBU", domain: "AI Server & Data Center", intent: "Application", users: 98, clicks: 72, landingPage: "AI Server & Data Center", conversionRate: "19.1%" },
+      { id: "KEY-EN-02", site: "国际站", keyword: "YMIN VMM capacitor", domain: "Automotive", intent: "Part Number", users: 76, clicks: 58, landingPage: "VMM Series", conversionRate: "17.2%" },
+      { id: "KEY-EN-03", site: "国际站", keyword: "capacitor lifetime calculator", domain: "Design Tools", intent: "Tool", users: 63, clicks: 46, landingPage: "Lifetime Calculator", conversionRate: "20.6%" }
+    ],
+    trafficStatusCodes: [
+      { id: "STATUS-200", code: "200", name: "正常访问", count: 20894, share: "98.4%" },
+      { id: "STATUS-301", code: "301/302", name: "正常跳转", count: 226, share: "1.1%" },
+      { id: "STATUS-404", code: "404", name: "页面不存在", count: 94, share: "0.4%" },
+      { id: "STATUS-5XX", code: "5xx", name: "服务器异常", count: 18, share: "0.1%" }
+    ],
+    trafficAiSources: [
+      { id: "AI-SOURCE-CHATGPT", site: "全站", name: "ChatGPT", users: 246, visits: 318, actions: 52, conversionRate: "21.1%" },
+      { id: "AI-SOURCE-DOUBAO", site: "中文站", name: "豆包", users: 152, visits: 197, actions: 29, conversionRate: "19.1%" },
+      { id: "AI-SOURCE-YUANBAO", site: "中文站", name: "腾讯元宝", users: 84, visits: 106, actions: 14, conversionRate: "16.7%" },
+      { id: "AI-SOURCE-PERPLEXITY", site: "国际站", name: "Perplexity", users: 73, visits: 91, actions: 17, conversionRate: "23.3%" },
+      { id: "AI-SOURCE-COPILOT", site: "国际站", name: "Microsoft Copilot", users: 46, visits: 58, actions: 9, conversionRate: "19.6%" }
+    ],
+    trafficAiCrawlers: [
+      { id: "AI-CRAWLER-GPTBOT", site: "全站", name: "GPTBot", hits: 1864, pages: 426, lastSeen: "2026-08-19 14:56" },
+      { id: "AI-CRAWLER-CLAUDE", site: "全站", name: "ClaudeBot", hits: 1278, pages: 318, lastSeen: "2026-08-19 14:42" },
+      { id: "AI-CRAWLER-BYTESPIDER", site: "全站", name: "Bytespider", hits: 972, pages: 286, lastSeen: "2026-08-19 14:33" },
+      { id: "AI-CRAWLER-GOOGLE", site: "全站", name: "Google-Extended", hits: 614, pages: 193, lastSeen: "2026-08-19 13:48" }
+    ],
+    trafficOpportunities: [
+      { id: "OPP-001", level: "高", type: "AI抓取机会", page: "AI服务器BBU备用电源中的超级电容应用", reason: "AI爬虫抓取高，真实访问仍有提升空间", action: "补充结构化参数、推荐料号和相关FAQ", owner: "内容运营" },
+      { id: "OPP-002", level: "高", type: "搜索需求机会", page: "寻找替代料", reason: "替代料相关搜索持续增长", action: "补充同行料号映射并优化入口文案", owner: "产品运营" },
+      { id: "OPP-003", level: "中", type: "页面价值提升", page: "3D-CAD模型", reason: "访问稳定但申请转化仍可提升", action: "完善模型覆盖和无文件申请引导", owner: "设计工具运营" },
+      { id: "OPP-004", level: "中", type: "内容关联优化", page: "汽车电子电容选型文章", reason: "内容浏览高，关联产品点击偏低", action: "复核产品、应用终端和FAQ关联", owner: "内容运营" }
     ],
     trafficDevices: [
       { id: "DEVICE-ZH-PC", site: "中文站", name: "桌面端", users: 5361, share: "76.1%" },
@@ -740,7 +768,12 @@
 
   const moduleConfigs = {
     dashboard: { kind: "dashboard", title: "运营工作台", group: "工作台", description: "" },
-    trafficAnalytics: { kind: "traffic-analytics", title: "流量分析", group: "工作台", description: "访问趋势、页面表现、用户行为与网站异常。" },
+    trafficAnalytics: { kind: "traffic-module", analyticsView: "overview", title: "首页总览", group: "流量分析", description: "官网整体访问、页面价值、渠道和AI流量概况。" },
+    pageValueAnalytics: { kind: "traffic-module", analyticsView: "value", title: "页面价值分析", group: "流量分析", description: "比较产品、文章、应用和工具页面的业务表现。" },
+    trafficSourceAnalytics: { kind: "traffic-module", analyticsView: "sources", title: "流量来源分析", group: "流量分析", description: "拆解访问渠道、设备、地区与落地页面。" },
+    aiTrafficAnalytics: { kind: "traffic-module", analyticsView: "ai", title: "AI流量洞察", group: "流量分析", description: "区分AI平台真实点击与大模型爬虫抓取。" },
+    keywordAnalytics: { kind: "traffic-module", analyticsView: "keywords", title: "关键词洞察", group: "流量分析", description: "从应用领域和搜索意图判断用户需求。" },
+    operationsAlerts: { kind: "traffic-module", analyticsView: "actions", title: "运营机会与预警", group: "流量分析", description: "集中查看内容机会、页面异常和数据质量。" },
     pageMap: { kind: "table", dataset: "pageMap", title: "全站页面定位", group: "前端页面管理", description: "按页面文件定位前台入口、后台维护模块和维护边界，供后续页面调整时查询。", columns: [["file","页面文件/入口"],["name","页面名称"],["dataSource","动态数据来源"],["backend","日常运营入口"],["boundary","维护边界"],["status","定位状态"]], readonly: true },
     homepages: { kind: "table", dataset: "homepage", title: "首页结构与发布记录", group: "前端页面管理", description: "记录中文首页和国际版首页的结构版本，供IT预览、发布和回退；状态只区分编辑中、当前版本和历史版本。", columns: [["name","页面"],["version","结构版本"],["blocks","固定模块"],["status","版本状态"],["updatedAt","更新时间"]], fields: [fields.name,{key:"version",label:"结构版本",type:"text"},{key:"blocks",label:"固定模块",type:"textarea",full:true},{key:"status",label:"版本状态",type:"select",required:true,options:["编辑中","当前版本","历史版本"]},fields.updatedAt] },
     banners: { kind: "table", dataset: "banners", title: "首页轮播图", group: "日常运营", description: "中文运营只维护中文首页Banner，英文运营只维护国际版首页Banner；图片、文案和跳转分别保存，账号不能跨站点切换语言。", columns: [["title","轮播标题"],["scene","场景"],["language","内容版本"],["link","跳转"],["leftPanel","左侧功能区"],["sort","排序"],["status","状态"]], fields: [fields.title,{key:"scene",label:"场景",type:"select",options:["产品组合","无人机","机器人","Industrial Robotics","Smart Automotive","AI Data Center"]},fields.language,{key:"image",label:"轮播图片",type:"file",full:true},{key:"link",label:"跳转地址",type:"text",full:true},{key:"leftPanel",label:"左侧功能区",type:"select",required:true,options:["显示","隐藏"],help:"绑定当前Banner记录；调整排序后设置仍随该Banner生效"},fields.sort,fields.status] },
@@ -843,7 +876,8 @@
   });
 
   const navGroups = [
-    { area: "日常运营", label: "工作台", icon: "▦", items: [["dashboard","运营工作台"],["trafficAnalytics","流量分析"]] },
+    { area: "日常运营", label: "工作台", icon: "▦", items: [["dashboard","运营工作台"]] },
+    { area: "数据分析", label: "流量分析", icon: "◉", items: [["trafficAnalytics","首页总览"],["pageValueAnalytics","页面价值分析"],["trafficSourceAnalytics","流量来源分析"],["aiTrafficAnalytics","AI流量洞察"],["keywordAnalytics","关键词洞察"],["operationsAlerts","运营机会与预警"]] },
     { area: "日常运营", label: "首页运营", icon: "⌂", items: [["banners","首页轮播图"],["homepageStats","首页数据指标"],["homepageProductCards","首页产品线卡片"],["homepageApplicationCards","英文首页应用卡片"]] },
     { area: "日常运营", label: "全站组件", icon: "▧", items: [["navigation","导航栏"],["footers","页脚"]] },
     { area: "日常运营", label: "产品中心", icon: "◫", items: [["products","产品主数据（只读）"],["productAiKeywords","AI搜索关键词"],["series","系列公共资料"],["shopLinks","商城商品匹配"],["replacements","替代料关系"]] },
@@ -879,7 +913,7 @@
 
   const roleModuleAccess = {
     zh: [
-      "dashboard", "trafficAnalytics", "banners", "homepageStats", "homepageProductCards", "navigation", "footers",
+      "dashboard", "trafficAnalytics", "pageValueAnalytics", "trafficSourceAnalytics", "aiTrafficAnalytics", "keywordAnalytics", "operationsAlerts", "banners", "homepageStats", "homepageProductCards", "navigation", "footers",
       "products", "productAiKeywords", "series", "shopLinks", "replacements",
       "applicationOverview", "applications", "applicationHighlights", "applicationToolHighlights", "terminals", "appProducts", "appGuides",
       "designOverview", "tools", "cadModels", "spiceModels", "reliability",
@@ -888,7 +922,7 @@
       "leads", "members", "cadRequests", "jobApplications", "procurement", "pageMap"
     ],
     international: [
-      "dashboard", "trafficAnalytics", "banners", "homepageStats", "homepageProductCards", "homepageApplicationCards", "navigation", "footers",
+      "dashboard", "trafficAnalytics", "pageValueAnalytics", "trafficSourceAnalytics", "aiTrafficAnalytics", "keywordAnalytics", "operationsAlerts", "banners", "homepageStats", "homepageProductCards", "homepageApplicationCards", "navigation", "footers",
       "products", "productAiKeywords", "series", "shopLinks", "replacements",
       "applicationOverview", "applications", "applicationHighlights", "applicationToolHighlights", "terminals", "appProducts", "appGuides",
       "designOverview", "tools", "cadModels", "spiceModels", "reliability",
@@ -913,7 +947,7 @@
     articles: "中英文分别维护", newsFeaturedArticles: "中英文分别维护", faqs: "中英文分别维护",
     downloads: "中英文分别维护", aboutContent: "中英文分别维护",
     jobs: "中文专属", procurementPage: "中文专属",
-    trafficAnalytics: "全站只读分析", leads: "CRM按账号范围只读", members: "CRM按账号范围只读", cadRequests: "CRM按账号范围只读",
+    trafficAnalytics: "全站只读分析", pageValueAnalytics: "全站只读分析", trafficSourceAnalytics: "全站只读分析", aiTrafficAnalytics: "全站只读分析", keywordAnalytics: "全站只读分析", operationsAlerts: "全站只读分析", leads: "CRM按账号范围只读", members: "CRM按账号范围只读", cadRequests: "CRM按账号范围只读",
     jobApplications: "CRM按人事权限只读", procurement: "CRM按采购权限只读", languagePacks: "由英文版生成",
     navigation: "全站共享", footers: "中英文分别维护",
     pageMap: "只读页面定位", homepages: "系统技术配置",

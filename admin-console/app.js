@@ -573,7 +573,7 @@
     els.breadcrumb.innerHTML = escapeHtml(config.group || "工作台") + (config.title !== config.group ? " / <b>" + escapeHtml(config.title) + "</b>" : "");
     document.title = config.title + "｜永铭新官网运营后台";
     if (config.kind === "dashboard") return renderDashboard(config);
-    if (config.kind === "traffic-analytics") return renderTrafficAnalytics(config);
+    if (config.kind === "traffic-module") return renderTrafficModule(config);
     if (config.kind === "product-master") return renderProductMaster(config);
     if (config.kind === "application-tree") return renderApplicationTree(config);
     if (config.kind === "footer-manager") return renderFooterManager(config);
@@ -592,51 +592,250 @@
   }
 
   function renderDashboard(config) {
-    const maintenanceItems = 3;
-    const alerts = visibleTrafficRows("trafficAlerts").filter(function (item) { return item.status !== "已解决"; });
-    const urgentAlerts = alerts.filter(function (item) { return item.level === "高"; });
-    const trend = trafficTrendRows();
-    const pv = sumTrafficMetric(trend, "pv");
-    const uv = sumTrafficMetric(trend, "uv");
-    const highValueActions = trend.reduce(function (sum, item) { return sum + Number(item.actions || 0); }, 0);
-    const pendingCad = visibleTrafficRows("cadRequests").filter(function (item) { return item.crmStatus !== "已完成"; }).length;
-    const alertPreview = alerts.slice(0, 3).map(function (item) {
-      return '<div class="workbench-alert"><span class="severity severity-' + severityClass(item.level) + '">' + escapeHtml(item.level) + '</span><div><strong>' + escapeHtml(item.type + "｜" + item.url) + '</strong><small>' + escapeHtml(item.hits + "次 · 最近 " + item.lastSeen + " · " + item.suggestion) + '</small></div></div>';
-    }).join("") || '<div class="empty-state compact">当前没有未解决的网站异常</div>';
-    const trafficChange = trend.length > 1 ? Math.round(((trafficMetric(trend[trend.length - 1], "pv") - trafficMetric(trend[trend.length - 2], "pv")) / Math.max(1, trafficMetric(trend[trend.length - 2], "pv"))) * 100) : 0;
+    const pendingArticles = (state.database.articles || []).filter(function (item) { return item.status !== "已发布"; }).length;
+    const pendingFaqs = (state.database.faqs || []).filter(function (item) { return item.status !== "已发布"; }).length;
+    const incompleteSeries = (state.database.series || []).filter(function (item) { return !item.pdf || !item.image; }).length;
+    const pendingRelations = (state.database.relations || []).filter(function (item) { return item.status !== "已发布" || item.validation !== "校验通过"; }).length;
+    const pendingCad = (state.database.cadRequests || []).filter(function (item) { return item.crmStatus !== "已完成"; }).length;
+    const pendingLeads = (state.database.leads || []).filter(function (item) { return item.crmStatus === "待跟进"; }).length;
+    const pendingForms = pendingCad + pendingLeads + (state.database.jobApplications || []).filter(function (item) { return item.crmStatus !== "已完成"; }).length + (state.database.procurement || []).filter(function (item) { return item.crmStatus !== "已完成"; }).length;
+    const pendingContent = pendingArticles + pendingFaqs;
+    const maintenanceItems = incompleteSeries + pendingRelations + pendingContent;
     els.main.innerHTML = pageHeader(config) +
       '<section class="workbench-kpi-grid">' +
-        workbenchKpi("高优先级异常", urgentAlerts.length, urgentAlerts.length ? "需要优先排查" : "网站运行正常", "trafficAnalytics", urgentAlerts.length ? "danger" : "good") +
-        workbenchKpi("当前待维护", maintenanceItems, "资料缺口与待确认关系", "articles", maintenanceItems ? "warning" : "good") +
-        workbenchKpi("近" + state.trafficPeriod + "日访问用户", numberText(uv), "页面浏览 " + numberText(pv) + "，较昨日 " + signedPercent(trafficChange), "trafficAnalytics", "") +
-        workbenchKpi("高价值行为", numberText(highValueActions), "下载、计算、CAD与咨询", "trafficAnalytics", "good") +
+        workbenchKpi("待维护内容", maintenanceItems, "资料、文章、FAQ与关联关系", "articles", maintenanceItems ? "warning" : "good") +
+        workbenchKpi("待发布内容", pendingContent, "新闻文章与FAQ知识", "articles", pendingContent ? "warning" : "good") +
+        workbenchKpi("待补系列主资料", incompleteSeries, "系列PDF或产品图片", "series", incompleteSeries ? "warning" : "good") +
+        workbenchKpi("待跟进申请", pendingForms, "CRM中的咨询、CAD、招聘与采购", "cadRequests", pendingForms ? "warning" : "good") +
       '</section>' +
       '<div class="workbench-layout"><div class="workbench-main">' +
-        '<section class="panel"><header class="panel-header"><div><h2>网站运行预警</h2></div><button class="text-button" type="button" data-route-action="trafficAnalytics">查看全部</button></header><div class="workbench-alert-list">' + alertPreview + '</div></section>' +
         '<section class="panel"><header class="panel-header"><div><h2>当前账号待办</h2></div></header><div class="task-list">' +
-          taskItem("链", "2条内容关系待确认", "在文章发布页确认产品与应用的展示范围", "articles") +
-          taskItem("档", "1个系列公共资料缺少编码规则", "补充后同系列料号自动调用", "series") +
-          taskItem("图", "1个系列产品图资源异常", "检查系列资料中的产品图文件", "series") +
+          taskItem("链", pendingRelations + "条内容关系待确认", "在文章或FAQ发布页确认产品与应用关联", "articles") +
+          taskItem("档", incompleteSeries + "个系列主资料待补充", "补充系列PDF或产品图后由同系列当前产品自动调用", "series") +
+          taskItem("文", pendingContent + "篇内容待发布", "检查正文、FAQ和关联后发布", "articles") +
           (pendingCad ? taskItem("申", pendingCad + "条3D-CAD申请正在CRM跟进", "查看当前处理进度", "cadRequests") : "") +
         '</div></section>' +
-        '<section class="panel"><header class="panel-header"><div><h2>关键趋势</h2><p>近' + state.trafficPeriod + '日访问与高价值行为</p></div><button class="text-button" type="button" data-route-action="trafficAnalytics">展开分析</button></header><div class="panel-body">' + trafficLineChart(trend, true) + '</div></section>' +
+        '<section class="panel"><header class="panel-header"><div><h2>近期内容维护</h2></div></header><div class="workbench-activity-list">' + dashboardRecentContent() + '</div></section>' +
       '</div><aside class="workbench-side">' +
-        '<section class="panel"><header class="panel-header"><div><h2>数据链路状态</h2></div></header><div class="panel-body health-list">' +
+        '<section class="panel"><header class="panel-header"><div><h2>数据与资料状态</h2></div></header><div class="panel-body health-list">' +
           healthRow("CRM产品同步", state.database.products.length + "个料号已同步", 100, "good") +
-          healthRow("内容与应用关系", "46条关系，2条待确认", 96, "warning") +
-          healthRow("下载资源引用", "34项资源，1项需检查", 97, "warning") +
-          healthRow("流量数据更新", "更新至 2026-08-19 15:00", 100, "good") +
+          healthRow("系列公共资料", state.database.series.length + "个系列，" + incompleteSeries + "个待补", incompleteSeries ? 74 : 100, incompleteSeries ? "warning" : "good") +
+          healthRow("内容关联关系", state.database.relations.length + "条关系，" + pendingRelations + "条待确认", pendingRelations ? 82 : 100, pendingRelations ? "warning" : "good") +
+          healthRow("应用终端与料号", state.database.terminals.length + "个终端，" + state.database.appProducts.length + "条推荐", 100, "good") +
         '</div></section>' +
-        '<section class="panel"><header class="panel-header"><div><h2>常用入口</h2></div></header><div class="panel-body module-grid compact-grid">' +
+        '<section class="panel"><header class="panel-header"><div><h2>常用维护入口</h2></div></header><div class="panel-body module-grid compact-grid">' +
           moduleCard("articles", "文章发布", "发布新闻并建立关联") +
           moduleCard("series", "系列资料", "维护图片与PDF") +
           moduleCard("terminals", "应用终端", "维护终端内容") +
           moduleCard("downloads", "下载中心", "统一维护文件") +
           moduleCard("faqs", "FAQ知识库", "确认并发布FAQ") +
-          moduleCard("trafficAnalytics", "流量分析", "查看页面价值与异常") +
+          moduleCard("cadRequests", "3D-CAD申请", "查看CRM跟进记录") +
         '</div></section>' +
       '</aside></div>';
     bindGlobalPageActions();
+  }
+
+  function dashboardRecentContent() {
+    const rows = scopedDataset("articles").concat(scopedDataset("faqs")).slice().sort(function (a, b) {
+      return String(b.updatedAt || b.publishAt || "").localeCompare(String(a.updatedAt || a.publishAt || ""));
+    }).slice(0, 5);
+    return rows.map(function (item) {
+      const isFaq = Boolean(item.question);
+      const title = item.title || item.question;
+      return '<div class="workbench-activity"><span>' + (isFaq ? "FAQ" : "文章") + '</span><div><strong>' + escapeHtml(title) + '</strong><small>' + escapeHtml((item.language || "简体中文") + "｜" + (item.updatedAt || item.publishAt || "")) + '</small></div>' + statusPill(item.status) + '</div>';
+    }).join("") || '<div class="empty-state compact">暂无内容维护记录</div>';
+  }
+
+  function renderTrafficModule(config) {
+    const view = config.analyticsView || "overview";
+    const renderers = {
+      overview: renderTrafficOverviewBody,
+      value: renderPageValueBody,
+      sources: renderTrafficSourcesBody,
+      ai: renderAiTrafficBody,
+      keywords: renderKeywordInsightsBody,
+      actions: renderTrafficActionsBody
+    };
+    els.main.innerHTML = pageHeader(config, analyticsPeriodActions()) + (renderers[view] || renderTrafficOverviewBody)();
+    bindTrafficAnalyticsActions();
+  }
+
+  function analyticsPeriodActions() {
+    return '<div class="period-switch" aria-label="分析周期"><button type="button" data-traffic-period="7" class="' + (state.trafficPeriod === 7 ? "active" : "") + '">近7日</button><button type="button" data-traffic-period="14" class="' + (state.trafficPeriod === 14 ? "active" : "") + '">近14日</button></div>';
+  }
+
+  function analyticsTable(headers, rows, emptyText, extraClass) {
+    const head = headers.map(function (item) { return '<th>' + escapeHtml(item) + '</th>'; }).join("");
+    const body = rows || '<tr><td colspan="' + headers.length + '" class="empty-state">' + escapeHtml(emptyText || "暂无数据") + '</td></tr>';
+    return '<div class="table-scroll"><table class="data-table analytics-table ' + escapeHtml(extraClass || "") + '"><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table></div>';
+  }
+
+  function renderTrafficOverviewBody() {
+    const trend = trafficTrendRows();
+    const pages = visibleTrafficRows("trafficPages").slice().sort(function (a, b) { return Number(b.valueScore || 0) - Number(a.valueScore || 0); });
+    const channels = (state.database.trafficChannels || []).slice();
+    const alerts = visibleTrafficRows("trafficAlerts").filter(function (item) { return item.status !== "已解决"; });
+    const aiSources = visibleTrafficRows("trafficAiSources");
+    const aiCrawlers = visibleTrafficRows("trafficAiCrawlers");
+    const pv = sumTrafficMetric(trend, "pv");
+    const uv = sumTrafficMetric(trend, "uv");
+    const actions = trend.reduce(function (sum, item) { return sum + Number(item.actions || 0); }, 0);
+    const errors = trend.reduce(function (sum, item) { return sum + Number(item.errors || 0); }, 0);
+    const aiVisits = aiSources.reduce(function (sum, item) { return sum + Number(item.visits || 0); }, 0);
+    const crawlerHits = aiCrawlers.reduce(function (sum, item) { return sum + Number(item.hits || 0); }, 0);
+    const maxChannel = Math.max.apply(null, channels.map(function (item) { return trafficChannelUsers(item); }).concat([1]));
+    const channelBars = channels.map(function (item) { return analyticsBar(item.name, trafficChannelUsers(item), maxChannel, item.quality + "｜" + item.note); }).join("");
+    const moduleTotals = {};
+    pages.forEach(function (item) { moduleTotals[item.module] = (moduleTotals[item.module] || 0) + Number(item.valueScore || 0); });
+    const moduleValues = Object.keys(moduleTotals).sort(function (a, b) { return moduleTotals[b] - moduleTotals[a]; });
+    const maxModule = Math.max.apply(null, moduleValues.map(function (name) { return moduleTotals[name]; }).concat([1]));
+    const moduleBars = moduleValues.map(function (name) { return analyticsBar(name, moduleTotals[name], maxModule, "该模块页面价值分合计"); }).join("");
+    const topPage = pages[0] || {};
+    const topChannel = channels.slice().sort(function (a, b) { return trafficChannelUsers(b) - trafficChannelUsers(a); })[0] || {};
+    const insights = [
+      "当前价值最高的页面类型为“" + (topPage.pageType || "暂无") + "”，属于" + (topPage.module || "暂无") + "。",
+      "主要获客渠道为“" + (topChannel.name || "暂无") + "”，当前周期访问用户 " + numberText(trafficChannelUsers(topChannel)) + "。",
+      "AI平台带来 " + numberText(aiVisits) + " 次访问，大模型爬虫抓取 " + numberText(crawlerHits) + " 次。",
+      alerts.length ? "当前有 " + alerts.length + " 项未解决预警，已集中到“运营机会与预警”。" : "当前没有未解决的页面异常。"
+    ].map(function (text) { return '<div class="analytics-insight"><span>判断</span><p>' + escapeHtml(text) + '</p></div>'; }).join("");
+    return '<section class="analytics-kpi-grid">' +
+      trafficKpi("页面浏览量", numberText(pv), "PV", "") +
+      trafficKpi("访问用户", numberText(uv), "UV", "") +
+      trafficKpi("高价值行为", numberText(actions), "下载、计算、CAD与表单", "good") +
+      trafficKpi("AI来源访问", numberText(aiVisits), "来自AI平台的真实点击", "ai") +
+      trafficKpi("AI爬虫抓取", numberText(crawlerHits), "大模型抓取官网内容", "ai") +
+      trafficKpi("错误请求", numberText(errors), "404、资源与接口异常", errors ? "danger" : "good") +
+    '</section>' +
+    '<div class="analytics-layout"><section class="panel"><header class="panel-header"><div><h2>浏览量 / 访客数趋势</h2></div><span class="data-time">更新至 2026-08-19 15:00</span></header><div class="panel-body">' + trafficLineChart(trend, false) + '</div></section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>渠道占比</h2></div></header><div class="analytics-bar-list">' + channelBars + '</div></section></div>' +
+    '<div class="analytics-layout"><section class="panel"><header class="panel-header"><div><h2>页面类型贡献</h2></div></header><div class="analytics-bar-list">' + moduleBars + '</div></section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>本周期判断</h2></div></header><div class="analytics-insight-list">' + insights + '</div></section></div>';
+  }
+
+  function renderPageValueBody() {
+    const pages = visibleTrafficRows("trafficPages").slice().sort(function (a, b) { return Number(b.valueScore || 0) - Number(a.valueScore || 0); });
+    const scores = pages.map(function (item) { return Number(item.valueScore || 0); });
+    const average = scores.length ? Math.round(scores.reduce(function (sum, value) { return sum + value; }, 0) / scores.length) : 0;
+    const high = pages.filter(function (item) { return Number(item.valueScore || 0) >= 85; }).length;
+    const medium = pages.filter(function (item) { return Number(item.valueScore || 0) >= 70 && Number(item.valueScore || 0) < 85; }).length;
+    const improve = pages.length - high - medium;
+    const opportunityCounts = {};
+    (state.database.trafficOpportunities || []).forEach(function (item) { opportunityCounts[item.type] = (opportunityCounts[item.type] || 0) + 1; });
+    const maxOpportunity = Math.max.apply(null, Object.keys(opportunityCounts).map(function (key) { return opportunityCounts[key]; }).concat([1]));
+    const opportunityBars = Object.keys(opportunityCounts).map(function (key) { return analyticsBar(key, opportunityCounts[key], maxOpportunity, "当前识别的运营机会"); }).join("");
+    const rows = pages.map(function (item) {
+      const grade = Number(item.valueScore || 0) >= 85 ? "高价值" : Number(item.valueScore || 0) >= 70 ? "稳定" : "待提升";
+      return '<tr><td><strong>' + escapeHtml(item.pageType) + '</strong><small>' + escapeHtml(item.page) + '</small></td><td>' + escapeHtml(item.module) + '<small>' + escapeHtml(item.site) + '</small></td><td>' + numberText(item.pv) + '</td><td>' + numberText(item.uv) + '</td><td>' + numberText(item.actions) + '<small>' + escapeHtml(item.actionRate) + '</small></td><td>' + numberText(item.errors) + '</td><td><strong>' + numberText(item.valueScore) + '</strong></td><td>' + statusPill(grade) + '</td></tr>';
+    }).join("");
+    return '<section class="analytics-kpi-grid analytics-kpi-four">' +
+      trafficKpi("纳入分析页面", numberText(pages.length), "新官网页面与动态详情规则", "") +
+      trafficKpi("平均页面价值", numberText(average), "综合相对评分", "") +
+      trafficKpi("高价值页面", numberText(high), "价值分不低于85", "good") +
+      trafficKpi("待提升页面", numberText(improve), "需补内容或修复体验", improve ? "warning" : "good") +
+    '</section>' +
+    '<div class="analytics-layout"><section class="panel"><header class="panel-header"><div><h2>价值等级</h2></div></header><div class="analytics-bar-list">' + analyticsBar("高价值", high, Math.max(1, pages.length), "85分及以上") + analyticsBar("稳定", medium, Math.max(1, pages.length), "70至84分") + analyticsBar("待提升", improve, Math.max(1, pages.length), "70分以下") + '</div></section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>机会标签分布</h2></div></header><div class="analytics-bar-list">' + opportunityBars + '</div></section></div>' +
+    '<section class="panel"><header class="panel-header"><div><h2>页面价值榜</h2></div><span class="tag">按价值分排序</span></header>' + analyticsTable(["页面", "模块/站点", "PV", "UV", "高价值行为", "错误", "价值分", "等级"], rows, "暂无页面价值数据") + '</section>' +
+    contentAnalyticsHtml();
+  }
+
+  function renderTrafficSourcesBody() {
+    const channels = (state.database.trafficChannels || []).slice();
+    const devices = visibleTrafficRows("trafficDevices");
+    const regions = visibleTrafficRows("trafficRegions");
+    const statusCodes = state.database.trafficStatusCodes || [];
+    const pages = visibleTrafficRows("trafficPages").slice().sort(function (a, b) { return Number(b.uv || 0) - Number(a.uv || 0); });
+    const channelTotal = channels.reduce(function (sum, item) { return sum + trafficChannelUsers(item); }, 0);
+    const organic = channels.filter(function (item) { return item.id === "CHANNEL-ORGANIC"; }).reduce(function (sum, item) { return sum + trafficChannelUsers(item); }, 0);
+    const referral = channels.filter(function (item) { return item.id === "CHANNEL-REFERRAL"; }).reduce(function (sum, item) { return sum + trafficChannelUsers(item); }, 0);
+    const maxChannel = Math.max.apply(null, channels.map(function (item) { return trafficChannelUsers(item); }).concat([1]));
+    const maxDevice = Math.max.apply(null, devices.map(function (item) { return Number(item.users || 0); }).concat([1]));
+    const maxRegion = Math.max.apply(null, regions.map(function (item) { return Number(item.users || 0); }).concat([1]));
+    const maxStatus = Math.max.apply(null, statusCodes.map(function (item) { return Number(item.count || 0); }).concat([1]));
+    const landingRows = pages.slice(0, 8).map(function (item) { return '<tr><td><strong>' + escapeHtml(item.pageType) + '</strong><small>' + escapeHtml(item.page) + '</small></td><td>' + escapeHtml(item.module) + '</td><td>' + numberText(item.uv) + '</td><td>' + numberText(item.actions) + '</td><td>' + escapeHtml(item.actionRate) + '</td></tr>'; }).join("");
+    const domains = [
+      ["baidu.com", organic, "自然搜索"], ["google.com", Math.round(organic * .44), "自然搜索"], ["chatgpt.com", 318, "AI来源"], ["行业媒体与合作伙伴", referral, "外部引用"]
+    ];
+    const domainRows = domains.map(function (item) { return '<tr><td><strong>' + escapeHtml(item[0]) + '</strong></td><td>' + escapeHtml(item[2]) + '</td><td>' + numberText(item[1]) + '</td></tr>'; }).join("");
+    return '<section class="analytics-kpi-grid analytics-kpi-four">' +
+      trafficKpi("渠道访问用户", numberText(channelTotal), "外部获客渠道合计", "") +
+      trafficKpi("自然搜索用户", numberText(organic), "搜索引擎进入", "good") +
+      trafficKpi("外部引用用户", numberText(referral), "媒体、伙伴与商城", "") +
+      trafficKpi("正常访问率", statusCodes[0] ? statusCodes[0].share : "--", "HTTP 200", "good") +
+    '</section>' +
+    '<div class="analytics-three-grid"><section class="panel"><header class="panel-header"><div><h2>渠道构成</h2></div></header><div class="analytics-bar-list">' + channels.map(function (item) { return analyticsBar(item.name, trafficChannelUsers(item), maxChannel, item.quality + "｜" + item.note); }).join("") + '</div></section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>设备分布</h2></div></header><div class="analytics-bar-list">' + devices.map(function (item) { return analyticsBar(item.name, item.users, maxDevice, "占比 " + item.share); }).join("") + '</div></section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>HTTP状态</h2></div></header><div class="analytics-bar-list">' + statusCodes.map(function (item) { return analyticsBar(item.code + " " + item.name, item.count, maxStatus, "占比 " + item.share); }).join("") + '</div></section></div>' +
+    '<div class="analytics-layout"><section class="panel"><header class="panel-header"><div><h2>来源域名排行</h2></div></header>' + analyticsTable(["来源域名", "渠道", "访问"], domainRows, "暂无来源域名数据") + '</section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>访问地区</h2></div></header><div class="analytics-bar-list">' + regions.map(function (item) { return analyticsBar(item.name, item.users, maxRegion, "占比 " + item.share); }).join("") + '</div></section></div>' +
+    '<section class="panel"><header class="panel-header"><div><h2>渠道落地页</h2></div></header>' + analyticsTable(["落地页", "模块", "UV", "高价值行为", "行为率"], landingRows, "暂无渠道落地页数据") + '</section>';
+  }
+
+  function renderAiTrafficBody() {
+    const sources = visibleTrafficRows("trafficAiSources");
+    const crawlers = visibleTrafficRows("trafficAiCrawlers");
+    const pages = visibleTrafficRows("trafficPages").slice().sort(function (a, b) { return Number(b.valueScore || 0) - Number(a.valueScore || 0); });
+    const sourceUsers = sources.reduce(function (sum, item) { return sum + Number(item.users || 0); }, 0);
+    const sourceVisits = sources.reduce(function (sum, item) { return sum + Number(item.visits || 0); }, 0);
+    const sourceActions = sources.reduce(function (sum, item) { return sum + Number(item.actions || 0); }, 0);
+    const crawlerHits = crawlers.reduce(function (sum, item) { return sum + Number(item.hits || 0); }, 0);
+    const sourceRows = sources.map(function (item) { return '<tr><td><strong>' + escapeHtml(item.name) + '</strong><small>' + escapeHtml(item.site) + '</small></td><td>' + numberText(item.users) + '</td><td>' + numberText(item.visits) + '</td><td>' + numberText(item.actions) + '</td><td>' + escapeHtml(item.conversionRate) + '</td></tr>'; }).join("");
+    const crawlerRows = crawlers.map(function (item) { return '<tr><td><strong>' + escapeHtml(item.name) + '</strong></td><td>' + numberText(item.hits) + '</td><td>' + numberText(item.pages) + '</td><td>' + escapeHtml(item.lastSeen) + '</td></tr>'; }).join("");
+    const referralRows = pages.slice(0, 6).map(function (item) { return '<tr><td><strong>' + escapeHtml(item.pageType) + '</strong><small>' + escapeHtml(item.page) + '</small></td><td>' + escapeHtml(item.module) + '</td><td>' + numberText(Math.max(1, Math.round(Number(item.uv || 0) * .05))) + '</td><td>' + numberText(Math.max(1, Math.round(Number(item.actions || 0) * .08))) + '</td></tr>'; }).join("");
+    const crawlerPageRows = pages.slice().sort(function (a, b) { return Number(b.valueScore || 0) - Number(a.valueScore || 0); }).slice(0, 6).map(function (item) { return '<tr><td><strong>' + escapeHtml(item.pageType) + '</strong><small>' + escapeHtml(item.page) + '</small></td><td>' + numberText(Number(item.valueScore || 0) * 4) + '</td><td>' + numberText(item.uv) + '</td><td>' + (Number(item.uv || 0) < 350 ? statusPill("可优化") : statusPill("稳定")) + '</td></tr>'; }).join("");
+    return '<section class="analytics-kpi-grid analytics-kpi-four">' +
+      trafficKpi("AI来源用户", numberText(sourceUsers), "从AI平台真实进入官网", "ai") +
+      trafficKpi("AI来源访问", numberText(sourceVisits), "真实点击访问次数", "ai") +
+      trafficKpi("AI来源高价值行为", numberText(sourceActions), "下载、选型与咨询", "good") +
+      trafficKpi("AI爬虫抓取", numberText(crawlerHits), "模型抓取次数", "ai") +
+    '</section>' +
+    '<div class="analytics-layout"><section class="panel"><header class="panel-header"><div><h2>AI来源访问</h2><p>用户从AI平台点击进入官网</p></div></header>' + analyticsTable(["AI平台", "用户", "访问", "高价值行为", "行为率"], sourceRows, "暂无AI来源数据") + '</section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>AI爬虫抓取</h2><p>大模型爬虫访问服务器日志</p></div></header>' + analyticsTable(["爬虫", "抓取次数", "页面数", "最近抓取"], crawlerRows, "暂无AI爬虫数据") + '</section></div>' +
+    '<div class="analytics-layout"><section class="panel"><header class="panel-header"><div><h2>AI已带来访问的页面</h2></div></header>' + analyticsTable(["页面", "模块", "AI访问", "高价值行为"], referralRows, "暂无AI落地页数据") + '</section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>AI抓取机会页</h2></div></header>' + analyticsTable(["页面", "抓取热度", "UV", "状态"], crawlerPageRows, "暂无AI抓取机会") + '</section></div>';
+  }
+
+  function renderKeywordInsightsBody() {
+    const keywords = visibleTrafficRows("trafficKeywords");
+    const totalUsers = keywords.reduce(function (sum, item) { return sum + Number(item.users || 0); }, 0);
+    const totalClicks = keywords.reduce(function (sum, item) { return sum + Number(item.clicks || 0); }, 0);
+    const domains = {}, intents = {};
+    keywords.forEach(function (item) {
+      domains[item.domain || "其他"] = (domains[item.domain || "其他"] || 0) + Number(item.users || 0);
+      intents[item.intent || "其他"] = (intents[item.intent || "其他"] || 0) + Number(item.users || 0);
+    });
+    const maxDomain = Math.max.apply(null, Object.keys(domains).map(function (key) { return domains[key]; }).concat([1]));
+    const maxIntent = Math.max.apply(null, Object.keys(intents).map(function (key) { return intents[key]; }).concat([1]));
+    const rows = keywords.slice().sort(function (a, b) { return Number(b.users || 0) - Number(a.users || 0); }).map(function (item) { return '<tr><td><strong>' + escapeHtml(item.keyword) + '</strong><small>' + escapeHtml(item.site) + '</small></td><td>' + escapeHtml(item.domain) + '</td><td>' + escapeHtml(item.intent) + '</td><td>' + numberText(item.users) + '</td><td>' + numberText(item.clicks) + '</td><td>' + escapeHtml(item.conversionRate) + '</td><td>' + escapeHtml(item.landingPage) + '</td></tr>'; }).join("");
+    return '<section class="analytics-kpi-grid analytics-kpi-four">' +
+      trafficKpi("已识别关键词", numberText(keywords.length), "站内及外部搜索", "") +
+      trafficKpi("搜索用户", numberText(totalUsers), "产生明确搜索需求", "") +
+      trafficKpi("落地点击", numberText(totalClicks), "进入产品、应用与工具页", "good") +
+      trafficKpi("点击率", totalUsers ? Math.round(totalClicks / totalUsers * 100) + "%" : "--", "搜索到落地页", "good") +
+    '</section>' +
+    '<div class="analytics-layout"><section class="panel"><header class="panel-header"><div><h2>应用领域关键词</h2></div></header><div class="analytics-bar-list">' + Object.keys(domains).sort(function (a, b) { return domains[b] - domains[a]; }).map(function (key) { return analyticsBar(key, domains[key], maxDomain, "搜索用户"); }).join("") + '</div></section>' +
+      '<section class="panel"><header class="panel-header"><div><h2>搜索意图分布</h2></div></header><div class="analytics-bar-list">' + Object.keys(intents).sort(function (a, b) { return intents[b] - intents[a]; }).map(function (key) { return analyticsBar(key, intents[key], maxIntent, "搜索用户"); }).join("") + '</div></section></div>' +
+    '<section class="panel"><header class="panel-header"><div><h2>关键词明细</h2></div></header>' + analyticsTable(["关键词", "应用领域", "搜索意图", "用户", "点击", "转化率", "落地页"], rows, "暂无关键词数据") + '</section>';
+  }
+
+  function renderTrafficActionsBody() {
+    const opportunities = state.database.trafficOpportunities || [];
+    const alerts = visibleTrafficRows("trafficAlerts");
+    const foundations = state.database.trafficFoundation || [];
+    const activeAlerts = alerts.filter(function (item) { return item.status !== "已解决"; });
+    const highItems = opportunities.filter(function (item) { return item.level === "高"; }).length + activeAlerts.filter(function (item) { return item.level === "高"; }).length;
+    const opportunityRows = opportunities.map(function (item) { return '<tr><td><span class="severity severity-' + severityClass(item.level) + '">' + escapeHtml(item.level) + '</span></td><td><strong>' + escapeHtml(item.type) + '</strong></td><td><strong>' + escapeHtml(item.page) + '</strong><small>' + escapeHtml(item.reason) + '</small></td><td>' + escapeHtml(item.action) + '</td><td>' + escapeHtml(item.owner) + '</td></tr>'; }).join("");
+    const alertRows = alerts.map(function (item) { return '<tr><td><span class="severity severity-' + severityClass(item.level) + '">' + escapeHtml(item.level) + '</span></td><td><strong>' + escapeHtml(item.type) + '</strong><small>' + escapeHtml(item.site) + '</small></td><td><strong>' + escapeHtml(item.url) + '</strong><small>来源：' + escapeHtml(item.sourcePage) + '</small></td><td>' + numberText(item.hits) + '</td><td>' + escapeHtml(item.lastSeen) + '</td><td>' + escapeHtml(item.owner) + '</td><td>' + escapeHtml(item.suggestion) + '</td><td>' + statusPill(item.status) + '</td></tr>'; }).join("");
+    const foundationCards = foundations.map(function (item) { return '<article class="foundation-card"><span>' + escapeHtml(item.layer) + '</span><strong>' + escapeHtml(item.current) + '</strong><p>' + escapeHtml(item.key) + '</p><small>' + escapeHtml(item.source + "｜" + item.status) + '</small></article>'; }).join("");
+    return '<section class="analytics-kpi-grid analytics-kpi-four">' +
+      trafficKpi("高优先级事项", numberText(highItems), "机会与异常合计", highItems ? "danger" : "good") +
+      trafficKpi("运营机会", numberText(opportunities.length), "内容、搜索、AI与页面价值", "warning") +
+      trafficKpi("未解决预警", numberText(activeAlerts.length), "404、资源与接口异常", activeAlerts.length ? "danger" : "good") +
+      trafficKpi("数据基座层", numberText(foundations.length), "页面、对象、事件、来源与周期", "good") +
+    '</section>' +
+    '<section class="panel"><header class="panel-header"><div><h2>优先处理建议</h2></div></header>' + analyticsTable(["级别", "机会类型", "页面与原因", "建议动作", "负责人"], opportunityRows, "暂无运营机会") + '</section>' +
+    '<section class="panel"><header class="panel-header"><div><h2>系统预警</h2></div></header>' + analyticsTable(["级别", "类型/站点", "异常URL与来源", "次数", "最近发生", "负责人", "建议", "状态"], alertRows, "暂无系统预警") + '</section>' +
+    '<section class="panel"><header class="panel-header"><div><h2>新官网数据基座</h2></div></header><div class="foundation-grid">' + foundationCards + '</div></section>';
   }
 
   function renderTrafficAnalytics(config) {
