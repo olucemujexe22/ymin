@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>永铭官网流量核心数据看板（第一稿）</title>
+  <style>
+    :root {
+      --navy: #173d68;
+      --navy-2: #0d2948;
+      --blue: #2e6ea9;
+      --cyan: #1d9bb5;
+      --green: #2f8c63;
+      --orange: #d98221;
+      --red: #bc4b4b;
+      --ink: #183149;
+      --muted: #62768a;
+      --line: #dbe5ee;
+      --bg: #f3f7fb;
+      --card: #fff;
+      --shadow: 0 10px 28px rgba(24, 49, 73, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--bg); color: var(--ink); font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; }
+    body { margin: 0; min-width: 1180px; }
+    button, select { font: inherit; }
+
+    .topbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 34px;
+      color: #fff;
+      background: linear-gradient(118deg, var(--navy-2), var(--navy));
+      box-shadow: 0 2px 12px rgba(8, 31, 55, .18);
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-mark {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: grid; place-items: center;
+      background: #fff; color: var(--navy); font-weight: 900; letter-spacing: -1px;
+    }
+    .brand-title { font-size: 20px; font-weight: 700; }
+    .brand-sub { margin-top: 3px; font-size: 12px; color: #cbd9e6; }
+    .top-meta { display: flex; align-items: center; gap: 20px; font-size: 13px; }
+    .status-dot { width: 8px; height: 8px; display: inline-block; border-radius: 50%; background: #37d391; margin-right: 7px; }
+    .period { padding: 9px 13px; border: 1px solid rgba(255,255,255,.23); border-radius: 7px; background: rgba(255,255,255,.06); }
+
+    .shell { display: grid; grid-template-columns: 214px minmax(0, 1fr); min-height: calc(100vh - 72px); }
+    .sidebar { background: #fff; border-right: 1px solid var(--line); padding: 26px 16px; }
+    .side-label { padding: 0 12px 10px; color: #8a9aaa; font-size: 12px; font-weight: 700; }
+    .nav-item {
+      width: 100%; height: 46px; border: 0; border-radius: 8px; background: transparent;
+      display: flex; align-items: center; gap: 11px; padding: 0 13px;
+      color: #3b536b; font-weight: 600; cursor: default; text-align: left; margin-bottom: 5px;
+    }
+    .nav-item.active { background: #e9f1f8; color: var(--navy); box-shadow: inset 3px 0 var(--blue); }
+    .nav-icon { width: 24px; height: 24px; display: grid; place-items: center; font-size: 14px; border-radius: 7px; background: #eff4f8; }
+    .sidebar-note { margin: 22px 8px 0; padding: 14px; border-radius: 9px; background: #f6f9fc; border: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .sidebar a { color: var(--blue); text-decoration: none; font-weight: 700; }
+
+    main { padding: 28px 30px 42px; overflow: hidden; }
+    .page-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 22px; margin-bottom: 20px; }
+    .eyebrow { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+    h1 { margin: 5px 0 7px; font-size: 28px; color: var(--navy-2); }
+    .desc { margin: 0; color: var(--muted); line-height: 1.7; font-size: 14px; }
+    .head-actions { display: flex; gap: 10px; }
+    .select, .btn { height: 40px; border: 1px solid #cbd9e6; border-radius: 7px; background: #fff; color: var(--ink); padding: 0 13px; }
+    .btn { cursor: pointer; font-weight: 700; }
+    .btn.primary { color: #fff; background: var(--navy); border-color: var(--navy); }
+
+    .focus-banner {
+      display: grid; grid-template-columns: 1.35fr .8fr .8fr .8fr; align-items: stretch;
+      border: 1px solid #cfe1ef; background: linear-gradient(100deg, #eff7fd 0%, #f9fcff 60%); border-radius: 12px;
+      margin-bottom: 18px; overflow: hidden;
+    }
+    .focus-text { padding: 18px 20px; }
+    .focus-title { font-size: 15px; font-weight: 800; color: var(--navy); }
+    .focus-copy { margin-top: 7px; font-size: 13px; line-height: 1.7; color: var(--muted); }
+    .focus-stat { padding: 18px 16px; border-left: 1px solid #d7e7f3; display: flex; flex-direction: column; justify-content: center; }
+    .focus-stat strong { color: var(--navy); font-size: 22px; }
+    .focus-stat span { margin-top: 5px; color: var(--muted); font-size: 12px; }
+
+    .stage-flow { display: grid; grid-template-columns: 1fr 34px 1fr 34px 1fr; align-items: stretch; margin-bottom: 18px; }
+    .arrow { display: grid; place-items: center; color: #90a9bd; font-size: 26px; }
+    .stage { border-radius: 12px; background: var(--card); box-shadow: var(--shadow); border: 1px solid var(--line); overflow: hidden; }
+    .stage-head { padding: 16px 18px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+    .stage:nth-child(1) .stage-head { background: linear-gradient(120deg, #2c6fa8, #3e88bd); }
+    .stage:nth-child(3) .stage-head { background: linear-gradient(120deg, #197b90, #31a1ad); }
+    .stage:nth-child(5) .stage-head { background: linear-gradient(120deg, #2d7d5b, #43a175); }
+    .stage-no { font-weight: 900; font-size: 12px; letter-spacing: .1em; opacity: .85; }
+    .stage-title { font-size: 18px; font-weight: 800; margin-top: 3px; }
+    .stage-question { font-size: 12px; opacity: .88; }
+    .stage-body { padding: 17px 18px 15px; }
+    .metrics { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    .metric { padding: 13px; border-radius: 9px; background: #f6f9fc; border: 1px solid #e4ebf2; min-height: 88px; }
+    .metric-label { color: var(--muted); font-size: 12px; }
+    .metric-value { font-size: 24px; font-weight: 800; color: var(--navy); margin-top: 6px; }
+    .metric-value.pending { font-size: 18px; color: var(--orange); }
+    .metric-note { color: #8090a0; font-size: 11px; margin-top: 4px; line-height: 1.4; }
+    .stage-foot { margin-top: 13px; padding-top: 12px; border-top: 1px dashed #d6e1ea; color: #466078; font-size: 12px; line-height: 1.65; }
+
+    .grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; margin-bottom: 18px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+    .card-head { min-height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; border-bottom: 1px solid #e7edf3; }
+    .card-title { font-size: 15px; color: var(--navy); font-weight: 800; }
+    .card-sub { color: #8796a4; font-size: 11px; }
+    .card-body { padding: 17px 18px; }
+
+    .bar-list { display: grid; gap: 14px; }
+    .bar-row { display: grid; grid-template-columns: 110px 1fr 72px; gap: 12px; align-items: center; font-size: 12px; }
+    .bar-track { height: 10px; background: #edf2f6; border-radius: 8px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), #5da0d2); }
+    .bar-row:nth-child(2) .bar-fill { background: linear-gradient(90deg, var(--cyan), #5fc6c5); }
+    .bar-row:nth-child(3) .bar-fill { background: linear-gradient(90deg, var(--orange), #e8ad5b); }
+    .bar-value { text-align: right; font-weight: 800; color: var(--navy); }
+
+    .action-list { display: grid; gap: 10px; }
+    .action { display: grid; grid-template-columns: 34px 1fr auto; gap: 11px; align-items: center; padding: 11px 12px; border: 1px solid #e0e8ef; border-radius: 9px; }
+    .action-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; font-weight: 900; }
+    .action.good .action-mark { background: #e5f4ed; color: var(--green); }
+    .action.warn .action-mark { background: #fff0dd; color: var(--orange); }
+    .action.info .action-mark { background: #e7f0f8; color: var(--blue); }
+    .action strong { display: block; font-size: 13px; color: #29445d; }
+    .action span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .tag { border-radius: 999px; padding: 5px 9px; font-size: 11px; font-weight: 800; white-space: nowrap; }
+    .tag.good { color: var(--green); background: #e6f4ee; }
+    .tag.warn { color: #a35d0d; background: #fff1de; }
+    .tag.blue { color: var(--blue); background: #e7f0f8; }
+
+    .dimension-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .dimension-table th, .dimension-table td { border-bottom: 1px solid #e5ecf2; padding: 11px 10px; text-align: left; vertical-align: middle; }
+    .dimension-table th { color: #5d7185; background: #f6f9fc; font-weight: 800; }
+    .dimension-table td:first-child { color: var(--navy); font-weight: 800; }
+    .dimension-table tr:last-child td { border-bottom: 0; }
+    .ok { color: var(--green); font-weight: 800; }
+    .wait { color: var(--orange); font-weight: 800; }
+
+    .footer-note { margin-top: 8px; color: #7a8b9b; font-size: 11px; line-height: 1.75; }
+    .source-strip { margin-top: 18px; padding: 14px 17px; border-radius: 10px; border: 1px solid #d9e4ee; background: #fff; color: #60758a; font-size: 12px; line-height: 1.75; }
+    .source-strip strong { color: var(--navy); }
+
+    @media print {
+      body { min-width: 0; background: #fff; }
+      .topbar { height: 58px; padding: 0 20px; }
+      .shell { display: block; }
+      .sidebar, .head-actions { display: none; }
+      main { padding: 18px; }
+      .stage, .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">YM</div>
+      <div>
+        <div class="brand-title">官网流量核心数据看板</div>
+        <div class="brand-sub">管理层阅读版 · 基于现有流量分析数据基座</div>
+      </div>
+    </div>
+    <div class="top-meta">
+      <span><i class="status-dot"></i>数据基座已验证</span>
+      <span class="period">数据快照：2026-06-01 至 2026-07-01</span>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="side-label">管理视角</div>
+      <button class="nav-item active"><span class="nav-icon">总</span>管理总览</button>
+      <button class="nav-item"><span class="nav-icon">入</span>流量入口</button>
+      <button class="nav-item"><span class="nav-icon">承</span>页面承接</button>
+      <button class="nav-item"><span class="nav-icon">转</span>转化结果</button>
+      <button class="nav-item"><span class="nav-icon">行</span>运营行动</button>
+      <div class="sidebar-note">
+        本页只保留管理层需要快速判断的指标。产品、文章、来源、AI与关键词明细继续在原分析系统中下钻。
+        <div style="margin-top:10px"><a href="https://www.ymin.com/agent/" target="_blank" rel="noreferrer">打开原分析系统 →</a></div>
+      </div>
+    </aside>
+
+    <main>
+      <section class="page-head">
+        <div>
+          <div class="eyebrow">FIRST DRAFT · 2026.08.30</div>
+          <h1>从“有多少流量”到“下一步做什么”</h1>
+          <p class="desc">按“入口—承接—转化”梳理官网数据，上级先看三步结论，运营人员再进入原系统查看明细。</p>
+        </div>
+        <div class="head-actions">
+          <select class="select" aria-label="数据周期"><option>2026-06-01 — 2026-07-01</option></select>
+          <button class="btn" onclick="window.print()">打印当前页</button>
+          <a class="btn primary" style="display:grid;place-items:center;text-decoration:none" href="https://www.ymin.com/agent/" target="_blank" rel="noreferrer">进入详细分析</a>
+        </div>
+      </section>
+
+      <section class="focus-banner">
+        <div class="focus-text">
+          <div class="focus-title">本期总体判断</div>
+          <div class="focus-copy">数据基座可支撑入口与页面承接分析；页面识别和数据质量已经稳定。转化结果仍需部署产品点击、资料下载、设计工具和表单埋点后才能形成闭环。</div>
+        </div>
+        <div class="focus-stat"><strong>99.97%</strong><span>页面识别率</span></div>
+        <div class="focus-stat"><strong>0</strong><span>数据质量失败/警告</span></div>
+        <div class="focus-stat"><strong>待接入</strong><span>转化行为埋点</span></div>
+      </section>
+
+      <section class="stage-flow" aria-label="入口承接转化三阶段">
+        <article class="stage">
+          <div class="stage-head">
+            <div><div class="stage-no">STAGE 01</div><div class="stage-title">流量入口</div></div>
+            <div class="stage-question">客户从哪里来？</div>
+          </div>
+          <div class="stage-body">
+            <div class="metrics">
+              <div class="metric"><div class="metric-label">百度页面浏览量</div><div class="metric-value">26,603</div><div class="metric-note">百度统计口径</div></div>
+              <div class="metric"><div class="metric-label">服务器真实访问</div><div class="metric-value">1,573,066</div><div class="metric-note">human pageviews</div></div>
+              <div class="metric"><div class="metric-label">来源维度</div><div class="metric-value">231</div><div class="metric-note">含普通来源与AI来源</div></div>
+              <div class="metric"><div class="metric-label">AI来源类型</div><div class="metric-value">16</div><div class="metric-note">AI平台真实点击来源</div></div>
+            </div>
+            <div class="stage-foot">管理问题：流量规模是否变化？主要来自搜索、外链、AI还是直接访问？用户通过什么关键词进入？</div>
+          </div>
+        </article>
+        <div class="arrow">›</div>
+        <article class="stage">
+          <div class="stage-head">
+            <div><div class="stage-no">STAGE 02</div><div class="stage-title">页面承接</div></div>
+            <div class="stage-question">客户看了什么？</div>
+          </div>
+          <div class="stage-body">
+            <div class="metrics">
+              <div class="metric"><div class="metric-label">已识别业务页面</div><div class="metric-value">7,968</div><div class="metric-note">共7,970个页面</div></div>
+              <div class="metric"><div class="metric-label">未识别页面</div><div class="metric-value">2</div><div class="metric-note">需继续补齐规则</div></div>
+              <div class="metric"><div class="metric-label">页面价值缓存</div><div class="metric-value">220,900</div><div class="metric-note">page rows</div></div>
+              <div class="metric"><div class="metric-label">AI抓取次数</div><div class="metric-value">140,907</div><div class="metric-note">内容被模型发现的信号</div></div>
+            </div>
+            <div class="stage-foot">管理问题：产品、文章、应用和工具哪些真正受关注？哪些页面值得加强，哪些页面需要优化或清理？</div>
+          </div>
+        </article>
+        <div class="arrow">›</div>
+        <article class="stage">
+          <div class="stage-head">
+            <div><div class="stage-no">STAGE 03</div><div class="stage-title">转化结果</div></div>
+            <div class="stage-question">客户采取了什么行动？</div>
+          </div>
+          <div class="stage-body">
+            <div class="metrics">
+              <div class="metric"><div class="metric-label">产品详情点击</div><div class="metric-value pending">待接入</div><div class="metric-note">需前端事件埋点</div></div>
+              <div class="metric"><div class="metric-label">PDF资料下载</div><div class="metric-value pending">待接入</div><div class="metric-note">需前端事件埋点</div></div>
+              <div class="metric"><div class="metric-label">设计工具使用</div><div class="metric-value pending">待接入</div><div class="metric-note">需前端事件埋点</div></div>
+              <div class="metric"><div class="metric-label">咨询/申请提交</div><div class="metric-value pending">待接入</div><div class="metric-note">后续可关联CRM</div></div>
+            </div>
+            <div class="stage-foot">管理问题：访问是否带来产品兴趣、资料获取、工具使用或明确咨询？转化数据未接入前不展示虚构结果。</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <div class="card-head"><div class="card-title">核心数据能力完整度</div><div class="card-sub">已接入能力 / 待补能力</div></div>
+          <div class="card-body">
+            <div class="bar-list">
+              <div class="bar-row"><span>流量入口</span><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><div class="bar-value">已具备</div></div>
+              <div class="bar-row"><span>页面承接</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><div class="bar-value">已具备</div></div>
+              <div class="bar-row"><span>转化结果</span><div class="bar-track"><div class="bar-fill" style="width:28%"></div></div><div class="bar-value">待埋点</div></div>
+            </div>
+            <div class="footer-note">完整度是建设状态，不是业务得分。入口和承接已有真实数据；转化结果需要新官网埋点与CRM关联。</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><div class="card-title">本期运营行动</div><div class="card-sub">先处理影响判断的事项</div></div>
+          <div class="card-body action-list">
+            <div class="action good"><div class="action-mark">✓</div><div><strong>数据质量可用</strong><span>10项检查中无fail、无warn</span></div><em class="tag good">正常</em></div>
+            <div class="action info"><div class="action-mark">2</div><div><strong>补齐未识别页面</strong><span>7,970个页面中剩余2个未识别</span></div><em class="tag blue">低风险</em></div>
+            <div class="action warn"><div class="action-mark">!</div><div><strong>部署转化行为埋点</strong><span>优先采集产品点击、下载、工具和表单</span></div><em class="tag warn">优先</em></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><div class="card-title">核心数据维度与页面去向</div><div class="card-sub">管理总览看结论，详细分析看原因</div></div>
+        <div class="card-body" style="padding:0 18px 8px">
+          <table class="dimension-table">
+            <thead><tr><th>阶段</th><th>核心维度</th><th>管理层关注点</th><th>现有系统对应页面</th><th>数据状态</th></tr></thead>
+            <tbody>
+              <tr><td>流量入口</td><td>PV/UV、来源、搜索词、设备、AI来源</td><td>流量来自哪里，是否有增长</td><td>首页总览、流量来源分析、关键词洞察</td><td class="ok">已具备</td></tr>
+              <tr><td>页面承接</td><td>页面类型、产品、文章、应用领域、页面价值、AI抓取</td><td>用户关注什么，页面是否有效承接</td><td>页面价值分析、AI流量洞察</td><td class="ok">已具备</td></tr>
+              <tr><td>转化结果</td><td>产品点击、下载、工具使用、表单提交</td><td>访问是否形成明确行动</td><td>后续新增转化分析</td><td class="wait">待埋点</td></tr>
+              <tr><td>运营行动</td><td>异常流量、404/5xx、内容衰减、数据质量</td><td>下一步优先处理什么</td><td>运营机会与预警</td><td class="ok">已具备基础</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="source-strip">
+        <strong>数据口径说明：</strong>本页数据来自《数据基座补充专项》已验证周期。百度页面浏览量与服务器真实访问属于不同采集口径，不直接相加；AI来源点击与AI爬虫抓取分开统计；页面价值用于相对比较，不等同于销售额；转化埋点未接入前只显示“待接入”。
+      </div>
+    </main>
+  </div>
+</body>
+</html>
