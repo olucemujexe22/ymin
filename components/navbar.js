@@ -138,9 +138,9 @@ YMIN.navbar = (function () {
         ];
         if (!international) {
             aboutItems.push({ href: 'about-careers.html', label: '加入我们' });
-            aboutItems.push({ href: 'about-procurement.html', label: '原材料采购' });
+            aboutItems.push({ href: 'about-procurement.html', label: '原材料采购发布与供应商准入申请' });
         }
-        html += dropdownMenuRight(aboutItems, 'w-48');
+        html += dropdownMenuRight(aboutItems, international ? 'w-48' : 'w-72');
         html += '</div>';
 
         html += '</nav>';

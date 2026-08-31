@@ -50,7 +50,7 @@ YMIN.footer = (function () {
         html += '<li><a href="about-distributors.html" class="hover:text-[#1B365D]">代理商网络</a></li>';
         html += '<li><a href="about-contact.html" class="hover:text-[#1B365D]">联系我们</a></li>';
         html += '<li><a href="about-careers.html" class="hover:text-[#1B365D]">加入我们</a></li>';
-        html += '<li><a href="about-procurement.html" class="hover:text-[#1B365D]">原材料采购</a></li>';
+        html += '<li><a href="about-procurement.html" class="hover:text-[#1B365D]">原材料采购发布与供应商准入申请</a></li>';
         html += '</ul></div>';
 
         html += '<div><h4 class="text-xs font-bold text-[#1B365D] uppercase mb-6 tracking-widest">联系支持</h4>';
