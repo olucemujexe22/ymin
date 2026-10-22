@@ -329,7 +329,7 @@
         aboutTitle: "关于我们", aboutLinks: "公司简介｜about-company.html\n企业荣誉｜about-honors.html\n代理商网络｜about-distributors.html\n联系我们｜about-contact.html\n加入我们｜about-careers.html\n原材料采购｜about-procurement.html",
         rightTitle: "联系支持", hotline: "400 900 1922", domesticEmail: "web@ymin.com", internationalEmail: "ymin-sale@ymin.com", switchboard: "021-33617848", address: "上海市奉贤区南桥镇杨王经济园区光村路258号", addressUrl: "",
         rightExtraType: "二维码", serviceQr: "", serviceQrCaption: "扫码关注服务号", douyinQr: "", douyinQrCaption: "扫码关注抖音号", facebookUrl: "", xUrl: "", youtubeUrl: "", linkedinUrl: "",
-        copyright: "© 2026 永铭电子有限公司. 版权所有.", privacyLabel: "隐私政策", privacyUrl: "#", termsLabel: "使用条款", termsUrl: "#", updatedAt: "2026-08-20"
+        copyright: "© 2026 永铭电子有限公司. 版权所有.", privacyLabel: "隐私政策", privacyUrl: "privacy-policy.html", termsLabel: "使用条款", termsUrl: "terms-of-use.html", updatedAt: "2026-10-22"
       },
       {
         id: "FOOTER-EN", language: "English", site: "国际官网",
@@ -338,7 +338,7 @@
         aboutTitle: "About Us", aboutLinks: "Company Profile｜about-company.html\nHonors and Certifications｜about-honors.html\nDistributor Network｜about-distributors.html\nContact Us｜about-contact.html",
         rightTitle: "Contact Support", hotline: "", domesticEmail: "web@ymin.com", internationalEmail: "ymin-sale@ymin.com", switchboard: "", address: "No. 258 Guangcun Road, Nanqiao Town, Fengxian District, Shanghai, China", addressUrl: "https://www.google.com/maps/search/?api=1&query=No.%20258%20Guangcun%20Road%2C%20Yangwang%20Economic%20Park%2C%20Nanqiao%20Town%2C%20Fengxian%20District%2C%20Shanghai",
         rightExtraType: "社交媒体", serviceQr: "", serviceQrCaption: "", douyinQr: "", douyinQrCaption: "", facebookUrl: "https://www.facebook.com/profile.php?id=100090904592502&mibextid=LQQJ4d", xUrl: "https://x.com/YMINcapacitor", youtubeUrl: "https://youtube.com/@shanghaiyongmingelectroniccolt", linkedinUrl: "https://www.linkedin.com/company/shanghai-yongming-electronic/",
-        copyright: "© 2026 YMIN Electronics Co., Ltd. All rights reserved.", privacyLabel: "Privacy Policy", privacyUrl: "#", termsLabel: "Terms of Use", termsUrl: "#", updatedAt: "2026-08-20"
+        copyright: "© 2026 YMIN Electronics Co., Ltd. All rights reserved.", privacyLabel: "Privacy Policy", privacyUrl: "privacy-policy.html?lang=en", termsLabel: "Terms of Use", termsUrl: "terms-of-use.html?lang=en", updatedAt: "2026-10-22"
       }
     ],
     frontendChanges: [
