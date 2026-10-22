@@ -169,7 +169,7 @@ if (footerZh && (footerZh.rightExtraType !== "二维码" || footerZh.hotline !==
 if (!footerFieldMap.has("serviceQr") || footerFieldMap.get("serviceQr").type !== "file" || !footerFieldMap.has("douyinQr") || footerFieldMap.get("douyinQr").type !== "file") failures.push("中文页脚两个二维码必须使用图片上传字段");
 if (!footerFieldMap.get("serviceQr").languages.includes("简体中文") || !footerFieldMap.get("facebookUrl").languages.includes("English")) failures.push("页脚中文二维码与国际社交媒体字段未按语言隔离");
 if (footerEn && (footerEn.rightExtraType !== "社交媒体" || !footerEn.linkedinUrl || !footerEn.facebookUrl || footerEn.domesticEmail !== "web@ymin.com" || !footerEn.addressUrl)) failures.push("国际页脚右侧联系信息或社交媒体配置不完整");
-["domesticEmail", "internationalEmail", "address", "facebookUrl", "xUrl", "youtubeUrl", "linkedinUrl", "privacyUrl", "termsUrl"].forEach((key) => {
+["domesticEmail", "internationalEmail", "address", "facebookUrl", "xUrl", "youtubeUrl", "linkedinUrl", "privacyUrl", "termsUrl", "cookieUrl"].forEach((key) => {
   if (!footerFieldMap.has(key)) failures.push(`页脚缺少独立维护字段：${key}`);
 });
 

@@ -69,7 +69,7 @@ YMIN.footer = (function () {
         html += '</div>';
         html += '<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">';
         html += '<p class="text-[10px] uppercase tracking-wider text-slate-400">© 2026 永铭电子有限公司. 版权所有.</p>';
-        html += '<div class="flex gap-8"><a href="privacy-policy.html" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">隐私政策</a><a href="terms-of-use.html" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">使用条款</a></div>';
+        html += '<div class="flex flex-wrap gap-x-8 gap-y-2"><a href="privacy-policy.html" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">隐私政策</a><a href="terms-of-use.html" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">使用条款</a><a href="cookie-policy.html" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">Cookie政策</a></div>';
         html += '</div></footer>';
         return html;
     }
@@ -118,7 +118,7 @@ YMIN.footer = (function () {
         html += '</div>';
         html += '<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">';
         html += '<p class="text-[10px] uppercase tracking-wider text-slate-400">© 2026 YMIN Electronics Co., Ltd. All rights reserved.</p>';
-        html += '<div class="flex gap-8"><a href="privacy-policy.html?lang=en" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">Privacy Policy</a><a href="terms-of-use.html?lang=en" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">Terms of Use</a></div>';
+        html += '<div class="flex flex-wrap gap-x-8 gap-y-2"><a href="privacy-policy.html?lang=en" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">Privacy Policy</a><a href="terms-of-use.html?lang=en" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">Terms of Use</a><a href="cookie-policy.html?lang=en" class="text-[10px] uppercase tracking-wider text-slate-400 hover:text-[#1B365D]">Cookie Policy</a></div>';
         html += '</div></footer>';
         return html;
     }

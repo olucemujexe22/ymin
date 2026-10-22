@@ -24,6 +24,12 @@
     } else if (documentType === 'terms') {
       if (title) title.textContent = '使用条款 - YMIN';
       if (description) description.setAttribute('content', '永铭电子官网使用条款，说明网站访问、资料下载、设计工具、知识产权及责任范围。');
+    } else if (documentType === 'cookie' && isEnglish) {
+      if (title) title.textContent = 'Cookie Policy - YMIN';
+      if (description) description.setAttribute('content', 'How the YMIN website uses cookies, local storage, analytics and preference technologies, and how you can manage them.');
+    } else if (documentType === 'cookie') {
+      if (title) title.textContent = 'Cookie 政策 - YMIN';
+      if (description) description.setAttribute('content', '永铭电子官网 Cookie 政策，说明 Cookie、本地存储、用途、第三方服务及管理方式。');
     }
 
     var topButton = document.querySelector('[data-legal-top]');
